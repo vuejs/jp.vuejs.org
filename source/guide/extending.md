@@ -9,7 +9,7 @@ Mixinsは、Vueのコンポーネントに再利用可能で柔軟性のある�
 
 ``` js
 // mixin.js
-exports.mixin = {
+module.exports = {
   created: function () {
     this.hello()
   },
