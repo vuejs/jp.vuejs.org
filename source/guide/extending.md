@@ -3,9 +3,9 @@ type: guide
 order: 14
 ---
 
-## Extend with Mixins
+## Mixinsによる拡張
 
-Mixins are a flexible way to distribute reusable functionalities for Vue components. You can write a mixin just like a normal Vue component option object:
+Mixinsは、Vueのコンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。mixinは、通常のVueコンポーネントのoptionと同じように記述できます。
 
 ``` js
 // mixin.js
@@ -30,17 +30,15 @@ var Component = Vue.extend({
 var component = new Component() // -> "hello from mixin!"
 ```
 
-## Extend with Plugins
+## プラグインによる拡張
 
-Plugins usually adds global-level functionality to Vue.
+プラグインは、通常Vueのグローバルメソッドの機能を追加します。
 
-### Writing a Plugin
+### プラグインの記述
 
-There are typically several types of plugins you can write:
-
-1. Add one or more global methods. e.g. [vue-element](https://github.com/vuejs/vue-element)
-2. Add one or more global assets: directives/filters/transitions etc. e.g. [vue-touch](https://github.com/vuejs/vue-touch)
-3. Add some Vue instance methods by attaching them to Vue.prototype. The convention here is Vue instance methods should be prefixed with `$`, so that they don't conflict with user data and methods.
+1. 1つ、または複数のグローバル・メソッドを追加します（例：[vue-element](https://github.com/vuejs/vue-element)）。
+2. 1つ、または複数のグローバル・アセットを追加します：directives/filters/transitions など（例：[vue-touch](https://github.com/vuejs/vue-touch)）。
+3. VueインスタンスメソッドをVue.prototypeに記述します。慣例として、Vueインスタンスメソッドは、`$`をつけることで、他のデータやメソッドと干渉を避けることができます。
 
 ``` js
 exports.install = function (Vue, options) {
@@ -50,9 +48,9 @@ exports.install = function (Vue, options) {
 }
 ```
 
-### Using a Plugin
+### プラグインの使用
 
-Assuming using a CommonJS build system:
+CommonJSベースのビルドを行っていると仮定します。
 
 ``` js
 var vueTouch = require('vue-touch')
@@ -60,7 +58,7 @@ var vueTouch = require('vue-touch')
 Vue.use(vueTouch)
 ```
 
-You can also pass in additional options to the plugin:
+プラグインには、オプションを追加することができます。
 
 ```js
 Vue.use('my-plugin', {
@@ -68,9 +66,9 @@ Vue.use('my-plugin', {
 })
 ```
 
-## Existing Tools
+## 他の拡張ツール
 
-- [vue-devtools](https://github.com/vuejs/vue-devtools): A Chrome devtools extension for debugging Vue.js applications.
-- [vue-touch](https://github.com/vuejs/vue-touch): Add touch-gesture directives using Hammer.js.
-- [vue-element](https://github.com/vuejs/vue-element): Register Custom Elements with Vue.js.
+- [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.jsアプリケーションのデバッグ用Chrome devtools extensionです。
+- [vue-touch](https://github.com/vuejs/vue-touch): Hammer.jsを利用して、タッチ操作のディレクティブを追加できます。
+- [vue-element](https://github.com/vuejs/vue-element): Vue.jsにカスタムElementsを登録することができます。
 - [List of User Contributed Tools](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
