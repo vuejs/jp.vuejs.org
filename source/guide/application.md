@@ -3,34 +3,34 @@ type: guide
 order: 13
 ---
 
-Vue.js is designed to be as flexible as possible - it's just an interface library that doesn't enforce any architectural decisions. While this can be very useful for rapid prototyping, it could be a challenge for those with less experience to build larger scale applications with it. The following is an opinionated perspective on how to organize larger projects when using Vue.js.
+Vue.jsは、他のアーキテクチャと干渉せず、可能な限り柔軟に対応ができるよう設計されているインターフェイス・ライブラリです。Vue.jsは、ラピッドプロトタイピングの手法において非常に扱いやすい一方で、大規模アプリケーションを構築する場合では、構築経験の少ない開発者にとって悩ましい問題にもなります。ここでは、Vue.js を活用して大規模なプロジェクトを整理する方法について、独断的視点から示しています。
 
-## Modularization
+## モジュール化
 
-Although the standalone build of Vue.js can be used as a global, it is often better to utilize a modularized build system to better organize your code. The recommended approach of doing so is by writing your source code in CommonJS modules (the format used by Node.js, and also the format used by Vue.js source code) and bundle them using [Browserify](http://browserify.org/) or [Webpack](http://webpack.github.io/).
+スタンドアロンで動作するVue.jsコードは、グローバルで使用できますが煩雑になりやすいので、モジュールのビルドツールを利用して、コードをより良く整理していくことが望ましいです。実践への導入としては、CommonJSモジュールにコード（Node.js、およびVue.jsのソースコードで使用されているフォーマット）を記述して、[Browserify](http://browserify.org/)や[Webpack](http://webpack.github.io/) でバンドルする方法をおすすめします。
 
-Here are some build setup examples on GitHub:
+下記は、GitHub上にあるビルドツールの設定例です:
 
 - [Vue + Browserify](https://github.com/vuejs/vue-browserify-example)
 - [Vue + Webpack](https://github.com/vuejs/vue-webpack-example)
 
-## Single File Components
+## シングルファイル・コンポーネント
 
-In a typical Vue.js project we will be breaking up our code into many small components, and it would be nice to have each component encapsulate its CSS styles, template and JavaScript definition in the same place. A bonus for using the previously mentioned build tools is that they both provided mechanisms to transform the source code before bundling them together, and with a bit of pre-processing we can write our components like this:
+Vue.jsを利用した典型的なプロジェクトでは、たくさんの個別のコンポーネントにコードを分割して、コンポーネントごとにHTML/CSS/JavaScript(Vue.js)を配置しておくと便利です。前述のビルドツールを利用するメリットは、バンドルする前にソースコードを変換するためのメカニズムが提供されていることで、次のようなコンポーネントをわずかな前処理だけで作成できます：
 
 <img src="/images/vueify.png">
 
-If you are into pre-processors, you can even do this:
+もし、プリプロセッサに詳しいなら、次のようにも書くことができます：
 
 <img src="/images/vueify_with_pre.png">
 
-This is achieved via using the [Vueify](https://github.com/vuejs/vueify) transform for Browserify, or with [Vue-loader](https://github.com/vuejs/vue-loader) for Webpack.
+このファイルは、HTML/CSS/JavaScript(Vue.js)のソースコードをBrowserifyで管理できるよう変換してくれる[Vueify](https://github.com/vuejs/vueify)や、Webpack用に変換してくれる[Vue-loader](https://github.com/vuejs/vue-loader)を使用することで、作成することができます。
 
 ## Routing
 
-You can implement some rudimentary routing logic by manually listening on hashchange and utilizing a dynamic `v-component`.
+ハッシュチェンジへのイベントリスニングと、動的な`v-component` を利用することで基本的なルーティングのロジックを実装することができます。
 
-**Example:**
+**例：:**
 
 ``` html
 <div id="app">
@@ -51,17 +51,17 @@ var app = new Vue({
 app.currentView = 'page1'
 ```
 
-With this mechanism it's very easy to leverage standalone routing libraries such as [Page.js](https://github.com/visionmedia/page.js) or [Director](https://github.com/flatiron/director).
+このメカニズムでは、[Page.js](https://github.com/visionmedia/page.js)や[Director](https://github.com/flatiron/director)などの、ルーティングライブラリを活用すると非常に簡単です。
 
-## Communication with Server
+## サーバーとの通信
 
-All Vue instances can have their raw `$data` directly serialized with `JSON.stringify()` with no additional effort. You can use any Ajax component you like, for example [SuperAgent](https://github.com/visionmedia/superagent). It also plays nicely with no-backend services such as Firebase.
+すべてのVueインスタンスは、`JSON.stringify()`メソッドでシリアライズされる生の`$data`ディレクトリを持つことができます。[SuperAgent](https://github.com/visionmedia/superagent)など、お好きなAjaxコンポーネントを使用してください。バックエンドを持たないFirebaseなどのサービスとの連携にも適しています。
 
-## Unit Testing
+## 単体テスト
 
-Anything compatible with a CommonJS-based build system works. A recommendation is using the [Karma](http://karma-runner.github.io/0.12/index.html) test runner together with its [CommonJS pre-processor](https://github.com/karma-runner/karma-commonjs) to test your code modularly.
+CommonJSベースのビルドシステムと互換性のあるものであれば、お好きなものを選んでください。おすすめは、[Karma](http://karma-runner.github.io/0.12/index.html)と、そのプラグインの[CommonJS pre-processor](https://github.com/karma-runner/karma-commonjs)を使用して、テストを実行する方法です。
 
-The best practice is to export raw options / functions inside modules. Consider this example:
+最良の実践は、モジュール内のoptionsやfunctionsをエクスポートします。次の例を考えてみます：
 
 ``` js
 // my-component.js
@@ -72,7 +72,7 @@ module.exports = {
 }
 ```
 
-You can use that file in your entry module like this:
+このファイルは、エントリーモジュールで次のように使用できます：
 
 ``` js
 // main.js
@@ -84,9 +84,8 @@ var app = new Vue({
     'my-component': require('./my-component')
   }
 })
-```
 
-And you can test that module like this:
+そして、出来たモジュールは次のようにテストできます：
 
 ``` js
 // Some Jasmine 2.0 tests
@@ -104,8 +103,8 @@ describe('my-component', function () {
 })
 ```
 
-<p class="tip">Since Vue.js directives react to data updates asynchronously, when you are asserting DOM state after changing the data, you will have to do so in a `Vue.nextTick` callback. Alternatively you can set `Vue.config.async = false` during tests, so you can assert the DOM state synchronously right after the data change.</p>
+<p class="tip">Vue.jsのディレクティブは、非同期でデータ更新に反応するので、データ更新後のDOMステータスに対してアサーションを行うには、`Vue.nextTick`のコールバックを利用する必要があります。</p>
 
-## An Example
+## 例
 
-The [Vue.js Hackernews Clone](https://github.com/yyx990803/vue-hackernews) is an example application that uses Browserify + Vueify for code organization, Director.js for routing, and HackerNews' official Firebase API as the backend. It's by no means a big application, but it demonstrates the combined usage of the concepts discussed on this page.
+[Vue.js Hackernews Clone](https://github.com/yyx990803/vue-hackernews)は、BrowserifyとVueifyを利用したソースコード管理と、Director.jsを利用したルーティングの基本設計、またHackerNewsのFirebase APIをバックエンドとして利用したサンプルアプリケーションです。決して大きなアプリケーションではないですが、  このページで説明する概念の併用を実証しています。
