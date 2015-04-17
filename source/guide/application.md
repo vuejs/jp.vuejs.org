@@ -66,8 +66,14 @@ CommonJSベースのビルドシステムと互換性のあるものであれば
 ``` js
 // my-component.js
 module.exports = {
+  template: '<span>{{msg}}</span>',
+  data: function () {
+    return {
+      msg: 'hello!'
+    }
+  }
   created: function () {
-    this.message = 'hello!'
+    console.log('my-component created!')
   }
 }
 ```
