@@ -117,7 +117,7 @@ order: 6
 ### v-model
 
 - このディレクティブは `<input>` 、`<select>` もしくは `<textarea>` 要素においてのみ使用できます。
-- ディレクティブのパラメーター:  `lazy`, `number`, `options`
+- ディレクティブのパラメーター: [`lazy`](/guide/forms.html#Lazy_Updates), [`number`](/guide/forms.html#Casting_Value_as_Number), [`options`](/guide/forms.html#Dynamic_Select_Options), [`debounce`](/guide/forms.html#Input_Debounce)
 
 form の input 要素に双方向バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
 より詳しい例は、[フォームの取り扱い](/guide/forms.html)を参照してください。
@@ -238,7 +238,7 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 ### v-component
 
-- ディレクティブパラメーター: `keep-alive`, `wait-for`, `transition-mode`
+- ディレクティブパラメーター: [`keep-alive`](/guide/components.html#Dynamic_Components), [`wait-for`](/guide/components.html#wait-for), [`transition-mode`](/guide/components.html#transition-mode), [`inline-template`](/guide/components.html#Inline_Template)
 
 割り当てられたコンポーネントコンストラクタをもつ子 ViewModel として、この要素をコンパイルします。これは、親からデータを継承するために、`v-with` と共に使用することができます。より詳細な説明は、[コンポーネントシステム](/guide/components.html)を参照してください。
 
