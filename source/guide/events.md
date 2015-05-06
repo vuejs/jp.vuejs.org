@@ -3,7 +3,7 @@ type: guide
 order: 6
 ---
 
-You can use the `v-on` directive to bind event listeners to DOM events. It can be bound to either an event handler function (without the invocation parentheses) or an inline expression. If a handler function is provided, it will get the original DOM event as the argument. The event also comes with an extra property: `targetVM`, pointing to the particular ViewModel the event was triggered on:
+イベントリスナを DOM イベントにバインドするために、`v-on` ディレクティブを利用することができます。`v-on` は、イベントハンドラ関数（関数呼び出しのための括弧は不要）と、インラインの expression のどちらにもバインドすることができます。ハンドラ関数が提供されている場合には、オリジナルの DOM イベントを引数として取得します。イベントには、イベントが発生した特定の ViewModel を指す特別なプロパティ `targetVM` が付随します。
 
 ``` html
 <div id="demo">
@@ -27,9 +27,9 @@ new Vue({
 })
 ```
 
-## Invoke Handler with Expression
+## Expression によるハンドラの呼び出し
 
-`targetVM` could be useful when `v-on` is used with `v-repeat`, since the latter creates a lot of child ViewModels. However, it is often more convenient to use an invocation expression passing in `this`, which equals the current context ViewModel:
+たくさんの子 ViewModel を生成する `v-repeat` と、`v-on` を同時に利用している時には `targetVM` が便利です。しかしながら、現在のコンテキストの ViewModel と等しい `this` を渡す呼び出し expression を使うほうがより便利でしょう。
 
 ``` html
 <ul id="list">
@@ -54,7 +54,7 @@ new Vue({
 })
 ```
 
-When you want to access the original DOM event in an expression handler, you can pass it in as `$event`:
+もし、 expression ハンドラ内のオリジナルの DOM イベントにアクセスしたいのであれば、`$event` として渡すことができます。
 
 ``` html
 <button v-on="click: submit('hello!', $event)">Submit</button>
@@ -72,30 +72,30 @@ When you want to access the original DOM event in an expression handler, you can
 /* ... */
 ```
 
-## The Special `key` Filter
+## 特殊な `key` フィルタ
 
-When listening for keyboard events, we often need to check for common key codes. Vue.js provides a special `key` filter that can only be used with `v-on` directives. It takes a single argument that denotes the key code to check for:
+キーボードイベントを監視するとき、汎用のキーコードをチェックする必要がしばしばあります。Vue.js は、 `v-on` ディレクティブと一緒の場合にのみ利用できる、特殊な `key` フィルタを用意しています。`key` フィルタは、チェックしたいキーコードを示す一つの引数を取ります。
 
 ```
 <!-- only call vm.submit() when the keyCode is 13 -->
 <input v-on="keyup:submit | key 13">
 ```
 
-It also has a few presets for commonly used keys:
+よく利用されるキーのプリセットもいくつか用意されています。
 
 ```
 <!-- same as above -->
 <input v-on="keyup:submit | key enter">
 ```
 
-Check the API reference for a [full list of key filter presets](/api/filters.html#key).
+詳しくは、API リファレンス内の、[キープリセットの全リスト](/api/filters.html#key) を参照してください。
 
-## Why Listeners in HTML?
+## なぜ HTML 内にリスナを記述するのですか？
 
-You might be concerned about this whole event listening approach violates the good old rules about "separation of concern". Rest assured - since all Vue.js handler functions and expressions are strictly bound to the ViewModel that's handling the current View, it won't cause any maintainance difficulty. In fact, there are several benefits in using `v-on`:
+このようなイベント監視のアプローチは、「関心の分離」という古き良きルールを破っているのではないか、と心配されるかもしれません。安心して下さい。すべての Vue.js のハンドラ関数と expression は現在のビューのみを扱う ViewModel にのみバインドされるよう制限されています。それによってメンテナンスが難しくなることはありません。実際に、`v-on` を利用することでいくつかの利点があります。
 
-1. It makes it easier to locate the handler function implementations within your JS code by simply skimming the HTML template.
-2. Since you don't have to manually attach event listeners in JS, your ViewModel code can be pure logic and DOM-free. This makes it easier to test.
-3. When a ViewModel is destroyed, all event listeners are automatically removed. You don't need to worry about cleaning it up yourself.
+1. HTML テンプレートを単に眺めることで、あなたの JS コード内のハンドラ関数を簡単に見つけ出すことができます。
+2. JS 内のイベントリスナを手作業でアタッチする必要がないので、ViewModel のコードはロジックのみとなり、DOM 依存もなくなります。
+3. ViewModel が破棄されたとき、すべてのイベントリスナは自動的に削除されます。それらを自力でクリーンアップすることを気にかける必要もありません。
 
-Next up: [Handling Forms](/guide/forms.html).
+次は [Handling Forms](/guide/forms.html) です。
