@@ -82,7 +82,7 @@ new Vue({
 デフォルトで、`v-model` はデータと input を `input` イベントの直後に同期します。`lazy` 属性を追加することで、 `change` イベントの直後に同期させるように、挙動を変更することができます。
 
 ``` html
-<!-- synced after "change" instead of "input" -->
+<!-- "input" の代わりに、"change" の直後に同期する  -->
 <input v-model="msg" lazy>
 ```
 
