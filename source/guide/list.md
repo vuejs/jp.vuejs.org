@@ -3,7 +3,7 @@ type: guide
 order: 5
 ---
 
-ViewModel上のオブジェクトの配列に基づき、テンプレート要素を繰り返すために、`v-repeat` directive を利用することができます。
+ViewModel 上のオブジェクトの配列に基づき、テンプレート要素を繰り返すために、`v-repeat` directive を利用することができます。
 `v-repeat` directive は、配列内の各オブジェクトを `$data` オブジェクトとして利用し、子の Vue インスタンスを作成します。それらの子インスタンスは親の全データを継承しているので、繰り返された要素内では、繰り返されたインスタンスと親インスタンス双方のプロパティにアクセスできます。加えて、レンダリングされたインスタンスの配列インデックスに対応する `$index` プロパティにもアクセスすることができます。
 
 **例:**
@@ -83,7 +83,7 @@ new Vue({
 
 ``` html
 <ul id="users">
-  <!-- think of this as "for each user in users" -->
+  <!--これを "for each user in users" とみなす -->
   <li v-repeat="user: users">
     {{user.name}} - {{user.email}}
   </li>
@@ -121,7 +121,7 @@ new Vue({
 内部的に、Vue.js は監視対象の配列のミューテーションメソッド (`push()`, `pop()`, `shift()`, `unshift()`, `splice()`, `sort()` 及び `reverse()`) を横取りし、ビューの更新を引き起こします。
 
 ``` js
-// the DOM will be updated accordingly
+// この結果、DOM が更新される
 demo.items.unshift({ childMsg: 'Baz' })
 demo.items.pop()
 ```
@@ -154,7 +154,7 @@ demo.items = demo.items.filter(function (item) {
 })
 ```
 
-この操作により、既存の DOM を吹き飛ばし、すべてが再構築されてしまうのではないかと思うかもしれませんが、その心配はありません。Vue.js は、既に配列に関連付けられた Vue インスタンスがあれば認識し、それらのインスタンスを可能な限り再利用します。
+この操作により、既存の DOM を消し飛ばし、すべてが再構築されてしまうのではないかと思うかもしれませんが、その心配はありません。Vue.js は、既に配列に関連付けられた Vue インスタンスがあれば認識し、それらのインスタンスを可能な限り再利用します。
 
 ## `track-by` の利用
 
@@ -175,7 +175,7 @@ demo.items = demo.items.filter(function (item) {
 
 ``` html
 <div v-repeat="items" track-by="_uid">
-  <!-- content -->
+  <!-- 内容 -->
 </div>
 ```
 
