@@ -177,8 +177,8 @@ demo.items = demo.items.filter(function (item) {
 ``` js
 {
   items: [
-    { _uid: 88f869d, ... },
-    { _uid: 7496c10, ... }
+    { _uid: '88f869d', ... },
+    { _uid: '7496c10', ... }
   ]
 }
 ```
