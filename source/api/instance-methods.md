@@ -1,11 +1,11 @@
-title: Instance Methods
+title: インスタンスメソッド
 type: api
 order: 4
 ---
 
-## Data
+## データ
 
-> You can observe data changes on a Vue instance. Note that all watch callbacks fire asynchronously. In addition, value changes are batched within an event loop. This means when a value changes multiple times within a single event loop, the callback will be fired only once with the latest value.
+> Vueインスタンスでは、データの変更を監視することができます。すべてのwatchコールバックは非同期に発火することに注意してください。さらに、値の変更はイベントループの中でバッチ処理されます。これは、ひとつのイベントループの中で値が何度も変更された時に、コールバックは最新の値に対して一度しか発火しないことを意味します。
 
 ### vm.$watch( expression, callback, [deep, immediate] )
 
@@ -14,7 +14,7 @@ order: 4
 - **deep** `Boolean` *optional*
 - **immdediate** `Boolean` *optional*
 
-Watch an expression on the Vue instance for changes. The expression can be a single keypath or actual expressions:
+Vueインスタンス上でのひとつの式の変更を監視します。引数 expression には、単一の keypath か、実際の式を入れることができます:
 
 ``` js
 vm.$watch('a + b', function (newVal, oldVal) {
@@ -22,7 +22,7 @@ vm.$watch('a + b', function (newVal, oldVal) {
 })
 ```
 
-To also detect nested value changes inside Objects, you need to pass in `true` for the third `deep` argument. Note that you don't need to do so to listen for Array mutations.
+オブジェクトの中のネストされた値の変更を検出するには、3つめの引数 `deep` に `true` を渡す必要があります。Array の値変更に対しては、こうする必要はないことに注意してください。
 
 ``` js
 vm.$watch('someObject', callback, true)
@@ -30,14 +30,14 @@ vm.someObject.nestedValue = 123
 // callback is fired
 ```
 
-Passing in `true` for the fourth `immediate` argument will trigger the callback immediately with the current value of the expression:
+4つめの引数 `immediate` に `true` を渡すと、その時の式の値で、コールバックがただちに実行されます:
 
 ``` js
 vm.$watch('a', callback, false, true)
-// callback is fired immediately with current value of `a`
+// その時の `a` の値でコールバックがただちに発火します
 ```
 
-Finally, `vm.$watch` returns an unwatch function that stops firing the callback:
+最後に、`vm.$watch` はコールバックの実行を停止する unwatch 関数を返します。
 
 ``` js
 var unwatch = vm.$watch('a', cb)
@@ -49,33 +49,33 @@ unwatch()
 
 - **expression** `String`
 
-Retrieve a value from the Vue instance given an expression. Expressions that throw errors will be suppressed and return `undefined`.
+Vue インスタンスから与えられた式の値を抽出します。エラーのある式は、停止され、`undefined` を返します。
 
 ### vm.$set( keypath, value )
 
 - **keypath** `String`
 - **value** `*`
 
-Set a data value on the Vue instance given a valid keypath. If the path doesn't exist it will be created.
+Vue インスタンスの data の、該当する keypath に値をセットします。もし path がなければ、作成されます。
 
 ### vm.$add( keypath, value )
 
 - **keypath** `String`
 - **value** `*`
 
-Add a root level property to the Vue instance (and also its `$data`). Due to the limitations of ES5, Vue cannot detect properties directly added to or deleted from an Object, so use this method and `vm.$delete` when you need to do so. Additionally, all observed objects are augmented with these two methods too.
+Vue インスタンス（とその `$data` ）に root レベルのプロパティを追加します。ES5の制約により、Vue はオブジェクトから追加されたり削除されたりしたプロパティを直接特定することができません。そのため、追加や削除が必要な場合は、このメソッドや `vm.$delete` を使用する必要があります。さらに、すべての監視されたオブジェクトも、これら2つのメソッドと同じように増加していきます。
 
 ### vm.$delete( keypath )
 
 - **keypath** `String`
 
-Delete a root level property on the Vue instance (and also its `$data`).
+Vue インスタンス（それと、その `$data`）のルートレベルのプロパティを削除します。
 
 ### vm.$eval( expression )
 
 - **expression** `String`
 
-Evaluate an expression that can also contain filters.
+フィルタも含むことができるような式を評価します。
 
 ``` js
 // assuming vm.msg = 'hello'
@@ -86,7 +86,7 @@ vm.$eval('msg | uppercase') // -> 'HELLO'
 
 - **templateString** `String`
 
-Evaluate a piece of template string containing mustache interpolations. Note that this method simply performs string interpolation; attribute directives are not compiled.
+中括弧補間をもつテンプレートの文字列のかたまりを評価します。このメソッドは、単に文字列を挿入するだけであるということに気をつけてください。つまり、属性ディレクティブはコンパイルされません。
 
 ``` js
 // assuming vm.msg = 'hello'
@@ -97,7 +97,7 @@ vm.$interpolate('{{msg}} world!') // -> 'hello world!'
 
 - **keypath** `String` *optional*
 
-Log the current instance data as a plain object, which is more console-inspectable than a bunch of getter/setters. Also accepts an optional key.
+現在のインスタンスを getter や setter よりもコンソールで検査しやすいプレーンオブジェクトとして記録します。オプションのキーも受けつけます。
 
 ``` js
 vm.$log() // logs entire ViewModel data
@@ -106,80 +106,80 @@ vm.$log('item') // logs vm.item
 
 ## Events
 
-> Each vm is also an event emitter. When you have multiple nested ViewModels, you can use the event system to communicate between them.
+> それぞれの vm はイベント発生装置でもあります。複数の入れ子になった ViewModels をもつとき、それら同士で通信をするイベントシステムを使うことができます。
 
 ### vm.$dispatch( event, [args...] )
 
 - **event** `String`
 - **args...** *optional*
 
-Dispatch an event from the current vm that propagates all the way up to its `$root`. If a callback returns `false`, it will stop the propagation at its owner instance.
+イベントを、現在のvmから `$root` へ向かって全てに伝搬させます。もしコールバックが `false` を返した場合、親のインスタンスでの伝搬を停止します。
 
 ### vm.$broadcast( event, [args...] )
 
 - **event** `String`
 - **args...** *optional*
 
-Emit an event to all children vms of the current vm, which gets further broadcasted to their children all the way down. If a callback returns `false`, its owner instance will not broadcast the event any further.
+現在の vm のすべての子vmに対してイベントを送り、すべての子に対して隅々まで伝搬させます。もしコールバックが `false` を返したら、その所有インスタンスはそれ以降イベントを広めません。
 
 ### vm.$emit( event, [args...] )
 
 - **event** `String`
 - **args...** *optional*
 
-Trigger an event on this vm only.
+現在の vm 上でのみのイベントのきっかけとなります。
 
 ### vm.$on( event, callback )
 
 - **event** `String`
 - **callback** `Function`
 
-Listen for an event on the current vm.
+現在の vm 上のイベントを監視します。
 
 ### vm.$once( event, callback )
 
 - **event** `String`
 - **callback** `Function`
 
-Attach a one-time only listener for an event.
+一度きりのイベントリスナーを提供します。
 
 ### vm.$off( [event, callback] )
 
 - **event** `String` *optional*
 - **callback** `Function` *optional*
 
-If no arguments are given, stop listening for all events; if only the event is given, remove all callbacks for that event; if both event and callback are given, remove that specific callback only.
+もし引数が与えられなければ、すべてのイベントの監視を停止します。もしイベントがひとつだけ与えられたら、そのイベントに関するすべてのコールバックを削除します。もしイベントとコールバックの両方が与えられたら、その特定のコールバックのみを削除します。
 
 ## DOM
 
-> All vm DOM manipulation methods work like their jQuery counterparts - except they also trigger Vue.js transitions if there are any declared on vm's `$el`. For more details on transitions see [Adding Transition Effects](/guide/transitions.html).
+> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js の表示変換のきっかけになることを除いては、jQuery と同じような動きをします。表示変換に関して、より詳しくは[表示変換のエフェクトを追加する](/guide/transitions.html)を参照していただきたい。
 
 ### vm.$appendTo( element|selector, [callback] )
 
 - **element** `HTMLElement` | **selector** `String`
 - **callback** `Function` *optional*
 
-Append the vm's `$el` to target element. The argument can be either an element or a querySelector string.
+vmの `$el` を対象となる要素に付加します。引数は要素もしくは querySelector 文字列を受け入れます。
 
 ### vm.$before( element|selector, [callback] )
 
 - **element** `HTMLElement` | **selector** `String`
 - **callback** `Function` *optional*
 
-Insert the vm's `$el` before target element.
+ターゲット要素の前に、vmの `$el` を挿入します。
 
 ### vm.$after( element|selector, [callback] )
 
 - **element** `HTMLElement` | **selector** `String`
 - **callback** `Function` *optional*
 
-Insert the vm's `$el` after target element.
+ターゲット要素の後ろに、vmの `$el` を挿入します。
 
 ### vm.$remove( [callback] )
 
 - **callback** `Function` *optional*
 
-Remove the vm's `$el` from the DOM.
+DOMから、vmの `$el` を削除します。
 
 ## Lifecycle
 
@@ -187,29 +187,29 @@ Remove the vm's `$el` from the DOM.
 
 - **element** `HTMLElement` | **selector** `String` *optional*
 
-If the Vue instance didn't get an `el` option at instantiation, you can manually call `$mount()` to assign an element to it and start the compilation. If no argument is provided, an empty `<div>` will be automatically created. Calling `$mount()` on an already mounted instance will have no effect. The method returns the instance itself so you can chain other instance methods after it.
+もしインスタンス化の際に、Vue インスタンスが `el` オプションを受け取らなかった場合、マニュアルで `$mount()` を読んである要素をそこに割り当て、コンパイルを開始することができます。もし引数が何も与えられなかったら、空の `<div>` が自動的に作られます。既に使用可能になった状態のインスタンスで `$mount()` を呼んでも、何も起きません。このメソッドはインスタンスそのものを返しますので、他のインスタンスメソッドをその後につなげることができます。
 
 ### vm.$destroy( [remove] )
 
 - **remove** `Boolean` *optional*
 
-Completely destroy a vm. Clean up its connections with other existing vms, unbind all its directives and remove its `$el` from the DOM. Also, all `$on` and `$watch` listeners will be automatically removed.
+vm を完全に破棄します。既存の他の vm との接続を切り、そのすべてのディレクティブとのバインドを解消し、DOMから `$el` を削除します。さらに、すべての `$on` や `$watch` リスナーも自動的に削除されます。
 
 ### vm.$compile( element )
 
 - **element** `HTMLElement`
 
-Partially compile a piece of DOM (Element or DocumentFragment). The method returns a `decompile` function that tearsdown the directives created during the process. Note the decompile function does not remove the DOM. This method is exposed primarily for writing advanced custom directives.
+DOM（要素や DocumentFragment）の一部を部分的にコンパイルします。メソッドは処理の中で作られたディレクティブを破壊する `decompile` 関数を返します。decompile 関数はDOMを削除しないことに注意してください。このメソッドは主に高度なカスタムディレクティブを書くためにあります。
 
 ### vm.$addChild( [options, constructor] )
 
 - **options** `Object` *optional*
 - **constructor** `Function` *optional*
 
-Adds a child instance to the current instance. The options object is the same in manually instantiating an instance. Optionally you can pass in a constructor created from `Vue.extend()`.
+現在のインスタンスに子インスタンスを追加します。options オブジェクトはマニュアルでインスタンスを作成したものと同じです。追加で、コンストラクタの中に `Vue.extend()` から作られたコンストラクタを渡せます。
 
-There are three implications of a parent-child relationship between instances:
+あるインスタンス間の親子関係には、3つの意味合いがあります:
 
-1. The parent and child can communicate via [the event system](#Events).
-2. The child has access to all parent assets (e.g. custom directives).
-3. The child, if inheriting parent scope, has access to parent scope data properties.
+1. 親と子は[イベントシステム](#Events)を介して通信します。
+2. 子はすべての親の資産にアクセス可能です（例えば、カスタムディレクティブなど）。
+3. 子は、親のスコープを継承した場合は、親のスコープのデータプロパティにアクセスできます。
