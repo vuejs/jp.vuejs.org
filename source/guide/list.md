@@ -3,9 +3,9 @@ type: guide
 order: 5
 ---
 
-You can use the `v-repeat` directive to repeat a template element based on an Array of objects on the ViewModel. For every object in the Array, the directive will create a child Vue instance using that object as its `$data` object. These child instances inherit all data on the parent, so in the repeated element you have access to properties on both the repeated instance and the parent instance. In addition, you get access to the `$index` property, which will be the corresponding Array index of the rendered instance.
+ViewModel 上のオブジェクトの配列に基づき、テンプレート要素を繰り返すために、`v-repeat` directive を利用することができます。`v-repeat` directive は、配列内の各オブジェクトを `$data` オブジェクトとして利用し、子の Vue インスタンスを作成します。それらの子インスタンスは親の全データを継承しているので、繰り返された要素内では、繰り返されたインスタンスと親インスタンス双方のプロパティにアクセスできます。加えて、レンダリングされたインスタンスの配列インデックスに対応する `$index` プロパティにもアクセスすることができます。
 
-**Example:**
+**例:**
 
 ``` html
 <ul id="demo">
@@ -28,7 +28,7 @@ var demo = new Vue({
 })
 ```
 
-**Result:**
+**結果:**
 
 <ul id="demo"><li v-repeat="items" class="item-{&#123;$index&#125;}">{&#123;$index&#125;} - {&#123;parentMsg&#125;} {&#123;childMsg&#125;}</li></ul>
 <script>
@@ -44,9 +44,9 @@ var demo = new Vue({
 })
 </script>
 
-## Arrays of Primitive Values
+## プリミティブ値の配列
 
-For Arrays containing primitive values, you can access the value simply as `$value`:
+プリミティブ値を含む配列では、単純に `$value` として値にアクセスできます:
 
 ``` html
 <ul id="tags">
@@ -65,7 +65,7 @@ new Vue({
 })
 ```
 
-**Result:**
+**結果:**
 <ul id="tags" class="demo"><li v-repeat="tags">{&#123;$value&#125;}</li></ul>
 <script>
 new Vue({
@@ -76,13 +76,13 @@ new Vue({
 })
 </script>
 
-## Using an identifier
+## 識別子の利用
 
-Sometimes we might want to have more explicit variable access instead of implicitly falling back to parent scope. You can do that by providing an argument to the `v-repeat` directive and use it as the identifier for the item being iterated:
+親スコープへの不明確なフォールバックよりは、もっと明確に変数を指定したい場合が多々あるでしょう。それを行うには、繰り返されるアイテムの識別子として、 `v-repeat` に引数を指定して下さい:
 
 ``` html
 <ul id="users">
-  <!-- think of this as "for each user in users" -->
+  <!--これを "for each user in users" とみなす -->
   <li v-repeat="user: users">
     {{user.name}} - {{user.email}}
   </li>
@@ -101,7 +101,7 @@ new Vue({
 })
 ```
 
-**Result:**
+**結果:**
 <ul id="users" class="demo"><li v-repeat="user: users">{&#123;user.name&#125;} - {&#123;user.email&#125;}</li></ul>
 <script>
 new Vue({
@@ -117,35 +117,35 @@ new Vue({
 
 ## Mutation Methods
 
-Under the hood, Vue.js intercepts an observed Array's mutating methods (`push()`, `pop()`, `shift()`, `unshift()`, `splice()`, `sort()` and `reverse()`) so they will also trigger View updates.
+内部的に、Vue.js は監視対象の配列のミューテーションメソッド (`push()`, `pop()`, `shift()`, `unshift()`, `splice()`, `sort()` 及び `reverse()`) を横取りし、ビューの更新を引き起こします。
 
 ``` js
-// the DOM will be updated accordingly
+// この結果、DOM が更新される
 demo.items.unshift({ childMsg: 'Baz' })
 demo.items.pop()
 ```
 
 ## Augmented Methods
 
-Vue.js augments observed Arrays with two convenience methods: `$set()` and `$remove()`.
+Vue.js は配列の監視を、 `$set()` と `$remove()` の２つの便利なメソッドで補います。
 
-You should avoid directly setting elements of a data-bound Array with indices, because those changes will not be picked up by Vue.js. Instead, use the agumented `$set()` method:
+データバインドされた配列に対して、直接インデックスを指定して要素を設定するのは避けて下さい。これは、 Vue.js によって変更を感知できなくなってしまうためです。代わりに、augmented method の `$set()` を利用して下さい:
 
 ``` js
-// same as `demo.items[0] = ...` but triggers view update
+// `demo.items[0] = ...` と同様だが、ビューの更新が実行される
 demo.items.$set(0, { childMsg: 'Changed!'})
 ```
 
-`$remove()` is just syntax sugar for `splice()`. It will remove the element at the given index. When the argument is not a number, `$remove()` will search for that value in the array and remove the first occurrence.
+`$remove()` は単なる `splice()` へのシンタックスシュガーです。引数で指定されたインデックスの要素を削除します。引数が数値でない場合、 `$remove()` は配列内をその値で検索し、最初に見つかった要素を削除します。
 
 ``` js
-// remove the item at index 0
+// インデックスが0のアイテムを削除
 demo.items.$remove(0)
 ```
 
-## Replacing an Array
+## 配列の置き換え
 
-When you are using non-mutating methods, e.g. `filter()`, `concat()` or `slice()`, the returned Array will be a different instance. In that case, you can just replace the old Array with the new one:
+Non-mutating method（例： `filter()`, `concat()` または `slice()` ）を使う場合、返却される配列は異なるインスタンスになります。このケースでは、古い配列を新しいものと置き換えることが出来ます:
 
 ``` js
 demo.items = demo.items.filter(function (item) {
@@ -153,13 +153,13 @@ demo.items = demo.items.filter(function (item) {
 })
 ```
 
-You might think this will blow away the existing DOM and re-build everything. But worry not - Vue.js recognizes array elements that already have an associated Vue instance and will reuse those instances whenever possible.
+この操作により、既存の DOM を消し飛ばし、すべてが再構築されてしまうのではないかと思うかもしれませんが、その心配はありません。Vue.js は、既に配列に関連付けられた Vue インスタンスがあれば認識し、それらのインスタンスを可能な限り再利用します。
 
-## Using `track-by`
+## `track-by` の利用
 
-In some cases, you might need to replace the Array with completely new objects - e.g. ones returned from an API call. If your data objects have a unique id property, then you can use a `track-by` attribute to give Vue.js a hint so that it can reuse an existing instance with data that has the same id.
+いくつかのケースで、完全に新しいオブジェクトで配列を置き換える必要があるかもしれません（例えば、API コールから返されたオブジェクトなど）。もし、データオブジェクトがユニークな ID プロパティを持っているのであれば、同一 ID を持つデータに基づく既存のインスタンスを再利用するための Vue.js へのヒントとして、`track-by` 属性を利用することができます。
 
-For example, if your data looks like this:
+例として、もし data がこのようであるならば:
 
 ``` js
 {
@@ -170,17 +170,17 @@ For example, if your data looks like this:
 }
 ```
 
-Then you can give the hint like this:
+このようにヒントを与えることができます:
 
 ``` html
 <div v-repeat="items" track-by="_uid">
-  <!-- content -->
+  <!-- 内容 -->
 </div>
 ```
 
-## Iterating Through An Object
+## オブジェクトをイテレーションする
 
-You can also use `v-repeat` to iterate through the properties of an Object. Each repeated instance will have a special property `$key`. For primitive values, you also get `$value` which is similar to primitive values in Arrays.
+オブジェクトのプロパティに対して、 `v-repeat` を使ってイテレーションすることができます。それぞれの繰り返されたインスタンスは `$key` という特別なプロパティを持ちます。また、プリミティブ値に対しては、配列と同様に、`$value` を取得することができます。
 
 ``` html
 <ul id="repeat-object">
@@ -211,7 +211,7 @@ new Vue({
 })
 ```
 
-**Result:**
+**結果:**
 <ul id="repeat-object" class="demo"><li v-repeat="primitiveValues">{&#123;$key&#125;} : {&#123;$value&#125;}</li><li>===</li><li v-repeat="objectValues">{&#123;$key&#125;} : {&#123;msg&#125;}</li></ul>
 <script>
 new Vue({
@@ -234,11 +234,12 @@ new Vue({
 })
 </script>
 
-<p class="tip">In ECMAScript 5 there is no way to detect when a new property is added to an Object, or when a property is deleted from an Object. To deal with that, observed objects will be augmented with two methods: `$add(key, value)` and `$delete(key)`. These methods can be used to add / delete properties from observed objects while triggering the desired View updates.</p>
+<p class="tip">ECMAScript 5 では、オブジェクトに対して新たなプロパティが追加もしくは削除されたことを感知する方法がありません。これに対処する為、監視対象のオブジェクトを `$add(key, value)` と `$delete(key)` の２つのメソッドを使って補います。期待したビューの更新を実行しつつ、監視対象のオブジェクトのプロパティを追加・削除するために、これらのメソッドを利用することが出来ます。
+</p>
 
-## Iterating Over a Range
+## 範囲のイテレーション
 
-`v-repeat` can also take an integer Number. In this case it will repeat the template that many times.
+`v-repeat` は整数値を取ることも出来ます。このケースでは、指定された数だけテンプレートが繰り返されます。
 
 ``` html
 <div id="range">
@@ -254,7 +255,7 @@ new Vue({
   }
 });
 ```
-**Result:**
+**結果:**
 <ul id="range" class="demo"><li v-repeat="val">Hi! {&#123;$index&#125;}</li></ul>
 <script>
 new Vue({
@@ -263,8 +264,8 @@ new Vue({
 });
 </script>
 
-## Array Filters
+## 配列のフィルタ
 
-Sometimes we only need to display a filtered or sorted version of the Array without actually mutating or resetting the original data. Vue provides two built-in filters to simplify such usage: `filterBy` and `orderBy`. Check out their [documentations](/api/filters.html#filterBy) for more details.
+オリジナルのデータに対して変更やリセットをせずに、フィルタリングやソートされた配列を表示のみ行いたい場合が時々あります。Vue は、そのような用途でシンプルに使えるよう、`filterBy` と `orderBy` という組み込みのフィルタを提供しています。詳しくはそれらの [documentations](/api/filters.html#filterBy) を参照してください。
 
-Next up: [Listening for Events](/guide/events.html).
+次は [Listening for Events](/guide/events.html) です。
