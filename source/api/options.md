@@ -1,16 +1,16 @@
-title: Options
+title: オプション
 type: api
 order: 2
 ---
 
-## Data
+## データ
 
 ### data
 
-- **Type:** `Object | Function`
-- **Restricton:** Only accepts `Function` when used in `Vue.extend()`.
+- **タイプ:** `Object | Function`
+- **制約:** `Vue.extend()` の中で使用するときは、`Function` のみを受け入れます。
 
-The data object for the Vue instance. It can be accessed as `vm.$data`:
+Vue インスタンスのためのデータオブジェクトです。`vm.$data` としてアクセスできます。
 
 ```js
 var data = { a: 1 }
@@ -20,7 +20,7 @@ var vm = new Vue({
 vm.$data === data // -> true
 ```
 
-The Vue instance will proxy access to all its properties, therefore you can manipulate the properties on the Vue instance and the changes get synced back to the actual data object:
+Vue インスタンスはすべてのプロパティに代理アクセスします。したがって、Vue インスタンス上のプロパティを操作することが可能であり、その変更は実際のデータオブジェクトと同期されます:
 
 ```js
 vm.a   // -> 1
@@ -30,9 +30,9 @@ data.a = 3
 vm.a   // -> 3
 ```
 
-The object must be JSON-compliant (no circular references). You can use it just like an ordinary object, and it will look exactly the same when serialized with `JSON.stringify`. You can also share it between multiple Vue instances.
+このオブジェクトは JSON の仕様に準拠する必要があります（循環参照はありません）。普通のオブジェクトと同じように使うことができ、`JSON.stringify` でシリアライズしたときと全く同じになります。複数の Vue インスタンス間で共有することも可能です。
 
-A special case here is when using the `data` option in `Vue.extend()`. Since we don't want nested objects to be shared by all instances created from that extended constructor, we must provide a function that returns a fresh copy of the default data:
+`Vue.extend()` 内の `data` オプションを使うときは特別です。ネストされたオブジェクトが、すべての継承されたコンストラクタから作られたインスタンスによって共有されないようにするため、デフォルトのデータの最新のコピーを返す関数を提供する必要があります。
 
 ``` js
 var MyComponent = Vue.extend({
@@ -47,15 +47,15 @@ var MyComponent = Vue.extend({
 })
 ```
 
-<p class="tip">Under the hood, Vue.js attaches a hidden property `__ob__` and recursively converts the object's enumerable properties into getters and setters to enable dependency collection. Properties with keys that starts with `$` or `_` are skipped.</p>
+<p class="tip">内部実装的には、Vue.js は隠しプロパティ `__ob__` を備えており、依存関係の修正を可能にするために、オブジェクトの数えられるプロパティを getter と setter に再帰的に変換します。`$` や `_` で始まるキーをもつプロパティは、スキップされます。</p>
 
-### methods
+### method
 
-- **Type:** `Object`
+- **タイプ:** `Object`
 
-Methods to be mixed into the Vue instance. You can access these methods directly on the VM instance, or use them in directive expressions. All methods will have their `this` context automatically bound to the Vue instance.
+Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブ表現で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバウンドされた `this` コンテキストをもちます。
 
-**Example:**
+**例:**
 
 ```js
 var vm = new Vue({
@@ -74,9 +74,9 @@ vm.a // 2
 
 - **Type:** `Object`
 
-Computed properties to be mixed into the Vue instance. All getters and setters have their `this` context automatically bound to the Vue instance.
+Vue インスタンスに組み込まれる Computed プロパティです。すべての getter や setter は、自動的に Vue インスタンスにバウンドされた `this` コンテキストをもちます。
 
-**Example:**
+**例:**
 
 ```js
 var vm = new Vue({
@@ -105,11 +105,11 @@ vm.aDouble // -> 4
 
 ### paramAttributes
 
-- **Type:** `Array`
+- **タイプ:** `Array`
 
-An array of attribute names to be set on the Vue instance as initial data. Useful when passing data to a component.
+引数の名前の配列が、Vue インスタンス上で初期値として設定されます。データをコンポーネントに渡すときに便利です。
 
-**Example:**
+**例:**
 
 ``` js
 Vue.component('param-demo', {
@@ -125,156 +125,157 @@ Vue.component('param-demo', {
 <param-demo size="100" message="hello!"></param-demo>
 ```
 
-Param attributes can also contain interpolation tags. The interpolation will be evaluated against the parent, and under the hood they will be compiled as [`v-with`](/api/directives.html#v-with), which means when the value of the interpolated expression changes, the component's corresponding property will also be updated:
+Param 引数は、補間タグを含むことができます。補間は親に対して評価され、内部実装的には [`v-with`](/api/directives.html#v-with) としてコンパイルされます。これが意味するところは、補間表現が変化したとき、コンポーネントの対応するプロパティも更新されるということです:
 
 ``` html
 <param-demo message="{{parentMessage}}"></param-demo>
 ```
 
-#### Notes on hyphened attributes
+#### ハイフンでつながれた引数についての注意
 
-HTML attribute names ignore upper and lower case differences, so we usually use hyphened attributes instead of camel case. There are some special cases when using `paramAttributes` with attributes that contains hyphens:
+HTMLの引数名は、小文字や大文字の違いを無視するので、通常はキャメルケースの代わりにハイフンでつながれた引数を使用します。ハイフンを含んだ属性をもつ `paramAttributes` を使用する特殊な場合もあります:
 
-1. If the attribute is a data attribute, the `data-` prefix will be auto stripped;
+1. もし引数が data 引数出会った場合、`data-` 接頭辞は自動的に削除されます。
 
-2. If the attribute still contains dashes, it will be camelized. This is because it's inconvenient to access top level properties containing dashes in templates: the expression `my-param` will be parsed as a minus expression unless you use the awkward `this['my-param']` syntax.
+2. もし引数が依然ダッシュ (-) を含んでいた場合、キャメルケースに変換されます。これは、テンプレートの中にダッシュを含む最上位のプロパティにアクセスするときに不便だからです。`my-param` という表記は、不恰好に `this['my-param']` という書き方をしない限りマイナスの表記としてパースされてしまいます。
 
-This means a param attribute `data-hello` will be set on the vm as `vm.hello`; And `my-param` will be set as `vm.myParam`.
+これは、パラメータの引数 `data-hello` はvm上で `vm.hello` と設定され、`my-param` は `vm.myParam` と設定されることを意味します。
 
 ## DOM
 
 ### el
 
-- **Type:** `String | HTMLElement | Function`
-- **Restriction:** only accepts type `Function` when used in `Vue.extend()`.
+- **タイプ:** `String | HTMLElement | Function`
+- **制約:** `Vue.extend()` の中で使用する場合は、`Function` タイプのみを受け付けます。
 
-Provide the Vue instance with an existing DOM element. It can be a CSS selector string, an actual HTMLElement, or a function that returns an HTMLElement. The resolved element will be accessible as `vm.$el`.
+既存の DOM 要素に Vue インスタンスを与えます。CSS セレクタの文字列、実際の HTML 要素、または、HTML 要素を返す関数をとることができます。解決された要素は、`vm.$el` としてアクセス可能になります。
 
-When used in `Vue.extend`, a function must be provided so each instance gets a separately created element.
+`Vue.extend` の中で使用されているとき、それぞれのインスタンスが独立に要素を作るような関数が与えられる必要があります。
 
-If the option is available at instantiation, the instance will immediately enter compilation; otherwise, the user will have to explicitly call `vm.$mount()` to manually start the compilation.
+もしインスタンス化の際にオプションが有効であれば、そのインスタンスはただちにコンパイルの段階に入ります。さもなければ、ユーザーがコンパイルを始めるために手作業で明示的に `vm.$mount()` を呼ぶ必要があります。
 
 ### template
 
-- **Type:** `String`
+- **タイプ:** `String`
 
-A string template to be inserted into `vm.$el`. Any existing markup inside `vm.$el` will be overwritten, unless [content insertion points](/guide/components.html#Content_Insertion) are present in the template. If the **replace** option is `true`, the template will replace `vm.$el` entirely.
+`vm.$el` に挿入するための、文字列のテンプレートです。[content insertion points](/guide/components.html#Content_Insertion) がテンプレートの中になければ、`vm.$el` 内部の既存のマークアップは上書きされます。もし **relace** オプションが `true` であれば、テンプレートは `vm.$el` を完全に書き換えます。
 
-If it starts with `#` it will be used as a querySelector and use the selected element's innerHTML and the template string. This allows the use of the common `<script type="x-template">` trick to include templates.
+もし `#` で始まる場合、querySelector として使用され、選択された要素の innerHTML とテンプレート文字列を使用します。これにより、テンプレートを組み込むための共通の `<script type="x-template">` というやり方を使うことができるようになります。
 
-<p class="tip">Vue.js uses DOM-based templating. The compiler walks through DOM elements and looks for directives and creates data bindings. This means all Vue.js templates are parsable HTML that can be converted into actual DOM elements by the browser. Vue.js converts string templates into DOM fragments so they can be cloned when creating more Vue instances. If you want your templates to be valid HTML, you can configure the directive prefix to start with `data-`.</p>
+<p class="tip">Vue.js は DOM ベースのテンプレート。コンパイラーは DOM 要素を処理して、ディレクティブを探し、データバインディングを作成します。これは、すべての Vue.js テンプレートはブラウザによって実際の DOM に変換可能な、パース可能なHTMLであることを意味しています。Vue.js はテンプレートの文字列を DOM の断片に変換され、追加でVue インスタンスを作成するときにクローンされます。もしテンプレートを正しい HTML にしたければ、`data-` から始めるようにディレクティブの接頭辞を設定することができます。</p>
 
 ### replace
 
-- **Type:** `Boolean`  
-- **Default:** `false`
-- **Restriction:** only respected if the **template** option is also present.
+- **タイプ:** `Boolean`
+- **初期値:** `false`
+- **制約:** **template** オプションが存在する場合にのみ重視されます。
 
-Whether to replace the original `vm.$el` with the template's content instead of appending to it.
+元々の `vm.$el` を template の中身を追加する代わりに、置き換えるかどうかを意味します。
 
-## Lifecycle
+## ライフサイクル
 
-All lifecycle hooks have their `this` context bound to the Vue instance they belong to. The Vue instance will also fire corresponding events for each hook in the form of `"hook:<hookName>"`. e.g. for `created`, a `"hook:created"` event will be fired.
+すべてのライフサイクルのフックは、それらが所属する Vue インスタンスにバインドされた `this` のコンテキストを持ちます。Vue インスタンスは `"hook:<hookName>"` の形式のそれぞれのフックに対応するイベントを発火します。例えば、`created` では、 `"hook:created"` イベントが発火されます。
 
 ### created
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called synchronously after the instance is created. At this stage, the instance has finished processing the options which means the following have been set up: data observation, computed properties, methods, watch/event callbacks. However, DOM compilation has not been started, and the `$el` property will not be available yet.
+インスタンスが作成された後に、同期的に呼ばれます。この段階では、インスタンスは次の設定されたオプションの処理を終了しています: data の監視、computed プロパティ、methods、watch / event コールバック
+しかしながら、DOM のコンパイルは開始されておらず、`$el` プロパティはまだ有効ではありません。
 
 ### beforeCompile
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called right before the compilation starts.
+コンパイルが開始される寸前に呼ばれます。
 
 ### compiled
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called after the compilation is finished. At this stage all directives have been linked so data changes will trigger DOM updates. However, `$el` is not guaranteed to have been inserted into the document yet.
+コンパイルが終了した後に呼ばれます。この段階では、すべてのディレクティブはリンクされているため、データの変更は DOM の更新のトリガーになります。しかし、'$el' がドキュメントに挿入されていることは保証されません。
 
 ### ready
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called after compilation **and** the `$el` is **inserted into the document for the first time**. Note this insertion must be executed via Vue (with methods like `vm.$appendTo()` or as a result of a directive update) to trigger the `ready` hook.
+コンパイルが終了した後に呼ばれます。**そして**、`$el` が**ドキュメントの中に初めて挿入されます**。この挿入は `ready` フックのトリガーになるように（`vm.$appendTo()` のようなメソッドやディレクティブの更新の結果をもった） Vue 経由で実行されなくてはならないことに注意してください。
 
 ### attached
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called when `vm.$el` is attached to DOM by a directive or a VM instance method such as `$appendTo()`. Direct manipulation of `vm.$el` will **not** trigger this hook.
+`vm.$el` がディレクティブもしくは VM インスタンスもしくは`$appendTo()` のような VM インスタンスのメソッドによって DOM に追加されたときに呼ばれます。`vm.$el` の直接の操作はこのフックのトリガーに**なりません**。
 
 ### detached
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called when `vm.$el` is removed from the DOM by a directive or a VM instance method. Direct manipulation of `vm.$el` will **not** trigger this hook.
+ディレクティブか VM インスタンスのメソッドによって DOM から `vm.$el` が削除されたときに呼ばれます。ディレクティブの `vm.$el` の操作はこのフックのトリガーに**なりません**。
 
 ### beforeDestroy
 
-- **Type:** `Function`
+- **タイプ:** `Function`
 
-Called right before a Vue instance is destroyed. At this stage the instance is still fully functional.
+Vue インスタンスが破棄される寸前に呼ばれます。この段階では、インスタンスはまだ完全に使用可能ではありません。
 
 ### destroyed
 
 - **Type:** `Function`
 
-Called after a Vue instance has been destroyed. When this hook is called, all bindings and directives of the Vue instance have been unbound and all child Vue instances have also been destroyed.
+Vue インスタンスが破棄された後に呼ばれます。このフックが呼ばれたとき、Vue インスタンスのすべてのバインディングとディレクティブはバインドを解かれ、すべての子 Vue インスタンスも破棄されます。
 
-Note if there is a leaving transition, the `destroyed` hook is called **after** the transition has finished.
+もし残された切り替えがあった場合、`destroyed` フックは切り替えが終了した**後に**呼ばれます。
 
-## Assets
+## アセット
 
-These are private assets that will be available only to this Vue instance and its children during compilation.
+コンパイル中の Vue インスタンスとその子インスタンスでのみで有効なプライベートなアセットがあります。
 
 ### directives
 
-- **Type:** `Object`
+- **タイプ:** `Object`
 
-A hash of directives to be made available to the Vue instance. For details on how to write a custom directive, see [Writing Custom Directives](/guide/custom-directive.html).
+Vue インスタンスで使用できるような、ディレクティブのハッシュです。カスタムディレクティブの書き方について、より詳しくは[カスタムディレクティブを書く](/guide/custom-directive.html)を参照してください。
 
 ### filters
 
-- **Type:** `Object`
+- **タイプ:** `Object`
 
-A hash of filters to be made available to the Vue instance. For details on how to write a custom filter, see [Writing Custom Filters](/guide/custom-filter.html).
+Vue インスタンスで使用できるようなフィルターのハッシュです。カスタムフィルターの書き方は、[カスタムフィルターを書く](/guide/custom-filter.html)を参照してください。
 
 ### components
 
-- **Type:** `Object`
+- **タイプ:** `Object`
 
-A hash of components to be made available to the Vue instance. For details on how to extend and compose Vue instances, see [Component System](/guide/components.html).
+Vue インスタンスで使用できるようなコンポーネントのハッシュです。Vue インスタンスの継承や構成の仕方の詳細は、[コンポーネントシステム](/guide/components.html)を参照してください。
 
 ### partials
 
-- **Type:** `Object`
+- **タイプ:** `Object`
 
-A hash of partials to be made available to the Vue instance. Also see [v-partial](/api/directives.html#v-partial).
+Vue インスタンスで使用できるような partials のハッシュです。[v-partial](/api/directives.html#v-partial)も参照してください。
 
 ### transitions
 
-- **Type:** `Object`
+- **タイプ:** `Object`
 
-A hash of transitions to be made available to the Vue instance. For details see the guide on [Transitions](/guide/transitions.html).
+Vue インスタンスで使用できるようなトランジッションのハッシュです。詳しくは、[Transitions](/guide/transitions.html)にあるガイドを参照してください。
 
-## Others
+## その他
 
 ### inherit
 
-- **Type:** `Boolean`
-- **Default:** `false`
+- **タイプ:** `Boolean`
+- **初期値:** `false`
 
-Whether to inherit parent scope data. Set it to `true` if you want to create a component that inherits parent scope. When `inherit` is set to `true`, you can:
+親のスコープのデータを継承するか否かを表します。もし親のスコープを継承したコンポーネントを作りたい場合は、`true` に設定してください。`inherit` が `true` に設定されたときは、以下のことができます:
 
-1. Bind to parent scope properties in the component template;
-2. Directly access parent properties on the component instance itself, via prototypal inheritance.
+1. コンポーネント内で親のスコープのプロパティにバインドする。
+2. 原型的なインターフェースを介して、コンポーネントのインスタンスそのものの親のプロパティに直接アクセスする。
 
-One important thing to know when using `inherit: true` is that **the child can also set parent properties**, because all Vue instance data properties are getter/setters.
+`inherit: true` を使用する際に知っておくべき重要なことは、すべての Vue インスタンスのデータプロパティは、getterやsetterであるため、**子も親のプロパティを設定できる**ことです。
 
-**Example:**
+**例:**
 
 ``` js
 var parent = new Vue({
@@ -294,9 +295,9 @@ parent.a // -> 2
 
 ### events
 
-An object where keys are events to listen for and values are the corresponding callbacks. Note these are Vue events rather than DOM events. The value can also be a string of a method name. The Vue instance will call `$on()` for each entry in the object at instantiation.
+キーが監視するべきイベントで、値が対応するコールバックのオブジェクトです。DOM のイベントというよりはむしろVue のイベントです。値はメソッド名の文字列をとることもできます。Vue インスタンスはインスタンス化の際にオブジェクトの各エントリに対して `$on()` を呼びます。
 
-**Example:**
+**例:**
 
 ``` js
 var vm = new Vue({
@@ -307,7 +308,7 @@ var vm = new Vue({
     greeting: function (msg) {
       console.log(msg)
     },
-    // can also use a string for methods
+    // メソッド名の文字列も使用可能
     bye: 'sayGoodbye'
   },
   methods: {
@@ -322,11 +323,11 @@ vm.$emit('bye')             // -> goodbye!
 
 ### watch
 
-- **Type**: `Object`
+- **タイプ**: `Object`
 
-An object where keys are expressions to watch and values are the corresponding callbacks. The value can also be a string of a method name. The Vue instance will call `$watch()` for each entry in the object at instantiation.
+キーがwatchする評価式で、値が対応するコールバックをもつオブジェクトです。値はメソッド名の文字列をとることもできます。Vue インスタンスはインスタンス化の際にオブジェクトの各エントリに対して `$watch()` を呼びます。
 
-**Example:**
+**例:**
 
 ``` js
 var vm = new Vue({
@@ -344,11 +345,11 @@ vm.a = 2 // -> new: 2, old: 1
 
 ### mixins
 
-- **Type**: `Array`
+- **タイプ**: `Array`
 
-The `mixins` option accepts an array of mixin objects. These mixin objects can contain instance options just like normal instance objects, and they will be merged against the eventual options using the same option merging logic in `Vue.extend()`. e.g. If your mixin contains a created hook and the component itself also has one, both functions will be called.
+`mixins` オプションは、ミックスインオブジェクトの配列を受け入れます。ミックスインオブジェクトは、通常のインスタンスオブジェクトのようなインスタンスオプションを含むことができ、`Vue.extend()` における同じオプションを併合するロジックを使った結果のオプションに対して併合されます。例えば、もしあなたのミックスインが作成されたフックをもち、コンポーネントそのものもそれを持っていた場合、両方の関数が呼ばれます。
 
-**Example:**
+**例:**
 
 ``` js
 var mixin = {
@@ -364,12 +365,12 @@ var vm = new Vue({
 
 ### name
 
-- **Type**: `String`
-- **Restrctions:** only respected when used in `Vue.extend()`.
+- **タイプ**: `String`
+- **制約:** `Vue.extend()` の中で使用されるときのみ重視されます。
 
-When inspecting an extended Vue component in the console, the default constructor name is `VueComponent`, which isn't very informative. By passing in an optional `name` option to `Vue.extend()`, you will get a better inspection output so that you know which component you are looking at. The string will be camelized and used as the component's constructor name.
+コンソール上で拡張された Vue コンポーネントを調べる際、コンストラクタの名前の初期値は情報価値を持たない、`VueComponent` です。追加の `name` オプションを `Vue.extend()` に渡すことで、どちらのコンポーネントをあなたが見ているのかを知ることができるようなよりわかりやすい出力を得ることができます。この文字列はキャメルケースになり、コンポーネントのコンストラクタの名前として使用されます。
 
-**Example:**
+**例:**
 
 ``` js
 var Ctor = Vue.extend({
