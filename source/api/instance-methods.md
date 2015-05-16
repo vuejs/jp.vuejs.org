@@ -11,14 +11,14 @@ order: 4
 
 - **expression** `String`
 - **callback( newValue, oldValue )** `Function`
-- **deep** `Boolean` *optional*
-- **immdediate** `Boolean` *optional*
+- **deep** `Boolean` *任意*
+- **immdediate** `Boolean` *任意*
 
 Vueインスタンス上でのひとつの式の変更を監視します。引数 expression には、単一の keypath か、実際の式を入れることができます:
 
 ``` js
 vm.$watch('a + b', function (newVal, oldVal) {
-  // do something
+  // 何かする
 })
 ```
 
@@ -27,7 +27,7 @@ vm.$watch('a + b', function (newVal, oldVal) {
 ``` js
 vm.$watch('someObject', callback, true)
 vm.someObject.nestedValue = 123
-// callback is fired
+// コールバックが発火する
 ```
 
 4つめの引数 `immediate` に `true` を渡すと、その時の式の値で、コールバックがただちに実行されます:
@@ -41,7 +41,7 @@ vm.$watch('a', callback, false, true)
 
 ``` js
 var unwatch = vm.$watch('a', cb)
-// later, teardown the watcher
+// 後で監視を削除する
 unwatch()
 ```
 
@@ -78,7 +78,7 @@ Vue インスタンス（それと、その `$data`）のルートレベルの�
 フィルタも含むことができるような式を評価します。
 
 ``` js
-// assuming vm.msg = 'hello'
+// vm.msg = 'hello' を仮定
 vm.$eval('msg | uppercase') // -> 'HELLO'
 ```
 
@@ -86,21 +86,21 @@ vm.$eval('msg | uppercase') // -> 'HELLO'
 
 - **templateString** `String`
 
-中括弧補間をもつテンプレートの文字列のかたまりを評価します。このメソッドは、単に文字列を挿入するだけであるということに気をつけてください。つまり、属性ディレクティブはコンパイルされません。
+中括弧補間をもつテンプレートの文字列のかたまりを評価します。このメソッドは、単に文字列を挿入するだけであるということに気をつけてください。つまり、属性を持ったディレクティブはコンパイルされません。
 
 ``` js
-// assuming vm.msg = 'hello'
+// vm.msg = 'hello' を仮定
 vm.$interpolate('{{msg}} world!') // -> 'hello world!'
 ```
 
 ### vm.$log( [keypath] )
 
-- **keypath** `String` *optional*
+- **keypath** `String` *任意*
 
 現在のインスタンスを getter や setter よりもコンソールで検査しやすいプレーンオブジェクトとして記録します。オプションのキーも受けつけます。
 
 ``` js
-vm.$log() // logs entire ViewModel data
+vm.$log() // ViewModel のすべてのデータのログをとる
 vm.$log('item') // logs vm.item
 ```
 
@@ -111,21 +111,21 @@ vm.$log('item') // logs vm.item
 ### vm.$dispatch( event, [args...] )
 
 - **event** `String`
-- **args...** *optional*
+- **args...** *任意*
 
 イベントを、現在のvmから `$root` へ向かって全てに伝搬させます。もしコールバックが `false` を返した場合、親のインスタンスでの伝搬を停止します。
 
 ### vm.$broadcast( event, [args...] )
 
 - **event** `String`
-- **args...** *optional*
+- **args...** *任意*
 
 現在の vm のすべての子vmに対してイベントを送り、すべての子に対して隅々まで伝搬させます。もしコールバックが `false` を返したら、その所有インスタンスはそれ以降イベントを広めません。
 
 ### vm.$emit( event, [args...] )
 
 - **event** `String`
-- **args...** *optional*
+- **args...** *任意*
 
 現在の vm 上でのみのイベントのきっかけとなります。
 
@@ -145,53 +145,53 @@ vm.$log('item') // logs vm.item
 
 ### vm.$off( [event, callback] )
 
-- **event** `String` *optional*
-- **callback** `Function` *optional*
+- **event** `String` *任意*
+- **callback** `Function` *任意*
 
 もし引数が与えられなければ、すべてのイベントの監視を停止します。もしイベントがひとつだけ与えられたら、そのイベントに関するすべてのコールバックを削除します。もしイベントとコールバックの両方が与えられたら、その特定のコールバックのみを削除します。
 
 ## DOM
 
-> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js の表示変換のきっかけになることを除いては、jQuery と同じような動きをします。表示変換に関して、より詳しくは[表示変換のエフェクトを追加する](/guide/transitions.html)を参照していただきたい。
+> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js の表示変換のきっかけになることを除いては、jQuery と同じような動きをします。表示変換に関して、より詳しくは[表示変換のエフェクトを追加する](/guide/transitions.html)を参照してください。
 
 ### vm.$appendTo( element|selector, [callback] )
 
 - **element** `HTMLElement` | **selector** `String`
-- **callback** `Function` *optional*
+- **callback** `Function` *任意*
 
 vmの `$el` を対象となる要素に付加します。引数は要素もしくは querySelector 文字列を受け入れます。
 
 ### vm.$before( element|selector, [callback] )
 
 - **element** `HTMLElement` | **selector** `String`
-- **callback** `Function` *optional*
+- **callback** `Function` *任意*
 
 ターゲット要素の前に、vmの `$el` を挿入します。
 
 ### vm.$after( element|selector, [callback] )
 
 - **element** `HTMLElement` | **selector** `String`
-- **callback** `Function` *optional*
+- **callback** `Function` *任意*
 
 ターゲット要素の後ろに、vmの `$el` を挿入します。
 
 ### vm.$remove( [callback] )
 
-- **callback** `Function` *optional*
+- **callback** `Function` *任意*
 
 DOMから、vmの `$el` を削除します。
 
-## Lifecycle
+## ライフサイクル
 
 ### vm.$mount( [element|selector] )
 
-- **element** `HTMLElement` | **selector** `String` *optional*
+- **element** `HTMLElement` | **selector** `String` *任意*
 
 もしインスタンス化の際に、Vue インスタンスが `el` オプションを受け取らなかった場合、マニュアルで `$mount()` を読んである要素をそこに割り当て、コンパイルを開始することができます。もし引数が何も与えられなかったら、空の `<div>` が自動的に作られます。既に使用可能になった状態のインスタンスで `$mount()` を呼んでも、何も起きません。このメソッドはインスタンスそのものを返しますので、他のインスタンスメソッドをその後につなげることができます。
 
 ### vm.$destroy( [remove] )
 
-- **remove** `Boolean` *optional*
+- **remove** `Boolean` *任意*
 
 vm を完全に破棄します。既存の他の vm との接続を切り、そのすべてのディレクティブとのバインドを解消し、DOMから `$el` を削除します。さらに、すべての `$on` や `$watch` リスナーも自動的に削除されます。
 
@@ -203,8 +203,8 @@ DOM（要素や DocumentFragment）の一部を部分的にコンパイルしま
 
 ### vm.$addChild( [options, constructor] )
 
-- **options** `Object` *optional*
-- **constructor** `Function` *optional*
+- **options** `Object` *任意*
+- **constructor** `Function` *任意*
 
 現在のインスタンスに子インスタンスを追加します。options オブジェクトはマニュアルでインスタンスを作成したものと同じです。追加で、コンストラクタの中に `Vue.extend()` から作られたコンストラクタを渡せます。
 
