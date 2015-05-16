@@ -7,7 +7,7 @@ order: 2
 
 ### data
 
-- **タイプ:** `Object | Function`
+- **型:** `Object | Function`
 - **制約:** `Vue.extend()` の中で使用するときは、`Function` のみを受け入れます。
 
 Vue インスタンスのためのデータオブジェクトです。`vm.$data` としてアクセスできます。
@@ -49,9 +49,9 @@ var MyComponent = Vue.extend({
 
 <p class="tip">内部実装的には、Vue.js は隠しプロパティ `__ob__` を備えており、依存関係の修正を可能にするために、オブジェクトの数えられるプロパティを getter と setter に再帰的に変換します。`$` や `_` で始まるキーをもつプロパティは、スキップされます。</p>
 
-### method
+### methods
 
-- **タイプ:** `Object`
+- **型:** `Object`
 
 Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブ表現で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバウンドされた `this` コンテキストをもちます。
 
@@ -82,11 +82,11 @@ Vue インスタンスに組み込まれる Computed プロパティです。す
 var vm = new Vue({
   data: { a: 1 },
   computed: {
-    // get only, just need a function
+    // get のみ、関数が一つ必要なだけ
     aDouble: function () {
       return this.a * 2
     },
-    // both get and set
+    // get と set 両方
     aPlus: {
       get: function () {
         return this.a + 1
@@ -105,7 +105,7 @@ vm.aDouble // -> 4
 
 ### paramAttributes
 
-- **タイプ:** `Array`
+- **型:** `Array`
 
 引数の名前の配列が、Vue インスタンス上で初期値として設定されます。データをコンポーネントに渡すときに便利です。
 
@@ -145,7 +145,7 @@ HTMLの引数名は、小文字や大文字の違いを無視するので、通�
 
 ### el
 
-- **タイプ:** `String | HTMLElement | Function`
+- **型:** `String | HTMLElement | Function`
 - **制約:** `Vue.extend()` の中で使用する場合は、`Function` タイプのみを受け付けます。
 
 既存の DOM 要素に Vue インスタンスを与えます。CSS セレクタの文字列、実際の HTML 要素、または、HTML 要素を返す関数をとることができます。解決された要素は、`vm.$el` としてアクセス可能になります。
@@ -156,7 +156,7 @@ HTMLの引数名は、小文字や大文字の違いを無視するので、通�
 
 ### template
 
-- **タイプ:** `String`
+- **型:** `String`
 
 `vm.$el` に挿入するための、文字列のテンプレートです。[content insertion points](/guide/components.html#Content_Insertion) がテンプレートの中になければ、`vm.$el` 内部の既存のマークアップは上書きされます。もし **relace** オプションが `true` であれば、テンプレートは `vm.$el` を完全に書き換えます。
 
@@ -166,7 +166,7 @@ HTMLの引数名は、小文字や大文字の違いを無視するので、通�
 
 ### replace
 
-- **タイプ:** `Boolean`
+- **型:** `Boolean`
 - **初期値:** `false`
 - **制約:** **template** オプションが存在する場合にのみ重視されます。
 
@@ -178,44 +178,44 @@ HTMLの引数名は、小文字や大文字の違いを無視するので、通�
 
 ### created
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 インスタンスが作成された後に、同期的に呼ばれます。この段階では、インスタンスは次の設定されたオプションの処理を終了しています: data の監視、computed プロパティ、methods、watch / event コールバック
 しかしながら、DOM のコンパイルは開始されておらず、`$el` プロパティはまだ有効ではありません。
 
 ### beforeCompile
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 コンパイルが開始される寸前に呼ばれます。
 
 ### compiled
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 コンパイルが終了した後に呼ばれます。この段階では、すべてのディレクティブはリンクされているため、データの変更は DOM の更新のトリガーになります。しかし、'$el' がドキュメントに挿入されていることは保証されません。
 
 ### ready
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 コンパイルが終了した後に呼ばれます。**そして**、`$el` が**ドキュメントの中に初めて挿入されます**。この挿入は `ready` フックのトリガーになるように（`vm.$appendTo()` のようなメソッドやディレクティブの更新の結果をもった） Vue 経由で実行されなくてはならないことに注意してください。
 
 ### attached
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 `vm.$el` がディレクティブもしくは VM インスタンスもしくは`$appendTo()` のような VM インスタンスのメソッドによって DOM に追加されたときに呼ばれます。`vm.$el` の直接の操作はこのフックのトリガーに**なりません**。
 
 ### detached
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 ディレクティブか VM インスタンスのメソッドによって DOM から `vm.$el` が削除されたときに呼ばれます。ディレクティブの `vm.$el` の操作はこのフックのトリガーに**なりません**。
 
 ### beforeDestroy
 
-- **タイプ:** `Function`
+- **型:** `Function`
 
 Vue インスタンスが破棄される寸前に呼ばれます。この段階では、インスタンスはまだ完全に使用可能ではありません。
 
@@ -233,31 +233,31 @@ Vue インスタンスが破棄された後に呼ばれます。このフック�
 
 ### directives
 
-- **タイプ:** `Object`
+- **型:** `Object`
 
 Vue インスタンスで使用できるような、ディレクティブのハッシュです。カスタムディレクティブの書き方について、より詳しくは[カスタムディレクティブを書く](/guide/custom-directive.html)を参照してください。
 
 ### filters
 
-- **タイプ:** `Object`
+- **型:** `Object`
 
 Vue インスタンスで使用できるようなフィルターのハッシュです。カスタムフィルターの書き方は、[カスタムフィルターを書く](/guide/custom-filter.html)を参照してください。
 
 ### components
 
-- **タイプ:** `Object`
+- **型:** `Object`
 
 Vue インスタンスで使用できるようなコンポーネントのハッシュです。Vue インスタンスの継承や構成の仕方の詳細は、[コンポーネントシステム](/guide/components.html)を参照してください。
 
 ### partials
 
-- **タイプ:** `Object`
+- **型:** `Object`
 
 Vue インスタンスで使用できるような partials のハッシュです。[v-partial](/api/directives.html#v-partial)も参照してください。
 
 ### transitions
 
-- **タイプ:** `Object`
+- **型:** `Object`
 
 Vue インスタンスで使用できるようなトランジッションのハッシュです。詳しくは、[Transitions](/guide/transitions.html)にあるガイドを参照してください。
 
@@ -265,7 +265,7 @@ Vue インスタンスで使用できるようなトランジッションのハ�
 
 ### inherit
 
-- **タイプ:** `Boolean`
+- **型:** `Boolean`
 - **初期値:** `false`
 
 親のスコープのデータを継承するか否かを表します。もし親のスコープを継承したコンポーネントを作りたい場合は、`true` に設定してください。`inherit` が `true` に設定されたときは、以下のことができます:
@@ -287,8 +287,8 @@ var child = parent.$addChild({
 })
 child.a  // -> 1
 child.b  // -> 2
-// the following line modifies parent.a
-// instead of creating a new property on child:
+// 子に新しいプロパティを作成する代わりに、
+// 次の行で parent.a を修正する:
 child.a = 2
 parent.a // -> 2
 ```
@@ -316,7 +316,7 @@ var vm = new Vue({
       console.log('goodbye!')
     }
   }
-}) // -> created!
+}) // -> 作られた!
 vm.$emit('greeting', 'hi!') // -> hi!
 vm.$emit('bye')             // -> goodbye!
 ```
