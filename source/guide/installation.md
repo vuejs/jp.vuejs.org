@@ -53,7 +53,7 @@ $ component install yyx990803/vue@dev
 ```
 
 ## AMD Module Loaders
-ダウンロードされたスタンドアローン版 vue と Bower 経由でインストールされた vue は UMD でラップされています。そのため、 AMD module のように直接利用することができます。
+ダウンロードされたスタンドアローン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、 AMD moduleとして直接利用することができます。
 
 
 ## Ready?
