@@ -1,62 +1,62 @@
-title: Common FAQs
+title: FAQs
 type: guide
 order: 15
 ---
 
-- **Why doesn't Vue.js support IE8?**
+- **なぜ、Vue.jsはIE8をサポートしないのですか？**
 
-  Vue.js is able to deliver the plain JavaScript object syntax without resorting to dirty checking by using `Object.defineProperty`, which is an ECMAScript 5 feature. It only works on DOM elements in IE8 and there's no way to polyfill it for JavaScript objects.
+  Vue.jsは、ECMAScript 5の新機能である`Object.defineProperty`メソッドを利用し、dirty checkに頼ること無く、プレーンなJavaScriptオブジェクトのシンタックスを提供することができます。IE8において、このメソッドはDOM要素にのみ有効で、JavaScriptオブジェクトに対してはPolyfillができないからです。
 
-- **So Vue.js modifies my data?**
+- **つまり、Vue.jsはデータを上書きするのですか？**
 
-  Yes and No. Vue.js only converts normal properties into getters and setters so it can get notified when the properties are accessed or changed. When serialized, your data will look exactly the same. There are, of course, some caveats:
+  Vue.jsは、規定のプロパティをgetterとsetterに変換するので、そのプロパティがアクセスまたは変更された場合には通知を受けることができます。シリアライズすると、データがまったく同じになります。もちろん、いくつかの注意点があります：
 
-  1. When you `console.log` observed objects you will only see a bunch of getter/setters. However you can use `vm.$log()` to log a more inspectable output.
+  1. `console.log`の出力では、getter/setterの束しか表示されません。しかし、`vm.$log()`を使うとさらに検出可能なログを出力できます。
 
-  2. You cannot define your own getter/setters on data objects. This isn't much of a problem because data objects are expected to be obtained from plain JSON and Vue.js provides computed properties.
+  2. データオブジェクトに独自のgetter/setterを定義することはできません。ただ、データオブジェクト自体はプレーンなJSONやVue.jsのcomputed propertiesから取得するので、これはあまり大した問題ではありません。
 
-  3. Vue.js adds a few extra properties/methods to obsesrved objects: `__ob__`, `$add` and `$delete`. These properties are inenumberable so they will not show up in `for ... in ...` loops. However if you overwrite them things will likely break.
+  3. Vue.jsは、定義されたオブジェクトにいくつかのプロパティやメソッドを余分に追加します： `__ob__`、`$add`と`$delete`。これらの特性は無数にあるので、`for ... in ...`のループには表示されません。しかし、それらを上書きした場合は、おそらく解除されます。
 
-  That's pretty much it. Accessing properties on the object is the same as before, `JSON.stringify` and `for ... in ...` loops will work as normal. 99.9% of the time you don't even need to think about it.
+  だいたい以上です。オブジェクトのプロパティにアクセスしても`JSON.stringify`と`for ... in ...`ループは通常どおりに動作します。99.9%は、上記の配慮は必要ないでしょう。
 
-- **What is the current status of Vue.js? Can I use it in production?**
+- **Vue.jsの現在の状況はどうですか？製品への使用はできますか?**
 
-  Vue.js has undergone some major rewrite for the 0.11 update, and we are now working towards the 1.0 release. Vue.js is already being used in production at companies like Optimizely.
+  Vue.jsは、0.11へのアップデートにあたり、いくつかの大きな変更を行いました。また、現在バージョン1.0のリリースに向けて取り組んでいます。Vue.jsは、すでにOptimizelyのような企業の製品に使用されています。
 
-- **Is Vue.js free to use?**
+- **Vue.jsの使用は無料でしょうか?**
 
-  Vue.js is free and fully open sourced under the MIT License.
+  Vue.jsは無料で使用でき、MITライセンスの下でソースを公開しています。
 
-- **What is the difference between Vue.js and AngularJS?**
+- **Vue.jsとAngularJSの違いは何ですか？**
 
-  There are a few reasons to use Vue over Angular, although they might not apply for everyone:
+  何にでも当てはまるわけではないと思いますが、Angularの代わりにVueを使用する理由がいくつかあります：
 
-  1. Vue.js is a more flexible, less opinionated solution. That allows you to structure your app the way you want it to be, instead of being forced to do everything the Angular way. It's only an interface layer so you can use it as a light feature in pages instead of a full blown SPA. It gives you bigger room to mix and match with other libraries. This is probably the most important distinction.
+  1. Vue.jsは、より柔軟で自己を主張しないライブラリと言えます。すべてにおいてAngular wayを余儀なくされるのに対して、自分の好みのやり方でアプリを構築できます。本格的なSPAを作成せずとも、インターフェイス・レイヤーとしてページ内に軽度の機能実装を実現できるので、他のライブラリとの組み合わせを自由に選ぶ余地が生まれます。これが、おそらく最も重要な違いと言えるでしょう。
 
-  2. Vue.js is much simpler than Angular in general, so you can learn almost everything about it really fast and get productive.
+  2. Vue.jsは、Angularと比べて全体にとてもシンプルに設計してあり、学習効率が非常に高いと言えます。
 
-  3. Vue.js has better performance because it doesn't use dirty checking. Angular gets slow when there are a lot of watchers, because every time anything in the scope changes, all these watchers need to be re-evaluated again. Vue.js doesn't suffer from this because it uses an event based observing mechanism, so all changes trigger independently unless they have explicit dependency relationships.
+  3. Vue.jsは、dirty checkを行わないため優れたパフォーマンスを持っています。Angularは、スコープに変更がある度、すべてのウォッチャーを評価し直すため、ウォッチャーが多く存在すると遅くなりがちです。Vue.jsはイベント駆動型のメカニズムを採用しているので、明らかな依存関係が無い限りすべての変更のトリガーは独立して機能し、この問題に悩まされることはありません。
 
-  4. Vue.js has a clearer separation between directives and components. Directives are meant to encapsulate DOM manipulations only, while Components stand for a self-contained unit that has its own view and data logic. In Angular there's a lot of confusion between the two.
+  4. Vue.jsでは、コンポーネントは独自のビューとデータロジックを持つ自己完結型のユニットであり、その中でディレクティブは様々なDOM操作の紐付け（カプセル化）を行うものとして、両者の役割を明確に分離しています。Angularでは、両者の使い分けに多くの曖昧な点が存在しています。
 
-  But also note that Vue.js is a relatively young project, while Angular is battle-proven, Google-sponsored, and has a larger community.
+  しかし、Angulerは、Googleがスポンサーとなり、実践で十分に証明され、最大規模のコミュニティがすでに存在しているのに対し、Vue.jsはまだまだ比較的若いプロジェクトであることに注意してください。
 
-- **What makes Vue.js different from KnockoutJS?**
+- **Vue.jsとKnockoutJSの違いは何ですか?**
 
-  First, Vue provides a cleaner syntax in getting and setting VM properties.
+  まず、VueはVM（ViewModel）プロパティの取得や設定で、クリーンな構文を組みやすいという点があります。
 
-  On a higher level, Vue differs from Knockout in that Vue's component system encourages you to take a top-down, structure first, declarative design strategy, instead of imperatively build up ViewModels from bottom up. In Vue the source data are plain, logic-less objects (ones that you can directly JSON.stringify and throw into a post request), and the ViewModel simply proxies access to that data on itself. A Vue VM instance always connects raw data to a corresponding DOM element. In Knockout, the ViewModel essentially **is** the data and the line between Model and ViewModel is pretty blurry. This lack of differentiation makes Knockout more flexible, but also much more likely to result in convoluted ViewModels.
+  より高いレベルでは、Vueのコンポーネントシステムはトップダウン設計による手続き型の設計戦略に基づき、まずシステム全体を定義します。対してKnockoutは、オブジェクト指向言語で主流のボトムアップ設計に基づき、個々のViewModelを組み上げてシステムを構成していきます。Vueにおいて、ソースデータはプレーンなロジックレスのオブジェクトです（つまり、直接JSON.stringify()メソッドを使いPOSTリクエストを投げることが出来ます）。ViewModelは、単にそのデータへプロキシ経由でアクセスするものです。VueのVMインスタンスは、常に対応するDOM要素に生データを接続している状態になります。Knockoutでは、ViewModelは本質的に**データそのもの**であり、ModelとViewModelの境界はかなり曖昧なものになっています。この点で、Knockoutはさらなる柔軟性を獲得していますが、同時にはるかに複雑なViewModelの構造をもたらす可能性が高いです。
 
-- **What makes Vue.js different from React.js?**
+- **Vue.jsとReact.jsの違いは何ですか？**
 
-  React.js and Vue.js do have some similarity in that they both provide reactive & composable View components. However the internal implementation is fundamentally different. React is built upon a virtual DOM - an in-memory representation of what the actual DOM should look like. Data in React is largely immutable and DOM manipulations are calculated via diffing. On the contrary data in Vue.js is mutable and stateful by default, and changes are triggered through events. Instead of a virtual DOM, Vue.js uses the actual DOM as the template and keeps references to actual nodes for data bindings.
+  React.jsとVue.jsは、どちらもリアクティブ＆コンポーザブルなViewのコンポーネントを提供し、いくつかの類似性があります。しかし、内部実装は基本的に異なっています。Reactは、仮想DOM上で構築されます - 実際のDOMがどのように動作するかをメモリ内で表現しています。React内のデータの大部分は不変で、DOM操作はdiffを算出して実行されます。それに引き換え、Vue.jsはデフォルトでステートフルであり、内部のデータは変更可能です。変更はイベントを通じてトリガーされます。Vue.jsは、仮想DOMの代わりに実際のDOMをテンプレートとして使用し、データバインディングのために実際にノードへのリファレンスを保持します。
 
-  The virtual-DOM approach provides a functional way to describe your view at any point of time, which is really nice. Because it doesn't use observables and re-renders the entire app on every update, the view is by definition guaranteed to be in sync with the data. It also opens up possiblities to isomorphic JavaScript applications.
+  仮想DOMのアプローチは、任意のタイミングでViewを描画する機能的な方法を提供します。オブザーバーを利用せず、更新ごとにアプリケーション全体を再描画しているため、Viewはデータと常に同期がされていることが保証されます。これは、他のJavaScriptアプリケーションでも同様の可能性を与えることができます。 
 
-  Overall I'm a big fan of React's design philosophy myself. But one issue with React is that your logic and your view are tightly knit together. For some developers this is a bonus, but for designer/developer hybrids like me, having a template makes it much easier to think visually about the design and CSS. JSX mixed with JavaScript logic breaks that visual model I need to map the code to the design. In contrast, Vue.js pays the cost of a lightweight DSL (directives) so that we have a visually scannable template and with logic encapsulated into directives and filters.
+  私自身は、全体的にReactの設計思想の大ファンです。ただ、Reactにおける問題の一つがロジックとViewが密に結びついていることです。一部の開発者にとっては恩恵になると思いますが、私のようなデザイナーと開発者のハイブリッドにとっては、テンプレートを持つことでデザインとCSS設計を視覚的に捉えやすいものにしてくれます。JSXにJavaScriptのロジックを組み合わせるのは、コードをデザインに変換していくための視覚的なモデル構造の邪魔になります。対照的に、Vue.jsは、軽量なDSL（ディレクティブ）によりコストをかけており、そんために視覚的に構築可能なテンプレートと、ディレクティブとフィルタにカプセル化するロジックを持っています。
 
-  Another issue with React is that because DOM updates are completely delegated to the Virtual DOM, it's a bit tricky when you actually **want** to control the DOM yourself (although theoretically you can, you'd be essentially working against the library when you do that). For applications that needs complex time-choreographed animations, this can become a pretty annoying restriction. On this front, Vue.js allows for more flexibility and there are [multiple FWA/Awwwards winning sites](https://github.com/yyx990803/vue/wiki/Projects-Using-Vue.js#interactive-experiences) built with Vue.js.
+  Reactについて別の問題を上げるなら、DOMの更新が完全に仮想DOMに委任されていることです。実際に、DOMを**自分でコントロールする**のは少しトリッキーです（理論的には出来ますが、Reactの思想に反する結果になります）。複雑な時間の割り当てを行うアニメーションを実装する場合、これがかなり厄介な制限になることになります。この面では、Vue.jsはより柔軟性があり、例として[multiple FWA/Awwwards winning sites](https://github.com/yyx990803/vue/wiki/Projects-Using-Vue.js#interactive-experiences)にはVue.jsが組み込まれています。
 
-- **I want to help!**
+- **ぜひ、協力を！**
 
-    Great! Read the [contribution guide](https://github.com/yyx990803/vue/blob/master/CONTRIBUTING.md) and join discussions on IRC (#vuejs).
+  コントリビューションガイドを読んで、IRC（#vuejs）の議論に参加しましょう！

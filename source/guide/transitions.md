@@ -3,27 +3,27 @@ type: guide
 order: 12
 ---
 
-With Vue.js' transition system you can apply automatic transition effects when elements are inserted into or removed from the DOM. There are two options to do so: defining CSS classes with transitions/animations, or by registering a definition object containing custom JavaScript hook functions.
+Vue.jsのトランジションシステムを使用すると、DOMから要素を取得したり削除するといったトランジションエフェクトを自動的に適用できます。これには、CSSトランジションやCSSアニメーションによる定義と、登録したカスタムJavaScriptを含む定義オブジェクトをフックする２つのオプションがあります。
 
-With the directive `v-transition="my-transition"` applied, Vue will:
+`v-transition="my-transition"` というディレクティブを適用した場合：
 
-1. Try to find a JavaScript transtion definition registered either through `Vue.transition(id, def)` or passed in with the `transitions` option, with the id `"my-transition"`. If it finds it, it will use that definition object to perform the custom JavaScript based transition.
+1. `"my-transition"` のIDから、`Vue.transition(id, def)` または、`transitions` オプションを通じて登録されたJavaScriptのトランジションの定義を探します。定義が見つかると、カスタムJavaScriptベースのトランジションを実行します。
 
-2. If no custom JavaScript transition is found, it will automatically sniff whether the target element has CSS transitions or CSS animations applied, and add/remove the CSS classes at the appropriate times.
+2. もし、カスタムJavaScriptによるトランジションが見つからなければ、対象の要素にCSSトランジションかCSSアニメーションが適用されているか調べ、適切なタイミングでCSSクラスを追加/削除します。
 
-3. If no transitions/animations are detected, the DOM manipulation is executed on next frame.
+3. もし、CSSトランジションやCSSアニメーションも見つからなければ、次のフレームでDOM操作が実行されます。
 
-<p class="tip">All Vue.js transitions are triggered only if the DOM manipulation was applied by Vue.js, either through built-in directives, e.g. `v-if`, or through Vue instance methods, e.g. `vm.$appendTo()`.</p>
+<p class="tip">Vue.jsのすべてのトランジションは、内蔵のディレクティブ（ `v-if` など）や Vueのインスタンスメソッド（ `vm.$appendTo()` など）を通じてDOM操作が適用された時のみ実行されます。</p>
 
-## CSS Transitions
+## CSSトランジション
 
-A typical CSS transition looks like this:
+基本的なCSSトランジションは、次のようになります。
 
 ``` html
 <p class="msg" v-if="show" v-transition="expand">Hello!</p>
 ```
 
-You also need to define CSS rules for `.expand-enter` and `.expand-leave` classes:
+また `.expand-enter` クラスと `.expand-leave` クラスのCSSルールを定義する必要があります。
 
 ``` css
 .msg {
@@ -65,28 +65,28 @@ new Vue({
 })
 </script>
 
-The classes being toggled are based on the value of your `v-transition` directive. In the case of `v-transition="fade"`, the classes being toggled will be `.fade-enter` and `.fade-leave`. When no value is provided they will default to `.v-enter` and `.v-leave`.
+トグルするクラス名の接頭辞は、`v-transition`ディレクティブの値に基づきます。`v-transition="fade"`とした場合、トグルするクラス名の接頭辞は、`.fade-enter`と`.fade-leave`になります。`v-transition`だけで値がない場合は、`.v-enter`と`.v-leave`がデフォルトになります。
 
-When the `show` property changes, Vue.js will insert or remove the `<p>` element accordingly, and apply transition classes as specified below:
+`show`プロパティに変更があると、それに応じてVue.jsは`<p>`要素を追加/削除し、以下に指定されているようにトランジションクラスを適用します。
 
-- When `show` becomes false, Vue.js will:
-  1. Apply `v-leave` class to the element to trigger the transition;
-  2. Wait for the transition to finish; (listening to a `transitionend` event)
-  3. Remove the element from the DOM and remove `v-leave` class.
+- `show`プロパティが`false`の場合：
+  1. `v-leave`クラスが対象の要素に適用され、トランジションが実行されます。
+  2. トランジション終了を待ちます。（`transitionend`イベントを待機）
+  3. DOMから対象の要素を削除し、`v-leave`クラスを削除します。
 
-- When `show` becomes true, Vue.js will:
-  1. Apply `v-enter` class to the element;
-  2. Insert it into the DOM;
-  3. Force a CSS layout so `v-enter` is actually applied;
-  4. Remove the `v-enter` class to trigger a transition back to the element's original state.
+- `show`プロパティが`true`の場合：
+  1. `v-enter`クラスが対象の要素に挿入されます。
+  2. 対象の要素がDOMに追加されます。
+  3. `v-enter`クラスのCSSレイアウトを対象の要素に適用します。
+  4. `v-enter`クラスが削除され、対象の要素を元の状態に戻します。
 
-<p class="tip">When multiple elements are being transitioned together, Vue.js batches them and only applies one forced layout.</p>
+<p class="tip">複数要素を同時にトランジションさせる場合、Vue.js はその要素をバッチにし、自動的に連続処理を行います。</p>
 
-## CSS Animations
+## CSSアニメーション
 
-CSS animations are applied in the same way with CSS transitions, the difference being that `v-enter` is not removed immediately after the element is inserted, but on an `animationend` callback.
+CSSアニメーションは、CSSトランジションと同じやり方で適用することができますが、対処の要素が追加された後、`animationend`がコールバックされるまで`v-enter`クラスが削除されないという違いがあります。
 
-**Example:** (omitting prefixed CSS rules here)
+**例：** (CSSルールの記述は諸略)
 
 ``` html
 <p class="animated" v-if="show" v-transition="bounce">Look at me!</p>
@@ -199,9 +199,9 @@ new Vue({
 })
 </script>
 
-## JavaScript Functions
+## JavaScript 関数
 
-The following example registers a custom JavaScript transition definition using jQuery:
+以下の例では、jQueryを使用してカスタムなJavaScriptトランジションの定義を登録します。
 
 ``` js
 Vue.transition('fade', {
@@ -233,7 +233,7 @@ Vue.transition('fade', {
 })
 ```
 
-Then you can use it by providing the transition id to `v-transition`. Note this has higher priority than CSS transitions.
+そして、`v-transition`のトランジションIDに値を渡すことで、この関数を使用することができます。JavaScriptによる定義は、CSSトランジションよりも優先順位が高いことに注意してください。
 
 ``` html
 <p v-transition="fade"></p>
