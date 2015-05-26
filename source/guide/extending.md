@@ -54,7 +54,7 @@ CommonJSベースのビルドを行っていると仮定します。
 
 ``` js
 var vueTouch = require('vue-touch')
-// use the plugin globally
+// プラグインをグルーバルで使用
 Vue.use(vueTouch)
 ```
 
@@ -62,7 +62,7 @@ Vue.use(vueTouch)
 
 ```js
 Vue.use('my-plugin', {
-  /* pass in additional options */
+  /* 追加オプションを渡します */
 })
 ```
 
@@ -70,5 +70,5 @@ Vue.use('my-plugin', {
 
 - [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.jsアプリケーションのデバッグ用Chrome devtools extensionです。
 - [vue-touch](https://github.com/vuejs/vue-touch): Hammer.jsを利用して、タッチ操作のディレクティブを追加できます。
-- [vue-element](https://github.com/vuejs/vue-element): Vue.jsにカスタムElementsを登録することができます。
+- [vue-element](https://github.com/vuejs/vue-element): Vue.jsでカスタムエレメントを登録することができます。
 - [List of User Contributed Tools](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)

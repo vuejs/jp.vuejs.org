@@ -55,7 +55,7 @@ app.currentView = 'page1'
 
 ## サーバーとの通信
 
-すべてのVueインスタンスは、`JSON.stringify()`メソッドでシリアライズされる生の`$data`ディレクトリを持つことができます。[SuperAgent](https://github.com/visionmedia/superagent)など、お好きなAjaxコンポーネントを使用してください。バックエンドを持たないFirebaseなどのサービスとの連携にも適しています。
+すべてのVueインスタンスは、`JSON.stringify()`で直接シリアライズされる生の`$data`を持つことができます。[SuperAgent](https://github.com/visionmedia/superagent)など、好きなAjaxコンポーネントを使用してください。バックエンドを持たないFirebaseなどのサービスとの連携にも適しています。
 
 ## 単体テスト
 
