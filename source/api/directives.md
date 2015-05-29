@@ -117,7 +117,7 @@ order: 6
 ### v-model
 
 - このディレクティブは `<input>` 、`<select>` もしくは `<textarea>` 要素においてのみ使用できます。
-- ディレクティブのパラメーター:  `lazy`, `number`, `options`
+- ディレクティブのパラメーター: [`lazy`](/guide/forms.html#Lazy_Updates), [`number`](/guide/forms.html#Casting_Value_as_Number), [`options`](/guide/forms.html#Dynamic_Select_Options), [`debounce`](/guide/forms.html#Input_Debounce)
 
 form の input 要素に双方向バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
 より詳しい例は、[フォームの取り扱い](/guide/forms.html)を参照してください。
@@ -153,7 +153,7 @@ form の input 要素に双方向バインディングを作成します。デ�
 - このディレクティブの値は Array 型、Object 型、もしくは Number 型である必要があります。
 - このディレクティブは表示切り替えのトリガーとなり得ます。
 - このディレクティブは、オプション属性を受け入れます。
-- ディレクティブパラメータ: `trackby`
+- ディレクティブパラメータ: [`track-by`](/guide/list.html#Using_track-by)
 
 Array もしくは Object のバインディングのすべてのアイテムの子 ViewModel を作ります。もし値が絶対値であれば、その分の ViewModelが作成されます。それらの子ViewModel は、mutating methods、例えば `push()` などが Array や Object 上で呼ばれたときや、その数が増減したときに自動的に生成、削除されます。
 
@@ -219,7 +219,7 @@ Array もしくは Object のバインディングのすべてのアイテムの
 ### v-events
 
 - このディレクティブは、`v-component` とのみ使用されます。
-- このディレクティブは keypath のみを受けつけ、expression はありません。
+- このディレクティブは メソッド名か、または単独の expression statement を受けつけます。
 
 親インスタンスが子インスタンス上でのイベントを監視できるようにします。`v-on` と異なる点は、`v-events` はDOMイベントというよりはむしろ、`vm.$emit()` 経由で作られたVueのコンポーネントシステムのイベントを監視するという点です。このディレクティブは、親のコンポーネントにイベントリスナーをハードコードすることなく、親子がより分離された通信をすることを可能にします。`v-component` と共に使用する必要があることに注意してください。例えば、子コンポーネントの root 要素では以下のようになります。
 
@@ -238,21 +238,14 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 ### v-component
 
-- ディレクティブパラメーター: `keep-alive`, `wait-for`, `transition-mode`
+- ディレクティブパラメーター: [`keep-alive`](/guide/components.html#Dynamic_Components), [`wait-for`](/guide/components.html#wait-for), [`transition-mode`](/guide/components.html#transition-mode), [`inline-template`](/guide/components.html#Inline_Template)
+- mustache でリアクティブにすることができます。
 
 割り当てられたコンポーネントコンストラクタをもつ子 ViewModel として、この要素をコンパイルします。これは、親からデータを継承するために、`v-with` と共に使用することができます。より詳細な説明は、[コンポーネントシステム](/guide/components.html)を参照してください。
 
-### v-ref
-
-簡単にアクセス可能なように、親に子コンポーネントへの参照を登録します。`v-component` や `v-repeat` を組み合わせて動きます。そのコンポーネントのインスタンスは、その親の `$` オブジェクトへアクセス可能です。例は、 [子リファレンス](/guide/components.html#Child_Reference)を参照してください。
-
-`v-repeat` と共に使用するとき、値はそれにバウンドしている配列に対応するすべての子 Vue インスタンスを含む配列になります。
-
-### v-el
-
-簡単にアクセス可能にするために、親のVueインスタンス上で DOM 要素へのリファレンスを登録します。例えば、`<div v-el="hi">` は `vm.$$.hi` としてアクセス可能です。
-
 ### v-partial
+
+- mustache でリアクティブにすることができます。
 
 登録された部分要素で、要素の innerHTML を置き換えます。部分要素は、`Vue.partial()` で登録するか、`partials` オプションの中に渡すことができます。
 
@@ -271,9 +264,21 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 ### v-transition
 
+- mustache でリアクティブにすることができます。
+
 Vue.js に対してこの要素への変換を適用することを知らせます。変換クラスは、ある変換のきっかけとなるディレクティブが要素を修正したときか、Vue インスタンスの DOM 生成メソッドが呼ばれたときに適用されます。
 
 より詳しくは、[the guide to transitions](/guide/transitions.html)を参照してください。
+
+### v-ref
+
+簡単にアクセス可能なように、親に子コンポーネントへの参照を登録します。`v-component` や `v-repeat` を組み合わせて動きます。そのコンポーネントのインスタンスは、その親の `$` オブジェクトへアクセス可能です。例は、 [子リファレンス](/guide/components.html#Child_Reference)を参照してください。
+
+`v-repeat` と共に使用するとき、値はそれにバウンドしている配列に対応するすべての子 Vue インスタンスを含む配列になります。
+
+### v-el
+
+簡単にアクセス可能にするために、親のVueインスタンス上で DOM 要素へのリファレンスを登録します。例えば、`<div v-el="hi">` は `vm.$$.hi` としてアクセス可能です。
 
 ## 空のディレクティブ
 

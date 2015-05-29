@@ -12,7 +12,7 @@ order: 4
 - **expression** `String`
 - **callback( newValue, oldValue )** `Function`
 - **deep** `Boolean` *任意*
-- **immdediate** `Boolean` *任意*
+- **immediate** `Boolean` *任意*
 
 Vueインスタンス上でのひとつの式の変更を監視します。引数 expression には、単一の keypath か、実際の式を入れることができます:
 

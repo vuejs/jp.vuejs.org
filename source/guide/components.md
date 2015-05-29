@@ -173,7 +173,7 @@ new Vue({
 ``` html
 <div id="demo-3">
   <input v-model="parentMsg">
-  <child-component child-msg="parentMsg"></p>
+  <child-component child-msg="{{parentMsg}}"></child-component>
 </div>
 ```
 
@@ -491,7 +491,7 @@ MyComponent
 
 再利用可能なコンポーネントを作るときに、コンポーネントの一部ではないホストしている要素 (Angular の "transclusion" の概念に類似したものです。) の中にある元のコンテンツへのアクセスや再利用がしばしば必要です。Vue.jsは現在の Web Components の仕様ドラフトと互換性のある content insertion の仕組みを実装しています。元のコンテンツに対する挿入ポイントとして機能する特別な `<content>` 要素を使用します。
 
-<p class="tip">注釈: "transcluded" されたコンテンツは親コンポーネントのスコープの中でコンパイルされます。</p>
+<p class="tip">**重要**: "transcluded" されたコンテンツは子のスコープではなく、親コンポーネントのスコープの中でコンパイルされます。</p>
 
 ### Single Insertion Point
 
@@ -527,6 +527,8 @@ MyComponent
 
 `<content>` 要素は CSS セレクタを期待する `select` という特殊な属性を持ちます。異なる `select` 属性を用いて複数の  `<content>` の挿入位置を指定することができます。それぞれは元のコンテンツの中でそのセレクタにマッチした要素によって置換されます。
 
+<p class="tip">Starting in 0.11.6, `<content>` selectors can only match top-level children of the host node. This keeps the behavior consistent with the Shadow DOM spec and avoids accidentally selecting unwanted nodes in nested transclusions.</p>
+
 `multi-insertion-component` のテンプレート:
 
 ``` html
@@ -556,5 +558,16 @@ MyComponent
 ```
 
 content insertion の仕組みは、元のコンテンツがどのように組み替えられ、表示されるべきか、という点に関して素晴らしい管理機能を提供します。これによってコンポーネントが非常に柔軟性と再利用性が高いものになります。
+
+## Inline Template
+
+In 0.11.6, a new directive param for `v-component` is introduced: `inline-template`. When this param is present, the component will use its inner content as its template rather than transclusion content. This allows more flexible template-authoring.
+
+``` html
+<div v-component="example" inline-template>
+  <p>These are compiled as the component's own template</p>
+  <p>Not parent's transclusion content.</p>
+</div>
+```
 
 次: [Applying Transition Effects](/guide/transitions.html).

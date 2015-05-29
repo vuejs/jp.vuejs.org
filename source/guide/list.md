@@ -44,6 +44,19 @@ var demo = new Vue({
 })
 </script>
 
+## Block Repeat
+
+Sometimes you might want to repeat a block of more than one nodes - in that case, you can use a `<template>` tag to wrap the repeat block. The `<template>` tag here merely serves as a semantic wrapper. For example:
+
+``` html
+<ul>
+  <template v-repeat="list">
+    <li>{{msg}}</li>
+    <li class="divider"></li>
+  </template>
+</ul>
+```
+
 ## プリミティブ値の配列
 
 プリミティブ値を含む配列では、単純に `$value` として値にアクセスできます:
@@ -164,8 +177,8 @@ demo.items = demo.items.filter(function (item) {
 ``` js
 {
   items: [
-    { _uid: 88f869d, ... },
-    { _uid: 7496c10, ... }
+    { _uid: '88f869d', ... },
+    { _uid: '7496c10', ... }
   ]
 }
 ```
@@ -234,7 +247,7 @@ new Vue({
 })
 </script>
 
-<p class="tip">ECMAScript 5 では、オブジェクトに対して新たなプロパティが追加もしくは削除されたことを感知する方法がありません。これに対処する為、監視対象のオブジェクトを `$add(key, value)` と `$delete(key)` の２つのメソッドを使って補います。期待したビューの更新を実行しつつ、監視対象のオブジェクトのプロパティを追加・削除するために、これらのメソッドを利用することが出来ます。
+<p class="tip">ECMAScript 5 では、オブジェクトに対して新たなプロパティが追加もしくは削除されたことを感知する方法がありません。これに対処する為、監視対象のオブジェクトを `$add(key, value)` 、`$set(key, value)` そして `$delete(key)` の3つのメソッドを使って補います。期待したビューの更新を実行しつつ、監視対象のオブジェクトのプロパティを追加・削除するために、これらのメソッドを利用することが出来ます。`$add` と `$set` との違いは、`$add` はもしオブジェクトにキーが既に存在している場合は、すぐにリターンして、`obj.$add(key)` を呼び出してだけでは、`undefined` で既存の値を上書きをしません。
 </p>
 
 ## 範囲のイテレーション
