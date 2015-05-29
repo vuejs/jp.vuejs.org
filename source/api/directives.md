@@ -153,7 +153,7 @@ form の input 要素に双方向バインディングを作成します。デ�
 - このディレクティブの値は Array 型、Object 型、もしくは Number 型である必要があります。
 - このディレクティブは表示切り替えのトリガーとなり得ます。
 - このディレクティブは、オプション属性を受け入れます。
-- ディレクティブパラメータ: `trackby`
+- ディレクティブパラメータ: [`track-by`](/guide/list.html#Using_track-by)
 
 Array もしくは Object のバインディングのすべてのアイテムの子 ViewModel を作ります。もし値が絶対値であれば、その分の ViewModelが作成されます。それらの子ViewModel は、mutating methods、例えば `push()` などが Array や Object 上で呼ばれたときや、その数が増減したときに自動的に生成、削除されます。
 
