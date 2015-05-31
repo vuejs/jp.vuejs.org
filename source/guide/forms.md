@@ -146,9 +146,9 @@ new Vue({
 </select>
 ```
 
-## Input Debounce
+## 入力デバウンス
 
-The `debounce` param allows you to set a minimum delay after each keystroke before an update is executed. This can be useful when you are performing expensive operations on each update, for example making an Ajax request for type-ahead autocompletion.
+`debounce` パラメータは、更新が実行される前に各キーストローク後の最小遅延の設定を許可します。これは、例えば、先行入力自動補完向けに Ajax リクエストを作成するような、各更新時に高価な操作を実行しているときには便利です。
 
 ``` html
 <input v-model="msg" debounce="500">

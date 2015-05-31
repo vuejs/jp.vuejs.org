@@ -58,14 +58,14 @@ Vue.component('my-component', {
 ```
 
 <p class="tip">
-W3Cのカスタムエレメントの仕様に沿ってネイティブのエレメントと名前の衝突を避けるために、コンポーネントのIDには **必ず** ハイフン `-` を含める必要があります。</p>
+W3C のカスタムエレメントの仕様に沿ってネイティブのエレメントと名前の衝突を避けるために、コンポーネントのIDには **必ず** ハイフン `-` を含める必要があります。</p>
 
 `Vue.extend()` と `Vue.component()` の違いを理解することは重要です。`Vue` 自身はコンストラクタであるため、`Vue.extend()` は **クラス継承メソッド** です。そのタスクは `Vue` のサブクラスを生成して、そのコンストラクタを返すものです。一方、 `Vue.component()` は **アセット登録メソッド** であり、`Vue.directive()` や `Vue.filter()` と類似しています。そのタスクは与えられたコンストラクタに文字列のIDを関連付けて、 Vue.js がそれをテンプレートの中で利用できるようにするものです。直接 `Vue.component()` にオプションを渡した時は、内部的に `Vue.extend()` が呼ばれます。
 
 Vue.js は二つの異なる API パラダイムをサポートしています: クラスベースの命令的な Backbone スタイルの API とマークアップベースで宣言的な Web Components スタイルの API です。もし混同してしまう場合は、image エレメントを `new Image()` を作るか、 `<img>` タグで作るかということを考えてみてください。どちらもそれ自体で有効的であり、Vue.js は最大限の柔軟性のためにどちらの方式も提供しています。
 
 
-## Data Inheritance
+## データの継承
 
 ### 明示的な Data の受け渡し
 
@@ -527,7 +527,7 @@ MyComponent
 
 `<content>` 要素は CSS セレクタを期待する `select` という特殊な属性を持ちます。異なる `select` 属性を用いて複数の  `<content>` の挿入位置を指定することができます。それぞれは元のコンテンツの中でそのセレクタにマッチした要素によって置換されます。
 
-<p class="tip">Starting in 0.11.6, `<content>` selectors can only match top-level children of the host node. This keeps the behavior consistent with the Shadow DOM spec and avoids accidentally selecting unwanted nodes in nested transclusions.</p>
+<p class="tip">0.11.6 以降では、`<content>` セレクタは、ホストノードのトップレベルの子だけ一致できます。これは Shadow DOM 仕様の振舞いを保ち、そしてネストされたトランスクルージョンで誤って不要なノードを選択することを回避します。 </p>
 
 `multi-insertion-component` のテンプレート:
 
@@ -559,9 +559,9 @@ MyComponent
 
 content insertion の仕組みは、元のコンテンツがどのように組み替えられ、表示されるべきか、という点に関して素晴らしい管理機能を提供します。これによってコンポーネントが非常に柔軟性と再利用性が高いものになります。
 
-## Inline Template
+## インラインテンプレート
 
-In 0.11.6, a new directive param for `v-component` is introduced: `inline-template`. When this param is present, the component will use its inner content as its template rather than transclusion content. This allows more flexible template-authoring.
+0.11.6 では、`v-component` 向けに新しいディレクティブパラメータとして、`inline-template` というパラメータが導入されます。これのパラメータが提供されるとき、コンポーネントはそれはテンプレートではなくトランスクルージョンコンテンツとして内部コンテンツを使用します。これは、より柔軟なテンプレートオーサリングを可能にします。
 
 ``` html
 <div v-component="example" inline-template>
