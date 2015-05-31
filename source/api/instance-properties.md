@@ -8,13 +8,13 @@ order: 3
 - **Type:** `HTMLElement`
 - **Read only**
 
-Vue インスタンスを管理している DOM 要素。
+Vue インスタンスが管理している DOM 要素。
 
 ### vm.$data
 
 - **Type:** `Object`
 
-Vue インスタンスをオブザーブしているデータオブジェクト。新しいオブジェクトでスワップできます。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
+Vue インスタンスがオブザーブしているデータオブジェクト。新しいオブジェクトでスワップできます。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
 
 ### vm.$options
 
@@ -50,14 +50,14 @@ new Vue({
 - **Type:** `Object`
 - **Read only**
 
-`v-ref` を登録した子コンポーネントを保持するオブジェクト。詳細については、[v-ref](/api/directives.html#v-ref) を参照してください。
+`v-ref` で登録した子コンポーネントを保持するオブジェクト。詳細については、[v-ref](/api/directives.html#v-ref) を参照してください。
 
 ### vm.$$
 
 - **Type:** `Object`
 - **Read only**
 
-`v-el` を登録した DOM 要素を保持するオブジェクト。詳細については、[v-el](/api/directives.html#v-el) を参照してください。
+`v-el` で登録した DOM 要素を保持するオブジェクト。詳細については、[v-el](/api/directives.html#v-el) を参照してください。
 
 ### メタプロパティ
 
