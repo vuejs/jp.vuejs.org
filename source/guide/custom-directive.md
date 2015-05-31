@@ -111,6 +111,26 @@ var demo = new Vue({
 })
 </script>
 
+### 複数の節
+
+コンマで区切られた引数は、複数のディレクティブインスタンスとしてバウンドされます。以下の例は、ディレクティブメソッドが2回呼ばれます。
+
+``` html
+<div v-demo="color: 'white', text: 'hello!'"></div>
+```
+
+オブジェクトリテラルで値を閉じることにより、すべての引数で単一のバインディングを成し遂げることができます:
+
+``` html
+<div v-demo="{color: 'white', text: 'hello!'}"></div>
+```
+
+``` js
+Vue.directive('demo', function (value) {
+  console.log(value) // Object {color: 'white', text: 'hello!'}
+})
+```
+
 ## リテラルディレクティブ
 
 もしカスタムディレクティブを作成するときに `isLiteral: true` を渡した場合は、その属性値は文字列 string として扱われ、そのディレクティブの `expression` として割り当てられます。リテラルディレクティブはデータの監視の準備はしません。
