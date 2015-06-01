@@ -89,4 +89,30 @@ DOM の更新前に値をさらに加工するために、フィルタを direct
 
 エンプティディレクティブの全リストは[API リファレンス](/api/directives.html#エンプティディレクティブ) 内にあります。
 
+## 非同期更新の理解
+
+You can think of directives as mappings of your data state to the DOM state. However, it is important to understand that in Vue.js, the directive update process is asynchronous by default. For example, when you set `vm.someData = 'new value'`, the DOM will not update immediately. Vue.js buffers all data changes happening in the same event loop, and execute any necessary DOM updates asynchronously in the next "tick". This prevents multiple changes to the same piece of data from triggering duplicate updates.
+
+This behavior can be tricky when you want to do something that depends on the updated DOM state. Although Vue.js generally encourages developers to think in a "data-driven" way, sometimes you might just want to use that handy jQuery plugin you've always been using. In order to wait until Vue.js has finished updating the DOM after a data change, you can use `Vue.nextTick(callback)` immediately after the data is changed - when the callback is called, the DOM would have been updated. For example:
+
+``` html
+<div id="example">{{msg}}</div>
+```
+
+``` js
+var vm = new Vue({
+  el: '#example',
+  data: {
+    msg: '123'
+  }
+})
+vm.msg = 'new message' // 変更データ
+vm.$el.textContent === 'new message' // false
+Vue.nextTick(function () {
+  vm.$el.textContent === 'new message' // true
+})
+```
+
+あるいは、`Vue.config.async = false` の設定で、非同期更新を止めることができます。
+
 では次に、[フィルタ](/guide/filters.html)について説明しましょう。
