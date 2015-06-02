@@ -1,4 +1,4 @@
-title: Installation
+title: インストール
 type: guide
 order: 1
 vue_version: 0.11.10
@@ -9,14 +9,14 @@ gz_size: 19.53
 
 > **互換性に関する注意:** Vue.js は IE8 以下をサポートしていません。
 
-## Standalone
+## スタンドアロン
 
 ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。
 
 <div id="downloads">
-<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.js" download>Development Version</a><span class="light info">{{dev_size}}kb, コメント、デバック、警告のメッセージが豊富です。</span>
+<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.js" download>開発版</a><span class="light info">{{dev_size}}kb, コメント、デバック、警告のメッセージが豊富です。</span>
 
-<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>Production Version</a><span class="light info">{{min_size}}kb minified / {{gz_size}}kb gzipped</span>
+<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>リリース版</a><span class="light info">{{min_size}}kb minified / {{gz_size}}kb gzipped</span>
 </div>
 
  [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js)も利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
@@ -25,14 +25,14 @@ gz_size: 19.53
 
 ``` bash
 $ npm install vue
-# for edge version:
+# 最新版向け:
 $ npm install yyx990803/vue#dev
 ```
 
 ## Bower
 
 ``` bash
-# only stable version is available through Bower
+# Bower では安定版だけ利用できます
 $ bower install vue
 ```
 
@@ -40,7 +40,7 @@ $ bower install vue
 
 ```js
 var Vue = require('yyx990803/vue')
-// for edge version:
+// 最新版向け:
 var Vue = require('yyx990803/vue@dev')
 ```
 
@@ -48,14 +48,14 @@ var Vue = require('yyx990803/vue@dev')
 
 ``` bash
 $ component install yyx990803/vue
-# for edge version:
+# 最新版向け:
 $ component install yyx990803/vue@dev
 ```
 
-## AMD Module Loaders
-ダウンロードされたスタンドアローン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、 AMD moduleとして直接利用することができます。
+## AMD モジュールローダ
+ダウンロードされたスタンドアロン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、 AMD モジュールとして直接利用することができます。
 
 
-## Ready?
+## 準備はいいですか？
 
-[Let's Get Started](/guide/).
+[はじめましょう！](/guide/).
