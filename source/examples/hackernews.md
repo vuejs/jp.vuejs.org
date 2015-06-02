@@ -3,7 +3,7 @@ type: examples
 order: 8
 ---
 
-> これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、ビルドセットアップ向けに Browserify + Vueify を使っています。
+> これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、ビルドセットアップ向けに Webpack + vue-loader を使っています。
 
 <div style="max-width:600px">
   <a href="http://yyx990803.github.io/vue-hackernews" target="_blank"><img style="width:100%" src="/images/hn.png"></a>
