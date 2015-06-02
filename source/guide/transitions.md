@@ -233,7 +233,7 @@ Vue.transition('fade', {
 })
 ```
 
-All of the above hook functions are called with their `this` contexts set to the associated Vue instances. If the element is the root node of a Vue instance, that instance will be used as the context. Otherwise, the context will be the owner instance of the transition directive.
+上記のようなフック関数の全ては、それらの `this` コンテキストは関連付けられた Vue インスタンスを設定して呼び出されます。もし要素が Vue インスタンスのルートノードの場合、そのインスタンスはそのコンテキストとして使用されます。それ以外の場合は、そのコンテキストはトランジションディレクティブのインスタンスの所有者になります。
 
 そして、`v-transition`のトランジションIDに値を渡すことで、この関数を使用することができます。JavaScriptによる定義は、CSSトランジションよりも優先順位が高いことに注意してください。
 

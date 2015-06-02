@@ -1,4 +1,4 @@
-title: Instance Properties
+title: インスタンスプロパティ
 type: api
 order: 3
 ---
@@ -8,19 +8,19 @@ order: 3
 - **Type:** `HTMLElement`
 - **Read only**
 
-The DOM element that the Vue instance is managing.
+Vue インスタンスが管理している DOM 要素。
 
 ### vm.$data
 
 - **Type:** `Object`
 
-The data object that the Vue instance is observing. You can swap it with a new object. The Vue instance proxies access to the properties on its data object.
+Vue インスタンスが監視しているデータオブジェクト。新しいオブジェクトでスワップできます。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
 
 ### vm.$options
 
 - **Type:** `Object`
 
-The instantiation options used for the current Vue instance. This is useful when you want to include custom properties in the options:
+現在の Vue インスタンスのためのインストールオプションとして使われます。これはオプションにカスタムプロパティを含めたいとき便利です:
 
 ``` js
 new Vue({
@@ -36,29 +36,29 @@ new Vue({
 - **Type:** `Vue`
 - **Read only**
 
-The parent instance, if the current instance has one.
+もし現在のインスタンスが1つ持つ場合は親のインスタンス。
 
 ### vm.$root
 
 - **Type:** `Vue`
 - **Read only**
 
-The root Vue instance of the current component tree. If the current instance has no parents this value will be itself.
+現在のコンポーネントツリーのルート Vue インスタンス。もし現在のインスタンスが親ではない場合、この値はそれ自身でしょう。
 
 ### vm.$
 
 - **Type:** `Object`
 - **Read only**
 
-An object that holds child components that have `v-ref` registered. For more details see [v-ref](/api/directives.html#v-ref).
+`v-ref` で登録した子コンポーネントを保持するオブジェクト。詳細については、[v-ref](/api/directives.html#v-ref) を参照してください。
 
 ### vm.$$
 
 - **Type:** `Object`
 - **Read only**
 
-An object that holds DOM elements that have `v-el` registered. For more details see [v-el](/api/directives.html#v-el).
+`v-el` で登録した DOM 要素を保持するオブジェクト。詳細については、[v-el](/api/directives.html#v-el) を参照してください。
 
-### Meta Properties
+### メタプロパティ
 
-Instances created by `v-repeat` will also have some meta properties, e.g. `vm.$index`, `vm.$key` and `vm.$value`. For more details, see [the guide on using `v-repeat`](/guide/list.html).
+`v-repeat` によって作成されたインスタンスは、いくつかのメタプロパティも持っています。例えば `vm.$index` 、`vm.$key` そして `vm.$value` 。詳細については、[the guide on using `v-repeat`](/guide/list.html) を参照してください。
