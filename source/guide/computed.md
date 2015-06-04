@@ -3,7 +3,7 @@ type: guide
 order: 8
 ---
 
-Vue.js のインラインの expression は非常に便利ですが、最良のユースケースはシンプルな boolean 演算や文字列の連結を使用したものです。より複雑なロジックに関しては、 **computed properties** を活用しましょう。
+Vue.js のインライン expression は非常に便利ですが、最良のユースケースはシンプルな boolean 演算や文字列の連結を使用したものです。より複雑なロジックに関しては、 **computed properties** を活用しましょう。
 
 Vue.js では `computed` オプションを使って computed properties を定義します。
 
@@ -48,4 +48,4 @@ computed: {
 
 <p class="tip">Vue.js 0.11 以前では、条件付きのステートメントが呼び出される際に、ユーザーが明示的に依存性を列挙する必要性がありました。0.11 以降ではその必要はありません。</p>
 
-次は、[write a custom directive](/guide/custom-directive.html)について学びましょう。
+次: [カスタムディレクティブ](/guide/custom-directive.html)
