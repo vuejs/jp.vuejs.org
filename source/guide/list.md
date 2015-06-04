@@ -1,9 +1,9 @@
-title: Displaying a List
+title: リスト表示
 type: guide
 order: 5
 ---
 
-ViewModel 上のオブジェクトの配列に基づき、テンプレート要素を繰り返すために、`v-repeat` directive を利用することができます。`v-repeat` directive は、配列内の各オブジェクトを `$data` オブジェクトとして利用し、子の Vue インスタンスを作成します。それらの子インスタンスは親の全データを継承しているので、繰り返された要素内では、繰り返されたインスタンスと親インスタンス双方のプロパティにアクセスできます。加えて、レンダリングされたインスタンスの配列インデックスに対応する `$index` プロパティにもアクセスすることができます。
+ViewModel 上のオブジェクトの配列に基づき、テンプレート要素を繰り返すために、`v-repeat` ディレクティブを利用することができます。`v-repeat` ディレクティブは、配列内の各オブジェクトを `$data` オブジェクトとして利用し、子の Vue インスタンスを作成します。それらの子インスタンスは親の全データを継承しているので、繰り返された要素内では、繰り返されたインスタンスと親インスタンス双方のプロパティにアクセスできます。加えて、レンダリングされたインスタンスの配列インデックスに対応する `$index` プロパティにもアクセスすることができます。
 
 **例:**
 
@@ -44,9 +44,9 @@ var demo = new Vue({
 })
 </script>
 
-## Block Repeat
+## ブロックの繰り返し
 
-Sometimes you might want to repeat a block of more than one nodes - in that case, you can use a `<template>` tag to wrap the repeat block. The `<template>` tag here merely serves as a semantic wrapper. For example:
+ときどき、複数のノードのブロックを繰り返したいかもしれません。そのケースでは、繰り返すブロックをラップするために `<template>` タグを使うことができます。ここでの `<template>` タグは、単にセマンティックなラッパ(wrapper)になります。例えば:
 
 ``` html
 <ul>
@@ -128,9 +128,9 @@ new Vue({
 })
 </script>
 
-## Mutation Methods
+## 変更メソッド
 
-内部的に、Vue.js は監視対象の配列のミューテーションメソッド (`push()`, `pop()`, `shift()`, `unshift()`, `splice()`, `sort()` 及び `reverse()`) を横取りし、ビューの更新を引き起こします。
+内部的に、Vue.js は監視対象の配列の変更メソッド (`push()`, `pop()`, `shift()`, `unshift()`, `splice()`, `sort()` 及び `reverse()`) を横取りし、View の更新を引き起こします。
 
 ``` js
 // この結果、DOM が更新される
@@ -138,14 +138,14 @@ demo.items.unshift({ childMsg: 'Baz' })
 demo.items.pop()
 ```
 
-## Augmented Methods
+## 拡張メソッド
 
-Vue.js は配列の監視を、 `$set()` と `$remove()` の２つの便利なメソッドで補います。
+Vue.js は配列の監視を、 `$set()` と `$remove()` の2つの便利なメソッドで補います。
 
-データバインドされた配列に対して、直接インデックスを指定して要素を設定するのは避けて下さい。これは、 Vue.js によって変更を感知できなくなってしまうためです。代わりに、augmented method の `$set()` を利用して下さい:
+データバインドされた配列に対して、直接インデックスを指定して要素を設定するのは避けて下さい。これは、 Vue.js によって変更を感知できなくなってしまうためです。代わりに、拡張メソッドの `$set()` を利用して下さい:
 
 ``` js
-// `demo.items[0] = ...` と同様だが、ビューの更新が実行される
+// `demo.items[0] = ...` と同様だが、View の更新が実行される
 demo.items.$set(0, { childMsg: 'Changed!'})
 ```
 
@@ -158,7 +158,7 @@ demo.items.$remove(0)
 
 ## 配列の置き換え
 
-Non-mutating method（例： `filter()`, `concat()` または `slice()` ）を使う場合、返却される配列は異なるインスタンスになります。このケースでは、古い配列を新しいものと置き換えることが出来ます:
+無変更メソッド (例:`filter()`, `concat()` または `slice()`) を使う場合、返却される配列は異なるインスタンスになります。このケースでは、古い配列を新しいものと置き換えることが出来ます:
 
 ``` js
 demo.items = demo.items.filter(function (item) {
@@ -279,6 +279,6 @@ new Vue({
 
 ## 配列のフィルタ
 
-オリジナルのデータに対して変更やリセットをせずに、フィルタリングやソートされた配列を表示のみ行いたい場合が時々あります。Vue は、そのような用途でシンプルに使えるよう、`filterBy` と `orderBy` という組み込みのフィルタを提供しています。詳しくはそれらの [documentations](/api/filters.html#filterBy) を参照してください。
+オリジナルのデータに対して変更やリセットをせずに、フィルタリングやソートされた配列を表示のみ行いたい場合が時々あります。Vue は、そのような用途でシンプルに使えるよう、`filterBy` と `orderBy` という組み込みのフィルタを提供しています。詳しくはそれらの[ドキュメント](/api/filters.html#filterBy)を参照してください。
 
-次は [Listening for Events](/guide/events.html) です。
+次: [イベントのリスニング](/guide/events.html)
