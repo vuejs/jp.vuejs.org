@@ -1,11 +1,11 @@
-title: Filters
+title: フィルタ
 type: guide
 order: 4
 ---
 
 ## 要約
 
-Vue.jsのフィルタは、本質的には「値を取り、加工し、加工した値を返す」関数です。マークアップ内ではパイプ(`|`)で表され 、一つ以上の引数を続けることができます。
+Vue.js のフィルタは、本質的には「値を取り、加工し、加工した値を返す」関数です。マークアップ内ではパイプ(`|`)で表され 、一つ以上の引数を続けることができます。
 
 ``` html
 <element directive="expression | filterId [args...]"></element>
@@ -43,6 +43,6 @@ mustache スタイルのバインディング内でも利用することがで�
 <input v-on="keyup: submitForm | key enter">
 ```
 
-上記の例の明確な利用方法は、[full list of built-in filters](/api/filters.html) を参照してください。
+上記の例の明確な利用方法は、[API のビルドインフィルタの全リスト](/api/filters.html)を参照してください。
 
-これで、ディレクティブとフィルタについて知ることができました。では、実際に[display a list of items](/guide/list.html)をやってみましょう。
+これで、ディレクティブとフィルタについて知ることができました。では、実際に[アイテムリストの表示](/guide/list.html)をやってみましょう。
