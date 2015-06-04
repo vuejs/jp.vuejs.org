@@ -1,11 +1,11 @@
-title: Handling Forms
+title: フォームのハンドリング
 type: guide
 order: 7
 ---
 
 ## 基礎
 
-フォームの input要素に双方向バインディングを作成するには、 `v-model` directive を使用します。 `v-model` directive は、input type に基づき、要素を更新する正しい方法を自動的に選択します。
+フォームの input 要素に双方向バインディングを作成するには、 `v-model` ディレクティブを使用します。 `v-model` ディレクティブは、input の type に基づき、要素を更新する正しい方法を自動的に選択します。
 
 **例**
 
@@ -88,13 +88,13 @@ new Vue({
 
 ## 値を数値としてキャストする
 
-もし、ユーザの入力を自動的に数値として永続化したいのであれば、v-model で管理している input に `number` 属性を追加することができます:
+もし、ユーザの入力を自動的に数値として永続化したいのであれば、`v-model` で管理している input に `number` 属性を追加することができます:
 
 ``` html
 <input v-model="age" number>
 ```
 
-## Dynamic Select Options
+## 動的な選択オプション
 
 `<select>` 要素のオプションリストを動的にレンダリングする必要があれば、`v-model`  と一緒に `options` 属性を利用することが推奨されています:
 
@@ -164,4 +164,4 @@ new Vue({
 })
 </script>
 
-次は、 [Computed Properties](/guide/computed.html) です。
+次: [Computed Properties](/guide/computed.html)
