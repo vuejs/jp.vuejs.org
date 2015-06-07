@@ -71,4 +71,4 @@ Vue.filter('concat', function (value, key) {
 
 ビルトインの `filterBy` と `orderBy` フィルタは共に渡された配列に対して重要な変更を行うものであり、所有者である Vue インスタンスの現在の状態に依存するものです。
 
-以上！これで次は [Component System](/guide/components.html) がどのように動作するか学ぶ時間です。
+以上！これで次は [コンポーネントシステム](/guide/components.html) がどのように動作するか学ぶ時間です。

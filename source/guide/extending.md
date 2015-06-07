@@ -1,11 +1,11 @@
-title: Extending Vue
+title: Vue の拡張
 type: guide
 order: 14
 ---
 
-## Mixinsによる拡張
+## ミックスインによる拡張
 
-Mixinsは、Vueのコンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。mixinは、通常のVueコンポーネントのoptionと同じように記述できます。
+ミックスイン (mixin) は、Vue のコンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。ミックスインは、通常の Vue コンポーネントのオプションと同じように記述できます。
 
 ``` js
 // mixin.js
@@ -32,13 +32,13 @@ var component = new Component() // -> "hello from mixin!"
 
 ## プラグインによる拡張
 
-プラグインは、通常Vueのグローバルメソッドの機能を追加します。
+プラグインは、通常 Vue のグローバルメソッドの機能を追加します。
 
 ### プラグインの記述
 
 1. 1つ、または複数のグローバル・メソッドを追加します（例：[vue-element](https://github.com/vuejs/vue-element)）。
-2. 1つ、または複数のグローバル・アセットを追加します：directives/filters/transitions など（例：[vue-touch](https://github.com/vuejs/vue-touch)）。
-3. VueインスタンスメソッドをVue.prototypeに記述します。慣例として、Vueインスタンスメソッドは、`$`をつけることで、他のデータやメソッドと干渉を避けることができます。
+2. 1つ、または複数のグローバル・アセットを追加します：ディレクティブ/フィルタ/トランジションなど（例：[vue-touch](https://github.com/vuejs/vue-touch)）。
+3. Vue インスタンスメソッドを Vue.prototype に記述します。慣例として、Vue インスタンスメソッドは、`$` をつけることで、他のデータやメソッドと干渉を避けることができます。
 
 ``` js
 exports.install = function (Vue, options) {
@@ -50,7 +50,7 @@ exports.install = function (Vue, options) {
 
 ### プラグインの使用
 
-CommonJSベースのビルドを行っていると仮定します。
+CommonJS ベースのビルドを行っていると仮定します。
 
 ``` js
 var vueTouch = require('vue-touch')
@@ -68,7 +68,9 @@ Vue.use('my-plugin', {
 
 ## 他の拡張ツール
 
-- [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.jsアプリケーションのデバッグ用Chrome devtools extensionです。
-- [vue-touch](https://github.com/vuejs/vue-touch): Hammer.jsを利用して、タッチ操作のディレクティブを追加できます。
-- [vue-element](https://github.com/vuejs/vue-element): Vue.jsでカスタムエレメントを登録することができます。
-- [List of User Contributed Tools](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
+- [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.js アプリケーションのデバッグ用 Chrome devtools extension です。
+- [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加できます。
+- [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録することができます。
+- [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
+
+次: [FAQ](/guide/faq.html)
