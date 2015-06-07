@@ -21,7 +21,7 @@ order: 3
 
 このように、接頭辞はデフォルトで `v` です。このディレクティブ ID は `text` で、expression は `message` です。Vue インスタンス上の `message` プロパティが変更される時は常に、このディレクティブは Vue.js にdivの `textContent` を更新させます。
 
-## インライン表現
+## インライン Expressions
 
 ``` html
 <div v-text="'hello ' + user.firstName + ' ' + user.lastName"></div>
@@ -29,7 +29,7 @@ order: 3
 
 このように、私達は単一のプロパティキーの代わりに、 computed expression を使用します。Vue.js は expression が依存しているプロパティを自動的に監視し、変更があったときは常にディレクティブを更新します。非同期なバッチ更新のおかげで、もし複数の依存関係に変更があったとしても、 expression はイベントループ毎に一度だけ更新されます。
 
-特に副作用（イベントリスナ expression を除く）のある statement の場合には、テンプレート内でロジックが過多になるのを避けるため、 expression を賢く利用してください。テンプレート内でロジックの使いすぎを防止するため、 Vue.js でのインライン expression は **１ statement のみ** に制限されています。更に複雑な操作を要するバインディングには、代わりに　[Computed Properties](/guide/computed.html) を利用してください。
+特に副作用（イベントリスナ expression を除く）のあるステートメント (statement) の場合には、テンプレート内でロジックが過多になるのを避けるため、 expression を賢く利用してください。テンプレート内でロジックの使いすぎを防止するため、 Vue.js でのインライン expression は **1ステートメントのみ** に制限されています。更に複雑な操作を要するバインディングには、代わりに　[Computed Properties](/guide/computed.html) を利用してください。
 
 <p class="tip">セキュリティ上の理由のため、インライン expression では、現在のコンテキストの Vue インスタンスおよび、親のプロパティとメソッドにのみアクセスできます。</p>
 
@@ -77,9 +77,9 @@ mustache 内部の expression が変更されるのに応じて、レンダリ�
 
 しかしながら、この種のリアクティブな振舞いを持つリテラルディレクティブは、全てではないということに注意してください。ビルドインディレクティブは、`v-component` 、 `v-partial` そして `v-transition` を含んだこの使い方をサポートしています。他のリテラルディレクティブ（例：`v-ref`）内の Mustache expression は、 **一度だけ** 評価されます。ディレクティブのコンパイル実行後、値の変化に反応することはありません。
 
-リテラルディレクティブの全リストは [API リファレンス](/api/directives.html#Literal_Directives) 内にあります。
+リテラルディレクティブの全リストは [API リファレンス](/api/directives.html#リテラルディレクティブ) 内にあります。
 
-## 空ディレクティブ
+## エンプティディレクティブ
 
 いくつかのディレクティブは、属性値すら期待せず、単純にその要素に何かを一度きり行います。例えば `v-pre` ディレクティブでは下記のようになります。
 
@@ -89,6 +89,6 @@ mustache 内部の expression が変更されるのに応じて、レンダリ�
 </div>
 ```
 
-空のディレクティブの全リストは[API リファレンス](/api/directives.html#Empty_Directives) 内にあります。
+エンプティディレクティブの全リストは[API リファレンス](/api/directives.html#エンプティディレクティブ) 内にあります。
 
 では次に、[フィルタ](/guide/filters.html)について説明しましょう。

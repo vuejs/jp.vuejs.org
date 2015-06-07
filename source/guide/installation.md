@@ -58,4 +58,4 @@ $ component install yyx990803/vue@dev
 
 ## 準備はいいですか？
 
-[はじめましょう！](/guide/).
+[はじめましょう！](/guide/)

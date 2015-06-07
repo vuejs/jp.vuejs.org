@@ -88,7 +88,7 @@ new Vue({
 <input v-on="keyup:submit | key enter">
 ```
 
-詳しくは、API リファレンス内の、[キーフィルタプリセットの全リスト](/api/filters.html#key) を参照してください。
+詳しくは、API リファレンス内の、[key の全リスト](/api/filters.html#key) を参照してください。
 
 ## なぜ HTML 内にリスナを記述するのですか？
 
