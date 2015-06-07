@@ -1,4 +1,4 @@
-title: オプション
+title: コンポーネントオプション
 type: api
 order: 2
 ---
