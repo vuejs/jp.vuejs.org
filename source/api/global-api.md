@@ -52,9 +52,9 @@ Vue.config.delimiters = ['(%', '%)']
 
 - **options** `Object`
 
-Vue コンストラクタベースの"サブクラス"を作成します。[instantiation options](/api/options.html) の全てはここで使うことができます。ここでの注意すべき特別なケースは、`el` と `data` で、このケースでは関数にしなければなりません。
+Vue コンストラクタベースの"サブクラス"を作成します。[オプション](/api/options.html)の全てはここで使うことができます。ここでの注意すべき特別なケースは、`el` と `data` で、このケースでは関数にしなければなりません。
 
-内部的に、`Vue.extend()` は component をインスタンス化する前に、全ての component オプション上で呼び出されます。さらに詳しくは component に関しては、[Component System](/guide/components.html) を参照してください。
+内部的に、`Vue.extend()` は component をインスタンス化する前に、全ての component オプション上で呼び出されます。さらに詳しくは component に関しては、[コンポーネントシステム](/guide/components.html) を参照してください。
 
 **例**
 
@@ -86,35 +86,35 @@ profile.$appendTo('body')
 - **id** `String`
 - **definition** `Function` または `Object` *任意*
 
-グローバルカスタム directive に登録または取得します。さらに詳しくは [Writing Custom Directives](/guide/custom-directive.html) を参照してください。
+グローバルカスタムディレクティブに登録または取得します。さらに詳しくは[カスタムディレクティブ](/guide/custom-directive.html)を参照してください。
 
 ### Vue.filter( id, [definition] )
 
 - **id** `String`
 - **definition** `Function` *任意*
 
-グローバルカスタム fitler に登録または取得します。さらに詳しくは [Writing Custom Filters](/guide/custom-filter.html) を参照してください。
+グローバルカスタムフィルタに登録または取得します。さらに詳しくは[カスタムフィルタ](/guide/custom-filter.html)を参照してください。
 
 ### Vue.component( id, [definition] )
 
 - **id** `String`
 - **definition** `Function` コンストラクタ または `Object` *任意*
 
-グローバル component に登録または取得します。さらに詳しくは [Component System](/guide/components.html) を参照してください。
+グローバルコンポーネントに登録または取得します。さらに詳しくは[コンポーネントシステム](/guide/components.html)を参照してください。
 
 ### Vue.transition( id, [definition] )
 
 - **id** `String`
 - **definition** `Object` *任意*
 
-グローバル JavaScript transition effect definition に登録または取得します。さらに詳しくガイド向けの [JavaScript Transitions](/guide/transitions.html#JavaScript_Functions) を参照してください。
+グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScrip 関数)](/guide/transitions.html#JavaScript_Functions) を参照してください。
 
 ### Vue.partial( id, [definition] )
 
 - **id** `String`
 - **definition** `String | Node` *任意*
 
-グローバル partial に登録または取得します。定義にはテンプレート文字列の場合があり、querySelector は `#` で始まるか、DOM 要素 (`innerHTML`はテンプレート文字列として利用される) か、また Documentfragment です。
+グローバルパーシャルに登録または取得します。定義にはテンプレート文字列の場合があり、querySelector は `#` で始まるか、DOM 要素 (`innerHTML` はテンプレート文字列として利用される) か、また Documentfragment です。
 
 **例**
 
@@ -158,8 +158,8 @@ Vue.js のバッチは view を更新し、非同期にそれらを全て実行�
 - **plugin** `Object` または `Function`
 - **args...** *任意*
 
-Vue.js は plugin をマウントします。もし、plugin がオブジェクトなら、それは `install` メソッドを実装していなければなりません。もし、それ自身が関数ならば、それは install メソッドとして扱われます。install メソッドは、Vue を引数として呼び出されます。さらに詳しくは、[Plugins](/guide/extending.html#Extend_with_Plugins) を参照してください。
+Vue.js は plugin をマウントします。もし、plugin がオブジェクトなら、それは `install` メソッドを実装していなければなりません。もし、それ自身が関数ならば、それは install メソッドとして扱われます。install メソッドは、Vue を引数として呼び出されます。さらに詳しくは、[プラグイン(プラグインによる拡張)](/guide/extending.html#Extend_with_Plugins)を参照してください。
 
 ### Vue.util
 
-多数のユーティリティメソッドを含む内部 `util` モジュールを公開します。これは高度な plugin/directive 作成向けに目的としており、そのため、何が可能かどうか確認するためにソースコードを見る必要があります。
+多数のユーティリティメソッドを含む内部 `util` モジュールを公開します。これは高度なプラグイン/ディレクティブ作成向けに目的としており、そのため、何が可能かどうか確認するためにソースコードを見る必要があります。

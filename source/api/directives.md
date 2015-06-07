@@ -3,7 +3,7 @@ type: api
 order: 6
 ---
 
-## リアクティブ・ディレクティブ
+## リアクティブディレクティブ
 
 > このディレクティブは、それ自身を Vue インスタンスのプロパティやインスタンスの文脈の中で評価される表現にバインドすることができます。配下のプロパティや表現の値が変更されたら、それらのディレクティブの `update()` 関数が同期的に呼ばれます。
 
@@ -55,7 +55,7 @@ order: 6
 
 内部的には、&#123;&#123; 中括弧({}) &#125;&#125; 表現の中の引数を computed `v-attr` ディレクティブにコンパイルします。
 
-<p class="tip"> `<img>` 要素上の `src` 要素を設定するときには、中括弧バインディングの代わりに `v-attr` を使用するべきです。テンプレートは Vue.js によってコンパイルされる前にブラウザによってパースされるので、ブラウザがイメージの URL を取得しようとしたときに、中括弧バインディングは404エラーの原因になり得ます。</p>
+<p class="tip"> `<img>` 要素上の `src` 要素を設定するときには、中括弧バインディングの代わりに `v-attr` を使用するべきです。テンプレートは Vue.js によってコンパイルされる前にブラウザによってパースされるので、ブラウザがイメージの URL を取得しようとしたときに、中括弧バインディングは 404 エラーの原因になり得ます。</p>
 
 ### v-style
 
@@ -112,15 +112,15 @@ order: 6
 - このディレクティブはひとつの引数を必要とします。
 - このディレクティブは、関数かステートメントになり得る値を必要とします。
 
-要素にイベントリスナーを割り当てます。イベントタイプは引数によって記述されます。 `key` フィルターと一緒に使用することができる唯一のディレクティブです。詳しくは、[イベントの監視](/guide/events.html)を参照してください。
+要素にイベントリスナーを割り当てます。イベントタイプは引数によって記述されます。 `key` フィルタと一緒に使用することができる唯一のディレクティブです。詳しくは、[イベントのリスニング](/guide/events.html)を参照してください。
 
 ### v-model
 
 - このディレクティブは `<input>` 、`<select>` もしくは `<textarea>` 要素においてのみ使用できます。
-- ディレクティブのパラメーター: [`lazy`](/guide/forms.html#Lazy_Updates), [`number`](/guide/forms.html#Casting_Value_as_Number), [`options`](/guide/forms.html#Dynamic_Select_Options), [`debounce`](/guide/forms.html#Input_Debounce)
+- ディレクティブのパラメータ: [`lazy`](/guide/forms.html#Lazy_Updates), [`number`](/guide/forms.html#Casting_Value_as_Number), [`options`](/guide/forms.html#Dynamic_Select_Options), [`debounce`](/guide/forms.html#Input_Debounce)
 
 form の input 要素に双方向バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
-より詳しい例は、[フォームの取り扱い](/guide/forms.html)を参照してください。
+より詳しい例は、[フォームのハンドリング](/guide/forms.html)を参照してください。
 
 ### v-if
 
@@ -155,7 +155,7 @@ form の input 要素に双方向バインディングを作成します。デ�
 - このディレクティブは、オプション属性を受け入れます。
 - ディレクティブパラメータ: [`track-by`](/guide/list.html#Using_track-by)
 
-Array もしくは Object のバインディングのすべてのアイテムの子 ViewModel を作ります。もし値が絶対値であれば、その分の ViewModelが作成されます。それらの子ViewModel は、mutating methods、例えば `push()` などが Array や Object 上で呼ばれたときや、その数が増減したときに自動的に生成、削除されます。
+Array もしくは Object のバインディングのすべてのアイテムの子 ViewModel を作ります。もし値が絶対値であれば、その分の ViewModel が作成されます。それらの子 ViewModel は変更メソッド、例えば `push()` などが Array や Object 上で呼ばれたときや、その数が増減したときに自動的に生成、削除されます。
 
 引数が何も与えられなかったとき、子 ViewModel は継承された Array の中の要素を `$data` として直接使用します。もし値が Object でなければ、ラッパーのデータオブジェクトが作られ、エイリアスキー `$value` を使用しているオブジェクトにその値がセットされます。
 
@@ -179,7 +179,7 @@ Array もしくは Object のバインディングのすべてのアイテムの
 </ul>
 ```
 
-より詳しい説明は、[リストの表示](/guide/list.html)を参照してください。
+より詳しい説明は、[リスト表示](/guide/list.html)を参照してください。
 
 ### v-with
 
@@ -238,7 +238,7 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 ### v-component
 
-- ディレクティブパラメーター: [`keep-alive`](/guide/components.html#Dynamic_Components), [`wait-for`](/guide/components.html#wait-for), [`transition-mode`](/guide/components.html#transition-mode), [`inline-template`](/guide/components.html#Inline_Template)
+- ディレクティブパラメータ: [`keep-alive`](/guide/components.html#Dynamic_Components), [`wait-for`](/guide/components.html#wait-for), [`transition-mode`](/guide/components.html#transition-mode), [`inline-template`](/guide/components.html#Inline_Template)
 - mustache でリアクティブにすることができます。
 
 割り当てられたコンポーネントコンストラクタをもつ子 ViewModel として、この要素をコンパイルします。これは、親からデータを継承するために、`v-with` と共に使用することができます。より詳細な説明は、[コンポーネントシステム](/guide/components.html)を参照してください。
@@ -268,21 +268,21 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 Vue.js に対してこの要素への変換を適用することを知らせます。変換クラスは、ある変換のきっかけとなるディレクティブが要素を修正したときか、Vue インスタンスの DOM 生成メソッドが呼ばれたときに適用されます。
 
-より詳しくは、[the guide to transitions](/guide/transitions.html)を参照してください。
+より詳しくは、[トランジション](/guide/transitions.html)を参照してください。
 
 ### v-ref
 
-簡単にアクセス可能なように、親に子コンポーネントへの参照を登録します。`v-component` や `v-repeat` を組み合わせて動きます。そのコンポーネントのインスタンスは、その親の `$` オブジェクトへアクセス可能です。例は、 [子リファレンス](/guide/components.html#Child_Reference)を参照してください。
+簡単にアクセス可能なように、親に子コンポーネントへの参照を登録します。`v-component` や `v-repeat` を組み合わせて動きます。そのコンポーネントのインスタンスは、その親の `$` オブジェクトへアクセス可能です。例は、[コンポーネントシステム(子の参照)](/guide/components.html#Child_Reference)を参照してください。
 
 `v-repeat` と共に使用するとき、値はそれにバウンドしている配列に対応するすべての子 Vue インスタンスを含む配列になります。
 
 ### v-el
 
-簡単にアクセス可能にするために、親のVueインスタンス上で DOM 要素へのリファレンスを登録します。例えば、`<div v-el="hi">` は `vm.$$.hi` としてアクセス可能です。
+簡単にアクセス可能にするために、親の Vue インスタンス上で DOM 要素へのリファレンスを登録します。例えば、`<div v-el="hi">` は `vm.$$.hi` としてアクセス可能です。
 
-## 空のディレクティブ
+## エンプティディレクティブ
 
-> 空のディレクティブは属性値が必須ではなく、無視します。
+> エンプティディレクティブは属性値が必須ではなく、無視します。
 
 ### v-pre
 
