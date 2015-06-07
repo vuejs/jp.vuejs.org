@@ -17,7 +17,7 @@ Vue.js ではカスタムディレクティブを登録する仕組みが用意�
 Vue.directive('my-directive', {
   bind: function () {
     // 準備のための作業をします
-    // e.g. イベントリスナーを追加したり、一回だけ実行が必要なコストのかかる処理を行う
+    // e.g. イベントリスナを追加したり、一回だけ実行が必要なコストのかかる処理を行う
   },
   update: function (newValue, oldValue) {
     // 更新された値に何か処理をします
@@ -25,7 +25,7 @@ Vue.directive('my-directive', {
   },
   unbind: function () {
     // クリーンアップのための処理を行います
-    // e.g. bind()の中で追加されたイベントリスナーの削除
+    // e.g. bind()の中で追加されたイベントリスナの削除
   }
 })
 ```

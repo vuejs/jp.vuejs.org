@@ -107,7 +107,7 @@ profile.$appendTo('body')
 - **id** `String`
 - **definition** `Object` *任意*
 
-グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScrip 関数)](/guide/transitions.html#JavaScript_Functions) を参照してください。
+グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScript 関数)](/guide/transitions.html#JavaScript_関数) を参照してください。
 
 ### Vue.partial( id, [definition] )
 
@@ -158,7 +158,7 @@ Vue.js のバッチは view を更新し、非同期にそれらを全て実行�
 - **plugin** `Object` または `Function`
 - **args...** *任意*
 
-Vue.js は plugin をマウントします。もし、plugin がオブジェクトなら、それは `install` メソッドを実装していなければなりません。もし、それ自身が関数ならば、それは install メソッドとして扱われます。install メソッドは、Vue を引数として呼び出されます。さらに詳しくは、[プラグイン(プラグインによる拡張)](/guide/extending.html#Extend_with_Plugins)を参照してください。
+Vue.js は plugin をマウントします。もし、plugin がオブジェクトなら、それは `install` メソッドを実装していなければなりません。もし、それ自身が関数ならば、それは install メソッドとして扱われます。install メソッドは、Vue を引数として呼び出されます。さらに詳しくは、[プラグイン(プラグインによる拡張)](/guide/extending.html#プラグインによる拡張)を参照してください。
 
 ### Vue.util
 
