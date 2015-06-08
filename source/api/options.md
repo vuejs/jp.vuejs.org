@@ -237,6 +237,12 @@ Vue インスタンスが破棄された後に呼ばれます。このフック�
 
 Vue インスタンスで使用できるような、ディレクティブのハッシュです。カスタムディレクティブの書き方について、より詳しくは[カスタムディレクティブ](/guide/custom-directive.html)を参照してください。
 
+### elementDirectives
+
+- **型:** `Object`
+
+Vue インスタンス使用できるような、エレメントディレクティブのハッシュです。エレメントディレクティブの書き方は、[エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)を参照してください。
+
 ### filters
 
 - **型:** `Object`
@@ -248,12 +254,6 @@ Vue インスタンスで使用できるようなフィルタのハッシュで�
 - **型:** `Object`
 
 Vue インスタンスで使用できるようなコンポーネントのハッシュです。Vue インスタンスの継承や構成の仕方の詳細は、[コンポーネントシステム](/guide/components.html)を参照してください。
-
-### partials
-
-- **型:** `Object`
-
-Vue インスタンスで使用できるような partials のハッシュです。[v-partial](/api/directives.html#v-partial)も参照してください。
 
 ### transitions
 

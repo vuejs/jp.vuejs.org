@@ -88,6 +88,13 @@ profile.$appendTo('body')
 
 グローバルカスタムディレクティブに登録または取得します。さらに詳しくは[カスタムディレクティブ](/guide/custom-directive.html)を参照してください。
 
+### Vue.elementDirective( id, [definition] )
+
+- **id** `String`
+- **definition** `Function` or `Object` *任意*
+
+グローバルエレメントディレクティブに登録または取得します。さらに詳しくは[エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)を参照してください。
+
 ### Vue.filter( id, [definition] )
 
 - **id** `String`
@@ -108,44 +115,6 @@ profile.$appendTo('body')
 - **definition** `Object` *任意*
 
 グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScript 関数)](/guide/transitions.html#JavaScript_関数) を参照してください。
-
-### Vue.partial( id, [definition] )
-
-- **id** `String`
-- **definition** `String | Node` *任意*
-
-グローバルパーシャルに登録または取得します。定義にはテンプレート文字列の場合があり、querySelector は `#` で始まるか、DOM 要素 (`innerHTML` はテンプレート文字列として利用される) か、また Documentfragment です。
-
-**例**
-
-HTML
-
-``` html
-<div id="demo">
-  {{> avatar}}
-</div>
-```
-
-JavaScript
-
-``` js
-Vue.partial('avatar', '<img v-attr="src:avatarURL">')
-
-new Vue({
-  el: '#demo',
-  data: {
-    avatarURL: '/images/avatar.jpg'
-  }    
-})
-```
-
-結果は以下のようになります:
-
-``` html
-<div id="demo">
-  <img src="/images/avatar.jpg">
-</div>
-```
 
 ### Vue.nextTick( callback )
 
