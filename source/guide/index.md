@@ -109,12 +109,12 @@ div の textContent が更新されたときに、`message` の値は `capitaliz
 
 ### コンポーネント
 
-Vue.js では、全ての要素は単に Vue インスタンスです。コンポーネントは、アプリケーションインターフェースを表現するネストされたツリーのような階層構造を形作ります。これらは `Vue.extend` から返ってきたカスタムコンストラクタによって初期化されます。しかし、より宣言的なアプローチはそれらを `Vue.component(id, constructor)` で登録することです。 一度登録されれば、`v-component` ディレクティブをもった他の Vue インスタンスのテンプレートに宣言的にネストされます:
+Vue.js では、全ての要素は単に Vue インスタンスです。コンポーネントは、アプリケーションインターフェースを表現するネストされたツリーのような階層構造を形作ります。これらは `Vue.extend` から返ってきたカスタムコンストラクタによって初期化されます。しかし、より宣言的なアプローチはそれらを `Vue.component(id, constructor)` で登録することです。 一度登録されれば、カスタム要素のフォームで、他の Vue インスタンスのテンプレートに宣言的にネストされます:
 
 ```html
-<div v-component="my-component">
+<my-component>
   <!-- internals handled by my-component -->
-</div>
+</my-component>
 ```
 
 この簡単な機構は、宣言の再利用と [Web Components](http://www.w3.org/TR/components-intro/) と似た方法での Vue インスタンスの構成を可能にします。最新ブラウザや重い polyfills は必要ありません。アプリケーションをより小さなコンポーネントに分割することにより、結果は高度に分離され、メンテナンスしやすいコードベースになります。 詳細は[コンポーネントシステム](/guide/components.html)を参照してください。
