@@ -523,4 +523,32 @@ MyComponent
 </my-component>
 ```
 
+## 非同期コンポーネント
+
+<p class="tip">非同期コンポーネントは Vue 0.12.0 以降のみサポートされます。</p>
+
+大規模アプリケーションでは、実際に必要になったとき、サーバからコンポーネントをロードするだけの、アプリケーションを小さい塊に分割する必要があるかもしれません。それを簡単にするために、Vue.js はコンポーネント定義を非同期的に解決するファクトリ関数としてあなたのコンポーネントを定義することができます。例:
+
+``` js
+Vue.component('async-example', function (resolve) {
+  setTimeout(function () {
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+
+ファクトリ関数は単一の引数を受け取り、その引数はサーバからあなたのコンポーネント定義を取り戻すときに呼ばれるべきコールバック関数です。ここでは `setTimeout` はデモとしてシンプルです。どうやってコンポーネントを取得するかどうかは完全にあなた次第です。1つ推奨されるアプローチは [Webpack のコード分割機能](http://webpack.github.io/docs/code-splitting.html)で非同期コンポーネントを使うことです。
+
+``` js
+Vue.component('async-webpack-example', function (resolve) {
+  // この特別な require シンタックスは、
+  // 自動的に ajax リクエストでロードされているバンドルで、
+  // あなたのビルドコードを自動的に分割するために
+  // webpack で指示しています。
+  require(['./my-async-component'], resolve)
+})
+```
+
 次: [トランジション](/guide/transitions.html)
