@@ -20,38 +20,37 @@ Vue.js のトランジションシステムを使用すると、DOM から要素
 基本的な CSS トランジションは、次のようになります。
 
 ``` html
-<p class="msg" v-if="show" v-transition="expand">Hello!</p>
+<div class="msg" v-if="show" v-transition="expand">Hello!</div>
 ```
 
-また `.expand-enter` クラスと `.expand-leave` クラスの CSS ルールを定義する必要があります。
+また `.expand-transition`クラス、`.expand-enter` クラスそして `.expand-leave` クラスの CSS ルールを定義する必要があります。
 
 ``` css
-.msg {
+.expand-transition {
   transition: all .3s ease;
   height: 30px;
   padding: 10px;
   background-color: #eee;
   overflow: hidden;
 }
-.msg.expand-enter, .msg.expand-leave {
+.expand-enter, .expand-leave {
   height: 0;
   padding: 0 10px;
   opacity: 0;
 }
 ```
 
-<div id="demo"><p class="msg" v-if="show" v-transition="expand">Hello!</p><button v-on="click: show = !show">Toggle</button></div>
+<div id="demo"><div class="msg" v-if="show" v-transition="expand">Hello!</div><button v-on="click: show = !show">Toggle</button></div>
 
 <style>
-.msg {
-  transition: all .5s ease;
+.expand-transition {
+  transition: all .3s ease;
+  padding: 10px;
   height: 30px;
   background-color: #eee;
   overflow: hidden;
-  padding: 10px;
-  margin: 0 !important;
 }
-.msg.expand-enter, .msg.expand-leave {
+.expand-enter, .expand-leave {
   height: 0;
   padding: 0 10px;
   opacity: 0;
@@ -65,7 +64,7 @@ new Vue({
 })
 </script>
 
-トグルするクラス名の接頭辞は、`v-transition` ディレクティブの値に基づきます。`v-transition="fade"` とした場合、トグルするクラス名の接頭辞は、`.fade-enter` と`.fade-leave` になります。`v-transition` だけで値がない場合は、`.v-enter` と `.v-leave` がデフォルトになります。
+追加とトグルするクラス名の接頭辞は、`v-transition` ディレクティブの値に基づきます。`v-transition="fade"` と `.fade-transition` クラスと常に与えられた場合、トグルするクラス名の接頭辞は頃合いのよいときに自動的に、`.fade-enter` と`.fade-leave` になります。値がない場合は、`.v-transition`、`.v-enter`、そして `.v-leave` がデフォルトになります。
 
 `show` プロパティに変更があると、それに応じて Vue.js は `<p>` 要素を追加/削除し、以下に指定されているようにトランジションクラスを適用します。
 
@@ -89,17 +88,14 @@ CSS アニメーションは、CSS トランジションと同じやり方で適
 **例：** (CSS ルールの記述は諸略)
 
 ``` html
-<p class="animated" v-if="show" v-transition="bounce">Look at me!</p>
+<span v-if="show" v-transition="bounce">Look at me!</span>
 ```
 
 ``` css
-.animated {
-  display: inline-block;
-}
-.animated.bounce-enter {
+.bounce-enter {
   animation: bounce-in .5s;
 }
-.animated.bounce-leave {
+.bounce-leave {
   animation: bounce-out .5s;
 }
 @keyframes bounce-in {
@@ -126,17 +122,14 @@ CSS アニメーションは、CSS トランジションと同じやり方で適
 }
 ```
 
-<div id="anim" class="demo"><span class="animated" v-if="show" v-transition="bounce">Look at me!</span><br><button v-on="click: show = !show">Toggle</button></div>
+<div id="anim" class="demo"><span v-if="show" v-transition="bounce">Look at me!</span><br><button v-on="click: show = !show">Toggle</button></div>
 
 <style>
-  .animated {
-    display: inline-block;
-  }
-  .animated.bounce-enter {
+  .bounce-enter {
     -webkit-animation: bounce-in .5s;
     animation: bounce-in .5s;
   }
-  .animated.bounce-leave {
+  .bounce-leave {
     -webkit-animation: bounce-out .5s;
     animation: bounce-out .5s;
   }
