@@ -28,7 +28,7 @@ Vue.filter('wrap', function (value, begin, end) {
 
 ``` html
 <!-- 'hello' => 'before hello after' -->
-<span v-text="message | wrap before after"></span>
+<span v-text="message | wrap 'before' 'after'"></span>
 ```
 
 ## 双方向フィルタ
@@ -50,21 +50,20 @@ Vue.filter('check-email', {
 })
 ```
 
-## フィルタコンテキスト
+## 動的な引数
 
-フィルタが呼び出される時、`this` のコンテキストにはそれを呼び出している Vue インスタンスがセットされます。これによって、その所有者である Vue インスタンスの状態に応じて動的な結果を出力することが可能になります。
+もし、フィルタ引数が引用符 ('') で閉じていない場合は、現在の vm データコンテキストで動的に評価されます。それに加えて、フィルタ関数はいつも現在の vm は `this` コンテキストとして利用して起動されます。例:
 
-例:
-
-``` js
-Vue.filter('concat', function (value, key) {
-  // `this` はフィルタを呼び出す Vue インスタンスを指します
-  return value + this[key]
-})
-```
 ``` html
 <input v-model="userInput">
 <span>{{msg | concat userInput}}</span>
+```
+
+``` js
++Vue.filter('concat', function (value, input) {
+  // ここは `input` === `this.userInput`
+  return value + input
+})
 ```
 
 上記の簡単な例では、 expression をそのまま記述した時と同じ結果が得られます。しかし、複数のステートメントが必要な複雑な処理においては、Computed Property もしくは カスタムフィルタが必要になります。
