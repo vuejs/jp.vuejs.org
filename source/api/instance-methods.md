@@ -181,6 +181,12 @@ vmの `$el` を対象となる要素に付加します。引数は要素もし�
 
 DOMから、vm の `$el` を削除します。
 
+### vm.$nextTick( callback )
+
+- **callback** `Function`
+
+callback を延期し、DOM の更新サイクル後に実行されます。DOM の更新を待つ待ち受けるためにいくつかのデータを更新した直後に使用してください。これは、callback の `this` コンテキストは自動的にこのメソッドを呼び出すインスタンスにバインドされることを除いて、グローバルな `Vue.nextTick` と同じです。
+
 ## ライフサイクル
 
 ### vm.$mount( [element|selector] )

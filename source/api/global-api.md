@@ -81,6 +81,12 @@ profile.$appendTo('body')
 <p>Walter White aka Heisenberg</p>
 ```
 
+### Vue.nextTick( callback )
+
+- **callback** `Function`
+
+callback を延期し、DOM の更新サイクル後に実行されます。DOM の更新を待つ待ち受けるためにいくつかのデータを更新した直後に使用してください。さらに詳しくは[非同期更新の理解](/guide/directives.html#非同期更新の理解)を参照してください。
+
 ### Vue.directive( id, [definition] )
 
 - **id** `String`
@@ -115,12 +121,6 @@ profile.$appendTo('body')
 - **definition** `Object` *任意*
 
 グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScript 関数)](/guide/transitions.html#JavaScript_関数) を参照してください。
-
-### Vue.nextTick( callback )
-
-- **callback** `Function`
-
-Vue.js のバッチは view を更新し、非同期にそれらを全て実行します。それは可能なら `MutationObserver` 使い、可能でないなら `setTimeout(fn, 0)` にフォールバックします。このメソッドは view を更新した後に、callback を呼び出し、view が更新されるまで待ちたいときに役にたちます。
 
 ### Vue.use( plugin, [args...] )
 
