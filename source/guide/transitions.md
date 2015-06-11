@@ -55,6 +55,10 @@ Vue.transition('expand', {
   afterEnter: function (el) {
     el.textContent = 'afterEnter'
   },
+  enterCancelled: function (el) {
+    // 取り消しハンドル
+  },
+
   beforeLeave: function (el) {
     el.textContent = 'beforeLeave'
   },
@@ -63,6 +67,9 @@ Vue.transition('expand', {
   },
   afterLeave: function (el) {
     el.textContent = 'afterLeave'
+  },
+  leaveCancelled: function (el) {
+    // 取り消しハンドル
   }
 })
 ```
@@ -137,9 +144,11 @@ new Vue({
   6. トランジションが終わるまで待ちます。
   7. `afterEnter` フックを呼びます。
 
+加えて、もし enter トランジションが進行中のときに要素が削除される場合、`enterCancelled` フックは、変更を一掃する、または `enter` でタイマーが作成されるための機会を与えるために呼び出されます。逆である leaving トランジションも同じです。
+
 上記のようなフック関数の全ては、それらの `this` コンテキストは関連付けられた Vue インスタンスを設定して呼び出されます。もし要素が Vue インスタンスのルートノードの場合、そのインスタンスはそのコンテキストとして使用されます。それ以外の場合は、そのコンテキストはトランジションディレクティブのインスタンスの所有者になります。
 
-加えて、`enter` と `leave` は、必要に応じて、第2引数にコールバックを取ることができます。これを行うと、トランジションが終了すべきときに明示的に制御したいと示しているため、CSS の `transitionend`イベントを待ち受ける代わりに、Vue.js は最終的にトランジションを完了するためにコールバックを呼び出すことを期待します。例:
+最後に、`enter` と `leave` は、必要に応じて、第2引数にコールバックを取ることができます。これを行うと、トランジションが終了すべきときに明示的に制御したいと示しているため、CSS の `transitionend`イベントを待ち受ける代わりに、Vue.js は最終的にトランジションを完了するためにコールバックを呼び出すことを期待します。例:
 
 ``` js
 enter: function (el) {
@@ -147,7 +156,7 @@ enter: function (el) {
 }
 ```
 
-対
+に対して
 
 ``` js
 enter: function (el, done) {
@@ -280,19 +289,16 @@ Vue.transition('fade', {
     $(el)
       .css('opacity', 0)
       .animate({ opacity: 1 }, 1000, done)
-    // アニメーションがキャンセルされた場合、
-    // 必要に応じてクリーンアップするために
-    // "cancel" 関数を戻します
-    return function () {
-      $(el).stop()
-    }
+  },
+  enterCancelled: function (el) {
+    $(el).stop()
   },
   leave: function (el, done) {
     // enter と同様
     $(el).animate({ opacity: 0 }, 1000, done)
-    return function () {
-      $(el).stop()
-    }
+  },
+  leaveCancelled: function (el) {
+    $(el).stop()
   }
 })
 ```
@@ -302,5 +308,29 @@ Vue.transition('fade', {
 ``` html
 <p v-transition="fade"></p>
 ```
+
+## スタガリングトランジション
+
+`v-repeat` で `v-transition` を使用するとき、スタガリングトランジションを作成することが可能です。`stagger`、か `enter-stagger`、かまたは `leave-stagger` のいずれかの属性をトランジション要素に追加することによってこれをすることができます:
+
+``` html
+<div v-repeat="list" v-transition stagger="100"></div>
+```
+
+または、より細かい制御のために、`stagger`、`enterStagger` または `leaveStagger` フックを提供することができます:
+
+``` js
+Vue.transition('stagger', {
+  stagger: function (index) {
+    // 各トランジションされた項目に対して 50ms 遅延を増加させ、
+    // しかし最大遅延は 300ms に制限
+    return Math.min(300, index * 50)
+  }
+})
+```
+
+例:
+
+<iframe width="100%" height="200" style="margin-left:10px" src="http://jsfiddle.net/yyx990803/ujqrsu6w/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 次: [大規模アプリケーションの構築](/guide/application.html)
