@@ -91,9 +91,9 @@ DOM の更新前に値をさらに加工するために、フィルタを direct
 
 ## 非同期更新の理解
 
-You can think of directives as mappings of your data state to the DOM state. However, it is important to understand that in Vue.js, the directive update process is asynchronous by default. For example, when you set `vm.someData = 'new value'`, the DOM will not update immediately. Vue.js buffers all data changes happening in the same event loop, and execute any necessary DOM updates asynchronously in the next "tick". This prevents multiple changes to the same piece of data from triggering duplicate updates.
+ディレクティブは、データの状態を DOM の状態へのマッピングとしてみなすことができます。しかしながら、それは Vue.js では理解するために重要です。ディレクティブ更新の工程はデフォルトで非同期です。例として、`vm.someData = 'new value'` をセットしたとき、DOM はすぐには更新しません。Vue.js は同じイベントループで変更の生じた全てのデータをバッファし、そして、次の "tick" で任意に必要な DOM 更新を非同期に実行します。これは、重複更新のトリガーからデータの同じ部分への複数の変更を防ぎます。
 
-This behavior can be tricky when you want to do something that depends on the updated DOM state. Although Vue.js generally encourages developers to think in a "data-driven" way, sometimes you might just want to use that handy jQuery plugin you've always been using. In order to wait until Vue.js has finished updating the DOM after a data change, you can use `Vue.nextTick(callback)` immediately after the data is changed - when the callback is called, the DOM would have been updated. For example:
+この振舞いは、更新した DOM の状態に依存する何かをしたいとき、注意が必要です。Vue.js は一般的に"データ駆動"的な方法で考えることを開発者に奨励していますが、時々、いつも使用してきた便利な jQuery プラグインをまさに使用したいときがあるかもしれません。Vue.js でデータの変更後に、DOM の更新が完了するまでに待つためには、データが変更された直後に `Vue.nexttick(callback)` を使用することができます。 -  コールバックが呼ばれたとき、DOM は更新されていたであろう。例:
 
 ``` html
 <div id="example">{{msg}}</div>
