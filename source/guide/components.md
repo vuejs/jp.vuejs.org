@@ -530,7 +530,7 @@ MyComponent
 大規模アプリケーションでは、実際に必要になったとき、サーバからコンポーネントをロードするだけの、アプリケーションを小さい塊に分割する必要があるかもしれません。それを簡単にするために、Vue.js はコンポーネント定義を非同期的に解決するファクトリ関数としてあなたのコンポーネントを定義することができます。例:
 
 ``` js
-Vue.component('async-example', function (resolve) {
+Vue.component('async-example', function (resolve, reject) {
   setTimeout(function () {
     resolve({
       template: '<div>I am async!</div>'
@@ -539,7 +539,7 @@ Vue.component('async-example', function (resolve) {
 })
 ```
 
-ファクトリ関数は単一の引数を受け取り、その引数はサーバからあなたのコンポーネント定義を取り戻すときに呼ばれるべきコールバック関数です。ここでは `setTimeout` はデモとしてシンプルです。どうやってコンポーネントを取得するかどうかは完全にあなた次第です。1つ推奨されるアプローチは [Webpack のコード分割機能](http://webpack.github.io/docs/code-splitting.html)で非同期コンポーネントを使うことです。
+ファクトリ関数は `resolve` コールバックを受け取り、その引数はサーバからあなたのコンポーネント定義を取り戻すときに呼ばれるべきです。ロードが失敗したことを示すために、`reject(reason)` も呼び出すことができます。ここでは `setTimeout` はデモとしてシンプルです。どうやってコンポーネントを取得するかどうかは完全にあなた次第です。1つ推奨されるアプローチは [Webpack のコード分割機能](http://webpack.github.io/docs/code-splitting.html)で非同期コンポーネントを使うことです。
 
 ``` js
 Vue.component('async-webpack-example', function (resolve) {
