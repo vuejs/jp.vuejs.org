@@ -68,6 +68,7 @@ Vue.use('my-plugin', {
 
 ## 他の拡張ツール
 
+- [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグイン。
 - [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.js アプリケーションのデバッグ用 Chrome devtools extension です。
 - [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加できます。
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録することができます。
