@@ -85,7 +85,7 @@ new Vue({
 
 ```
 <!-- 上記と同じ -->
-<input v-on="keyup:submit | key enter">
+<input v-on="keyup:submit | key 'enter'">
 ```
 
 詳しくは、API リファレンス内の、[key の全リスト](/api/filters.html#key) を参照してください。
