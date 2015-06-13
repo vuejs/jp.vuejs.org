@@ -144,6 +144,35 @@ new Vue({
 <child msg="{{a + b}}"></child>
 ```
 
+### Props としてのコールバックの伝達
+
+メソッドや、子コンポーネントへのコールバックなどのステートメントを渡すのも可能です。これは宣言、切り離された親-子間のコミュニケーションを可能にします:
+
+``` js
+Vue.component('parent', {
+  // ...
+  methods: {
+    onChildLoaded: function (msg) {
+      console.log(msg)
+    }
+  }
+})
+
+Vue.component('child', {
+  // ...
+  props: ['on-load'],
+  ready: function () {
+    // props with hyphens are camelized
+    this.onLoad('message from child!')
+  }
+})
+```
+
+``` html
+<!-- in parent's template -->
+<child on-load="{{onChildLoaded}}"></child>
+```
+
 ### 親スコープの継承
 
 もし必要な場合は `inherit: true` オプションを使用して子コンポーネントに対して、親の全てのプロパティをプロトタイプ継承させることができます:
