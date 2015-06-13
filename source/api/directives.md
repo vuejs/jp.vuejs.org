@@ -126,7 +126,7 @@ Falsy values except 0 will remove the attribute.
 - このディレクティブは `<input>` 、`<select>` もしくは `<textarea>` 要素においてのみ使用できます。
 - ディレクティブのパラメータ: [`lazy`](/guide/forms.html#遅延更新), [`number`](/guide/forms.html#値を数値としてキャストする), [`options`](/guide/forms.html#動的な選択オプション), [`debounce`](/guide/forms.html#入力デバウンス)
 
-form の input 要素に双方向バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
+form の input 要素に Two way (双方向)バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
 より詳しい例は、[フォームのハンドリング](/guide/forms.html)を参照してください。
 
 ### v-if
@@ -198,7 +198,7 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 Vue.js に対してこの要素への変換を適用することを知らせます。変換クラスは、ある変換のきっかけとなるディレクティブが要素を修正したときか、Vue インスタンスの DOM 生成メソッドが呼ばれたときに適用されます。
 
-より詳しくは、[トランジション](/guide/transitions.html)を参照してください。
+より詳しくは、[トランジションシステム](/guide/transitions.html)を参照してください。
 
 ### v-ref
 

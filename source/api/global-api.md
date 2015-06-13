@@ -120,7 +120,7 @@ callback を延期し、DOM の更新サイクル後に実行されます。DOM 
 - **id** `String`
 - **definition** `Object` *任意*
 
-グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScript 関数)](/guide/transitions.html#JavaScript_関数) を参照してください。
+グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジションシステム(JavaScript だけによるトランジション)](/guide/transitions.html#JavaScript_だけによるトランジション) を参照してください。
 
 ### Vue.use( plugin, [args...] )
 

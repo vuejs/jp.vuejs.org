@@ -166,7 +166,7 @@ vm.$log('item') // logs vm.item
 
 ## DOM
 
-> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js のトランジションのきっかけになることを除いては、jQuery と同じような動きをします。トランジションに関して、より詳しくは[トランジション](/guide/transitions.html)を参照してください。
+> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js のトランジションのきっかけになることを除いては、jQuery と同じような動きをします。トランジションに関して、より詳しくは[トランジションシステム](/guide/transitions.html)を参照してください。
 
 ### vm.$appendTo( element|selector, [callback] )
 
