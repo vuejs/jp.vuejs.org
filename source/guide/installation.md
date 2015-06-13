@@ -44,14 +44,6 @@ var Vue = require('yyx990803/vue')
 var Vue = require('yyx990803/vue@dev')
 ```
 
-## Component
-
-``` bash
-$ component install yyx990803/vue
-# 最新版向け:
-$ component install yyx990803/vue@dev
-```
-
 ## AMD モジュールローダ
 ダウンロードされたスタンドアロン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、 AMD モジュールとして直接利用することができます。
 
