@@ -52,7 +52,7 @@ Vue.config.delimiters = ['(%', '%)']
 
 - **options** `Object`
 
-Vue コンストラクタベースの"サブクラス"を作成します。[オプション](/api/options.html)の全てはここで使うことができます。ここでの注意すべき特別なケースは、`el` と `data` で、このケースでは関数にしなければなりません。
+Vue コンストラクタベースの"サブクラス"を作成します。[コンポーネントオプション](/api/options.html)の全てはここで使うことができます。ここでの注意すべき特別なケースは、`el` と `data` で、このケースでは関数にしなければなりません。
 
 内部的に、`Vue.extend()` は component をインスタンス化する前に、全ての component オプション上で呼び出されます。さらに詳しくは component に関しては、[コンポーネントシステム](/guide/components.html) を参照してください。
 
@@ -81,12 +81,25 @@ profile.$appendTo('body')
 <p>Walter White aka Heisenberg</p>
 ```
 
+### Vue.nextTick( callback )
+
+- **callback** `Function`
+
+callback を延期し、DOM の更新サイクル後に実行されます。DOM の更新を待つ待ち受けるためにいくつかのデータを更新した直後に使用してください。さらに詳しくは[非同期更新の理解](/guide/directives.html#非同期更新の理解)を参照してください。
+
 ### Vue.directive( id, [definition] )
 
 - **id** `String`
 - **definition** `Function` または `Object` *任意*
 
 グローバルカスタムディレクティブに登録または取得します。さらに詳しくは[カスタムディレクティブ](/guide/custom-directive.html)を参照してください。
+
+### Vue.elementDirective( id, [definition] )
+
+- **id** `String`
+- **definition** `Function` or `Object` *任意*
+
+グローバルエレメントディレクティブに登録または取得します。さらに詳しくは[エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)を参照してください。
 
 ### Vue.filter( id, [definition] )
 
@@ -107,51 +120,7 @@ profile.$appendTo('body')
 - **id** `String`
 - **definition** `Object` *任意*
 
-グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジション(JavaScript 関数)](/guide/transitions.html#JavaScript_関数) を参照してください。
-
-### Vue.partial( id, [definition] )
-
-- **id** `String`
-- **definition** `String | Node` *任意*
-
-グローバルパーシャルに登録または取得します。定義にはテンプレート文字列の場合があり、querySelector は `#` で始まるか、DOM 要素 (`innerHTML` はテンプレート文字列として利用される) か、また Documentfragment です。
-
-**例**
-
-HTML
-
-``` html
-<div id="demo">
-  {{> avatar}}
-</div>
-```
-
-JavaScript
-
-``` js
-Vue.partial('avatar', '<img v-attr="src:avatarURL">')
-
-new Vue({
-  el: '#demo',
-  data: {
-    avatarURL: '/images/avatar.jpg'
-  }    
-})
-```
-
-結果は以下のようになります:
-
-``` html
-<div id="demo">
-  <img src="/images/avatar.jpg">
-</div>
-```
-
-### Vue.nextTick( callback )
-
-- **callback** `Function`
-
-Vue.js のバッチは view を更新し、非同期にそれらを全て実行します。それは可能なら `MutationObserver` 使い、可能でないなら `setTimeout(fn, 0)` にフォールバックします。このメソッドは view を更新した後に、callback を呼び出し、view が更新されるまで待ちたいときに役にたちます。
+グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジションシステム(JavaScript だけによるトランジション)](/guide/transitions.html#JavaScript_だけによるトランジション) を参照してください。
 
 ### Vue.use( plugin, [args...] )
 

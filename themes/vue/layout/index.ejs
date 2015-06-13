@@ -1,34 +1,26 @@
-<script>
-    // G+ button
-    ;(function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
-</script>
-
 <div id="hero">
-    <a id="cn-link" href="http://cn.vuejs.org">中文版</a>
     <div class="inner">
         <ul id="nav">
             <li><a href="/guide/" class="nav-link">ガイド</a></li>
             <li><a href="/api/" class="nav-link">API リファレンス</a></li>
             <li><a href="/examples/" class="nav-link">例</a></li>
             <li><a href="/blog/" class="nav-link">ブログ(英語)</a></li>
+            <li><a href="http://vuejs.org" class="nav-link">英語</a></li>
+            <li><a href="http://cn.vuejs.org" class="nav-link">中文</a></li>
         </ul>
         <img id="logo" src="/images/logo.png">
         <h1>Vue.js</h1>
         <p class="sub">よくわかる MVVM</p>
-        <p class="desc">Vue.js はインタラクティブな Web インターフェースを構築するためのライブラリです。<br>シンプルで柔軟性の高い API でデータリアクティブなコンポーネントを提供します。</p>
+        <p class="desc">Vue.js はモダンな Web インターフェースを構築するためのライブラリです。<br>シンプルで柔軟性の高い API でデータリアクティブなコンポーネントを提供します。</p>
         <p class="buttons">
-            <a href="/guide/installation.html" class="button">Vue.js v<%- theme.vue_version %> を入手</a>
+            <a href="/guide/installation.html" class="button">v<%- theme.vue_version %> をインストール</a>
             <a href="https://github.com/yyx990803/vue" target="_blank" class="button">GitHub のソース</a>
         </p>
         <ul id="social">
-            <li><a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="http://vuejs.org" data-text="Vue.js - MVVM made simple" data-via="vuejs">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+            <li><a href="https://twitter.com/vuejs" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @vuejs</a></li>
             <li><iframe src="http://ghbtns.com/github-btn.html?user=yyx990803&repo=vue&type=watch&count=true"
         allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></li>
-            <li><g:plusone href="http://vuejs.org" size="medium"></g:plusone></li>
+            <li class="last"><a href="https://gitter.im/yyx990803/vue" target="_blank"><img src="https://badges.gitter.im/Join%20Chat.svg"></a></li>
         </ul>
     </div>
     <div class="down"><img src="/images/down.png"></div>
@@ -90,23 +82,23 @@
             <p>いくつか HTML を書いて、いくつか JSON を持ってきて、Vue インスタンスを作って、それでおしまいです。</p>
         </div>
         <div class="feat">
-            <h2><span class="icon fast"></span>速い</h2>
-            <p>精密で効率のよい非同期バッチで DOM を更新します。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon composable"></span>構成可能</h2>
-            <p>分離された、再利用可能なコンポーネントであなたのアプリケーションを構成します。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon compact"></span>コンパクト</h2>
-            <p>min+gzip で19キロバイト〜、依存はありません。</p>
-        </div>
-        <div class="feat">
             <h2><span class="icon powerful"></span>パワフル</h2>
             <p>式 (Expressions) と透過依存性トラッキングによる computed properties 。</p>
         </div>
         <div class="feat">
-            <h2><span class="icon module"></span>モジュールフレンドリー</h2>
+            <h2><span class="icon composable"></span>コンポーネント</h2>
+            <p>分離された、再利用可能なコンポーネントであなたのアプリケーションを構成します。</p>
+        </div>
+        <div class="feat">
+            <h2><span class="icon compact"></span>コンパクト</h2>
+            <p>min+gzip で20キロバイト〜、依存はありません。</p>
+        </div>
+        <div class="feat">
+            <h2><span class="icon fast"></span>速い</h2>
+            <p>精密で効率のよい非同期バッチで DOM を更新します。</p>
+        </div>
+        <div class="feat">
+            <h2><span class="icon module"></span>パッケージ</h2>
             <p>NPM 、Bower または、Duo 経由でインストールします。あなたのお気に入りのエコシステムを利用できます！</p>
         </div>
     </div>
@@ -125,12 +117,15 @@
     <a class="start" href="/guide/index.html">はじめる</a>
     <p>Released under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a></p>
     <p>日本語翻訳:
-        <a href="https://github.com/hashrock" target="_blank">hashrock</a>
-        <a href="https://github.com/kazupon" target="_blank">kazupon</a>
-        <a href="https://github.com/kojimakazuto" target="_blank">kojimakazuto</a>
-        <a href="https://github.com/positiveflat" target="_blank">positiveflat</a>
-        <a href="https://github.com/tejitak" target="_blank">tejitak</a>
-        <a href="https://github.com/yasunobuigarashi" target="_blank">yasunobuigarashi</a>
+        <a href="https://github.com/hashrock" target="_blank">@hashrock</a>
+        <a href="https://github.com/kazupon" target="_blank">@kazupon</a>
+        <a href="https://github.com/kojimakazuto" target="_blank">@kojimakazuto</a>
+        <a href="https://github.com/positiveflat" target="_blank">@positiveflat</a>
+        <a href="https://github.com/tejitak" target="_blank">@tejitak</a>
+        <a href="https://github.com/yasunobuigarashi" target="_blank">@yasunobuigarashi</a>
     </p>
     <p>Copyright (c) <%- date(Date.now(), 'YYYY') %> <a href="http://evanyou.me" target="_blank">Evan You</a></p>
 </div>
+
+<!-- Twitter follow button script -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

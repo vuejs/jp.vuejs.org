@@ -7,16 +7,13 @@ Vue.js は、他のアーキテクチャと干渉せず、可能な限り柔軟�
 
 ## モジュール化
 
-スタンドアロンで動作する Vue.js コードは、グローバルで使用できますが煩雑になりやすいので、モジュールのビルドツールを利用して、コードをより良く整理していくことが望ましいです。実践への導入としては、CommonJS モジュールにコード（Node.js、および Vue.js のソースコードで使用されているフォーマット）を記述して、[Browserify](http://browserify.org/) や [Webpack](http://webpack.github.io/) でバンドルする方法をおすすめします。
+スタンドアロンで動作する Vue.js コードは、グローバルで使用できますが煩雑になりやすいので、モジュールのビルドツールを利用して、コードをより良く整理していくことが望ましいです。実践への導入としては、CommonJS モジュールにコード（Node.js、および Vue.js のソースコードで使用されているフォーマット）を記述して、[Webpack](http://webpack.github.io/) や [Browserify](http://browserify.org/) でバンドルする方法をおすすめします。
 
-下記は、GitHub 上にあるビルドツールの設定例です:
-
-- [Vue + Browserify](https://github.com/vuejs/vue-browserify-example)
-- [Vue + Webpack](https://github.com/vuejs/vue-webpack-example)
+Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用して、将来サポートされる ES6/7 シンタックスでコードを書くことができます。
 
 ## 単一ファイルコンポーネント
 
-Vue.js を利用した典型的なプロジェクトでは、たくさんの個別のコンポーネントにコードを分割して、コンポーネントごとに HTML/CSS/JavaScript(Vue.js) を配置しておくと便利です。前述のビルドツールを利用するメリットは、バンドルする前にソースコードを変換するためのメカニズムが提供されていることで、次のようなコンポーネントをわずかな前処理だけで作成できます：
+Vue.js を利用した典型的なプロジェクトでは、たくさんの個別のコンポーネントにコードを分割して、コンポーネントごとに HTML/CSS/JavaScript(Vue.js) を配置しておくと便利です。上述したように、Webpack または Browserify を使用するとき、次のようなコンポーネントを適切なソース変換できます:
 
 <img src="/images/vueify.png">
 
@@ -24,17 +21,24 @@ Vue.js を利用した典型的なプロジェクトでは、たくさんの個�
 
 <img src="/images/vueify_with_pre.png">
 
-このファイルは、HTML/CSS/JavaScript(Vue.js) のソースコードを Browserify で管理できるよう変換してくれる [Vueify](https://github.com/vuejs/vueify) や、Webpack 用に変換してくれる [Vue-loader](https://github.com/vuejs/vue-loader) を使用することで、作成することができます。
+これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。もしプリプロセッサを使用している場合、Webpack ローダ API はより良いファイル依存関係追跡とキャッシングが可能であるため、Webpack をセットアップして使用することをお勧めします。
+
+GitHub のビルドセットアップの例を探すことができます。
+
+- [Webpack + vue-loader](https://github.com/vuejs/vue-loader-example)
+- [Browserify + vueify](https://github.com/vuejs/vueify-example)
 
 ## ルーティング
 
-ハッシュチェンジへのイベントリスニングと、動的な `v-component` を利用することで基本的なルーティングのロジックを実装することができます。
+<p class="tip">オフィシャルな `vue-router` モジュールは開発がアクティブでまもなくリリースされます。</p>
+
+ハッシュチェンジへのイベントリスニングと、動的なコンポーネントを利用することで基本的なルーティングのロジックを実装することができます。
 
 **例：:**
 
 ``` html
 <div id="app">
-  <div v-component="{{currentView}}"></div>
+  <component="{{currentView}}"></component>
 </div>
 ```
 
@@ -55,7 +59,7 @@ app.currentView = 'page1'
 
 ## サーバーとの通信
 
-すべての Vue インスタンスは、`JSON.stringify()` で直接シリアライズされる生の `$data` を持つことができます。[SuperAgent](https://github.com/visionmedia/superagent) など、好きな Ajax コンポーネントを使用してください。バックエンドを持たない Firebase などのサービスとの連携にも適しています。
+すべての Vue インスタンスは、`JSON.stringify()` で直接シリアライズされる生の `$data` を持つことができます。Vue.js コミュニティは [vue-resource](https://github.com/vuejs/vue-resource) プラグインを貢献していて、RESTFul API で動作するため簡単な方法を提供します。例えば jQuery の `$.ajax` または [SuperAgent](https://github.com/visionmedia/superagent) などの好きな Ajax ライブラリも使用できます。Vue.js はバックエンドを持たない Firebase や Parse などのサービスとの連携にも適しています。
 
 ## 単体テスト
 

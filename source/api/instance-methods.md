@@ -7,33 +7,47 @@ order: 4
 
 Vue インスタンスでは、データの変更を監視することができます。すべての watch コールバックは非同期に発火することに注意してください。さらに、値の変更はイベントループの中でバッチ処理されます。これは、ひとつのイベントループの中で値が何度も変更された時に、コールバックは最新の値に対して一度しか発火しないことを意味します。
 
-### vm.$watch( expression, callback, [deep, immediate] )
+### vm.$watch( expOrFn, callback, [options] )
 
-- **expression** `String`
+- **expOrFn** `String|Function`
 - **callback( newValue, oldValue )** `Function`
-- **deep** `Boolean` *任意*
-- **immediate** `Boolean` *任意*
+- **options** `Object` *任意*
+  - **deep** `Boolean` *任意*
+  - **immediate** `Boolean` *任意*
 
-Vue インスタンス上でのひとつの式の変更を監視します。引数 expression には、単一の keypath か、実際の式を入れることができます:
+Vue インスタンス上でのひとつの expression または computed function の変更を監視します。引数 expression には、単一の keypath か、実際の式を入れることができます:
 
 ``` js
 vm.$watch('a + b', function (newVal, oldVal) {
   // 何かする
 })
+// または
+vm.$watch(
+  function () {
+    return this.a + this.b
+  },
+  function (newVal, oldVal) {
+    // 何かする
+  }
+)
 ```
 
-オブジェクトの中のネストされた値の変更を検出するには、3つめの引数 `deep` に `true` を渡す必要があります。Array の値変更に対しては、こうする必要はないことに注意してください。
+オブジェクトの中のネストされた値の変更を検出するには、options 引数に `deep: true` を渡す必要があります。Array の値変更に対しては、こうする必要はないことに注意してください。
 
 ``` js
-vm.$watch('someObject', callback, true)
+vm.$watch('someObject', callback, {
+  deep: true
+})
 vm.someObject.nestedValue = 123
 // コールバックが発火する
 ```
 
-4つめの引数 `immediate` に `true` を渡すと、その時の式の値で、コールバックがただちに実行されます:
+options 引数に `immediate: true` を渡すと、その時の式の値で、コールバックが直ちに実行されます:
 
 ``` js
-vm.$watch('a', callback, false, true)
+vm.$watch('a', callback, false, {
+  immediate: true
+})
 // その時の `a` の値でコールバックがただちに発火します
 ```
 
@@ -152,7 +166,7 @@ vm.$log('item') // logs vm.item
 
 ## DOM
 
-> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js のトランジションのきっかけになることを除いては、jQuery と同じような動きをします。トランジションに関して、より詳しくは[トランジション](/guide/transitions.html)を参照してください。
+> すべての vm の DOM 生成メソッドは、vm の `$el` で何かしら宣言されている場合に Vue.js のトランジションのきっかけになることを除いては、jQuery と同じような動きをします。トランジションに関して、より詳しくは[トランジションシステム](/guide/transitions.html)を参照してください。
 
 ### vm.$appendTo( element|selector, [callback] )
 
@@ -180,6 +194,12 @@ vmの `$el` を対象となる要素に付加します。引数は要素もし�
 - **callback** `Function` *任意*
 
 DOMから、vm の `$el` を削除します。
+
+### vm.$nextTick( callback )
+
+- **callback** `Function`
+
+callback を延期し、DOM の更新サイクル後に実行されます。DOM の更新を待つ待ち受けるためにいくつかのデータを更新した直後に使用してください。これは、callback の `this` コンテキストは自動的にこのメソッドを呼び出すインスタンスにバインドされることを除いて、グローバルな `Vue.nextTick` と同じです。
 
 ## ライフサイクル
 

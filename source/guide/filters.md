@@ -33,15 +33,17 @@ mustache スタイルのバインディング内でも利用することがで�
 
 ## 引数
 
-いくつかのフィルタはオプションの引数を取ることができます。単純に、スペース区切りの引数を追加してください。
+いくつかのフィルタはオプションの引数を取ることができます。引数はスペースで区切られています。
 
 ``` html
-<span>{{order | pluralize st nd rd th}}</span>
+<span>{{order | pluralize 'st' 'nd' 'rd' 'th'}}</span>
 ```
 
 ``` html
-<input v-on="keyup: submitForm | key enter">
+<input v-on="keyup: submitForm | key 'enter'">
 ```
+
+プレーンな文字列引数は、引用符 ('') で囲む必要があります。引用符ではない引数は、現在のデータスコープに対して動的に評価されます。カスタムフィルタのより詳細については後で説明します。
 
 上記の例の明確な利用方法は、[API リファレンス](/api/filters.html)を参照してください。
 

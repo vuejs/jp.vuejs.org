@@ -41,6 +41,8 @@ order: 6
 "></span>
 ```
 
+別な方法としては、直接ディレクティブをオブジェクトにバインドできます。オブジェクトのキーは、クラスのリストは対応する値に基づいてトグルします。
+
 ### v-attr
 
 - このディレクティブは、ひとつの属性が必要となります。
@@ -52,6 +54,11 @@ order: 6
 ``` html
 <canvas v-attr="width:w, height:h"></canvas>
 ```
+
+0 を除く偽となりうる値は、属性を削除します。
+Falsy values except 0 will remove the attribute.
+
+別な方法としては、直接ディレクティブをオブジェクトにバインドできます。オブジェクトのキーは、属性のリストは対応する値に基づいてトグルします。
 
 内部的には、&#123;&#123; Mustache &#125;&#125; 表現の中の引数を computed `v-attr` ディレクティブにコンパイルします。
 
@@ -119,7 +126,7 @@ order: 6
 - このディレクティブは `<input>` 、`<select>` もしくは `<textarea>` 要素においてのみ使用できます。
 - ディレクティブのパラメータ: [`lazy`](/guide/forms.html#遅延更新), [`number`](/guide/forms.html#値を数値としてキャストする), [`options`](/guide/forms.html#動的な選択オプション), [`debounce`](/guide/forms.html#入力デバウンス)
 
-form の input 要素に双方向バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
+form の input 要素に Two way (双方向)バインディングを作成します。データはデフォルトでは `input` イベント毎に同期されます。
 より詳しい例は、[フォームのハンドリング](/guide/forms.html)を参照してください。
 
 ### v-if
@@ -153,7 +160,7 @@ form の input 要素に双方向バインディングを作成します。デ�
 - このディレクティブの値は Array 型、Object 型、もしくは Number 型である必要があります。
 - このディレクティブは表示切り替えのトリガとなり得ます。
 - このディレクティブは、オプション属性を受け入れます。
-- ディレクティブパラメータ: [`track-by`](/guide/list.html#track-by_の利用)
+- ディレクティブパラメータ: [`track-by`](/guide/list.html#track-by_の利用)、[`stagger`](/guide/transitions.html#スタガリングトランジション)、[`enter-stagger`](/guide/transitions.html#スタガリングトランジション)、[`leave-stagger`](/guide/transitions.html#スタガリングトランジション)
 
 Array もしくは Object のバインディングのすべてのアイテムの子 ViewModel を作ります。もし値が絶対値であれば、その分の ViewModel が作成されます。それらの子 ViewModel は変更メソッド、例えば `push()` などが Array や Object 上で呼ばれたときや、その数が増減したときに自動的に生成、削除されます。
 
@@ -181,86 +188,9 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 より詳しい説明は、[リスト表示](/guide/list.html)を参照してください。
 
-### v-with
-
-- このディレクティブは、`v-component` とのみ使用されます。
-- このディレクティブは、keypath のみを受けつけ、expression はありません。
-
-子 ViewModel が親からデータを受け取ることができるようにします。`data` オプションとして使用されるオブジェクトの中で渡すことも可能であるし、個々の親のプロパティを異なるキーで子供に結びつけることも可能です。このディレクティブは、`v-component` とともに使用されなければなりません。
-
-オブジェクトの継承の例:
-
-``` js
-// 親のデータが以下のようだとします
-{
-  user: {
-    name: 'Foo Bar',
-    email: 'foo@bar.com'
-  }
-}
-```
-
-``` html
-<my-component v-with="user">
-  <!-- `user`がなくてもプロパティにアクセスできます -->
-  {{name}} {{email}}
-</my-component>
-```
-
-個別のプロパティを継承している例（同じデータを使用）:
-
-``` 
-<my-component v-with="myName: user.name, myEmail: user.email">
-  <!-- 新しいキーで、プロパティにアクセスできる -->
-  {{myName}} {{myEmail}}
-</my-component>
-```
-
-### v-events
-
-- このディレクティブは、`v-component` とのみ使用されます。
-- このディレクティブは メソッド名か、または単独の expression statement を受けつけます。
-
-親インスタンスが子インスタンス上でのイベントを監視できるようにします。`v-on` と異なる点は、`v-events` はDOMイベントというよりはむしろ、`vm.$emit()` 経由で作られたVueのコンポーネントシステムのイベントを監視するという点です。このディレクティブは、親のコンポーネントにイベントリスナをハードコードすることなく、親子がより分離された通信をすることを可能にします。`v-component` と共に使用する必要があることに注意してください。例えば、子コンポーネントの root 要素では以下のようになります。
-
-**例:**
-
-``` html
-<!-- 親テンプレートの中身 -->
-<div v-component="child" v-events="change: onChildChange"></div>
-```
-
-子要素が `this.$emit('change', ...)` を呼ぶとき、親の `onChildChange` が `$emit()` からきたオプションの引数が渡された状態で呼び出されます。
-
 ## リテラルディレクティブ
 
 > リテラルディレクティブはその要素の値を素の文字列として取り扱い、何ともバインドしようとしません。このディレクティブが行うのは、文字列の値を `bind()` 関数に渡して実行することだけです。リテラルディレクティブはその値の中で Mustache 表現を使用できますが、それらの表現は最初のコンパイルの際に一度だけ評価され、データの変更に対して反応しません。
-
-### v-component
-
-- ディレクティブパラメータ: [`keep-alive`](/guide/components.html#動的コンポーネント), [`wait-for`](/guide/components.html#wait-for), [`transition-mode`](/guide/components.html#transition-mode), [`inline-template`](/guide/components.html#インラインテンプレート)
-- mustache でリアクティブにすることができます。
-
-割り当てられたコンポーネントコンストラクタをもつ子 ViewModel として、この要素をコンパイルします。これは、親からデータを継承するために、`v-with` と共に使用することができます。より詳細な説明は、[コンポーネントシステム](/guide/components.html)を参照してください。
-
-### v-partial
-
-- mustache でリアクティブにすることができます。
-
-登録された部分要素で、要素の innerHTML を置き換えます。部分要素は、`Vue.partial()` で登録するか、`partials` オプションの中に渡すことができます。
-
-`v-partial` の中で Mustache タグを使用して反応的にします:
-
-``` html
-<!-- 内容は、vm.partialIdに基づいて変わります -->
-<div v-partial="{{partialId}}"></div>
-```
-
-この文法も使用できます（反応性はサポートされません）:
-
-``` html
-<div>{{> my-partial}}</div> 
-```
 
 ### v-transition
 
@@ -268,13 +198,15 @@ Array もしくは Object のバインディングのすべてのアイテムの
 
 Vue.js に対してこの要素への変換を適用することを知らせます。変換クラスは、ある変換のきっかけとなるディレクティブが要素を修正したときか、Vue インスタンスの DOM 生成メソッドが呼ばれたときに適用されます。
 
-より詳しくは、[トランジション](/guide/transitions.html)を参照してください。
+より詳しくは、[トランジションシステム](/guide/transitions.html)を参照してください。
 
 ### v-ref
 
-簡単にアクセス可能なように、親に子コンポーネントへの参照を登録します。`v-component` や `v-repeat` を組み合わせて動きます。そのコンポーネントのインスタンスは、その親の `$` オブジェクトへアクセス可能です。例は、[コンポーネントシステム(子の参照)](/guide/components.html#子の参照)を参照してください。
+簡単にアクセス可能なように、親に子コンポーネントへの参照を登録します。コンポーネントや `v-repeat` で動きます。そのコンポーネントのインスタンスは、その親の `$` オブジェクトへアクセス可能です。例は、[コンポーネントシステム(子の参照)](/guide/components.html#子の参照)を参照してください。
 
 `v-repeat` と共に使用するとき、値はそれにバウンドしている配列に対応するすべての子 Vue インスタンスを含む配列になります。
+
+0.12 以降: もし `v-repeat` のソースデータがオブジェクトの場合、`v-ref` はそのオブジェクトの各キーとインスタンスで一致するオブジェクトを返します。
 
 ### v-el
 

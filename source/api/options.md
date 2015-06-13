@@ -1,4 +1,4 @@
-title: オプション
+title: コンポーネントオプション
 type: api
 order: 2
 ---
@@ -103,7 +103,7 @@ vm.a       // -> 2
 vm.aDouble // -> 4
 ```
 
-### paramAttributes
+### props
 
 - **型:** `Array`
 
@@ -113,7 +113,7 @@ vm.aDouble // -> 4
 
 ``` js
 Vue.component('param-demo', {
-  paramAttributes: ['size', 'message'],
+  props: ['size', 'message'],
   compiled: function () {
     console.log(this.size)    // -> 100
     console.log(this.message) // -> 'hello!'
@@ -125,15 +125,14 @@ Vue.component('param-demo', {
 <param-demo size="100" message="hello!"></param-demo>
 ```
 
-引数属性は、補間タグを含むことができます。補間は親に対して評価され、内部実装的には [`v-with`](/api/directives.html#v-with) としてコンパイルされます。これが意味するところは、補間表現が変化したとき、コンポーネントの対応するプロパティも更新されるということです:
+データのコンポーネントへの渡し方の詳細については以下を参照してください:
 
-``` html
-<param-demo message="{{parentMessage}}"></param-demo>
-```
+- [Props のバインディングタイプ](/guide/components.html#Props_のバインディングタイプ)
+- [Props としてのコールバックの伝達](/guide/components.html#Props_としてのコールバックの伝達)
 
 #### ハイフンでつながれた引数についての注意
 
-HTML の引数名は、小文字や大文字の違いを無視するので、通常はキャメルケースの代わりにハイフンでつながれた引数を使用します。ハイフンを含んだ属性をもつ `paramAttributes` を使用する特殊な場合もあります:
+HTML の引数名は、小文字や大文字の違いを無視するので、通常はキャメルケースの代わりにハイフンでつながれた引数を使用します。ハイフンを含んだ属性をもつ `props` を使用する特殊な場合もあります:
 
 1. もし引数が data 引数出会った場合、`data-` 接頭辞は自動的に削除されます。
 
@@ -237,6 +236,12 @@ Vue インスタンスが破棄された後に呼ばれます。このフック�
 
 Vue インスタンスで使用できるような、ディレクティブのハッシュです。カスタムディレクティブの書き方について、より詳しくは[カスタムディレクティブ](/guide/custom-directive.html)を参照してください。
 
+### elementDirectives
+
+- **型:** `Object`
+
+Vue インスタンス使用できるような、エレメントディレクティブのハッシュです。エレメントディレクティブの書き方は、[エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)を参照してください。
+
 ### filters
 
 - **型:** `Object`
@@ -248,12 +253,6 @@ Vue インスタンスで使用できるようなフィルタのハッシュで�
 - **型:** `Object`
 
 Vue インスタンスで使用できるようなコンポーネントのハッシュです。Vue インスタンスの継承や構成の仕方の詳細は、[コンポーネントシステム](/guide/components.html)を参照してください。
-
-### partials
-
-- **型:** `Object`
-
-Vue インスタンスで使用できるような partials のハッシュです。[v-partial](/api/directives.html#v-partial)も参照してください。
 
 ### transitions
 
@@ -271,7 +270,7 @@ Vue インスタンスで使用できるようなトランジションのハッ�
 親のスコープのデータを継承するか否かを表します。もし親のスコープを継承したコンポーネントを作りたい場合は、`true` に設定してください。`inherit` が `true` に設定されたときは、以下のことができます:
 
 1. コンポーネント内で親のスコープのプロパティにバインドする。
-2. 原型的なインターフェースを介して、コンポーネントのインスタンスそのものの親のプロパティに直接アクセスする。
+2. 原型的なインターフェイスを介して、コンポーネントのインスタンスそのものの親のプロパティに直接アクセスする。
 
 `inherit: true` を使用する際に知っておくべき重要なことは、すべての Vue インスタンスのデータプロパティは、getterやsetterであるため、**子も親のプロパティを設定できる**ことです。
 

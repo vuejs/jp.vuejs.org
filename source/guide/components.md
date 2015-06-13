@@ -48,110 +48,81 @@ Vue.component('my-component', {
 
 ``` html
 <!-- 親テンプレートの内部 -->
-<div v-component="my-component"></div>
-```
-
-任意で、カスタムエレメントのタグ形式でコンポーネントを使用することもできます:
-
-``` html
 <my-component></my-component>
 ```
 
-<p class="tip">
-W3C のカスタムエレメントの仕様に沿ってネイティブのエレメントと名前の衝突を避けるために、コンポーネントのIDには**必ず**ハイフン `-` を含める必要があります。</p>
+毎回グローバルなコンポーネントを登録する必要はありません。`components` オプションでそれを渡すことによって、別のコンポーネントへのコンポーネントの可用性とその子孫を制限することができます (このカプセル化は、このようなディレクティブやフィルタなどのその他のアセットに適用されます):
+
+``` js
+var Parent = Vue.extend({
+  components: {
+    child: {
+      // 子は親と親の子孫コンポーネントだけ利用できる
+    }
+  }
+})
+```
 
 `Vue.extend()` と `Vue.component()` の違いを理解することは重要です。`Vue` 自身はコンストラクタであるため、`Vue.extend()` は**クラス継承メソッド**です。そのタスクは `Vue` のサブクラスを生成して、そのコンストラクタを返すものです。一方、 `Vue.component()` は**アセット登録メソッド**であり、`Vue.directive()` や `Vue.filter()` と類似しています。そのタスクは与えられたコンストラクタに文字列のIDを関連付けて、 Vue.js がそれをテンプレートの中で利用できるようにするものです。直接 `Vue.component()` にオプションを渡した時は、内部的に `Vue.extend()` が呼ばれます。
 
-Vue.js は二つの異なる API パラダイムをサポートしています: クラスベースの命令的な Backbone スタイルの API とマークアップベースで宣言的な Web Components スタイルの API です。もし混同してしまう場合は、image エレメントを `new Image()` を作るか、 `<img>` タグで作るかということを考えてみてください。どちらもそれ自体で有効的であり、Vue.js は最大限の柔軟性のためにどちらの方式も提供しています。
+Vue.js はコンポーネントの使い方として二つの異なる API スタイルをサポートしています: コンストラクタベースの命令的な API とテンプレートベースの API です。もし混同してしまう場合は、image エレメントを `new Image()` を作るか、 `<img>` タグで作るかということを考えてみてください。どちらもそれ自体で有効的であり、Vue.js は最大限の柔軟性のためにどちらの方式も提供しています。
 
+<p class="tip">`table` 要素は、要素がその内部に表示できるものに制限があるため、カスタム要素が押し上げられてしまい正しくレンダリングされません。これらのケースではコンポーネントディレクティブシンタックスを使うことができます: `<tr v-component="my-component"></tr>` 。このシンタックスはテーブル要素でのみ使用可能であることに注意してください。</p>
 
-## データの継承
+## データの流れ
 
-### 明示的なデータの受け渡し
+### Props による伝達
 
-デフォルトでは、コンポーネントは**隔離されたスコープ (isolated scope) **を持ちます。これが意味するところは、子コンポーネントのテンプレートの中で親データの参照ができないということです。データを隔離されたスコープで明示的に子コンポーネントに渡す場合は、`v-with` ディレクティブを使用することができます。
+デフォルトでは、コンポーネントは**隔離されたスコープ (isolated scope) **を持ちます。これが意味するところは、子コンポーネントのテンプレートの中で親データの参照ができないということです。データを隔離されたスコープで子コンポーネントに渡すためには、`props` を利用する必要があります。
 
-
-#### 子の `$data` への伝達
-
-引数なしで一つの keypath を与えた場合、親の対応する値が子の `$data` へ受け渡されます。受け渡しされる値はオブジェクトでなくてはなりません。そして、子コンポーネントが既に持っているかもしれない `$data` はそのオブジェクトによって上書きされます。
-
-**例:**
-
-``` html
-<div id="demo-1">
-  <p v-component="user-profile" v-with="user"></p>
-</div>
-```
+"prop" は、親コンポーネントから受信されることを期待されるコンポーネントデータ上のフィールドです。子コンポーネントは、[`props` オプション](/api/options.html#props)を利用して受信することを期待するために、明示的に宣言する必要があります:
 
 ``` js
-// 先にコンポーネントを登録します
-Vue.component('user-profile', {
-  template: '{{name}}<br>{{email}}'
+Vue.component('child', {
+  // props を宣言
+  props: ['msg'],
+  // prop は内部テンプレートで利用でき、
+  // そして `this.msg` として設定される
+  template: '<span>{{msg}}</span>'
 })
-// この `user` オブジェクトは子に渡されます
-// 子コンポーネントの $data として扱われます
-var parent = new Vue({
-  el: '#demo-1',
-  data: {
-    user: {
-      name: 'Foo Bar',
-      email: 'foo@bar.com'
-    }
-  }
-})
+```
+
+そのとき、以下のようにデータを渡すことができます:
+
+``` html
+<child msg="hello!"></child>
 ```
 
 **結果:**
 
-<div id="demo-1" class="demo"><p v-component="user-profile" v-with="user"></p></div>
+<div id="prop-example-1" class="demo"><child msg="hello!"></child></div>
 <script>
-  Vue.component('user-profile', {
-    template: '{&#123;name&#125;}<br>{&#123;email&#125;}'
-  })
-  var parent = new Vue({
-    el: '#demo-1',
-    data: {
-      user: {
-        name: 'Foo Bar',
-        email: 'foo@bar.com'
-      }
-    }
-  })
-</script>
-
-#### 個別のプロパティの受け渡し
-
-`v-with` は `v-with="childProp: parentProp"` という形式で、一つの引数を渡して使用することもできます。これは、 `parent[parentProp]` を `child[childProp]` として、双方向バインディング (0.11.5時点) で子に渡すということです。
-
-**例:**
-
-``` html
-<div id="demo-2">
-  <input v-model="parentMsg">
-  <p v-component="child" v-with="childMsg : parentMsg">
-    <!-- 基本的には "自身の `parentMsg` を `childMsg` としてバインドするということです" -->
-  </p>
-</div>
-```
-
-``` js
 new Vue({
-  el: '#demo-2',
-  data: {
-    parentMsg: 'Inherited message'
-  },
+  el: '#prop-example-1',
   components: {
     child: {
-      template: '<span>{{childMsg}}</span>'
+      props: ['msg'],
+      template: '<span>{&#123;msg&#125;}</span>'
     }
   }
 })
+</script>
+
+#### 動的な Props
+
+親から動的なデータを受け取ることができます。例えば:
+
+``` html
+<div>
+  <input v-model="parentMsg">
+  <br>
+  <child msg="{{parentMsg}}"></child>
+</div>
 ```
 
 **結果:**
 
-<div id="demo-2" class="demo"><input v-model="parentMsg"><p v-component="child" v-with="childMsg:parentMsg"></p></div>
+<div id="demo-2" class="demo"><input v-model="parentMsg"><br><child msg="{&#123;parentMsg&#125;}"></child></div>
 <script>
 new Vue({
   el: '#demo-2',
@@ -160,41 +131,81 @@ new Vue({
   },
   components: {
     child: {
-      template: '<span v-text="childMsg"></span>'
+      props: ['msg'],
+      template: '<span>{&#123;msg&#125;}</span>'
     }
   }
 })
 </script>
 
-#### `paramAttributes` の使用
+<p class="tip">prop として `$data` を公開することも可能です。渡される値は、オブジェクトでなければならず、コンポーネントをデフォルト `$data` に置き換えます。</p>
 
-[`paramAttributes`](/api/options.html#paramAttributes) というオプションを使用することもできます。それは、 `v-with` にコンパイルされるもので、カスタムエレメントのようなインターフェースを外部公開するためのものです:
+### Props のバインディングタイプ
+
+デフォルトで、全ての props は子プロパティと親プロパティとの間で two way (双方向)バインディングです。親プロパティが更新したとき、子までに同期され、そして逆もしかりです。 しかしながら、明示的に次のバインディングタイプを強いることも可能です:
+
+- one time (コンパイル時に一度解決するだけ)
+- one way down (親の変更を子に同期するだけ)
+- one way up (子の変更を親に同期するだけ)
+
+シンタックスの比較:
 
 ``` html
-<div id="demo-3">
-  <input v-model="parentMsg">
-  <child-component child-msg="{{parentMsg}}"></child-component>
-</div>
+<!-- デフォルトは two way バインディング -->
+<child msg="{{parentMsg}}"></child>
+<!-- 明示的な one time バインディング -->
+<child msg="{{* parentMsg}}"></child>
+<!-- 明示的な one way down バインディング -->
+<child msg="{{< parentMsg}}"></child>
+<!-- 明示的な one way up バインディング -->
+<child msg="{{> parentMsg}}"></child>
 ```
 
+ここでは、矢印の方向を理解する上でのヒントです: 矢印は、データが親プロパティと子プロパティとの間に流れる方向を示しています。例えば：
+
+``` html
+<child msg="{{< parentMsg}}"></child>
+```
+
+ここでは、子にある `msg` に、親にある `parentMsg` の変更を同期しようとしています。しかし、私たちは親に影響を与えるために、子の `msg` への変更を望んでいません。
+
+加えて、もし親 prop の expression が "設定可能" ではない場合、バインディングは自動的に one way になります。例えば:
+
+``` html
+<!-- 自動的な one way バインディング -->
+<child msg="{{a + b}}"></child>
+```
+
+### Props としてのコールバックの伝達
+
+メソッドや、子コンポーネントへのコールバックなどのステートメントを渡すのも可能です。これは宣言、切り離された親子間のコミュニケーションを可能にします:
+
 ``` js
-new Vue({
-  el: '#demo-3',
-  data: {
-    parentMsg: 'Inherited message'
-  },
-  components: {
-    'child-component': {
-      paramAttributes: ['child-msg'],
-      // ハイフンによる属性が camel 形式になったもの,
-      // したがって、 'child-msg' は 'this.childMsg' になります
-      template: '<span>{{childMsg}}</span>'
+Vue.component('parent', {
+  // ...
+  methods: {
+    onChildLoaded: function (msg) {
+      console.log(msg)
     }
+  }
+})
+
+Vue.component('child', {
+  // ...
+  props: ['on-load'],
+  ready: function () {
+    // props はハイフンなしで camel される
+    this.onLoad('message from child!')
   }
 })
 ```
 
-### スコープの継承
+``` html
+<!-- 親のテンプレート -->
+<child on-load="{{onChildLoaded}}"></child>
+```
+
+### 親スコープの継承
 
 もし必要な場合は `inherit: true` オプションを使用して子コンポーネントに対して、親の全てのプロパティをプロトタイプ継承させることができます:
 
@@ -232,7 +243,7 @@ console.log(child.hasOwnProperty('a')) // -> false
 
 ``` html
 <!-- 親テンプレート -->
-<div v-component v-show="active" v-on="click:onClick"></div>
+<my-component v-show="active" v-on="click:onClick"></my-component>
 ```
 
 このディレクティブ (`v-show` と `v-on`) は親のスコープでコンパイルされます。そのため、 `active` という値と `onClick` は親で解決されます。子テンプレート内のいかなるディレクティブや挿入句は子のスコープでコンパイルされます。これによって、親と子のコンポーネント間のクリーンな住み分けが実現できます。
@@ -255,7 +266,7 @@ var MyComponent = Vue.extend({
 
 ## 動的コンポーネント
 
-`v-component` ディレクティブの中にある Mustache タグを使ってコンポーネントを動的に切り替える仕組みがあります。それは "ページの切り替え" を実現するルーターと共に使用することができます:
+予約された `component` 要素を使って、"ページをスワップ" を成し遂げるためにコンポーネントを動的に切り替える仕組みがあります:
 
 ``` js
 new Vue({
@@ -272,17 +283,17 @@ new Vue({
 ```
 
 ``` html
-<div v-component="{{currentView}}">
+<component is="{{currentView}}">
   <!-- vm.currentview が変更されると、中身が変更されます! -->
-</div>
+</component>
 ```
 
 状態を保持したりや再レンダリングを避けたりするために、もし切り替えられたコンポーネントを活性化された状態で保持したい場合は、ディレクティブのパラメータ `keep-alive` を追加することができます:
 
 ``` html
-<div v-component="{{currentView}}" keep-alive>
+<component is="{{currentView}}" keep-alive>
   <!-- 非活性になったコンポーネントをキャッシュします! -->
-</div>
+</component>
 ```
 
 ### トランジション操作
@@ -296,7 +307,7 @@ new Vue({
 **例:**
 
 ``` html
-<div v-component="{{view}}" wait-for="data-loaded"></div>
+<component is="{{view}}" wait-for="data-loaded"></component>
 ```
 ``` js
 // コンポーネントの定義
@@ -327,27 +338,26 @@ new Vue({
 
 ``` html
 <!-- 先にフェードアウトし, その後フェードインします -->
-<div v-component="{{view}}"
+<component is="{{view}}"
   v-transition="fade"
   transition-mode="out-in">
-</div>
+</component>
 ```
 
 ## リストとコンポーネント
 
-オブジェクトの配列に対して、`v-component` と `v-repeat` を併用することができます。その場合、配列の中にあるそれぞれのオブジェクトに対して、そのオブジェクトをデータとして、また、指定されたコンポーネントをコンストラクタとして扱う子 ViewModel が生成されます。
+オブジェクトの配列に対して、コンポーネントと `v-repeat` を併用することができます。その場合、配列の中にあるそれぞれのオブジェクトに対して、そのオブジェクトを `$data` として、また、指定されたコンポーネントをコンストラクタとして扱う子コンポーネントが生成されます。
 
 
 ``` html
-<ul id="demo-4">
-  <!-- 事前に登録した user-profile コンポーネントを再利用します -->
-  <li v-repeat="users" v-component="user-profile"></li>
+<ul id="list-example">
+  <user-profile v-repeat="users"></user-profile>
 </ul>
 ```
 
 ``` js
 var parent2 = new Vue({
-  el: '#demo-4',
+  el: '#list-example',
   data: {
     users: [
       {
@@ -359,16 +369,22 @@ var parent2 = new Vue({
         email: 'bruce@lee.com'
       }
     ]
+  },
+  components: {
+    'user-profile': {
+      template: '<li>{{name}}  {{email}}</li>',
+      replace: true
+    }
   }
 })
 ```
 
 **結果:**
 
-<ul id="demo-4" class="demo"><li v-repeat="users" v-component="user-profile"></li></ul>
+<ul id="list-example" class="demo"><user-profile v-repeat="users"></user-profile></ul>
 <script>
 var parent2 = new Vue({
-  el: '#demo-4',
+  el: '#list-example',
   data: {
     users: [
       {
@@ -380,17 +396,37 @@ var parent2 = new Vue({
         email: 'bruce@lee.com'
       }
     ]
+  },
+  components: {
+    'user-profile': {
+      template: '<li>{&#123;name&#125;} - {&#123;email&#125;}</li>',
+      replace: true
+    }
   }
 })
 </script>
 
+### 識別子によるコンポーネントの繰り返し
+
+識別子シンタックスはコンポーネントを使用しているときも動作し、繰り返されるデータは、キーとして識別子を使用するコンポーネントのプロパティとして設定されます:
+
+``` html
+<ul id="list-example">
+  <!-- データは `this.user` として内部コンポーネントで利用できます -->
+  <user-profile v-repeat="user:users"></user-profile>
+</ul>
+```
+
+
+<p class="tip">`v-repeat` で一度コンポーネントを利用すると、同じスコーピングルールは、コンポーネントコンテナ要素上の他のディレクティブに適用されることに注意してください。結果として、親テンプレートの `$index` にアクセスすることはできません。コンポーネントの独自テンプレート内部だけで利用できるようになります。<br><br>別な方法としては、中間スコープを作るために `<template>` ブロックを繰り返し使用することができますが、ほとんどの場合は、コンポーネント内部の `$index` を使用することをお勧めします。</p>
+
 ## 子の参照
 
-時々、JavaScript でネストした子コンポーネントへのアクセスが必要になる場合があります。それを実現するためには `v-ref` を用いて子コンポーネントに対して参照 ID を割り当てる必要があります。例:
+時々、JavaScript でネストした子コンポーネントへのアクセスが必要になる場合があります。それを実現するためには `v-ref` を用いて子コンポーネントに対して参照 ID を割り当てる必要があります。例えば:
 
 ``` html
 <div id="parent">
-  <div v-component="user-profile" v-ref="profile"></div>
+  <user-profile v-ref="profile"></user-profile>
 </div>
 ```
 
@@ -404,47 +440,42 @@ var child = parent.$.profile
 
 ## イベントシステム
 
-ViewModel の子や親に直接アクセスすることもできますが、コンポーネント間通信のためのビルトインのイベントシステムを使用した方が便利です。また、この仕組みによってコードの依存性を減らし、メンテナンスし易くなります。一度親子の関係が確立されれば、それぞれの ViewModel の[イベント](/api/instance-methods.html#イベント)を使ったイベントのディスパッチやトリガが可能になります。
+Vue インスタンスの子や親に直接アクセスすることもできますが、コンポーネント間通信のためのビルトインのイベントシステムを使用した方が便利です。また、この仕組みによってコードの依存性を減らし、メンテナンスし易くなります。一度親子の関係が確立されれば、それぞれのコンポーネントの[イベント](/api/instance-methods.html#イベント)を使ったイベントのディスパッチやトリガが可能になります。
 
 ``` js
-var Child = Vue.extend({
-  created: function () {
-    this.$dispatch('child-created', this)
-  }
-})
-
 var parent = new Vue({
-  template: '<div v-component="child"></div>',
-  components: {
-    child: Child
-  },
+  template: '<child></child>',
   created: function () {
     this.$on('child-created', function (child) {
       console.log('new child created: ')
       console.log(child)
     })
+  },
+  components: {
+    child: {
+      created: function () {
+        this.$dispatch('child-created', this)
+      }
+    }
   }
 })
 ```
 
 <script>
-var Child = Vue.extend({
-  created: function () {
-    this.$dispatch('child-created', this)
-  }
-})
-
 var parent = new Vue({
-  el: document.createElement('div'),
-  template: '<div v-component="child"></div>',
-  components: {
-    child: Child
-  },
+  template: '<child></child>',
   created: function () {
     this.$on('child-created', function (child) {
       console.log('new child created: ')
       console.log(child)
     })
+  },
+  components: {
+    child: {
+      created: function () {
+        this.$dispatch('child-created', this)
+      }
+    }
   }
 })
 </script>
@@ -507,20 +538,20 @@ MyComponent
 このコンポーネントを使用した親のマークアップ:
 
 ``` html
-<div v-component="my-component">
+<my-component>
   <p>This is some original content</p>
   <p>This is some more original content</p>
-</div>
+</my-component>
 ```
 
 レンダリング結果:
 
 ``` html
-<div>
+<my-component>
   <h1>This is my component!</h1>
   <p>This is some original content</p>
   <p>This is some more original content</p>
-</div>
+</my-component>
 ```
 
 ### 多数の挿入位置
@@ -529,7 +560,7 @@ MyComponent
 
 <p class="tip">0.11.6 以降では、`<content>` セレクタは、ホストノードのトップレベルの子だけ一致できます。これは Shadow DOM 仕様の振舞いを保ち、そしてネストされたテンプレートで誤って不要なノードを選択することを回避します。 </p>
 
-多数のコンポーネント挿入のテンプレート:
+例として、以下のテンプレートのような、多数のコンポーネント挿入のテンプレートを持っていると仮定:
 
 ``` html
 <content select="p:nth-child(3)"></content>
@@ -540,34 +571,62 @@ MyComponent
 親のマークアップ:
 
 ``` html
-<div v-component="multi-insertion-component">
+<multi-insertion">
   <p>One</p>
   <p>Two</p>
   <p>Three</p>
-</div>
+</multi-insertion>
 ```
 
 レンダリングされる結果:
 
 ``` html
-<div>
+<multi-insertion>
   <p>Three</p>
   <p>Two</p>
   <p>One</p>
-</div>
+</multi-insertion>
 ```
 
 コンテンツ挿入の仕組みは、元のコンテンツがどのように組み替えられ、表示されるべきか、という点に関して素晴らしい管理機能を提供します。これによってコンポーネントが非常に柔軟性と再利用性が高いものになります。
 
 ## インラインテンプレート
 
-0.11.6 では、`v-component` 向けに新しいディレクティブパラメータとして、`inline-template` というパラメータが導入されます。これのパラメータが提供されるとき、コンポーネントはそれはテンプレートではなくテンプレートコンテンツとして内部コンテンツを使用します。これは、より柔軟なテンプレートオーサリングを可能にします。
+0.11.6 では、コンポーネント向けに特別なパラメータ属性として、`inline-template` というパラメータが導入されます。これのパラメータが提供されるとき、コンポーネントはそれはテンプレートではなくテンプレートコンテンツとして内部コンテンツを使用します。これは、より柔軟なテンプレートオーサリングを可能にします。
 
 ``` html
-<div v-component="example" inline-template>
+<my-component inline-template>
   <p>These are compiled as the component's own template</p>
   <p>Not parent's transclusion content.</p>
-</div>
+</my-component>
+```
+
+## 非同期コンポーネント
+
+<p class="tip">非同期コンポーネントは Vue 0.12.0 以降のみサポートされます。</p>
+
+大規模アプリケーションでは、実際に必要になったとき、サーバからコンポーネントをロードするだけの、アプリケーションを小さい塊に分割する必要があるかもしれません。それを簡単にするために、Vue.js はコンポーネント定義を非同期的に解決するファクトリ関数としてあなたのコンポーネントを定義することができます。Vue.js はコンポーネントが実際に描画が必要になったときファクトリ関数のみトリガし、そして将来の再描画のために結果をキャッシュします。例えば:
+
+``` js
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+
+ファクトリ関数は `resolve` コールバックを受け取り、その引数はサーバからあなたのコンポーネント定義を取り戻すときに呼ばれるべきです。ロードが失敗したことを示すために、`reject(reason)` も呼び出すことができます。ここでは `setTimeout` はデモとしてシンプルです。どうやってコンポーネントを取得するかどうかは完全にあなた次第です。1つ推奨されるアプローチは [Webpack のコード分割機能](http://webpack.github.io/docs/code-splitting.html)で非同期コンポーネントを使うことです。
+
+``` js
+Vue.component('async-webpack-example', function (resolve) {
+  // この特別な require シンタックスは、
+  // 自動的に ajax リクエストでロードされているバンドルで、
+  // あなたのビルドコードを自動的に分割するために
+  // webpack で指示しています。
+  require(['./my-async-component'], resolve)
+})
 ```
 
 次: [トランジション](/guide/transitions.html)

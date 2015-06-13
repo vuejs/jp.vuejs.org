@@ -32,14 +32,14 @@ order: 7
 **例:**
 
 ``` html
-{{count}} {{count | pluralize item}}
+{{count}} {{count | pluralize 'item'}}
 ```
 
 *1 => '1 item'*  
 *2 => '2 items'*
 
 ``` html
-{{date}}{{date | pluralize st nd rd th}}
+{{date}}{{date | pluralize 'st' 'nd' 'rd' 'th'}}
 ```
 
 以下は結果になります:
@@ -79,7 +79,7 @@ order: 7
 **例:**
 
 ``` html
-<input v-on="keyup:doSomething | key enter">
+<input v-on="keyup:doSomething | key 'enter'">
 ```
 
 `doSomething` は Enter キーが押されたときにのみ呼び出されます。
