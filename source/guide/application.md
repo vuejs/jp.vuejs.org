@@ -38,7 +38,7 @@ GitHub のビルドセットアップの例を探すことができます。
 
 ``` html
 <div id="app">
-  <component="{{currentView}}"></component>
+  <component is="{{currentView}}"></component>
 </div>
 ```
 
@@ -75,7 +75,7 @@ module.exports = {
     return {
       msg: 'hello!'
     }
-  }
+  },
   created: function () {
     console.log('my-component created!')
   }
