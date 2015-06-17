@@ -130,6 +130,26 @@ Vue.component('param-demo', {
 - [Props のバインディングタイプ](/guide/components.html#Props_のバインディングタイプ)
 - [Props としてのコールバックの伝達](/guide/components.html#Props_としてのコールバックの伝達)
 
+文字列として定義している props の代わりに、検証要件を含んだオブジェクトを使用できます:
+
+``` js
+Vue.component('prop-validation-demo', {
+  props: [
+    {
+      name: 'size',
+      type: Number
+    },
+    {
+      name: 'message',
+      type: String,
+      required: true
+    }
+  ]
+})
+```
+
+prop 検証の詳細については [Prop 検証](/guide/components.html#Prop_検証) を参照してください。
+
 #### ハイフンでつながれた引数についての注意
 
 HTML の引数名は、小文字や大文字の違いを無視するので、通常はキャメルケースの代わりにハイフンでつながれた引数を使用します。ハイフンを含んだ属性をもつ `props` を使用する特殊な場合もあります:
