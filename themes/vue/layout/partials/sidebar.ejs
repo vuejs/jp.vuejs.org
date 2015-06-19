@@ -12,7 +12,9 @@
         <% } %>
         <ul class="menu-root">
             <% site.pages.find({type: type}).sort('order').each(function (p) { %>
-                <li><a href="/<%- p.path %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %>"><%- p.title %></a></li>
+                <li>
+                    <a href="/<%- p.path %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %><%- p.is_new ? ' new' : '' %>"><%- p.title %></a>
+                </li>
             <% }) %>
             <li><a href="http://legacy.vuejs.org">0.11 のドキュメントをお探しですか？</a></li>
             <li style="margin:10px 0 3px">

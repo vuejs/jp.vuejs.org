@@ -74,4 +74,4 @@ Vue.use('my-plugin', {
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録することができます。
 - [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
 
-次: [FAQ](/guide/faq.html)
+次: [コツ & ベストプラクティス](/guide/best-practices.html)
