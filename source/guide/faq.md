@@ -1,6 +1,6 @@
 title: FAQ
 type: guide
-order: 15
+order: 16
 ---
 
 - **なぜ、Vue.js は IE8 をサポートしないのですか？**
