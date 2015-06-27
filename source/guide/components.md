@@ -10,7 +10,7 @@ Vue.js では [Web Components](http://www.w3.org/TR/components-intro/) と類似
 ``` js
 // 再利用可能なコンストラクタを取得するために Vue を拡張します
 var MyComponent = Vue.extend({
-  template: 'A custom component!'
+  template: '<p>A custom component!</p>'
 })
 ```
 
@@ -40,7 +40,7 @@ Vue.component('my-component', MyComponent)
 // Note: この関数はグローバルな Vue を返し、
 // 登録されたコンストラクタを返すものではありません。
 Vue.component('my-component', {
-  template: 'A custom component!'
+  template: '<p>A custom component!</p>'
 })
 ```
 
@@ -49,6 +49,12 @@ Vue.component('my-component', {
 ``` html
 <!-- 親テンプレートの内部 -->
 <my-component></my-component>
+```
+
+表示する内容:
+
+``` html
+<p>A custom component!</p>
 ```
 
 毎回グローバルなコンポーネントを登録する必要はありません。`components` オプションでそれを渡すことによって、別のコンポーネントへのコンポーネントの可用性とその子孫を制限することができます (このカプセル化は、このようなディレクティブやフィルタなどのその他のアセットに適用されます):
@@ -275,7 +281,7 @@ console.log(child.hasOwnProperty('a')) // -> false
 
 このディレクティブ (`v-show` と `v-on`) は親のスコープでコンパイルされます。そのため、 `active` という値と `onClick` は親で解決されます。子テンプレート内のいかなるディレクティブや挿入句は子のスコープでコンパイルされます。これによって、親と子のコンポーネント間のクリーンな住み分けが実現できます。
 
-このルールはこのガイドで後述する[コンテンツ挿入](#コンテンツ挿入)についても適用されます。
+詳細については[コンポーネントのスコープ](/guide/best-practices.html#コンポーネントのスコープ)を読んでください。
 
 ## コンポーネントライフサイクル
 
@@ -399,8 +405,7 @@ var parent2 = new Vue({
   },
   components: {
     'user-profile': {
-      template: '<li>{{name}}  {{email}}</li>',
-      replace: true
+      template: '<li>{{name}}  {{email}}</li>'
     }
   }
 })
@@ -426,8 +431,7 @@ var parent2 = new Vue({
   },
   components: {
     'user-profile': {
-      template: '<li>{&#123;name&#125;} - {&#123;email&#125;}</li>',
-      replace: true
+      template: '<li>{&#123;name&#125;} - {&#123;email&#125;}</li>'
     }
   }
 })
@@ -471,7 +475,7 @@ Vue インスタンスの子や親に直接アクセスすることもできま�
 
 ``` js
 var parent = new Vue({
-  template: '<child></child>',
+  template: '<div><child></child></div>',
   created: function () {
     this.$on('child-created', function (child) {
       console.log('new child created: ')
@@ -485,12 +489,12 @@ var parent = new Vue({
       }
     }
   }
-})
+}).$mount()
 ```
 
 <script>
 var parent = new Vue({
-  template: '<child></child>',
+  template: '<div><child></child></div>',
   created: function () {
     this.$on('child-created', function (child) {
       console.log('new child created: ')
@@ -504,7 +508,7 @@ var parent = new Vue({
       }
     }
   }
-})
+}).$mount()
 </script>
 
 ## プライベートアセット

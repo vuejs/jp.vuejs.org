@@ -87,7 +87,7 @@ Vue.nextTick(function () {
 
 ``` js
 Vue.component('example', {
-  template: '{{msg}}',
+  template: '<span>{{msg}}</span>',
   data: function () {
     return {
       msg: 'not updated'
@@ -120,12 +120,10 @@ Vue.component('example', {
 </div>
 ```
 
-もし root ノードのコンポーネント上で子スコープのディレクティブをバインドする必要がある場合は、`replace: true` オプションを使用すべきで、そして子テンプレートに root ノードを含むべきです:
+もし root ノードのコンポーネント上で子スコープのディレクティブをバインドする必要がある場合は、子コンポーネント自身のテンプレートにすべきです:
 
 ``` js
 Vue.component('child-component', {
-  // コンテナノードを置き換えるコンポーネントテンプレートを作る
-  replace: true,
   // 正しいスコープなため、これは動作する
   template: '<div v-on="click: childMethod">Child</div>',
   methods: {

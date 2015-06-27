@@ -57,14 +57,19 @@ Vue コンストラクタベースの"サブクラス"を作成します。[コ�
 内部的に、`Vue.extend()` は component をインスタンス化する前に、全ての component オプション上で呼び出されます。さらに詳しくは component に関しては、[コンポーネントシステム](/guide/components.html) を参照してください。
 
 **例**
+``` html
+<div id="mount-point"></div>
+```
 
 ``` js
+// 再利用可能なコンストラクタを作成
 var Profile = Vue.extend({
   el: function () {
     return document.createElement('p')
   },
-  template: '{{firstName}} {{lastName}} aka {{alias}}'
+  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>'
 })
+// Profile のインスタンスの作成
 var profile = new Profile({
   data: {
     firstName : 'Walter',
@@ -72,7 +77,8 @@ var profile = new Profile({
     alias     : 'Heisenberg'
   }  
 })
-profile.$appendTo('body')
+// 要素上にマウント
+profile.$mount('#mount-point')
 ```
 
 結果は以下のようになります:
