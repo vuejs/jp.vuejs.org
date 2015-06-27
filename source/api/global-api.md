@@ -128,6 +128,13 @@ callback を延期し、DOM の更新サイクル後に実行されます。DOM 
 
 グローバルトランジションに登録または取得します。さらに詳しくガイド向けの [トランジションシステム(JavaScript だけによるトランジション)](/guide/transitions.html#JavaScript_だけによるトランジション) を参照してください。
 
+### Vue.partial( id, [partial] )
+
+- **id** `String`
+- **partial** `String` *任意*
+
+グローバルテンプレート partial 文字列に登録または取得します。さらに詳しくは [partial](/api/elements.html#partial) を参照してください。
+
 ### Vue.use( plugin, [args...] )
 
 - **plugin** `Object` または `Function`

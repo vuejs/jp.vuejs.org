@@ -323,6 +323,12 @@ Vue インスタンスで使用できるようなコンポーネントのハッ�
 
 Vue インスタンスで使用できるようなトランジションのハッシュです。詳しくは、[トランジション](/guide/transitions.html)にあるガイドを参照してください。
 
+### partials
+
+- **型:** `Object`
+
+Vue インスタンスで使用できるような partial 文字列のハッシュです。詳しくは、[partial](/api/elements.html#partial)を参照してください。
+
 ## その他
 
 ### inherit
