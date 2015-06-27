@@ -1,40 +1,39 @@
-title: Special Elements
+title: 特別な要素
 type: api
 order: 8
 is_new: true
 ---
 
-> The following is a list of abstract elements that serve special purposes in Vue.js templates.
+> 次は、Vue.js のテンプレートで特別な用途で役に立つ抽象要素のリストです。
 
 ### component
 
-Alternative syntax for invoking components. Primarily used for dynamic components with the `is` attribute:
+コンポーネントを起動するための代替シンタックスです。主に、動的コンポーネント向けに `is` 属性で使用されます:
 
 ``` html
-<!-- a dynamic component controlled by -->
-<!-- the `componentId` property on the vm -->
+<!-- 動的コンポーネントは vm で `componentid` プロパティによってコントロールされます -->
 <component is="{{componentId}}"></component>
 ```
 
 ### content
 
-`<content>` tags serve as content insertion outlets in component templates. It optionally accepts a `select` attribute, which should be a valid CSS selector to be used to match a subset of inserted content to be displayed:
+`<content>` タグはコンポーネントテンプレートでコンテンツ挿入アウトレットとして役に立ちます。必要に応じて、挿入されたコンテンツの一部を表示させるのを一致するために使用される CSS セレクタを有効にする `select` 属性を受け入れます。
 
 ``` html
-<!-- only display <li>'s in the inserted content -->
+<!-- 挿入されたコンテンツに <li> だけ表示する -->
 <content select="li"></content>
 ```
 
-The select attribute can also contain mustache expressions. For more details, see [Content Insertion](/guide/components.html#Content_Insertion).
+select 属性は mustache expression も含むことができます。詳細については、[コンテンツ挿入](/guide/components.html#コンテンツ挿入)を参照してください。
 
 ### partial
 
-`<partial>` tags serve as outlets for registered partials. Partial contents are also compiled by Vue when inserted. It requires a `name` attribute to be provided. For example:
+`<partial>` タグは登録された partial 向けのアウトレットとして役に立ちます。partial なコンテンツは挿入された時、Vue によってコンパイルもされます。提供されるためには、`name` 属性が必要です。例えば:
 
 ``` html
-<!-- a static partial -->
+<!-- 静的な partial -->
 <partial name="my-partial"></partial>
 
-<!-- a dynamic partial -->
+<!-- 動的な partial -->
 <partial name="{{partialId}}"></partial>
 ```
