@@ -49,60 +49,6 @@ var MyComponent = Vue.extend({
 
 <p class="tip">内部実装的には、Vue.js は隠しプロパティ `__ob__` を備えており、依存関係の修正を可能にするために、オブジェクトの数えられるプロパティを getter と setter に再帰的に変換します。`$` や `_` で始まるキーをもつプロパティは、スキップされます。</p>
 
-### methods
-
-- **型:** `Object`
-
-Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブ表現で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバウンドされた `this` コンテキストをもちます。
-
-**例:**
-
-```js
-var vm = new Vue({
-  data: { a: 1 },
-  methods: {
-    plus: function () {
-      this.a++
-    }
-  }
-})
-vm.plus()
-vm.a // 2
-```
-
-### computed
-
-- **型:** `Object`
-
-Vue インスタンスに組み込まれる Computed properties です。すべての getter や setter は、自動的に Vue インスタンスにバウンドされた `this` コンテキストをもちます。
-
-**例:**
-
-```js
-var vm = new Vue({
-  data: { a: 1 },
-  computed: {
-    // get のみ、関数が一つ必要なだけ
-    aDouble: function () {
-      return this.a * 2
-    },
-    // get と set 両方
-    aPlus: {
-      get: function () {
-        return this.a + 1
-      },
-      set: function (v) {
-        this.a = v - 1
-      }
-    }
-  }
-})
-vm.aPlus   // -> 2
-vm.aPlus = 3
-vm.a       // -> 2
-vm.aDouble // -> 4
-```
-
 ### props
 
 - **型:** `Array`
@@ -159,6 +105,60 @@ HTML の引数名は、小文字や大文字の違いを無視するので、通
 2. もし引数が依然ダッシュ (-) を含んでいた場合、キャメルケースに変換されます。これは、テンプレートの中にダッシュを含む最上位のプロパティにアクセスするときに不便だからです。`my-param` という表記は、不恰好に `this['my-param']` という書き方をしない限りマイナスの表記としてパースされてしまいます。
 
 これは、パラメータの引数 `data-hello` はvm上で `vm.hello` と設定され、`my-param` は `vm.myParam` と設定されることを意味します。
+
+### methods
+
+- **型:** `Object`
+
+Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブ表現で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバウンドされた `this` コンテキストをもちます。
+
+**例:**
+
+```js
+var vm = new Vue({
+  data: { a: 1 },
+  methods: {
+    plus: function () {
+      this.a++
+    }
+  }
+})
+vm.plus()
+vm.a // 2
+```
+
+### computed
+
+- **型:** `Object`
+
+Vue インスタンスに組み込まれる Computed properties です。すべての getter や setter は、自動的に Vue インスタンスにバウンドされた `this` コンテキストをもちます。
+
+**例:**
+
+```js
+var vm = new Vue({
+  data: { a: 1 },
+  computed: {
+    // get のみ、関数が一つ必要なだけ
+    aDouble: function () {
+      return this.a * 2
+    },
+    // get と set 両方
+    aPlus: {
+      get: function () {
+        return this.a + 1
+      },
+      set: function (v) {
+        this.a = v - 1
+      }
+    }
+  }
+})
+vm.aPlus   // -> 2
+vm.aPlus = 3
+vm.a       // -> 2
+vm.aDouble // -> 4
+```
 
 ## DOM
 
