@@ -51,7 +51,7 @@ Vue.component('my-component', {
 <my-component></my-component>
 ```
 
-表示する内容:
+レンダリング内容:
 
 ``` html
 <p>A custom component!</p>
