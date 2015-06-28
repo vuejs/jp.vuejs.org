@@ -10,7 +10,7 @@ Vue.js では [Web Components](http://www.w3.org/TR/components-intro/) と類似
 ``` js
 // 再利用可能なコンストラクタを取得するために Vue を拡張します
 var MyComponent = Vue.extend({
-  template: 'A custom component!'
+  template: '<p>A custom component!</p>'
 })
 ```
 
@@ -40,7 +40,7 @@ Vue.component('my-component', MyComponent)
 // Note: この関数はグローバルな Vue を返し、
 // 登録されたコンストラクタを返すものではありません。
 Vue.component('my-component', {
-  template: 'A custom component!'
+  template: '<p>A custom component!</p>'
 })
 ```
 
@@ -49,6 +49,12 @@ Vue.component('my-component', {
 ``` html
 <!-- 親テンプレートの内部 -->
 <my-component></my-component>
+```
+
+レンダリング内容:
+
+``` html
+<p>A custom component!</p>
 ```
 
 毎回グローバルなコンポーネントを登録する必要はありません。`components` オプションでそれを渡すことによって、別のコンポーネントへのコンポーネントの可用性とその子孫を制限することができます (このカプセル化は、このようなディレクティブやフィルタなどのその他のアセットに適用されます):
@@ -67,7 +73,7 @@ var Parent = Vue.extend({
 
 Vue.js はコンポーネントの使い方として二つの異なる API スタイルをサポートしています: コンストラクタベースの命令的な API とテンプレートベースの API です。もし混同してしまう場合は、image エレメントを `new Image()` を作るか、 `<img>` タグで作るかということを考えてみてください。どちらもそれ自体で有効的であり、Vue.js は最大限の柔軟性のためにどちらの方式も提供しています。
 
-<p class="tip">`table` 要素は、要素がその内部に表示できるものに制限があるため、カスタム要素が押し上げられてしまい正しくレンダリングされません。これらのケースではコンポーネントディレクティブシンタックスを使うことができます: `<tr v-component="my-component"></tr>` 。このシンタックスはテーブル要素でのみ使用可能であることに注意してください。</p>
+<p class="tip">`table` 要素は、要素がその内部に表示できるものに制限があるため、カスタム要素が押し上げられてしまい正しくレンダリングされません。これらのケースではコンポーネントディレクティブシンタックスを使うことができます: `<tr v-component="my-component"></tr>`</p>
 
 ## データの流れ
 
@@ -275,7 +281,7 @@ console.log(child.hasOwnProperty('a')) // -> false
 
 このディレクティブ (`v-show` と `v-on`) は親のスコープでコンパイルされます。そのため、 `active` という値と `onClick` は親で解決されます。子テンプレート内のいかなるディレクティブや挿入句は子のスコープでコンパイルされます。これによって、親と子のコンポーネント間のクリーンな住み分けが実現できます。
 
-このルールはこのガイドで後述する[コンテンツ挿入](#コンテンツ挿入)についても適用されます。
+詳細については[コンポーネントのスコープ](/guide/best-practices.html#コンポーネントのスコープ)を読んでください。
 
 ## コンポーネントライフサイクル
 
@@ -323,19 +329,26 @@ new Vue({
 </component>
 ```
 
-### トランジション操作
+## トランジション操作
 
-2つの追加の属性パラメータにより、動的コンポーネントが一方からもう一方へどのようにトランジションするかの高度な操作が可能になります。
+2つの追加の param 属性により、コンポーネントがレンダリングまたはトランジションされるべきかの高度な操作が可能になります。
 
-#### `wait-for`
+### `wait-for`
 
-現在のコンポーネントと切り替えられる前に、挿入される子コンポーネントを待つためのイベント名です。空白による望ましくないちらつきを回避するために、トランジションの開始の前に非同期なデータのロードを待つことが可能になります。
+DOM と切り替えられる前に、挿入される子コンポーネントを待つためのイベント名です。トランジションの開始そして空のコンテンツ表示を回避する前に非同期なデータのロードを待つことが可能になります。
+
+この属性は、静的そして動的コンポーネント上の両方で使用できます。動的コンポーネントでは、全てのコンポーネントが潜在的に待機イベントを `$emit` する必要があるためにレンダリングされ、それ以外の場合は、それらは挿入されることはないことに注意してください。
 
 **例:**
 
 ``` html
+<!-- 静的 -->
+<my-component wait-for="data-loaded"></my-component>
+
+<!-- 動的 -->
 <component is="{{view}}" wait-for="data-loaded"></component>
 ```
+
 ``` js
 // コンポーネントの定義
 {
@@ -354,9 +367,11 @@ new Vue({
 }
 ```
 
-#### `transition-mode`
+### `transition-mode`
 
-デフォルトでは、入ってくるコンポーネントと出て行くコンポーネントのトランジションが同時に起こります。このパラメータによって、2つの他のモードを設定することができます:
+`transition-mode` パラメータ属性はどうやって2つの動的コンポーネント間でトランジションが実行されるべきかどうか指定できます。
+
+デフォルトでは、入ってくるコンポーネントと出て行くコンポーネントのトランジションが同時に起こります。この属性によって、2つの他のモードを設定することができます:
 
 - `in-out`: 新しいコンポーネントのトランジションが初めに起こり、そのトランジションが完了した後に現在のコンポーネントの出て行くトランジションが開始します。
 - `out-in`: 現在のコンポーネントが出て行くトランジションが初めに起こり、そのトランジションが完了した後に新しいコンポーネントのトランジションが開始します。
@@ -399,8 +414,7 @@ var parent2 = new Vue({
   },
   components: {
     'user-profile': {
-      template: '<li>{{name}}  {{email}}</li>',
-      replace: true
+      template: '<li>{{name}}  {{email}}</li>'
     }
   }
 })
@@ -426,8 +440,7 @@ var parent2 = new Vue({
   },
   components: {
     'user-profile': {
-      template: '<li>{&#123;name&#125;} - {&#123;email&#125;}</li>',
-      replace: true
+      template: '<li>{&#123;name&#125;} - {&#123;email&#125;}</li>'
     }
   }
 })
@@ -471,7 +484,7 @@ Vue インスタンスの子や親に直接アクセスすることもできま�
 
 ``` js
 var parent = new Vue({
-  template: '<child></child>',
+  template: '<div><child></child></div>',
   created: function () {
     this.$on('child-created', function (child) {
       console.log('new child created: ')
@@ -485,12 +498,12 @@ var parent = new Vue({
       }
     }
   }
-})
+}).$mount()
 ```
 
 <script>
 var parent = new Vue({
-  template: '<child></child>',
+  template: '<div><child></child></div>',
   created: function () {
     this.$on('child-created', function (child) {
       console.log('new child created: ')
@@ -504,7 +517,7 @@ var parent = new Vue({
       }
     }
   }
-})
+}).$mount()
 </script>
 
 ## プライベートアセット
