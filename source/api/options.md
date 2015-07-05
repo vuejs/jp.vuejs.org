@@ -59,16 +59,18 @@ var MyComponent = Vue.extend({
 
 ``` js
 Vue.component('param-demo', {
-  props: ['size', 'message'], // シンプルシンタックス
+  props: ['size', 'myMessage'], // シンプルシンタックス
   compiled: function () {
     console.log(this.size)    // -> 100
-    console.log(this.message) // -> 'hello!'
+    console.log(this.myMessage) // -> 'hello!'
   }
 })
 ```
 
+HTML の属性では大文字と小文字は区別されませんので注意してください、テンプレートの属性として表示されたときから、ハイフン付きの prop を使用する必要があります:
+
 ``` html
-<param-demo size="100" message="hello!"></param-demo>
+<param-demo size="100" my-message="hello!"></param-demo>
 ```
 
 データの受け渡しの詳細については、ガイドの次のセクションを読んでください:
@@ -88,6 +90,13 @@ Vue.component('prop-validation-demo', {
     }
   }
 })
+```
+
+以下のコンポーネントの使い方は2つの警告の結果になります: "size" は型の不一致、そして必要とされる "name" プロパティが見つからない。
+
+``` html
+<prop-validation-demoo size="hello">
+</prop-validation-demo>
 ```
 
 オブジェクトベースのシンタックス、そして prop 検証の詳細については [Prop 検証](/guide/components.html#Prop_検証) を参照してください。

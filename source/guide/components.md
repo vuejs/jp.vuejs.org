@@ -114,7 +114,23 @@ new Vue({
 })
 </script>
 
-#### 動的な Props
+### キャメルケース vs ハイフン付き
+
+HTML の属性は大文字と小文字を区別しません。キャメルケースされた prop 名を属性として使用するとき、それらハイフン付き相当語句として使用する必要があります:
+
+``` js
+Vue.component('child', {
+  props: ['myMessage'],
+  template: '<span>{{myMessage}}</span>'
+})
+```
+
+``` html
+<!-- 重要: ハイフン付きの名前を使用! -->
+<child my-message="hello!"></child>
+```
+
+### 動的な Props
 
 親から動的なデータを受け取ることができます。例えば:
 
@@ -173,19 +189,19 @@ two-way バインディングは子の `msg` プロパティの変更を親の `
 Vue.component('example', {
   props: {
     // 基本な型チェック (`null` はどんな型でも受け付ける)
-    'on-something': Function,
+    onSomeEvent: Function,
     // 存在チェック
-    'required-prop': {
+    requiredProp: {
       type: String,
       required: true
     },
     // デフォルト値
-    'prop-with-default': {
+    propWithDefault: {
       type: Number,
       default: 100
     },
     // カスタムバリデータ関数
-    'greater-than-ten': {
+    greaterThanTen: {
       validator: function (value) {
         return value > 10
       }
@@ -225,9 +241,8 @@ Vue.component('parent', {
 
 Vue.component('child', {
   // ...
-  props: ['on-load'],
+  props: ['onLoad'],
   ready: function () {
-    // props はハイフンなしで camel される
     this.onLoad('message from child!')
   }
 })
