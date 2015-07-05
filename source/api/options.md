@@ -51,15 +51,15 @@ var MyComponent = Vue.extend({
 
 ### props
 
-- **型:** `Array`
+- **型:** `Array | Object`
 
-引数の名前の配列が、Vue インスタンス上で初期値として設定されます。データをコンポーネントに渡すときに便利です。
+親コンポーネントからデータを受け取るためにエクスポートされた属性のリスト/ハッシュです。シンプルな配列ベースのシンタックス、そして型チェック、カスタム検証そしてデフォルト値などの高度な構成を可能とする配列ベースの代わりとなるオブジェクトベースのシンタックスがあります。
 
 **例:**
 
 ``` js
 Vue.component('param-demo', {
-  props: ['size', 'message'],
+  props: ['size', 'message'], // シンプルシンタックス
   compiled: function () {
     console.log(this.size)    // -> 100
     console.log(this.message) // -> 'hello!'
@@ -71,30 +71,26 @@ Vue.component('param-demo', {
 <param-demo size="100" message="hello!"></param-demo>
 ```
 
-データのコンポーネントへの渡し方の詳細については以下を参照してください:
+データの受け渡しの詳細については、ガイドの次のセクションを読んでください:
 
 - [Props のバインディングタイプ](/guide/components.html#Props_のバインディングタイプ)
 - [Props としてのコールバックの伝達](/guide/components.html#Props_としてのコールバックの伝達)
 
-文字列として定義している props の代わりに、検証要件を含んだオブジェクトを使用できます:
+配列ベースの代替となるオブジェクトベースの構文は次のようになります:
 
 ``` js
 Vue.component('prop-validation-demo', {
-  props: [
-    {
-      name: 'size',
-      type: Number
-    },
-    {
-      name: 'message',
+  props: {
+    size: Number,
+    name: {
       type: String,
       required: true
     }
-  ]
+  }
 })
 ```
 
-prop 検証の詳細については [Prop 検証](/guide/components.html#Prop_検証) を参照してください。
+オブジェクトベースのシンタックス、そして prop 検証の詳細については [Prop 検証](/guide/components.html#Prop_検証) を参照してください。
 
 #### ハイフンでつながれた引数についての注意
 

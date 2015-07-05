@@ -171,26 +171,26 @@ two-way バインディングは子の `msg` プロパティの変更を親の `
 
 ``` js
 Vue.component('example', {
-  props: [
-    // 型チェック
-    {
-      name: 'on-something',
-      type: Function
-    },
+  props: {
+    // 基本な型チェック (`null` はどんな型でも受け付ける)
+    'on-something': Function,
     // 存在チェック
-    {
-      name: 'required-prop',
+    'required-prop': {
       type: String,
       required: true
     },
+    // デフォルト値
+    'prop-with-default': {
+      type: Number,
+      default: 100
+    },
     // カスタムバリデータ関数
-    {
-      name: 'greater-than-ten',
+    'greater-than-ten': {
       validator: function (value) {
         return value > 10
       }
     }
-  ]
+  }
 })
 ```
 
