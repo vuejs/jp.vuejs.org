@@ -1,10 +1,10 @@
 title: インストール
 type: guide
 order: 1
-vue_version: 0.12.4
-dev_size: 218.59
-min_size: 67.31
-gz_size: 21.89
+vue_version: 0.12.5
+dev_size: 218.88
+min_size: 67.44
+gz_size: 21.93
 ---
 
 > **互換性に関する注意:** Vue.js は IE8 以下をサポートしていません。
@@ -19,7 +19,7 @@ gz_size: 21.89
 <a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>リリース版</a><span class="light info">{{min_size}}kb minified / {{gz_size}}kb gzipped</span>
 </div>
 
- [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js)も利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
+ [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) または [jsdelivr](//cdn.jsdelivr.net/vue/0.12.5/vue.min.js) も利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
 
 ## NPM
 
