@@ -19,7 +19,7 @@ gz_size: 21.93
 <a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>リリース版</a><span class="light info">{{min_size}}kb minified / {{gz_size}}kb gzipped</span>
 </div>
 
- [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) または [jsdelivr](//cdn.jsdelivr.net/vue/0.12.5/vue.min.js) も利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
+ [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) または [jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) も利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
 
 ## NPM
 
