@@ -61,14 +61,15 @@ Vue.use(vueTouch)
 プラグインには、オプションを追加することができます。
 
 ```js
-Vue.use('my-plugin', {
+Vue.use(require('my-plugin'), {
   /* 追加オプションを渡します */
 })
 ```
 
-## 他の拡張ツール
+## 現在提供済みのプラグインとツール
 
-- [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグイン。
+- [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグインです。
+- [vue-validator](https://github.com/vuejs/vue-validator): フォーム検証するためのプラグインです。
 - [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.js アプリケーションのデバッグ用 Chrome devtools extension です。
 - [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加できます。
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録することができます。
