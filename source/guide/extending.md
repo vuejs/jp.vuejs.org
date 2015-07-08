@@ -68,11 +68,11 @@ Vue.use(require('my-plugin'), {
 
 ## 現在提供済みのプラグインとツール
 
-- [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグインです。
-- [vue-validator](https://github.com/vuejs/vue-validator): フォーム検証するためのプラグインです。
-- [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.js アプリケーションのデバッグ用 Chrome devtools extension です。
-- [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加できます。
-- [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録することができます。
+- [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグイン。
+- [vue-validator](https://github.com/vuejs/vue-validator): フォーム検証するためのプラグイン。
+- [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.js アプリケーションのデバッグ用 Chrome devtools extension 。
+- [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加するプラグイン。
+- [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録できるようになるプラグイン。
 - [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
 
 次: [コツ & ベストプラクティス](/guide/best-practices.html)
