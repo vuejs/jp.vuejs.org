@@ -289,7 +289,7 @@ Vue.component('example', {
 <!-- root 要素がないため動作しません -->
 <example v-show="ok" v-transition="fade"></example>
 
-<!-- propts は意図されて動作 -->
+<!-- prop は意図したように動作をします -->
 <example prop="{{someData}}"></example>
 ```
 
