@@ -21,7 +21,7 @@ order: 3
 
 このように、接頭辞はデフォルトで `v` です。このディレクティブ ID は `text` で、expression は `message` です。Vue インスタンス上の `message` プロパティが変更される時は常に、このディレクティブは Vue.js にdivの `textContent` を更新させます。
 
-## インライン Expressions
+## インライン Expression
 
 ``` html
 <div v-text="'hello ' + user.firstName + ' ' + user.lastName"></div>
