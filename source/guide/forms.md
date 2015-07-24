@@ -96,15 +96,15 @@ new Vue({
 
 ## 動的な選択オプション
 
-`<select>` 要素のオプションリストを動的にレンダリングする必要があれば、`v-model`  と一緒に `options` 属性を利用することが推奨されています:
+`<select>` 要素のオプションリストを動的にレンダリングする必要があれば、オプションが動的に変更されるとき、`v-model` は正しく同期しているため、`v-model`  と一緒に `options` 属性を利用することが推奨されています:
 
 ``` html
 <select v-model="selected" options="myOptions"></select>
 ```
 
-あなたの data では、`myOptions` はオプションとして使いたい配列を指す keypath または expression である必要があります。配列内には、プレーンな文字列またはオブジェクトを格納することができます。
+あなたの data では、`myOptions` はオプションとして使いたい配列を指す keypath または expression である必要があります。
 
-オブジェクトは、`{text:'', value:''}` の形式をとることができます。これにより、値とは異なるオプション文字列を表示することができます:
+配列はプレーンなテキストまたはオブジェクトを含むことができます。オブジェクトは、`{text:'', value:''}` の形式をとることができます。これにより、値とは異なるオプション文字列を表示することができます:
 
 ``` js
 [
@@ -146,9 +146,25 @@ new Vue({
 </select>
 ```
 
+それは、あなたの元データがこの希望されるフォーマットで来ていないことが非常に可能性があり、動的なオプションを生成するためにデータを変換する必要があります。DRY な変換をするために、`options` パラメータはフィルタをサポートしており、あなたの変換ロジックを再利用可能な[カスタムフィルタ](/guide/custom-filter.html)で置き換えることで役に立ちます。
+
+``` js
+Vue.filter('extract', function (value, keyToExtract) {
+  return value.map(function (item) {
+    return item[keyToExtract]
+  })
+})
+```
+
+``` html
+<select options="users | extract 'name'"></select>
+```
+
+上記フィルタは `[{ name: 'Bruce' }, { name: 'Chuck' }]` のようなデータを `['Bruce', 'Chuck']` 変換し、 正しいフォーマットになります。
+
 ## 入力デバウンス
 
-`debounce` パラメータは、更新が実行される前に各キーストローク後の最小遅延の設定を許可します。これは、例えば、先行入力自動補完向けに Ajax リクエストを作成するような、各更新時に高価な操作を実行しているときには便利です。
+`debounce` パラメータは、入力値がモデルに同期される前に各キーストローク後の最小遅延の設定を許可します。これは、例えば、先行入力自動補完向けに Ajax リクエストを作成するような、各更新時に高価な操作を実行しているときには便利です。
 
 ``` html
 <input v-model="msg" debounce="500">
@@ -163,5 +179,7 @@ new Vue({
   data: { msg: 'edit me' }
 })
 </script>
+
+`debounce` パラメータはユーザーの入力イベントをデバウンスしないことに注意してください: それは基礎となるデータに"書き込み"操作をデバウンスします。そのため、`debounce` を使用するときデータ変更に反応するために `vm.$watch()` を使用する必要があります。
 
 次: [Computed Properties](/guide/computed.html)
