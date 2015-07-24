@@ -200,6 +200,10 @@ Vue.component('example', {
       type: Number,
       default: 100
     },
+    // two-way prop は、もしバインディングの型が一致しない場合は警告を投げます
+    twoWayProp: {
+      twoWay: true
+    },
     // カスタムバリデータ関数
     greaterThanTen: {
       validator: function (value) {
