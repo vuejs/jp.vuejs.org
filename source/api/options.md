@@ -99,7 +99,7 @@ Vue.component('prop-validation-demo', {
 </prop-validation-demo>
 ```
 
-オブジェクトベースのシンタックス、そして prop 検証の詳細については [Prop 検証](/guide/components.html#Prop_検証) を参照してください。
+オブジェクトベースのシンタックス、そして prop 検証の詳細については [Prop 仕様](/guide/components.html#Prop_仕様) を参照してください。
 
 #### ハイフンでつながれた引数についての注意
 
