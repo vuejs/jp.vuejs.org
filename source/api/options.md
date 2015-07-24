@@ -429,14 +429,17 @@ vm.a = 2 // -> new: 2, old: 1
 
 `mixins` オプションは、ミックスインオブジェクトの配列を受け入れます。ミックスインオブジェクトは、通常のインスタンスオブジェクトのようなインスタンスオプションを含むことができ、`Vue.extend()` における同じオプションを併合するロジックを使った結果のオプションに対して併合されます。例えば、もしあなたのミックスインが作成されたフックをもち、コンポーネントそのものもそれを持っていた場合、両方の関数が呼ばれます。
 
+ミックスインのフックはそれらが提供された順に呼び出され、コンポーネント自身のフックの前に呼び出されます。
+
+
 **例:**
 
 ``` js
 var mixin = {
-  created: function () { console.log(2) }
+  created: function () { console.log(1) }
 }
 var vm = new Vue({
-  created: function () { console.log(1) },
+  created: function () { console.log(2) },
   mixins: [mixin]
 })
 // -> 1
