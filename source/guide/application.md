@@ -15,11 +15,11 @@ Webpack と Browserify は単にモジュールバンドラ以上のものです
 
 Vue.js を利用した典型的なプロジェクトでは、たくさんの個別のコンポーネントにコードを分割して、コンポーネントごとに HTML/CSS/JavaScript(Vue.js) を配置しておくと便利です。上述したように、Webpack または Browserify を使用するとき、次のようなコンポーネントを適切なソース変換できます:
 
-<img src="/images/vueify.png">
+<img src="/images/vue-component.png">
 
 もし、プリプロセッサに詳しいなら、次のようにも書くことができます：
 
-<img src="/images/vueify_with_pre.png">
+<img src="/images/vue-component-with-pre-processors.png">
 
 これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。もしプリプロセッサを使用している場合、Webpack ローダ API はより良いファイル依存関係追跡とキャッシングが可能であるため、Webpack をセットアップして使用することをお勧めします。
 
