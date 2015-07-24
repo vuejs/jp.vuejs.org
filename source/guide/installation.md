@@ -19,13 +19,21 @@ gz_size: 22.09
 <a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>リリース版</a><span class="light info">{{min_size}}kb minified / {{gz_size}}kb gzipped</span>
 </div>
 
- [jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) も利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
+### CDN
+
+ [jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
+
+### CSP 準拠ビルド
+
+Google Chrome アプリのようなある環境では、Content Secuirty Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/yyx990803/vue/tree/csp/dist) を代わりに使用できます。
 
 ## NPM
 
 ``` bash
 $ npm install vue
-# 最新版向け:
+# CSP 準拠バージョン向け:
+$ npm install vue@csp
+# 開発ビルド向け(Github):
 $ npm install yyx990803/vue#dev
 ```
 
@@ -34,14 +42,6 @@ $ npm install yyx990803/vue#dev
 ``` bash
 # Bower では安定版だけ利用できます
 $ bower install vue
-```
-
-## Duo
-
-```js
-var Vue = require('yyx990803/vue')
-// 最新版向け:
-var Vue = require('yyx990803/vue@dev')
 ```
 
 ## AMD モジュールローダ
