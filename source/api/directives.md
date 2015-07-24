@@ -188,6 +188,16 @@ Array もしくは Object のバインディングのすべてのアイテムの
 </ul>
 ```
 
+0.12.8 以降では、特別な代替手段としてより自然なシンタックスを利用できます:
+
+``` html
+<ul>
+  <li v-repeat="user in users">
+    {{user.name}} {{user.email}}
+  </li>
+</ul>
+```
+
 より詳しい説明は、[リスト表示](/guide/list.html)を参照してください。
 
 ## リテラルディレクティブ
