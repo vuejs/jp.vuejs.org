@@ -1,28 +1,28 @@
 # Vue.js TodoMVC Example
 
-> Vue.js is a library for building interactive web interfaces. 
-It provides data-driven, nestable view components with a simple and flexible API.
+> Vue.js は Web インターフェイスを構築するためのライブラリです。
+データ駆動で、シンプルなネスト可能な view コンポーネント、そしてフレキシブルなAPIを提供します。
 
 > _[Vue.js - vuejs.org](http://vuejs.org)_
 
-## Learning Vue.js
-The [Vue.js website](http://vuejs.org/) is a great resource to get started.
+## Vue.js の学習
+[Vue.js website](http://vuejs.org/) は、学習をはじめるための素晴らしいリソースです。
 
-Here are some links you may find helpful:
+ここには、あなたが役に立つ幾つかのリンクが見つかるかもしれません:
 
-* [Official Guide](http://vuejs.org/guide/)
-* [API Reference](http://vuejs.org/api/)
-* [Examples](http://vuejs.org/examples/)
-* [Building Larger Apps with Vue.js](http://vuejs.org/guide/application.html)
+* [オフィシャルガイド](http://vuejs.org/guide/)
+* [API リファレンス](http://vuejs.org/api/)
+* [例](http://vuejs.org/examples/)
+* [大規模なアプリケーションの構築](http://vuejs.org/guide/application.html)
 
-Get help from other Vue.js users:
+他の Vue.js ユーザーからヘルプを得る:
 
-* [Vue.js on Twitter](https://twitter.com/vuejs)
-* [Vue.js on Gitter](https://gitter.im/yyx990803/vue)
-* [Vue.js discussion repo](https://github.com/vuejs/Discussion/issues)
+* [Vue.js の Twitter](https://twitter.com/vuejs)
+* [Vue.js の Gitter](https://gitter.im/yyx990803/vue)
+* [Vue.js のディスカッションレポジトリ](https://github.com/vuejs/Discussion/issues)
 
-_If you have other helpful links to share, or find any of the links above no longer work, please [let us know](https://github.com/tastejs/todomvc/issues)._
+_もしあなたが他の役立つリンクをシェアしたい、またはもはや動作しない上記リンクのいずれかを見つけた場合、どうか[私達に教えてください](https://github.com/tastejs/todomvc/issues)._
 
-## Credit
+## クレジット
 
-This TodoMVC application was created by [Evan You](http://evanyou.me).
+この TodoMVC アプリケーションは [Evan You](http://evanyou.me) によって作成されました。
