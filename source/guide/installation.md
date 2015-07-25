@@ -25,7 +25,7 @@ gz_size: "22.36"
 
 ### CSP 準拠ビルド
 
-Google Chrome アプリのようなある環境では、Content Secuirty Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/yyx990803/vue/tree/csp/dist) を代わりに使用できます。
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/yyx990803/vue/tree/csp/dist) を代わりに使用できます。
 
 ## NPM
 
