@@ -24,7 +24,7 @@ is_new: true
 <content select="li"></content>
 ```
 
-select 属性は mustache expression も含むことができます。詳細については、[コンテンツ挿入](/guide/components.html#コンテンツ挿入)を参照してください。
+select 属性は mustache 表現も含むことができます。詳細については、[コンテンツ挿入](/guide/components.html#コンテンツ挿入)を参照してください。
 
 ### partial
 
