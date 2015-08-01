@@ -104,7 +104,7 @@ new Vue({
 
 あなたの data では、`myOptions` はオプションとして使いたい配列を指す keypath または expression である必要があります。
 
-配列はプレーンなテキストまたはオブジェクトを含むことができます。オブジェクトは、`{text:'', value:''}` の形式をとることができます。これにより、値とは異なるオプション文字列を表示することができます:
+配列はプレーンなテキストまたは `{text:'', value:''}` の形式のオブジェクトを含めることができます。このオブジェクト形式は、値とは異なるオプション文字列を表示することができます:
 
 ``` js
 [
@@ -157,7 +157,10 @@ Vue.filter('extract', function (value, keyToExtract) {
 ```
 
 ``` html
-<select options="users | extract 'name'"></select>
+<select
+  v-model="selectedUser"
+  options="users | extract 'name'">
+</select>
 ```
 
 上記フィルタは `[{ name: 'Bruce' }, { name: 'Chuck' }]` のようなデータを `['Bruce', 'Chuck']` に変換し、 正しいフォーマットになります。
