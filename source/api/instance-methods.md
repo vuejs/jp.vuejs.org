@@ -12,8 +12,9 @@ Vue インスタンスでは、データの変更を監視することができ�
 - **expOrFn** `String|Function`
 - **callback( newValue, oldValue )** `Function`
 - **options** `Object` *任意*
-  - **deep** `Boolean` *任意*
-  - **immediate** `Boolean` *任意*
+  - **deep** `Boolean`
+  - **immediate** `Boolean`
+  - **sync** `Boolean`
 
 Vue インスタンス上でのひとつの expression または computed function の変更を監視します。引数 expression には、単一の keypath か、実際の式を入れることができます:
 
