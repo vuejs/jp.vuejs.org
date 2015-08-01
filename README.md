@@ -2,12 +2,8 @@
 
 このサイトは [hexo](http://zespia.tw/hexo) で構築されています。サイトコンテンツは `source` の位置に markdown フォーマットで書かれています。プルリクエスト、歓迎します！
 
-## 貢献方法
-1. このレポジトリをフォークします!
-2. `lang-ja`ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
-3. 変更をコミットします: `git commit -am 'Fix some files'`
-4. フォークした自分のレポジトリにPushします: `git push origin my-topic-branch`
-5. プルリクエストを`vuejs-jp/vuejs.org`の`lang-ja`ブランチに送ります
+## 貢献ガイド
+[Vue.js 公式サイト日本語翻訳ガイド](https://github.com/vuejs-jp/vuejs.org/blob/lang-ja/CONTRIBUTING.md) を一読お願いします！
 
 ## 開発
 
@@ -19,7 +15,7 @@ $ npm install
 $ hexo server
 ```
 
-## 貢献者
+## 貢献者 (翻訳プロジェクト発起人)
 (アルファベット順)
 
 - [@hashrock](https://github.com/hashrock)
