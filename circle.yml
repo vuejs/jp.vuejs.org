@@ -12,9 +12,9 @@ deployment:
       - git submodule init
       - git submodule update
       - ./node_modules/.bin/hexo clean
-	  - rm -rf db.json
+      - rm -rf db.json
       - ./node_modules/.bin/hexo generate
-	  - cp -R ./todomvc public/examples
+      - cp -R ./todomvc public/examples
       - ./node_modules/.bin/hexo deploy
 general:
   branches:
