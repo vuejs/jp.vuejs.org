@@ -15,7 +15,7 @@ $ npm install
 $ hexo server
 ```
 
-## 貢献者 (翻訳プロジェクト発起人)
+## 翻訳プロジェクト発起人
 (アルファベット順)
 
 - [@hashrock](https://github.com/hashrock)
