@@ -3,6 +3,9 @@ all: update
 	hexo generate
 	cp -R ./todomvc public/examples
 
+test:
+	@echo 'test ignore !!' >/dev/null 2>&1
+
 deploy:	all
 	hexo deploy
 
