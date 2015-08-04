@@ -48,6 +48,4 @@ computed: {
 
 0.12.8 より前は、computed properties は getter のように振舞います。それにアクセスするたびに、getter 関数は再評価されます。0.12.8 ではこれは改善されました。computed properties はキャッシュされ、必要なときにだけ、lazily に再評価されます。
 
-<p class="tip">Vue.js 0.11 以前では、条件付きのステートメントが呼び出される際に、ユーザーが明示的に依存性を列挙する必要性がありました。0.11 以降ではその必要はありません。</p>
-
 次: [カスタムディレクティブ](/guide/custom-directive.html)

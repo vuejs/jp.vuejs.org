@@ -29,11 +29,13 @@ new Vue({
 
 ## Expression によるハンドラの呼び出し
 
-たくさんの子 ViewModel を生成する `v-repeat` と、`v-on` を同時に利用している時には `targetVM` が便利です。しかしながら、現在のコンテキストの ViewModel と等しい `this` を渡す呼び出し expression を使うほうがより便利でしょう:
+たくさんの子 ViewModel を生成する `v-repeat` と、`v-on` を同時に利用している時には `targetVM` が便利です。しかしながら、統合された現在のデータオブジェクトと等しい現在のエイリアスを渡す呼び出し expression を使うほうがより便利で明示的でしょう:
 
 ``` html
 <ul id="list">
-  <li v-repeat="items" v-on="click: toggle(this)">{{text}}</li>
+  <li v-repeat="item in items" v-on="click: toggle(item)">
+    {{text}}
+  </li>
 </ul>
 ```
 
