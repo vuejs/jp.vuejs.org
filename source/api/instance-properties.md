@@ -8,7 +8,7 @@ order: 3
 - **型:** `HTMLElement`
 - **Read only**
 
-Vue インスタンスが管理している DOM 要素。
+Vue インスタンスが管理している DOM 要素。これは[フラグメントインスタンス](/guide/best-practices.html#フラグメントインスタンス)向けであることに注意が必要で、`vm.$el` はフラグメントの開始位置を示すアンカーノードを返します。
 
 ### vm.$data
 
