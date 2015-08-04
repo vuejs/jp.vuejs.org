@@ -18,9 +18,18 @@ $ hexo server
 ## 翻訳プロジェクト発起人
 (アルファベット順)
 
-- [@hashrock](https://github.com/hashrock)
-- [@kazupon](https://github.com/kazupon)
-- [@kojimakazuto](https://github.com/kojimakazuto)
-- [@positiveflat](https://github.com/positiveflat)
-- [@tejitak](https://github.com/tejitak)
-- [@yasunobuigarashi](https://github.com/yasunobuigarashi)
+- [hashrock](https://github.com/hashrock)
+- [kazupon](https://github.com/kazupon)
+- [kojimakazuto](https://github.com/kojimakazuto)
+- [positiveflat](https://github.com/positiveflat)
+- [tejitak](https://github.com/tejitak)
+- [yasunobuigarashi](https://github.com/yasunobuigarashi)
+
+## 貢献者
+(アルファベット順)
+
+- [bouzuya](https://github.com/bouzuya)
+- [chi-bd](https://github.com/chi-bd)
+- [pocke](https://github.com/pocke)
+- [y-yagi](https://github.com/y-yagi)
+- [zakuro9715](https://github.com/zakuro9715)
