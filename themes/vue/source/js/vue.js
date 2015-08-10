@@ -1,5 +1,5 @@
 /*!
- * Vue.js v0.12.9
+ * Vue.js v0.12.10
  * (c) 2015 Evan You
  * Released under the MIT License.
  */
@@ -1250,8 +1250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    el = el.content
 	  }
 	  if (el.hasChildNodes()) {
-	    trim(el, el.firstChild)
-	    trim(el, el.lastChild)
+	    exports.trimNode(el)
 	    rawContent = asFragment
 	      ? document.createDocumentFragment()
 	      : document.createElement('div')
@@ -1264,9 +1263,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return rawContent
 	}
 
-	function trim (content, node) {
+	/**
+	 * Trim possible empty head/tail textNodes inside a parent.
+	 *
+	 * @param {Node} node
+	 */
+
+	exports.trimNode = function (node) {
+	  trim(node, node.firstChild)
+	  trim(node, node.lastChild)
+	}
+
+	function trim (parent, node) {
 	  if (node && node.nodeType === 3 && !node.data.trim()) {
-	    content.removeChild(node)
+	    parent.removeChild(node)
 	  }
 	}
 
@@ -2282,18 +2292,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * If this is a fragment instance, we only need to compile 1.
 	 *
-	 * This function does compile and link at the same time,
-	 * since root linkers can not be reused. It returns the
-	 * unlink function for potential context directives on the
-	 * container.
-	 *
 	 * @param {Vue} vm
 	 * @param {Element} el
 	 * @param {Object} options
 	 * @return {Function}
 	 */
 
-	exports.compileAndLinkRoot = function (vm, el, options) {
+	exports.compileRoot = function (el, options) {
 	  var containerAttrs = options._containerAttrs
 	  var replacerAttrs = options._replacerAttrs
 	  var contextLinkFn, replacerLinkFn
@@ -2318,23 +2323,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }
 
-	  // link context scope dirs
-	  var context = vm._context
-	  var contextDirs
-	  if (context && contextLinkFn) {
-	    contextDirs = linkAndCapture(function () {
-	      contextLinkFn(context, el)
-	    }, context)
+	  return function rootLinkFn (vm, el) {
+	    // link context scope dirs
+	    var context = vm._context
+	    var contextDirs
+	    if (context && contextLinkFn) {
+	      contextDirs = linkAndCapture(function () {
+	        contextLinkFn(context, el)
+	      }, context)
+	    }
+
+	    // link self
+	    var selfDirs = linkAndCapture(function () {
+	      if (replacerLinkFn) replacerLinkFn(vm, el)
+	    }, vm)
+
+	    // return the unlink function that tearsdown context
+	    // container directives.
+	    return makeUnlinkFn(vm, selfDirs, context, contextDirs)
 	  }
-
-	  // link self
-	  var selfDirs = linkAndCapture(function () {
-	    if (replacerLinkFn) replacerLinkFn(vm, el)
-	  }, vm)
-
-	  // return the unlink function that tearsdown context
-	  // container directives.
-	  return makeUnlinkFn(vm, selfDirs, context, contextDirs)
 	}
 
 	/**
@@ -2366,6 +2373,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	function compileElement (el, options) {
+	  // preprocess textareas.
+	  // textarea treats its text content as the initial value.
+	  // just bind it as a v-attr directive for value.
+	  if (el.tagName === 'TEXTAREA') {
+	    if (textParser.parse(el.value)) {
+	      el.setAttribute('value', el.value)
+	    }
+	  }
 	  var linkFn
 	  var hasAttrs = el.hasAttributes()
 	  // check terminal directives (repeat & if)
@@ -2383,16 +2398,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // normal directives
 	  if (!linkFn && hasAttrs) {
 	    linkFn = compileDirectives(el.attributes, options)
-	  }
-	  // if the element is a textarea, we need to interpolate
-	  // its content on initial render.
-	  if (el.tagName === 'TEXTAREA') {
-	    var realLinkFn = linkFn
-	    linkFn = function (vm, el) {
-	      el.value = vm.$interpolate(el.value)
-	      if (realLinkFn) realLinkFn(vm, el)
-	    }
-	    linkFn.terminal = true
 	  }
 	  return linkFn
 	}
@@ -4177,6 +4182,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  '</svg>'
 	]
 
+	/**
+	 * Check if a node is a supported template node with a
+	 * DocumentFragment content.
+	 *
+	 * @param {Node} node
+	 * @return {Boolean}
+	 */
+
+	function isRealTemplate (node) {
+	  return _.isTemplate(node) &&
+	    node.content instanceof DocumentFragment
+	}
+
 	var tagRE = /<([\w:]+)/
 	var entityRE = /&\w+;/
 
@@ -4241,10 +4259,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function nodeToFragment (node) {
 	  // if its a template tag and the browser supports it,
 	  // its content is already a document fragment.
-	  if (
-	    _.isTemplate(node) &&
-	    node.content instanceof DocumentFragment
-	  ) {
+	  if (isRealTemplate(node)) {
+	    _.trimNode(node.content)
 	    return node.content
 	  }
 	  // script template
@@ -4260,6 +4276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /* eslint-enable no-cond-assign */
 	    frag.appendChild(child)
 	  }
+	  _.trimNode(frag)
 	  return frag
 	}
 
@@ -4293,16 +4310,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	exports.clone = function (node) {
-	  var res = node.cloneNode(true)
 	  if (!node.querySelectorAll) {
-	    return res
+	    return node.cloneNode()
 	  }
+	  var res = node.cloneNode(true)
 	  var i, original, cloned
 	  /* istanbul ignore if */
 	  if (hasBrokenTemplate) {
+	    var clone = res
+	    if (isRealTemplate(node)) {
+	      node = node.content
+	      clone = res.content
+	    }
 	    original = node.querySelectorAll('template')
 	    if (original.length) {
-	      cloned = res.querySelectorAll('template')
+	      cloned = clone.querySelectorAll('template')
 	      i = cloned.length
 	      while (i--) {
 	        cloned[i].parentNode.replaceChild(
@@ -4352,6 +4374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // if the template is already a document fragment,
 	  // do nothing
 	  if (template instanceof DocumentFragment) {
+	    _.trimNode(template)
 	    return clone
 	      ? exports.clone(template)
 	      : template
@@ -4419,7 +4442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // cache object, with its constructor id as the key.
 	      this.keepAlive = this._checkParam('keep-alive') != null
 	      // wait for event before insertion
-	      this.readyEvent = this._checkParam('wait-for')
+	      this.waitForEvent = this._checkParam('wait-for')
 	      // check ref
 	      this.refID = this._checkParam(config.prefix + 'ref')
 	      if (this.keepAlive) {
@@ -4431,9 +4454,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.template = _.extractContent(this.el, true)
 	      }
 	      // component resolution related state
-	      this._pendingCb =
-	      this.componentID =
+	      this.pendingComponentCb =
 	      this.Component = null
+	      // transition related state
+	      this.pendingRemovals = 0
+	      this.pendingRemovalCb = null
 	      // if static, build right now.
 	      if (!this._isDynamicLiteral) {
 	        this.resolveComponent(this.expression, _.bind(this.initStatic, this))
@@ -4454,15 +4479,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  initStatic: function () {
-	    var child = this.build()
+	    // wait-for
 	    var anchor = this.anchor
+	    var options
+	    var waitFor = this.waitForEvent
+	    if (waitFor) {
+	      options = {
+	        created: function () {
+	          this.$once(waitFor, function () {
+	            this.$before(anchor)
+	          })
+	        }
+	      }
+	    }
+	    var child = this.build(options)
 	    this.setCurrent(child)
-	    if (!this.readyEvent) {
+	    if (!this.waitForEvent) {
 	      child.$before(anchor)
-	    } else {
-	      child.$once(this.readyEvent, function () {
-	        child.$before(anchor)
-	      })
 	    }
 	  },
 
@@ -4481,32 +4514,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * specified transition mode. Accepts a few additional
 	   * arguments specifically for vue-router.
 	   *
+	   * The callback is called when the full transition is
+	   * finished.
+	   *
 	   * @param {String} value
-	   * @param {Object} data
-	   * @param {Function} afterBuild
-	   * @param {Function} afterTransition
+	   * @param {Function} [cb]
 	   */
 
-	  setComponent: function (value, data, afterBuild, afterTransition) {
+	  setComponent: function (value, cb) {
 	    this.invalidatePending()
 	    if (!value) {
 	      // just remove current
 	      this.unbuild(true)
-	      this.remove(this.childVM, afterTransition)
+	      this.remove(this.childVM, cb)
 	      this.unsetCurrent()
 	    } else {
 	      this.resolveComponent(value, _.bind(function () {
 	        this.unbuild(true)
-	        var newComponent = this.build(data)
-	        /* istanbul ignore if */
-	        if (afterBuild) afterBuild(newComponent)
+	        var options
 	        var self = this
-	        if (this.readyEvent) {
-	          newComponent.$once(this.readyEvent, function () {
-	            self.transition(newComponent, afterTransition)
-	          })
-	        } else {
-	          this.transition(newComponent, afterTransition)
+	        var waitFor = this.waitForEvent
+	        if (waitFor) {
+	          options = {
+	            created: function () {
+	              this.$once(waitFor, function () {
+	                self.transition(this, cb)
+	              })
+	            }
+	          }
+	        }
+	        var newComponent = this.build(options)
+	        if (!waitFor) {
+	          this.transition(newComponent, cb)
 	        }
 	      }, this))
 	    }
@@ -4519,12 +4558,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  resolveComponent: function (id, cb) {
 	    var self = this
-	    this._pendingCb = _.cancellable(function (component) {
-	      self.componentID = id
-	      self.Component = component
+	    this.pendingComponentCb = _.cancellable(function (Component) {
+	      self.Component = Component
 	      cb()
 	    })
-	    this.vm._resolveComponent(id, this._pendingCb)
+	    this.vm._resolveComponent(id, this.pendingComponentCb)
 	  },
 
 	  /**
@@ -4534,9 +4572,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  invalidatePending: function () {
-	    if (this._pendingCb) {
-	      this._pendingCb.cancel()
-	      this._pendingCb = null
+	    if (this.pendingComponentCb) {
+	      this.pendingComponentCb.cancel()
+	      this.pendingComponentCb = null
 	    }
 	  },
 
@@ -4545,23 +4583,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * If keep alive and has cached instance, insert that
 	   * instance; otherwise build a new one and cache it.
 	   *
-	   * @param {Object} [data]
+	   * @param {Object} [extraOptions]
 	   * @return {Vue} - the created instance
 	   */
 
-	  build: function (data) {
+	  build: function (extraOptions) {
 	    if (this.keepAlive) {
-	      var cached = this.cache[this.componentID]
+	      var cached = this.cache[this.Component.cid]
 	      if (cached) {
 	        return cached
 	      }
 	    }
 	    if (this.Component) {
-	      var parent = this._host || this.vm
-	      var el = templateParser.clone(this.el)
-	      var child = parent.$addChild({
-	        el: el,
-	        data: data,
+	      // default options
+	      var options = {
+	        el: templateParser.clone(this.el),
 	        template: this.template,
 	        // if no inline-template, then the compiled
 	        // linker can be cached for better performance.
@@ -4569,9 +4605,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _asComponent: true,
 	        _isRouterView: this._isRouterView,
 	        _context: this.vm
-	      }, this.Component)
+	      }
+	      // extra options
+	      if (extraOptions) {
+	        _.extend(options, extraOptions)
+	      }
+	      var parent = this._host || this.vm
+	      var child = parent.$addChild(options, this.Component)
 	      if (this.keepAlive) {
-	        this.cache[this.componentID] = child
+	        this.cache[this.Component.cid] = child
 	      }
 	      return child
 	    }
@@ -4605,9 +4647,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  remove: function (child, cb) {
 	    var keepAlive = this.keepAlive
 	    if (child) {
+	      // we may have a component switch when a previous
+	      // component is still being transitioned out.
+	      // we want to trigger only one lastest insertion cb
+	      // when the existing transition finishes. (#1119)
+	      this.pendingRemovals++
+	      this.pendingRemovalCb = cb
+	      var self = this
 	      child.$remove(function () {
+	        self.pendingRemovals--
 	        if (!keepAlive) child._cleanup()
-	        if (cb) cb()
+	        if (!self.pendingRemovals && self.pendingRemovalCb) {
+	          self.pendingRemovalCb()
+	          self.pendingRemovalCb = null
+	        }
 	      })
 	    } else if (cb) {
 	      cb()
@@ -4635,9 +4688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        break
 	      case 'out-in':
 	        self.remove(current, function () {
-	          if (!target._isDestroyed) {
-	            target.$before(self.anchor, cb)
-	          }
+	          target.$before(self.anchor, cb)
 	        })
 	        break
 	      default:
@@ -5094,7 +5145,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  setAttr: function (attr, value) {
-	    if (value != null && value !== false) {
+	    if (attr === 'value' && attr in this.el) {
+	      if (!this.valueRemoved) {
+	        this.el.removeAttribute(attr)
+	        this.valueRemoved = true
+	      }
+	      this.el.value = value
+	    } else if (value != null && value !== false) {
 	      if (xlinkRE.test(attr)) {
 	        this.el.setAttributeNS(xlinkNS, attr, value)
 	      } else {
@@ -5102,9 +5159,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    } else {
 	      this.el.removeAttribute(attr)
-	    }
-	    if (attr === 'value' && 'value' in this.el) {
-	      this.el.value = value
 	    }
 	  }
 	}
@@ -5133,7 +5187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Append with transition.
 	 *
-	 * @oaram {Element} el
+	 * @param {Element} el
 	 * @param {Element} target
 	 * @param {Vue} vm
 	 * @param {Function} [cb]
@@ -5148,7 +5202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * InsertBefore with transition.
 	 *
-	 * @oaram {Element} el
+	 * @param {Element} el
 	 * @param {Element} target
 	 * @param {Vue} vm
 	 * @param {Function} [cb]
@@ -5163,7 +5217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Remove with transition.
 	 *
-	 * @oaram {Element} el
+	 * @param {Element} el
 	 * @param {Vue} vm
 	 * @param {Function} [cb]
 	 */
@@ -5178,7 +5232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Remove by appending to another parent with transition.
 	 * This is only used in block operations.
 	 *
-	 * @oaram {Element} el
+	 * @param {Element} el
 	 * @param {Element} target
 	 * @param {Vue} vm
 	 * @param {Function} [cb]
@@ -5226,7 +5280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Apply transitions with an operation callback.
 	 *
-	 * @oaram {Element} el
+	 * @param {Element} el
 	 * @param {Number} direction
 	 *                  1: enter
 	 *                 -1: leave
@@ -5444,6 +5498,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	var TYPE_TRANSITION = 1
 	var TYPE_ANIMATION = 2
 
+	var uid = 0
+
 	/**
 	 * A Transition object that encapsulates the state and logic
 	 * of the transition.
@@ -5455,6 +5511,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	function Transition (el, id, hooks, vm) {
+	  this.id = uid++
 	  this.el = el
 	  this.enterClass = id + '-enter'
 	  this.leaveClass = id + '-leave'
@@ -5467,6 +5524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.pendingJsCb =
 	  this.op =
 	  this.cb = null
+	  this.justEntered = false
 	  this.typeCache = {}
 	  // bind
 	  var self = this
@@ -5521,6 +5579,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	p.enterNextTick = function () {
+	  this.justEntered = true
+	  _.nextTick(function () {
+	    this.justEntered = false
+	  }, this)
 	  var type = this.getCssTransitionType(this.enterClass)
 	  var enterDone = this.enterDone
 	  if (type === TYPE_TRANSITION) {
@@ -5574,10 +5636,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  addClass(this.el, this.leaveClass)
 	  this.callHookWithCb('leave')
 	  this.cancel = this.hooks && this.hooks.leaveCancelled
-	  // only need to do leaveNextTick if there's no explicit
-	  // js callback
-	  if (!this.pendingJsCb) {
-	    queue.push(this.leaveNextTick)
+	  // only need to handle leaveDone if
+	  // 1. the transition is already done (synchronously called
+	  //    by the user, which causes this.op set to null)
+	  // 2. there's no explicit js callback
+	  if (this.op && !this.pendingJsCb) {
+	    // if a CSS transition leaves immediately after enter,
+	    // the transitionend event never fires. therefore we
+	    // detect such cases and end the leave immediately.
+	    if (this.justEntered) {
+	      this.leaveDone()
+	    } else {
+	      queue.push(this.leaveNextTick)
+	    }
 	  }
 	}
 
@@ -5607,6 +5678,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  removeClass(this.el, this.leaveClass)
 	  this.callHook('afterLeave')
 	  if (this.cb) this.cb()
+	  this.op = null
 	}
 
 	/**
@@ -5980,6 +6052,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  update: function (value) {
 	    var el = this.el
 	    el.selectedIndex = -1
+	    if (!value && value !== 0) {
+	      if (this.defaultOption) {
+	        this.defaultOption.selected = true
+	      }
+	      return
+	    }
 	    var multi = this.multiple && _.isArray(value)
 	    var options = el.options
 	    var i = options.length
@@ -6012,11 +6090,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function initOptions (expression) {
 	  var self = this
+	  var el = self.el
+	  var defaultOption = self.defaultOption = self.el.options[0]
 	  var descriptor = dirParser.parse(expression)[0]
 	  function optionUpdateWatcher (value) {
 	    if (_.isArray(value)) {
-	      self.el.innerHTML = ''
-	      buildOptions(self.el, value)
+	      // clear old options.
+	      // cannot reset innerHTML here because IE family get
+	      // confused during compilation.
+	      var i = el.options.length
+	      while (i--) {
+	        var option = el.options[i]
+	        if (option !== defaultOption) {
+	          el.removeChild(option)
+	        }
+	      }
+	      buildOptions(el, value)
 	      self.forceUpdate()
 	    } else {
 	      ("development") !== 'production' && _.warn(
@@ -6312,12 +6401,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  bind: function () {
 	    var self = this
 	    var el = this.el
+	    var number = this._checkParam('number') != null
+	    function getValue () {
+	      return number
+	        ? _.toNumber(el.value)
+	        : el.value
+	    }
 	    this.listener = function () {
-	      self.set(el.value)
+	      self.set(getValue())
 	    }
 	    _.on(el, 'change', this.listener)
 	    if (el.checked) {
-	      this._initValue = el.value
+	      this._initValue = getValue()
 	    }
 	  },
 
@@ -8665,24 +8760,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // root is always compiled per-instance, because
 	    // container attrs and props can be different every time.
-	    var rootUnlinkFn =
-	      compiler.compileAndLinkRoot(this, el, options)
+	    var rootLinker = compiler.compileRoot(el, options)
 
 	    // compile and link the rest
-	    var linker
+	    var contentLinkFn
 	    var ctor = this.constructor
 	    // component compilation can be cached
 	    // as long as it's not using inline-template
 	    if (options._linkerCachable) {
-	      linker = ctor.linker
-	      if (!linker) {
-	        linker = ctor.linker = compiler.compile(el, options)
+	      contentLinkFn = ctor.linker
+	      if (!contentLinkFn) {
+	        contentLinkFn = ctor.linker = compiler.compile(el, options)
 	      }
 	    }
-	    var contentUnlinkFn = linker
-	      ? linker(this, el)
+
+	    // link phase
+	    var rootUnlinkFn = rootLinker(this, el)
+	    var contentUnlinkFn = contentLinkFn
+	      ? contentLinkFn(this, el)
 	      : compiler.compile(el, options)(this, el, host)
 
+	    // register composite unlink function
+	    // to be called during instance destruction
 	    this._unlinkFn = function () {
 	      rootUnlinkFn()
 	      // passing destroying: true to avoid searching and
