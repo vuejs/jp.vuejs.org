@@ -60,7 +60,7 @@ Vue.filter('check-email', {
 ```
 
 ``` js
-+Vue.filter('concat', function (value, input) {
+Vue.filter('concat', function (value, input) {
   // ここは `input` === `this.userInput`
   return value + input
 })
