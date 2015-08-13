@@ -73,16 +73,16 @@ Vue インスタンスから与えられた式の値を抽出します。エラ�
 
 Vue インスタンスの data の、該当する keypath に値をセットします。もし path がなければ、作成されます。
 
-### vm.$add( keypath, value )
+### vm.$add( key, value )
 
-- **keypath** `String`
+- **key** `String`
 - **value** `*`
 
 Vue インスタンス（とその `$data` ）に ルートレベルのプロパティを追加します。ECMAScript 5 の制約により、Vue は直接オブジェクトに追加されたり、削除されたりするプロパティを検知することができません。そのため、追加や削除が必要な場合は、このメソッドや `vm.$delete` を使用する必要があります。このメソッドは現在の vm の 全てのウォッチャの dirty チェックを強制するため、必要なときにだけこれを使用するか確認してください。
 
-### vm.$delete( keypath )
+### vm.$delete( key )
 
-- **keypath** `String`
+- **key** `String`
 
 Vue インスタンス（それと、その `$data`）のルートレベルのプロパティを削除します。
 
