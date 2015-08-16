@@ -30,9 +30,9 @@ GitHub のビルドセットアップの例を探すことができます。
 
 ## ルーティング
 
-<p class="tip">オフィシャルな `vue-router` モジュールは開発がアクティブでまもなくリリースされます。</p>
+シングルページアプリケーション (Single Page Application: SPA) については、現在テクニカルプレビューな[オフィシャル vue-router ライブラリ](https://github.com/vuejs/vue-router)の使用を推奨します。詳細については、どうか vue-router の[ドキュメンテーション](http://vuejs.github.io/vue-router/)を参照してください。
 
-ハッシュチェンジへのイベントリスニングと、動的なコンポーネントを利用することで基本的なルーティングのロジックを実装することができます。
+もし、いくつかとてもシンプルなルーティングのロジックを必要としている場合は、ハッシュチェンジへのイベントリスニングと、動的なコンポーネントを利用することでそれを実装することができます。
 
 **例：:**
 
@@ -55,7 +55,7 @@ var app = new Vue({
 app.currentView = 'page1'
 ```
 
-このメカニズムでは、[Page.js](https://github.com/visionmedia/page.js) や [Director](https://github.com/flatiron/director) などの、ルーティングライブラリを活用すると非常に簡単です。
+このメカニズムでは、[Page.js](https://github.com/visionmedia/page.js) や [Director](https://github.com/flatiron/director) などの、外部ルーティングライブラリを活用すると非常に簡単です。
 
 ## サーバーとの通信
 
