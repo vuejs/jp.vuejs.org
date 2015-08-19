@@ -36,7 +36,7 @@ Vue.directive('my-directive', {
 <div v-my-directive="someValue"></div>
 ```
 
-`update` 関数のみが必要な場合は、definition object の代わりに関数を一つ渡すこともできます:
+`update` 関数のみが必要な場合は、definition object の代わりに関数を1つ渡すこともできます:
 
 
 ``` js
