@@ -68,7 +68,9 @@ Vue.use(require('my-plugin'), {
 
 ## 現在提供済みのプラグインとツール
 
+- [vue-router](https://github.com/vuejs/vue-router): シングルページアプリケーションを簡単に作るために Vue.js コアにぐっと統合された Vue.js 向けのオフィシャルルータ。
 - [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグイン。
+- [vue-async-data](https://github.com/vuejs/vue-async-data): 非同期データ読み込みプラグイン。
 - [vue-validator](https://github.com/vuejs/vue-validator): フォーム検証するためのプラグイン。
 - [vue-devtools](https://github.com/vuejs/vue-devtools): Vue.js アプリケーションのデバッグ用 Chrome devtools extension 。
 - [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加するプラグイン。
