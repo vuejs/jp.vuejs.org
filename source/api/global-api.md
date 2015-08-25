@@ -100,7 +100,7 @@ profile.$mount('#mount-point')
 
 - **callback** `Function`
 
-callback を延期し、DOM の更新サイクル後に実行されます。DOM の更新を待つ待ち受けるためにいくつかのデータを更新した直後に使用してください。さらに詳しくは[非同期更新の理解](/guide/directives.html#非同期更新の理解)を参照してください。
+callback を延期し、DOM の更新サイクル後に実行されます。DOM の更新を待つ待ち受けるためにいくつかのデータを更新した直後に使用してください。さらに詳しくは[非同期更新の理解](/guide/best-practices.html#非同期更新の理解)を参照してください。
 
 ### Vue.directive( id, [definition] )
 
