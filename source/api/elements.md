@@ -31,7 +31,7 @@ select 属性は mustache 表現も含むことができます。詳細につい
 `<partial>` タグは登録された partial 向けのアウトレットとして役に立ちます。partial なコンテンツが挿入された時、Vue によってコンパイルされます。`<partial>` 要素それ自身、置き換えられます。`name` 属性が必要です。例えば:
 
 ``` js
-// partila の登録
+// partial の登録
 Vue.partial('my-partial', '<p>This is a partial! {{msg}}</p>')
 ```
 
