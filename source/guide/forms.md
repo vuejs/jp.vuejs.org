@@ -199,6 +199,5 @@ new Vue({
 })
 </script>
 
-`debounce` パラメータはユーザーの入力イベントをデバウンスしないことに注意してください: それは基礎となるデータに "書き込み" 操作をデバウンスします。そのため、`debounce` を使用するときデータ変更に反応するために `vm.$watch()` を使用する必要があります。
-
+`debounce` パラメータはユーザーの入力イベントをデバウンスしないことに注意してください: それは基礎となるデータに "書き込み" 操作をデバウンスします。そのため、`debounce` を使用するときデータ変更に反応するために `vm.$watch()` を使用する必要があります。本物の DOM イベントをデバウンスするためには、[debounce filter](/api/filters.html#debounce) を使います。
 次: [Computed Properties](/guide/computed.html)
