@@ -36,19 +36,50 @@ Vue.filter('wrap', function (value, begin, end) {
 これまでフィルタはモデルから渡される値をビューに表示される前に変換するために使用していました。しかし、input 要素などのビューからモデルに書き込みがされる前に値を変換するフィルタの定義も可能です。
 
 ``` js
-Vue.filter('check-email', {
-  // read は任意のもので、
-  // ここではデモ用に記載します
-  read: function (val) {
-    return val
+Vue.filter('currencyDisplay', {
+  currencyDisplay: {
+    // model -> view
+    // input 要素が更新される際に値を変換します。
+    read: function(val) {
+      return '$'+val.toFixed(2)
+    },
+    // view -> model
+    // データが更新される際に値を変換します。
+    write: function(val, oldVal) {
+      var number = +val.replace(/[^\d.]/g, '')
+      return isNaN(number) ? 0 : number
+    }
+  }
+}
+```
+
+デモ:
+
+{% raw %}
+<div id="two-way-filter-demo" class="demo">
+  <input type="text" v-model="money | currencyDisplay">
+  <p>Model value: {{money}}</p>
+</div>
+<script>
+new Vue({
+  el: '#two-way-filter-demo',
+  data: {
+    money: 123.45
   },
-  // モデルへの書き出しが行われる前に
-  // 呼び出されます
-  write: function (val, oldVal) {
-    return isEmail(val) ? val : oldVal
+  filters: {
+    currencyDisplay: {
+      read: function(val) {
+        return '$'+val.toFixed(2)
+      },
+      write: function(val, oldVal) {
+        var number = +val.replace(/[^\d.]/g, '')
+        return isNaN(number) ? 0 : number
+      }
+    }
   }
 })
-```
+</script>
+{% endraw %}
 
 ## 動的な引数
 
