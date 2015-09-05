@@ -93,12 +93,11 @@ X が引数であるとすると、X ミリ秒の間デバウンスするため�
 
 ### filterBy
 
-**構文:** `filterBy searchKey [in dataKey]`.
+**構文:** `filterBy searchKey [in dataKey...]`.
 
-- このフィルタは `v-repeat` でのみ動作します
-- これは computed なフィルタです
+- このフィルタは配列の値に対してのみ動作します
 
-`v-repeat` でのみ、元の配列のフィルタされたバージョンを表示させます。`searchkey` 引数は ViewModel コンテキスト上のプロパティキーです。プロパティの値は文字列として検索するために利用されます:
+元の配列のフィルタされたバージョンを返します。`searchkey` 引数は ViewModel コンテキスト上のプロパティキーです。プロパティの値は文字列として検索するために利用されます:
 
 ``` html
 <input v-model="searchText">
@@ -118,28 +117,40 @@ X が引数であるとすると、X ミリ秒の間デバウンスするため�
 </ul>
 ```
 
-上記では、今まさに `searchText` の値が `name` プロパティで見つかった場合は、そのアイテムのみが一致します。なので、値 `'555'` な `searchText`は、もはやこのアイテムと一致しませんが、値 `'Jack'` なら一致します。
+上記では、今まさに `searchText` の値が `name` プロパティで見つかった場合は、そのアイテムのみが一致します。文字列リテラルの引数であることを明示するために、`name` をクオートで囲む必要があることに注意してください。この制約により、値 `'555'` な `searchText` は、もはやこのアイテムと一致しませんが、値 `'Jack'` なら一致します。
 
-最後に、リテラル引数を指定するためシングルクオートを利用できます:
+> 0.12.11 以降のみ
+
+0.12.11 からは複数のデータキーを渡すことができます:
 
 ``` html
-<ul>
-  <li v-repeat="users | filterBy '555' in 'phone'">{{name}}</li>
-</ul>
+<li v-repeat="user in users | filterBy searchText in 'name' 'phone'"></li>
+```
+
+または、配列の値で動的に引数を渡すことができます:
+
+``` html
+<!-- fields = ['fieldA', 'fieldB'] -->
+<div v-repeat="user in users | filterBy searchText in fields">
+```
+
+または、1つのカスタムフィルタ関数のみを渡します:
+
+``` html
+<div v-repeat="user in users | filterBy myCustomFilterFunction">
 ```
 
 ### orderBy
 
 **構文:** `orderBy sortKey [reverseKey]`.
 
-- このフィルタは `v-repeat` でのみ動作します
-- これは computed なフィルタです
+- このフィルタは配列の値に対してのみ動作します
 
-`v-repeat` で表示された結果をソートします。`sortKey` 引数は ViewModel コンテキスト上のプロパティキーです。そのプロパティの値は配列のアイテムをソートするためのキーとして利用されます。任意な `reverseKey` 引数もまた、ViewModel コンテキスト上のプロパティキーです。しかし、この値の真偽は、結果が反転されるべきかどうかを決定します。
+入力された配列のソートされたバージョンを返します。`sortKey` 引数は ViewModel コンテキスト上のプロパティキーです。そのプロパティの値は配列のアイテムをソートするためのキーとして利用されます。任意な `reverseKey` 引数もまた、ViewModel コンテキスト上のプロパティキーです。しかし、この値の真偽は、結果が反転されるべきかどうかを決定します。
 
 ``` html
 <ul>
-  <li v-repeat="users | orderBy field reverse">{{name}}</li>
+  <li v-repeat="user in users | orderBy field reverse">{{name}}</li>
 </ul>
 ```
 
@@ -157,6 +168,6 @@ new Vue({
 
 ``` html
 <ul>
-  <li v-repeat="users | orderBy 'name' -1">{{name}}</li>
+  <li v-repeat="user in users | orderBy 'name' -1">{{name}}</li>
 </ul>
 ```
