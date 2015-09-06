@@ -93,7 +93,7 @@ var vm = new Vue({
 
 上記の例では、computed property は `vm.msg` を頼っています。これは Vue インスタンス上で監視されているデータプロパティであるため、reactive property であるとされます。`vm.msg` が変化したときは、`vm.example` の値は再評価されます。
 
-しかし、Vue のデータ監視システムとの間で何もしないため、`Date.now()` は reactive property **ではありません**。そのため、プログラムで `vm.computed` にアクセスしたとき、`vm.msg` の再評価が行われない限りは同じタイムスタンプが残り続けるでしょう。
+しかし、Vue のデータ監視システムとの間で何もしないため、`Date.now()` は reactive property **ではありません**。そのため、プログラムで `vm.example` にアクセスしたとき、`vm.msg` の再評価が行われない限りは同じタイムスタンプが残り続けるでしょう。
 
 アクセスするたびに `vm.example` を単純に再評価して欲しいというような、シンプルな getter のような挙動を保ちたいという場合もあるでしょう。0.12.11 からは、特定の computed property のキャッシュを無効化できます。
 
