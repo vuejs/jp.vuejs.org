@@ -113,7 +113,7 @@ X が引数であるとすると、X ミリ秒の間デバウンスするため�
 ``` html
 <input v-model="searchText">
 <ul>
-  <li v-repeat="users | filterBy searchText in name">{{name}}</li>
+  <li v-repeat="user in users | filterBy searchText in name">{{name}}</li>
 </ul>
 ```
 
