@@ -72,9 +72,9 @@ computed: {
 
 ### computed property のキャッシュ
 
-0.12.8 より前は、computed property は getter のように振舞っていました - アクセスするたびに getter 関数は再評価されていました。0.12.8 ではこれが改善されました - computed property はキャッシュされ reactive dependency のうち1つでも変化した場合にのみ再評価されます。
+0.12.8 より前は、computed properties は getter のように振舞っていました - アクセスするたびに getter 関数は再評価されていました。0.12.8 ではこれが改善され、computed properties はキャッシュされて reactive dependencies のうち1つでも変化した場合にのみ再評価されます。
 
-巨大な配列のループと多くの計算を必要とする高価な computed property A を持っているとします。そして、他に A に依存する computed property を持っているとします。キャッシュが無いと、A の getter が必要以上に多く呼び出され、潜在的なパフォーマンスの問題の原因になります。キャッシュがあると、A の値は依存するものの値が変化しない限りキャッシュされ、繰り返しアクセスしても必要のない計算を引き起こしません。
+巨大な配列のループと多くの計算を必要とする高価な computed property A を持っているとします。そして、他に A に依存する computed properties を持っているとします。キャッシュが無いと、A の getter が必要以上に多く呼び出され、潜在的なパフォーマンスの問題の原因になります。キャッシュがあると、A の値は依存するものの値が変化しない限りキャッシュされ、繰り返しアクセスしても必要のない計算を引き起こしません。
 
 しかしながら、"reactive dependency" がどのように考えられているのか理解することは重要です:
 
@@ -91,9 +91,9 @@ var vm = new Vue({
 })
 ```
 
-上記の例では、computed property は `vm.msg` を頼っています。これは Vue インスタンス上で監視されているデータプロパティであるため、reactive property であるとされます。`vm.msg` が変化したときは、`vm.example` の値は再評価されます。
+上記の例では、computed property は `vm.msg` を頼っています。これは Vue インスタンス上で監視されているデータプロパティであるため、reactive dependency であるとされます。`vm.msg` が変化したときは、`vm.example` の値は再評価されます。
 
-しかし、Vue のデータ監視システムとの間で何もしないため、`Date.now()` は reactive property **ではありません**。そのため、プログラムで `vm.example` にアクセスしたとき、`vm.msg` の再評価が行われない限りは同じタイムスタンプが残り続けるでしょう。
+しかし、Vue のデータ監視システムとの間で何もしないため、`Date.now()` は reactive dependency **ではありません**。そのため、プログラムで `vm.example` にアクセスしたとき、`vm.msg` の再評価が行われない限りは同じタイムスタンプが残り続けるでしょう。
 
 アクセスするたびに `vm.example` を単純に再評価して欲しいというような、シンプルな getter のような挙動を保ちたいという場合もあるでしょう。0.12.11 からは、特定の computed property のキャッシュを無効化できます。
 
@@ -108,6 +108,6 @@ computed: {
 }
 ```
 
-これで、`vm.example` にアクセスするたびにタイムスタンプは更新されるでしょう。しかし、これは JavaScript 内でのプログラムでのアクセスにのみ影響します; データバインディングは依然として依存関係ドリブンです。テンプレート内で `{% raw %}{{example}}{% endraw %}` として computed property をバインドした場合、DOM は reactive property が変化したときのみ更新されるでしょう。
+これで、`vm.example` にアクセスするたびにタイムスタンプは更新されるでしょう。しかし、これは JavaScript 内でのプログラムでのアクセスにのみ影響します; データバインディングは依然として依存関係ドリブンです。テンプレート内で `{% raw %}{{example}}{% endraw %}` として computed property をバインドした場合、DOM は reactive dependency が変化したときのみ更新されるでしょう。
 
 次: [カスタムディレクティブ](/guide/custom-directive.html)
