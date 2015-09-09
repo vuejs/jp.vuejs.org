@@ -1,5 +1,5 @@
 /*!
- * Vue.js v0.12.10
+ * Vue.js v0.12.13
  * (c) 2015 Evan You
  * Released under the MIT License.
  */
@@ -7,7 +7,7 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define(factory);
+		define([], factory);
 	else if(typeof exports === 'object')
 		exports["Vue"] = factory();
 	else
@@ -154,23 +154,838 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var lang = __webpack_require__(4)
+	var lang = __webpack_require__(2)
 	var extend = lang.extend
 
 	extend(exports, lang)
-	extend(exports, __webpack_require__(5))
+	extend(exports, __webpack_require__(3))
+	extend(exports, __webpack_require__(4))
 	extend(exports, __webpack_require__(6))
-	extend(exports, __webpack_require__(2))
 	extend(exports, __webpack_require__(7))
 	extend(exports, __webpack_require__(8))
 
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	/**
+	 * Check is a string starts with $ or _
+	 *
+	 * @param {String} str
+	 * @return {Boolean}
+	 */
+
+	exports.isReserved = function (str) {
+	  var c = (str + '').charCodeAt(0)
+	  return c === 0x24 || c === 0x5F
+	}
+
+	/**
+	 * Guard text output, make sure undefined outputs
+	 * empty string
+	 *
+	 * @param {*} value
+	 * @return {String}
+	 */
+
+	exports.toString = function (value) {
+	  return value == null
+	    ? ''
+	    : value.toString()
+	}
+
+	/**
+	 * Check and convert possible numeric strings to numbers
+	 * before setting back to data
+	 *
+	 * @param {*} value
+	 * @return {*|Number}
+	 */
+
+	exports.toNumber = function (value) {
+	  if (typeof value !== 'string') {
+	    return value
+	  } else {
+	    var parsed = Number(value)
+	    return isNaN(parsed)
+	      ? value
+	      : parsed
+	  }
+	}
+
+	/**
+	 * Convert string boolean literals into real booleans.
+	 *
+	 * @param {*} value
+	 * @return {*|Boolean}
+	 */
+
+	exports.toBoolean = function (value) {
+	  return value === 'true'
+	    ? true
+	    : value === 'false'
+	      ? false
+	      : value
+	}
+
+	/**
+	 * Strip quotes from a string
+	 *
+	 * @param {String} str
+	 * @return {String | false}
+	 */
+
+	exports.stripQuotes = function (str) {
+	  var a = str.charCodeAt(0)
+	  var b = str.charCodeAt(str.length - 1)
+	  return a === b && (a === 0x22 || a === 0x27)
+	    ? str.slice(1, -1)
+	    : false
+	}
+
+	/**
+	 * Camelize a hyphen-delmited string.
+	 *
+	 * @param {String} str
+	 * @return {String}
+	 */
+
+	exports.camelize = function (str) {
+	  return str.replace(/-(\w)/g, toUpper)
+	}
+
+	function toUpper (_, c) {
+	  return c ? c.toUpperCase() : ''
+	}
+
+	/**
+	 * Hyphenate a camelCase string.
+	 *
+	 * @param {String} str
+	 * @return {String}
+	 */
+
+	exports.hyphenate = function (str) {
+	  return str
+	    .replace(/([a-z\d])([A-Z])/g, '$1-$2')
+	    .toLowerCase()
+	}
+
+	/**
+	 * Converts hyphen/underscore/slash delimitered names into
+	 * camelized classNames.
+	 *
+	 * e.g. my-component => MyComponent
+	 *      some_else    => SomeElse
+	 *      some/comp    => SomeComp
+	 *
+	 * @param {String} str
+	 * @return {String}
+	 */
+
+	var classifyRE = /(?:^|[-_\/])(\w)/g
+	exports.classify = function (str) {
+	  return str.replace(classifyRE, toUpper)
+	}
+
+	/**
+	 * Simple bind, faster than native
+	 *
+	 * @param {Function} fn
+	 * @param {Object} ctx
+	 * @return {Function}
+	 */
+
+	exports.bind = function (fn, ctx) {
+	  return function (a) {
+	    var l = arguments.length
+	    return l
+	      ? l > 1
+	        ? fn.apply(ctx, arguments)
+	        : fn.call(ctx, a)
+	      : fn.call(ctx)
+	  }
+	}
+
+	/**
+	 * Convert an Array-like object to a real Array.
+	 *
+	 * @param {Array-like} list
+	 * @param {Number} [start] - start index
+	 * @return {Array}
+	 */
+
+	exports.toArray = function (list, start) {
+	  start = start || 0
+	  var i = list.length - start
+	  var ret = new Array(i)
+	  while (i--) {
+	    ret[i] = list[i + start]
+	  }
+	  return ret
+	}
+
+	/**
+	 * Mix properties into target object.
+	 *
+	 * @param {Object} to
+	 * @param {Object} from
+	 */
+
+	exports.extend = function (to, from) {
+	  for (var key in from) {
+	    to[key] = from[key]
+	  }
+	  return to
+	}
+
+	/**
+	 * Quick object check - this is primarily used to tell
+	 * Objects from primitive values when we know the value
+	 * is a JSON-compliant type.
+	 *
+	 * @param {*} obj
+	 * @return {Boolean}
+	 */
+
+	exports.isObject = function (obj) {
+	  return obj !== null && typeof obj === 'object'
+	}
+
+	/**
+	 * Strict object type check. Only returns true
+	 * for plain JavaScript objects.
+	 *
+	 * @param {*} obj
+	 * @return {Boolean}
+	 */
+
+	var toString = Object.prototype.toString
+	var OBJECT_STRING = '[object Object]'
+	exports.isPlainObject = function (obj) {
+	  return toString.call(obj) === OBJECT_STRING
+	}
+
+	/**
+	 * Array type check.
+	 *
+	 * @param {*} obj
+	 * @return {Boolean}
+	 */
+
+	exports.isArray = Array.isArray
+
+	/**
+	 * Define a non-enumerable property
+	 *
+	 * @param {Object} obj
+	 * @param {String} key
+	 * @param {*} val
+	 * @param {Boolean} [enumerable]
+	 */
+
+	exports.define = function (obj, key, val, enumerable) {
+	  Object.defineProperty(obj, key, {
+	    value: val,
+	    enumerable: !!enumerable,
+	    writable: true,
+	    configurable: true
+	  })
+	}
+
+	/**
+	 * Debounce a function so it only gets called after the
+	 * input stops arriving after the given wait period.
+	 *
+	 * @param {Function} func
+	 * @param {Number} wait
+	 * @return {Function} - the debounced function
+	 */
+
+	exports.debounce = function (func, wait) {
+	  var timeout, args, context, timestamp, result
+	  var later = function () {
+	    var last = Date.now() - timestamp
+	    if (last < wait && last >= 0) {
+	      timeout = setTimeout(later, wait - last)
+	    } else {
+	      timeout = null
+	      result = func.apply(context, args)
+	      if (!timeout) context = args = null
+	    }
+	  }
+	  return function () {
+	    context = this
+	    args = arguments
+	    timestamp = Date.now()
+	    if (!timeout) {
+	      timeout = setTimeout(later, wait)
+	    }
+	    return result
+	  }
+	}
+
+	/**
+	 * Manual indexOf because it's slightly faster than
+	 * native.
+	 *
+	 * @param {Array} arr
+	 * @param {*} obj
+	 */
+
+	exports.indexOf = function (arr, obj) {
+	  var i = arr.length
+	  while (i--) {
+	    if (arr[i] === obj) return i
+	  }
+	  return -1
+	}
+
+	/**
+	 * Make a cancellable version of an async callback.
+	 *
+	 * @param {Function} fn
+	 * @return {Function}
+	 */
+
+	exports.cancellable = function (fn) {
+	  var cb = function () {
+	    if (!cb.cancelled) {
+	      return fn.apply(this, arguments)
+	    }
+	  }
+	  cb.cancel = function () {
+	    cb.cancelled = true
+	  }
+	  return cb
+	}
+
+	/**
+	 * Check if two values are loosely equal - that is,
+	 * if they are plain objects, do they have the same shape?
+	 *
+	 * @param {*} a
+	 * @param {*} b
+	 * @return {Boolean}
+	 */
+
+	exports.looseEqual = function (a, b) {
+	  /* eslint-disable eqeqeq */
+	  return a == b || (
+	    exports.isObject(a) && exports.isObject(b)
+	      ? JSON.stringify(a) === JSON.stringify(b)
+	      : false
+	  )
+	  /* eslint-enable eqeqeq */
+	}
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	// can we use __proto__?
+	exports.hasProto = '__proto__' in {}
+
+	// Browser environment sniffing
+	var inBrowser = exports.inBrowser =
+	  typeof window !== 'undefined' &&
+	  Object.prototype.toString.call(window) !== '[object Object]'
+
+	exports.isIE9 =
+	  inBrowser &&
+	  navigator.userAgent.toLowerCase().indexOf('msie 9.0') > 0
+
+	exports.isAndroid =
+	  inBrowser &&
+	  navigator.userAgent.toLowerCase().indexOf('android') > 0
+
+	// Transition property/event sniffing
+	if (inBrowser && !exports.isIE9) {
+	  var isWebkitTrans =
+	    window.ontransitionend === undefined &&
+	    window.onwebkittransitionend !== undefined
+	  var isWebkitAnim =
+	    window.onanimationend === undefined &&
+	    window.onwebkitanimationend !== undefined
+	  exports.transitionProp = isWebkitTrans
+	    ? 'WebkitTransition'
+	    : 'transition'
+	  exports.transitionEndEvent = isWebkitTrans
+	    ? 'webkitTransitionEnd'
+	    : 'transitionend'
+	  exports.animationProp = isWebkitAnim
+	    ? 'WebkitAnimation'
+	    : 'animation'
+	  exports.animationEndEvent = isWebkitAnim
+	    ? 'webkitAnimationEnd'
+	    : 'animationend'
+	}
+
+	/**
+	 * Defer a task to execute it asynchronously. Ideally this
+	 * should be executed as a microtask, so we leverage
+	 * MutationObserver if it's available, and fallback to
+	 * setTimeout(0).
+	 *
+	 * @param {Function} cb
+	 * @param {Object} ctx
+	 */
+
+	exports.nextTick = (function () {
+	  var callbacks = []
+	  var pending = false
+	  var timerFunc
+	  function nextTickHandler () {
+	    pending = false
+	    var copies = callbacks.slice(0)
+	    callbacks = []
+	    for (var i = 0; i < copies.length; i++) {
+	      copies[i]()
+	    }
+	  }
+	  /* istanbul ignore if */
+	  if (typeof MutationObserver !== 'undefined') {
+	    var counter = 1
+	    var observer = new MutationObserver(nextTickHandler)
+	    var textNode = document.createTextNode(counter)
+	    observer.observe(textNode, {
+	      characterData: true
+	    })
+	    timerFunc = function () {
+	      counter = (counter + 1) % 2
+	      textNode.data = counter
+	    }
+	  } else {
+	    timerFunc = setTimeout
+	  }
+	  return function (cb, ctx) {
+	    var func = ctx
+	      ? function () { cb.call(ctx) }
+	      : cb
+	    callbacks.push(func)
+	    if (pending) return
+	    pending = true
+	    timerFunc(nextTickHandler, 0)
+	  }
+	})()
+
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
+
+	/**
+	 * Query an element selector if it's not an element already.
+	 *
+	 * @param {String|Element} el
+	 * @return {Element}
+	 */
+
+	exports.query = function (el) {
+	  if (typeof el === 'string') {
+	    var selector = el
+	    el = document.querySelector(el)
+	    if (!el) {
+	      ("development") !== 'production' && _.warn(
+	        'Cannot find element: ' + selector
+	      )
+	    }
+	  }
+	  return el
+	}
+
+	/**
+	 * Check if a node is in the document.
+	 * Note: document.documentElement.contains should work here
+	 * but always returns false for comment nodes in phantomjs,
+	 * making unit tests difficult. This is fixed byy doing the
+	 * contains() check on the node's parentNode instead of
+	 * the node itself.
+	 *
+	 * @param {Node} node
+	 * @return {Boolean}
+	 */
+
+	exports.inDoc = function (node) {
+	  var doc = document.documentElement
+	  var parent = node && node.parentNode
+	  return doc === node ||
+	    doc === parent ||
+	    !!(parent && parent.nodeType === 1 && (doc.contains(parent)))
+	}
+
+	/**
+	 * Extract an attribute from a node.
+	 *
+	 * @param {Node} node
+	 * @param {String} attr
+	 */
+
+	exports.attr = function (node, attr) {
+	  attr = config.prefix + attr
+	  var val = node.getAttribute(attr)
+	  if (val !== null) {
+	    node.removeAttribute(attr)
+	  }
+	  return val
+	}
+
+	/**
+	 * Insert el before target
+	 *
+	 * @param {Element} el
+	 * @param {Element} target
+	 */
+
+	exports.before = function (el, target) {
+	  target.parentNode.insertBefore(el, target)
+	}
+
+	/**
+	 * Insert el after target
+	 *
+	 * @param {Element} el
+	 * @param {Element} target
+	 */
+
+	exports.after = function (el, target) {
+	  if (target.nextSibling) {
+	    exports.before(el, target.nextSibling)
+	  } else {
+	    target.parentNode.appendChild(el)
+	  }
+	}
+
+	/**
+	 * Remove el from DOM
+	 *
+	 * @param {Element} el
+	 */
+
+	exports.remove = function (el) {
+	  el.parentNode.removeChild(el)
+	}
+
+	/**
+	 * Prepend el to target
+	 *
+	 * @param {Element} el
+	 * @param {Element} target
+	 */
+
+	exports.prepend = function (el, target) {
+	  if (target.firstChild) {
+	    exports.before(el, target.firstChild)
+	  } else {
+	    target.appendChild(el)
+	  }
+	}
+
+	/**
+	 * Replace target with el
+	 *
+	 * @param {Element} target
+	 * @param {Element} el
+	 */
+
+	exports.replace = function (target, el) {
+	  var parent = target.parentNode
+	  if (parent) {
+	    parent.replaceChild(el, target)
+	  }
+	}
+
+	/**
+	 * Add event listener shorthand.
+	 *
+	 * @param {Element} el
+	 * @param {String} event
+	 * @param {Function} cb
+	 */
+
+	exports.on = function (el, event, cb) {
+	  el.addEventListener(event, cb)
+	}
+
+	/**
+	 * Remove event listener shorthand.
+	 *
+	 * @param {Element} el
+	 * @param {String} event
+	 * @param {Function} cb
+	 */
+
+	exports.off = function (el, event, cb) {
+	  el.removeEventListener(event, cb)
+	}
+
+	/**
+	 * Add class with compatibility for IE & SVG
+	 *
+	 * @param {Element} el
+	 * @param {Strong} cls
+	 */
+
+	exports.addClass = function (el, cls) {
+	  if (el.classList) {
+	    el.classList.add(cls)
+	  } else {
+	    var cur = ' ' + (el.getAttribute('class') || '') + ' '
+	    if (cur.indexOf(' ' + cls + ' ') < 0) {
+	      el.setAttribute('class', (cur + cls).trim())
+	    }
+	  }
+	}
+
+	/**
+	 * Remove class with compatibility for IE & SVG
+	 *
+	 * @param {Element} el
+	 * @param {Strong} cls
+	 */
+
+	exports.removeClass = function (el, cls) {
+	  if (el.classList) {
+	    el.classList.remove(cls)
+	  } else {
+	    var cur = ' ' + (el.getAttribute('class') || '') + ' '
+	    var tar = ' ' + cls + ' '
+	    while (cur.indexOf(tar) >= 0) {
+	      cur = cur.replace(tar, ' ')
+	    }
+	    el.setAttribute('class', cur.trim())
+	  }
+	}
+
+	/**
+	 * Extract raw content inside an element into a temporary
+	 * container div
+	 *
+	 * @param {Element} el
+	 * @param {Boolean} asFragment
+	 * @return {Element}
+	 */
+
+	exports.extractContent = function (el, asFragment) {
+	  var child
+	  var rawContent
+	  /* istanbul ignore if */
+	  if (
+	    exports.isTemplate(el) &&
+	    el.content instanceof DocumentFragment
+	  ) {
+	    el = el.content
+	  }
+	  if (el.hasChildNodes()) {
+	    exports.trimNode(el)
+	    rawContent = asFragment
+	      ? document.createDocumentFragment()
+	      : document.createElement('div')
+	    /* eslint-disable no-cond-assign */
+	    while (child = el.firstChild) {
+	    /* eslint-enable no-cond-assign */
+	      rawContent.appendChild(child)
+	    }
+	  }
+	  return rawContent
+	}
+
+	/**
+	 * Trim possible empty head/tail textNodes inside a parent.
+	 *
+	 * @param {Node} node
+	 */
+
+	exports.trimNode = function (node) {
+	  trim(node, node.firstChild)
+	  trim(node, node.lastChild)
+	}
+
+	function trim (parent, node) {
+	  if (node && node.nodeType === 3 && !node.data.trim()) {
+	    parent.removeChild(node)
+	  }
+	}
+
+	/**
+	 * Check if an element is a template tag.
+	 * Note if the template appears inside an SVG its tagName
+	 * will be in lowercase.
+	 *
+	 * @param {Element} el
+	 */
+
+	exports.isTemplate = function (el) {
+	  return el.tagName &&
+	    el.tagName.toLowerCase() === 'template'
+	}
+
+	/**
+	 * Create an "anchor" for performing dom insertion/removals.
+	 * This is used in a number of scenarios:
+	 * - fragment instance
+	 * - v-html
+	 * - v-if
+	 * - component
+	 * - repeat
+	 *
+	 * @param {String} content
+	 * @param {Boolean} persist - IE trashes empty textNodes on
+	 *                            cloneNode(true), so in certain
+	 *                            cases the anchor needs to be
+	 *                            non-empty to be persisted in
+	 *                            templates.
+	 * @return {Comment|Text}
+	 */
+
+	exports.createAnchor = function (content, persist) {
+	  return config.debug
+	    ? document.createComment(content)
+	    : document.createTextNode(persist ? ' ' : '')
+	}
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = {
+
+	  /**
+	   * The prefix to look for when parsing directives.
+	   *
+	   * @type {String}
+	   */
+
+	  prefix: 'v-',
+
+	  /**
+	   * Whether to print debug messages.
+	   * Also enables stack trace for warnings.
+	   *
+	   * @type {Boolean}
+	   */
+
+	  debug: false,
+
+	  /**
+	   * Strict mode.
+	   * Disables asset lookup in the view parent chain.
+	   */
+
+	  strict: false,
+
+	  /**
+	   * Whether to suppress warnings.
+	   *
+	   * @type {Boolean}
+	   */
+
+	  silent: false,
+
+	  /**
+	   * Whether allow observer to alter data objects'
+	   * __proto__.
+	   *
+	   * @type {Boolean}
+	   */
+
+	  proto: true,
+
+	  /**
+	   * Whether to parse mustache tags in templates.
+	   *
+	   * @type {Boolean}
+	   */
+
+	  interpolate: true,
+
+	  /**
+	   * Whether to use async rendering.
+	   */
+
+	  async: true,
+
+	  /**
+	   * Whether to warn against errors caught when evaluating
+	   * expressions.
+	   */
+
+	  warnExpressionErrors: true,
+
+	  /**
+	   * Internal flag to indicate the delimiters have been
+	   * changed.
+	   *
+	   * @type {Boolean}
+	   */
+
+	  _delimitersChanged: true,
+
+	  /**
+	   * List of asset types that a component can own.
+	   *
+	   * @type {Array}
+	   */
+
+	  _assetTypes: [
+	    'component',
+	    'directive',
+	    'elementDirective',
+	    'filter',
+	    'transition',
+	    'partial'
+	  ],
+
+	  /**
+	   * prop binding modes
+	   */
+
+	  _propBindingModes: {
+	    ONE_WAY: 0,
+	    TWO_WAY: 1,
+	    ONE_TIME: 2
+	  },
+
+	  /**
+	   * Max circular updates allowed in a batcher flush cycle.
+	   */
+
+	  _maxUpdateCount: 100
+
+	}
+
+	/**
+	 * Interpolation delimiters.
+	 * We need to mark the changed flag so that the text parser
+	 * knows it needs to recompile the regex.
+	 *
+	 * @type {Array<String>}
+	 */
+
+	var delimiters = ['{{', '}}']
+	Object.defineProperty(module.exports, 'delimiters', {
+	  get: function () {
+	    return delimiters
+	  },
+	  set: function (val) {
+	    delimiters = val
+	    this._delimitersChanged = true
+	  }
+	})
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+	var config = __webpack_require__(5)
 	var extend = _.extend
 
 	/**
@@ -512,809 +1327,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.resolveAsset = function resolve (options, type, id) {
 	  var camelizedId = _.camelize(id)
-	  var asset = options[type][id] || options[type][camelizedId]
+	  var pascalizedId = camelizedId.charAt(0).toUpperCase() + camelizedId.slice(1)
+	  var assets = options[type]
+	  var asset = assets[id] || assets[camelizedId] || assets[pascalizedId]
 	  while (
-	    !asset && options._parent &&
+	    !asset &&
+	    options._parent &&
 	    (!config.strict || options._repeat)
 	  ) {
-	    options = options._parent.$options
-	    asset = options[type][id] || options[type][camelizedId]
+	    options = (options._context || options._parent).$options
+	    assets = options[type]
+	    asset = assets[id] || assets[camelizedId] || assets[pascalizedId]
 	  }
 	  return asset
-	}
-
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-
-	  /**
-	   * The prefix to look for when parsing directives.
-	   *
-	   * @type {String}
-	   */
-
-	  prefix: 'v-',
-
-	  /**
-	   * Whether to print debug messages.
-	   * Also enables stack trace for warnings.
-	   *
-	   * @type {Boolean}
-	   */
-
-	  debug: false,
-
-	  /**
-	   * Strict mode.
-	   * Disables asset lookup in the view parent chain.
-	   */
-
-	  strict: false,
-
-	  /**
-	   * Whether to suppress warnings.
-	   *
-	   * @type {Boolean}
-	   */
-
-	  silent: false,
-
-	  /**
-	   * Whether allow observer to alter data objects'
-	   * __proto__.
-	   *
-	   * @type {Boolean}
-	   */
-
-	  proto: true,
-
-	  /**
-	   * Whether to parse mustache tags in templates.
-	   *
-	   * @type {Boolean}
-	   */
-
-	  interpolate: true,
-
-	  /**
-	   * Whether to use async rendering.
-	   */
-
-	  async: true,
-
-	  /**
-	   * Whether to warn against errors caught when evaluating
-	   * expressions.
-	   */
-
-	  warnExpressionErrors: true,
-
-	  /**
-	   * Internal flag to indicate the delimiters have been
-	   * changed.
-	   *
-	   * @type {Boolean}
-	   */
-
-	  _delimitersChanged: true,
-
-	  /**
-	   * List of asset types that a component can own.
-	   *
-	   * @type {Array}
-	   */
-
-	  _assetTypes: [
-	    'component',
-	    'directive',
-	    'elementDirective',
-	    'filter',
-	    'transition',
-	    'partial'
-	  ],
-
-	  /**
-	   * prop binding modes
-	   */
-
-	  _propBindingModes: {
-	    ONE_WAY: 0,
-	    TWO_WAY: 1,
-	    ONE_TIME: 2
-	  },
-
-	  /**
-	   * Max circular updates allowed in a batcher flush cycle.
-	   */
-
-	  _maxUpdateCount: 100
-
-	}
-
-	/**
-	 * Interpolation delimiters.
-	 * We need to mark the changed flag so that the text parser
-	 * knows it needs to recompile the regex.
-	 *
-	 * @type {Array<String>}
-	 */
-
-	var delimiters = ['{{', '}}']
-	Object.defineProperty(module.exports, 'delimiters', {
-	  get: function () {
-	    return delimiters
-	  },
-	  set: function (val) {
-	    delimiters = val
-	    this._delimitersChanged = true
-	  }
-	})
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Check is a string starts with $ or _
-	 *
-	 * @param {String} str
-	 * @return {Boolean}
-	 */
-
-	exports.isReserved = function (str) {
-	  var c = (str + '').charCodeAt(0)
-	  return c === 0x24 || c === 0x5F
-	}
-
-	/**
-	 * Guard text output, make sure undefined outputs
-	 * empty string
-	 *
-	 * @param {*} value
-	 * @return {String}
-	 */
-
-	exports.toString = function (value) {
-	  return value == null
-	    ? ''
-	    : value.toString()
-	}
-
-	/**
-	 * Check and convert possible numeric strings to numbers
-	 * before setting back to data
-	 *
-	 * @param {*} value
-	 * @return {*|Number}
-	 */
-
-	exports.toNumber = function (value) {
-	  if (typeof value !== 'string') {
-	    return value
-	  } else {
-	    var parsed = Number(value)
-	    return isNaN(parsed)
-	      ? value
-	      : parsed
-	  }
-	}
-
-	/**
-	 * Convert string boolean literals into real booleans.
-	 *
-	 * @param {*} value
-	 * @return {*|Boolean}
-	 */
-
-	exports.toBoolean = function (value) {
-	  return value === 'true'
-	    ? true
-	    : value === 'false'
-	      ? false
-	      : value
-	}
-
-	/**
-	 * Strip quotes from a string
-	 *
-	 * @param {String} str
-	 * @return {String | false}
-	 */
-
-	exports.stripQuotes = function (str) {
-	  var a = str.charCodeAt(0)
-	  var b = str.charCodeAt(str.length - 1)
-	  return a === b && (a === 0x22 || a === 0x27)
-	    ? str.slice(1, -1)
-	    : false
-	}
-
-	/**
-	 * Camelize a hyphen-delmited string.
-	 *
-	 * @param {String} str
-	 * @return {String}
-	 */
-
-	exports.camelize = function (str) {
-	  return str.replace(/-(\w)/g, toUpper)
-	}
-
-	function toUpper (_, c) {
-	  return c ? c.toUpperCase() : ''
-	}
-
-	/**
-	 * Hyphenate a camelCase string.
-	 *
-	 * @param {String} str
-	 * @return {String}
-	 */
-
-	exports.hyphenate = function (str) {
-	  return str
-	    .replace(/([a-z\d])([A-Z])/g, '$1-$2')
-	    .toLowerCase()
-	}
-
-	/**
-	 * Converts hyphen/underscore/slash delimitered names into
-	 * camelized classNames.
-	 *
-	 * e.g. my-component => MyComponent
-	 *      some_else    => SomeElse
-	 *      some/comp    => SomeComp
-	 *
-	 * @param {String} str
-	 * @return {String}
-	 */
-
-	var classifyRE = /(?:^|[-_\/])(\w)/g
-	exports.classify = function (str) {
-	  return str.replace(classifyRE, toUpper)
-	}
-
-	/**
-	 * Simple bind, faster than native
-	 *
-	 * @param {Function} fn
-	 * @param {Object} ctx
-	 * @return {Function}
-	 */
-
-	exports.bind = function (fn, ctx) {
-	  return function (a) {
-	    var l = arguments.length
-	    return l
-	      ? l > 1
-	        ? fn.apply(ctx, arguments)
-	        : fn.call(ctx, a)
-	      : fn.call(ctx)
-	  }
-	}
-
-	/**
-	 * Convert an Array-like object to a real Array.
-	 *
-	 * @param {Array-like} list
-	 * @param {Number} [start] - start index
-	 * @return {Array}
-	 */
-
-	exports.toArray = function (list, start) {
-	  start = start || 0
-	  var i = list.length - start
-	  var ret = new Array(i)
-	  while (i--) {
-	    ret[i] = list[i + start]
-	  }
-	  return ret
-	}
-
-	/**
-	 * Mix properties into target object.
-	 *
-	 * @param {Object} to
-	 * @param {Object} from
-	 */
-
-	exports.extend = function (to, from) {
-	  for (var key in from) {
-	    to[key] = from[key]
-	  }
-	  return to
-	}
-
-	/**
-	 * Quick object check - this is primarily used to tell
-	 * Objects from primitive values when we know the value
-	 * is a JSON-compliant type.
-	 *
-	 * @param {*} obj
-	 * @return {Boolean}
-	 */
-
-	exports.isObject = function (obj) {
-	  return obj !== null && typeof obj === 'object'
-	}
-
-	/**
-	 * Strict object type check. Only returns true
-	 * for plain JavaScript objects.
-	 *
-	 * @param {*} obj
-	 * @return {Boolean}
-	 */
-
-	var toString = Object.prototype.toString
-	exports.isPlainObject = function (obj) {
-	  return toString.call(obj) === '[object Object]'
-	}
-
-	/**
-	 * Array type check.
-	 *
-	 * @param {*} obj
-	 * @return {Boolean}
-	 */
-
-	exports.isArray = Array.isArray
-
-	/**
-	 * Define a non-enumerable property
-	 *
-	 * @param {Object} obj
-	 * @param {String} key
-	 * @param {*} val
-	 * @param {Boolean} [enumerable]
-	 */
-
-	exports.define = function (obj, key, val, enumerable) {
-	  Object.defineProperty(obj, key, {
-	    value: val,
-	    enumerable: !!enumerable,
-	    writable: true,
-	    configurable: true
-	  })
-	}
-
-	/**
-	 * Debounce a function so it only gets called after the
-	 * input stops arriving after the given wait period.
-	 *
-	 * @param {Function} func
-	 * @param {Number} wait
-	 * @return {Function} - the debounced function
-	 */
-
-	exports.debounce = function (func, wait) {
-	  var timeout, args, context, timestamp, result
-	  var later = function () {
-	    var last = Date.now() - timestamp
-	    if (last < wait && last >= 0) {
-	      timeout = setTimeout(later, wait - last)
-	    } else {
-	      timeout = null
-	      result = func.apply(context, args)
-	      if (!timeout) context = args = null
-	    }
-	  }
-	  return function () {
-	    context = this
-	    args = arguments
-	    timestamp = Date.now()
-	    if (!timeout) {
-	      timeout = setTimeout(later, wait)
-	    }
-	    return result
-	  }
-	}
-
-	/**
-	 * Manual indexOf because it's slightly faster than
-	 * native.
-	 *
-	 * @param {Array} arr
-	 * @param {*} obj
-	 */
-
-	exports.indexOf = function (arr, obj) {
-	  for (var i = 0, l = arr.length; i < l; i++) {
-	    if (arr[i] === obj) return i
-	  }
-	  return -1
-	}
-
-	/**
-	 * Make a cancellable version of an async callback.
-	 *
-	 * @param {Function} fn
-	 * @return {Function}
-	 */
-
-	exports.cancellable = function (fn) {
-	  var cb = function () {
-	    if (!cb.cancelled) {
-	      return fn.apply(this, arguments)
-	    }
-	  }
-	  cb.cancel = function () {
-	    cb.cancelled = true
-	  }
-	  return cb
-	}
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// can we use __proto__?
-	exports.hasProto = '__proto__' in {}
-
-	// Browser environment sniffing
-	var inBrowser = exports.inBrowser =
-	  typeof window !== 'undefined' &&
-	  Object.prototype.toString.call(window) !== '[object Object]'
-
-	exports.isIE9 =
-	  inBrowser &&
-	  navigator.userAgent.toLowerCase().indexOf('msie 9.0') > 0
-
-	exports.isAndroid =
-	  inBrowser &&
-	  navigator.userAgent.toLowerCase().indexOf('android') > 0
-
-	// Transition property/event sniffing
-	if (inBrowser && !exports.isIE9) {
-	  var isWebkitTrans =
-	    window.ontransitionend === undefined &&
-	    window.onwebkittransitionend !== undefined
-	  var isWebkitAnim =
-	    window.onanimationend === undefined &&
-	    window.onwebkitanimationend !== undefined
-	  exports.transitionProp = isWebkitTrans
-	    ? 'WebkitTransition'
-	    : 'transition'
-	  exports.transitionEndEvent = isWebkitTrans
-	    ? 'webkitTransitionEnd'
-	    : 'transitionend'
-	  exports.animationProp = isWebkitAnim
-	    ? 'WebkitAnimation'
-	    : 'animation'
-	  exports.animationEndEvent = isWebkitAnim
-	    ? 'webkitAnimationEnd'
-	    : 'animationend'
-	}
-
-	/**
-	 * Defer a task to execute it asynchronously. Ideally this
-	 * should be executed as a microtask, so we leverage
-	 * MutationObserver if it's available, and fallback to
-	 * setTimeout(0).
-	 *
-	 * @param {Function} cb
-	 * @param {Object} ctx
-	 */
-
-	exports.nextTick = (function () {
-	  var callbacks = []
-	  var pending = false
-	  var timerFunc
-	  function handle () {
-	    pending = false
-	    var copies = callbacks.slice(0)
-	    callbacks = []
-	    for (var i = 0; i < copies.length; i++) {
-	      copies[i]()
-	    }
-	  }
-	  /* istanbul ignore if */
-	  if (typeof MutationObserver !== 'undefined') {
-	    var counter = 1
-	    var observer = new MutationObserver(handle)
-	    var textNode = document.createTextNode(counter)
-	    observer.observe(textNode, {
-	      characterData: true
-	    })
-	    timerFunc = function () {
-	      counter = (counter + 1) % 2
-	      textNode.data = counter
-	    }
-	  } else {
-	    timerFunc = setTimeout
-	  }
-	  return function (cb, ctx) {
-	    var func = ctx
-	      ? function () { cb.call(ctx) }
-	      : cb
-	    callbacks.push(func)
-	    if (pending) return
-	    pending = true
-	    timerFunc(handle, 0)
-	  }
-	})()
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
-
-	/**
-	 * Query an element selector if it's not an element already.
-	 *
-	 * @param {String|Element} el
-	 * @return {Element}
-	 */
-
-	exports.query = function (el) {
-	  if (typeof el === 'string') {
-	    var selector = el
-	    el = document.querySelector(el)
-	    if (!el) {
-	      ("development") !== 'production' && _.warn(
-	        'Cannot find element: ' + selector
-	      )
-	    }
-	  }
-	  return el
-	}
-
-	/**
-	 * Check if a node is in the document.
-	 * Note: document.documentElement.contains should work here
-	 * but always returns false for comment nodes in phantomjs,
-	 * making unit tests difficult. This is fixed byy doing the
-	 * contains() check on the node's parentNode instead of
-	 * the node itself.
-	 *
-	 * @param {Node} node
-	 * @return {Boolean}
-	 */
-
-	exports.inDoc = function (node) {
-	  var doc = document.documentElement
-	  var parent = node && node.parentNode
-	  return doc === node ||
-	    doc === parent ||
-	    !!(parent && parent.nodeType === 1 && (doc.contains(parent)))
-	}
-
-	/**
-	 * Extract an attribute from a node.
-	 *
-	 * @param {Node} node
-	 * @param {String} attr
-	 */
-
-	exports.attr = function (node, attr) {
-	  attr = config.prefix + attr
-	  var val = node.getAttribute(attr)
-	  if (val !== null) {
-	    node.removeAttribute(attr)
-	  }
-	  return val
-	}
-
-	/**
-	 * Insert el before target
-	 *
-	 * @param {Element} el
-	 * @param {Element} target
-	 */
-
-	exports.before = function (el, target) {
-	  target.parentNode.insertBefore(el, target)
-	}
-
-	/**
-	 * Insert el after target
-	 *
-	 * @param {Element} el
-	 * @param {Element} target
-	 */
-
-	exports.after = function (el, target) {
-	  if (target.nextSibling) {
-	    exports.before(el, target.nextSibling)
-	  } else {
-	    target.parentNode.appendChild(el)
-	  }
-	}
-
-	/**
-	 * Remove el from DOM
-	 *
-	 * @param {Element} el
-	 */
-
-	exports.remove = function (el) {
-	  el.parentNode.removeChild(el)
-	}
-
-	/**
-	 * Prepend el to target
-	 *
-	 * @param {Element} el
-	 * @param {Element} target
-	 */
-
-	exports.prepend = function (el, target) {
-	  if (target.firstChild) {
-	    exports.before(el, target.firstChild)
-	  } else {
-	    target.appendChild(el)
-	  }
-	}
-
-	/**
-	 * Replace target with el
-	 *
-	 * @param {Element} target
-	 * @param {Element} el
-	 */
-
-	exports.replace = function (target, el) {
-	  var parent = target.parentNode
-	  if (parent) {
-	    parent.replaceChild(el, target)
-	  }
-	}
-
-	/**
-	 * Add event listener shorthand.
-	 *
-	 * @param {Element} el
-	 * @param {String} event
-	 * @param {Function} cb
-	 */
-
-	exports.on = function (el, event, cb) {
-	  el.addEventListener(event, cb)
-	}
-
-	/**
-	 * Remove event listener shorthand.
-	 *
-	 * @param {Element} el
-	 * @param {String} event
-	 * @param {Function} cb
-	 */
-
-	exports.off = function (el, event, cb) {
-	  el.removeEventListener(event, cb)
-	}
-
-	/**
-	 * Add class with compatibility for IE & SVG
-	 *
-	 * @param {Element} el
-	 * @param {Strong} cls
-	 */
-
-	exports.addClass = function (el, cls) {
-	  if (el.classList) {
-	    el.classList.add(cls)
-	  } else {
-	    var cur = ' ' + (el.getAttribute('class') || '') + ' '
-	    if (cur.indexOf(' ' + cls + ' ') < 0) {
-	      el.setAttribute('class', (cur + cls).trim())
-	    }
-	  }
-	}
-
-	/**
-	 * Remove class with compatibility for IE & SVG
-	 *
-	 * @param {Element} el
-	 * @param {Strong} cls
-	 */
-
-	exports.removeClass = function (el, cls) {
-	  if (el.classList) {
-	    el.classList.remove(cls)
-	  } else {
-	    var cur = ' ' + (el.getAttribute('class') || '') + ' '
-	    var tar = ' ' + cls + ' '
-	    while (cur.indexOf(tar) >= 0) {
-	      cur = cur.replace(tar, ' ')
-	    }
-	    el.setAttribute('class', cur.trim())
-	  }
-	}
-
-	/**
-	 * Extract raw content inside an element into a temporary
-	 * container div
-	 *
-	 * @param {Element} el
-	 * @param {Boolean} asFragment
-	 * @return {Element}
-	 */
-
-	exports.extractContent = function (el, asFragment) {
-	  var child
-	  var rawContent
-	  /* istanbul ignore if */
-	  if (
-	    exports.isTemplate(el) &&
-	    el.content instanceof DocumentFragment
-	  ) {
-	    el = el.content
-	  }
-	  if (el.hasChildNodes()) {
-	    exports.trimNode(el)
-	    rawContent = asFragment
-	      ? document.createDocumentFragment()
-	      : document.createElement('div')
-	    /* eslint-disable no-cond-assign */
-	    while (child = el.firstChild) {
-	    /* eslint-enable no-cond-assign */
-	      rawContent.appendChild(child)
-	    }
-	  }
-	  return rawContent
-	}
-
-	/**
-	 * Trim possible empty head/tail textNodes inside a parent.
-	 *
-	 * @param {Node} node
-	 */
-
-	exports.trimNode = function (node) {
-	  trim(node, node.firstChild)
-	  trim(node, node.lastChild)
-	}
-
-	function trim (parent, node) {
-	  if (node && node.nodeType === 3 && !node.data.trim()) {
-	    parent.removeChild(node)
-	  }
-	}
-
-	/**
-	 * Check if an element is a template tag.
-	 * Note if the template appears inside an SVG its tagName
-	 * will be in lowercase.
-	 *
-	 * @param {Element} el
-	 */
-
-	exports.isTemplate = function (el) {
-	  return el.tagName &&
-	    el.tagName.toLowerCase() === 'template'
-	}
-
-	/**
-	 * Create an "anchor" for performing dom insertion/removals.
-	 * This is used in a number of scenarios:
-	 * - fragment instance
-	 * - v-html
-	 * - v-if
-	 * - component
-	 * - repeat
-	 *
-	 * @param {String} content
-	 * @param {Boolean} persist - IE trashes empty textNodes on
-	 *                            cloneNode(true), so in certain
-	 *                            cases the anchor needs to be
-	 *                            non-empty to be persisted in
-	 *                            templates.
-	 * @return {Comment|Text}
-	 */
-
-	exports.createAnchor = function (content, persist) {
-	  return config.debug
-	    ? document.createComment(content)
-	    : document.createTextNode(persist ? ' ' : '')
 	}
 
 
@@ -1458,7 +1483,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	if (true) {
 
-	  var config = __webpack_require__(3)
+	  var config = __webpack_require__(5)
 	  var hasConsole = typeof console !== 'undefined'
 
 	  /**
@@ -1523,7 +1548,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
 
 	/**
 	 * Expose useful internals
@@ -1532,13 +1557,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.util = _
 	exports.config = config
 	exports.nextTick = _.nextTick
-	exports.compiler = __webpack_require__(13)
+	exports.compiler = __webpack_require__(10)
 
 	exports.parsers = {
-	  path: __webpack_require__(16),
-	  text: __webpack_require__(10),
+	  path: __webpack_require__(20),
+	  text: __webpack_require__(13),
 	  template: __webpack_require__(22),
-	  directive: __webpack_require__(12),
+	  directive: __webpack_require__(15),
 	  expression: __webpack_require__(19)
 	}
 
@@ -1647,506 +1672,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Cache = __webpack_require__(11)
-	var config = __webpack_require__(3)
-	var dirParser = __webpack_require__(12)
-	var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g
-	var cache, tagRE, htmlRE, firstChar, lastChar
+	var _ = __webpack_require__(1)
 
-	/**
-	 * Escape a string so it can be used in a RegExp
-	 * constructor.
-	 *
-	 * @param {String} str
-	 */
-
-	function escapeRegex (str) {
-	  return str.replace(regexEscapeRE, '\\$&')
-	}
-
-	/**
-	 * Compile the interpolation tag regex.
-	 *
-	 * @return {RegExp}
-	 */
-
-	function compileRegex () {
-	  config._delimitersChanged = false
-	  var open = config.delimiters[0]
-	  var close = config.delimiters[1]
-	  firstChar = open.charAt(0)
-	  lastChar = close.charAt(close.length - 1)
-	  var firstCharRE = escapeRegex(firstChar)
-	  var lastCharRE = escapeRegex(lastChar)
-	  var openRE = escapeRegex(open)
-	  var closeRE = escapeRegex(close)
-	  tagRE = new RegExp(
-	    firstCharRE + '?' + openRE +
-	    '(.+?)' +
-	    closeRE + lastCharRE + '?',
-	    'g'
-	  )
-	  htmlRE = new RegExp(
-	    '^' + firstCharRE + openRE +
-	    '.*' +
-	    closeRE + lastCharRE + '$'
-	  )
-	  // reset cache
-	  cache = new Cache(1000)
-	}
-
-	/**
-	 * Parse a template text string into an array of tokens.
-	 *
-	 * @param {String} text
-	 * @return {Array<Object> | null}
-	 *               - {String} type
-	 *               - {String} value
-	 *               - {Boolean} [html]
-	 *               - {Boolean} [oneTime]
-	 */
-
-	exports.parse = function (text) {
-	  if (config._delimitersChanged) {
-	    compileRegex()
-	  }
-	  var hit = cache.get(text)
-	  if (hit) {
-	    return hit
-	  }
-	  text = text.replace(/\n/g, '')
-	  if (!tagRE.test(text)) {
-	    return null
-	  }
-	  var tokens = []
-	  var lastIndex = tagRE.lastIndex = 0
-	  var match, index, value, first, oneTime, twoWay
-	  /* eslint-disable no-cond-assign */
-	  while (match = tagRE.exec(text)) {
-	  /* eslint-enable no-cond-assign */
-	    index = match.index
-	    // push text token
-	    if (index > lastIndex) {
-	      tokens.push({
-	        value: text.slice(lastIndex, index)
-	      })
-	    }
-	    // tag token
-	    first = match[1].charCodeAt(0)
-	    oneTime = first === 42 // *
-	    twoWay = first === 64  // @
-	    value = oneTime || twoWay
-	      ? match[1].slice(1)
-	      : match[1]
-	    tokens.push({
-	      tag: true,
-	      value: value.trim(),
-	      html: htmlRE.test(match[0]),
-	      oneTime: oneTime,
-	      twoWay: twoWay
-	    })
-	    lastIndex = index + match[0].length
-	  }
-	  if (lastIndex < text.length) {
-	    tokens.push({
-	      value: text.slice(lastIndex)
-	    })
-	  }
-	  cache.put(text, tokens)
-	  return tokens
-	}
-
-	/**
-	 * Format a list of tokens into an expression.
-	 * e.g. tokens parsed from 'a {{b}} c' can be serialized
-	 * into one single expression as '"a " + b + " c"'.
-	 *
-	 * @param {Array} tokens
-	 * @param {Vue} [vm]
-	 * @return {String}
-	 */
-
-	exports.tokensToExp = function (tokens, vm) {
-	  return tokens.length > 1
-	    ? tokens.map(function (token) {
-	        return formatToken(token, vm)
-	      }).join('+')
-	    : formatToken(tokens[0], vm, true)
-	}
-
-	/**
-	 * Format a single token.
-	 *
-	 * @param {Object} token
-	 * @param {Vue} [vm]
-	 * @param {Boolean} single
-	 * @return {String}
-	 */
-
-	function formatToken (token, vm, single) {
-	  return token.tag
-	    ? vm && token.oneTime
-	      ? '"' + vm.$eval(token.value) + '"'
-	      : inlineFilters(token.value, single)
-	    : '"' + token.value + '"'
-	}
-
-	/**
-	 * For an attribute with multiple interpolation tags,
-	 * e.g. attr="some-{{thing | filter}}", in order to combine
-	 * the whole thing into a single watchable expression, we
-	 * have to inline those filters. This function does exactly
-	 * that. This is a bit hacky but it avoids heavy changes
-	 * to directive parser and watcher mechanism.
-	 *
-	 * @param {String} exp
-	 * @param {Boolean} single
-	 * @return {String}
-	 */
-
-	var filterRE = /[^|]\|[^|]/
-	function inlineFilters (exp, single) {
-	  if (!filterRE.test(exp)) {
-	    return single
-	      ? exp
-	      : '(' + exp + ')'
-	  } else {
-	    var dir = dirParser.parse(exp)[0]
-	    if (!dir.filters) {
-	      return '(' + exp + ')'
-	    } else {
-	      return 'this._applyFilters(' +
-	        dir.expression + // value
-	        ',null,' +       // oldValue (null for read)
-	        JSON.stringify(dir.filters) + // filter descriptors
-	        ',false)'        // write?
-	    }
-	  }
-	}
+	_.extend(exports, __webpack_require__(11))
+	_.extend(exports, __webpack_require__(24))
 
 
 /***/ },
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
-	 * A doubly linked list-based Least Recently Used (LRU)
-	 * cache. Will keep most recently used items while
-	 * discarding least recently used items when its limit is
-	 * reached. This is a bare-bone version of
-	 * Rasmus Andersson's js-lru:
-	 *
-	 *   https://github.com/rsms/js-lru
-	 *
-	 * @param {Number} limit
-	 * @constructor
-	 */
-
-	function Cache (limit) {
-	  this.size = 0
-	  this.limit = limit
-	  this.head = this.tail = undefined
-	  this._keymap = Object.create(null)
-	}
-
-	var p = Cache.prototype
-
-	/**
-	 * Put <value> into the cache associated with <key>.
-	 * Returns the entry which was removed to make room for
-	 * the new entry. Otherwise undefined is returned.
-	 * (i.e. if there was enough room already).
-	 *
-	 * @param {String} key
-	 * @param {*} value
-	 * @return {Entry|undefined}
-	 */
-
-	p.put = function (key, value) {
-	  var entry = {
-	    key: key,
-	    value: value
-	  }
-	  this._keymap[key] = entry
-	  if (this.tail) {
-	    this.tail.newer = entry
-	    entry.older = this.tail
-	  } else {
-	    this.head = entry
-	  }
-	  this.tail = entry
-	  if (this.size === this.limit) {
-	    return this.shift()
-	  } else {
-	    this.size++
-	  }
-	}
-
-	/**
-	 * Purge the least recently used (oldest) entry from the
-	 * cache. Returns the removed entry or undefined if the
-	 * cache was empty.
-	 */
-
-	p.shift = function () {
-	  var entry = this.head
-	  if (entry) {
-	    this.head = this.head.newer
-	    this.head.older = undefined
-	    entry.newer = entry.older = undefined
-	    this._keymap[entry.key] = undefined
-	  }
-	  return entry
-	}
-
-	/**
-	 * Get and register recent use of <key>. Returns the value
-	 * associated with <key> or undefined if not in cache.
-	 *
-	 * @param {String} key
-	 * @param {Boolean} returnEntry
-	 * @return {Entry|*}
-	 */
-
-	p.get = function (key, returnEntry) {
-	  var entry = this._keymap[key]
-	  if (entry === undefined) return
-	  if (entry === this.tail) {
-	    return returnEntry
-	      ? entry
-	      : entry.value
-	  }
-	  // HEAD--------------TAIL
-	  //   <.older   .newer>
-	  //  <--- add direction --
-	  //   A  B  C  <D>  E
-	  if (entry.newer) {
-	    if (entry === this.head) {
-	      this.head = entry.newer
-	    }
-	    entry.newer.older = entry.older // C <-- E.
-	  }
-	  if (entry.older) {
-	    entry.older.newer = entry.newer // C. --> E
-	  }
-	  entry.newer = undefined // D --x
-	  entry.older = this.tail // D. --> E
-	  if (this.tail) {
-	    this.tail.newer = entry // E. <-- D
-	  }
-	  this.tail = entry
-	  return returnEntry
-	    ? entry
-	    : entry.value
-	}
-
-	module.exports = Cache
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var _ = __webpack_require__(1)
-	var Cache = __webpack_require__(11)
-	var cache = new Cache(1000)
-	var argRE = /^[^\{\?]+$|^'[^']*'$|^"[^"]*"$/
-	var filterTokenRE = /[^\s'"]+|'[^']+'|"[^"]+"/g
-	var reservedArgRE = /^in$|^-?\d+/
-
-	/**
-	 * Parser state
-	 */
-
-	var str
-	var c, i, l
-	var inSingle
-	var inDouble
-	var curly
-	var square
-	var paren
-	var begin
-	var argIndex
-	var dirs
-	var dir
-	var lastFilterIndex
-	var arg
-
-	/**
-	 * Push a directive object into the result Array
-	 */
-
-	function pushDir () {
-	  dir.raw = str.slice(begin, i).trim()
-	  if (dir.expression === undefined) {
-	    dir.expression = str.slice(argIndex, i).trim()
-	  } else if (lastFilterIndex !== begin) {
-	    pushFilter()
-	  }
-	  if (i === 0 || dir.expression) {
-	    dirs.push(dir)
-	  }
-	}
-
-	/**
-	 * Push a filter to the current directive object
-	 */
-
-	function pushFilter () {
-	  var exp = str.slice(lastFilterIndex, i).trim()
-	  var filter
-	  if (exp) {
-	    filter = {}
-	    var tokens = exp.match(filterTokenRE)
-	    filter.name = tokens[0]
-	    if (tokens.length > 1) {
-	      filter.args = tokens.slice(1).map(processFilterArg)
-	    }
-	  }
-	  if (filter) {
-	    (dir.filters = dir.filters || []).push(filter)
-	  }
-	  lastFilterIndex = i + 1
-	}
-
-	/**
-	 * Check if an argument is dynamic and strip quotes.
-	 *
-	 * @param {String} arg
-	 * @return {Object}
-	 */
-
-	function processFilterArg (arg) {
-	  var stripped = reservedArgRE.test(arg)
-	    ? arg
-	    : _.stripQuotes(arg)
-	  return {
-	    value: stripped || arg,
-	    dynamic: !stripped
-	  }
-	}
-
-	/**
-	 * Parse a directive string into an Array of AST-like
-	 * objects representing directives.
-	 *
-	 * Example:
-	 *
-	 * "click: a = a + 1 | uppercase" will yield:
-	 * {
-	 *   arg: 'click',
-	 *   expression: 'a = a + 1',
-	 *   filters: [
-	 *     { name: 'uppercase', args: null }
-	 *   ]
-	 * }
-	 *
-	 * @param {String} str
-	 * @return {Array<Object>}
-	 */
-
-	exports.parse = function (s) {
-
-	  var hit = cache.get(s)
-	  if (hit) {
-	    return hit
-	  }
-
-	  // reset parser state
-	  str = s
-	  inSingle = inDouble = false
-	  curly = square = paren = begin = argIndex = 0
-	  lastFilterIndex = 0
-	  dirs = []
-	  dir = {}
-	  arg = null
-
-	  for (i = 0, l = str.length; i < l; i++) {
-	    c = str.charCodeAt(i)
-	    if (inSingle) {
-	      // check single quote
-	      if (c === 0x27) inSingle = !inSingle
-	    } else if (inDouble) {
-	      // check double quote
-	      if (c === 0x22) inDouble = !inDouble
-	    } else if (
-	      c === 0x2C && // comma
-	      !paren && !curly && !square
-	    ) {
-	      // reached the end of a directive
-	      pushDir()
-	      // reset & skip the comma
-	      dir = {}
-	      begin = argIndex = lastFilterIndex = i + 1
-	    } else if (
-	      c === 0x3A && // colon
-	      !dir.expression &&
-	      !dir.arg
-	    ) {
-	      // argument
-	      arg = str.slice(begin, i).trim()
-	      // test for valid argument here
-	      // since we may have caught stuff like first half of
-	      // an object literal or a ternary expression.
-	      if (argRE.test(arg)) {
-	        argIndex = i + 1
-	        dir.arg = _.stripQuotes(arg) || arg
-	      }
-	    } else if (
-	      c === 0x7C && // pipe
-	      str.charCodeAt(i + 1) !== 0x7C &&
-	      str.charCodeAt(i - 1) !== 0x7C
-	    ) {
-	      if (dir.expression === undefined) {
-	        // first filter, end of expression
-	        lastFilterIndex = i + 1
-	        dir.expression = str.slice(argIndex, i).trim()
-	      } else {
-	        // already has filter
-	        pushFilter()
-	      }
-	    } else {
-	      switch (c) {
-	        case 0x22: inDouble = true; break // "
-	        case 0x27: inSingle = true; break // '
-	        case 0x28: paren++; break         // (
-	        case 0x29: paren--; break         // )
-	        case 0x5B: square++; break        // [
-	        case 0x5D: square--; break        // ]
-	        case 0x7B: curly++; break         // {
-	        case 0x7D: curly--; break         // }
-	      }
-	    }
-	  }
-
-	  if (i === 0 || begin !== i) {
-	    pushDir()
-	  }
-
-	  cache.put(s, dirs)
-	  return dirs
-	}
-
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-
-	_.extend(exports, __webpack_require__(14))
-	_.extend(exports, __webpack_require__(24))
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-	var compileProps = __webpack_require__(15)
-	var config = __webpack_require__(3)
-	var textParser = __webpack_require__(10)
-	var dirParser = __webpack_require__(12)
+	var compileProps = __webpack_require__(12)
+	var config = __webpack_require__(5)
+	var textParser = __webpack_require__(13)
+	var dirParser = __webpack_require__(15)
 	var templateParser = __webpack_require__(22)
 	var resolveAsset = _.resolveAsset
 	var componentDef = __webpack_require__(23)
@@ -2171,11 +1711,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Element|DocumentFragment} el
 	 * @param {Object} options
 	 * @param {Boolean} partial
-	 * @param {Vue} [host] - host vm of transcluded content
 	 * @return {Function}
 	 */
 
-	exports.compile = function (el, options, partial, host) {
+	exports.compile = function (el, options, partial) {
 	  // link function for the node itself.
 	  var nodeLinkFn = partial || !options._asComponent
 	    ? compileNode(el, options)
@@ -2195,10 +1734,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @param {Vue} vm
 	   * @param {Element|DocumentFragment} el
+	   * @param {Vue} [host] - host vm of transcluded content
 	   * @return {Function|undefined}
 	   */
 
-	  return function compositeLinkFn (vm, el) {
+	  return function compositeLinkFn (vm, el, host) {
 	    // cache childNodes before linking parent, fix #657
 	    var childNodes = _.toArray(el.childNodes)
 	    // link
@@ -2771,16 +2311,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 15 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var textParser = __webpack_require__(10)
-	var propDef = __webpack_require__(17)
-	var propBindingModes = __webpack_require__(3)._propBindingModes
+	var textParser = __webpack_require__(13)
+	var propDef = __webpack_require__(16)
+	var propBindingModes = __webpack_require__(5)._propBindingModes
 
 	// regexes
-	var identRE = __webpack_require__(16).identRE
+	var identRE = __webpack_require__(20).identRE
 	var dataAttrRE = /^data-/
 	var settablePathRE = /^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\[[^\[\]]+\])*$/
 	var literalValueRE = /^(true|false)$|^\d.*/
@@ -2960,11 +2500,1219 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 16 */
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Cache = __webpack_require__(14)
+	var config = __webpack_require__(5)
+	var dirParser = __webpack_require__(15)
+	var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g
+	var cache, tagRE, htmlRE, firstChar, lastChar
+
+	/**
+	 * Escape a string so it can be used in a RegExp
+	 * constructor.
+	 *
+	 * @param {String} str
+	 */
+
+	function escapeRegex (str) {
+	  return str.replace(regexEscapeRE, '\\$&')
+	}
+
+	/**
+	 * Compile the interpolation tag regex.
+	 *
+	 * @return {RegExp}
+	 */
+
+	function compileRegex () {
+	  config._delimitersChanged = false
+	  var open = config.delimiters[0]
+	  var close = config.delimiters[1]
+	  firstChar = open.charAt(0)
+	  lastChar = close.charAt(close.length - 1)
+	  var firstCharRE = escapeRegex(firstChar)
+	  var lastCharRE = escapeRegex(lastChar)
+	  var openRE = escapeRegex(open)
+	  var closeRE = escapeRegex(close)
+	  tagRE = new RegExp(
+	    firstCharRE + '?' + openRE +
+	    '(.+?)' +
+	    closeRE + lastCharRE + '?',
+	    'g'
+	  )
+	  htmlRE = new RegExp(
+	    '^' + firstCharRE + openRE +
+	    '.*' +
+	    closeRE + lastCharRE + '$'
+	  )
+	  // reset cache
+	  cache = new Cache(1000)
+	}
+
+	/**
+	 * Parse a template text string into an array of tokens.
+	 *
+	 * @param {String} text
+	 * @return {Array<Object> | null}
+	 *               - {String} type
+	 *               - {String} value
+	 *               - {Boolean} [html]
+	 *               - {Boolean} [oneTime]
+	 */
+
+	exports.parse = function (text) {
+	  if (config._delimitersChanged) {
+	    compileRegex()
+	  }
+	  var hit = cache.get(text)
+	  if (hit) {
+	    return hit
+	  }
+	  text = text.replace(/\n/g, '')
+	  if (!tagRE.test(text)) {
+	    return null
+	  }
+	  var tokens = []
+	  var lastIndex = tagRE.lastIndex = 0
+	  var match, index, value, first, oneTime, twoWay
+	  /* eslint-disable no-cond-assign */
+	  while (match = tagRE.exec(text)) {
+	  /* eslint-enable no-cond-assign */
+	    index = match.index
+	    // push text token
+	    if (index > lastIndex) {
+	      tokens.push({
+	        value: text.slice(lastIndex, index)
+	      })
+	    }
+	    // tag token
+	    first = match[1].charCodeAt(0)
+	    oneTime = first === 42 // *
+	    twoWay = first === 64  // @
+	    value = oneTime || twoWay
+	      ? match[1].slice(1)
+	      : match[1]
+	    tokens.push({
+	      tag: true,
+	      value: value.trim(),
+	      html: htmlRE.test(match[0]),
+	      oneTime: oneTime,
+	      twoWay: twoWay
+	    })
+	    lastIndex = index + match[0].length
+	  }
+	  if (lastIndex < text.length) {
+	    tokens.push({
+	      value: text.slice(lastIndex)
+	    })
+	  }
+	  cache.put(text, tokens)
+	  return tokens
+	}
+
+	/**
+	 * Format a list of tokens into an expression.
+	 * e.g. tokens parsed from 'a {{b}} c' can be serialized
+	 * into one single expression as '"a " + b + " c"'.
+	 *
+	 * @param {Array} tokens
+	 * @param {Vue} [vm]
+	 * @return {String}
+	 */
+
+	exports.tokensToExp = function (tokens, vm) {
+	  return tokens.length > 1
+	    ? tokens.map(function (token) {
+	        return formatToken(token, vm)
+	      }).join('+')
+	    : formatToken(tokens[0], vm, true)
+	}
+
+	/**
+	 * Format a single token.
+	 *
+	 * @param {Object} token
+	 * @param {Vue} [vm]
+	 * @param {Boolean} single
+	 * @return {String}
+	 */
+
+	function formatToken (token, vm, single) {
+	  return token.tag
+	    ? vm && token.oneTime
+	      ? '"' + vm.$eval(token.value) + '"'
+	      : inlineFilters(token.value, single)
+	    : '"' + token.value + '"'
+	}
+
+	/**
+	 * For an attribute with multiple interpolation tags,
+	 * e.g. attr="some-{{thing | filter}}", in order to combine
+	 * the whole thing into a single watchable expression, we
+	 * have to inline those filters. This function does exactly
+	 * that. This is a bit hacky but it avoids heavy changes
+	 * to directive parser and watcher mechanism.
+	 *
+	 * @param {String} exp
+	 * @param {Boolean} single
+	 * @return {String}
+	 */
+
+	var filterRE = /[^|]\|[^|]/
+	function inlineFilters (exp, single) {
+	  if (!filterRE.test(exp)) {
+	    return single
+	      ? exp
+	      : '(' + exp + ')'
+	  } else {
+	    var dir = dirParser.parse(exp)[0]
+	    if (!dir.filters) {
+	      return '(' + exp + ')'
+	    } else {
+	      return 'this._applyFilters(' +
+	        dir.expression + // value
+	        ',null,' +       // oldValue (null for read)
+	        JSON.stringify(dir.filters) + // filter descriptors
+	        ',false)'        // write?
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	/**
+	 * A doubly linked list-based Least Recently Used (LRU)
+	 * cache. Will keep most recently used items while
+	 * discarding least recently used items when its limit is
+	 * reached. This is a bare-bone version of
+	 * Rasmus Andersson's js-lru:
+	 *
+	 *   https://github.com/rsms/js-lru
+	 *
+	 * @param {Number} limit
+	 * @constructor
+	 */
+
+	function Cache (limit) {
+	  this.size = 0
+	  this.limit = limit
+	  this.head = this.tail = undefined
+	  this._keymap = Object.create(null)
+	}
+
+	var p = Cache.prototype
+
+	/**
+	 * Put <value> into the cache associated with <key>.
+	 * Returns the entry which was removed to make room for
+	 * the new entry. Otherwise undefined is returned.
+	 * (i.e. if there was enough room already).
+	 *
+	 * @param {String} key
+	 * @param {*} value
+	 * @return {Entry|undefined}
+	 */
+
+	p.put = function (key, value) {
+	  var entry = {
+	    key: key,
+	    value: value
+	  }
+	  this._keymap[key] = entry
+	  if (this.tail) {
+	    this.tail.newer = entry
+	    entry.older = this.tail
+	  } else {
+	    this.head = entry
+	  }
+	  this.tail = entry
+	  if (this.size === this.limit) {
+	    return this.shift()
+	  } else {
+	    this.size++
+	  }
+	}
+
+	/**
+	 * Purge the least recently used (oldest) entry from the
+	 * cache. Returns the removed entry or undefined if the
+	 * cache was empty.
+	 */
+
+	p.shift = function () {
+	  var entry = this.head
+	  if (entry) {
+	    this.head = this.head.newer
+	    this.head.older = undefined
+	    entry.newer = entry.older = undefined
+	    this._keymap[entry.key] = undefined
+	  }
+	  return entry
+	}
+
+	/**
+	 * Get and register recent use of <key>. Returns the value
+	 * associated with <key> or undefined if not in cache.
+	 *
+	 * @param {String} key
+	 * @param {Boolean} returnEntry
+	 * @return {Entry|*}
+	 */
+
+	p.get = function (key, returnEntry) {
+	  var entry = this._keymap[key]
+	  if (entry === undefined) return
+	  if (entry === this.tail) {
+	    return returnEntry
+	      ? entry
+	      : entry.value
+	  }
+	  // HEAD--------------TAIL
+	  //   <.older   .newer>
+	  //  <--- add direction --
+	  //   A  B  C  <D>  E
+	  if (entry.newer) {
+	    if (entry === this.head) {
+	      this.head = entry.newer
+	    }
+	    entry.newer.older = entry.older // C <-- E.
+	  }
+	  if (entry.older) {
+	    entry.older.newer = entry.newer // C. --> E
+	  }
+	  entry.newer = undefined // D --x
+	  entry.older = this.tail // D. --> E
+	  if (this.tail) {
+	    this.tail.newer = entry // E. <-- D
+	  }
+	  this.tail = entry
+	  return returnEntry
+	    ? entry
+	    : entry.value
+	}
+
+	module.exports = Cache
+
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var Cache = __webpack_require__(11)
+	var Cache = __webpack_require__(14)
+	var cache = new Cache(1000)
+	var argRE = /^[^\{\?]+$|^'[^']*'$|^"[^"]*"$/
+	var filterTokenRE = /[^\s'"]+|'[^']*'|"[^"]*"/g
+	var reservedArgRE = /^in$|^-?\d+/
+
+	/**
+	 * Parser state
+	 */
+
+	var str
+	var c, i, l
+	var inSingle
+	var inDouble
+	var curly
+	var square
+	var paren
+	var begin
+	var argIndex
+	var dirs
+	var dir
+	var lastFilterIndex
+	var arg
+
+	/**
+	 * Push a directive object into the result Array
+	 */
+
+	function pushDir () {
+	  dir.raw = str.slice(begin, i).trim()
+	  if (dir.expression === undefined) {
+	    dir.expression = str.slice(argIndex, i).trim()
+	  } else if (lastFilterIndex !== begin) {
+	    pushFilter()
+	  }
+	  if (i === 0 || dir.expression) {
+	    dirs.push(dir)
+	  }
+	}
+
+	/**
+	 * Push a filter to the current directive object
+	 */
+
+	function pushFilter () {
+	  var exp = str.slice(lastFilterIndex, i).trim()
+	  var filter
+	  if (exp) {
+	    filter = {}
+	    var tokens = exp.match(filterTokenRE)
+	    filter.name = tokens[0]
+	    if (tokens.length > 1) {
+	      filter.args = tokens.slice(1).map(processFilterArg)
+	    }
+	  }
+	  if (filter) {
+	    (dir.filters = dir.filters || []).push(filter)
+	  }
+	  lastFilterIndex = i + 1
+	}
+
+	/**
+	 * Check if an argument is dynamic and strip quotes.
+	 *
+	 * @param {String} arg
+	 * @return {Object}
+	 */
+
+	function processFilterArg (arg) {
+	  var stripped = reservedArgRE.test(arg)
+	    ? arg
+	    : _.stripQuotes(arg)
+	  var dynamic = stripped === false
+	  return {
+	    value: dynamic ? arg : stripped,
+	    dynamic: dynamic
+	  }
+	}
+
+	/**
+	 * Parse a directive string into an Array of AST-like
+	 * objects representing directives.
+	 *
+	 * Example:
+	 *
+	 * "click: a = a + 1 | uppercase" will yield:
+	 * {
+	 *   arg: 'click',
+	 *   expression: 'a = a + 1',
+	 *   filters: [
+	 *     { name: 'uppercase', args: null }
+	 *   ]
+	 * }
+	 *
+	 * @param {String} str
+	 * @return {Array<Object>}
+	 */
+
+	exports.parse = function (s) {
+
+	  var hit = cache.get(s)
+	  if (hit) {
+	    return hit
+	  }
+
+	  // reset parser state
+	  str = s
+	  inSingle = inDouble = false
+	  curly = square = paren = begin = argIndex = 0
+	  lastFilterIndex = 0
+	  dirs = []
+	  dir = {}
+	  arg = null
+
+	  for (i = 0, l = str.length; i < l; i++) {
+	    c = str.charCodeAt(i)
+	    if (inSingle) {
+	      // check single quote
+	      if (c === 0x27) inSingle = !inSingle
+	    } else if (inDouble) {
+	      // check double quote
+	      if (c === 0x22) inDouble = !inDouble
+	    } else if (
+	      c === 0x2C && // comma
+	      !paren && !curly && !square
+	    ) {
+	      // reached the end of a directive
+	      pushDir()
+	      // reset & skip the comma
+	      dir = {}
+	      begin = argIndex = lastFilterIndex = i + 1
+	    } else if (
+	      c === 0x3A && // colon
+	      !dir.expression &&
+	      !dir.arg
+	    ) {
+	      // argument
+	      arg = str.slice(begin, i).trim()
+	      // test for valid argument here
+	      // since we may have caught stuff like first half of
+	      // an object literal or a ternary expression.
+	      if (argRE.test(arg)) {
+	        argIndex = i + 1
+	        dir.arg = _.stripQuotes(arg) || arg
+	      }
+	    } else if (
+	      c === 0x7C && // pipe
+	      str.charCodeAt(i + 1) !== 0x7C &&
+	      str.charCodeAt(i - 1) !== 0x7C
+	    ) {
+	      if (dir.expression === undefined) {
+	        // first filter, end of expression
+	        lastFilterIndex = i + 1
+	        dir.expression = str.slice(argIndex, i).trim()
+	      } else {
+	        // already has filter
+	        pushFilter()
+	      }
+	    } else {
+	      switch (c) {
+	        case 0x22: inDouble = true; break // "
+	        case 0x27: inSingle = true; break // '
+	        case 0x28: paren++; break         // (
+	        case 0x29: paren--; break         // )
+	        case 0x5B: square++; break        // [
+	        case 0x5D: square--; break        // ]
+	        case 0x7B: curly++; break         // {
+	        case 0x7D: curly--; break         // }
+	      }
+	    }
+	  }
+
+	  if (i === 0 || begin !== i) {
+	    pushDir()
+	  }
+
+	  cache.put(s, dirs)
+	  return dirs
+	}
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// NOTE: the prop internal directive is compiled and linked
+	// during _initScope(), before the created hook is called.
+	// The purpose is to make the initial prop values available
+	// inside `created` hooks and `data` functions.
+
+	var _ = __webpack_require__(1)
+	var Watcher = __webpack_require__(17)
+	var bindingModes = __webpack_require__(5)._propBindingModes
+
+	module.exports = {
+
+	  bind: function () {
+
+	    var child = this.vm
+	    var parent = child._context
+	    // passed in from compiler directly
+	    var prop = this._descriptor
+	    var childKey = prop.path
+	    var parentKey = prop.parentPath
+
+	    this.parentWatcher = new Watcher(
+	      parent,
+	      parentKey,
+	      function (val) {
+	        if (_.assertProp(prop, val)) {
+	          child[childKey] = val
+	        }
+	      }, { sync: true }
+	    )
+
+	    // set the child initial value.
+	    var value = this.parentWatcher.value
+	    if (childKey === '$data') {
+	      child._data = value
+	    } else {
+	      _.initProp(child, prop, value)
+	    }
+
+	    // setup two-way binding
+	    if (prop.mode === bindingModes.TWO_WAY) {
+	      // important: defer the child watcher creation until
+	      // the created hook (after data observation)
+	      var self = this
+	      child.$once('hook:created', function () {
+	        self.childWatcher = new Watcher(
+	          child,
+	          childKey,
+	          function (val) {
+	            parent.$set(parentKey, val)
+	          }, { sync: true }
+	        )
+	      })
+	    }
+	  },
+
+	  unbind: function () {
+	    this.parentWatcher.teardown()
+	    if (this.childWatcher) {
+	      this.childWatcher.teardown()
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+	var config = __webpack_require__(5)
+	var Dep = __webpack_require__(18)
+	var expParser = __webpack_require__(19)
+	var batcher = __webpack_require__(21)
+	var uid = 0
+
+	/**
+	 * A watcher parses an expression, collects dependencies,
+	 * and fires callback when the expression value changes.
+	 * This is used for both the $watch() api and directives.
+	 *
+	 * @param {Vue} vm
+	 * @param {String} expression
+	 * @param {Function} cb
+	 * @param {Object} options
+	 *                 - {Array} filters
+	 *                 - {Boolean} twoWay
+	 *                 - {Boolean} deep
+	 *                 - {Boolean} user
+	 *                 - {Boolean} sync
+	 *                 - {Boolean} lazy
+	 *                 - {Function} [preProcess]
+	 * @constructor
+	 */
+
+	function Watcher (vm, expOrFn, cb, options) {
+	  // mix in options
+	  if (options) {
+	    _.extend(this, options)
+	  }
+	  var isFn = typeof expOrFn === 'function'
+	  this.vm = vm
+	  vm._watchers.push(this)
+	  this.expression = isFn ? expOrFn.toString() : expOrFn
+	  this.cb = cb
+	  this.id = ++uid // uid for batching
+	  this.active = true
+	  this.dirty = this.lazy // for lazy watchers
+	  this.deps = []
+	  this.newDeps = null
+	  this.prevError = null // for async error stacks
+	  // parse expression for getter/setter
+	  if (isFn) {
+	    this.getter = expOrFn
+	    this.setter = undefined
+	  } else {
+	    var res = expParser.parse(expOrFn, this.twoWay)
+	    this.getter = res.get
+	    this.setter = res.set
+	  }
+	  this.value = this.lazy
+	    ? undefined
+	    : this.get()
+	  // state for avoiding false triggers for deep and Array
+	  // watchers during vm._digest()
+	  this.queued = this.shallow = false
+	}
+
+	/**
+	 * Add a dependency to this directive.
+	 *
+	 * @param {Dep} dep
+	 */
+
+	Watcher.prototype.addDep = function (dep) {
+	  var newDeps = this.newDeps
+	  var old = this.deps
+	  if (_.indexOf(newDeps, dep) < 0) {
+	    newDeps.push(dep)
+	    var i = _.indexOf(old, dep)
+	    if (i < 0) {
+	      dep.addSub(this)
+	    } else {
+	      old[i] = null
+	    }
+	  }
+	}
+
+	/**
+	 * Evaluate the getter, and re-collect dependencies.
+	 */
+
+	Watcher.prototype.get = function () {
+	  this.beforeGet()
+	  var vm = this.vm
+	  var value
+	  try {
+	    value = this.getter.call(vm, vm)
+	  } catch (e) {
+	    if (
+	      ("development") !== 'production' &&
+	      config.warnExpressionErrors
+	    ) {
+	      _.warn(
+	        'Error when evaluating expression "' +
+	        this.expression + '". ' +
+	        (config.debug
+	          ? ''
+	          : 'Turn on debug mode to see stack trace.'
+	        ), e
+	      )
+	    }
+	  }
+	  // "touch" every property so they are all tracked as
+	  // dependencies for deep watching
+	  if (this.deep) {
+	    traverse(value)
+	  }
+	  if (this.preProcess) {
+	    value = this.preProcess(value)
+	  }
+	  if (this.filters) {
+	    value = vm._applyFilters(value, null, this.filters, false)
+	  }
+	  this.afterGet()
+	  return value
+	}
+
+	/**
+	 * Set the corresponding value with the setter.
+	 *
+	 * @param {*} value
+	 */
+
+	Watcher.prototype.set = function (value) {
+	  var vm = this.vm
+	  if (this.filters) {
+	    value = vm._applyFilters(
+	      value, this.value, this.filters, true)
+	  }
+	  try {
+	    this.setter.call(vm, vm, value)
+	  } catch (e) {
+	    if (
+	      ("development") !== 'production' &&
+	      config.warnExpressionErrors
+	    ) {
+	      _.warn(
+	        'Error when evaluating setter "' +
+	        this.expression + '"', e
+	      )
+	    }
+	  }
+	}
+
+	/**
+	 * Prepare for dependency collection.
+	 */
+
+	Watcher.prototype.beforeGet = function () {
+	  Dep.target = this
+	  this.newDeps = []
+	}
+
+	/**
+	 * Clean up for dependency collection.
+	 */
+
+	Watcher.prototype.afterGet = function () {
+	  Dep.target = null
+	  var i = this.deps.length
+	  while (i--) {
+	    var dep = this.deps[i]
+	    if (dep) {
+	      dep.removeSub(this)
+	    }
+	  }
+	  this.deps = this.newDeps
+	  this.newDeps = null
+	}
+
+	/**
+	 * Subscriber interface.
+	 * Will be called when a dependency changes.
+	 *
+	 * @param {Boolean} shallow
+	 */
+
+	Watcher.prototype.update = function (shallow) {
+	  if (this.lazy) {
+	    this.dirty = true
+	  } else if (this.sync || !config.async) {
+	    this.run()
+	  } else {
+	    // if queued, only overwrite shallow with non-shallow,
+	    // but not the other way around.
+	    this.shallow = this.queued
+	      ? shallow
+	        ? this.shallow
+	        : false
+	      : !!shallow
+	    this.queued = true
+	    // record before-push error stack in debug mode
+	    /* istanbul ignore if */
+	    if (("development") !== 'production' && config.debug) {
+	      this.prevError = new Error('[vue] async stack trace')
+	    }
+	    batcher.push(this)
+	  }
+	}
+
+	/**
+	 * Batcher job interface.
+	 * Will be called by the batcher.
+	 */
+
+	Watcher.prototype.run = function () {
+	  if (this.active) {
+	    var value = this.get()
+	    if (
+	      value !== this.value ||
+	      // Deep watchers and Array watchers should fire even
+	      // when the value is the same, because the value may
+	      // have mutated; but only do so if this is a
+	      // non-shallow update (caused by a vm digest).
+	      ((_.isArray(value) || this.deep) && !this.shallow)
+	    ) {
+	      // set new value
+	      var oldValue = this.value
+	      this.value = value
+	      // in debug + async mode, when a watcher callbacks
+	      // throws, we also throw the saved before-push error
+	      // so the full cross-tick stack trace is available.
+	      var prevError = this.prevError
+	      /* istanbul ignore if */
+	      if (("development") !== 'production' &&
+	          config.debug && prevError) {
+	        this.prevError = null
+	        try {
+	          this.cb.call(this.vm, value, oldValue)
+	        } catch (e) {
+	          _.nextTick(function () {
+	            throw prevError
+	          }, 0)
+	          throw e
+	        }
+	      } else {
+	        this.cb.call(this.vm, value, oldValue)
+	      }
+	    }
+	    this.queued = this.shallow = false
+	  }
+	}
+
+	/**
+	 * Evaluate the value of the watcher.
+	 * This only gets called for lazy watchers.
+	 */
+
+	Watcher.prototype.evaluate = function () {
+	  // avoid overwriting another watcher that is being
+	  // collected.
+	  var current = Dep.target
+	  this.value = this.get()
+	  this.dirty = false
+	  Dep.target = current
+	}
+
+	/**
+	 * Depend on all deps collected by this watcher.
+	 */
+
+	Watcher.prototype.depend = function () {
+	  var i = this.deps.length
+	  while (i--) {
+	    this.deps[i].depend()
+	  }
+	}
+
+	/**
+	 * Remove self from all dependencies' subcriber list.
+	 */
+
+	Watcher.prototype.teardown = function () {
+	  if (this.active) {
+	    // remove self from vm's watcher list
+	    // we can skip this if the vm if being destroyed
+	    // which can improve teardown performance.
+	    if (!this.vm._isBeingDestroyed) {
+	      this.vm._watchers.$remove(this)
+	    }
+	    var i = this.deps.length
+	    while (i--) {
+	      this.deps[i].removeSub(this)
+	    }
+	    this.active = false
+	    this.vm = this.cb = this.value = null
+	  }
+	}
+
+	/**
+	 * Recrusively traverse an object to evoke all converted
+	 * getters, so that every nested property inside the object
+	 * is collected as a "deep" dependency.
+	 *
+	 * @param {Object} obj
+	 */
+
+	function traverse (obj) {
+	  var key, val, i
+	  for (key in obj) {
+	    val = obj[key]
+	    if (_.isArray(val)) {
+	      i = val.length
+	      while (i--) traverse(val[i])
+	    } else if (_.isObject(val)) {
+	      traverse(val)
+	    }
+	  }
+	}
+
+	module.exports = Watcher
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+
+	/**
+	 * A dep is an observable that can have multiple
+	 * directives subscribing to it.
+	 *
+	 * @constructor
+	 */
+
+	function Dep () {
+	  this.subs = []
+	}
+
+	// the current target watcher being evaluated.
+	// this is globally unique because there could be only one
+	// watcher being evaluated at any time.
+	Dep.target = null
+
+	/**
+	 * Add a directive subscriber.
+	 *
+	 * @param {Directive} sub
+	 */
+
+	Dep.prototype.addSub = function (sub) {
+	  this.subs.push(sub)
+	}
+
+	/**
+	 * Remove a directive subscriber.
+	 *
+	 * @param {Directive} sub
+	 */
+
+	Dep.prototype.removeSub = function (sub) {
+	  this.subs.$remove(sub)
+	}
+
+	/**
+	 * Add self as a dependency to the target watcher.
+	 */
+
+	Dep.prototype.depend = function () {
+	  Dep.target.addDep(this)
+	}
+
+	/**
+	 * Notify all subscribers of a new value.
+	 */
+
+	Dep.prototype.notify = function () {
+	  // stablize the subscriber list first
+	  var subs = _.toArray(this.subs)
+	  for (var i = 0, l = subs.length; i < l; i++) {
+	    subs[i].update()
+	  }
+	}
+
+	module.exports = Dep
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+	var Path = __webpack_require__(20)
+	var Cache = __webpack_require__(14)
+	var expressionCache = new Cache(1000)
+
+	var allowedKeywords =
+	  'Math,Date,this,true,false,null,undefined,Infinity,NaN,' +
+	  'isNaN,isFinite,decodeURI,decodeURIComponent,encodeURI,' +
+	  'encodeURIComponent,parseInt,parseFloat'
+	var allowedKeywordsRE =
+	  new RegExp('^(' + allowedKeywords.replace(/,/g, '\\b|') + '\\b)')
+
+	// keywords that don't make sense inside expressions
+	var improperKeywords =
+	  'break,case,class,catch,const,continue,debugger,default,' +
+	  'delete,do,else,export,extends,finally,for,function,if,' +
+	  'import,in,instanceof,let,return,super,switch,throw,try,' +
+	  'var,while,with,yield,enum,await,implements,package,' +
+	  'proctected,static,interface,private,public'
+	var improperKeywordsRE =
+	  new RegExp('^(' + improperKeywords.replace(/,/g, '\\b|') + '\\b)')
+
+	var wsRE = /\s/g
+	var newlineRE = /\n/g
+	var saveRE = /[\{,]\s*[\w\$_]+\s*:|('[^']*'|"[^"]*")|new |typeof |void /g
+	var restoreRE = /"(\d+)"/g
+	var pathTestRE = /^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/
+	var pathReplaceRE = /[^\w$\.]([A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\])*)/g
+	var booleanLiteralRE = /^(true|false)$/
+
+	/**
+	 * Save / Rewrite / Restore
+	 *
+	 * When rewriting paths found in an expression, it is
+	 * possible for the same letter sequences to be found in
+	 * strings and Object literal property keys. Therefore we
+	 * remove and store these parts in a temporary array, and
+	 * restore them after the path rewrite.
+	 */
+
+	var saved = []
+
+	/**
+	 * Save replacer
+	 *
+	 * The save regex can match two possible cases:
+	 * 1. An opening object literal
+	 * 2. A string
+	 * If matched as a plain string, we need to escape its
+	 * newlines, since the string needs to be preserved when
+	 * generating the function body.
+	 *
+	 * @param {String} str
+	 * @param {String} isString - str if matched as a string
+	 * @return {String} - placeholder with index
+	 */
+
+	function save (str, isString) {
+	  var i = saved.length
+	  saved[i] = isString
+	    ? str.replace(newlineRE, '\\n')
+	    : str
+	  return '"' + i + '"'
+	}
+
+	/**
+	 * Path rewrite replacer
+	 *
+	 * @param {String} raw
+	 * @return {String}
+	 */
+
+	function rewrite (raw) {
+	  var c = raw.charAt(0)
+	  var path = raw.slice(1)
+	  if (allowedKeywordsRE.test(path)) {
+	    return raw
+	  } else {
+	    path = path.indexOf('"') > -1
+	      ? path.replace(restoreRE, restore)
+	      : path
+	    return c + 'scope.' + path
+	  }
+	}
+
+	/**
+	 * Restore replacer
+	 *
+	 * @param {String} str
+	 * @param {String} i - matched save index
+	 * @return {String}
+	 */
+
+	function restore (str, i) {
+	  return saved[i]
+	}
+
+	/**
+	 * Rewrite an expression, prefixing all path accessors with
+	 * `scope.` and generate getter/setter functions.
+	 *
+	 * @param {String} exp
+	 * @param {Boolean} needSet
+	 * @return {Function}
+	 */
+
+	function compileExpFns (exp, needSet) {
+	  if (improperKeywordsRE.test(exp)) {
+	    ("development") !== 'production' && _.warn(
+	      'Avoid using reserved keywords in expression: ' + exp
+	    )
+	  }
+	  // reset state
+	  saved.length = 0
+	  // save strings and object literal keys
+	  var body = exp
+	    .replace(saveRE, save)
+	    .replace(wsRE, '')
+	  // rewrite all paths
+	  // pad 1 space here becaue the regex matches 1 extra char
+	  body = (' ' + body)
+	    .replace(pathReplaceRE, rewrite)
+	    .replace(restoreRE, restore)
+	  var getter = makeGetter(body)
+	  if (getter) {
+	    return {
+	      get: getter,
+	      body: body,
+	      set: needSet
+	        ? makeSetter(body)
+	        : null
+	    }
+	  }
+	}
+
+	/**
+	 * Compile getter setters for a simple path.
+	 *
+	 * @param {String} exp
+	 * @return {Function}
+	 */
+
+	function compilePathFns (exp) {
+	  var getter, path
+	  if (exp.indexOf('[') < 0) {
+	    // really simple path
+	    path = exp.split('.')
+	    path.raw = exp
+	    getter = Path.compileGetter(path)
+	  } else {
+	    // do the real parsing
+	    path = Path.parse(exp)
+	    getter = path.get
+	  }
+	  return {
+	    get: getter,
+	    // always generate setter for simple paths
+	    set: function (obj, val) {
+	      Path.set(obj, path, val)
+	    }
+	  }
+	}
+
+	/**
+	 * Build a getter function. Requires eval.
+	 *
+	 * We isolate the try/catch so it doesn't affect the
+	 * optimization of the parse function when it is not called.
+	 *
+	 * @param {String} body
+	 * @return {Function|undefined}
+	 */
+
+	function makeGetter (body) {
+	  try {
+	    return new Function('scope', 'return ' + body + ';')
+	  } catch (e) {
+	    ("development") !== 'production' && _.warn(
+	      'Invalid expression. ' +
+	      'Generated function body: ' + body
+	    )
+	  }
+	}
+
+	/**
+	 * Build a setter function.
+	 *
+	 * This is only needed in rare situations like "a[b]" where
+	 * a settable path requires dynamic evaluation.
+	 *
+	 * This setter function may throw error when called if the
+	 * expression body is not a valid left-hand expression in
+	 * assignment.
+	 *
+	 * @param {String} body
+	 * @return {Function|undefined}
+	 */
+
+	function makeSetter (body) {
+	  try {
+	    return new Function('scope', 'value', body + '=value;')
+	  } catch (e) {
+	    ("development") !== 'production' && _.warn(
+	      'Invalid setter function body: ' + body
+	    )
+	  }
+	}
+
+	/**
+	 * Check for setter existence on a cache hit.
+	 *
+	 * @param {Function} hit
+	 */
+
+	function checkSetter (hit) {
+	  if (!hit.set) {
+	    hit.set = makeSetter(hit.body)
+	  }
+	}
+
+	/**
+	 * Parse an expression into re-written getter/setters.
+	 *
+	 * @param {String} exp
+	 * @param {Boolean} needSet
+	 * @return {Function}
+	 */
+
+	exports.parse = function (exp, needSet) {
+	  exp = exp.trim()
+	  // try cache
+	  var hit = expressionCache.get(exp)
+	  if (hit) {
+	    if (needSet) {
+	      checkSetter(hit)
+	    }
+	    return hit
+	  }
+	  // we do a simple path check to optimize for them.
+	  // the check fails valid paths with unusal whitespaces,
+	  // but that's too rare and we don't care.
+	  // also skip boolean literals and paths that start with
+	  // global "Math"
+	  var res = exports.isSimplePath(exp)
+	    ? compilePathFns(exp)
+	    : compileExpFns(exp, needSet)
+	  expressionCache.put(exp, res)
+	  return res
+	}
+
+	/**
+	 * Check if an expression is a simple path.
+	 *
+	 * @param {String} exp
+	 * @return {Boolean}
+	 */
+
+	exports.isSimplePath = function (exp) {
+	  return pathTestRE.test(exp) &&
+	    // don't treat true/false as paths
+	    !booleanLiteralRE.test(exp) &&
+	    // Math constants e.g. Math.PI, Math.E etc.
+	    exp.slice(0, 5) !== 'Math.'
+	}
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+	var Cache = __webpack_require__(14)
 	var pathCache = new Cache(1000)
 	var identRE = exports.identRE = /^[$_a-zA-Z]+[\w$]*$/
 
@@ -3314,714 +4062,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// NOTE: the prop internal directive is compiled and linked
-	// during _initScope(), before the created hook is called.
-	// The purpose is to make the initial prop values available
-	// inside `created` hooks and `data` functions.
-
-	var _ = __webpack_require__(1)
-	var Watcher = __webpack_require__(18)
-	var bindingModes = __webpack_require__(3)._propBindingModes
-
-	module.exports = {
-
-	  bind: function () {
-
-	    var child = this.vm
-	    var parent = child._context
-	    // passed in from compiler directly
-	    var prop = this._descriptor
-	    var childKey = prop.path
-	    var parentKey = prop.parentPath
-
-	    this.parentWatcher = new Watcher(
-	      parent,
-	      parentKey,
-	      function (val) {
-	        if (_.assertProp(prop, val)) {
-	          child[childKey] = val
-	        }
-	      }
-	    )
-
-	    // set the child initial value.
-	    var value = this.parentWatcher.value
-	    if (childKey === '$data') {
-	      child._data = value
-	    } else {
-	      _.initProp(child, prop, value)
-	    }
-
-	    // setup two-way binding
-	    if (prop.mode === bindingModes.TWO_WAY) {
-	      // important: defer the child watcher creation until
-	      // the created hook (after data observation)
-	      var self = this
-	      child.$once('hook:created', function () {
-	        self.childWatcher = new Watcher(
-	          child,
-	          childKey,
-	          function (val) {
-	            parent.$set(parentKey, val)
-	          }
-	        )
-	      })
-	    }
-	  },
-
-	  unbind: function () {
-	    this.parentWatcher.teardown()
-	    if (this.childWatcher) {
-	      this.childWatcher.teardown()
-	    }
-	  }
-	}
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
-	var Dep = __webpack_require__(20)
-	var expParser = __webpack_require__(19)
-	var batcher = __webpack_require__(21)
-	var uid = 0
-
-	/**
-	 * A watcher parses an expression, collects dependencies,
-	 * and fires callback when the expression value changes.
-	 * This is used for both the $watch() api and directives.
-	 *
-	 * @param {Vue} vm
-	 * @param {String} expression
-	 * @param {Function} cb
-	 * @param {Object} options
-	 *                 - {Array} filters
-	 *                 - {Boolean} twoWay
-	 *                 - {Boolean} deep
-	 *                 - {Boolean} user
-	 *                 - {Boolean} lazy
-	 *                 - {Function} [preProcess]
-	 * @constructor
-	 */
-
-	function Watcher (vm, expOrFn, cb, options) {
-	  var isFn = typeof expOrFn === 'function'
-	  this.vm = vm
-	  vm._watchers.push(this)
-	  this.expression = isFn ? expOrFn.toString() : expOrFn
-	  this.cb = cb
-	  this.id = ++uid // uid for batching
-	  this.active = true
-	  options = options || {}
-	  this.deep = !!options.deep
-	  this.user = !!options.user
-	  this.twoWay = !!options.twoWay
-	  this.lazy = !!options.lazy
-	  this.dirty = this.lazy
-	  this.filters = options.filters
-	  this.preProcess = options.preProcess
-	  this.deps = []
-	  this.newDeps = null
-	  // parse expression for getter/setter
-	  if (isFn) {
-	    this.getter = expOrFn
-	    this.setter = undefined
-	  } else {
-	    var res = expParser.parse(expOrFn, options.twoWay)
-	    this.getter = res.get
-	    this.setter = res.set
-	  }
-	  this.value = this.lazy
-	    ? undefined
-	    : this.get()
-	  // state for avoiding false triggers for deep and Array
-	  // watchers during vm._digest()
-	  this.queued = this.shallow = false
-	}
-
-	var p = Watcher.prototype
-
-	/**
-	 * Add a dependency to this directive.
-	 *
-	 * @param {Dep} dep
-	 */
-
-	p.addDep = function (dep) {
-	  var newDeps = this.newDeps
-	  var old = this.deps
-	  if (_.indexOf(newDeps, dep) < 0) {
-	    newDeps.push(dep)
-	    var i = _.indexOf(old, dep)
-	    if (i < 0) {
-	      dep.addSub(this)
-	    } else {
-	      old[i] = null
-	    }
-	  }
-	}
-
-	/**
-	 * Evaluate the getter, and re-collect dependencies.
-	 */
-
-	p.get = function () {
-	  this.beforeGet()
-	  var vm = this.vm
-	  var value
-	  try {
-	    value = this.getter.call(vm, vm)
-	  } catch (e) {
-	    if (
-	      ("development") !== 'production' &&
-	      config.warnExpressionErrors
-	    ) {
-	      _.warn(
-	        'Error when evaluating expression "' +
-	        this.expression + '". ' +
-	        (config.debug
-	          ? '' :
-	          'Turn on debug mode to see stack trace.'
-	        ), e
-	      )
-	    }
-	  }
-	  // "touch" every property so they are all tracked as
-	  // dependencies for deep watching
-	  if (this.deep) {
-	    traverse(value)
-	  }
-	  if (this.preProcess) {
-	    value = this.preProcess(value)
-	  }
-	  if (this.filters) {
-	    value = vm._applyFilters(value, null, this.filters, false)
-	  }
-	  this.afterGet()
-	  return value
-	}
-
-	/**
-	 * Set the corresponding value with the setter.
-	 *
-	 * @param {*} value
-	 */
-
-	p.set = function (value) {
-	  var vm = this.vm
-	  if (this.filters) {
-	    value = vm._applyFilters(
-	      value, this.value, this.filters, true)
-	  }
-	  try {
-	    this.setter.call(vm, vm, value)
-	  } catch (e) {
-	    if (
-	      ("development") !== 'production' &&
-	      config.warnExpressionErrors
-	    ) {
-	      _.warn(
-	        'Error when evaluating setter "' +
-	        this.expression + '"', e
-	      )
-	    }
-	  }
-	}
-
-	/**
-	 * Prepare for dependency collection.
-	 */
-
-	p.beforeGet = function () {
-	  Dep.target = this
-	  this.newDeps = []
-	}
-
-	/**
-	 * Clean up for dependency collection.
-	 */
-
-	p.afterGet = function () {
-	  Dep.target = null
-	  var i = this.deps.length
-	  while (i--) {
-	    var dep = this.deps[i]
-	    if (dep) {
-	      dep.removeSub(this)
-	    }
-	  }
-	  this.deps = this.newDeps
-	  this.newDeps = null
-	}
-
-	/**
-	 * Subscriber interface.
-	 * Will be called when a dependency changes.
-	 *
-	 * @param {Boolean} shallow
-	 */
-
-	p.update = function (shallow) {
-	  if (this.lazy) {
-	    this.dirty = true
-	  } else if (!config.async) {
-	    this.run()
-	  } else {
-	    // if queued, only overwrite shallow with non-shallow,
-	    // but not the other way around.
-	    this.shallow = this.queued
-	      ? shallow
-	        ? this.shallow
-	        : false
-	      : !!shallow
-	    this.queued = true
-	    batcher.push(this)
-	  }
-	}
-
-	/**
-	 * Batcher job interface.
-	 * Will be called by the batcher.
-	 */
-
-	p.run = function () {
-	  if (this.active) {
-	    var value = this.get()
-	    if (
-	      value !== this.value ||
-	      // Deep watchers and Array watchers should fire even
-	      // when the value is the same, because the value may
-	      // have mutated; but only do so if this is a
-	      // non-shallow update (caused by a vm digest).
-	      ((_.isArray(value) || this.deep) && !this.shallow)
-	    ) {
-	      var oldValue = this.value
-	      this.value = value
-	      this.cb(value, oldValue)
-	    }
-	    this.queued = this.shallow = false
-	  }
-	}
-
-	/**
-	 * Evaluate the value of the watcher.
-	 * This only gets called for lazy watchers.
-	 */
-
-	p.evaluate = function () {
-	  // avoid overwriting another watcher that is being
-	  // collected.
-	  var current = Dep.target
-	  this.value = this.get()
-	  this.dirty = false
-	  Dep.target = current
-	}
-
-	/**
-	 * Depend on all deps collected by this watcher.
-	 */
-
-	p.depend = function () {
-	  var i = this.deps.length
-	  while (i--) {
-	    this.deps[i].depend()
-	  }
-	}
-
-	/**
-	 * Remove self from all dependencies' subcriber list.
-	 */
-
-	p.teardown = function () {
-	  if (this.active) {
-	    // remove self from vm's watcher list
-	    // we can skip this if the vm if being destroyed
-	    // which can improve teardown performance.
-	    if (!this.vm._isBeingDestroyed) {
-	      this.vm._watchers.$remove(this)
-	    }
-	    var i = this.deps.length
-	    while (i--) {
-	      this.deps[i].removeSub(this)
-	    }
-	    this.active = false
-	    this.vm = this.cb = this.value = null
-	  }
-	}
-
-	/**
-	 * Recrusively traverse an object to evoke all converted
-	 * getters, so that every nested property inside the object
-	 * is collected as a "deep" dependency.
-	 *
-	 * @param {Object} obj
-	 */
-
-	function traverse (obj) {
-	  var key, val, i
-	  for (key in obj) {
-	    val = obj[key]
-	    if (_.isArray(val)) {
-	      i = val.length
-	      while (i--) traverse(val[i])
-	    } else if (_.isObject(val)) {
-	      traverse(val)
-	    }
-	  }
-	}
-
-	module.exports = Watcher
-
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-	var Path = __webpack_require__(16)
-	var Cache = __webpack_require__(11)
-	var expressionCache = new Cache(1000)
-
-	var allowedKeywords =
-	  'Math,Date,this,true,false,null,undefined,Infinity,NaN,' +
-	  'isNaN,isFinite,decodeURI,decodeURIComponent,encodeURI,' +
-	  'encodeURIComponent,parseInt,parseFloat'
-	var allowedKeywordsRE =
-	  new RegExp('^(' + allowedKeywords.replace(/,/g, '\\b|') + '\\b)')
-
-	// keywords that don't make sense inside expressions
-	var improperKeywords =
-	  'break,case,class,catch,const,continue,debugger,default,' +
-	  'delete,do,else,export,extends,finally,for,function,if,' +
-	  'import,in,instanceof,let,return,super,switch,throw,try,' +
-	  'var,while,with,yield,enum,await,implements,package,' +
-	  'proctected,static,interface,private,public'
-	var improperKeywordsRE =
-	  new RegExp('^(' + improperKeywords.replace(/,/g, '\\b|') + '\\b)')
-
-	var wsRE = /\s/g
-	var newlineRE = /\n/g
-	var saveRE = /[\{,]\s*[\w\$_]+\s*:|('[^']*'|"[^"]*")|new |typeof |void /g
-	var restoreRE = /"(\d+)"/g
-	var pathTestRE = /^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/
-	var pathReplaceRE = /[^\w$\.]([A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\])*)/g
-	var booleanLiteralRE = /^(true|false)$/
-
-	/**
-	 * Save / Rewrite / Restore
-	 *
-	 * When rewriting paths found in an expression, it is
-	 * possible for the same letter sequences to be found in
-	 * strings and Object literal property keys. Therefore we
-	 * remove and store these parts in a temporary array, and
-	 * restore them after the path rewrite.
-	 */
-
-	var saved = []
-
-	/**
-	 * Save replacer
-	 *
-	 * The save regex can match two possible cases:
-	 * 1. An opening object literal
-	 * 2. A string
-	 * If matched as a plain string, we need to escape its
-	 * newlines, since the string needs to be preserved when
-	 * generating the function body.
-	 *
-	 * @param {String} str
-	 * @param {String} isString - str if matched as a string
-	 * @return {String} - placeholder with index
-	 */
-
-	function save (str, isString) {
-	  var i = saved.length
-	  saved[i] = isString
-	    ? str.replace(newlineRE, '\\n')
-	    : str
-	  return '"' + i + '"'
-	}
-
-	/**
-	 * Path rewrite replacer
-	 *
-	 * @param {String} raw
-	 * @return {String}
-	 */
-
-	function rewrite (raw) {
-	  var c = raw.charAt(0)
-	  var path = raw.slice(1)
-	  if (allowedKeywordsRE.test(path)) {
-	    return raw
-	  } else {
-	    path = path.indexOf('"') > -1
-	      ? path.replace(restoreRE, restore)
-	      : path
-	    return c + 'scope.' + path
-	  }
-	}
-
-	/**
-	 * Restore replacer
-	 *
-	 * @param {String} str
-	 * @param {String} i - matched save index
-	 * @return {String}
-	 */
-
-	function restore (str, i) {
-	  return saved[i]
-	}
-
-	/**
-	 * Rewrite an expression, prefixing all path accessors with
-	 * `scope.` and generate getter/setter functions.
-	 *
-	 * @param {String} exp
-	 * @param {Boolean} needSet
-	 * @return {Function}
-	 */
-
-	function compileExpFns (exp, needSet) {
-	  if (improperKeywordsRE.test(exp)) {
-	    ("development") !== 'production' && _.warn(
-	      'Avoid using reserved keywords in expression: ' + exp
-	    )
-	  }
-	  // reset state
-	  saved.length = 0
-	  // save strings and object literal keys
-	  var body = exp
-	    .replace(saveRE, save)
-	    .replace(wsRE, '')
-	  // rewrite all paths
-	  // pad 1 space here becaue the regex matches 1 extra char
-	  body = (' ' + body)
-	    .replace(pathReplaceRE, rewrite)
-	    .replace(restoreRE, restore)
-	  var getter = makeGetter(body)
-	  if (getter) {
-	    return {
-	      get: getter,
-	      body: body,
-	      set: needSet
-	        ? makeSetter(body)
-	        : null
-	    }
-	  }
-	}
-
-	/**
-	 * Compile getter setters for a simple path.
-	 *
-	 * @param {String} exp
-	 * @return {Function}
-	 */
-
-	function compilePathFns (exp) {
-	  var getter, path
-	  if (exp.indexOf('[') < 0) {
-	    // really simple path
-	    path = exp.split('.')
-	    path.raw = exp
-	    getter = Path.compileGetter(path)
-	  } else {
-	    // do the real parsing
-	    path = Path.parse(exp)
-	    getter = path.get
-	  }
-	  return {
-	    get: getter,
-	    // always generate setter for simple paths
-	    set: function (obj, val) {
-	      Path.set(obj, path, val)
-	    }
-	  }
-	}
-
-	/**
-	 * Build a getter function. Requires eval.
-	 *
-	 * We isolate the try/catch so it doesn't affect the
-	 * optimization of the parse function when it is not called.
-	 *
-	 * @param {String} body
-	 * @return {Function|undefined}
-	 */
-
-	function makeGetter (body) {
-	  try {
-	    return new Function('scope', 'return ' + body + ';')
-	  } catch (e) {
-	    ("development") !== 'production' && _.warn(
-	      'Invalid expression. ' +
-	      'Generated function body: ' + body
-	    )
-	  }
-	}
-
-	/**
-	 * Build a setter function.
-	 *
-	 * This is only needed in rare situations like "a[b]" where
-	 * a settable path requires dynamic evaluation.
-	 *
-	 * This setter function may throw error when called if the
-	 * expression body is not a valid left-hand expression in
-	 * assignment.
-	 *
-	 * @param {String} body
-	 * @return {Function|undefined}
-	 */
-
-	function makeSetter (body) {
-	  try {
-	    return new Function('scope', 'value', body + '=value;')
-	  } catch (e) {
-	    ("development") !== 'production' && _.warn(
-	      'Invalid setter function body: ' + body
-	    )
-	  }
-	}
-
-	/**
-	 * Check for setter existence on a cache hit.
-	 *
-	 * @param {Function} hit
-	 */
-
-	function checkSetter (hit) {
-	  if (!hit.set) {
-	    hit.set = makeSetter(hit.body)
-	  }
-	}
-
-	/**
-	 * Parse an expression into re-written getter/setters.
-	 *
-	 * @param {String} exp
-	 * @param {Boolean} needSet
-	 * @return {Function}
-	 */
-
-	exports.parse = function (exp, needSet) {
-	  exp = exp.trim()
-	  // try cache
-	  var hit = expressionCache.get(exp)
-	  if (hit) {
-	    if (needSet) {
-	      checkSetter(hit)
-	    }
-	    return hit
-	  }
-	  // we do a simple path check to optimize for them.
-	  // the check fails valid paths with unusal whitespaces,
-	  // but that's too rare and we don't care.
-	  // also skip boolean literals and paths that start with
-	  // global "Math"
-	  var res = exports.isSimplePath(exp)
-	    ? compilePathFns(exp)
-	    : compileExpFns(exp, needSet)
-	  expressionCache.put(exp, res)
-	  return res
-	}
-
-	/**
-	 * Check if an expression is a simple path.
-	 *
-	 * @param {String} exp
-	 * @return {Boolean}
-	 */
-
-	exports.isSimplePath = function (exp) {
-	  return pathTestRE.test(exp) &&
-	    // don't treat true/false as paths
-	    !booleanLiteralRE.test(exp) &&
-	    // Math constants e.g. Math.PI, Math.E etc.
-	    exp.slice(0, 5) !== 'Math.'
-	}
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-
-	/**
-	 * A dep is an observable that can have multiple
-	 * directives subscribing to it.
-	 *
-	 * @constructor
-	 */
-
-	function Dep () {
-	  this.subs = []
-	}
-
-	// the current target watcher being evaluated.
-	// this is globally unique because there could be only one
-	// watcher being evaluated at any time.
-	Dep.target = null
-
-	var p = Dep.prototype
-
-	/**
-	 * Add a directive subscriber.
-	 *
-	 * @param {Directive} sub
-	 */
-
-	p.addSub = function (sub) {
-	  this.subs.push(sub)
-	}
-
-	/**
-	 * Remove a directive subscriber.
-	 *
-	 * @param {Directive} sub
-	 */
-
-	p.removeSub = function (sub) {
-	  this.subs.$remove(sub)
-	}
-
-	/**
-	 * Add self as a dependency to the target watcher.
-	 */
-
-	p.depend = function () {
-	  Dep.target.addDep(this)
-	}
-
-	/**
-	 * Notify all subscribers of a new value.
-	 */
-
-	p.notify = function () {
-	  // stablize the subscriber list first
-	  var subs = _.toArray(this.subs)
-	  for (var i = 0, l = subs.length; i < l; i++) {
-	    subs[i].update()
-	  }
-	}
-
-	module.exports = Dep
-
-
-/***/ },
 /* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
 
 	// we have two separate queues: one for directive updates
 	// and one for user watcher registered via $watch().
@@ -4040,7 +4085,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Reset the batcher's state.
 	 */
 
-	function reset () {
+	function resetBatcherState () {
 	  queue = []
 	  userQueue = []
 	  has = {}
@@ -4052,11 +4097,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Flush both queues and run the watchers.
 	 */
 
-	function flush () {
-	  run(queue)
+	function flushBatcherQueue () {
+	  runBatcherQueue(queue)
 	  internalQueueDepleted = true
-	  run(userQueue)
-	  reset()
+	  runBatcherQueue(userQueue)
+	  resetBatcherState()
 	}
 
 	/**
@@ -4065,7 +4110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Array} queue
 	 */
 
-	function run (queue) {
+	function runBatcherQueue (queue) {
 	  // do not cache length because more watchers might be pushed
 	  // as we run existing watchers
 	  for (var i = 0; i < queue.length; i++) {
@@ -4114,7 +4159,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // queue the flush
 	    if (!waiting) {
 	      waiting = true
-	      _.nextTick(flush)
+	      _.nextTick(flushBatcherQueue)
 	    }
 	  }
 	}
@@ -4125,7 +4170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var Cache = __webpack_require__(11)
+	var Cache = __webpack_require__(14)
 	var templateCache = new Cache(1000)
 	var idSelectorCache = new Cache(1000)
 
@@ -4413,7 +4458,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
 	var templateParser = __webpack_require__(22)
 
 	module.exports = {
@@ -4538,14 +4583,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	          options = {
 	            created: function () {
 	              this.$once(waitFor, function () {
+	                self.waitingFor = null
 	                self.transition(this, cb)
 	              })
 	            }
 	          }
 	        }
+	        var cached = this.getCached()
 	        var newComponent = this.build(options)
-	        if (!waitFor) {
+	        if (!waitFor || cached) {
 	          this.transition(newComponent, cb)
+	        } else {
+	          this.waitingFor = newComponent
 	        }
 	      }, this))
 	    }
@@ -4588,11 +4637,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  build: function (extraOptions) {
-	    if (this.keepAlive) {
-	      var cached = this.cache[this.Component.cid]
-	      if (cached) {
-	        return cached
-	      }
+	    var cached = this.getCached()
+	    if (cached) {
+	      return cached
 	    }
 	    if (this.Component) {
 	      // default options
@@ -4620,6 +4667,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  /**
+	   * Try to get a cached instance of the current component.
+	   *
+	   * @return {Vue|undefined}
+	   */
+
+	  getCached: function () {
+	    return this.keepAlive && this.cache[this.Component.cid]
+	  },
+
+	  /**
 	   * Teardown the current child, but defers cleanup so
 	   * that we can separate the destroy and removal steps.
 	   *
@@ -4627,6 +4684,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  unbuild: function (defer) {
+	    if (this.waitingFor) {
+	      this.waitingFor.$destroy()
+	      this.waitingFor = null
+	    }
 	    var child = this.childVM
 	    if (!child || this.keepAlive) {
 	      return
@@ -4678,7 +4739,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  transition: function (target, cb) {
 	    var self = this
 	    var current = this.childVM
-	    this.unsetCurrent()
 	    this.setCurrent(target)
 	    switch (self.transMode) {
 	      case 'in-out':
@@ -4702,6 +4762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  setCurrent: function (child) {
+	    this.unsetCurrent()
 	    this.childVM = child
 	    var refID = child._refID || this.refID
 	    if (refID) {
@@ -4747,7 +4808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
 	var templateParser = __webpack_require__(22)
 
 	/**
@@ -4897,15 +4958,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	// manipulation directives
-	exports.text = __webpack_require__(27)
-	exports.html = __webpack_require__(28)
-	exports.attr = __webpack_require__(29)
-	exports.show = __webpack_require__(30)
-	exports['class'] = __webpack_require__(32)
-	exports.el = __webpack_require__(33)
-	exports.ref = __webpack_require__(34)
-	exports.cloak = __webpack_require__(35)
-	exports.style = __webpack_require__(26)
+	exports.text = __webpack_require__(26)
+	exports.html = __webpack_require__(27)
+	exports.attr = __webpack_require__(28)
+	exports.show = __webpack_require__(29)
+	exports['class'] = __webpack_require__(31)
+	exports.el = __webpack_require__(32)
+	exports.ref = __webpack_require__(33)
+	exports.cloak = __webpack_require__(34)
+	exports.style = __webpack_require__(35)
 	exports.transition = __webpack_require__(36)
 
 	// event listener directives
@@ -4919,127 +4980,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	// internal directives that should not be used directly
 	// but we still want to expose them for advanced usage.
 	exports._component = __webpack_require__(23)
-	exports._prop = __webpack_require__(17)
+	exports._prop = __webpack_require__(16)
 
 
 /***/ },
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-	var prefixes = ['-webkit-', '-moz-', '-ms-']
-	var camelPrefixes = ['Webkit', 'Moz', 'ms']
-	var importantRE = /!important;?$/
-	var camelRE = /([a-z])([A-Z])/g
-	var testEl = null
-	var propCache = {}
-
-	module.exports = {
-
-	  deep: true,
-
-	  update: function (value) {
-	    if (this.arg) {
-	      this.setProp(this.arg, value)
-	    } else {
-	      if (typeof value === 'object') {
-	        this.objectHandler(value)
-	      } else {
-	        this.el.style.cssText = value
-	      }
-	    }
-	  },
-
-	  objectHandler: function (value) {
-	    // cache object styles so that only changed props
-	    // are actually updated.
-	    var cache = this.cache || (this.cache = {})
-	    var prop, val
-	    for (prop in cache) {
-	      if (!(prop in value)) {
-	        this.setProp(prop, null)
-	        delete cache[prop]
-	      }
-	    }
-	    for (prop in value) {
-	      val = value[prop]
-	      if (val !== cache[prop]) {
-	        cache[prop] = val
-	        this.setProp(prop, val)
-	      }
-	    }
-	  },
-
-	  setProp: function (prop, value) {
-	    prop = normalize(prop)
-	    if (!prop) return // unsupported prop
-	    // cast possible numbers/booleans into strings
-	    if (value != null) value += ''
-	    if (value) {
-	      var isImportant = importantRE.test(value)
-	        ? 'important'
-	        : ''
-	      if (isImportant) {
-	        value = value.replace(importantRE, '').trim()
-	      }
-	      this.el.style.setProperty(prop, value, isImportant)
-	    } else {
-	      this.el.style.removeProperty(prop)
-	    }
-	  }
-
-	}
-
-	/**
-	 * Normalize a CSS property name.
-	 * - cache result
-	 * - auto prefix
-	 * - camelCase -> dash-case
-	 *
-	 * @param {String} prop
-	 * @return {String}
-	 */
-
-	function normalize (prop) {
-	  if (propCache[prop]) {
-	    return propCache[prop]
-	  }
-	  var res = prefix(prop)
-	  propCache[prop] = propCache[res] = res
-	  return res
-	}
-
-	/**
-	 * Auto detect the appropriate prefix for a CSS property.
-	 * https://gist.github.com/paulirish/523692
-	 *
-	 * @param {String} prop
-	 * @return {String}
-	 */
-
-	function prefix (prop) {
-	  prop = prop.replace(camelRE, '$1-$2').toLowerCase()
-	  var camel = _.camelize(prop)
-	  var upper = camel.charAt(0).toUpperCase() + camel.slice(1)
-	  if (!testEl) {
-	    testEl = document.createElement('div')
-	  }
-	  if (camel in testEl.style) {
-	    return prop
-	  }
-	  var i = prefixes.length
-	  var prefixed
-	  while (i--) {
-	    prefixed = camelPrefixes[i] + upper
-	    if (prefixed in testEl.style) {
-	      return prefixes[i] + prop
-	    }
-	  }
-	}
-
-
-/***/ },
-/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
@@ -5059,7 +5004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
@@ -5105,12 +5050,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
+/* 28 */
+/***/ function(module, exports) {
 
 	// xlink
 	var xlinkNS = 'http://www.w3.org/1999/xlink'
 	var xlinkRE = /^xlink:/
+	var inputProps = {
+	  value: 1,
+	  checked: 1,
+	  selected: 1
+	}
 
 	module.exports = {
 
@@ -5145,12 +5095,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  setAttr: function (attr, value) {
-	    if (attr === 'value' && attr in this.el) {
+	    if (inputProps[attr] && attr in this.el) {
 	      if (!this.valueRemoved) {
 	        this.el.removeAttribute(attr)
 	        this.valueRemoved = true
 	      }
-	      this.el.value = value
+	      this.el[attr] = value
 	    } else if (value != null && value !== false) {
 	      if (xlinkRE.test(attr)) {
 	        this.el.setAttributeNS(xlinkNS, attr, value)
@@ -5165,10 +5115,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var transition = __webpack_require__(31)
+	var transition = __webpack_require__(30)
 
 	module.exports = function (value) {
 	  var el = this.el
@@ -5179,7 +5129,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
@@ -5313,7 +5263,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
@@ -5389,8 +5339,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
+/* 32 */
+/***/ function(module, exports) {
 
 	module.exports = {
 
@@ -5407,7 +5357,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
@@ -5435,10 +5385,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
 
 	module.exports = {
 	  bind: function () {
@@ -5446,6 +5396,122 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.vm.$once('hook:compiled', function () {
 	      el.removeAttribute(config.prefix + 'cloak')
 	    })
+	  }
+	}
+
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+	var prefixes = ['-webkit-', '-moz-', '-ms-']
+	var camelPrefixes = ['Webkit', 'Moz', 'ms']
+	var importantRE = /!important;?$/
+	var camelRE = /([a-z])([A-Z])/g
+	var testEl = null
+	var propCache = {}
+
+	module.exports = {
+
+	  deep: true,
+
+	  update: function (value) {
+	    if (this.arg) {
+	      this.setProp(this.arg, value)
+	    } else {
+	      if (typeof value === 'object') {
+	        this.objectHandler(value)
+	      } else {
+	        this.el.style.cssText = value
+	      }
+	    }
+	  },
+
+	  objectHandler: function (value) {
+	    // cache object styles so that only changed props
+	    // are actually updated.
+	    var cache = this.cache || (this.cache = {})
+	    var prop, val
+	    for (prop in cache) {
+	      if (!(prop in value)) {
+	        this.setProp(prop, null)
+	        delete cache[prop]
+	      }
+	    }
+	    for (prop in value) {
+	      val = value[prop]
+	      if (val !== cache[prop]) {
+	        cache[prop] = val
+	        this.setProp(prop, val)
+	      }
+	    }
+	  },
+
+	  setProp: function (prop, value) {
+	    prop = normalize(prop)
+	    if (!prop) return // unsupported prop
+	    // cast possible numbers/booleans into strings
+	    if (value != null) value += ''
+	    if (value) {
+	      var isImportant = importantRE.test(value)
+	        ? 'important'
+	        : ''
+	      if (isImportant) {
+	        value = value.replace(importantRE, '').trim()
+	      }
+	      this.el.style.setProperty(prop, value, isImportant)
+	    } else {
+	      this.el.style.removeProperty(prop)
+	    }
+	  }
+
+	}
+
+	/**
+	 * Normalize a CSS property name.
+	 * - cache result
+	 * - auto prefix
+	 * - camelCase -> dash-case
+	 *
+	 * @param {String} prop
+	 * @return {String}
+	 */
+
+	function normalize (prop) {
+	  if (propCache[prop]) {
+	    return propCache[prop]
+	  }
+	  var res = prefix(prop)
+	  propCache[prop] = propCache[res] = res
+	  return res
+	}
+
+	/**
+	 * Auto detect the appropriate prefix for a CSS property.
+	 * https://gist.github.com/paulirish/523692
+	 *
+	 * @param {String} prop
+	 * @return {String}
+	 */
+
+	function prefix (prop) {
+	  prop = prop.replace(camelRE, '$1-$2').toLowerCase()
+	  var camel = _.camelize(prop)
+	  var upper = camel.charAt(0).toUpperCase() + camel.slice(1)
+	  if (!testEl) {
+	    testEl = document.createElement('div')
+	  }
+	  if (camel in testEl.style) {
+	    return prop
+	  }
+	  var i = prefixes.length
+	  var prefixed
+	  while (i--) {
+	    prefixed = camelPrefixes[i] + upper
+	    if (prefixed in testEl.style) {
+	      return prefixes[i] + prop
+	    }
 	  }
 	}
 
@@ -5525,6 +5591,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.op =
 	  this.cb = null
 	  this.justEntered = false
+	  this.entered = this.left = false
 	  this.typeCache = {}
 	  // bind
 	  var self = this
@@ -5567,7 +5634,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.cb = cb
 	  addClass(this.el, this.enterClass)
 	  op()
+	  this.entered = false
 	  this.callHookWithCb('enter')
+	  if (this.entered) {
+	    return // user called done synchronously.
+	  }
 	  this.cancel = this.hooks && this.hooks.enterCancelled
 	  queue.push(this.enterNextTick)
 	}
@@ -5583,16 +5654,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _.nextTick(function () {
 	    this.justEntered = false
 	  }, this)
-	  var type = this.getCssTransitionType(this.enterClass)
 	  var enterDone = this.enterDone
-	  if (type === TYPE_TRANSITION) {
-	    // trigger transition by removing enter class now
+	  var type = this.getCssTransitionType(this.enterClass)
+	  if (!this.pendingJsCb) {
+	    if (type === TYPE_TRANSITION) {
+	      // trigger transition by removing enter class now
+	      removeClass(this.el, this.enterClass)
+	      this.setupCssCb(transitionEndEvent, enterDone)
+	    } else if (type === TYPE_ANIMATION) {
+	      this.setupCssCb(animationEndEvent, enterDone)
+	    } else {
+	      enterDone()
+	    }
+	  } else if (type === TYPE_TRANSITION) {
 	    removeClass(this.el, this.enterClass)
-	    this.setupCssCb(transitionEndEvent, enterDone)
-	  } else if (type === TYPE_ANIMATION) {
-	    this.setupCssCb(animationEndEvent, enterDone)
-	  } else if (!this.pendingJsCb) {
-	    enterDone()
 	  }
 	}
 
@@ -5601,6 +5676,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	p.enterDone = function () {
+	  this.entered = true
 	  this.cancel = this.pendingJsCb = null
 	  removeClass(this.el, this.enterClass)
 	  this.callHook('afterEnter')
@@ -5634,7 +5710,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.op = op
 	  this.cb = cb
 	  addClass(this.el, this.leaveClass)
+	  this.left = false
 	  this.callHookWithCb('leave')
+	  if (this.left) {
+	    return // user called done synchronously.
+	  }
 	  this.cancel = this.hooks && this.hooks.leaveCancelled
 	  // only need to handle leaveDone if
 	  // 1. the transition is already done (synchronously called
@@ -5673,6 +5753,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	p.leaveDone = function () {
+	  this.left = true
 	  this.cancel = this.pendingJsCb = null
 	  this.op()
 	  removeClass(this.el, this.leaveClass)
@@ -5876,7 +5957,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.iframeBind = function () {
 	        _.on(self.el.contentWindow, self.arg, self.handler)
 	      }
-	      _.on(this.el, 'load', this.iframeBind)
+	      this.on('load', this.iframeBind)
 	    }
 	  },
 
@@ -5916,7 +5997,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  unbind: function () {
 	    this.reset()
-	    _.off(this.el, 'load', this.iframeBind)
 	  }
 	}
 
@@ -5928,9 +6008,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _ = __webpack_require__(1)
 
 	var handlers = {
-	  text: __webpack_require__(42),
-	  radio: __webpack_require__(43),
-	  select: __webpack_require__(41),
+	  text: __webpack_require__(41),
+	  radio: __webpack_require__(42),
+	  select: __webpack_require__(43),
 	  checkbox: __webpack_require__(44)
 	}
 
@@ -5977,9 +6057,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      )
 	      return
 	    }
+	    el.__v_model = this
 	    handler.bind.call(this)
 	    this.update = handler.update
-	    this.unbind = handler.unbind
+	    this._unbind = handler.unbind
 	  },
 
 	  /**
@@ -5999,6 +6080,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.hasWrite = true
 	      }
 	    }
+	  },
+
+	  unbind: function () {
+	    this.el.__v_model = null
+	    this._unbind && this._unbind()
 	  }
 	}
 
@@ -6008,20 +6094,195 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var Watcher = __webpack_require__(18)
-	var dirParser = __webpack_require__(12)
 
 	module.exports = {
 
 	  bind: function () {
 	    var self = this
 	    var el = this.el
-	    // update DOM using latest value.
+	    var isRange = el.type === 'range'
+
+	    // check params
+	    // - lazy: update model on "change" instead of "input"
+	    var lazy = this._checkParam('lazy') != null
+	    // - number: cast value into number when updating model.
+	    var number = this._checkParam('number') != null
+	    // - debounce: debounce the input listener
+	    var debounce = parseInt(this._checkParam('debounce'), 10)
+
+	    // handle composition events.
+	    //   http://blog.evanyou.me/2014/01/03/composition-event/
+	    // skip this for Android because it handles composition
+	    // events quite differently. Android doesn't trigger
+	    // composition events for language input methods e.g.
+	    // Chinese, but instead triggers them for spelling
+	    // suggestions... (see Discussion/#162)
+	    var composing = false
+	    if (!_.isAndroid && !isRange) {
+	      this.on('compositionstart', function () {
+	        composing = true
+	      })
+	      this.on('compositionend', function () {
+	        composing = false
+	        // in IE11 the "compositionend" event fires AFTER
+	        // the "input" event, so the input handler is blocked
+	        // at the end... have to call it here.
+	        self.listener()
+	      })
+	    }
+
+	    // prevent messing with the input when user is typing,
+	    // and force update on blur.
+	    this.focused = false
+	    if (!isRange) {
+	      this.on('focus', function () {
+	        self.focused = true
+	      })
+	      this.on('blur', function () {
+	        self.focused = false
+	        self.listener()
+	      })
+	    }
+
+	    // Now attach the main listener
+	    this.listener = function () {
+	      if (composing) return
+	      var val = number || isRange
+	        ? _.toNumber(el.value)
+	        : el.value
+	      self.set(val)
+	      // force update on next tick to avoid lock & same value
+	      // also only update when user is not typing
+	      _.nextTick(function () {
+	        if (self._bound && !self.focused) {
+	          self.update(self._watcher.value)
+	        }
+	      })
+	    }
+	    if (debounce) {
+	      this.listener = _.debounce(this.listener, debounce)
+	    }
+
+	    // Support jQuery events, since jQuery.trigger() doesn't
+	    // trigger native events in some cases and some plugins
+	    // rely on $.trigger()
+	    //
+	    // We want to make sure if a listener is attached using
+	    // jQuery, it is also removed with jQuery, that's why
+	    // we do the check for each directive instance and
+	    // store that check result on itself. This also allows
+	    // easier test coverage control by unsetting the global
+	    // jQuery variable in tests.
+	    this.hasjQuery = typeof jQuery === 'function'
+	    if (this.hasjQuery) {
+	      jQuery(el).on('change', this.listener)
+	      if (!lazy) {
+	        jQuery(el).on('input', this.listener)
+	      }
+	    } else {
+	      this.on('change', this.listener)
+	      if (!lazy) {
+	        this.on('input', this.listener)
+	      }
+	    }
+
+	    // IE9 doesn't fire input event on backspace/del/cut
+	    if (!lazy && _.isIE9) {
+	      this.on('cut', function () {
+	        _.nextTick(self.listener)
+	      })
+	      this.on('keyup', function (e) {
+	        if (e.keyCode === 46 || e.keyCode === 8) {
+	          self.listener()
+	        }
+	      })
+	    }
+
+	    // set initial value if present
+	    if (
+	      el.hasAttribute('value') ||
+	      (el.tagName === 'TEXTAREA' && el.value.trim())
+	    ) {
+	      this._initValue = number
+	        ? _.toNumber(el.value)
+	        : el.value
+	    }
+	  },
+
+	  update: function (value) {
+	    this.el.value = _.toString(value)
+	  },
+
+	  unbind: function () {
+	    var el = this.el
+	    if (this.hasjQuery) {
+	      jQuery(el).off('change', this.listener)
+	      jQuery(el).off('input', this.listener)
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+
+	module.exports = {
+
+	  bind: function () {
+	    var self = this
+	    var el = this.el
+	    var number = this._checkParam('number') != null
+	    var expression = this._checkParam('exp')
+
+	    this.getValue = function () {
+	      var val = el.value
+	      if (number) {
+	        val = _.toNumber(val)
+	      } else if (expression !== null) {
+	        val = self.vm.$eval(expression)
+	      }
+	      return val
+	    }
+
+	    this.on('change', function () {
+	      self.set(self.getValue())
+	    })
+
+	    if (el.checked) {
+	      this._initValue = this.getValue()
+	    }
+	  },
+
+	  update: function (value) {
+	    this.el.checked = _.looseEqual(value, this.getValue())
+	  }
+	}
+
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _ = __webpack_require__(1)
+	var Watcher = __webpack_require__(17)
+	var dirParser = __webpack_require__(15)
+
+	module.exports = {
+
+	  bind: function () {
+	    var self = this
+	    var el = this.el
+
+	    // method to force update DOM using latest value.
 	    this.forceUpdate = function () {
 	      if (self._watcher) {
 	        self.update(self._watcher.get())
 	      }
 	    }
+
 	    // check options param
 	    var optionsParam = this._checkParam('options')
 	    if (optionsParam) {
@@ -6029,19 +6290,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    this.number = this._checkParam('number') != null
 	    this.multiple = el.hasAttribute('multiple')
-	    this.listener = function () {
-	      var value = self.multiple
-	        ? getMultiValue(el)
-	        : el.value
+
+	    // attach listener
+	    this.on('change', function () {
+	      var value = getValue(el, self.multiple)
 	      value = self.number
 	        ? _.isArray(value)
 	          ? value.map(_.toNumber)
 	          : _.toNumber(value)
 	        : value
 	      self.set(value)
-	    }
-	    _.on(el, 'change', this.listener)
+	    })
+
+	    // check initial value (inline selected attribute)
 	    checkInitialValue.call(this)
+
 	    // All major browsers except Firefox resets
 	    // selectedIndex with value -1 to 0 when the element
 	    // is appended to a new parent, therefore we have to
@@ -6052,7 +6315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  update: function (value) {
 	    var el = this.el
 	    el.selectedIndex = -1
-	    if (!value && value !== 0) {
+	    if (value == null) {
 	      if (this.defaultOption) {
 	        this.defaultOption.selected = true
 	      }
@@ -6061,25 +6324,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var multi = this.multiple && _.isArray(value)
 	    var options = el.options
 	    var i = options.length
-	    var option
+	    var op, val
 	    while (i--) {
-	      option = options[i]
+	      op = options[i]
+	      val = op.hasOwnProperty('_value')
+	        ? op._value
+	        : op.value
 	      /* eslint-disable eqeqeq */
-	      option.selected = multi
-	        ? indexOf(value, option.value) > -1
-	        : value == option.value
+	      op.selected = multi
+	        ? indexOf(value, val) > -1
+	        : _.looseEqual(value, val)
 	      /* eslint-enable eqeqeq */
 	    }
 	  },
 
 	  unbind: function () {
-	    _.off(this.el, 'change', this.listener)
 	    this.vm.$off('hook:attached', this.forceUpdate)
 	    if (this.optionWatcher) {
 	      this.optionWatcher.teardown()
 	    }
 	  }
-
 	}
 
 	/**
@@ -6144,10 +6408,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (typeof op === 'string') {
 	        el.text = el.value = op
 	      } else {
-	        if (op.value != null) {
+	        if (op.value != null && !_.isObject(op.value)) {
 	          el.value = op.value
 	        }
-	        el.text = op.text || op.value || ''
+	        // object values gets serialized when set as value,
+	        // so we store the raw value as a different property
+	        el._value = op.value
+	        el.text = op.text || ''
 	        if (op.disabled) {
 	          el.disabled = true
 	        }
@@ -6186,29 +6453,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * Helper to extract a value array for select[multiple]
+	 * Get select value
 	 *
 	 * @param {SelectElement} el
-	 * @return {Array}
+	 * @param {Boolean} multi
+	 * @return {Array|*}
 	 */
 
-	function getMultiValue (el) {
-	  return Array.prototype.filter
-	    .call(el.options, filterSelected)
-	    .map(getOptionValue)
-	}
-
-	function filterSelected (op) {
-	  return op.selected
-	}
-
-	function getOptionValue (op) {
-	  return op.value || op.text
+	function getValue (el, multi) {
+	  var res = multi ? [] : null
+	  var op, val
+	  for (var i = 0, l = el.options.length; i < l; i++) {
+	    op = el.options[i]
+	    if (op.selected) {
+	      val = op.hasOwnProperty('_value')
+	        ? op._value
+	        : op.value
+	      if (multi) {
+	        res.push(val)
+	      } else {
+	        return val
+	      }
+	    }
+	  }
+	  return res
 	}
 
 	/**
 	 * Native Array.indexOf uses strict equal, but in this
-	 * case we need to match string/numbers with soft equal.
+	 * case we need to match string/numbers with custom equal.
 	 *
 	 * @param {Array} arr
 	 * @param {*} val
@@ -6217,214 +6490,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	function indexOf (arr, val) {
 	  var i = arr.length
 	  while (i--) {
-	    /* eslint-disable eqeqeq */
-	    if (arr[i] == val) return i
-	    /* eslint-enable eqeqeq */
+	    if (_.looseEqual(arr[i], val)) {
+	      return i
+	    }
 	  }
 	  return -1
-	}
-
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-
-	module.exports = {
-
-	  bind: function () {
-	    var self = this
-	    var el = this.el
-
-	    // check params
-	    // - lazy: update model on "change" instead of "input"
-	    var lazy = this._checkParam('lazy') != null
-	    // - number: cast value into number when updating model.
-	    var number = this._checkParam('number') != null
-	    // - debounce: debounce the input listener
-	    var debounce = parseInt(this._checkParam('debounce'), 10)
-
-	    // handle composition events.
-	    //   http://blog.evanyou.me/2014/01/03/composition-event/
-	    // skip this for Android because it handles composition
-	    // events quite differently. Android doesn't trigger
-	    // composition events for language input methods e.g.
-	    // Chinese, but instead triggers them for spelling
-	    // suggestions... (see Discussion/#162)
-	    var composing = false
-	    if (!_.isAndroid) {
-	      this.onComposeStart = function () {
-	        composing = true
-	      }
-	      this.onComposeEnd = function () {
-	        composing = false
-	        // in IE11 the "compositionend" event fires AFTER
-	        // the "input" event, so the input handler is blocked
-	        // at the end... have to call it here.
-	        self.listener()
-	      }
-	      _.on(el, 'compositionstart', this.onComposeStart)
-	      _.on(el, 'compositionend', this.onComposeEnd)
-	    }
-
-	    function syncToModel () {
-	      var val = number
-	        ? _.toNumber(el.value)
-	        : el.value
-	      self.set(val)
-	    }
-
-	    // if the directive has filters, we need to
-	    // record cursor position and restore it after updating
-	    // the input with the filtered value.
-	    // also force update for type="range" inputs to enable
-	    // "lock in range" (see #506)
-	    if (this.hasRead || el.type === 'range') {
-	      this.listener = function () {
-	        if (composing) return
-	        var charsOffset
-	        // some HTML5 input types throw error here
-	        try {
-	          // record how many chars from the end of input
-	          // the cursor was at
-	          charsOffset = el.value.length - el.selectionStart
-	        } catch (e) {}
-	        // Fix IE10/11 infinite update cycle
-	        // https://github.com/yyx990803/vue/issues/592
-	        /* istanbul ignore if */
-	        if (charsOffset < 0) {
-	          return
-	        }
-	        syncToModel()
-	        _.nextTick(function () {
-	          // force a value update, because in
-	          // certain cases the write filters output the
-	          // same result for different input values, and
-	          // the Observer set events won't be triggered.
-	          var newVal = self._watcher.value
-	          self.update(newVal)
-	          if (charsOffset != null) {
-	            var cursorPos =
-	              _.toString(newVal).length - charsOffset
-	            el.setSelectionRange(cursorPos, cursorPos)
-	          }
-	        })
-	      }
-	    } else {
-	      this.listener = function () {
-	        if (composing) return
-	        syncToModel()
-	      }
-	    }
-
-	    if (debounce) {
-	      this.listener = _.debounce(this.listener, debounce)
-	    }
-
-	    // Now attach the main listener
-
-	    this.event = lazy ? 'change' : 'input'
-	    // Support jQuery events, since jQuery.trigger() doesn't
-	    // trigger native events in some cases and some plugins
-	    // rely on $.trigger()
-	    //
-	    // We want to make sure if a listener is attached using
-	    // jQuery, it is also removed with jQuery, that's why
-	    // we do the check for each directive instance and
-	    // store that check result on itself. This also allows
-	    // easier test coverage control by unsetting the global
-	    // jQuery variable in tests.
-	    this.hasjQuery = typeof jQuery === 'function'
-	    if (this.hasjQuery) {
-	      jQuery(el).on(this.event, this.listener)
-	    } else {
-	      _.on(el, this.event, this.listener)
-	    }
-
-	    // IE9 doesn't fire input event on backspace/del/cut
-	    if (!lazy && _.isIE9) {
-	      this.onCut = function () {
-	        _.nextTick(self.listener)
-	      }
-	      this.onDel = function (e) {
-	        if (e.keyCode === 46 || e.keyCode === 8) {
-	          self.listener()
-	        }
-	      }
-	      _.on(el, 'cut', this.onCut)
-	      _.on(el, 'keyup', this.onDel)
-	    }
-
-	    // set initial value if present
-	    if (
-	      el.hasAttribute('value') ||
-	      (el.tagName === 'TEXTAREA' && el.value.trim())
-	    ) {
-	      this._initValue = number
-	        ? _.toNumber(el.value)
-	        : el.value
-	    }
-	  },
-
-	  update: function (value) {
-	    this.el.value = _.toString(value)
-	  },
-
-	  unbind: function () {
-	    var el = this.el
-	    if (this.hasjQuery) {
-	      jQuery(el).off(this.event, this.listener)
-	    } else {
-	      _.off(el, this.event, this.listener)
-	    }
-	    if (this.onComposeStart) {
-	      _.off(el, 'compositionstart', this.onComposeStart)
-	      _.off(el, 'compositionend', this.onComposeEnd)
-	    }
-	    if (this.onCut) {
-	      _.off(el, 'cut', this.onCut)
-	      _.off(el, 'keyup', this.onDel)
-	    }
-	  }
-	}
-
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(1)
-
-	module.exports = {
-
-	  bind: function () {
-	    var self = this
-	    var el = this.el
-	    var number = this._checkParam('number') != null
-	    function getValue () {
-	      return number
-	        ? _.toNumber(el.value)
-	        : el.value
-	    }
-	    this.listener = function () {
-	      self.set(getValue())
-	    }
-	    _.on(el, 'change', this.listener)
-	    if (el.checked) {
-	      this._initValue = getValue()
-	    }
-	  },
-
-	  update: function (value) {
-	    /* eslint-disable eqeqeq */
-	    this.el.checked = value == this.el.value
-	    /* eslint-enable eqeqeq */
-	  },
-
-	  unbind: function () {
-	    _.off(this.el, 'change', this.listener)
-	  }
 	}
 
 
@@ -6439,21 +6509,39 @@ return /******/ (function(modules) { // webpackBootstrap
 	  bind: function () {
 	    var self = this
 	    var el = this.el
-	    this.listener = function () {
-	      self.set(el.checked)
+	    var trueExp = this._checkParam('true-exp')
+	    var falseExp = this._checkParam('false-exp')
+
+	    this._matchValue = function (value) {
+	      if (trueExp !== null) {
+	        return _.looseEqual(value, self.vm.$eval(trueExp))
+	      } else {
+	        return !!value
+	      }
 	    }
-	    _.on(el, 'change', this.listener)
+
+	    function getValue () {
+	      var val = el.checked
+	      if (val && trueExp !== null) {
+	        val = self.vm.$eval(trueExp)
+	      }
+	      if (!val && falseExp !== null) {
+	        val = self.vm.$eval(falseExp)
+	      }
+	      return val
+	    }
+
+	    this.on('change', function () {
+	      self.set(getValue())
+	    })
+
 	    if (el.checked) {
-	      this._initValue = el.checked
+	      this._initValue = getValue()
 	    }
 	  },
 
 	  update: function (value) {
-	    this.el.checked = !!value
-	  },
-
-	  unbind: function () {
-	    _.off(this.el, 'change', this.listener)
+	    this.el.checked = this._matchValue(value)
 	  }
 	}
 
@@ -6463,13 +6551,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
+	var config = __webpack_require__(5)
 	var isObject = _.isObject
 	var isPlainObject = _.isPlainObject
-	var textParser = __webpack_require__(10)
+	var textParser = __webpack_require__(13)
 	var expParser = __webpack_require__(19)
 	var templateParser = __webpack_require__(22)
-	var compiler = __webpack_require__(13)
+	var compiler = __webpack_require__(10)
 	var uid = 0
 
 	// async component resolution states
@@ -6485,6 +6573,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  bind: function () {
+
+	    // some helpful tips...
+	    /* istanbul ignore if */
+	    if (
+	      ("development") !== 'production' &&
+	      this.el.tagName === 'OPTION' &&
+	      this.el.parentNode && this.el.parentNode.__v_model
+	    ) {
+	      _.warn(
+	        'Don\'t use v-repeat for v-model options; ' +
+	        'use the `options` param instead: ' +
+	        'http://vuejs.org/guide/forms.html#Dynamic_Select_Options'
+	      )
+	    }
+
 	    // support for item in array syntax
 	    var inMatch = this.expression.match(/(.*) in (.*)/)
 	    if (inMatch) {
@@ -6523,19 +6626,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    // create cache object
 	    this.cache = Object.create(null)
-
-	    // some helpful tips...
-	    /* istanbul ignore if */
-	    if (
-	      ("development") !== 'production' &&
-	      this.el.tagName === 'OPTION'
-	    ) {
-	      _.warn(
-	        'Don\'t use v-repeat for v-model options; ' +
-	        'use the `options` param instead: ' +
-	        'http://vuejs.org/guide/forms.html#Dynamic_Select_Options'
-	      )
-	    }
 	  },
 
 	  /**
@@ -6606,7 +6696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, this))
 	  },
 
-	    /**
+	  /**
 	   * Resolve a dynamic component to use for an instance.
 	   * The tricky part here is that there could be dynamic
 	   * components depending on instance data.
@@ -6654,6 +6744,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 	  update: function (data) {
+	    if (("development") !== 'production' && !_.isArray(data)) {
+	      _.warn(
+	        'v-repeat pre-converts Objects into Arrays, and ' +
+	        'v-repeat filters should always return Arrays.'
+	      )
+	    }
 	    if (this.componentId) {
 	      var state = this.componentState
 	      if (state === UNRESOLVED) {
@@ -6727,6 +6823,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	      primitive = !isObject(raw)
 	      vm = !init && this.getVm(raw, i, converted ? obj.$key : null)
 	      if (vm) { // reusable instance
+
+	        if (("development") !== 'production' && vm._reused) {
+	          _.warn(
+	            'Duplicate objects found in v-repeat="' + this.expression + '": ' +
+	            JSON.stringify(raw)
+	          )
+	        }
+
 	        vm._reused = true
 	        vm.$index = i // update $index
 	        // update data for track-by or object repeat,
@@ -6924,7 +7028,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        cache[id] = vm
 	      } else if (!primitive && idKey !== '$index') {
 	        ("development") !== 'production' && _.warn(
-	          'Duplicate track-by key in v-repeat: ' + id
+	          'Duplicate objects with the same track-by key in v-repeat: ' + id
 	        )
 	      }
 	    } else {
@@ -6934,8 +7038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          data[id] = vm
 	        } else {
 	          ("development") !== 'production' && _.warn(
-	            'Duplicate objects are not supported in v-repeat ' +
-	            'when using components or transitions.'
+	            'Duplicate objects found in v-repeat="' + this.expression + '": ' +
+	            JSON.stringify(data)
 	          )
 	        }
 	      } else {
@@ -7223,10 +7327,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var compiler = __webpack_require__(13)
+	var compiler = __webpack_require__(10)
 	var templateParser = __webpack_require__(22)
-	var transition = __webpack_require__(31)
-	var Cache = __webpack_require__(11)
+	var transition = __webpack_require__(30)
+	var Cache = __webpack_require__(14)
 	var cache = new Cache(1000)
 
 	module.exports = {
@@ -7251,8 +7355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.linker = compiler.compile(
 	          this.template,
 	          this.vm.$options,
-	          true, // partial
-	          this._host // important
+	          true // partial
 	        )
 	        cache.put(cacheId, this.linker)
 	      }
@@ -7283,7 +7386,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  link: function (frag, linker) {
 	    var vm = this.vm
-	    this.unlink = linker(vm, frag)
+	    this.unlink = linker(vm, frag, this._host /* important */)
 	    transition.blockAppend(frag, this.end, vm)
 	    // call attached for all the child components created
 	    // during the compilation
@@ -7481,9 +7584,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _ = __webpack_require__(1)
 	var templateParser = __webpack_require__(22)
-	var textParser = __webpack_require__(10)
-	var compiler = __webpack_require__(13)
-	var Cache = __webpack_require__(11)
+	var textParser = __webpack_require__(13)
+	var compiler = __webpack_require__(10)
+	var Cache = __webpack_require__(14)
 	var cache = new Cache(1000)
 
 	// v-partial reuses logic from v-if
@@ -7621,7 +7724,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.currency = function (value, currency) {
 	  value = parseFloat(value)
 	  if (!isFinite(value) || (!value && value !== 0)) return ''
-	  currency = currency || '$'
+	  currency = currency != null ? currency : '$'
 	  var stringified = Math.abs(value).toFixed(2)
 	  var _int = stringified.slice(0, -3)
 	  var i = _int.length % 3
@@ -7667,6 +7770,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  esc: 27,
 	  tab: 9,
 	  enter: 13,
+	  space: 32,
 	  'delete': 46,
 	  up: 38,
 	  left: 37,
@@ -7690,6 +7794,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	// expose keycode hash
 	exports.key.keyCodes = keyCodes
 
+	exports.debounce = function (handler, delay) {
+	  if (!handler) return
+	  if (!delay) {
+	    delay = 300
+	  }
+	  return _.debounce(handler, delay)
+	}
+
 	/**
 	 * Install special array filters
 	 */
@@ -7702,7 +7814,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var Path = __webpack_require__(16)
+	var Path = __webpack_require__(20)
 
 	/**
 	 * Filter filter for v-repeat
@@ -7712,20 +7824,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {String} dataKey
 	 */
 
-	exports.filterBy = function (arr, search, delimiter, dataKey) {
-	  // allow optional `in` delimiter
-	  // because why not
-	  if (delimiter && delimiter !== 'in') {
-	    dataKey = delimiter
-	  }
+	exports.filterBy = function (arr, search, delimiter /* ...dataKeys */) {
 	  if (search == null) {
 	    return arr
 	  }
+	  if (typeof search === 'function') {
+	    return arr.filter(search)
+	  }
 	  // cast to lowercase string
 	  search = ('' + search).toLowerCase()
+	  // allow optional `in` delimiter
+	  // because why not
+	  var n = delimiter === 'in' ? 3 : 2
+	  // extract and flatten keys
+	  var keys = _.toArray(arguments, n).reduce(function (prev, cur) {
+	    return prev.concat(cur)
+	  }, [])
 	  return arr.filter(function (item) {
-	    return dataKey
-	      ? contains(Path.get(item, dataKey), search)
+	    return keys.length
+	      ? keys.some(function (key) {
+	          return contains(Path.get(item, key), search)
+	        })
 	      : contains(item, search)
 	  })
 	}
@@ -8033,10 +8152,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var compiler = __webpack_require__(13)
+	var compiler = __webpack_require__(10)
 	var Observer = __webpack_require__(55)
-	var Dep = __webpack_require__(20)
-	var Watcher = __webpack_require__(18)
+	var Dep = __webpack_require__(18)
+	var Watcher = __webpack_require__(17)
 
 	/**
 	 * Setup the scope of an instance, which contains:
@@ -8070,7 +8189,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	  // make sure to convert string selectors into element now
 	  el = options.el = _.query(el)
-	  this._propsUnlinkFn = el && props
+	  this._propsUnlinkFn = el && el.nodeType === 1 && props
 	    ? compiler.compileAndLinkProps(
 	        this, el, props
 	      )
@@ -8233,7 +8352,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        def.set = noop
 	      } else {
 	        def.get = userDef.get
-	          ? makeComputedGetter(userDef.get, this)
+	          ? userDef.cache !== false
+	            ? makeComputedGetter(userDef.get, this)
+	            : _.bind(userDef.get, this)
 	          : noop
 	        def.set = userDef.set
 	          ? _.bind(userDef.set, this)
@@ -8298,8 +8419,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports._defineMeta = function (key, value) {
 	  var dep = new Dep()
 	  Object.defineProperty(this, key, {
-	    enumerable: true,
-	    configurable: true,
 	    get: function metaGetter () {
 	      if (Dep.target) {
 	        dep.depend()
@@ -8321,8 +8440,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
-	var Dep = __webpack_require__(20)
+	var config = __webpack_require__(5)
+	var Dep = __webpack_require__(18)
 	var arrayMethods = __webpack_require__(56)
 	var arrayKeys = Object.getOwnPropertyNames(arrayMethods)
 	__webpack_require__(57)
@@ -8374,11 +8493,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  ) {
 	    ob = value.__ob__
 	  } else if (
-	    _.isObject(value) &&
+	    (_.isArray(value) || _.isPlainObject(value)) &&
 	    !Object.isFrozen(value) &&
 	    !value._isVue
 	  ) {
 	    ob = new Observer(value)
+	  } else if (true) {
+	    if (_.isObject(value) && !_.isArray(value) && !_.isPlainObject(value)) {
+	      _.warn(
+	        'Unobservable object found in data: ' +
+	        Object.prototype.toString.call(value)
+	      )
+	    }
 	  }
 	  if (ob && vm) {
 	    ob.addVm(vm)
@@ -8387,8 +8513,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	// Instance methods
-
-	var p = Observer.prototype
 
 	/**
 	 * Walk through each property and convert them into
@@ -8399,16 +8523,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} obj
 	 */
 
-	p.walk = function (obj) {
+	Observer.prototype.walk = function (obj) {
 	  var keys = Object.keys(obj)
 	  var i = keys.length
-	  var key, prefix
 	  while (i--) {
-	    key = keys[i]
-	    prefix = key.charCodeAt(0)
-	    if (prefix !== 0x24 && prefix !== 0x5F) { // skip $ or _
-	      this.convert(key, obj[key])
-	    }
+	    this.convert(keys[i], obj[keys[i]])
 	  }
 	}
 
@@ -8420,7 +8539,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {Dep|undefined}
 	 */
 
-	p.observe = function (val) {
+	Observer.prototype.observe = function (val) {
 	  return Observer.create(val)
 	}
 
@@ -8430,10 +8549,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Array} items
 	 */
 
-	p.observeArray = function (items) {
+	Observer.prototype.observeArray = function (items) {
 	  var i = items.length
 	  while (i--) {
-	    this.observe(items[i])
+	    var ob = this.observe(items[i])
+	    if (ob) {
+	      (ob.parents || (ob.parents = [])).push(this)
+	    }
+	  }
+	}
+
+	/**
+	 * Remove self from the parent list of removed objects.
+	 *
+	 * @param {Array} items
+	 */
+
+	Observer.prototype.unobserveArray = function (items) {
+	  var i = items.length
+	  while (i--) {
+	    var ob = items[i] && items[i].__ob__
+	    if (ob) {
+	      ob.parents.$remove(this)
+	    }
+	  }
+	}
+
+	/**
+	 * Notify self dependency, and also parent Array dependency
+	 * if any.
+	 */
+
+	Observer.prototype.notify = function () {
+	  this.dep.notify()
+	  var parents = this.parents
+	  if (parents) {
+	    var i = parents.length
+	    while (i--) {
+	      parents[i].notify()
+	    }
 	  }
 	}
 
@@ -8445,7 +8599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {*} val
 	 */
 
-	p.convert = function (key, val) {
+	Observer.prototype.convert = function (key, val) {
 	  var ob = this
 	  var childOb = ob.observe(val)
 	  var dep = new Dep()
@@ -8457,12 +8611,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        dep.depend()
 	        if (childOb) {
 	          childOb.dep.depend()
-	        }
-	        if (_.isArray(val)) {
-	          for (var e, i = 0, l = val.length; i < l; i++) {
-	            e = val[i]
-	            e && e.__ob__ && e.__ob__.dep.depend()
-	          }
 	        }
 	      }
 	      return val
@@ -8485,7 +8633,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Vue} vm
 	 */
 
-	p.addVm = function (vm) {
+	Observer.prototype.addVm = function (vm) {
 	  (this.vms || (this.vms = [])).push(vm)
 	}
 
@@ -8496,7 +8644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Vue} vm
 	 */
 
-	p.removeVm = function (vm) {
+	Observer.prototype.removeVm = function (vm) {
 	  this.vms.$remove(vm)
 	}
 
@@ -8568,7 +8716,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    var result = original.apply(this, args)
 	    var ob = this.__ob__
-	    var inserted
+	    var inserted, removed
 	    switch (method) {
 	      case 'push':
 	        inserted = args
@@ -8578,11 +8726,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        break
 	      case 'splice':
 	        inserted = args.slice(2)
+	        removed = result
+	        break
+	      case 'pop':
+	      case 'shift':
+	        removed = [result]
 	        break
 	    }
 	    if (inserted) ob.observeArray(inserted)
+	    if (removed) ob.unobserveArray(removed)
 	    // notify change
-	    ob.dep.notify()
+	    ob.notify()
 	    return result
 	  })
 	})
@@ -8659,7 +8813,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return
 	    }
 	    ob.convert(key, val)
-	    ob.dep.notify()
+	    ob.notify()
 	    if (ob.vms) {
 	      var i = ob.vms.length
 	      while (i--) {
@@ -8707,7 +8861,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!ob || _.isReserved(key)) {
 	      return
 	    }
-	    ob.dep.notify()
+	    ob.notify()
 	    if (ob.vms) {
 	      var i = ob.vms.length
 	      while (i--) {
@@ -8726,7 +8880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _ = __webpack_require__(1)
 	var Directive = __webpack_require__(59)
-	var compiler = __webpack_require__(13)
+	var compiler = __webpack_require__(10)
 
 	/**
 	 * Transclude, compile and link element.
@@ -8931,9 +9085,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var config = __webpack_require__(3)
-	var Watcher = __webpack_require__(18)
-	var textParser = __webpack_require__(10)
+	var config = __webpack_require__(5)
+	var Watcher = __webpack_require__(17)
+	var textParser = __webpack_require__(13)
 	var expParser = __webpack_require__(19)
 
 	/**
@@ -8969,11 +9123,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this._host = host
 	  this._locked = false
 	  this._bound = false
+	  this._listeners = null
 	  // init
 	  this._bind(def)
 	}
-
-	var p = Directive.prototype
 
 	/**
 	 * Initialize the directive, mixin definition properties,
@@ -8983,7 +9136,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Object} def
 	 */
 
-	p._bind = function (def) {
+	Directive.prototype._bind = function (def) {
 	  if (
 	    (this.name !== 'cloak' || this.vm._isCompiled) &&
 	    this.el && this.el.removeAttribute
@@ -9044,7 +9197,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * e.g. v-component="{{currentView}}"
 	 */
 
-	p._checkDynamicLiteral = function () {
+	Directive.prototype._checkDynamicLiteral = function () {
 	  var expression = this.expression
 	  if (expression && this.isLiteral) {
 	    var tokens = textParser.parse(expression)
@@ -9068,7 +9221,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {Boolean}
 	 */
 
-	p._checkStatement = function () {
+	Directive.prototype._checkStatement = function () {
 	  var expression = this.expression
 	  if (
 	    expression && this.acceptStatement &&
@@ -9094,30 +9247,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {String}
 	 */
 
-	p._checkParam = function (name) {
+	Directive.prototype._checkParam = function (name) {
 	  var param = this.el.getAttribute(name)
 	  if (param !== null) {
 	    this.el.removeAttribute(name)
 	    param = this.vm.$interpolate(param)
 	  }
 	  return param
-	}
-
-	/**
-	 * Teardown the watcher and call unbind.
-	 */
-
-	p._teardown = function () {
-	  if (this._bound) {
-	    this._bound = false
-	    if (this.unbind) {
-	      this.unbind()
-	    }
-	    if (this._watcher) {
-	      this._watcher.teardown()
-	    }
-	    this.vm = this.el = this._watcher = null
-	  }
 	}
 
 	/**
@@ -9129,11 +9265,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @public
 	 */
 
-	p.set = function (value) {
+	Directive.prototype.set = function (value) {
+	  /* istanbul ignore else */
 	  if (this.twoWay) {
 	    this._withLock(function () {
 	      this._watcher.set(value)
 	    })
+	  } else if (true) {
+	    _.warn(
+	      'Directive.set() can only be used inside twoWay' +
+	      'directives.'
+	    )
 	  }
 	}
 
@@ -9144,13 +9286,52 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {Function} fn
 	 */
 
-	p._withLock = function (fn) {
+	Directive.prototype._withLock = function (fn) {
 	  var self = this
 	  self._locked = true
 	  fn.call(self)
 	  _.nextTick(function () {
 	    self._locked = false
 	  })
+	}
+
+	/**
+	 * Convenience method that attaches a DOM event listener
+	 * to the directive element and autometically tears it down
+	 * during unbind.
+	 *
+	 * @param {String} event
+	 * @param {Function} handler
+	 */
+
+	Directive.prototype.on = function (event, handler) {
+	  _.on(this.el, event, handler)
+	  ;(this._listeners || (this._listeners = []))
+	    .push([event, handler])
+	}
+
+	/**
+	 * Teardown the watcher and call unbind.
+	 */
+
+	Directive.prototype._teardown = function () {
+	  if (this._bound) {
+	    this._bound = false
+	    if (this.unbind) {
+	      this.unbind()
+	    }
+	    if (this._watcher) {
+	      this._watcher.teardown()
+	    }
+	    var listeners = this._listeners
+	    if (listeners) {
+	      for (var i = 0; i < listeners.length; i++) {
+	        _.off(this.el, listeners[i][0], listeners[i][1])
+	      }
+	    }
+	    this.vm = this.el =
+	    this._watcher = this._listeners = null
+	  }
 	}
 
 	module.exports = Directive
@@ -9259,10 +9440,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Watcher = __webpack_require__(18)
-	var Path = __webpack_require__(16)
-	var textParser = __webpack_require__(10)
-	var dirParser = __webpack_require__(12)
+	var Watcher = __webpack_require__(17)
+	var Path = __webpack_require__(20)
+	var textParser = __webpack_require__(13)
+	var dirParser = __webpack_require__(15)
 	var expParser = __webpack_require__(19)
 	var filterRE = /[^|]\|[^|]/
 
@@ -9334,15 +9515,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.$watch = function (exp, cb, options) {
 	  var vm = this
-	  var wrappedCb = function (val, oldVal) {
-	    cb.call(vm, val, oldVal)
-	  }
-	  var watcher = new Watcher(vm, exp, wrappedCb, {
+	  var watcher = new Watcher(vm, exp, cb, {
 	    deep: options && options.deep,
 	    user: !options || options.user !== false
 	  })
 	  if (options && options.immediate) {
-	    wrappedCb(watcher.value)
+	    cb.call(vm, watcher.value)
 	  }
 	  return function unwatchFn () {
 	    watcher.teardown()
@@ -9420,7 +9598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var transition = __webpack_require__(31)
+	var transition = __webpack_require__(30)
 
 	/**
 	 * Convenience on-instance nextTick. The callback is
@@ -9847,13 +10025,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.$addChild = function (opts, BaseCtor) {
 	  BaseCtor = BaseCtor || _.Vue
 	  opts = opts || {}
-	  var parent = this
 	  var ChildVue
+	  var parent = this
+	  // transclusion context
+	  var context = opts._context || parent
 	  var inherit = opts.inherit !== undefined
 	    ? opts.inherit
 	    : BaseCtor.options.inherit
 	  if (inherit) {
-	    var ctors = parent._childCtors
+	    var ctors = context._childCtors
 	    ChildVue = ctors[BaseCtor.cid]
 	    if (!ChildVue) {
 	      var optionName = BaseCtor.options.name
@@ -9867,9 +10047,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      )()
 	      ChildVue.options = BaseCtor.options
 	      ChildVue.linker = BaseCtor.linker
-	      // important: transcluded inline repeaters should
-	      // inherit from outer scope rather than host
-	      ChildVue.prototype = opts._context || this
+	      ChildVue.prototype = context
 	      ctors[BaseCtor.cid] = ChildVue
 	    }
 	  } else {
@@ -9887,7 +10065,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports, __webpack_require__) {
 
 	var _ = __webpack_require__(1)
-	var compiler = __webpack_require__(13)
+	var compiler = __webpack_require__(10)
 
 	/**
 	 * Set instance target element and kick off the compilation
@@ -9952,7 +10130,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 	exports.$compile = function (el, host) {
-	  return compiler.compile(el, this.$options, true, host)(this, el)
+	  return compiler.compile(el, this.$options, true)(this, el, host)
 	}
 
 

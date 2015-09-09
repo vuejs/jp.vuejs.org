@@ -586,7 +586,7 @@ MyComponent
 
 ### アセットの命名規則
 
-コンポーネントやディレクティブのようなあるアセットは、HTML 属性または HTML カスタムタグの形でテンプレートに表示されます。HTML 属性名とタグ名は**大文字と小文字を区別しない**ため、私達はしばしばキャメルケースの代わりにダッシュケースを使用して私達のアセットに名前をつける必要があります。**0.12.9** 以降では、キャメルケースを使用してアセットに名前をつけるのをサポートし、テンプレートでダッシュケースでそれらを使用します。
+コンポーネントやディレクティブのようなあるアセットは、HTML 属性または HTML カスタムタグの形でテンプレートに表示されます。HTML 属性名とタグ名は**大文字と小文字を区別しない**ため、私達はしばしばキャメルケースの代わりにダッシュケースを使用して私達のアセットに名前をつける必要があります。**0.12.11** 以降では、キャメルケース (camelCase) またはパスカルケース (PascalCase) を使用してアセットに名前をつけるのをサポートし、テンプレートでダッシュケースでそれらを使用します。
 
 **例**
 
@@ -606,14 +606,15 @@ components: {
 これは [ES6 object literal shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_6) でうまく動作します: 
 
 ``` js
-import compA from './components/a';
-import compB from './components/b';
+// PascalCase
+import TextBox from './components/text-box';
+import DropdownMenu from './components/dropdown-menu';
 
 export default {
   components: {
-    // <comp-a> そして <comp-b> としてテンプレートで使用
-    compA,
-    compB
+    // <text-box> そして <dropdown-menu> としてテンプレートで使用
+    TextBox
+    DropdownMenu
   }
 }
 ```
