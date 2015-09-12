@@ -632,8 +632,10 @@ export default {
 `my-component` のテンプレート:
 
 ``` html
-<h1>This is my component!</h1>
-<content>This will only be displayed if no content is inserted</content>
+<div>
+  <h1>This is my component!</h1>
+  <content>This will only be displayed if no content is inserted</content>
+</div>
 ```
 
 このコンポーネントを使用した親のマークアップ:
@@ -648,11 +650,11 @@ export default {
 レンダリング結果:
 
 ``` html
-<my-component>
+<div>
   <h1>This is my component!</h1>
   <p>This is some original content</p>
   <p>This is some more original content</p>
-</my-component>
+</div>
 ```
 
 ### 多数の挿入位置
@@ -664,9 +666,11 @@ export default {
 例として、以下のテンプレートのような、多数のコンポーネント挿入のテンプレートを持っていると仮定:
 
 ``` html
-<content select="p:nth-child(3)"></content>
-<content select="p:nth-child(2)"></content>
-<content select="p:nth-child(1)"></content>
+<div>
+  <content select="p:nth-child(3)"></content>
+  <content select="p:nth-child(2)"></content>
+  <content select="p:nth-child(1)"></content>
+</div>
 ```
 
 親のマークアップ:
@@ -682,11 +686,11 @@ export default {
 レンダリングされる結果:
 
 ``` html
-<multi-insertion>
+<div>
   <p>Three</p>
   <p>Two</p>
   <p>One</p>
-</multi-insertion>
+</div>
 ```
 
 コンテンツ挿入の仕組みは、元のコンテンツがどのように組み替えられ、表示されるべきか、という点に関して素晴らしい管理機能を提供します。これによってコンポーネントが非常に柔軟性と再利用性が高いものになります。
