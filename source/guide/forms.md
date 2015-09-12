@@ -94,6 +94,46 @@ new Vue({
 <input v-model="age" number>
 ```
 
+## Expressions にバインドする
+
+> 0.12.12 以降のみ
+
+チェックボックスとラジオボックスの入力上で `v-model` を使用するとき、バインドされた値は boolean 値か、string のどちらかです:
+
+``` html
+<!-- true または false のどちらかでトグル -->
+<input type="checkbox" v-model="toggle">
+
+<!-- このラジオボックスが選択されるとき、pick は "red" になります -->
+<input type="radio" v-model="pick" value="red">
+```
+
+これは、時々何か他のものへ根本的な値をバインドしたいかもしれない時、少し制限することができます。ここでは、次のとおりにできます:
+
+**Checkbox**
+
+``` html
+<input type="checkbox" v-model="toggle" true-exp="a" false-exp="b">
+```
+
+``` js
+// チェックしたとき:
+vm.toggle === vm.a
+// チェックがはずれされたとき:
+vm.toggle === vm.b
+```
+
+**Radio**
+
+``` html
+<input type="radio" v-model="pick" exp="a">
+```
+
+``` js
+// チェックしたとき:
+vm.pick === vm.a
+```
+
 ## 動的な選択オプション
 
 `<select>` 要素のオプションリストを動的にレンダリングする必要があれば、オプションが動的に変更されるとき、`v-model` は正しく同期しているため、`v-model`  と一緒に `options` 属性を利用することが推奨されています:
