@@ -151,6 +151,12 @@ callback を延期し、DOM の更新サイクル後に実行されます。DOM 
 
 Vue.js は plugin をマウントします。もし、plugin がオブジェクトなら、それは `install` メソッドを実装していなければなりません。もし、それ自身が関数ならば、それは install メソッドとして扱われます。install メソッドは、Vue を引数として呼び出されます。さらに詳しくは、[プラグイン(プラグインによる拡張)](/guide/extending.html#プラグインによる拡張)を参照してください。
 
+### Vue.mixin( mixin )
+
+- **mixin** `Object`
+
+Apply a mixin globally, which affects every Vue instance created afterwards. This can be used by plugin authors to inject custom behavior into components. **Not recommended in application code**.
+
 ### Vue.util
 
 多数のユーティリティメソッドを含む内部 `util` モジュールを公開します。これは高度なプラグイン/ディレクティブ作成向けに目的としており、そのため、何が可能かどうか確認するためにソースコードを見る必要があります。
