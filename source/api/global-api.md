@@ -155,7 +155,7 @@ Vue.js は plugin をマウントします。もし、plugin がオブジェク�
 
 - **mixin** `Object`
 
-Apply a mixin globally, which affects every Vue instance created afterwards. This can be used by plugin authors to inject custom behavior into components. **Not recommended in application code**.
+ミックスイン (mixin) をグローバルに適用し、全ての Vue インスタンスが作成された後に影響します。これは、コンポーネントにカスタム動作を注入するために、プラグイン作成者によって使用することができます。**アプリケーションコードでの使用は推奨されません。**
 
 ### Vue.util
 
