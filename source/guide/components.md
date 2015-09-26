@@ -566,7 +566,7 @@ var MyComponent = Vue.extend({
   partials: {
     // ...
   },
-  effects: {
+  transitions: {
     // ...
   }
 })
