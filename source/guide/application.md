@@ -1,4 +1,4 @@
-title: 大規模アプリケーションの構築
+title: Building Large-Scale Apps
 type: guide
 order: 15
 ---

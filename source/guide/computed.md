@@ -1,15 +1,68 @@
 title: Computed Properties
 type: guide
-order: 8
+order: 4
 ---
 
-Vue.js のインライン expression は非常に便利ですが、最良のユースケースはシンプルな boolean 演算や文字列の連結を使用したものです。より複雑なロジックに関しては、 **computed properties** を活用しましょう。
+In-template expressions are very convenient, but they are really meant for simple operations only. Templates are meant to describe the structure of your view. Putting too much logic into your templates can make them bloated and hard to maintain. This is why Vue.js limits binding expressions to one expression only. For any logic that requires more than one expression, you should use a **computed property**.
 
-Vue.js では `computed` オプションを使って computed properties を定義します。
+### Basic Example
 
-computed property は他の値に依存する値を宣言的に記述するために利用されます。テンプレート内で computed property にデータバインドすると、Vue は computed property が依存する値のどれかが変化したときに DOM を更新することを知ります。これは非常にパワフルにでき、かつより宣言的でデータドリブンなコードになり、それによってメンテナンスが容易になります。
+``` html
+<div id="example">
+  a={{ a }}, b={{ b }}
+</div>
+```
 
-多くの場合 computed property を使うことは命令的な `$watch` コールバックを使うよりも良いアイデアです。この例を考えてみます:
+``` js
+var vm = new Vue({
+  el: '#example',
+  data: {
+    a: 1
+  },
+  computed: {
+    b: function () {
+      return this.a + 1
+    }
+  }
+})
+```
+
+Result:
+
+{% raw %}
+<div id="example" class="demo">
+  a={{ a }}, b={{ b }}
+</div>
+<script>
+var vm = new Vue({
+  el: '#example',
+  data: {
+    a: 1
+  },
+  computed: {
+    b: function () {
+      return this.a + 1
+    }
+  }
+})
+</script>
+{% endraw %}
+
+Here we have declared a computed property `b`. The function we provided will be used as the getter function for the property `vm.b`:
+
+``` js
+console.log(vm.b) // -> 2
+vm.a = 2
+console.log(vm.b) // -> 3
+```
+
+You can open the console and play with the example vm yourself. The value of `vm.b` is always dependent on the value of `vm.a`.
+
+You can data-bind to computed properties in templates just like a normal property. Vue is aware that `vm.b` depends on `vm.a`, so it will update any bindings that depends on `vm.b` when `vm.a` changes. And the best part is that we've created this dependency relationship declaratively: the computed getter function is pure and has no side effects, which makes it easy to test and reason about.
+
+### Computed Property vs. $watch
+
+Vue.js does provide an API method called `$watch` that allows you to observe data changes on a Vue instance. When you have some data that needs to change based on some other data, it is tempting to use `$watch` - espeically if you are coming from an AngularJS background. However, it is often a better idea to use a computed property rather than an imperative `$watch` callback. Consider this example:
 
 ``` html
 <div id="demo">{{fullName}}</div>
@@ -33,7 +86,7 @@ vm.$watch('lastName', function (val) {
 })
 ```
 
-上記のコードは命令的で扱いにくいです。computed property によるバージョンと比べてみましょう:
+The above code is imperative and repetitive. Compare it with a computed property version:
 
 ``` js
 var demo = new Vue({
@@ -49,7 +102,11 @@ var demo = new Vue({
 })
 ```
 
-ずっと良いでしょう。加えて、computed property による setter も定義できます。
+Much better, isn't it?
+
+### Computed Setter
+
+Computed properties are by default get-only, but you can also provide a setter when you need it:
 
 ``` js
 // ...
@@ -72,9 +129,9 @@ computed: {
 
 ### computed property のキャッシュ
 
-0.12.8 より前は、computed properties は getter のように振舞っていました - アクセスするたびに getter 関数は再評価されていました。0.12.8 ではこれが改善され、computed properties はキャッシュされて reactive dependencies のうち1つでも変化した場合にのみ再評価されます。
+You may think that computed properties behave just like getters - every time you access it, the getter function is re-evaluated. That is not the case. Vue.js computed properties are cached by default and lazily re-evaluated only when one of its reactive dependencies have changed.
 
-巨大な配列のループと多くの計算を必要とする高価な computed property A を持っているとします。そして、他に A に依存する computed properties を持っているとします。キャッシュが無いと、A の getter が必要以上に多く呼び出され、潜在的なパフォーマンスの問題の原因になります。キャッシュがあると、A の値は依存するものの値が変化しない限りキャッシュされ、繰り返しアクセスしても必要のない計算を引き起こしません。
+Imagine we have an expensive computed property A, which requires looping through a huge Array and doing a lot of computations. Then, we may have other computed properties that in turn depend on A. Without caching, we'd be calling A's getter many more times than necessary and this could potentially cause performance issues. With caching, A's value will be cached as long as its dependencies haven't changed, and accessing it many times will not trigger unnecessary computations.
 
 しかしながら、"reactive dependency" がどのように考えられているのか理解することは重要です:
 
@@ -95,7 +152,7 @@ var vm = new Vue({
 
 しかし、Vue のデータ監視システムとの間で何もしないため、`Date.now()` は reactive dependency **ではありません**。そのため、プログラムで `vm.example` にアクセスしたとき、`vm.msg` の再評価が行われない限りは同じタイムスタンプが残り続けるでしょう。
 
-アクセスするたびに `vm.example` を単純に再評価して欲しいというような、シンプルな getter のような挙動を保ちたいという場合もあるでしょう。0.12.11 からは、特定の computed property のキャッシュを無効化できます。
+Sometimes you may want to preserve the simple getter-like behavior, where every time you access `vm.example` it is simply re-evaluated. You can do that by turning off caching for a specific computed property:
 
 ``` js
 computed: {
@@ -108,6 +165,6 @@ computed: {
 }
 ```
 
-これで、`vm.example` にアクセスするたびにタイムスタンプは更新されるでしょう。しかし、これは JavaScript 内でのプログラムでのアクセスにのみ影響します; データバインディングは依然として依存関係ドリブンです。テンプレート内で `{% raw %}{{example}}{% endraw %}` として computed property をバインドした場合、DOM は reactive dependency が変化したときのみ更新されるでしょう。
+Now, every time you access `vm.example`, the timestamp will be up-to-date. **However, note this only affects programmatic access inside JavaScript; data-bindings are still dependency-driven.** When you bind to a computed property in the template as `{% raw %}{{example}}{% endraw %}`, the DOM will only be updated when a reactive dependency has changed.
 
-次: [カスタムディレクティブ](/guide/custom-directive.html)
+Enough about computed properties! Next, let's learn about [Class and Style Bindings](class-and-style.html).

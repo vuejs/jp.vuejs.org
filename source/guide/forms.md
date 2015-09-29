@@ -1,6 +1,6 @@
-title: フォームのハンドリング
+title: Form Input Bindings
 type: guide
-order: 7
+order: 9
 ---
 
 ## 基礎

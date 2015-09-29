@@ -1,4 +1,4 @@
-title: イベントのリスニング
+title: Event Handling
 type: guide
 order: 6
 ---
