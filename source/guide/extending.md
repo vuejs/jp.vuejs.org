@@ -1,6 +1,6 @@
 title: Vue の拡張
 type: guide
-order: 14
+order: 16
 ---
 
 ## ミックスインによる拡張

@@ -1,6 +1,6 @@
 title: Computed Properties
 type: guide
-order: 7
+order: 8
 ---
 
 Vue.js のインライン expression は非常に便利ですが、最良のユースケースはシンプルな boolean 演算や文字列の連結を使用したものです。より複雑なロジックに関しては、 **computed properties** を活用しましょう。

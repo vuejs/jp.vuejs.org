@@ -1,6 +1,6 @@
-title: FAQ
+title: Comparison with Other Frameworks
 type: guide
-order: 16
+order: 18
 ---
 
 - **なぜ、Vue.js は IE8 をサポートしないのですか？**

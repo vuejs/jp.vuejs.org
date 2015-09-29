@@ -1,6 +1,6 @@
 title: コツ & ベストプラクティス
 type: guide
-order: 15
+order: 17
 is_new: true
 ---
 
