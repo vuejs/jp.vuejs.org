@@ -3,94 +3,151 @@ type: guide
 order: 6
 ---
 
-イベントリスナを DOM イベントにバインドするために、`v-on` ディレクティブを利用することができます。`v-on` は、イベントハンドラ関数（関数呼び出しのための括弧は不要）と、インライン expression のどちらにもバインドすることができます。ハンドラ関数が提供されている場合には、オリジナルの DOM イベントを引数として取得します。イベントには、イベントが発生した特定の ViewModel を指す特別なプロパティ `targetVM` が付随します:
+## Method Handler
+
+We can then use the `v-on` directive to listen to DOM events:
 
 ``` html
-<div id="demo">
-  <a v-on="click: onClick">Trigger a handler</a>
-  <a v-on="click: n++">Trigger an expression</a>
+<div id="example">
+  <button v-on:click="greet">Greet</button>
 </div>
 ```
 
+We are binding a click event listener to a method named `greet`. Here's how to define that method in our Vue instance:
+
+``` js
+var vm = new Vue({
+  el: '#example',
+  data: {
+    name: 'Vue.js'
+  },
+  // define methods under the `methods` object
+  methods: {
+    greet: function (event) {
+      // `this` inside methods point to the Vue instance
+      alert('Hello ' + this.name + '!')
+      // `event` is the native DOM event
+      alert(event.target.tagName)
+    }
+  }
+})
+
+// you can invoke methods in JavaScript too
+vm.greet() // -> 'Hello Vue.js!'
+```
+
+Test it yourself:
+
+{% raw %}
+<div id="example" class="demo">
+  <button v-on:click="greet">Greet</button>
+</div>
+<script>
+var vm = new Vue({
+  el: '#example',
+  data: {
+    name: 'Vue.js'
+  },
+  // define methods under the `methods` object
+  methods: {
+    greet: function (event) {
+      // `this` inside methods point to the vm
+      alert('Hello ' + this.name + '!')
+      // `event` is the native DOM event
+      alert(event.target.tagName)
+    }
+  }
+})
+</script>
+{% endraw %}
+
+## Inline Statement Handler
+
+Instead of binding directly to a method name, we can also use an inline JavaScript statement:
+
+``` html
+<div id="example-2">
+  <button v-on:click="say('hi')">Say Hi</button>
+  <button v-on:click="say('what')">Say What</button>
+</div>
+```
 ``` js
 new Vue({
-  el: '#demo',
-  data: {
-    n: 0
-  },
+  el: '#example-2',
   methods: {
-    onClick: function (e) {
-      console.log(e.target.tagName) // "A"
-      console.log(e.targetVM === this) // true
+    say: function (msg) {
+      alert(msg)
     }
   }
 })
 ```
 
-## Expression によるハンドラの呼び出し
-
-たくさんの子 ViewModel を生成する `v-repeat` と、`v-on` を同時に利用している時には `targetVM` が便利です。しかしながら、現在反復されているデータオブジェクトと等しい現在のエイリアスを渡す呼び出し expression を使うほうがより便利で明示的でしょう:
-
-``` html
-<ul id="list">
-  <li v-repeat="item in items" v-on="click: toggle(item)">
-    {{item.text}}
-  </li>
-</ul>
-```
-
-``` js
+Result:
+{% raw %}
+<div id="example-2" class="demo">
+  <button v-on:click="say('hi')">Say Hi</button>
+  <button v-on:click="say('what')">Say What</button>
+</div>
+<script>
 new Vue({
-  el: '#list',
-  data: {
-    items: [
-      { text: 'one', done: true },
-      { text: 'two', done: false }
-    ]
-  },
+  el: '#example-2',
   methods: {
-    toggle: function (item) {
-      item.done = !item.done
+    say: function (msg) {
+      alert(msg)
     }
   }
 })
-```
+</script>
+{% endraw %}
 
-もし、 expression ハンドラ内のオリジナルの DOM イベントにアクセスしたいのであれば、`$event` として渡すことができます:
+Similar to the restrictions on inline expressions, event handlers are restricted to **one statement only**.
+
+Sometimes we also need to access the original DOM event in an inline statement handler. You can pass it into a method using the speical `$event` variable:
 
 ``` html
-<button v-on="click: submit('hello!', $event)">Submit</button>
+<button v-on:click="say('hello!', $event)">Submit</button>
 ```
 
 ``` js
-/* ... */
-{
-  methods: {
-    submit: function (msg, e) {
-      e.stopPropagation()
-    }
+// ...
+methods: {
+  say: function (msg, event) {
+    // now we have access to the native event
+    event.preventDefault()
   }
 }
-/* ... */
 ```
 
-## 特殊な `key` フィルタ
+## Key Modifiers
 
-キーボードイベントを監視するとき、汎用のキーコードをチェックする必要がしばしばあります。Vue.js は、 `v-on` ディレクティブと一緒の場合にのみ利用できる、特殊な `key` フィルタを用意しています。`key` フィルタは、チェックしたいキーコードを示す一つの引数を取ります:
+When listening for keyboard events, we often need to check for common key codes. Vue.js provides a convenient set of key modifiers that can only be used with `v-on` directives. Recall that **modifiers** are postfixes denoted by a dot:
 
 ``` html
-<!-- keyCode が 13 のときだけ、vm.submit() を呼ぶ -->
-<input v-on="keyup:submit | key 13">
+<!-- only call vm.submit() when the keyCode is 13 -->
+<input v-on:keyup.13="submit">
 ```
 
-よく利用されるキーのプリセットもいくつか用意されています:
+Remembering all the keyCodes is a hassle, so Vue.js provides aliases for most commonly used keys:
 
 ``` html
-<!-- 上記と同じ -->
-<input v-on="keyup:submit | key 'enter'">
+<!-- same as above -->
+<input v-on:keyup.enter="submit">
+
+<!-- also works for shorthand -->
+<input @keyup.enter="submit">
 ```
 
-詳しくは、API リファレンス内の、[key の全リスト](/api/filters.html#key) を参照してください。
+Here's the full list of key modifier aliases:
+
+- enter
+- tab
+- delete
+- esc
+- space
+- up
+- down
+- left
+- right
 
 ## なぜ HTML 内にリスナを記述するのですか？
 
@@ -100,4 +157,4 @@ new Vue({
 2. JS 内のイベントリスナを手作業でアタッチする必要がないので、ViewModel のコードはロジックのみとなり、DOM 依存もなくなります。このことはテストをより簡単にします。
 3. ViewModel が破棄されたとき、すべてのイベントリスナは自動的に削除されます。それらを自力でクリーンアップすることを気にかける必要もありません。
 
-次: [フォームのハンドリング](/guide/forms.html)
+Next up: [Conditional Rendering](conditional.html).
