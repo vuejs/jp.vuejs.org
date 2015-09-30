@@ -1,6 +1,6 @@
 title: コンポーネントシステム
 type: guide
-order: 13
+order: 11
 ---
 
 ## コンポーネントの使用
