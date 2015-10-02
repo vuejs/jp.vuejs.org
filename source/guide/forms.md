@@ -7,7 +7,15 @@ order: 9
 
 フォームの input 要素に two way (双方向)バインディングを作成するには、 `v-model` ディレクティブを使用します。 `v-model` ディレクティブは、input の type に基づき、要素を更新する正しい方法を自動的に選択します。
 
-**例**
+### Text
+
+### Checkbox
+
+### Radio
+
+### Select
+
+**Example**
 
 ``` html
 <form id="demo">
@@ -77,26 +85,7 @@ new Vue({
 })
 </script>
 
-## 遅延更新
-
-デフォルトで、`v-model` はデータと input を `input` イベントの直後に同期します。`lazy` 属性を追加することで、 `change` イベントの直後に同期させるように、挙動を変更することができます:
-
-``` html
-<!-- "input" の代わりに、"change" の直後に同期する  -->
-<input v-model="msg" lazy>
-```
-
-## 値を数値としてキャストする
-
-もし、ユーザの入力を自動的に数値として永続化したいのであれば、`v-model` で管理している input に `number` 属性を追加することができます:
-
-``` html
-<input v-model="age" number>
-```
-
-## Expressions にバインドする
-
-> 0.12.12 以降のみ
+## Binding Non-String Values
 
 チェックボックスとラジオボックスの入力上で `v-model` を使用するとき、バインドされた値は boolean 値か、string のどちらかです:
 
@@ -134,113 +123,26 @@ vm.toggle === vm.b
 vm.pick === vm.a
 ```
 
-## 動的な選択オプション
+## Param Attributes
 
-`<select>` 要素のオプションリストを動的にレンダリングする必要があれば、オプションが動的に変更されるとき、`v-model` は正しく同期しているため、`v-model`  と一緒に `options` 属性を利用することが推奨されています:
+### lazy
 
-``` html
-<select v-model="selected" options="myOptions"></select>
-```
-
-あなたの data では、`myOptions` はオプションとして使いたい配列を指す keypath または expression である必要があります。
-
-options の配列にはプレーンなテキストを含めることができます。
-
-``` js
-options = ['a', 'b', 'c']
-```
-
-または、`{text:'', value:''}` の形式のオブジェクトを含めることができます。このオブジェクト形式は、値とは異なるオプション文字列を表示することができます:
-
-``` js
-options = [
-  { text: 'A', value: 'a' },
-  { text: 'B', value: 'b' }
-]
-```
-
-これは下記のようにレンダリングされます:
+By default, `v-model` syncs the input with the data after each `input` event. You can add a `lazy` attribute to change the behavior to sync after `change` events:
 
 ``` html
-<select>
-  <option value="a">A</option>
-  <option value="b">B</option>
-</select>
+<!-- synced after "change" instead of "input" -->
+<input v-model="msg" lazy>
 ```
 
-`value` はオブジェクトにすることもできます。
+### number
 
-> 0.12.11 以降のみ
-
-``` js
-options = [
-  { text: 'A', value: { msg: 'hello' }},
-  { text: 'B', value: { msg: 'bye' }}
-]
-```
-
-### オプショングループ
-
-一方、オブジェクトは `{ label:'', options:[...] }` の形式も取ることができます。このケースでは、`<optgroup>` としてレンダリングされます:
-
-``` js
-[
-  { label: 'A', options: ['a', 'b']},
-  { label: 'B', options: ['c', 'd']}
-]
-```
-
-これは下記のようにレンダリングされます:
+If you want user input to be automatically persisted as numbers, you can add a `number` attribute to your `v-model` managed inputs:
 
 ``` html
-<select>
-  <optgroup label="A">
-    <option value="a">a</option>
-    <option value="b">b</option>
-  </optgroup>
-  <optgroup label="B">
-    <option value="c">c</option>
-    <option value="d">d</option>
-  </optgroup>
-</select>
+<input v-model="age" number>
 ```
 
-### オプションフィルタ
-
-あなたの元データがこれらの希望されるフォーマットでなく、動的にオプションを生成するためにデータを変換しなければならない場合がよくあります。DRY な変換をするために、`options` パラメータはフィルタをサポートしており、あなたの変換ロジックを再利用可能な[カスタムフィルタ](/guide/custom-filter.html)で置き換えるのに役に立ちます。
-
-``` js
-Vue.filter('extract', function (value, keyToExtract) {
-  return value.map(function (item) {
-    return item[keyToExtract]
-  })
-})
-```
-
-``` html
-<select
-  v-model="selectedUser"
-  options="users | extract 'name'">
-</select>
-```
-
-上記フィルタは `[{ name: 'Bruce' }, { name: 'Chuck' }]` のようなデータを `['Bruce', 'Chuck']` に変換し、 正しいフォーマットになります。
-
-### 静的なデフォルトオプション
-
-> 0.12.10 以降のみ
-
-動的な生成オプションに加えて、1つの静的デフォルトオプションを提供することができます:
-
-``` html
-<select v-model="selectedUser" options="users">
-  <option value="">Select a user...</option>
-</select>
-```
-
-`users` から作成された動的なオプションは、静的なオプションの後に追加されます。`v-model` の値が偽と評価される (`0` は除く) 値の場合、静的なオプションはデフォルトで選択されます。
-
-## 入力デバウンス
+### debounce
 
 `debounce` パラメータは、入力値が Model に同期される前の各キーストローク後の最小遅延の設定を許可します。これは、例えば、先行入力自動補完向けに Ajax リクエストを作成するような、各更新時に高価な操作を実行しているときには便利です。
 
@@ -258,5 +160,6 @@ new Vue({
 })
 </script>
 
-`debounce` パラメータはユーザーの入力イベントをデバウンスしないことに注意してください: それは基礎となるデータに "書き込み" 操作をデバウンスします。そのため、`debounce` を使用するときデータ変更に反応するために `vm.$watch()` を使用する必要があります。本物の DOM イベントをデバウンスするためには、[debounce filter](/api/filters.html#debounce) を使います。
-次: [Computed Properties](/guide/computed.html)
+Note that the `debounce` param does not debounce the user's input events: it debounces the "write" operation to the underlying data. Therefore you should use `vm.$watch()` to react to data changes when using `debounce`. For debouncing real DOM events you should use the [debounce filter](/api/filters.html#debounce).
+
+We've covered a lot of ground so far. By now you should already be able to build some simple, dynamic interfaces with Vue.js, but you may still feel that the whole reactive system is a bit like magic. It is time that we talk about it in more details. Next up: [Reactivity In Depth](reactivity.html).
