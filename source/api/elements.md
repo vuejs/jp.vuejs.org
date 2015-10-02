@@ -1,7 +1,6 @@
 title: 特別な要素
 type: api
 order: 8
-is_new: true
 ---
 
 > 次は、Vue.js のテンプレートで特別な用途で役に立つ抽象要素のリストです。

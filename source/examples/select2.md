@@ -1,7 +1,6 @@
 title: カスタムディレクティブ
 type: examples
 order: 8
-is_new: true
 ---
 
 > この例では、カスタムディレクティブ内部でラップすることによって、サードパーティの jQuery プラグイン (select2) を統合しています。

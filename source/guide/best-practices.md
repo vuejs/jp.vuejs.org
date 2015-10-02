@@ -1,7 +1,6 @@
 title: コツ & ベストプラクティス
 type: guide
 order: 17
-is_new: true
 ---
 
 ## データの初期化

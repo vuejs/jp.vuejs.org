@@ -1,7 +1,6 @@
 title: モーダルコンポーネント
 type: examples
 order: 7
-is_new: true
 ---
 
 > コンポーネント、prop 伝達、コンテンツ挿入、トランジションの機能が使われています。
