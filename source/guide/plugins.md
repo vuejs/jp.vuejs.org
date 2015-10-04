@@ -1,38 +1,9 @@
-title: Vue の拡張
+title: Plugins
 type: guide
-order: 15
+order: 17
 ---
 
-## ミックスインによる拡張
-
-ミックスイン (mixin) は、Vue のコンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。ミックスインは、通常の Vue コンポーネントのオプションと同じように記述できます。
-
-``` js
-// mixin.js
-module.exports = {
-  created: function () {
-    this.hello()
-  },
-  methods: {
-    hello: function () {
-      console.log('hello from mixin!')
-    }
-  }
-}
-```
-
-``` js
-// test.js
-var myMixin = require('./mixin')
-var Component = Vue.extend({
-  mixins: [myMixin]
-})
-var component = new Component() // -> "hello from mixin!"
-```
-
-## プラグインによる拡張
-
-プラグインは、通常 Vue のグローバルメソッドの機能を追加します。
+Plugins usually adds global-level functionality to Vue.
 
 ### プラグインの記述
 

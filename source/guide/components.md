@@ -1,6 +1,6 @@
 title: コンポーネントシステム
 type: guide
-order: 10
+order: 11
 ---
 
 ## コンポーネントの使用
@@ -294,18 +294,60 @@ console.log(parent.a) // -> 4
 console.log(child.hasOwnProperty('a')) // -> false
 ```
 
-### スコープに関する注釈
+## Component Scope
 
-コンポーネントが親テンプレートの中で使用される時、e.g.:
+Every Vue.js component is a separate Vue instance with its own scope. It's important to understand how scopes work when using components. The rule of thumb is:
+
+> If something appears in the parent template, it will be compiled in parent scope; if it appears in child template, it will be compiled in child scope.
+
+A common mistake is trying to bind a directive to a child property/method in the parent template:
 
 ``` html
-<!-- 親テンプレート -->
-<my-component v-show="active" v-on="click:onClick"></my-component>
+<div id="demo">
+  <!-- does NOT work -->
+  <child-component v-on="click: childMethod"></child-component>
+</div>
 ```
 
-このディレクティブ (`v-show` と `v-on`) は親のスコープでコンパイルされます。そのため、 `active` という値と `onClick` は親で解決されます。子テンプレート内のいかなるディレクティブや挿入句は子のスコープでコンパイルされます。これによって、親と子のコンポーネント間のクリーンな住み分けが実現できます。
+If you need to bind child-scope directives on a component root node, you should do so in the child component's own template:
 
-詳細については[コンポーネントのスコープ](/guide/best-practices.html#コンポーネントのスコープ)を読んでください。
+``` js
+Vue.component('child-component', {
+  // this does work, because we are in the right scope
+  template: '<div v-on="click: childMethod">Child</div>',
+  methods: {
+    childMethod: function () {
+      console.log('child method invoked!')
+    }
+  }
+})
+```
+
+Note this pattern also applies to `$index` when using a component with `v-repeat`.
+
+Similarly, HTML content inside a component container are considered "transclusion content". They will not be inserted anywhere unless the child template contains at least one `<content></content>` outlet. The inserted contents are also compiled in parent scope:
+
+``` html
+<div>
+  <child-component>
+    <!-- compiled in parent scope -->
+    <p>{{msg}}</p>
+  </child-component>
+</div>
+```
+
+You can use the `inline-template` attribute to indicate you want the content to be compiled in the child scope as the child's template:
+
+``` html
+<div>
+  <child-component inline-template>
+    <!-- compiled in child scope -->
+    <p>{{msg}}</p>
+  </child-component>
+</div>
+```
+
+For more details, see [Content Insertion](/guide/components.html#Content_Insertion).
 
 ## コンポーネントライフサイクル
 

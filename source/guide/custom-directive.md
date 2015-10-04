@@ -1,6 +1,6 @@
 title: カスタムディレクティブ
 type: guide
-order: 13
+order: 14
 ---
 
 ## 基本
