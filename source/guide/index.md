@@ -3,196 +3,164 @@ type: guide
 order: 2
 ---
 
-## 序論
+Vue.js is a library for building interactive web interfaces. The goal of Vue.js is to provide the benefits of **reactive data binding** and **composable view components** with an API that is as simple as possible.
 
-Vue.js はインタラクティブな Web インターフェイスを作るためのライブラリです。
+Vue.js itself is not a full-blown framework - it is focused on the view layer only. It is therefore very easy to pick up and to integrate with other libraries or existing projects. On the other hand, when used in combination with proper tooling and supporting libraries, Vue.js is also perfectly capable of powering sophisticated Single-Page Applications.
 
-技術的に、Vue.js は MVVM パターンの [ViewModel](#ViewModel) レイヤに注目しています。それは two way (双方向)バインディングによって [View](#View) と [Model](#Model) を接続します。実際の DOM 操作と出力の形式は[ディレクティブ](#ディレクティブ)と[フィルタ](#フィルタ)によって抽象化されています。
+## Reactive Data-Binding
 
-Vue.js の哲学的なゴールは、可能な限り簡単な API を通じて、反応性の良いデータバインディングの利点と構成可能な View のコンポーネントを提供することです。Vue.js は万能なフレームワークではありません。 Vue.js は単純かつ自由自在な View レイヤになるようにデザインされています。Vue.js 単体でラピッドプロトタイピングができます。特別なフロントエンドスタック用のライブラリ達と一緒に使ったり組み合わせたりもできます。Vue.js は Firebase のようなバックエンドがないサービスとも相性が良いです。
-
-Vue.js の API は [AngularJS]、[KnockoutJS]、[Ractive.js]、 [Rivets.js]に強く影響を受けています。それらと似てはいますが、単純さと機能性のちょうど良いスィートスポットを見つけることによって、Vue.js はそれらのライブラリに対して価値ある代変手段になりうると私は信じています。
-
-その他のライブラリの表現に既に慣れているかもしれませんが、それらの表現の記法が Vue.js のコンテキストにおいて意味するところとは違っているかもしれませんので、以下に示すコンセプトの全体像に目を通してみてください。
-
-## コンセプト概要
+At the core of Vue.js is a reactive data-binding system that makes it a breeze to keep your data and the DOM in sync. When using jQuery to manually manipulate the DOM, the code we write is often imperative, repetitive and error-prone. Vue.js embraces a design pattern called [MVVM](https://en.wikipedia.org/wiki/Model_View_ViewModel) (Model-View-ViewModel) to make it simpler. In plain words, it means we use special syntax in our normal HTML templates to "bind" the DOM to the underlying data. Once the bindings are created, the DOM will then be kept in sync with the data. Whenever you modify the data, the DOM updates accordingly. As a result, most of our application logic is now directly manipulating data, rather than messing around with DOM updates. This makes our code easier to write, easier to reason about and easier to maintain.
 
 ![MVVM](/images/mvvm.png)
 
-### ViewModel
+For the simplest possible example:
 
-Model と View を同期するオブジェクトです。 Vue.js において, 全ての Vue インスタンスは ViewModel です。 それらは `Vue` コンストラクタかそのサブクラスでインスタンス化されます:
-
-```js
-var vm = new Vue({ /* options */ })
-```
-
-これは Vue.js をつかって開発するときに初めて出会うオブジェクトです。詳細は [Vue コンストラクタ](/api/) を参照してください。
-
-### View
-
-Vue インスタンスによって管理される実際の DOM です。
-
-```js
-vm.$el // The View
-```
-
-Vue.js は DOM ベースのテンプレーティングを使います。各々の Vue インスタンスは対応する DOM 要素と関連づいています。Vue インスタンスが作られると、必要なデータバインディングを設定している間、Vue インスタンスはその親要素の全ての子ノードを再帰的に巡回します。View はコンパイルされると、データの変更に対してリアクティブになります。
-
-Vue.js を使っているときに、あなた自身で DOM に触れることはカスタムディレクティブ(後述)を除いてほとんどありません。 View の更新はデータが変わったときに自動的に行われます。これらの View の更新は、textNode に至る精度を持った高い粒度で行われます。これらは高性能化のために、バッチ化されて非同期実行されています。
-
-### Model
-
-若干修正されたプレーンな JavaScript オブジェクトです。
-
-```js
-vm.$data // The Model
-```
-
-Vue.js において、Model は単純にプレーンな JavaScript オブジェクトか**データオブジェクト**です。一度、オブジェクトが Vue インスタンス内部でデータとして利用されると、それは**リアクティブ**になります。それらのプロパティと、それらが変更されるかを監視している Vue インスタンスを操作できます。Vue.js はデータオブジェクトのプロパティを ES5 getter/setters に変換することによって、透明性のある反応を実現します。 ダーティーチェックは必要ありませんし、View を更新するために、明示的なシグナルを Vue に送る必要もありません。 データが変更されたときはいつでも、次のフレームで View は更新されます。
-
-Vue インスタンスは、それらが監視しているデータオブジェクトの全てのプロパティをプロキシしています。 そのため、一度オブジェクト `{ a: 1 }` が監視されれば、 `vm.$data.a` と`vm.a` の両方が同じ値を返します。また、`vm.a = 2` に設定すると `vm.$data` が変わります.
-
-データオブジェクトは適当な位置で変化します。そのため、参照によってそれらを変更することは、`vm.$data` を変更することと同じ効果を持っています. この事が、複数の Vue インスタンスがデータの同じ部分を監視することを可能にしています。より広い応用としては、 Vue インスタンスは純粋な view として使われ、そして、より分離したストアレイヤにデータ操作ロジックを外面化します。
-
-ここでの問題は、一度監視が始まったら、Vue.js はプロパティの新規追加と削除を検出できないことです。
-この問題を避けるために、監視されたオブジェクトは `$add` 、`$set` そして `$delete` メソッドで追加削除されます。
-
-以下は Vue.js でどのようにリアクティブな更新が実装されているかの、高レベルな概要です:
-
-![データ監視](/images/data.png)
-
-### ディレクティブ
-
-Vue.js が DOM 要素についての何かをすることを伝えているプレフィックスのついた HTML 属性です。
-
-```html
-<div v-text="message"></div>
-```
-
-ここでは div 要素は値が `message` でディレクティブ `v-text` を持っています。 これは Vue.js が、div の textContent が Vue インスタンスの `message` プロパティと同期していることを、保っていることを伝えています。
-
-ディレクティブは任意の DOM 操作をカプセル化できます。例えば、`v-attr` は要素の属性を操作し、`v-repeat` は配列に基づいて要素をクローンし、 `v-on` はイベントリスナを随行します。これらは後にまとめます。
-
-### Mustache バインディング
-
-テキストと属性の両方において mustache なスタイルのバインディングを使うこともできます。それらは内部で、`v-text` ディレクティブ と `v-attr` ディレクティブに翻訳されます。例えば:
-
-```html
-<div id="person-{{id}}">Hello {{name}}!</div>
-```
-
-この書き方は便利ですが、いくつか注意しなければならないことがあります:
-
-<p class="tip"> `<image>` 要素の `src` 属性は、値が設定されたときに HTTP リクエストを作成します。そのため、テンプレートが初めに解析されたときに、404 の結果が返ってきます. この場合は、`v-attr` を使うのが良いです。</p>
-
-<p class="tip">Internet Explorer (IE) は、HTML を解析しているときに、`style` 属性の無効なインラインを削除します。 そのため IE をサポートしたい場合、 インライン CSS をバインディングするときにはいつも `v-style` を使ってください。</p>
-
-エスケープされていない HTML に対して3重の mustache を使うことができ、それは内部で `v-html` に翻訳されます:
-
-```html
-{{{ safeHTMLString }}}
-```
-
-しかしながら、これは潜在的な XSS 攻撃の窓を開けてしまいます。それゆえ、データソースのセキュリティが絶対に確かなときか、信頼できない HTML を削除するカスタムフィルタを通じてパイプしたときのみ、3重の mustaches を使うことがよいでしょう。
-
-
-最後に、一度だけの挿入を示すために、mustache バインディングに `*` を追加することもできます。これはデータ変更には反応しません:
-
-```html
-{{* onlyOnce }}
-```
-
-### フィルタ
-
-フィルタは View を更新する前の生の値を処理するために使われる関数です。これらは、 ディレクティブかバインディングの中の"パイプ(`|`)"によって示されます:
-
-```html
-<div>{{message | capitalize}}</div>
-```
-
-div の textContent が更新されたときに、`message` の値は `capitalize` 関数を通じて初めて解析されます。詳細は[フィルタ](/guide/filters.html) を参照してください。
-
-### コンポーネント
-
-![コンポーネントのツリー](/images/components.png)
-
-Vue.js では、全ての要素は単に Vue インスタンスです。コンポーネントは、アプリケーションインターフェイスを表現するネストされたツリーのような階層構造を形作ります。これらは `Vue.extend` から返ってきたカスタムコンストラクタによって初期化されます。しかし、より宣言的なアプローチはそれらを `Vue.component(id, constructor)` で登録することです。 一度登録されれば、カスタム要素のフォームで、他の Vue インスタンスのテンプレートに宣言的にネストされます:
-
-```html
-<my-component>
-  <!-- internals handled by my-component -->
-</my-component>
-```
-
-この簡単な機構は、宣言の再利用と [Web Components](http://www.w3.org/TR/components-intro/) と似た方法での Vue インスタンスの構成を可能にします。最新ブラウザや重い polyfills は必要ありません。アプリケーションをより小さなコンポーネントに分割することにより、結果は高度に分離され、メンテナンスしやすいコードベースになります。 詳細は[コンポーネントシステム](/guide/components.html)を参照してください。
-
-## クイックな例
-
-```html
-<div id="demo">
-  <h1>{{title | uppercase}}</h1>
-  <ul>
-    <li
-      v-repeat="todos"
-      v-on="click: done = !done"
-      class="{{done ? 'done' : ''}}">
-      {{content}}
-    </li>
-  </ul>
+``` html
+<!-- this is our View -->
+<div id="example-1">
+  Hello {{ name }}!
 </div>
 ```
 
-```js
-var demo = new Vue({
-  el: '#demo',
+``` js
+// this is our Model
+var exampleData = {
+  name: 'Vue.js'
+}
+
+// create a Vue instance, or, a "ViewModel"
+// which links the View and the Model
+var exampleVM = new Vue({
+  el: '#example-1',
+  data: data
+})
+```
+
+Result:
+{% raw %}
+<div id="example-1" class="demo">Hello {{ name }}!</div>
+<script>
+var exampleData = {
+  name: 'Vue.js'
+}
+var exampleVM = new Vue({
+  el: '#example-1',
+  data: exampleData
+})
+</script>
+{% endraw %}
+
+This looks pretty similar to just rendering a template, but Vue.js has done a lot of work under the hood. The data and the DOM are now linked, and everything is now **reactive**. How do we know? Just open up your browser developer console and modify `exampleData.name`. You should see the rendered example above update accordingly. In addition, the Vue instance `exampleVM` proxies the properties of the data object it observes, so modifying `exampleVM.name` has the exact same effect.
+
+The Vue instance also holds reference to the DOM element it is managing and the data object it is observing:
+
+``` js
+exampleVM.$el === document.querySelector('#example-1') // true
+exampleVM.$data === exampleData // true
+```
+
+If you are interested in the technical details, Vue.js uses the [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) method to convert each property on the `exampleData` object into a pair of getter and setter. This enables Vue.js to seamlessly detect when a property is accessed or modified, and update the DOM accordingly.
+
+Note that we didn't have to write any DOM-manipulating code: the HTML template, enhanced with the bindings, is a declarative mapping of the underlying data state, which is in turn just plain JavaScript objects. Our view is entirely data-driven.
+
+Let's look at a second example:
+
+``` html
+<div id="example-2">
+  <p v-if="greeting">Hello!</p>
+</div>
+```
+
+``` js
+var exampleVM2 = new Vue({
+  el: '#example-2',
   data: {
-    title: 'todos',
-    todos: [
-      {
-        done: true,
-        content: 'Learn JavaScript'
-      },
-      {
-        done: false,
-        content: 'Learn Vue.js'
-      }
-    ]
+    greeting: true
   }
 })
 ```
 
-**結果**
-
-<div id="demo"><h1>&#123;&#123;title | uppercase&#125;&#125;</h1><ul><li v-repeat="todos" v-on="click: done = !done" class="&#123;&#123;done ? 'done' : ''&#125;&#125;">&#123;&#123;content&#125;&#125;</li></ul></div>
+{% raw %}
+<div id="example-2" class="demo">
+  <span v-if="greeting">Hello!</span>
+</div>
 <script>
-var demo = new Vue({
-  el: '#demo',
+var exampleVM2 = new Vue({
+  el: '#example-2',
   data: {
-    title: 'todos',
-    todos: [
-      {
-        done: true,
-        content: 'Learn JavaScript'
-      },
-      {
-        done: false,
-        content: 'Learn Vue.js'
-      }
-    ]
+    greeting: true
   }
 })
 </script>
+{% endraw %}
 
-[jsfiddle](http://jsfiddle.net/yyx990803/yMv7y/)も利用できます.
+Here we are encoutering something new. The `v-if` attribute you are seeing are called **Directives**. Directives are prefixed with `v-` to indicate that they are special attributes provided by Vue.js, and as you may have guessed, they apply special reactive behavior to the rendered DOM. Go ahead and set `exampleVM2.greeting` to `false` in the console. You should see the "Hello!" message disappear.
 
-todo をクリックして toggle したり、 ブラウザのコンソールを開いて `demo` オブジェクトで遊んでみることも可能です。例えば、`demo.title` を変更して、`demo.todos` に新しいオブジェクトを追加したり、 todo の`done` 状態をトグルしてみたりしてみて下さい。
+This second example demonstrates that not only can we bind DOM text to the data, we can also bind the **structure** of the DOM to the data. Moreover, Vue.js also provides a powerful transition effect system that can automatically apply transition effects when elements are inserted/removed by Vue.
 
-多分、いくつかの疑問が心に浮かんできたでしょう。しかし心配ありません。我々はそれらの疑問をすぐに解決します。
+There are quite a few other directives, each with its own special functionality. For example the `v-for` directive for displaying items in an Array, or the `v-bind` directive for binding HTML attributes. We will discuss the full data-binding syntax with more details later.
 
-次の[ディレクティブ](/guide/directives.html)に進みましょう。
+## Component System
 
-[AngularJS]: http://angularjs.org
-[KnockoutJS]: http://knockoutjs.com
-[Ractive.js]: http://ractivejs.org
-[Rivets.js]: http://www.rivetsjs.com
+The Component System is another important concept in Vue.js. If we think about it, almost any type of application interface can be abstracted into a tree of components:
+
+![Component Tree](/images/components.png)
+
+In Vue.js, we can create parent-child relationships between multiple Vue instances to form a "Component Tree". This can be achieved by:
+
+1. Extending the base `Vue` constructor to define a component class;
+2. Register this extended constructor as a component, so that it can be used inside templates in the form of a **Custom Element**.
+
+Example:
+
+``` js
+// define a component class
+var MyComponent = Vue.extend({
+  template: '<div>Hello MyComponent!</div>'
+})
+// register it as a global component
+Vue.component('my-component', MyComponent)
+```
+
+Once we've registered our component, we can then use it in another Vue instance, which will create an instance of `MyComponent` as a child component:
+
+``` html
+<div id="component-example">
+  <!-- use the registered component -->
+  <my-component></my-component>
+</div>
+```
+
+``` js
+// create the demo instance
+var componentExampleVM = new Vue({
+  el: '#component-example'
+})
+```
+
+Result:
+
+{% raw %}
+<div id="component-example" class="demo">
+  <my-component></my-component>
+</div>
+<script>
+var MyComponent = Vue.extend({
+  template: '<div>Hello MyComponent!</div>'
+})
+Vue.component('my-component', MyComponent)
+var componentExampleVM = new Vue({
+  el: '#component-example'
+})
+</script>
+{% endraw %}
+
+You may have noticed that Vue.js component usage is very similar to how you would use a **Custom Element**, which is part of the [Web Components Spec](http://www.w3.org/wiki/WebComponents/). In fact, Vue.js' component syntax is loosely modeled after the spec. For example, Vue components implement the [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) and the `is` special attribute. However, there are a few key differences:
+
+1. The Web Components Spec is still very much a work in progress, and is not natively implemented in every browser. In comparison, Vue.js components don't require any polyfills and works consistently in all supported browsers (IE9 and above).
+
+2. Vue.js components provides critical features that are not present in plain custom elements, most notably cross-component data flow, event communication and dynamic component switching with transition effects.
+
+The component system allows us to divide a complex interface into small, self-contained components, and is the foundation for building large-scale applications with Vue.js. The Vue.js ecosystem also provides advanced tooling and various supporting libraries for building large SPAs, but the philosophy is compose your stack with loosely coupled, swappable components rather than a monolithic framework.
+
+We have briefly introduced the two most important concepts in Vue.js, and will obviously cover more details on each topic in later sections of this guide. But for now, let's go back to ground zero and start with the basics: [Data Binding Syntax](/guide/syntax.html).
