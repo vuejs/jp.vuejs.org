@@ -1,35 +1,35 @@
-title: Conditional Rendering
+title: 条件レンダリング
 type: guide
 order: 7
 ---
 
 ### v-if
 
-In string templates, for example Handlebars, we would write a conditional block like this:
+文字列テンプレートでは、例えば Handlebars の例は、このような条件ブロックを記述します:
 
 ``` html
-<!-- Handlebars template -->
+<!-- Handlebars の例 -->
 {{#if ok}}
   <h1>Yes</h1>
 {{/if}}
 ```
 
-In Vue.js, we use the `v-if` directive to achieve the same:
+Vue.js では、同じことを達成するために、`v-if` ディレクティブを使用します:
 
 ``` html
 <h1 v-if="ok">Yes</h1>
 ```
 
-It is also possible to add an "else" block with `v-else`:
+これは、`v-else` で "else" ブロックを追加することも可能です:
 
 ``` html
 <h1 v-if="ok">Yes</h1>
 <h1 v-else>No</h1>
 ```
 
-### Template v-if
+### テンプレートでの v-if
 
-Because `v-if` is a directive, it has to be attached to a single element. But what if we want to toggle more than one element? In this case we can use `v-if` on a `<tempalte>` element, which serves as an invisible wrapper. The final rendered result will not include the `<template>` element.
+`v-if` はディレクティブであるため、単一の要素にアタッチする必要があります。しかし、もし 1 要素よりも多くの要素と切り替えたい場合はどうでしょうか? このケースでは、非表示ラッパー(wrapper) として提供される、`<template>` 要素で `v-if` を使用できます。最終的にレンダリングされる結果は、`<template>` 要素は含まれません。
 
 ``` html
 <template v-if="ok">
@@ -41,24 +41,24 @@ Because `v-if` is a directive, it has to be attached to a single element. But wh
 
 ### v-show
 
-Another option for conditionally displaying an element is the `v-show` directive. The usage is largely the same:
+条件的に要素を表示するための別のオプションは `v-show` です。使用方法はほとんど同じです:
 
 ``` html
 <h1 v-show="ok">Hello!</h1>
 ```
 
-The difference is that an element with `v-show` will always be rendered and remain in the DOM; `v-show` simply toggles the `display` CSS property of the element.
+違いは `v-show` をによる要素は常にレンダリングされて DOM に維持するということです。`v-show` はシンプルに要素の `display` CSS プロパティを切り替えます。
 
-Note that `v-show` doesn't support the `<template>` syntax.
+`v-show` は `<template>` シンタックスをサポートしていないということに注意してください。
 
-### v-if vs. v-show
+### v-if 対 v-show
 
-When a `v-if` block is toggled, Vue.js will have to perform a partial compilation/teardown process, because the template content inside `v-if` can also contain data bindings or child components. `v-if` is "real" conditional rendering becaues it ensures that event listeners and child components inside the conditional block are properly destroyed and re-created during toggles.
+`v-if` ブロックが切り替えられる時、Vue.js は `v-if` 内部のテンプレートコンテンツもデータバインディングまたは子コンポーネントを含むことができるため、部分的なコンパイル / teardown 処理を実行する必要があります。`v-if` は、イベントリスナーと子コンポーネント内部の条件ブロックが適切に破棄され、そして切り替えられるまでの間再作成されるため、"リアル"な条件レンダリングです。
 
-`v-if` is also **lazy**: if the condition is false on initial render, it will not do anything - partial compilation won't start until the condition becomes true for the first time (and the compilation is subsequently cached).
+`v-if` はまた **lazy** です: もし初期表示において false の場合、何もしません。部分コンパイルは、条件が最初に true になる(そしてコンパイルがその後にキャッシュされるまで)まで開始されません。
 
-In comparison, `v-show` is much simpler - the element is always compiled and preserved, with just simple CSS-based toggling.
+比較して、`v-show` はとてもシンプルです。要素は常にコンパイルされ、単にシンプルな CSS ベースな切り替えとして保存されます。
 
-Generally speaking, `v-if` has higher toggle costs while `v-show` has higher initial render costs. So prefer `v-show` if you need to toggle something very often, and prefer `v-if` if the condition is unlikely to change at runtime.
+一般的に言って、`v-if` はより高い切り替えコストを持っているのに一方、`v-show` はより高い初期レンダリングコストを持っています。そのため、とても頻繁に何かを切り替える必要があるのであればむしろ `v-show` を選び、条件が実行時に変更することがほとんどない場合は、むしろ `v-if` を選びます。
 
-Next, let's talk about [List Rendering](list.html).
+次は、[リスト表示](list.html)について話しましょう
