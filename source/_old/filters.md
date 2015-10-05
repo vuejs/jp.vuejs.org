@@ -1,6 +1,4 @@
 title: フィルタ
-type: guide
-order: 4
 ---
 
 ## 概要

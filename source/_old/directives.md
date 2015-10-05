@@ -1,6 +1,4 @@
 title: ディレクティブ
-type: guide
-order: 3
 ---
 
 ## 概要

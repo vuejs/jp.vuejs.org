@@ -1,6 +1,6 @@
 title: フォームのハンドリング
 type: guide
-order: 7
+order: 6
 ---
 
 ## 基礎
