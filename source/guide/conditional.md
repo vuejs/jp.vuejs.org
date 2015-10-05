@@ -1,6 +1,6 @@
 title: 条件レンダリング
 type: guide
-order: 8
+order: 7
 ---
 
 ## v-if

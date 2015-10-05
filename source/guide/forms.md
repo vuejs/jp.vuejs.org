@@ -5,7 +5,7 @@ order: 10
 
 ## Basics Usage
 
-フォームの input 要素に two way (双方向)バインディングを作成するには、 `v-model` ディレクティブを使用します。 `v-model` ディレクティブは、input の type に基づき、要素を更新する正しい方法を自動的に選択します。
+You can use the `v-model` directive to create two-way data bindings on form input elements. It automatically picks the correct way to update the element based on the input type. Although a bit magical, `v-model` is essentially syntax sugar for updating data on user input events, plus special care for some edge cases.
 
 ### Text
 

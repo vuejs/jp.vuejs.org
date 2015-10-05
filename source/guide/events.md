@@ -1,6 +1,6 @@
 title: Methods and Event Handling
 type: guide
-order: 7
+order: 9
 ---
 
 ## Method Handler
@@ -174,4 +174,4 @@ Here's the full list of key modifier aliases:
 2. JS 内のイベントリスナを手作業でアタッチする必要がないので、ViewModel のコードはロジックのみとなり、DOM 依存もなくなります。このことはテストをより簡単にします。
 3. ViewModel が破棄されたとき、すべてのイベントリスナは自動的に削除されます。それらを自力でクリーンアップすることを気にかける必要もありません。
 
-Next up: [Conditional Rendering](conditional.html).
+Next up: [Form Input Bindings](forms.html).
