@@ -44,10 +44,10 @@ Vue.filter('currencyDisplay', {
       return '$'+val.toFixed(2)
     },
     // view -> model
-    // データが更新される際に値を変換します。
+    // formats the value when writing to the data.
     write: function(val, oldVal) {
       var number = +val.replace(/[^\d.]/g, '')
-      return isNaN(number) ? 0 : number
+      return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
     }
   }
 })
@@ -73,7 +73,7 @@ new Vue({
       },
       write: function(val, oldVal) {
         var number = +val.replace(/[^\d.]/g, '')
-        return isNaN(number) ? 0 : number
+        return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
       }
     }
   }
