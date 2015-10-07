@@ -258,6 +258,4 @@ Vue.elementDirective('my-directive', {
 
 エレメントディレクティブは引数または expressions を受け付けることはできません。しかし、その振舞いを決定するために要素の属性を読み取ることはできます。
 
-標準のディレクティブとの大きな違いは、エレメントディレクティブは**ターミナル**で、Vue が一度エレメントディレクティブに遭遇したことを意味します。それは、要素とその子を残したまま、エレメントディレクティブそれ自体、要素とその子を操作することができるようになります。
-
-次は [カスタムフィルタ](/guide/custom-filter.html)
+A big difference from normal directives is that element directives are **terminal**, which means once Vue encounters an element directive, it will leave that element and all its children alone - only the element directive itself will be able to manipulate that element and its children. 

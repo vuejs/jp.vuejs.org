@@ -170,8 +170,8 @@ Here's the full list of key modifier aliases:
 
 このようなイベント監視のアプローチは、「関心の分離」という古き良きルールを破っているのではないか、と心配されるかもしれません。安心して下さい。すべての Vue.js のハンドラ関数と expression は現在のビューのみを扱う ViewModel にのみバインドされるよう制限されています。それによってメンテナンスが難しくなることはありません。実際に、`v-on` を利用することでいくつかの利点があります:
 
-1. HTML テンプレートを単に眺めることで、あなたの JS コード内のハンドラ関数を簡単に見つけ出すことができます。
-2. JS 内のイベントリスナを手作業でアタッチする必要がないので、ViewModel のコードはロジックのみとなり、DOM 依存もなくなります。このことはテストをより簡単にします。
-3. ViewModel が破棄されたとき、すべてのイベントリスナは自動的に削除されます。それらを自力でクリーンアップすることを気にかける必要もありません。
+1. It makes it easier to locate the handler function implementations within your JS code by simply skimming the HTML template.
 
-Next up: [Form Input Bindings](forms.html).
+2. Since you don't have to manually attach event listeners in JS, your ViewModel code can be pure logic and DOM-free. This makes it easier to test.
+
+3. When a ViewModel is destroyed, all event listeners are automatically removed. You don't need to worry about cleaning it up yourself.

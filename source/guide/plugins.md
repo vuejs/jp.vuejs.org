@@ -47,5 +47,3 @@ Vue.use(require('my-plugin'), {
 - [vue-touch](https://github.com/vuejs/vue-touch): Hammer.js を利用して、タッチ操作のディレクティブを追加するプラグイン。
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録できるようになるプラグイン。
 - [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
-
-次: [コツ & ベストプラクティス](/guide/best-practices.html)

@@ -99,6 +99,4 @@ Vue.filter('concat', function (value, input) {
 
 上記の簡単な例では、 expression をそのまま記述した時と同じ結果が得られます。しかし、複数のステートメントが必要な複雑な処理においては、Computed Property もしくは カスタムフィルタが必要になります。
 
-ビルトインの `filterBy` と `orderBy` フィルタは共に渡された配列に対して重要な変更を行うものであり、所有者である Vue インスタンスの現在の状態に依存するものです。
-
-以上！これで次は [コンポーネントシステム](/guide/components.html) がどのように動作するか学ぶ時間です。
+The built-in `filterBy` and `orderBy` filters are both filters that perform non-trivial work on the Array being passed in and relies on the current state of the owner Vue instance.

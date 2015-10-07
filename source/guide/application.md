@@ -157,6 +157,4 @@ NODE_ENV=production browserify -e main.js | uglifyjs -c -m > build.js
 
 ## 例
 
-[Vue.js Hackernews Clone](https://github.com/yyx990803/vue-hackernews) は、Browserify と vue-loader を利用したソースコード管理と、Director.js を利用したルーティングの基本設計、また HackerNews の Firebase API をバックエンドとして利用したサンプルアプリケーションです。決して大きなアプリケーションではないですが、このページで説明する概念の併用を実証しています。
-
-次: [Vue の拡張](/guide/extending.html)
+The [Vue.js Hackernews Clone](https://github.com/yyx990803/vue-hackernews) is an example application that uses Webpack + vue-loader for code organization, Director.js for routing, and HackerNews' official Firebase API as the backend. It's by no means a big application, but it demonstrates the combined usage of the concepts discussed on this page.
