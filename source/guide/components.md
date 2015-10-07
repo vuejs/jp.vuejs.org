@@ -654,18 +654,65 @@ Note the `activate` hook is only used for dynamic component swapping - it does n
 
 デフォルトでは、入ってくるコンポーネントと出て行くコンポーネントのトランジションが同時に起こります。この属性によって、2つの他のモードを設定することができます:
 
-- `in-out`: 新しいコンポーネントのトランジションが初めに起こり、そのトランジションが完了した後に現在のコンポーネントの出て行くトランジションが開始します。
-- `out-in`: 現在のコンポーネントが出て行くトランジションが初めに起こり、そのトランジションが完了した後に新しいコンポーネントのトランジションが開始します。
+- `in-out`: New component transitions in first, current component transitions out after incoming transition has finished.
+
+- `out-in`: Current component transitions out first, new componnent transitions in after outgoing transition has finished.
 
 **例**
 
 ``` html
-<!-- 先にフェードアウトし, その後フェードインします -->
-<component is="{{view}}"
-  v-transition="fade"
+<!-- fade out first, then fade in -->
+<component
+  :is="view"
+  transition="fade"
   transition-mode="out-in">
 </component>
 ```
+
+``` css
+.fade-transition {
+  transition: opacity .3s ease;
+}
+.fade-enter, .fade-leave {
+  opacity: 0;
+}
+```
+
+{% raw %}
+<div id="transition-mode-demo" class="demo">
+  <input v-model="view" type="radio" value="v-a" id="a" name="view"><label for="a">A</label>
+  <input v-model="view" type="radio" value="v-b" id="b" name="view"><label for="b">B</label>
+  <component
+    :is="view"
+    transition="fade"
+    transition-mode="out-in">
+  </component>
+</div>
+<style>
+  .fade-transition {
+    transition: opacity .3s ease;
+  }
+  .fade-enter, .fade-leave {
+    opacity: 0;
+  }
+</style>
+<script>
+new Vue({
+  el: '#transition-mode-demo',
+  data: {
+    view: 'v-a'
+  },
+  components: {
+    'v-a': {
+      template: '<div>Component A</div>'
+    },
+    'v-b': {
+      template: '<div>Component B</div>'
+    }
+  }
+})
+</script>
+{% endraw %}
 
 ## Misc
 
