@@ -3,13 +3,21 @@ type: guide
 order: 14
 ---
 
-## 基本
+## Basics
 
-Vue.js ではカスタムディレクティブを登録する仕組みが用意されています。カスタムディレクティブはデータの変更に伴い DOM がどのように変更されるかを定義することができる仕組みです。**directive id** とそれに続く **definition object** を`Vue.directive(id, definition)` メソッドに渡して、グローバルにカスタムディレクティブを登録することができます。この definition object はいくつかの hook 関数(全て任意)を提供します:
+In addition to the default set of directives shipped in core, Vue.js also allows you to register custom directives. Custom directives provide a mechanism for mapping data changes to arbitrary DOM behavior.
 
-- **bind**: ディレクティブが初めて対象のエレメントに紐付いた時に一度だけ呼ばれます。
-- **update**: 初めの一度は bind の直後に初期値とともに呼ばれ、以降、バインディングされている値が変更される度に呼ばれます。引数には新しい値と以前の値が渡されます。
-- **unbind**: ディレクティブが紐付いているエレメントから取り除かれた時に一度だけ呼ばれます。
+You can register a global custom directive with the `Vue.directive(id, definition)` method, passing in a **directive id** followed by a **definition object**. You can also register a local custom directive by including it in a component's `directives` option.
+
+### Hook Functions
+
+A definition object can provide several hook functions (all optional):
+
+- **bind**: called only once, when the directive is first bound to the element.
+
+- **update**: called for the first time immediately after `bind` with the initial value, then again whenever the binding value changes. The new value and the previous value are provided as the argument.
+
+- **unbind**: called only once, when the directive is unbound from the element.
 
 **例**
 
@@ -30,7 +38,7 @@ Vue.directive('my-directive', {
 })
 ```
 
-一度登録された後は、以下のように Vue.js のテンプレート内で使用することができます (Vue.js の prefix が必要です):
+Once registered, you can use it in Vue.js templates like this (remember to add the `v-` prefix):
 
 ``` html
 <div v-my-directive="someValue"></div>
@@ -45,21 +53,23 @@ Vue.directive('my-directive', function (value) {
 })
 ```
 
-全ての hook 関数は実際の **directive object** にコピーされます。directive object は hook 関数の内側で `this` のコンテキストとしてアクセスすることができます。この directive object はいくつかの便利なプロパティを持っています:
+### Directive Instance Properties
 
-- **el**: ディレクティブが紐づく要素
-- **vm**: このディレクティブを所有する ViewModel
-- **expression**: 引数とフィルタ以外のバインディングの expression
-- **arg**: 引数(もしある場合)
-- **raw**: 元のパースされる前の expression
-- **name**: prefix 無しのディレクティブの名前
+All the hook functions will be copied into the actual **directive object**, which you can access inside these functions as their `this` context. The directive object exposes some useful properties:
 
-<p class="tip">これらの全てのプロパティは read-only で変更しないものとして扱わなくてはいけません。カスタムプロパティを directive object に追加することができますが、意図せずに既存の内部プロパティを上書きしないように注意が必要です。</p>
+- **el**: the element the directive is bound to.
+- **vm**: the context ViewModel that owns this directive.
+- **expression**: the expression of the binding, excluding arguments and filters.
+- **arg**: the argument, if present.
+- **name**: the name of the directive, without the prefix.
+- **descriptor**: an object that contains the parsing result of the entire directive.
+
+<p class="tip">You should treat all these properties as read-only and never modify them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
 
 いくつかのプロパティを使用したカスタムディレクティブの例:
 
 ``` html
-<div id="demo" v-demo="LightSlateGray : msg"></div>
+<div id="demo" v-demo:hello="msg"></div>
 ```
 
 ``` js
@@ -71,7 +81,6 @@ Vue.directive('demo', {
   update: function (value) {
     this.el.innerHTML =
       'name - '       + this.name + '<br>' +
-      'raw - '        + this.raw + '<br>' +
       'expression - ' + this.expression + '<br>' +
       'argument - '   + this.arg + '<br>' +
       'value - '      + value
@@ -87,17 +96,15 @@ var demo = new Vue({
 
 **結果**
 
-<div id="demo" v-demo="LightSlateGray : msg"></div>
+<div id="demo" v-demo:hello="msg"></div>
 <script>
 Vue.directive('demo', {
   bind: function () {
-    this.el.style.color = '#fff'
-    this.el.style.backgroundColor = this.arg
+    console.log('demo bound!')
   },
   update: function (value) {
     this.el.innerHTML =
       'name - ' + this.name + '<br>' +
-      'raw - ' + this.raw + '<br>' +
       'expression - ' + this.expression + '<br>' +
       'argument - ' + this.arg + '<br>' +
       'value - ' + value
@@ -106,65 +113,60 @@ Vue.directive('demo', {
 var demo = new Vue({
   el: '#demo',
   data: {
-    msg: 'hello!'
+    msg: 'world!'
   }
 })
 </script>
 
-### 複数の節
+### Object Literals
 
-コンマで区切られた引数は、複数のディレクティブインスタンスとしてバウンドされます。以下の例は、ディレクティブメソッドが2回呼ばれます。
-
-``` html
-<div v-demo="color: 'white', text: 'hello!'"></div>
-```
-
-オブジェクトリテラルで値を閉じることにより、すべての引数で単一のバインディングを成し遂げることができます:
+If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression:
 
 ``` html
-<div v-demo="{color: 'white', text: 'hello!'}"></div>
+<div v-demo="{ color: 'white', text: 'hello!' }"></div>
 ```
 
 ``` js
 Vue.directive('demo', function (value) {
-  console.log(value) // Object {color: 'white', text: 'hello!'}
+  console.log(value.color) // "white"
+  console.log(value.text) // "hello!"
 })
 ```
 
-## リテラルディレクティブ
+### Literal Modifier
 
-もしカスタムディレクティブを作成するときに `isLiteral: true` を渡した場合は、その属性値は文字列 string として扱われ、そのディレクティブの `expression` として割り当てられます。リテラルディレクティブはデータの監視の準備はしません。
-
-例:
+When a directive is used with the literal modifer, its attribute value will be interpreted as a plain string and passed directly into the `update` method. The `update` method will also be called only once, because a plain string cannot be reactive.
 
 ``` html
-<div v-literal-dir="foo"></div>
+<div v-demo.literal="foo bar baz">
+```
+``` js
+Vue.directive('demo', function (value) {
+  console.log(value) // "foo bar baz"
+})
+```
+
+## Advanced Options
+
+### deep
+
+If your custom directive is expected to be used on an Object, and it needs to trigger `update` when a nested property inside the object changes, you need to pass in `deep: true` in your directive definition.
+
+``` html
+<div v-my-directive="obj"></div>
 ```
 
 ``` js
-Vue.directive('literal-dir', {
-  isLiteral: true,
-  bind: function () {
-    console.log(this.expression) // 'foo'
+Vue.directive('my-directive', {
+  deep: true,
+  update: function (obj) {
+    // will be called when nested properties in `obj`
+    // changes.
   }
 })
 ```
 
-### 動的リテラル
-
-しかし、リテラルディレクティブに mustache タグを含んでいる場合は、以下のような挙動になります: 
-
-
-- ディレクティブインスタンスは `this._isDynamicLiteral` というフラグを `true` にセットします。
-
-- もし `update` function が提供されていない場合、 mustache 表現は一度だけ評価され、 `this.expression` に割り当てられます。データ監視は行われません。
-
-- もし `update` function が提供される場合、ディレクティブはその expression に対するデータ監視をセットアップし、評価された結果が変更される度に `update` が呼ばれます。
-
-## Two-way ディレクティブ
-
-
-もしディレクティブが受け取ったデータを Vue インスタンスに書き戻したい場合は `twoWay: true` を渡す必要があります。このオプションはディレクティブの `this.set(value)` で使用することができます。
+### twoWay
 
 
 ``` js
@@ -186,7 +188,7 @@ Vue.directive('example', {
 })
 ```
 
-## インラインステートメント
+### acceptStatement
 
  `acceptStatement:true` を渡すことでカスタムディレクティブが `v-on` が行っているようなインラインステートメントを使用できるようになります: 
 
@@ -207,29 +209,11 @@ Vue.directive('my-directive', {
 
 ただし、テンプレート内のサイドエフェクトを避けるためにも、賢く使いましょう。
 
-## ディープな監視
-
-もしカスタムディレクティブでオブジェクトを扱いたい場合で、オブジェクトの内側のネストされたプロパティが変更された時に `update` をトリガしたい場合は、ディレクティブの定義に `deep: true` を渡す必要があります。
-
-``` html
-<div v-my-directive="obj"></div>
-```
-
-``` js
-Vue.directive('my-directive', {
-  deep: true,
-  update: function (obj) {
-    // `obj` の中のネストされたプロパティが
-    // 変更された時に呼ばれる
-  }
-})
-```
-
-## ディレクティブの優先度
+### priority
 
 ディレクティブには任意で優先度の数値 (デフォルトは0) を与えることができます。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
 
-いくつかのビルトインディレクティブに関する優先度は [API リファレンス](/api/directives.html) で確認できます。さらに ロジック制御する `v-repeat` と `v-if` は "ターミナルディレクティブ" として扱われ、コンパイル処理の中で常に最も高い優先度を持ちます。
+You can checkout the priorities for some built-in directives in the [API reference](/api/directives.html). Additionally, flow control directives `v-if` and `v-for` always have the highest priority in the compilation process.
 
 ## エレメントディレクティブ
 
