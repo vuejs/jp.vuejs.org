@@ -1,6 +1,6 @@
-title: コンポーネントシステム
+title: Components
 type: guide
-order: 11
+order: 12
 ---
 
 ## コンポーネントの使用
@@ -447,21 +447,6 @@ The example above is pretty nice, but when we are looking at the parent's code, 
 
 This makes things very clear: when the child triggers the `"child-msg"` event, the parent's `handleIt` method will be called. Any code that affects the parent's state will be inside the `handleIt` parent method; the child is only concerned with triggering the event.
 
-### Data Down, Actions Up
-
-Props and custom events together define how parent and child components communicate and interact with each other: props are used to pass data down, while events are used to trigger actions back up. With the dedicate shorthand syntax for `v-bind` and `v-on`, the intents can be clearly and succinctly conveyed in the template:
-
-``` html
-<my-component
-  :foo="baz"
-  :bar="qux"
-  @event-a="doThis"
-  @event-b="doThat">
-</my-component>
-```
-
-The phrase "Data down, actions up" was actually coined by the Ember team during the design of Ember.js 2.0, and it fits very well here because Vue.js components are designed using a very similar pattern.
-
 ### Child Component Refs
 
 Despite the existence of props and events, sometimes you might still need to directly access a child component in JavaScript. To achieve this you have to assign a reference ID to the child component using `v-ref`. For example:
@@ -519,6 +504,8 @@ A common mistake is trying to bind a directive to a child property/method in the
 <!-- does NOT work -->
 <child v-show="someChildProperty"></child>
 ```
+
+Assuming `someChildProperty` is a property on the child component, the example above would not work as intended. The parent's template should not be aware of the state of a child component.
 
 If you need to bind child-scope directives on a component root node, you should do so in the child component's own template:
 
@@ -613,7 +600,7 @@ The content distribution API is a very useful mechanism when designing component
 
 ## 動的コンポーネント
 
-予約された `component` 要素を使って、"ページをスワップ" を成し遂げるためにコンポーネントを動的に切り替える仕組みがあります:
+You can use the same mount point and dynamically switch between multiple components by using the reserved `<component>` element and dynamically bind to its `is` attribute:
 
 ``` js
 new Vue({
@@ -630,52 +617,36 @@ new Vue({
 ```
 
 ``` html
-<component is="{{currentView}}">
-  <!-- vm.currentview が変更されると、中身が変更されます! -->
+<component :is="currentView">
+  <!-- component changes when vm.currentview changes! -->
 </component>
 ```
 
 状態を保持したりや再レンダリングを避けたりするために、もし切り替えられたコンポーネントを活性化された状態で保持したい場合は、ディレクティブのパラメータ `keep-alive` を追加することができます:
 
 ``` html
-<component is="{{currentView}}" keep-alive>
-  <!-- 非活性になったコンポーネントをキャッシュします! -->
+<component :is="currentView" keep-alive>
+  <!-- inactive components will be cached! -->
 </component>
 ```
 
 ### `activate` Hook
 
-DOM と切り替えられる前に、挿入される子コンポーネントを待つためのイベント名です。トランジションの開始そして空のコンテンツ表示を回避する前に非同期なデータのロードを待つことが可能になります。
-
-この属性は、静的そして動的コンポーネント上の両方で使用できます。動的コンポーネントでは、全てのコンポーネントが潜在的に待機イベントを `$emit` する必要があるためにレンダリングされ、それ以外の場合は、それらは挿入されることはないことに注意してください。
-
-**例:**
-
-``` html
-<!-- 静的 -->
-<my-component wait-for="data-loaded"></my-component>
-
-<!-- 動的 -->
-<component is="{{view}}" wait-for="data-loaded"></component>
-```
+When switching components, the incoming component might need to perform some asynchronous operation before it should be swapped in. To control the timing of component swapping, implement the `activate` hook on the incoming component:
 
 ``` js
-// コンポーネントの定義
-{
-  // compiled フックの中で非同期にデータを取得してイベントを発火します。
-  // 例として jQuery を使っています。
-  compiled: function () {
+Vue.component('activate-example', {
+  activate: function (done) {
     var self = this
-    $.ajax({
-      // ...
-      success: function (data) {
-        self.$data = data
-        self.$emit('data-loaded')
-      }
+    loadDataAsync(function (data) {
+      this.someData = data
+      done()
     })
   }
-}
+})
 ```
+
+Note the `activate` hook is only used for dynamic component swapping - it does not affect static components and manual insertions with instance methods.
 
 ### `transition-mode`
 
@@ -697,6 +668,32 @@ DOM と切り替えられる前に、挿入される子コンポーネントを�
 ```
 
 ## Misc
+
+### Authoring Reusable Components
+
+When authoring components, it is good to keep in mind whether you intend to reuse this component somewhere else later. It is ok for one-off components to have some tight coupling with each other, but reusable components should define a clean public interface.
+
+The API for a Vue.js component essentially comes in three parts - props, events and slots:
+
+- **Props** allow the external enviroment to feed data to the component;
+
+- **Events** allow the component to trigger actions in the external environment;
+
+- **Slots** allow the external environment to insert content into the component's view structure.
+
+With the dedicate shorthand syntax for `v-bind` and `v-on`, the intents can be clearly and succinctly conveyed in the template:
+
+``` html
+<my-component
+  :foo="baz"
+  :bar="qux"
+  @event-a="doThis"
+  @event-b="doThat">
+  <!-- content -->
+  <img slot="icon" src="...">
+  <p slot="main-text">Hello!</p>
+</my-component>
+```
 
 ### Async Components
 
@@ -730,15 +727,15 @@ When you use the `template` option, the content of the template will replace the
 
 There are a few conditions that will turn a Vue instance into a **fragment instance**:
 
-1. Template contains only another component.
-2. Template contains multiple top-level elements.
-3. Template contains only plain text.
-4. Template contains only a `<partial>`.
-5. Template root node has `v-if` or `v-for`.
+1. Template contains multiple top-level elements.
+2. Template contains only plain text.
+3. Template contains only another component.
+4. Template contains only an element directive, e.g. `<partial>` or vue-router's `<router-view>`.
+5. Template root node has a flow-control directive, e.g. `v-if` or `v-for`.
 
 The reason is that all of the above cause the instance to have an unknown number of top-level elements, so it has to manage its DOM content as a fragment. A fragment instance will still render the content correctly. However, it will **not** have a root node, and its `$el` will point to an "anchor node", which is an empty Text node (or a Comment node in debug mode).
 
-What's more important though, is that **non-terminal directives, transitions and attributes (except for props) on the component element will be ignored**, because there is no root element to bind them to:
+What's more important though, is that **non-flow-control directives, non-prop attributes and transitions on the component element will be ignored**, because there is no root element to bind them to:
 
 ``` html
 <!-- doesn't work due to no root element -->
@@ -747,7 +744,7 @@ What's more important though, is that **non-terminal directives, transitions and
 <!-- props work -->
 <example :prop="someData"></example>
 
-<!-- v-if and v-for work as well, but without transitions -->
+<!-- flow control works, but without transitions -->
 <example v-if="ok"></example>
 ```
 
