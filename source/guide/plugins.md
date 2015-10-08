@@ -5,7 +5,9 @@ order: 17
 
 Plugins usually adds global-level functionality to Vue.
 
-### プラグインの記述
+## プラグインの記述
+
+There are typically several types of plugins you can write:
 
 1. 1つ、または複数のグローバル・メソッドを追加します（例：[vue-element](https://github.com/vuejs/vue-element)）。
 2. 1つ、または複数のグローバル・アセットを追加します：ディレクティブ/フィルタ/トランジションなど（例：[vue-touch](https://github.com/vuejs/vue-touch)）。
@@ -19,7 +21,7 @@ exports.install = function (Vue, options) {
 }
 ```
 
-### プラグインの使用
+## プラグインの使用
 
 CommonJS ベースのビルドを行っていると仮定します。
 
