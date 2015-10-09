@@ -352,7 +352,6 @@ Then you can use it with the `transition` attribute, same deal:
 ``` html
 <p transition="fade"></p>
 ```
-<p class="tip">もし JavaScript だけのトランジションを持った要素が、他の CSS トランジションまたはアニメーションが適用された場合、Vue のトランジションの検出は妨げられるかもしれません。そのような場合、 CSS 関連のトランジションを監視から Vue を明示的に無効にするためには、`css: false`を追加することができます。</p>
 
 ## Staggering Transitions
 
