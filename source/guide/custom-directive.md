@@ -62,14 +62,15 @@ Vue.directive('my-directive', function (value) {
 - **expression**: 引数とフィルタ以外のバインディングの expression
 - **arg**: 引数(もしある場合)
 - **name**: prefix 無しのディレクティブの名前
-- **descriptor**: 全体のディレクティブの解析結果を含むオブジェクト。
+- **modifiers**: もしあれば、モディファイアを含んでいるオブジェクト
+- **descriptor**: 全体のディレクティブの解析結果を含むオブジェクト
 
 <p class="tip">これらの全てのプロパティは read-only で変更しないものとして扱わなくてはいけません。カスタムプロパティを directive object に追加することができますが、意図せずに既存の内部プロパティを上書きしないように注意が必要です。</p>
 
 いくつかのプロパティを使用したカスタムディレクティブの例:
 
 ``` html
-<div id="demo" v-demo:hello="msg"></div>
+<div id="demo" v-demo:hello.a.b="msg"></div>
 ```
 
 ``` js
@@ -83,6 +84,7 @@ Vue.directive('demo', {
       'name - '       + this.name + '<br>' +
       'expression - ' + this.expression + '<br>' +
       'argument - '   + this.arg + '<br>' +
+      'modifiers - '  + JSON.stringify(this.modifiers) + '<br>' +
       'value - '      + value
   }
 })
@@ -96,7 +98,7 @@ var demo = new Vue({
 
 **結果**
 
-<div id="demo" v-demo:hello="msg"></div>
+<div id="demo" v-demo:hello.a.b="msg"></div>
 <script>
 Vue.directive('demo', {
   bind: function () {
@@ -107,6 +109,7 @@ Vue.directive('demo', {
       'name - ' + this.name + '<br>' +
       'expression - ' + this.expression + '<br>' +
       'argument - ' + this.arg + '<br>' +
+      'modifiers - '  + JSON.stringify(this.modifiers) + '<br>' +
       'value - ' + value
   }
 })
