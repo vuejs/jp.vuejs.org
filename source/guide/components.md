@@ -200,7 +200,7 @@ Vue.component('child', {
 
 ### 動的な Props
 
-Similar to binding a normal attribute to an expression, we can also use `v-bind` for dynamically binding props to data on the parent. Whenver the data is updated in the parent, it will also flow down to the child:
+Similar to binding a normal attribute to an expression, we can also use `v-bind` for dynamically binding props to data on the parent. Whenever the data is updated in the parent, it will also flow down to the child:
 
 ``` html
 <div>
@@ -717,11 +717,11 @@ new Vue({
 
 ### Authoring Reusable Components
 
-When authoring components, it is good to keep in mind whether you intend to reuse this component somewhere else later. It is ok for one-off components to have some tight coupling with each other, but reusable components should define a clean public interface.
+When authoring components, it is good to keep in mind whether you intend to reuse this component somewhere else later. It is OK for one-off components to have some tight coupling with each other, but reusable components should define a clean public interface.
 
 The API for a Vue.js component essentially comes in three parts - props, events and slots:
 
-- **Props** allow the external enviroment to feed data to the component;
+- **Props** allow the external environment to feed data to the component;
 
 - **Events** allow the component to trigger actions in the external environment;
 

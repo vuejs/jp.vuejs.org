@@ -31,7 +31,7 @@ React について別の問題を挙げるなら、DOM の更新が完全に仮�
 
 ## Ember
 
-Ember is a full-featured framework that is designed to be highly opnionated. It provides a lot of established conventions, and once you are familiar enough with them, it can make you very productive. However, it also means the learning curve is high and the flexibility suffers. It's a tradeoff when you try to pick between an opinionated framework and a library with a loosely coupled set of tools that work together. The latter gives you more freedom but also requires you to make more architectural decisions.
+Ember is a full-featured framework that is designed to be highly opinionated. It provides a lot of established conventions, and once you are familiar enough with them, it can make you very productive. However, it also means the learning curve is high and the flexibility suffers. It's a trade-off when you try to pick between an opinionated framework and a library with a loosely coupled set of tools that work together. The latter gives you more freedom but also requires you to make more architectural decisions.
 
 That said, it would probably make a better comparison between Vue.js core and Ember's templating and object model layer:
 

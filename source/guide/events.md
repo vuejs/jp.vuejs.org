@@ -102,7 +102,7 @@ new Vue({
 
 Similar to the restrictions on inline expressions, event handlers are restricted to **one statement only**.
 
-Sometimes we also need to access the original DOM event in an inline statement handler. You can pass it into a method using the speical `$event` variable:
+Sometimes we also need to access the original DOM event in an inline statement handler. You can pass it into a method using the special `$event` variable:
 
 ``` html
 <button v-on:click="say('hello!', $event)">Submit</button>
