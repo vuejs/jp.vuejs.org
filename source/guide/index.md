@@ -3,42 +3,42 @@ type: guide
 order: 2
 ---
 
-Vue.js (pronounced /vjuː/, like **view**) is a library for building interactive web interfaces. The goal of Vue.js is to provide the benefits of **reactive data binding** and **composable view components** with an API that is as simple as possible.
+Vue.js (発音は /vjuː/　、**view** と同様) はインタラクティブな Web インタフェースを構築するためのライブラリです。Vue.js のゴールは、**リアクティブデータバインディング** の利点と出来る限りシンプルな API で**構成可能な view コンポーネント**を提供することです。
 
-Vue.js itself is not a full-blown framework - it is focused on the view layer only. It is therefore very easy to pick up and to integrate with other libraries or existing projects. On the other hand, when used in combination with proper tooling and supporting libraries, Vue.js is also perfectly capable of powering sophisticated Single-Page Applications.
+Vue.js 自身、本格的なフレームワークではなく、view レイヤーだけに焦点を当てています。従って、ピックアップしたり、他のライブラリまたは既存のプロジェクトに統合することはとても容易です。一方、適切なツールとサポートするライブラリによる組み合わせで使用されるとき、Vue.js は完全に洗練されたシングルページアプリケーションを提供できます。
 
-If you are an experienced frontend developer and want to know how Vue.js compares to other libraries/frameworks, check out the [Comparison with Other Frameworks](comparison.html); if you are more interested about how Vue.js approaches larger-scale applications, check out the section on [Building Larger-Scale Applications](application.html).
+経験豊富なフロントエンド開発者で Vue.js を他のライブラリ/フレームワークと比較する方法を知りたい場合、[Comparison with Other Frameworks](comparison.html) をチェックしてください。Vue.js で大規模アプリケーションに取りかかる方法についてより興味がある場合は、[Building Larger-Scale Applications](application.html) をチェックしてください。
 
-## Reactive Data Binding
+## リアクティブデータバインディング
 
-At the core of Vue.js is a reactive data-binding system that makes it extremely simple to keep your data and the DOM in sync. When using jQuery to manually manipulate the DOM, the code we write is often imperative, repetitive and error-prone. Vue.js embraces the concept of **data-driven view**. In plain words, it means we use special syntax in our normal HTML templates to "bind" the DOM to the underlying data. Once the bindings are created, the DOM will then be kept in sync with the data. Whenever you modify the data, the DOM updates accordingly. As a result, most of our application logic is now directly manipulating data, rather than messing around with DOM updates. This makes our code easier to write, easier to reason about and easier to maintain.
+Vue.js のコアは、同期でデータと DOM を維持する非常にシンプルなリアクティブデータバインディングシステムです。手動で DOM を操作するために jQuery を使用する場合、私達が書くコードは、しばしば命令的で、繰り返し的で、誤りがちです。Vue.js は**データ駆動 view **のコンセプトを含みます。率直に言えば、それは基となるデータに DOM を "バインド" するために通常の HTML テンプレートで特別なシンタックスを使用するすることを意味します。一度バインディングが作成されると、DOM はデータによる同期で維持されます。データを変更するたびに、DOM はそれに応じて更新されます。その結果として、私達のアプリケーションロジックのほとんどは、DOM の更新をいじくり回すよりもむしろ、現在直接データを操作しています。これは、私達のコードをより書きやすく、より保守しやすいことについてより論理的に考えやすくなります。
 
 ![MVVM](/images/mvvm.png)
 
-For the simplest possible example:
+最も単純な例:
 
 ``` html
-<!-- this is our View -->
+<!-- これは View です -->
 <div id="example-1">
   Hello {{ name }}!
 </div>
 ```
 
 ``` js
-// this is our Model
+// これは Model です
 var exampleData = {
   name: 'Vue.js'
 }
 
-// create a Vue instance, or, a "ViewModel"
-// which links the View and the Model
+// Vue インスタンス、
+// または View と Model にリンクする "ViewModel" を作成
 var exampleVM = new Vue({
   el: '#example-1',
   data: data
 })
 ```
 
-Result:
+結果:
 {% raw %}
 <div id="example-1" class="demo">Hello {{ name }}!</div>
 <script>
@@ -52,11 +52,11 @@ var exampleVM = new Vue({
 </script>
 {% endraw %}
 
-This looks pretty similar to just rendering a template, but Vue.js has done a lot of work under the hood. The data and the DOM are now linked, and everything is now **reactive**. How do we know? Just open up your browser developer console and modify `exampleData.name`. You should see the rendered example above update accordingly.
+これはまさにテンプレートをレンダリングすることによく似ているように見えますが、Vue.js は中では多くの作業を行っています。データと DOM はリンクされ、そして全てが**リアクティブ**です。どうやって私達はそれを知るのでしょうか？あなたのブラウザの開発者コンソールを開いて、`exampleData.name` を変更しましょう。上記の例の更新に応じてレンダリングされるのを確認できるはずです。
 
-Note that we didn't have to write any DOM-manipulating code: the HTML template, enhanced with the bindings, is a declarative mapping of the underlying data state, which is in turn just plain JavaScript objects. Our view is entirely data-driven.
+私達が任意の DOM 操作のコードを書く必要がなかったことに注意してください。バインディングによって拡張された HTML テンプレートは、基となるデータ状態の宣言型マッピングで、それは単なる JavaScript オブジェクトです。私達の view は完全にデータ駆動型です。
 
-Let's look at a second example:
+次の例を見てみましょう:
 
 ``` html
 <div id="example-2">
@@ -87,19 +87,19 @@ var exampleVM2 = new Vue({
 </script>
 {% endraw %}
 
-Here we are encoutering something new. The `v-if` attribute you are seeing are called **Directives**. Directives are prefixed with `v-` to indicate that they are special attributes provided by Vue.js, and as you may have guessed, they apply special reactive behavior to the rendered DOM. Go ahead and set `exampleVM2.greeting` to `false` in the console. You should see the "Hello!" message disappear.
+ここでは、何か新しいものに遭っています。あなたが見ている `v-if` 属性は**ディレクティブ**と呼ばれています。ディレクティブは Vue.js によって提供された特別な属性を示すために `v-` が接頭されており、あなたが推測したように、レンダリングされた DOM に特別なリアクティブな振舞いを適用します。先に話を進めると、コンソールで `exampleVM2.greeting` に `false` を設定します。そうすると、あなたは "Hello!" メッセージが非表示になることを確認することができるはずです。
 
-This second example demonstrates that not only can we bind DOM text to the data, we can also bind the **structure** of the DOM to the data. Moreover, Vue.js also provides a powerful transition effect system that can automatically apply transition effects when elements are inserted/removed by Vue.
+この2つ目のデモ例は、私達が DOM テキストをデータにバインドできるだけではなく、DOM の**構造** にデータをバインドできることを証明しています。さらに Vue.js は、要素が Vue によって挿入/削除されたとき、自動的にトランジション(遷移)効果を適用できるパワフルなトランジション効果システムも提供します。
 
-There are quite a few other directives, each with its own special functionality. For example the `v-for` directive for displaying items in an Array, or the `v-bind` directive for binding HTML attributes. We will discuss the full data-binding syntax with more details later.
+かなりの数の他のディレクティブがあり、それぞれ独自に特別な機能を持っています。例えば、`v-for` ディレクティブは配列のアイテムを表示するためのディレクティブで、また `v-bind` ディレクティブは HTML 属性をバインディングするためのディレクティブです。私達は後で完全なデータバインディングシンタックスについてより詳細に説明します。
 
-## Component System
+## コンポーネントシステム
 
-The Component System is another important concept in Vue.js, becaues it's an abstraction that allows us to build large-scale applications composed of small, self-contained, and often reusable components. If we think about it, almost any type of application interface can be abstracted into a tree of components:
+コンポーネントシステムは Vue.js で別の重要なコンセプトです。なぜなら、私達に小さく、自己完結、そして再利用可能なコンポーネントで構成される大規模アプリケーションを構築することを可能にする抽象概念だからです。私達がそれについて考える場合、アプリケーションインタフェースのほぼすべてのタイプは、コンポーネントのツリーに抽象化することができます:
 
 ![Component Tree](/images/components.png)
 
-In fact, a typical large application built with Vue.js would form exactly what is on the right - a tree of components. We will talk a lot more about components later in the guide, but here's an (imaginary) example of what an app's template would look like with components:
+実際に、典型的な Vue.js で構築された大きいアプリケーションは、右側のコンポーネントツリーのような正確に形成することになります。私達は、ガイドで後でコンポーネントについてより多くの話をしますが、ここでは、アプリケーションのテンプレートがコンポーネントでどのように見えるか(架空)の例を示します:
 
 ``` html
 <div id="app">
@@ -111,10 +111,10 @@ In fact, a typical large application built with Vue.js would form exactly what i
 </div>
 ```
 
-You may have noticed that Vue.js components are very similar to **Custom Elements**, which is part of the [Web Components Spec](http://www.w3.org/wiki/WebComponents/). In fact, Vue.js' component syntax is loosely modeled after the spec. For example, Vue components implement the [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) and the `is` special attribute. However, there are a few key differences:
+あたなは Vue.js のコンポーネントが [Web Components Spec](http://www.w3.org/wiki/WebComponents/) の一部の**カスタム要素 (Custom Element)** にとても似ていることに気づいたかもしれません。実際、Vue.js コンポーネントシンタックスは仕様になって緩くモデル化されています。例えば、Vue コンポーネントは [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) と `is` という特別な属性を実装しています。しかしながら、いくつか重要な違いがあります:
 
-1. The Web Components Spec is still very much a work in progress, and is not natively implemented in every browser. In comparison, Vue.js components don't require any polyfills and works consistently in all supported browsers (IE9 and above). When needed, Vue.js components can also be wrapped inside a native custom element.
+1. Web Components の仕様はまだまだ進行中で、全てのブラウザでネイティブに実装されていません。比較すると、Vue.js コンポーネントは全てのポリフィル (polyfill) を必要とせず、全てのサポートされるブラウザ (IE9 とそれ以上) で一貫して動作します。必要になったとき、Vue.js コンポーネントはネイティブなカスタム要素内でラップ (wrap) することができます。
 
-2. Vue.js components provide important features that are not available in plain custom elements, most notably cross-component data flow, custom event communication and dynamic component switching with transition effects.
+2. Vue.js コンポーネントは、最も顕著なクロスコンポーネントデータフロー、カスタムイベント通信、そしてトランジション効果で動的コンポーネント切り替えといった、プレーンなカスタム要素で利用できない重要な機能を提供します。
 
-The component system is the foundation for building large apps with Vue.js. In addition, the Vue.js ecosystem also provides advanced tooling and various supporting libraries that can be put together to create a more "framework" like system.
+コンポーネントシステムは Vue.js で大きいアプリケーションを構築するための基礎となるものです。さらに Vue.js のエコシステムは、高度なツールとより"フレームワーク"のようなシステムを作成するために組み立てことができる様々なサポートをするライブラリも提供します。
