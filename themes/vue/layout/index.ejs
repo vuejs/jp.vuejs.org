@@ -1,138 +1,148 @@
 <div id="hero">
-    <div class="inner">
-        <ul id="nav">
-            <li><a href="/guide/" class="nav-link">ガイド</a></li>
-            <li><a href="/api/" class="nav-link">API リファレンス</a></li>
-            <li><a href="/examples/" class="nav-link">例</a></li>
-            <li><a href="https://github.com/yyx990803/vue" class="nav-link" target="_blank">GitHub</a></li>
-            <li><a href="http://forum.vuejs.org" class="nav-link" target="_blank">フォーラム</a></li>
-            <li><a href="https://gitter.im/yyx990803/vue" class="nav-link" target="_blank">チャット</a></li>
-        </ul>
-        <ul id="translations">
-            <li><a href="http://vuejs.org" class="nav-link">英語</a></li>
-            <li class="delimiter">|</li>
-            <li><a href="http://cn.vuejs.org" class="nav-link">中文</a></li>
-        </ul>
-        <img id="logo" src="/images/logo.png">
-        <h1>Vue.js</h1>
-        <p class="desc">モダンな Web インタフェース向けのリアクティブコンポーネント</p>
-        <p class="buttons">
-            <a href="/guide/installation.html" class="button">v<%- theme.vue_version %> をインストール</a>
-            <a href="https://github.com/yyx990803/vue" target="_blank" class="button">GitHub のソース</a>
-        </p>
-        <ul id="social">
-            <li><a href="https://twitter.com/vuejs" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @vuejs</a></li>
-            <li><iframe src="http://ghbtns.com/github-btn.html?user=yyx990803&repo=vue&type=watch&count=true"
-        allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></li>
-        </ul>
-    </div>
-    <div class="down"><img src="/images/down.png"></div>
+  <div class="inner">
+    <ul id="nav">
+      <li><a href="/guide/" class="nav-link">ガイド</a></li>
+      <li><a href="/api/" class="nav-link">API リファレンス</a></li>
+      <li><a href="/examples/" class="nav-link">例</a></li>
+      <li><a href="https://github.com/yyx990803/vue" class="nav-link" target="_blank">GitHub</a></li>
+      <li><a href="http://forum.vuejs.org" class="nav-link" target="_blank">フォーラム</a></li>
+      <li><a href="https://gitter.im/yyx990803/vue" class="nav-link" target="_blank">チャット</a></li>
+    </ul>
+    <ul id="translations">
+      <li><a href="http://vuejs.org" class="nav-link">英語</a></li>
+      <li class="delimiter">|</li>
+      <li><a href="http://cn.vuejs.org" class="nav-link">中文</a></li>
+    </ul>
+    <img id="logo" src="/images/logo.png">
+    <h1>Vue.js</h1>
+    <p class="desc">モダンな Web インタフェース向けのリアクティブコンポーネント</p>
+    <p class="buttons">
+      <a href="/guide/installation.html" class="button">v<%- theme.vue_version %> をインストール</a>
+    </p>
+    <ul id="social">
+      <li><a href="https://twitter.com/vuejs" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @vuejs</a></li>
+      <li><iframe src="http://ghbtns.com/github-btn.html?user=yyx990803&repo=vue&type=watch&count=true"
+    allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe></li>
+    </ul>
+  </div>
+  <div class="down"><img src="/images/down.png"></div>
 </div>
 
 <div id="example">
-    <h2>10秒で分かる例</h2>
-    <div class="block">
-        <figure class="highlight lang-html"><table><tbody><tr><td class="gutter"><pre>1
+  <h2>10秒で分かる例</h2>
+  <div class="block">
+    <figure class="highlight lang-html"><table><tbody><tr><td class="gutter"><pre>1
 2
 3
 4
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"demo"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">p</span>&gt;</span>{{message}}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-model</span>=<span class="value">"message"</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">p</span>&gt;</span>{{message}}<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">v-model</span>=<span class="value">"message"</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></tbody></table></figure>
-    </div>
+  </div>
 
-    <div class="sign">+</div>
+  <div class="sign">+</div>
 
-    <div class="block">
-        <figure class="highlight lang-js"><table><tbody><tr><td class="gutter"><pre>1
+  <div class="block">
+    <figure class="highlight lang-js"><table><tbody><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
 </pre></td><td class="code"><pre><span class="keyword">var</span> demo = <span class="keyword">new</span> Vue({
-    el: <span class="string">'#demo'</span>,
-    data: {
-        message: <span class="string">'Hello Vue.js!'</span>
-    }
+  el: <span class="string">'#demo'</span>,
+  data: {
+    message: <span class="string">'Hello Vue.js!'</span>
+  }
 })
 </pre></td></tr></tbody></table></figure>
-    </div>
+  </div>
 
-    <div class="sign">=</div>
+  <div class="sign">=</div>
 
-    <div class="block result">
-        <div id="demo">
-            <p>{{message}}</p>
-            <input v-model="message">
-        </div>
-        <script>
-        var demo = new Vue({
-            el: '#demo',
-            data: {
-                message: 'Hello Vue.js!'
-            }
-        })
-        </script>
+  <div class="block result">
+    <div id="demo">
+      <p>{{message}}</p>
+      <input v-model="message">
     </div>
+    <script>
+    var demo = new Vue({
+      el: '#demo',
+      data: {
+        message: 'Hello Vue.js!'
+      }
+    })
+    </script>
+  </div>
 </div>
 <div id="features">
-    <div class="feats">
-        <div class="feat">
-            <h2><span class="icon simple"></span>シンプル</h2>
-            <p>いくつか HTML を書いて、いくつか JSON を持ってきて、Vue インスタンスを作って、それでおしまいです。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon powerful"></span>パワフル</h2>
-            <p>式 (Expressions) と透過依存性トラッキングによる computed properties 。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon composable"></span>コンポーネント</h2>
-            <p>分離された、再利用可能なコンポーネントであなたのアプリケーションを構成します。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon compact"></span>コンパクト</h2>
-            <p>min+gzip で23キロバイト〜、依存はありません。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon fast"></span>速い</h2>
-            <p>精密で効率のよい非同期バッチで DOM を更新します。</p>
-        </div>
-        <div class="feat">
-            <h2><span class="icon module"></span>パッケージ</h2>
-            <p>NPM 、Bower 経由でインストールします。あなたのお気に入りのエコシステムを利用できます！</p>
-        </div>
+  <div class="feats">
+    <div class="feat">
+      <h2><span class="icon simple"></span>シンプル</h2>
+      <p>いくつか HTML を書いて、いくつか JSON を持ってきて、Vue インスタンスを作って、それでおしまいです。</p>
     </div>
+    <div class="feat">
+      <h2><span class="icon powerful"></span>パワフル</h2>
+      <p>式 (Expressions) と透過依存性トラッキングによる computed properties 。</p>
+    </div>
+    <div class="feat">
+      <h2><span class="icon composable"></span>コンポーネント</h2>
+      <p>分離された、再利用可能なコンポーネントであなたのアプリケーションを構成します。</p>
+    </div>
+    <div class="feat">
+      <h2><span class="icon compact"></span>コンパクト</h2>
+      <p>min+gzip で23キロバイト〜、依存はありません。</p>
+    </div>
+    <div class="feat">
+      <h2><span class="icon fast"></span>速い</h2>
+      <p>精密で効率のよい非同期バッチで DOM を更新します。</p>
+    </div>
+    <div class="feat">
+      <h2><span class="icon module"></span>パッケージ</h2>
+      <p>NPM 、Bower 経由でインストールします。あなたのお気に入りのエコシステムを利用できます！</p>
+    </div>
+  </div>
 </div>
 <div id="why">
-    <h2>もし以下の項目が気に入るなら試してみましょう！</h2>
-    <ul>
-        <li>拡張可能なデータバインディング</li>
-        <li>純粋な Javascript オブジェクトモデル</li>
-        <li>理に適ったシンプルな API</li>
-        <li>コンポーネントで UI をビルド</li>
-        <li>小さいライブラリとマッチしてミックスできる</li>
-    </ul>
+  <h2>もし以下の項目が気に入るなら試してみましょう！</h2>
+  <ul>
+    <li>拡張可能なデータバインディング</li>
+    <li>純粋な Javascript オブジェクトモデル</li>
+    <li>理に適ったシンプルな API</li>
+    <li>コンポーネントで UI をビルド</li>
+    <li>小さいライブラリとマッチしてミックスできる</li>
+  </ul>
 </div>
 <div id="footer">
-    <a class="start" href="/guide/index.html">はじめる</a>
-    <p>Released under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a></p>
-    <p>日本語翻訳プロジェクト発起人</p>
-    <p>
-        <a href="https://github.com/hashrock" target="_blank">@hashrock</a>
-        <a href="https://github.com/kazupon" target="_blank">@kazupon</a>
-        <a href="https://github.com/kojimakazuto" target="_blank">@kojimakazuto</a>
-        <a href="https://github.com/positiveflat" target="_blank">@positiveflat</a>
-        <a href="https://github.com/tejitak" target="_blank">@tejitak</a>
-        <a href="https://github.com/yasunobuigarashi" target="_blank">@yasunobuigarashi</a>
-    </p>
-    <p>
-        <a href="https://github.com/vuejs-jp/vuejs.org#貢献者" target="_blank">他の貢献された方々</a>
-    </p>
-    <p>Copyright (c) <%- date(Date.now(), 'YYYY') %> <a href="http://evanyou.me" target="_blank">Evan You</a></p>
+  <a class="start" href="/guide/index.html">はじめる</a>
+  <p>Released under the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a></p>
+  <p>日本語翻訳プロジェクト発起人</p>
+  <p>
+    <a href="https://github.com/hashrock" target="_blank">@hashrock</a>
+    <a href="https://github.com/kazupon" target="_blank">@kazupon</a>
+    <a href="https://github.com/kojimakazuto" target="_blank">@kojimakazuto</a>
+    <a href="https://github.com/positiveflat" target="_blank">@positiveflat</a>
+    <a href="https://github.com/tejitak" target="_blank">@tejitak</a>
+    <a href="https://github.com/yasunobuigarashi" target="_blank">@yasunobuigarashi</a>
+  </p>
+  <p>
+    <a href="https://github.com/vuejs-jp/vuejs.org#貢献者" target="_blank">他の貢献された方々</a>
+  </p>
+  <p>Copyright (c) <%- date(Date.now(), 'YYYY') %> <a href="http://evanyou.me" target="_blank">Evan You</a></p>
 </div>
 
 <!-- Twitter follow button script -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<script>
+// Temporarily block translation links until they are done
+// for 1.0 updates.
+[].forEach.call(document.querySelectorAll('#translations .nav-link'), function (link) {
+  link.addEventListener('click', function (e) {
+    e.preventDefault()
+    alert('Translations for the 1.0 docs are still work in progress.')
+  })
+})
+</script>
