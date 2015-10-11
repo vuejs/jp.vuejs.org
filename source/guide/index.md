@@ -34,7 +34,7 @@ var exampleData = {
 // または View と Model にリンクする "ViewModel" を作成
 var exampleVM = new Vue({
   el: '#example-1',
-  data: data
+  data: exampleData
 })
 ```
 
