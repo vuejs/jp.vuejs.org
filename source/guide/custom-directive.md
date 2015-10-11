@@ -9,15 +9,15 @@ In addition to the default set of directives shipped in core, Vue.js also allows
 
 You can register a global custom directive with the `Vue.directive(id, definition)` method, passing in a **directive id** followed by a **definition object**. You can also register a local custom directive by including it in a component's `directives` option.
 
-### Hook Functions
+### フック関数
 
-A definition object can provide several hook functions (all optional):
+definition object はいくつかの hook 関数(全て任意)を提供します:
 
-- **bind**: called only once, when the directive is first bound to the element.
+- **bind**: ディレクティブが初めて対象のエレメントに紐付いた時に一度だけ呼ばれます。
 
-- **update**: called for the first time immediately after `bind` with the initial value, then again whenever the binding value changes. The new value and the previous value are provided as the argument.
+- **update**: 初めの一度は bind の直後に初期値とともに呼ばれ、以降、バインディングされている値が変更される度に呼ばれます。引数には新しい値と以前の値が渡されます。
 
-- **unbind**: called only once, when the directive is unbound from the element.
+- **unbind**: ディレクティブが紐付いているエレメントから取り除かれた時に一度だけ呼ばれます。
 
 **例**
 
@@ -38,7 +38,7 @@ Vue.directive('my-directive', {
 })
 ```
 
-Once registered, you can use it in Vue.js templates like this (remember to add the `v-` prefix):
+一度登録された後は、以下のように Vue.js のテンプレート内で使用することができます (`v-` の接頭辞を追加するのを忘れないでください):
 
 ``` html
 <div v-my-directive="someValue"></div>
@@ -53,18 +53,18 @@ Vue.directive('my-directive', function (value) {
 })
 ```
 
-### Directive Instance Properties
+### ディレクティブインスタンスのプロパティ
 
-All the hook functions will be copied into the actual **directive object**, which you can access inside these functions as their `this` context. The directive object exposes some useful properties:
+全ての hook 関数は実際に **directive object** にコピーされます。directive object は hook 関数の内側で `this` のコンテキストとしてアクセスすることができます。この directive object はいくつかの便利なプロパティを持っています:
 
-- **el**: the element the directive is bound to.
-- **vm**: the context ViewModel that owns this directive.
-- **expression**: the expression of the binding, excluding arguments and filters.
-- **arg**: the argument, if present.
-- **name**: the name of the directive, without the prefix.
-- **descriptor**: an object that contains the parsing result of the entire directive.
+- **el**: ディレクティブが紐づく要素
+- **vm**: このディレクティブを所有する ViewModel
+- **expression**: 引数とフィルタ以外のバインディングの expression
+- **arg**: 引数(もしある場合)
+- **name**: prefix 無しのディレクティブの名前
+- **descriptor**: 全体のディレクティブの解析結果を含むオブジェクト。
 
-<p class="tip">You should treat all these properties as read-only and never modify them. You can attach custom properties to the directive object too, but be careful not to accidentally overwrite existing internal ones.</p>
+<p class="tip">これらの全てのプロパティは read-only で変更しないものとして扱わなくてはいけません。カスタムプロパティを directive object に追加することができますが、意図せずに既存の内部プロパティを上書きしないように注意が必要です。</p>
 
 いくつかのプロパティを使用したカスタムディレクティブの例:
 
@@ -146,11 +146,11 @@ Vue.directive('demo', function (value) {
 })
 ```
 
-## Advanced Options
+## 高度なオプション
 
 ### deep
 
-If your custom directive is expected to be used on an Object, and it needs to trigger `update` when a nested property inside the object changes, you need to pass in `deep: true` in your directive definition.
+もしカスタムディレクティブでオブジェクトを扱いたい場合で、オブジェクトの内側のネストされたプロパティが変更された時に `update` をトリガしたい場合は、ディレクティブの定義に `deep: true` を渡す必要があります。
 
 ``` html
 <div v-my-directive="obj"></div>
@@ -160,8 +160,8 @@ If your custom directive is expected to be used on an Object, and it needs to tr
 Vue.directive('my-directive', {
   deep: true,
   update: function (obj) {
-    // will be called when nested properties in `obj`
-    // changes.
+    // `obj` の中のネストされたプロパティが
+    // 変更された時に呼ばれる
   }
 })
 ```
@@ -213,7 +213,7 @@ Vue.directive('my-directive', {
 
 ディレクティブには任意で優先度の数値 (デフォルトは0) を与えることができます。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
 
-You can checkout the priorities for some built-in directives in the [API reference](/api/directives.html). Additionally, flow control directives `v-if` and `v-for` always have the highest priority in the compilation process.
+いくつかのビルトインディレクティブに関する優先度は [API リファレンス](/api/directives.html) で確認できます。さらに フロー制御するディレクティブ `v-if` と `v-for` は、コンパイル処理の中で常に最も高い優先度を持ちます。
 
 ## エレメントディレクティブ
 
@@ -242,4 +242,4 @@ Vue.elementDirective('my-directive', {
 
 エレメントディレクティブは引数または expressions を受け付けることはできません。しかし、その振舞いを決定するために要素の属性を読み取ることはできます。
 
-A big difference from normal directives is that element directives are **terminal**, which means once Vue encounters an element directive, it will leave that element and all its children alone - only the element directive itself will be able to manipulate that element and its children. 
+標準のディレクティブとの大きな違いは、エレメントディレクティブは**ターミナル**で、Vue が一度エレメントディレクティブに遭遇したことを意味します。それは、要素とその子を残したまま、エレメントディレクティブそれ自体、要素とその子を操作することができるようになります。

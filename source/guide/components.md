@@ -140,23 +140,23 @@ Some HTML elements, for example `<table>`, has restrictions on what elements can
 
 ## Props
 
-### Props による伝達
+### Props によるデータ伝達
 
-Every component instance has its own **isolated scope**. This means you cannot (and should not) directly reference parent data in a child component's template. Data can be passed down to child components using **props**.
+全てのコンポーネントインスタンスは、自身で**隔離されたスコープ (isolated scope)** を持ちます。これが意味するところは、子コンポーネントのテンプレートで親データの参照が直接できない(そしてすべきでない)ということです。データは **props** を使用して子コンポーネントに伝達できます。
 
-A "prop" is a field on a component's data that is expected to be passed down from its parent component. A child component needs to explicitly declare the props it expects to receive using the [`props` option](/api/options.html#props):
+"prop" は、親コンポーネントから受信されることを期待されるコンポーネントデータ上のフィールドです。子コンポーネントは、[`props` オプション](/api/options.html#props)を利用して受信することを期待するために、明示的に宣言する必要があります:
 
 ``` js
 Vue.component('child', {
   // props を宣言
   props: ['msg'],
-  // the prop can be used inside templates, and will also
-  // be set as `this.msg`
+  // prop は内部テンプレートで利用でき、
+  // そして `this.msg` として設定される
   template: '<span>{{ msg }}</span>'
 })
 ```
 
-Then, we can pass a plain string to it like so:
+そのとき、以下のようにプレーン文字列を渡すことができます:
 
 ``` html
 <child msg="hello!"></child>
@@ -181,9 +181,9 @@ new Vue({
 </script>
 {% endraw %}
 
-### camelCase vs. kebab-case
+### キャメルケース 対 ケバブケース
 
-HTML attributes are case-insensitive. When using camelCased prop names as attributes, you need to use their kebab-case (hyphen-delimited) equivalents:
+HTML の属性は大文字と小文字を区別しません。キャメルケースされた prop 名を属性として使用するとき、それらをケバブケース(ハイフンで句切られた)として使用する必要があります:
 
 ``` js
 Vue.component('child', {
@@ -240,35 +240,35 @@ new Vue({
 </script>
 {% endraw %}
 
-### Prop Binding Types
+### Prop バインディングタイプ
 
-By default, all props form a **one-way-down** binding between the child property and the parent one: when the parent property updates, it will flow down to the child, but not the other way around. This default is meant to prevent child components from accidentally mutating the parent's state, which can make your app's data flow harder to reason about. However, it is also possible to explicitly enforce a two-way or a one-time binding with the `.sync` and `.once` **binding type modifiers**:
+デフォルトで、全ての props は子プロパティと親プロパティとの間で **one way down** バインディングです。親プロパティが更新するとき子と同期されますが、その逆はありません。このデフォルトは、子コンポーネントが誤ってアプリのデータフローが推理しづらい親の状態の変更しないように防ぐためです。しかしながら、明示的に two-way または `.sync` そして `.once` **バインディングタイプモディファイア (binding type modifiers)** による one-time バインディングを強いることも可能です:
 
-Compare the syntax:
+シンタックスの比較:
 
 ``` html
-<!-- default, one-way-down binding -->
+<!-- デフォルトは one-way-down バインディング -->
 <child :msg="parentMsg"></child>
 
-<!-- explicit two-way binding -->
+<!-- 明示的な two-way バインディング -->
 <child :msg.sync="parentMsg"></child>
 
-<!-- explicit one-time binding -->
+<!-- 明示的な one-time バインディング -->
 <child :msg.once="parentMsg"></child>
 ```
 
 two-way バインディングは子の `msg` プロパティの変更を親の `parentMsg` プロパティに戻して同期します。one-time バインディングは、一度セットアップし、親と子との間では、先の変更は同期しません。
 
-<p class="tip">Note that if the prop being passed down is an Object or an Array, it is passed by reference. Mutating the Object or Array itself inside the child **will** affect parent state, regardless of the binding type you are using.</p>
+<p class="tip">もし、渡される prop がオブジェクトまたは配列ならば、それは参照で渡されることに注意してください。オブジェクトの変更または配列は、使用しているバインディングのタイプに関係なく、子の内部それ自身は、親の状態に影響を**与えます**。</p>
 
-### Prop Validation
+### Prop 検証
 
-It is possible for a component to specify the requirements for the props it is receiving. This is useful when you are authoring a component that is intended to be used by others, as these prop validation requirements essentially constitute your component's API, and ensure your users are using your component correctly. Instead of defining the props as an array of strings, you can use the object hash format that contain validation requirements:
+コンポーネントは受け取る props に対する必要条件を指定することができます。これは他の人に使用されるために目的とされたコンポーネントを編集するときに便利で、これらの prop 検証要件は本質的にはコンポーネントの API を構成するものとして、ユーザーがコンポーネントを正しく使用しているということを保証します。文字列の配列として定義している props の代わりに、検証要件を含んだオブジェクトハッシュフォーマットを使用できます:
 
 ``` js
 Vue.component('example', {
   props: {
-    // basic type check (`null` means accept any type)
+    // 基本な型チェック (`null` はどんな型でも受け付ける)
     propA: Number,
     // a required string
     propB: {
@@ -280,8 +280,7 @@ Vue.component('example', {
       type: Number,
       default: 100
     },
-    // object/array defaults should be returned from a
-    // factory function
+    // オブジェクト/配列のデフォルトはファクトリ関数から返されるべきです
     propD: {
       type: Object,
       default: function () {
@@ -293,7 +292,7 @@ Vue.component('example', {
     propE: {
       twoWay: true
     },
-    // custom validator function
+    // カスタムバリデータ関数
     propF: {
       validator: function (value) {
         return value > 10
@@ -447,9 +446,9 @@ The example above is pretty nice, but when we are looking at the parent's code, 
 
 This makes things very clear: when the child triggers the `"child-msg"` event, the parent's `handleIt` method will be called. Any code that affects the parent's state will be inside the `handleIt` parent method; the child is only concerned with triggering the event.
 
-### Child Component Refs
+### 子コンポーネントの参照
 
-Despite the existence of props and events, sometimes you might still need to directly access a child component in JavaScript. To achieve this you have to assign a reference ID to the child component using `v-ref`. For example:
+props やイベントの存在にもかかわらず、時々 JavaScript でネストした子コンポーネントへのアクセスが必要になる場合があります。それを実現するためには `v-ref` を用いて子コンポーネントに対して参照 ID を割り当てる必要があります。例えば:
 
 ``` html
 <div id="parent">
@@ -459,11 +458,11 @@ Despite the existence of props and events, sometimes you might still need to dir
 
 ``` js
 var parent = new Vue({ el: '#parent' })
-// access child component instance
+// 子コンポーネントのインスタンスへのアクセス
 var child = parent.$.profile
 ```
 
-When `v-ref` is used together with `v-for`, the ref you get will be an Array or an Object containing the child components mirroring the data source.
+`v-ref` が `v-for` と共に使用された時は、得られる値はそのデータの配列またはオブジェクトをミラーリングした子コンポーネントが格納されているデータソースになります。
 
 ## Content Distribution with Slots
 
@@ -541,7 +540,7 @@ Suppose we have a component with the following template:
 </div>
 ```
 
-Parent markup that uses the component:
+このコンポーネントを使用した親のマークアップ:
 
 ``` html
 <my-component>
@@ -550,7 +549,7 @@ Parent markup that uses the component:
 </my-component>
 ```
 
-The rendered result will be:
+レンダリング結果:
 
 ``` html
 <div>
@@ -566,7 +565,7 @@ The rendered result will be:
 
 There can still be one unnamed slot, which is the **default slot** that serves as a catch-all outlet for any unmatched content. If there is no default slot, unmatched content will be discarded.
 
-For example, suppose we have a `multi-insertion` component with the following template:
+例として、以下のテンプレートのような、多数のコンポーネント挿入のテンプレートを持っていると仮定:
 
 ``` html
 <div>
@@ -576,7 +575,7 @@ For example, suppose we have a `multi-insertion` component with the following te
 </div>
 ```
 
-Parent markup:
+親のマークアップ:
 
 ``` html
 <multi-insertion>
@@ -586,7 +585,7 @@ Parent markup:
 </multi-insertion>
 ```
 
-The rendered result will be:
+レンダリングされる結果:
 
 ``` html
 <div>
@@ -600,7 +599,7 @@ The content distribution API is a very useful mechanism when designing component
 
 ## 動的コンポーネント
 
-You can use the same mount point and dynamically switch between multiple components by using the reserved `<component>` element and dynamically bind to its `is` attribute:
+同じマウントポイント、そして予約された `<component>` 要素と動的にバインドする `is` 属性を使って複数のコンポーネントを動的に切り替えることができます:
 
 ``` js
 new Vue({
@@ -618,7 +617,7 @@ new Vue({
 
 ``` html
 <component :is="currentView">
-  <!-- component changes when vm.currentview changes! -->
+  <!-- vm.currentview が変更されると、中身が変更されます! -->
 </component>
 ```
 
@@ -626,7 +625,7 @@ new Vue({
 
 ``` html
 <component :is="currentView" keep-alive>
-  <!-- inactive components will be cached! -->
+  <!-- 非活性になったコンポーネントをキャッシュします! -->
 </component>
 ```
 
@@ -654,14 +653,14 @@ Note the `activate` hook is only used for dynamic component swapping - it does n
 
 デフォルトでは、入ってくるコンポーネントと出て行くコンポーネントのトランジションが同時に起こります。この属性によって、2つの他のモードを設定することができます:
 
-- `in-out`: New component transitions in first, current component transitions out after incoming transition has finished.
+- `in-out`: 新しいコンポーネントのトランジションが初めに起こり、そのトランジションが完了した後に現在のコンポーネントの出て行くトランジションが開始します。
 
-- `out-in`: Current component transitions out first, new componnent transitions in after outgoing transition has finished.
+- `out-in`: 現在のコンポーネントが出て行くトランジションが初めに起こり、そのトランジションが完了した後に新しいコンポーネントのトランジションが開始します。
 
 **例**
 
 ``` html
-<!-- fade out first, then fade in -->
+<!-- 先にフェードアウトし, その後フェードインします -->
 <component
   :is="view"
   transition="fade"
@@ -742,7 +741,7 @@ With the dedicate shorthand syntax for `v-bind` and `v-on`, the intents can be c
 </my-component>
 ```
 
-### Async Components
+### 非同期コンポーネント
 
 大規模アプリケーションでは、実際に必要になったとき、サーバからコンポーネントをロードするだけの、アプリケーションを小さい塊に分割する必要があるかもしれません。それを簡単にするために、Vue.js はコンポーネント定義を非同期的に解決するファクトリ関数としてあなたのコンポーネントを定義することができます。Vue.js はコンポーネントが実際に描画が必要になったときファクトリ関数のみトリガし、そして将来の再描画のために結果をキャッシュします。例えば:
 
@@ -768,26 +767,26 @@ Vue.component('async-webpack-example', function (resolve) {
 })
 ```
 
-### Assets Naming Convention
+### アセットの命名規則
 
-Some assets, such as components and directives, appear in templates in the form of HTML attributes or HTML custom tags. Since HTML attribute names and tag names are **case-insensitive**, we often need to name our assets using kebab-case instead of camelCase, which can be a bit inconvenient.
+コンポーネントやディレクティブのようなあるアセットは、HTML 属性または HTML カスタムタグの形でテンプレートに表示されます。HTML 属性名とタグ名は**大文字と小文字を区別しない (case-insensitive)** ため、私達はしばしばキャメルケースの代わりにケバブケースを使用して私達のアセットに名前をつける必要がありますが、これは少し不便です。
 
-Vue.js actually supports naming your assets using camelCase or PascalCase, and automatically resolves them as kebab-case in templates (similar to the name conversion for props):
+Vue.js は実際にキャメルケースまたはパスカルケース (PascalCase) を使用してアセットを命名するのをサポートし、自動的にそれらをテンプレートでケバブケースとして解決します (props の命名と似ています):
 
 ``` js
-// in a component definition
+// コンポーネント定義
 components: {
-  // register using camelCase
+  // キャメルケースを使用して登録
   myComponent: { /*... */ }
 }
 ```
 
 ``` html
-<!-- use dash case in templates -->
+<!-- テンプレートではダッシュケースを使用 -->
 <my-component></my-component>
 ```
 
-This works nicely with [ES6 object literal shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_6):
+これは [ES6 object literal shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_6) でうまく動作します:
 
 ``` js
 // PascalCase
@@ -796,7 +795,7 @@ import DropdownMenu from './components/dropdown-menu';
 
 export default {
   components: {
-    // use in templates as <text-box> and <dropdown-menu>
+    // <text-box> そして <dropdown-menu> としてテンプレートで使用
     TextBox,
     DropdownMenu
   }

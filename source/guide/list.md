@@ -149,7 +149,7 @@ You might think this will cause Vue.js to throw away the existing DOM and re-ren
 
 ### track-by
 
-In some cases, you might need to replace the Array with completely new objects - e.g. ones created from an API call. Since by default `v-for` determines the reusability of existing scopes and DOM elements by tracking the identity of its data object, this could cause the entire list to be re-rendered. However, if each of your data objects has a unique id property, then you can use a `track-by` special attribute to give Vue.js a hint so that it can reuse existing instances as much as possible.
+いくつかのケースで、完全に新しいオブジェクトで配列を置き換える必要があるかもしれません（例えば、API コールから作成されたオブジェクトなど）。デフォルトでは、`v-for` は既存のスコープとそのデータオブジェクトの識別情報を追跡することによって、DOM 要素の再利用性を決定するので、リスト全体が再レンダリングされる可能性があります。しかしながら、もし、各データオブジェクトがユニークな ID プロパティを持っているのであれば、できるだけ多くのインスタンスを再利用するための Vue.js へのヒントとして、`track-by` 特別な属性を利用することができます。
 
 例として、もし data がこのようであるならば:
 
@@ -170,7 +170,7 @@ In some cases, you might need to replace the Array with completely new objects -
 </div>
 ```
 
-Later on, when you replace the `items` array and Vue.js encounters a new object with `_uid: '88f869d'`, it knows it can reuse the existing scope and DOM elements associated with the same `_uid`.
+後で、`items` 配列を置き換え、そして Vue.js は `_uid: '88f869d'` を持つ新しいオブジェクトを検出するとき、同じ `_uid` と関連する既存スコープと DOM 要素を再利用することができます。
 
 ### track-by $index
 
@@ -211,7 +211,7 @@ this.items.$remove(item)
 
 ## Object v-for
 
-You can also use `v-for` to iterate through the properties of an Object. In addition to `$index`, each scope will have access to another special property `$key`.
+オブジェクトのプロパティに対して、`v-for` を使って反復処理することができます。`$index` に加えて、それぞれのスコープは `$key` という特別なプロパティにアクセスします。
 
 ``` html
 <ul id="repeat-object" class="demo">
@@ -261,7 +261,7 @@ new Vue({
 
 ## Range v-for
 
-`v-for` can also take an integer Number. In this case it will repeat the template that many times.
+`v-for` は整数値を取ることも出来ます。このケースでは、指定された数だけテンプレートが繰り返されます。
 
 ``` html
 <div>

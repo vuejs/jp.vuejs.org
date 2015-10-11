@@ -3,7 +3,7 @@ type: guide
 order: 18
 ---
 
-The Vue.js core library is designed to be focused and flexible - it's just a view layer library that doesn't enforce any application-level architecture. While this can be great for integrating with existing projects, it could be a challenge for those with less experience to build larger scale applications from scratch.
+Vue.js コアライブラリは、フォーカスされた柔軟に設計されており、全てのアプリケーションレベルのアーキテクチャと干渉しない view レイヤーのライブラリです。これは既存プロジェクトとの統合のために素晴らしいことができますが、スクラッチからの大規模アプリケーションを構築する場合は、構築経験の少ない開発者にとって悩ましい問題にもなります。
 
 The Vue.js ecosystem provides a set of tools, libraries on how to build large SPAs with Vue. This part is where we start get a bit "framework"-ish, but it's really just an opinionated list of recommendations; you still get to pick what to use for each part of the stack.
 
@@ -11,13 +11,13 @@ The Vue.js ecosystem provides a set of tools, libraries on how to build large SP
 
 For large projects it's necessary to utilize a modularized build system to better organize your code. The recommended approach of doing so is by writing your source code in CommonJS or ES6 modules and bundle them using [Webpack](http://webpack.github.io/) or [Browserify](http://browserify.org/).
 
-Webpack and Browserify are more than just module bundlers, though. They both provide source transform APIs that allow you to transform your source code with other pre-processors. For example, you can write your code with future ES2015/2016 syntax using [babel-loader](https://github.com/babel/babel-loader) or [babelify](https://github.com/babel/babelify).
+Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用して、将来サポートされる ES2015/2016 シンタックスでコードを書くことができます。
 
 If you've never used them before, I highly recommend going through a few tutorials to get familiar with the concept of module bunlders, and start writing JavaScript using the latest ECMAScript features.
 
 ## 単一ファイルコンポーネント
 
-In a typical Vue.js project we will be dividing our interface into many small components, and it would be nice to have each component encapsulate its CSS styles, template and JavaScript definition in the same place. As mentioned above, when using Webpack or Browserify, with proper source transforms we can write our components like this:
+Vue.js を利用した典型的なプロジェクトでは、たくさんの個別のコンポーネントにコードを分割して、コンポーネントごとに HTML/CSS/JavaScript を配置しておくと便利です。上述したように、Webpack または Browserify を使用するとき、次のようなコンポーネントを適切なソース変換できます:
 
 <img src="/images/vue-component.png">
 
@@ -25,7 +25,8 @@ In a typical Vue.js project we will be dividing our interface into many small co
 
 <img src="/images/vue-component-with-pre-processors.png">
 
-You can build these single-file Vue components with Webpack + [vue-loader](https://github.com/vuejs/vue-loader) or Browserify + [vueify](https://github.com/vuejs/vueify). It is recommended to use the Webpack setup because Webpack's loader API enables better file dependency tracking / caching and some advanced features that are not feasible with Browserify transforms.
+これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。Webpack ローダ API はより良いファイル依存関係追跡/キャッシング、そして Browserify transforms で実行できないいくつかの高度な機能があるため、Webpack をセットアップして使用することをお勧めします。
+
 
 GitHub のビルドセットアップの例を探すことができます。
 
@@ -123,7 +124,7 @@ The Flux architecture is commonly used in React applications. Turns out the core
 
 ## 単体テスト
 
-Anything compatible with a module-based build system works. A recommendation is using the [Karma](http://karma-runner.github.io/0.12/index.html) test runner. It has a lot of community plugins, including support for [Webpack](https://github.com/webpack/karma-webpack) and [Browserify](https://github.com/Nikku/karma-browserify). For detailed setup, please refer to each project's respective documentation.
+モジュールベースのビルドシステムと互換性のあるものであれば、お好きなものを選んでください。おすすめは、[Karma](http://karma-runner.github.io/0.12/index.html) テストランナーです。It has a lot of community plugins, including support for [Webpack](https://github.com/webpack/karma-webpack) and [Browserify](https://github.com/Nikku/karma-browserify). For detailed setup, please refer to each project's respective documentation.
 
 In terms of code structure for testing, the best practice is to export raw options / functions in your component modules. Consider this example:
 
@@ -215,4 +216,4 @@ NODE_ENV=production browserify -e main.js | uglifyjs -c -m > build.js
 
 ## アプリケーションの例
 
-The [Vue.js Hackernews Clone](https://github.com/yyx990803/vue-hackernews) is an example application that uses Webpack + vue-loader for code organization, Director.js for routing, and HackerNews' official Firebase API as the backend. It's by no means a big application, but it demonstrates the combined usage of the concepts discussed on this page.
+[Vue.js Hackernews Clone](https://github.com/yyx990803/vue-hackernews) は、Browserify と vue-loader を利用したソースコード管理と、Director.js を利用したルーティングの基本設計、また HackerNews の Firebase API をバックエンドとして利用したサンプルアプリケーションです。決して大きなアプリケーションではないですが、このページで説明する概念の併用を実証しています。

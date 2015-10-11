@@ -33,7 +33,7 @@ Vue.filter('wrap', function (value, begin, end) {
 
 ## Two-way フィルタ
 
-これまでフィルタはモデルから渡される値をビューに表示される前に変換するために使用していました。しかし、input 要素などのビューからモデルに書き込みがされる前に値を変換するフィルタの定義も可能です。
+これまでフィルタはモデルから渡される値を view に表示される前に変換するために使用していました。しかし、input 要素などの view からモデルに書き込みがされる前に値を変換するフィルタの定義も可能です。
 
 ``` js
 Vue.filter('currencyDisplay', {
@@ -43,7 +43,7 @@ Vue.filter('currencyDisplay', {
     return '$'+val.toFixed(2)
   },
   // view -> model
-  // formats the value when writing to the data.
+  // データが更新される際に値を変換します。
   write: function(val, oldVal) {
     var number = +val.replace(/[^\d.]/g, '')
     return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
@@ -98,4 +98,4 @@ Vue.filter('concat', function (value, input) {
 
 上記の簡単な例では、 expression をそのまま記述した時と同じ結果が得られます。しかし、複数のステートメントが必要な複雑な処理においては、Computed Property もしくは カスタムフィルタが必要になります。
 
-The built-in `filterBy` and `orderBy` filters are both filters that perform non-trivial work on the Array being passed in and relies on the current state of the owner Vue instance.
+ビルトインの `filterBy` と `orderBy` フィルタは共に渡された配列に対して重要な変更を行うものであり、所有者である Vue インスタンスの現在の状態に依存するものです。

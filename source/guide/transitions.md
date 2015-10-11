@@ -27,11 +27,11 @@ When an element with transition is inserted or removed, Vue will:
 
 2. 自動的に、対象の要素に CSS トランジションか CSS アニメーションが適用されているか調べ、適切なタイミングで CSS クラスを追加/削除します。
 
-## CSS Transitions
+## CSS トランジション
 
-### Example
+### 例
 
-A typical CSS transition looks like this:
+基本的な CSS トランジションは、次のようになります。
 
 ``` html
 <div v-if="show" transition="expand">hello</div>
@@ -144,11 +144,11 @@ new Vue({
 </script>
 {% endraw %}
 
-### Transition CSS Classes
+### トランジション CSS クラス
 
-The classes being added and toggled are based on the value of the `transition` attribute. In the case of `transition="fade"`, three CSS classes are involved:
+追加とトグルするクラス名の接頭辞は、`transition` 属性の値に基づきます。`transition="fade"` のケースでは、 3 つの CSS クラスが関与しています:
 
-1. The class `.fade-transition` will be always present on the element.
+1. `.fade-transition` クラスは常に与えられます。
 
 2. `.fade-enter` defines the starting state of an entering transition. It is applied for a single frame and then immediately removed.
 
@@ -156,7 +156,7 @@ The classes being added and toggled are based on the value of the `transition` a
 
 If the `transition` attribute has no value, the classes will default to `.v-transition`, `.v-enter` and `.v-leave`.
 
-### Transition Flow Details
+### トランジションフローの詳細
 
 `show` プロパティに変更があると、それに応じて Vue.js は `<div>` 要素を追加/削除し、以下に指定されているようにトランジションクラスを適用します。
 
@@ -199,11 +199,11 @@ enter: function (el, done) {
 
 <p class="tip">複数要素を同時にトランジションさせる場合、Vue.js はその要素をバッチにし、自動的に連続処理を行います。</p>
 
-### CSS Animations
+### CSS アニメーション
 
 CSS アニメーションは、CSS トランジションと同じやり方で適用することができますが、対処の要素が追加された後、`animationend` がコールバックされるまで `v-enter` クラスが削除されないという違いがあります。
 
-Example: (omitting prefixed CSS rules here)
+例： (CSS ルールの記述は諸略)
 
 ``` html
 <span v-show="show" transition="bounce">Look at me!</span>
@@ -316,13 +316,13 @@ new Vue({
 </script>
 {% endraw %}
 
-## JavaScript Transitions
+## JavaScript トランジション
 
-You can also use just the JavaScript hooks without defining any CSS rules. When using JavaScript only transitions, **the `done` callbacks are required for the `enter` and `leave` hooks**, otherwise they will be called synchronously and the transition will finish immediately.
+どんな CSS ルールの定義しなくても、JavaScript フックを利用することができます。JavaScript トランジションだけ利用するとき、**`done` コールバックは `enter` と `leave` フック向けに必須とであり**、そうでなければ、それらは同期的に呼ばれ、そしてトランジションはすぐに終了します。
 
 It's also a good idea to explicitly declare `css: false` for your JavaScript transitions so that Vue.js can skip the CSS detection. This also prevents cascaded CSS rules from accidentally interfering with the transition.
 
-The following example registers a custom JavaScript transition using jQuery:
+以下の例では、jQuery を使用してカスタムな JavaScript トランジションの定義を登録します:
 
 ``` js
 Vue.transition('fade', {
@@ -347,15 +347,15 @@ Vue.transition('fade', {
 })
 ```
 
-Then you can use it with the `transition` attribute, same deal:
+そして、`transition` のトランジションIDに値を渡すことで、この関数を使用することができます。同じ結果:
 
 ``` html
 <p transition="fade"></p>
 ```
 
-## Staggering Transitions
+## スタガリングトランジション
 
-It's possible to create staggering transitions when using `transition` with `v-for`. You can do this either by adding a `stagger`, `enter-stagger` or `leave-stagger` attribute to your transitioned element:
+`v-for` で `transition` を使用するとき、スタガリングトランジションを作成することが可能です。`stagger`、か `enter-stagger`、かまたは `leave-stagger` のいずれかの属性をトランジション要素に追加することによってこれをすることができます:
 
 ``` html
 <div v-repeat="list" transition stagger="100"></div>
