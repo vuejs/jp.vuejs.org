@@ -1,57 +1,57 @@
-title: Data Binding Syntax
+title: データバインディングシンタックス
 type: guide
 order: 4
 ---
 
-Vue.js uses a DOM-based templating implementation. This means that all Vue.js templates are essentially valid, parsable HTML enhanced with some special attributes. Keep that in mind, since this makes Vue templates fundamentally different from string-based templates.
+Vue.js は DOM ベースのテンプレートの実装を使用しています。これは、全ての Vue.js テンプレートは本質的に有効で、いくつかの特別な属性で充実させた HTML は解析可能であるということを意味します。これは、Vue のテンプレートは根本的に文字列ベースのテンプレートとは異なるということを念頭においてください。
 
-## Interpolations
+## Interpolation
 
-### Text
+### テキスト
 
-The most basic form of data binding is text interpolation using the "Mustache" syntax (double curly braces):
+データバインディングの最も基本的な形式は、"Mustache" シンタックス(2 重中括弧)を使用するテキスト interpolation です:
 
 ``` html
 <span>Message: {{ msg }}</span>
 ```
 
-The mustache tag will be replaced with the value of the `msg` property on the corresponding data object. It will also be updated whenever the data object's `msg` property changes.
+mustache タグは対応するデータオブジェクトでの `msg` プロパティの値で置き換えられます。またいつでも、データオブジェクトの `msg` プロパティ変更は更新されます。
 
-You can also perform one-time interpolations that do not update on data change:
+データ変更が更新されない一度だけ (one-time) の interpolation を実行できます:
 
 ``` html
 <span>This will never change: {{* msg }}</span>
 ```
 
-### Raw HTML
+### 生の HTML
 
-The double mustaches interprets the data as plain text, not HTML. In order to output real HTML, you will need to use triple mustaches:
+2重中括弧の mustache は HTML ではなく、プレーンなテキストとしてデータを解釈します。リアルな HTML を出力するためには、3重中括弧の mustache を使用する必要があります:
 
 ``` html
 <div>{{{ raw_html }}}</div>
 ```
 
-The contents are inserted as plain HTML - data bindings are ignored. If you need to reuse template pieces, you should use [partials](/api/#partial).
+コンテンツは、プレーンな HTML として挿入されます。データバインディングは無視されます。テンプレートの部品の再利用が必要な場合、[partials](/api/#partial) を使用すべきです。
 
-<p class="tip">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Only use HTML interpolation on trusted content and **never** on user-provided content.</p>
+<p class="tip">web サイトで動的に任意の HTML をレンダリングすることは、簡単に [XSS 攻撃](https://en.wikipedia.org/wiki/Cross-site_scripting)に繋がるので非常に危険なことができます。信頼されたコンテンツにだけ HTML interpolation を使用してください。決して、ユーザーによって提供されたコンテンツでは**決して**使用してはいけません。</p>
 
-### Attributes
+### 属性
 
-Mustaches can also be used inside HTML attributes:
+Mustache は HTML 属性内部でも使用することができます:
 
 ``` html
 <div id="item-{{ id }}"></div>
 ```
 
-However, this can only be used inside native HTML attributes. You cannot use mustaches in custom attributes or Vue.js directives. Don't worry, Vue.js will raise warnings for you when mustaches are used in wrong places.
+しかしながら、これはネイティブな HTML 属性内でのみ使用することができます。カスタム属性 または Vue.js ディレクティブでは mustache を使用することはできません。心配しないてください、Vue.js は mustache は間違った場所で使用されているとき、あなたに警告を発生させるでしょう。
 
-## Binding Expressions
+## バインディング式
 
-The text we put inside mustache tags are called **binding expressions**. In Vue.js, a binding expression consists of a single JavaScript expression optionally followed by one or more filters.
+mustache タグ内部に入れたテキストは **バインディング式** と呼ばれています。Vue.js では、バインディング式は、必要に応じて、1つ、または複数のフィルタに続いた、単一の JavaScript 式から構成されています。
 
-### JavaScript Expressions
+### JavaScript 式
 
-So far we've only been binding to simple property keys in our templates. But Vue.js actually supports the full power of JavaScript expressions inside data bindings:
+これまでは、私達のテンプレートでは単純なプロパティキーにバインディングしていました。しかし、Vue.js は実際にはデータバインディング内部の JavaScript 式の完全にサポートします:
 
 ``` html
 {{ number + 1 }}
@@ -61,102 +61,102 @@ So far we've only been binding to simple property keys in our templates. But Vue
 {{ message.split('').reverse().join('') }}
 ```
 
-These expressions will be evaluated in the data scope of the owner Vue instance. One restriction is that each binding can only contain **one single expression**, so the following will **NOT** work:
+これらの式は、Vue インスタンスのオーナーのデータスコープで評価されます。1つ制限として、各バインディングは**単一式**のみ含むことができるということです。なので、以下は動作**しません**:
 
 ``` html
-<!-- this is a statement, not an expression: -->
+<!-- これはステートメント、式ではありません: -->
 {{ var a = 1 }}
 
-<!-- flow control won't work either, use ternary expressions -->
+<!-- フロー制御はどちらも動作しません、三項演算子式を使用します -->
 {{ if (ok) { return message } }}
 ```
 
-### Filters
+### フィルタ
 
-Vue.js allows you to append optional "filters" to the end of an expression, denoted by the "pipe" symbol:
+Vue.js　は式の終わりに任意で"フィルタ"を追加することができ、"パイプ (`|`)" シンボルで示します:
 
 ``` html
 {{ message | capitalize }}
 ```
 
-Here we are "piping" the value of the `message` expression through the built-in `capitalize` filter, which is in fact just a JavaScript function that returns the capitalized value. Vue.js provides a number of built-in filters, and we will talk about how to write your own filters later.
+ここでは、実際に大文字の値を返すだけの JavaScript 関数である組み込み `capitalize` フィルタを通して、`message` 式の値をパイプしています。Vue.js はいくつかの組み込みフィルタを提供し、後で独自のフィルタを作成する方法について話します。
 
-Note that the pipe syntax is not part of JavaScript syntax, therefore you cannot mix filters inside expressions; you can only append them at the end of an expression.
+パイプシンタックスは JavaScript シンタックスの一部ではないことに注意してください。従って、式内部にフィルタを混ぜることはできません。式の終わりにだけ追加することができます。
 
-Filters can be chained:
+フィルタは繋ぎ合わせることができます:
 
 ``` html
 {{ message | filterA | filterB }}
 ```
 
-Filters can also take arguments:
+フィルタはまた引数を取得できます:
 
 ``` html
 {{ message | filterA 'arg1' arg2 }}
 ```
 
-The filter function always receives the expression's value as the first argument. Quoted arguments are interpreted as plain string, while un-quoted ones will be evaluated as expressions. Here, the plain string `"arg1"` will be passed into the filter as the second argument, and the value of expression `arg2` will be evaluated and passed in as the third argument.
+フィルタ関数は常に最初の引数として式の値を受け取ります。クォートされないものは式として評価される一方、クォートされた引数はプレーンな文字列として解釈されます。ここでは、プレーンな文字列 `"arg1"` は第 2 引数としてフィルタに渡され、式 `arg2` の値は評価されて、第 3 引数として渡されます。
 
-## Directives
+## ディレクティブ
 
-Directives are special attributes with the `v-` prefix. Directive attribute values are expected to be **binding expressions**, so the rules about JavaScript expressions and filters mentioned above apply here as well. A directive's job is to reactively apply special behavior to the DOM when the value of its expression changes. Let's review the example we've seen in the introduction:
+ディレクティブは `v-` 接頭辞による特別な属性です。ディレクティブ属性の値は**バインディング式**であることが期待されるので、JavaScript 式とフィルタで上記で言及したルールについては、ここでも同様に適用されます。ディレクティブの役割は、その式の値が変更するとき、リアクティブに DOM に特殊な動作を適用することです。イントロダクションで見てきた例を検討してみましょう:
 
 ``` html
 <p v-if="greeting">Hello!</p>
 ```
 
-Here, the `v-if` directive would remove/insert the `<p>` element based on the truthiness of the value of the expression `greeting`.
+ここでは、`v-if` ディレクティブは 式 `greeting` の値が真となるような値に基づいて、`<p>` 要素を削除/挿入します。
 
-### Arguments
+### 引数
 
-Some directives can take an "argument", denoted by a colon after the directive name. For example, the `v-bind` directive is used to reactively update an HTML attribute:
+いくつかのディレクティブは、ディレクティブ名の後に、コロン (:) によって示されることで、"引数"を取得することができます。例えば、`v-bind` ディレクティブは HTML 属性をリアクティブに更新するために使用されます:
 
 ``` html
 <a v-bind:href="url"></a>
 ```
 
-Here `href` is the argument, which tells the `v-bind` directive to bind the element's `href` attribute to the value of the expression `url`. You may have noticed this achieves the same result as an attribute interpolation using `{% raw %}href="{{url}}"{% endraw %}`: that is correct, and in fact, attribute interpolations are translated into `v-bind` bindings internally.
+ここでは、`href` は、`v-bind` ディレクティブに式 `url` の値に要素の `href` 属性をバインドするように伝える引数です。あなたは、`{% raw %}href="{{url}}"{% endraw %}` を使用して属性の interpolation と同様の結果になることを気づいたかもしれません。これは正しいです。実際には、属性の interpolation は内部では `v-bind` バインディングに翻訳されています。
 
-Another example is the `v-on` directive, which listens to DOM events:
+他の例は DOM イベントをリッスンする `v-on` ディレクティブです:
 
 ``` html
 <a v-on:click="doSomething">
 ```
 
-Here the argument is the event name to listen to. We will talk about event handling in more details too.
+ここでの引数は、DOM イベントをリッスンするためにイベント名です。私達はイベントハンドリングついて、詳細でも話します。
 
-### Modifiers
+### モディファイア
 
-Modifiers are special postfixes denoted by a dot, which indicates that a directive should be bound in some special way. For example, the `.literal` modifier tells the directive to interpret its attribute value as a literal string rather than an expression:
+モディファイア(修飾子)はドット(.)によって表記された特別な接尾辞で、ディレクティブがいくつかの特別な方法でバインドされるべきということを示します。例えば、`.literal` モディファイアはディレクティブに式よりもむしろリテラル文字列として属性値が解釈されるよう伝えます:
 
 ``` html
 <a v-bind:href.literal="/a/b/c"></a>
 ```
 
-Of course, this seems pointless because we can just do `href="/a/b/c"` instead of using a directive. The example here is just for demonstrating the syntax. We will see more practical uses of modifiers later.
+もちろん、この例は、ディレクティブを使用する代わりに `href="a/b/c"` で同じことができるため、無意味に思われます。ここでの例は、シンタックスをデモするためです。後でモディファイアのより実用的な用途を確認します。
 
-## Shorthands
+## 簡略表記
 
-The `v-` prefix serves as a visual cue for identifying Vue-specific attributes in your templates. This is useful when you are using Vue.js to apply dynamic behavior to some existing markup, but can feel verbose for some frequently used directives. At the same time, the need for the `v-` prefix becomes less important when you are building an SPA where Vue.js manages every template. Therefore, Vue.js provides special shorthands for two of the most often used directives, `v-bind` and `v-on`:
+`v- ` 接頭辞はテンプレートにおいて Vue 固有の属性を識別するための視覚的な手がかりとして役にたちます。これは、あなたが Vue.js を使用していくつかの既存のマークアップに動的な振舞いを適用するときは便利ですが、いくつか頻繁に使用されるディレクティブに対しては冗長であると感じることができます。同時に、`v-` 接頭辞の必要性は、あなたが Vue.js が全てのテンプレートを管理する SPA を構築するとき、大変重要となってきます。従って、Vue.js は最も頻繁に使用されるディレクティブ `v-bind` と `v-on` の2つに対して、特別な簡略表記を提供します:
 
-### `v-bind` Shorthand
+### `v-bind` 簡略表記
 
 ``` html
-<!-- full syntax -->
+<!-- 完全なシンタックス -->
 <a v-bind:href="url"></a>
 
-<!-- shorthand -->
+<!-- 簡略表記 -->
 <a :href="url"></a>
 ```
 
-### `v-on` Shorthand
+### `v-on` 簡略表記
 
 ``` html
-<!-- full syntax -->
+<!-- 完全なシンタックス -->
 <a v-on:click="doSomething"></a>
 
-<!-- shorthand -->
+<!-- 簡略表記 -->
 <a @click="doSomething"></a>
 ```
 
-They may look a bit different from "valid" HTML, but all Vue.js supported browsers can parse it correctly, and they do not appear in the final rendered markup. The shorthand syntax is totally optional, but you will likely appreciate it when you learn more about its usage later.
+それら簡略表記は、"valid" な HTML から見るとわずかに異なって見えるかもしれませんが、全ての Vue.js は、ブラウザがそれを正しく解析することをサポートし、そして最終的にレンダリングされたマークアップには表示されません。簡略表記は一向に任意ですが、あなたが後でその使用方法じついて詳細を学習するとき、あなたは恐らくそれに感謝するでしょう。
