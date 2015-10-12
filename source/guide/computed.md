@@ -3,9 +3,9 @@ type: guide
 order: 5
 ---
 
-In-template expressions are very convenient, but they are really meant for simple operations only. Templates are meant to describe the structure of your view. Putting too much logic into your templates can make them bloated and hard to maintain. This is why Vue.js limits binding expressions to one expression only. For any logic that requires more than one expression, you should use a **computed property**.
+テンプレート内での式はとても便利ですが、それらは実際には簡単な操作のためのものです。テンプレートはあなたの view の構造を記述することを意味しています。あなたのテンプレートに中にあまりにも多くのロジックを置きすぎるとそれらは肥大化し、維持するのが難しいです。Vue.js がバインディング式を1つの式だけに制限するのはこのためです。複数の式を要求する任意のロジックでは、あなたは **computed property** を使用する必要があります。
 
-### Basic Example
+### 基本の例
 
 ``` html
 <div id="example">
@@ -20,16 +20,16 @@ var vm = new Vue({
     a: 1
   },
   computed: {
-    // a computed getter
+    // computed getter
     b: function () {
-      // `this` points to the vm instance
+      // `this` は vm インスタンスを指します
       return this.a + 1
     }
   }
 })
 ```
 
-Result:
+結果:
 
 {% raw %}
 <div id="example" class="demo">
@@ -50,7 +50,7 @@ var vm = new Vue({
 </script>
 {% endraw %}
 
-Here we have declared a computed property `b`. The function we provided will be used as the getter function for the property `vm.b`:
+ここでは、computed property `b` を宣言しました。私達が提供する機能は、私達がプロパティ `vm.b` に対して getter 関数として使用されます:
 
 ``` js
 console.log(vm.b) // -> 2
@@ -58,13 +58,13 @@ vm.a = 2
 console.log(vm.b) // -> 3
 ```
 
-You can open the console and play with the example vm yourself. The value of `vm.b` is always dependent on the value of `vm.a`.
+あなたはコンソールを開いて、例の vm をあなた自身で遊ぶことができます。`vm.b` の値は、常に `vm.a` の値に依存しています。
 
-You can data-bind to computed properties in templates just like a normal property. Vue is aware that `vm.b` depends on `vm.a`, so it will update any bindings that depends on `vm.b` when `vm.a` changes. And the best part is that we've created this dependency relationship declaratively: the computed getter function is pure and has no side effects, which makes it easy to test and reason about.
+あなたは通常のプロパティのようにテンプレートで computed property にデータバインドすることができます。Vue は `vm.b` が `vm.a` に依存していることに気づいており、Vue は `vm.a` が変化するとき `vm.b` に依存する任意のバインディングを更新します。そして、最良の部分は、私達がこの依存関係を宣言的に作成したことです。computed getter 関数は純粋でありそして副作用がないので、それは簡単にテストしたりそしてほぼ理由になります。
 
-### Computed Property vs. $watch
+### Computed Property 対 $watch
 
-Vue.js does provide an API method called `$watch` that allows you to observe data changes on a Vue instance. When you have some data that needs to change based on some other data, it is tempting to use `$watch` - especially if you are coming from an AngularJS background. However, it is often a better idea to use a computed property rather than an imperative `$watch` callback. Consider this example:
+Vue.js は Vue インスタンスでデータ変更を監視することを可能にする `$watch` と呼ばれる API メソッドを提供しています。あなたがいくつかの他のデータに基づいて変更する必要があるいくつかのデータを持っているとき、それは、特に、あなたが AngularJS のバックグラウンドからやってきている場合は、`$watch` を使用するのが魅力的です。しかしながら、それはしばしば、命令的な `$watch` コールバックよりもむしろ computed property を使用するのがいっそうよいアイディアです。この例を考えてみます:
 
 ``` html
 <div id="demo">{{fullName}}</div>
@@ -88,7 +88,7 @@ vm.$watch('lastName', function (val) {
 })
 ```
 
-The above code is imperative and repetitive. Compare it with a computed property version:
+上記コードは命令的でくどいです。computed property のバージョンでそれを比較します:
 
 ``` js
 var demo = new Vue({
@@ -104,11 +104,11 @@ var demo = new Vue({
 })
 ```
 
-Much better, isn't it?
+こちらの方が、はるかによいではありませんか？
 
 ### Computed Setter
 
-Computed properties are by default get-only, but you can also provide a setter when you need it:
+Computed property はデフォルトでは getter のみだけですが、あなたは必要なとき setter も提供することができます:
 
 ``` js
 // ...
@@ -129,6 +129,6 @@ computed: {
 // ...
 ```
 
-Now when you call `vm.fullName = 'John Doe'`, the setter will be invoked and `vm.firstName` and `vm.lastName` will be updated accordingly.
+今、あなたが `vm.fullname = 'John Doe'` を呼ぶとき、setter が呼び出され、`vm.firstName` と `vm.lastName` は適宜更新します。
 
-The technical details behind how computed properties are updated are [discussed in another section](reactivity.html#Inside_Computed_Properties) dedicated to the reactivity system.
+技術的な詳細はリアクティブシステム専用の [別のセクション](reactivity.html#Inside_Computed_Properties) で、どうやって computed property が更新されるか、説明されています。
