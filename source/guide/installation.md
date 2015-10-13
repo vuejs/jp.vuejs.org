@@ -14,9 +14,9 @@ gz_size: "23.22"
 ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。
 
 <div id="downloads">
-<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.js" download>開発版</a><span class="light info">{{dev_size}}kb, コメント、デバック、警告のメッセージが豊富です。</span>
+<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり</span>
 
-<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>リリース版</a><span class="light info">{{min_size}}kb minified / {{gz_size}}kb gzipped</span>
+<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>プロダクションバージョン</a><span class="light info">警告出力なし、{{gz_size}}kb min+gzip</span>
 </div>
 
 ### CDN

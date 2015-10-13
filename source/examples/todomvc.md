@@ -1,6 +1,6 @@
 title: TodoMVC
 type: examples
-order: 9
+order: 8
 ---
 
 > これは Javascript の実質 120 行を切る(コメントと空行を除く)完全に仕様に準拠する TodoMVC 実装です。
