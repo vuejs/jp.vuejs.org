@@ -1,11 +1,11 @@
-title: Form Input Bindings
+title: Form Input バインディング
 type: guide
 order: 10
 ---
 
-## Basics Usage
+## 基本的な使い方
 
-You can use the `v-model` directive to create two-way data bindings on form input elements. It automatically picks the correct way to update the element based on the input type. Although a bit magical, `v-model` is essentially syntax sugar for updating data on user input events, plus special care for some edge cases.
+あなたは、form の input 要素 で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法が、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するためのシンタックスシュガー (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別なケアが必要です。
 
 ### Text
 
@@ -32,7 +32,7 @@ new Vue({
 
 ### Checkbox
 
-Single checkbox, boolean value:
+1つのチェックボックスは、boolean 値です:
 
 ``` html
 <input type="checkbox" id="checkbox" v-model="checked">
@@ -53,7 +53,7 @@ new Vue({
 </script>
 {% endraw %}
 
-Mutiple checkboxes, bound to the same Array:
+複数のチェックボックスは、同じ配列にバウンドします:
 
 ``` html
 <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
@@ -120,7 +120,7 @@ new Vue({
 
 ### Select
 
-Single select:
+単一の選択:
 
 ``` html
 <select v-model="selected">
@@ -149,7 +149,7 @@ new Vue({
 </script>
 {% endraw %}
 
-Multiple select (bound to Array):
+複数の選択 (配列にバウンド):
 
 ``` html
 <select v-model="selected" multiple>
@@ -180,7 +180,7 @@ new Vue({
 </script>
 {% endraw %}
 
-Dynamic options rendered with `v-for`:
+動的オプションは `v-for` でレンダリングできます:
 
 ``` html
 <select v-model="selected">
@@ -227,24 +227,24 @@ new Vue({
 </script>
 {% endraw %}
 
-## Value Bindings
+## 値のバインディング
 
-For radio, checkbox and select options, the `v-model` binding values are usually static strings (or booleans for checkbox):
+radio、checkbox、そして select オプションは、`v-model`バインディングの値は通常静的文字列 (または、チェックボックスには boolean )を指定します:
 
 ``` html
-<!-- `picked` is a string "a" when checked -->
+<!-- チェックされたとき、`picked` は文字列"a"になります -->
 <input type="radio" v-model="picked" value="a">
 
-<!-- `toggle` is either true or false -->
+<!-- `toggle` は true かまたは false のどちらかです -->
 <input type="checkbox" v-model="toggle">
 
-<!-- `selected` is a string "abc" when selected -->
+<!-- 選択されたとき、`selected` は文字列"abc"です -->
 <select v-model="selected">
   <option value="abc">ABC</option>
 </select>
 ```
 
-But sometimes we may want to bind the value to a dynamic property on the Vue instance. We can use `v-bind` to achieve that. In addition, using `v-bind` allows us to bind the input value to non-string values.
+しかし、時々、私達は、Vue インスタンスで動的プロパティに値をバインドしたいかもしれません。私達はそれを達成するために `v-bind` を使用することができます。 ほかに、`v-bind` の使用は、私達に文字列ではない値に input 値をバインドします。
 
 ### Checkbox
 
@@ -278,31 +278,32 @@ vm.pick === vm.a
 
 ``` html
 <select v-model="selected">
-  <!-- inline object literal -->
+  <!-- インラインオブジェクトリテラル -->
   <option v-bind:value="{ number: 123 }">123</option>>
 </select>
 ```
 
 ``` js
-// when selected:
+// 選択したとき
 typeof vm.selected // -> 'object'
 vm.selected.number // -> 123
 ```
 
-## Param Attributes
+## パラメータ属性
 
 ### lazy
 
+デフォルトでは、`v-model` は各 `input` イベント後に、データと入力を同期します。あなたは、`change` イベント後、同期するための振舞いを変更するために、`lazy` 属性を追加します:
 By default, `v-model` syncs the input with the data after each `input` event. You can add a `lazy` attribute to change the behavior to sync after `change` events:
 
 ``` html
-<!-- synced after "change" instead of "input" -->
+<!-- "input" の代わりに "change" 後に同期します -->
 <input v-model="msg" lazy>
 ```
 
 ### number
 
-If you want user input to be automatically persisted as numbers, you can add a `number` attribute to your `v-model` managed inputs:
+もし、あなたがユーザーの入力において自動的に数値として永続化する場合、あなたは、`v-model` を管理された input の値に対して、`number` 属性を追加することができます。
 
 ``` html
 <input v-model="age" number>
