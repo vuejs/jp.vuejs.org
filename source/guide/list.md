@@ -1,11 +1,11 @@
-title: List Rendering
+title: リストレンダリング
 type: guide
 order: 8
 ---
 
 ## v-for
 
-We can use the `v-for` directive to render a list of items based on an Array. The `v-for` directive requires a special syntax in the form of `item in items`, where `items` is the source data Array and `item` is an **alias** for the Array element being iterated on:
+私達は配列に基づいて、アイテムのリストをレンダリングするために、`v-for` ディレクティブを使用することができます。`v-for` ディレクティブは `item in items` の形式で特別なシンタックスを要求し、`items` はソースデータの配列で、`item` は配列要素がその上で反復されている**エイリアス**です:
 
 **例:**
 
@@ -55,7 +55,7 @@ var example1 = new Vue({
 </script>
 {% endraw %}
 
-Inside `v-for` blocks we have full access to parent scope properties, plus a special variable `$index` which, as you probably have guessed, is the Array index for the current item:
+`v-for` ブロック内では、私達が親スコープのプロパティへ完全なアクセスに加えて、恐らくあなたが推測しているとおり、現在のアイテムに対する配列のインデックスである特別な変数 `$index` を持っています:
 
 ``` html
 <ul id="example-2">
@@ -78,7 +78,7 @@ var example2 = new Vue({
 })
 ```
 
-**Result:**
+**結果:**
 
 {% raw%}
 <ul id="example-2" class="demo">
@@ -106,9 +106,9 @@ var example2 = new Vue({
 </script>
 {% endraw %}
 
-## Template v-for
+## テンプレートでの v-for
 
-Similar to template `v-if`, you can also use a `<template>` tag with `v-for` to render a block of multiple elements. For example:
+テンプレート `v-if` と同様、あなたは複数の要素のブロックをレンダリングするために `v-for` で `<template>` タグも使用することができます。例えば:
 
 ``` html
 <ul>
@@ -119,11 +119,11 @@ Similar to template `v-if`, you can also use a `<template>` tag with `v-for` to 
 </ul>
 ```
 
-## Array Change Detection
+## 配列の変化を検出
 
-### Mutation Methods
+### 変更メソッド
 
-Vue.js wraps an observed Array's mutation methods so they will also trigger View updates. The wrapped methods are:
+Vue.js は View の更新もトリガするために、監視された配列の変更メソッドをラップ (wrap) します。ラップされたメソッドは次のとおりです:
 
 - `push()`
 - `pop()`
@@ -133,11 +133,11 @@ Vue.js wraps an observed Array's mutation methods so they will also trigger View
 - `sort()`
 - `reverse()`
 
-You can open the console and play with the previous examples' `items` array by calling its mutation methods. For example: `example1.items.push({ message: 'Baz' })`.
+コンソールを開いて前の `items` 配列の例で変更メソッドを呼び出して遊んでみてください。例えば `example1.items.push({ message: 'Baz' })` のようにしてみましょう。
 
-### Replacing an Array
+### 配列の置き換え
 
-Mutation methods, as the name suggests, mutate the original Array they are called on. In comparison, there are also non-mutating methods, e.g. `filter()`, `concat()` and `slice()`, which do not mutate the original Array but **always return a new Array**. When working with non-mutating methods, you can just replace the old Array with the new one:
+変更メソッドは、名前が示唆するように、それらが呼ばれると元の配列を変更します。変更しないメソッドもあります。例えば、`filter()`、`concat()`、そして`slice()` のような、元の配列を変更しませんが、**常に新しい配列を返します**。変更しないメソッドで動作するとき、あなたは新しいもので古い配列を置き換えます:
 
 ``` js
 example1.items = example1.items.filter(function (item) {
@@ -145,7 +145,7 @@ example1.items = example1.items.filter(function (item) {
 })
 ```
 
-You might think this will cause Vue.js to throw away the existing DOM and re-render the entire list - luckily that is not the case. Vue.js implements some smart heuristics to maximize DOM element reuse, so replacing an array with another array containing overlapping objects is a very efficient operation.
+これは、Vue.js が既存の DOM を捨てて、リスト全体を再レンダリングの原因になると思うかもしれません。幸いにもそれはそうではありません。Vue.js は DOM 要素の再利用を最大化するためにいくつかのスマートなヒューリスティックを実装しているので、重複するオブジェクトを含んでいる他の配列を配列で置き換えることは、とても効率的な作業です。
 
 ### track-by
 
@@ -174,27 +174,27 @@ You might think this will cause Vue.js to throw away the existing DOM and re-ren
 
 ### track-by $index
 
-If you don't have a unique key to track by, you can also use `track-by="$index"`, which will force `v-for` into in-place update mode: fragments are no longer moved around, they simply get flushed with the new value at the corresponding index. This mode can also handle duplicate values in the source array.
+追跡するためにユニークなキーを持っていない場合、`track-by="$index"` も利用できます。これは、`v-for` を in-place 更新モードに強制します。フラグメントはもはや並べ替えておらず、それらは単純に対応するインデックスに新しい値でフラッシュして取得します。このモードはソースとなる配列に重複する値を扱うことができます。
 
-This can make Array replacement extremely efficient, but it comes at a trade-off. Because DOM nodes are no longer moved to reflect the change in order, temporary state like DOM input values and component private state can become out of sync. So, be careful when using `track-by="$index"` if the `v-for` block contains form input elements or child components.
+これは配列の置き換えは非常に効率的にできますが、トレードオフもあります。なぜなら、DOM ノードはもはや順序の変更を反映するように移動されていないため、DOM 入力値とコンポーネントのプライベートな状態のような一時的な状態は同期できないです。このため、`v-for` ブロックが input 要素または子コンポーネントから含まれている場合は、`track-by="$index"` を使用するとき注意してください。
 
-### Caveats
+### 警告
 
-Due to limitations of JavaScript, Vue.js **cannot** detect the following changes to an Array:
+JavaScript の制限のため、Vue.js は配列で以下の変更を検出することは**できません**:
 
-1. When you directly set an item with the index, e.g. `vm.items[0] = {}`;
-2. When you modify the length of the Array, e.g. `vm.items.length = 0`.
+1. インデックスでアイテムを直接設定するとき。例: `vm.items[0] = {}`
+2. 配列の長さを変更するとき。例: `vm.items.length = 0`
 
-To deal with caveat (1), Vue.js augments observed Arrays with a `$set()` method:
+上記の警告 (1) に対処するため、Vue.js は監視された配列を `$set()` メソッドで拡張します:
 
 ``` js
-// same as `example1.items[0] = ...` but triggers view update
+// `example1.items[0] ...` と同じであるが、view の更新をトリガする
 example1.items.$set(0, { childMsg: 'Changed!'})
 ```
 
-To deal with caveat (2), just replace `items` with an empty array instead.
+上記の警告 (2) に対処するため、代わりに空の配列で `items` を置き換えてください。
 
-In addition to `$set()`, Vue.js also augments Arrays with a convenience method `$remove()`, which searches for and removes an item from target Array by calling `splice()` internally. So instead of:
+`$set()` に加えて、Vue.js は配列を便利なメソッド `$remove()` で拡張し、そのメソッドは、検索し、そして内部では `splice()` を呼び出すことによって対象の配列からアイテムを削除します。そういうわけで代わりは:
 
 ``` js
 var index = this.items.indexOf(item)
@@ -203,13 +203,13 @@ if (index !== -1) {
 }
 ```
 
-You can just do:
+というようになり、これと同じことをあなたはこのように行うことができます:
 
 ``` js
 this.items.$remove(item)
 ```
 
-## Object v-for
+## オブジェクトの v-for
 
 オブジェクトのプロパティに対して、`v-for` を使って反復処理することができます。`$index` に加えて、それぞれのスコープは `$key` という特別なプロパティにアクセスします。
 
@@ -234,7 +234,7 @@ new Vue({
 })
 ```
 
-**Result:**
+**結果:**
 
 {% raw %}
 <ul id="repeat-object" class="demo">
@@ -257,9 +257,9 @@ new Vue({
 </script>
 {% endraw %}
 
-<p class="tip">When iterating over an Object, the order is based on the key enumeration order of `Object.keys()`, which is **not** guaranteed to be consistent in all JavaScript engine implementations.</p>
+<p class="tip">オブジェクトを反復処理するとき、順序は `Object.keys()` の列挙順のキーに基づいており、全ての JavaScript エンジンの実装で一貫性が保証されて**いません**。</p>
 
-## Range v-for
+## 範囲の v-for
 
 `v-for` は整数値を取ることも出来ます。このケースでは、指定された数だけテンプレートが繰り返されます。
 
@@ -269,7 +269,7 @@ new Vue({
 </div>
 ```
 
-Result:
+結果:
 
 {% raw %}
 <div id="range" class="demo">
@@ -281,11 +281,11 @@ new Vue({ el: '#range' })
 </script>
 {% endraw %}
 
-## Displaying Filtered/Sorted Results
+## フィルタ/ソートされた結果の表示
 
-Sometimes we only need to display a filtered or sorted version of the Array without actually mutating or resetting the original data. There are two options to achieve this:
+時々、私達は実際に変更するかまたは元のデータをリセットせずに配列フィルタリングやソートされたバージョンの配列を表示する必要があります。これを達成するに2つのオプションがあります:
 
-1. Create a computed property that returns the filtered or sorted Array;
-2. Use the built-in `filterBy` and `orderBy` filters.
+1. フィルタまたはソートされた配列を返す computed property を作成する
+2. 組み込み `filterBy` そして `orderBy` されたフィルタを使用する
 
-A computed property would give you finer-grained control and more flexibility since it's full JavaScript; but the filters can be more convenient for common use cases. For detailed usage of the Array filters, check out their [documentation](/api/filters.html#filterBy).
+それは完全な JavaScript であるため、computed property はあなたにより細かい制御と柔軟性を与えますが、フィルタは共通ユースケースに対してより便利にすることができます。配列フィルタの詳細な使用方法については、それらの[ドキュメント](/api/filters.html#filterBy)をチェックしてください。
