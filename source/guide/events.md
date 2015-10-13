@@ -1,11 +1,11 @@
-title: Methods and Event Handling
+title: メソッドとイベントハンドリング
 type: guide
 order: 9
 ---
 
-## Method Handler
+## メソッドハンドラ
 
-We can then use the `v-on` directive to listen to DOM events:
+私達は DOM イベントをリッスンするために `v-on` ディレクティブを使用することができます:
 
 ``` html
 <div id="example">
@@ -13,7 +13,7 @@ We can then use the `v-on` directive to listen to DOM events:
 </div>
 ```
 
-We are binding a click event listener to a method named `greet`. Here's how to define that method in our Vue instance:
+私達は `greet` という名のメソッドに click イベントリスナーをバインドします。ここでは、私達の Vue インスタンスでメソッドを定義する方法は以下になります:
 
 ``` js
 var vm = new Vue({
@@ -21,22 +21,22 @@ var vm = new Vue({
   data: {
     name: 'Vue.js'
   },
-  // define methods under the `methods` object
+  // `methods` オブジェクトの下にメソッドを定義します
   methods: {
     greet: function (event) {
-      // `this` inside methods point to the Vue instance
+      // 内部メソッドの `this` は vm インスタンスを指します
       alert('Hello ' + this.name + '!')
-      // `event` is the native DOM event
+      // `event` はネイティブ DOM イベントです
       alert(event.target.tagName)
     }
   }
 })
 
-// you can invoke methods in JavaScript too
+// JavaScript でもメソッドを起動できます
 vm.greet() // -> 'Hello Vue.js!'
 ```
 
-Test it yourself:
+あなた自身でそれをテストしてみましょう:
 
 {% raw %}
 <div id="example" class="demo">
@@ -48,12 +48,9 @@ var vm = new Vue({
   data: {
     name: 'Vue.js'
   },
-  // define methods under the `methods` object
   methods: {
     greet: function (event) {
-      // `this` inside methods point to the vm
       alert('Hello ' + this.name + '!')
-      // `event` is the native DOM event
       alert(event.target.tagName)
     }
   }
@@ -61,9 +58,9 @@ var vm = new Vue({
 </script>
 {% endraw %}
 
-## Inline Statement Handler
+## インラインステートメントハンドラ
 
-Instead of binding directly to a method name, we can also use an inline JavaScript statement:
+メソッド名に直接バインドする代わりに、私達はインライン JavaScript ステートメントも使用することができます:
 
 ``` html
 <div id="example-2">
@@ -82,7 +79,7 @@ new Vue({
 })
 ```
 
-Result:
+結果:
 {% raw %}
 <div id="example-2" class="demo">
   <button v-on:click="say('hi')">Say Hi</button>
@@ -100,9 +97,9 @@ new Vue({
 </script>
 {% endraw %}
 
-Similar to the restrictions on inline expressions, event handlers are restricted to **one statement only**.
+インライン式での制限と同様に、イベントハンドラは**1つのステートメントのみ**に制限されています。
 
-Sometimes we also need to access the original DOM event in an inline statement handler. You can pass it into a method using the special `$event` variable:
+時々、私達はインラインステートメントハンドラで元の DOM イベントにアクセスする必要もあります。あなたは特別な `$event` 変数を使用してメソッドにそれを渡すことができます:
 
 ``` html
 <button v-on:click="say('hello!', $event)">Submit</button>
@@ -112,49 +109,49 @@ Sometimes we also need to access the original DOM event in an inline statement h
 // ...
 methods: {
   say: function (msg, event) {
-    // now we have access to the native event
+    // 私達はネイティブイベントにアクセスできます
     event.preventDefault()
   }
 }
 ```
 
-## Event Modifiers
+## イベントモディファイア
 
-It is a very common need to call `event.preventDefault()` or `event.stopPropagation()` inside event handlers. Although we can do this easily inside methods, it would be better if the methods can be purely about data logic rather than having to deal with DOM event details.
+イベントハンドラ内部で `event.preventDefault()` または `event.stopPropagation()` を呼びだすのは、非常に一般的に必要です。私達はメソッド内部で簡単にこれを実行することはできますが、メソッドが DOM イベントで詳細に対処することよりもむしろデータロジックに対して純粋に可能ならば、それがよいでしょう。
 
-To address this problem, Vue.js provides two **event modifiers** for `v-on`: `.prevent` and `.stop`. Recall that modifiers are directive postfixes denoted by a dot:
+この問題に対処するため、Vue.js は `v-on` に対して、`.prevent` そして `.stop` という2つの**イベントモディファイア**を提供します。モディファイアはドット(.) で表記されたディレクティブの接尾辞であることを想起させます:
 
 ``` html
-<!-- the click event's propagation will be stopped -->
+<!-- click イベント propagation は停止されます -->
 <a v-on:click.stop="doThis"></a>
 
-<!-- the submit event will no longer reload the page -->
+<!-- submit イベントはもはやページをリロードしません -->
 <form v-on:submit.prevent="onSubmit"></form>
 
-<!-- modifiers can be chained -->
+<!-- モディファイアは繋ぎ合わせることができます -->
 <a v-on:click.stop.prevent="doThat">
 ```
 
-## Key Modifiers
+## キーモディファイア
 
-When listening for keyboard events, we often need to check for common key codes. Vue.js also allows adding key modifiers for `v-on` when listening for key events:
+キーボードイベントをリスニングするとき、私達はしばしば一般的なキーコードをチェックする必要があります。Vue.js はキーイベントに対してリスニングするとき、キーモディファイアを追加することができます:
 
 ``` html
-<!-- only call vm.submit() when the keyCode is 13 -->
+<!-- キーコードが 13 のときだけ、vm.submit() が呼ばれます -->
 <input v-on:keyup.13="submit">
 ```
 
-Remembering all the keyCodes is a hassle, so Vue.js provides aliases for most commonly used keys:
+全てのキーコードを覚えることは面倒ですので、Vue.js は最も一般的に使用されるキーのエイリアスを提供します:
 
 ``` html
-<!-- same as above -->
+<!-- 上記と同じです -->
 <input v-on:keyup.enter="submit">
 
-<!-- also works for shorthand -->
+<!-- 簡略表記に対しても動作します -->
 <input @keyup.enter="submit">
 ```
 
-Here's the full list of key modifier aliases:
+以下は、キーモディファイアのエイリアスの完全なリストです:
 
 - enter
 - tab
