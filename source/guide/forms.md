@@ -5,7 +5,7 @@ order: 10
 
 ## 基本的な使い方
 
-あなたは、form の input 要素 で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法が、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するためのシンタックスシュガー (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別なケアが必要です。
+あなたは、form の input 要素 で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法とはいえ、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するためのシンタックスシュガー (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別な配慮が必要です。
 
 ### Text
 
@@ -32,7 +32,7 @@ new Vue({
 
 ### Checkbox
 
-1つのチェックボックスは、boolean 値です:
+単体のチェックボックスは、boolean 値です:
 
 ``` html
 <input type="checkbox" id="checkbox" v-model="checked">
@@ -120,7 +120,7 @@ new Vue({
 
 ### Select
 
-単一の選択:
+単体の選択:
 
 ``` html
 <select v-model="selected">
@@ -294,7 +294,6 @@ vm.selected.number // -> 123
 ### lazy
 
 デフォルトでは、`v-model` は各 `input` イベント後に、データと入力を同期します。あなたは、`change` イベント後、同期するための振舞いを変更するために、`lazy` 属性を追加します:
-By default, `v-model` syncs the input with the data after each `input` event. You can add a `lazy` attribute to change the behavior to sync after `change` events:
 
 ``` html
 <!-- "input" の代わりに "change" 後に同期します -->
