@@ -1,31 +1,33 @@
-title: Transitions
+title: トランジション
 type: guide
 order: 11
 ---
 
 Vue.js のトランジションシステムを使用すると、DOM から要素を取得したり削除するといったトランジションエフェクトを自動的に適用できます。Vue.js は自動的に、適切な時に、あなたのために CSS トランジションまたはアニメーションをトリガするため、CSS クラスを追加または削除し、そしてトランジションの間は、カスタム DOM の操作をするために、JavaScript フック関数を提供することができます。
 
-To apply transition effects, you need to use the special `transition` attribute on the target element:
+トランジションエフェクトを適用するために、あなたは対象要素で特別な `transition` 属性を使用する必要があります:
 
 ``` html
 <div v-if="show" transition="my-transition"></div>
 ```
 
-The `transition` attribute can be used together with:
+`transition` 属性は以下と一緒に使用することができます:
 
 - `v-if`
 - `v-show`
-- `v-for` (triggered for insertion and removal only)
-- Dynamic components (introduced in the [next section](components.html#Dynamic_Components))
-- On a component root node, and triggered via Vue instance DOM methods, e.g. `vm.$appendTo(el)`.
+- `v-for` (挿入および削除のみに対するトリガ)
+- 動的コンポーネント([次のセクション](components.html#Dynamic_Components)で導入)
+- コンポーネントのルートノード、そして Vue インスタンス の DOM メソッド経由によるトリガ(例、`vm.$appendTo(el)`)
 
-When an element with transition is inserted or removed, Vue will:
+トランジションを持つ要素が挿入または削除されるとき、Vue は以下となります:
 
 `v-transition="my-transition"` というディレクティブを適用した場合：
 
 1. `"my-transition"` の ID を使用して、`Vue.transition(id, hooks)` または、`transitions` オプションを通じて登録された JavaScript のトランジションのフックオブジェクトを探します。それが見つかると、さまざまな段階で、適切なフックを呼びます。
 
 2. 自動的に、対象の要素に CSS トランジションか CSS アニメーションが適用されているか調べ、適切なタイミングで CSS クラスを追加/削除します。
+
+3. JavaScript フックが何も提供されず、CSS トランジション/アニメーションが何も検出されない場合、DOM オペレーション (挿入/削除) は次のフレームで直ちに実行されます。
 
 ## CSS トランジション
 
@@ -40,7 +42,7 @@ When an element with transition is inserted or removed, Vue will:
 また `.expand-transition`クラス、`.expand-enter` クラスそして `.expand-leave` クラスの CSS ルールを定義する必要があります。
 
 ``` css
-/* always present */
+/* 常に表示 */
 .expand-transition {
   transition: all .3s ease;
   height: 30px;
@@ -49,8 +51,8 @@ When an element with transition is inserted or removed, Vue will:
   overflow: hidden;
 }
 
-/* .expand-enter defines the starting state for entering */
-/* .expand-leave defines the ending state for leaving */
+/* .expand-enter は entering に対する開始状態を定義 */
+/* .expand-leave は leaving に対する終了状態を定義 */
 .expand-enter, .expand-leave {
   height: 0;
   padding: 0 10px;
@@ -150,11 +152,11 @@ new Vue({
 
 1. `.fade-transition` クラスは常に与えられます。
 
-2. `.fade-enter` defines the starting state of an entering transition. It is applied for a single frame and then immediately removed.
+2. `.fade-enter` は、entering transition (トランジションに入っている)の開始状態を定義します。単一のフレームに適用した後に、すぐに削除されます。
 
-3. `.fade-leave` defines the ending state of a leaving transition. It is applied when the leaving transition starts and removed when the transition finishes.
+3. `.fade-enter` は、leaving transition (トランジションから離れている)の終了状態を定義します。leaving transition が開始するときに適用され、トランジションが終了するときに削除されます。
 
-If the `transition` attribute has no value, the classes will default to `.v-transition`, `.v-enter` and `.v-leave`.
+`transition` が値を持たいない場合は、クラスはデフォルトで `.v-transition` 、`.v-enter` そして `v-leave` になります。
 
 ### トランジションフローの詳細
 
@@ -320,7 +322,7 @@ new Vue({
 
 どんな CSS ルールの定義しなくても、JavaScript フックを利用することができます。JavaScript トランジションだけ利用するとき、**`done` コールバックは `enter` と `leave` フック向けに必須とであり**、そうでなければ、それらは同期的に呼ばれ、そしてトランジションはすぐに終了します。
 
-It's also a good idea to explicitly declare `css: false` for your JavaScript transitions so that Vue.js can skip the CSS detection. This also prevents cascaded CSS rules from accidentally interfering with the transition.
+Vue.js は CSS の検出をスキップできるため、あなたの JavaScript トランジションに対して明示的に `css: false` を宣言することもよいアイディアです。これは、トランジションによる偶発的な干渉からカスケードされる CSS ルールも防止します。
 
 以下の例では、jQuery を使用してカスタムな JavaScript トランジションの定義を登録します:
 
@@ -347,7 +349,7 @@ Vue.transition('fade', {
 })
 ```
 
-そして、`transition` のトランジションIDに値を渡すことで、この関数を使用することができます。同じ結果:
+次に、`transition` 属性によってそれ使用するとき、同じ結果になります:
 
 ``` html
 <p transition="fade"></p>
@@ -358,7 +360,7 @@ Vue.transition('fade', {
 `v-for` で `transition` を使用するとき、スタガリングトランジションを作成することが可能です。`stagger`、か `enter-stagger`、かまたは `leave-stagger` のいずれかの属性をトランジション要素に追加することによってこれをすることができます:
 
 ``` html
-<div v-repeat="list" transition stagger="100"></div>
+<div v-for="list" transition stagger="100"></div>
 ```
 
 または、より細かい制御のために、`stagger`、`enterStagger` または `leaveStagger` フックを提供することができます:
