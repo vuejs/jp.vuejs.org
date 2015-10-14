@@ -9,10 +9,10 @@ order: 6
 
 ### オブジェクトシンタックス
 
-私達は、`v-bind:class` に動的にクラスを切り替えるオブジェクトを渡すことが出来ます:
+私達は、`v-bind:class` に動的にクラスを切り替えるオブジェクトを渡すことが出来ます。`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できることに注意してください:
 
 ``` html
-<div v-bind:class="{ 'class-a': isA, 'class-b': isB }"></div>
+<div class="static" v-bind:class="{ 'class-a': isA, 'class-b': isB }"></div>
 ```
 ``` js
 data: {
@@ -24,7 +24,7 @@ data: {
 このようにレンダリングされます:
 
 ``` html
-<div class="class-a"></div>
+<div class="static class-a"></div>
 ```
 
 `isA` と `isB` が変化するとき、クラスリストはそれに応じて更新されます。例えば、`isB` が `true` になった場合、クラスリストは `"class-a class-b"` になります。
