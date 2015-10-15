@@ -203,9 +203,9 @@ enter: function (el, done) {
 
 ### CSS アニメーション
 
-CSS アニメーションは、CSS トランジションと同じやり方で適用することができますが、対処の要素が追加された後、`animationend` がコールバックされるまで `v-enter` クラスが削除されないという違いがあります。
+CSS アニメーションは、CSS トランジションと同じやり方で適用することができますが、対象の要素が追加された後、`animationend` がコールバックされるまで `v-enter` クラスが削除されないという違いがあります。
 
-例： (CSS ルールの記述は諸略)
+例： (CSS ルールの記述は省略)
 
 ``` html
 <span v-show="show" transition="bounce">Look at me!</span>
