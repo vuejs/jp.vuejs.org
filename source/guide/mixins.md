@@ -1,16 +1,16 @@
-title: Mixins
+title: ミックスイン
 type: guide
 order: 16
 ---
 
 ## 基本
 
-ミックスイン (mixin) は、Vue コンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。A mixin object can contain any component options. When a component uses a mixin, all options in the mixin will be "mixed" into the component's own options.
+ミックスイン (mixin) は、Vue コンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。ミックスインオブジェクトは任意のコンポーネントオプションを含むことができます。コンポーネントがミックスインを使用するとき、ミックスインの全てのオプションはコンポーネント自身のオプションに"混ぜられ"ます。
 
 例:
 
 ``` js
-// define a mixin object
+// ミックスインオブジェクトを定義
 var myMixin = {
   created: function () {
     this.hello()
@@ -22,7 +22,7 @@ var myMixin = {
   }
 }
 
-// define a component that uses this mixin
+// このミックスインを使用するコンポーネントを定義
 var Component = Vue.extend({
   mixins: [myMixin]
 })
@@ -30,9 +30,9 @@ var Component = Vue.extend({
 var component = new Component() // -> "hello from mixin!"
 ```
 
-## Option Merging
+## オプションのマージ
 
-When a mixin and the component itself contain overlapping options, they will be "merged" using appropriate strategies. For example, hook functions with the same name are merged into an array so that all of them will be called. In addition, mixin hooks will be called **before** the component's own hooks:
+ミックスインとコンポーネントそれ自身がオプションと重複するとき、それらは適切なストラテジを使用して"マージ"されます。例えば、同じ名前のフック関数はそれら全てが呼び出されるよう配列にマージされます。加えて、ミックスインのフックはコンポーネント自身のフック**前**に呼ばれます:
 
 ``` js
 var mixin = {
@@ -52,7 +52,7 @@ new Vue({
 // -> "component hook called"
 ```
 
-Options that expect object values, for example `methods`, `components` and `directives`, will be merged into the same object. The component's options will take priority when there are conflicting keys in these objects:
+オブジェクトの値を期待するオプションは、例えば、`methods`、`components`、そして `directives` らは同じオブジェクトにマージされます。コンポーネントオプションはこれらのオブジェクトでキーのコンフリクトがあるとき、優先されます:
 
 ``` js
 var mixin = {
@@ -83,14 +83,14 @@ vm.bar() // -> "bar"
 vm.conflicting() // -> "from self"
 ```
 
-Note that the same merge strategies are used in `Vue.extend()`.
+同じマージストラテジが `Vue.extend()` で使用されることに注意してください。
 
-## Global Mixin
+## グローバルミックスイン
 
-You can also apply a mixin globally. Use caution! Once you apply a mixin globally, it will affect **every** Vue instance created afterwards. When used properly, this can be used to inject processing logic for custom options:
+あなたはグローバルにミックスインを適用することもできます。使用に注意してください！一度、あなたがグローバルにミックスインを適用すると、それはその後に作成する**全ての** Vue インスタンスに影響します。適切に使用されるとき、これはカスタムオプションに対して処理ロジックを注入するために使用することができます:
 
 ``` js
-// inject a handler for `myOption` custom option
+// `myOption` カスタムオプションにハンドラを注入する
 Vue.mixin({
   created: function () {
     var myOption = this.$options.myOption
@@ -106,17 +106,17 @@ new Vue({
 // -> "hello!"
 ```
 
-## Custom Option Merge Strategies
+## カスタムオプションのマージストラテジ
 
-When custom options are merged, they use the default strategy, which simply overwrites the existing value. If you want a custom option to be merged using custom logic, you need to attach a function to `Vue.config.optionMergeStrategies`:
+カスタムオプションでがマージされるとき、それらは単純に既存の値を上書きするデフォルトのストラテジを使用します。あなたがカスタムロジックを使用してカスタムオプションをマージする場合、あなたは `Vue.config.optionMergeStrategies` をアタッチする必要があります:
 
 ``` js
 Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
-  // return mergedVal
+  // マージされた値を返す
 }
 ```
 
-For most object-based options, you can simply use the same strategy used by `methods`:
+ほとんどのオブジェクトベースのオプションでは、単純に `methods` で使用されるのと同じストラテジを使用することができます:
 
 ``` js
 var strategies = Vue.config.optionMergeStrategies
