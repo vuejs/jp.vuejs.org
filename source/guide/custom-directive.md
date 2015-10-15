@@ -3,11 +3,11 @@ type: guide
 order: 14
 ---
 
-## Basics
+## 基本
 
-In addition to the default set of directives shipped in core, Vue.js also allows you to register custom directives. Custom directives provide a mechanism for mapping data changes to arbitrary DOM behavior.
+コアで出荷されたディレクティブのデフォルトセットに加えて、あなたはカスタムディレクティブを登録することができます。カスタムディレクティブは任意の DOM の振舞いへのマッピングデータを変更するためのメカニズムを提供します。
 
-You can register a global custom directive with the `Vue.directive(id, definition)` method, passing in a **directive id** followed by a **definition object**. You can also register a local custom directive by including it in a component's `directives` option.
+あなたは、`Vue.directive(id, definition)` メソッドで、**directive id** と **definition object** を続けて渡して、グローバルカスタムディレクティブに登録できます。あなたは、それをコンポーネントの `directives` オプションによってローカルカスタムディレクティブに登録することもできます。
 
 ### フック関数
 
@@ -59,7 +59,7 @@ Vue.directive('my-directive', function (value) {
 
 - **el**: ディレクティブが紐づく要素
 - **vm**: このディレクティブを所有する ViewModel
-- **expression**: 引数とフィルタ以外のバインディングの expression
+- **expression**: 引数とフィルタ以外のバインディングの式
 - **arg**: 引数(もしある場合)
 - **name**: prefix 無しのディレクティブの名前
 - **modifiers**: もしあれば、モディファイアを含んでいるオブジェクト
@@ -121,9 +121,9 @@ var demo = new Vue({
 })
 </script>
 
-### Object Literals
+### オブジェクトリテラル
 
-If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression:
+あなたのディレクティブが複数の値を必要ならば、あなたは JavaScript オブジェクトリテラルも渡すことができます。ディレクティブは任意の妥当な JavaScript 式を取ることができるのを覚えておいてください:
 
 ``` html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
@@ -136,9 +136,9 @@ Vue.directive('demo', function (value) {
 })
 ```
 
-### Literal Modifier
+### リテラルモディファイア
 
-When a directive is used with the literal modifier, its attribute value will be interpreted as a plain string and passed directly into the `update` method. The `update` method will also be called only once, because a plain string cannot be reactive.
+ディレクティブがリテラルモディファイアで使用されるとき、属性の値は、プレーンな文字列として解釈され、そして直接 `update` メソッドに渡されます。`update` メソッドはプレーンな文字列はリアクティブにできないため、一度だけ呼ばれます。
 
 ``` html
 <div v-demo.literal="foo bar baz">
@@ -171,6 +171,7 @@ Vue.directive('my-directive', {
 
 ### twoWay
 
+あなたのディレクティブが Vue インスタンスにデータを書き戻す場合、あなたは `twoWay: true` で渡す必要があります。このオプションは、ディレクティブ内部で `this.set(value)` を使用することができます:
 
 ``` js
 Vue.directive('example', {
@@ -193,7 +194,7 @@ Vue.directive('example', {
 
 ### acceptStatement
 
- `acceptStatement:true` を渡すことでカスタムディレクティブが `v-on` が行っているようなインラインステートメントを使用できるようになります: 
+`acceptStatement: true` を渡すことでカスタムディレクティブが `v-on` が行っているようなインラインステートメントを使用できるようになります: 
 
 ``` html
 <div v-my-directive="a++"></div>
@@ -216,7 +217,7 @@ Vue.directive('my-directive', {
 
 ディレクティブには任意で優先度の数値 (デフォルトは0) を与えることができます。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
 
-いくつかのビルトインディレクティブに関する優先度は [API リファレンス](/api/directives.html) で確認できます。さらに フロー制御するディレクティブ `v-if` と `v-for` は、コンパイル処理の中で常に最も高い優先度を持ちます。
+いくつかのビルトインディレクティブに関する優先度は [API リファレンス](/api/#Directives) で確認できます。さらに フロー制御するディレクティブ `v-if` と `v-for` は、コンパイル処理の中で常に最も高い優先度を持ちます。
 
 ## エレメントディレクティブ
 
@@ -243,6 +244,6 @@ Vue.elementDirective('my-directive', {
 <my-directive></my-directive>
 ```
 
-エレメントディレクティブは引数または expressions を受け付けることはできません。しかし、その振舞いを決定するために要素の属性を読み取ることはできます。
+エレメントディレクティブは引数または式を受け付けることはできません。しかし、その振舞いを決定するために要素の属性を読み取ることはできます。
 
 標準のディレクティブとの大きな違いは、エレメントディレクティブは**ターミナル**で、Vue が一度エレメントディレクティブに遭遇したことを意味します。それは、要素とその子を残したまま、エレメントディレクティブそれ自体、要素とその子を操作することができるようになります。
