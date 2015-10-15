@@ -1,4 +1,4 @@
-title: Class と Style のバインディング
+title: クラスとスタイルのバインディング
 type: guide
 order: 6
 ---

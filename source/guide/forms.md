@@ -1,4 +1,4 @@
-title: Form Input バインディング
+title: フォーム入力バインディング
 type: guide
 order: 10
 ---
