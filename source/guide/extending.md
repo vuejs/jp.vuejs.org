@@ -54,7 +54,7 @@ CommonJS ベースのビルドを行っていると仮定します。
 
 ``` js
 var vueTouch = require('vue-touch')
-// プラグインをグルーバルで使用
+// プラグインをグローバルで使用
 Vue.use(vueTouch)
 ```
 
