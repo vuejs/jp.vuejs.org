@@ -124,7 +124,7 @@ Vue.js の縮小されたスタンドアローンビルド版は、既に小さ�
 
 ### Webpack
 
-警告ブロックが自動的に UglifyJS によって縮小中を削除できるように、プロダクション環境を示すために Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使ってください。設定例:
+警告ブロックが自動的に UglifyJS によって縮小中に削除されるように、プロダクション環境を示すために Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使ってください。設定例:
 
 ``` js
 var webpack = require('webpack')
