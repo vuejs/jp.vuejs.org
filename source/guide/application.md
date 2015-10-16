@@ -1,19 +1,19 @@
-title: Building Large-Scale Apps
+title: 大規模アプリケーションの構築
 type: guide
 order: 18
 ---
 
-Vue.js コアライブラリは、フォーカスされた柔軟に設計されており、全てのアプリケーションレベルのアーキテクチャと干渉しない view レイヤーのライブラリです。これは既存プロジェクトとの統合のために素晴らしいことができますが、スクラッチからの大規模アプリケーションを構築する場合は、構築経験の少ない開発者にとって悩ましい問題にもなります。
+Vue.js コアライブラリは、view レイヤーにフォーカスされて柔軟に設計されており、全てのアプリケーションレベルのアーキテクチャと干渉しないライブラリです。これは既存プロジェクトとの統合のために素晴らしいことができますが、スクラッチからの大規模アプリケーションを構築する場合は、構築経験の少ない開発者にとって悩ましい問題にもなります。
 
-The Vue.js ecosystem provides a set of tools, libraries on how to build large SPAs with Vue. This part is where we start get a bit "framework"-ish, but it's really just an opinionated list of recommendations; you still get to pick what to use for each part of the stack.
+Vue.js のエコシステムは、Vue で大規模なシングルページアプリケーション (SPA: single page application) を構築する方法のライブラリのツールセットを提供します。このパートは、私達が少しだけ"フレームワーク"のように感じるようなものを開始しますが、それは本当にごく推奨するリストです。あなたは、今までどおりに積み重ねられた各パートにおいて使用するものを選ぶとよいでしょう。
 
 ## モジュール化
 
-For large projects it's necessary to utilize a modularized build system to better organize your code. The recommended approach of doing so is by writing your source code in CommonJS or ES6 modules and bundle them using [Webpack](http://webpack.github.io/) or [Browserify](http://browserify.org/).
+大規模なプロジェクトの場合、あなたのコードをよく整理するためにモジュール化ビルドシステムを利用することが必要です。そうすることの推奨するアプローチは、CommonJS または ES6 モジュールにあなたのソースコードを書いて、[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) を使用してそれらをバンドルします。
 
 Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用して、将来サポートされる ES2015/2016 シンタックスでコードを書くことができます。
 
-If you've never used them before, I highly recommend going through a few tutorials to get familiar with the concept of module bundlers, and start writing JavaScript using the latest ECMAScript features.
+あなたがこれまでにそれらを使用したことがない場合は，私は、いくつかのチュートリアルを通って、モジュールバンドラの概念に精通して得て、最新の ECMAScript の機能を使用して書き始めるのを、大いにお勧めします。
 
 ## 単一ファイルコンポーネント
 
@@ -35,7 +35,7 @@ GitHub のビルドセットアップの例を探すことができます。
 
 ## ルーティング
 
-シングルページアプリケーション (Single Page Application: SPA) については、現在テクニカルプレビューな[オフィシャル vue-router ライブラリ](https://github.com/vuejs/vue-router)の使用を推奨します。詳細については、どうか vue-router の[ドキュメンテーション](http://vuejs.github.io/vue-router/)を参照してください。
+シングルページアプリケーションについては、現在テクニカルプレビューな[オフィシャル vue-router ライブラリ](https://github.com/vuejs/vue-router)の使用を推奨します。詳細については、どうか vue-router の[ドキュメンテーション](http://vuejs.github.io/vue-router/)を参照してください。
 
 もし、いくつかとてもシンプルなルーティングのロジックを必要としている場合は、ハッシュチェンジへのイベントリスニングと、動的なコンポーネントを利用することでそれを実装することができます。
 
@@ -66,9 +66,9 @@ app.currentView = 'page1'
 
 すべての Vue インスタンスは、`JSON.stringify()` で直接シリアライズされる生の `$data` を持つことができます。Vue.js コミュニティは [vue-resource](https://github.com/vuejs/vue-resource) プラグインに貢献していて、RESTFul API で動作するため簡単な方法を提供します。例えば jQuery の `$.ajax` または [SuperAgent](https://github.com/visionmedia/superagent) などの好きな Ajax ライブラリも使用できます。Vue.js はバックエンドを持たない Firebase や Parse などのサービスとの連携にも適しています。
 
-## State Management
+## 状態管理
 
-In large applications, state management often becomes complex due to multiple pieces of state scattered across many components and the interactions between them. It is often overlooked that the source of truth in Vue.js applications is the raw data object - a Vue instances simply proxies access to it. Therefore, if you have a piece of state that should be shared by multiple instances, you should avoid duplicating it and share it by identity:
+大規模なアプリケーションで、状態管理はしばしば、状態が多くのコンポーネントに散らばって、それらコンポーネントの間に相互作用している複数の部品のために複雑になります。それは、Vue.js アプリケーションにおける本当のソースは生データのオブジェクトであることを、よく見落とされています。Vue インスタンスは単純にそれにプロキシアクセスします。それゆえ、あなたは複数のインスタンスによって共有されるべき状態の部品を持つ場合は、あなたはその重複を避けて、同一性によってそれを共有すべきです:
 
 ``` js
 var sourceOfTruth = {}
@@ -82,7 +82,7 @@ var vmB = new Vue({
 })
 ```
 
-Now whenever `sourceOfTruth` is mutated, both `vmA` and `vmB` will update their views automatically. Extending this idea further, we would arrive at the **store pattern**:
+現在、`sourceOfTruth` が変化されるたびに、`vmA` と `vmB` の両方は、自動的にそれら view を更新します。さらに、この考えた方を拡張して、私達は **store パターン**にたどり着くでしょう:
 
 ``` js
 var store = {
@@ -112,21 +112,21 @@ var vmB = new Vue({
 })
 ```
 
-Notice we are putting all actions that mutate the store's state inside the store itself. This type of centralized state management makes it easier to understand what type of mutations could happen to the state, and how are they triggered. Each component can still own and manage its private state.
+私達は、store 自体の内部に store の状態を変化させる全てのアクションに置いていることに注意してください。集中型の状態管理のこのタイプは、変化のタイプが状態に起こる可能性を、簡単に理解することができ、トリガされる方法があります。各コンポーネントはまだ所有し、そのプライベートな状態を管理することができます。
 
 ![State Management](/images/state.png)
 
-One thing to take note is that you should never replace the original state object in your actions - the components and the store need to share reference to the same object in order for the mutations to be observed.
+注意することの1つは、あなたがあなたのアクションにおいて元の状態オブジェクトを決して置き換えてはいけないということです。コンポーネントと store は、変化が監視されるべきために、同じオブジェクトへの参照を共有する必要があります。
 
-If we enforce a convention where components are never allowed to directly mutate state that belongs to a store, but should instead dispatch events that notify the store to perform actions, we've essentially arrived at the [Flux](https://facebook.github.io/flux/) architecture. The benefits of this convention is we can record all state mutations happening to the store, and on top of that we can implement advanced debugging helpers such as mutation logs, snapshots, history re-rolls etc.
+私達は、コンポーネントが直接 store に属する状態を変化させるのはできない規約を強制する場合は、代わりに、アクションを実行するために store に通知するイベントを送り出す必要がありますが、私達は本質的に [Flux](https://facebook.github.io/flux/) アーキテクチャにたどり着きました。この規約の利点は、私達が store に起こっている変化を全ての状態を記録でき、そしてその上で、私達は変化ログ、スナップショット、履歴の再転用などのような、高度なデバッギングヘルパーを実装することができます。
 
-The Flux architecture is commonly used in React applications. Turns out the core idea behind Flux can be quite simply achieved in Vue.js, thanks to the unobtrusive reactivity system. Do note what we demonstrated here is just an example to introduce the concept - you may not need it at all for simple scenarios, and you should adapt the pattern to fit the real needs of your application.
+Flux アーキテクチャは React アプリケーションで一般的に使用されています。コアなアイデアの裏からひっくり返して、Flux は Vue.js で非常に単純に達成することができので、地味なリアクティブシステムに感謝します。私達が、コンセプトを導入するための一例にすぎない、ここで実証するものであるということに注意してください。あなたは、すべての単純なシナリオのためにそれを必要としておらず、あなたはあなたのアプリケーションの真のニーズに合わせてパターンを調整する必要があります。
 
 ## 単体テスト
 
-モジュールベースのビルドシステムと互換性のあるものであれば、お好きなものを選んでください。おすすめは、[Karma](http://karma-runner.github.io/0.12/index.html) テストランナーです。It has a lot of community plugins, including support for [Webpack](https://github.com/webpack/karma-webpack) and [Browserify](https://github.com/Nikku/karma-browserify). For detailed setup, please refer to each project's respective documentation.
+モジュールベースのビルドシステムと互換性のあるものであれば、お好きなものを選んでください。おすすめは、[Karma](http://karma-runner.github.io/0.12/index.html) テストランナーです。それは、たくさんのコミュニティプラグインがあり、[Webpack](https://github.com/webpack/karma-webpack) と [Browserify](https://github.com/Nikku/karma-browserify) にサポートを含んでいます。詳細なセットアップについては各プロジェクトのそれぞれのドキュメントを参照してください。
 
-In terms of code structure for testing, the best practice is to export raw options / functions in your component modules. Consider this example:
+テストのためにコード構造の観点から、ベストプラクティスはあなたのコンポーネントモジュールで生のオプション/機能をエクスポートすることです。この例を考えてみます:
 
 ``` js
 // my-component.js
@@ -160,9 +160,9 @@ var app = new Vue({
 そして、出来たモジュールは次のようにテストできます：
 
 ``` js
-// Some Jasmine 2.0 tests
+// Jasmine 2.0 のテストと同じ
 describe('my-component', function () {  
-  // require source module
+  // ソースモジュールを require
   var myComponent = require('../src/my-component')
   it('should have a created hook', function () {
     expect(typeof myComponent.created).toBe('function')
