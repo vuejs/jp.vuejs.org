@@ -1,3 +1,4 @@
+---
 title: インスタンスメソッド
 type: api
 order: 4

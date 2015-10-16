@@ -1,3 +1,4 @@
+---
 title: インストール
 type: guide
 order: 1

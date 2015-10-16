@@ -1,3 +1,4 @@
+---
 title: SVG グラフ
 type: examples
 order: 5

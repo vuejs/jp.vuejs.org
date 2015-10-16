@@ -1,3 +1,4 @@
+---
 title: ミックスイン
 type: guide
 order: 16

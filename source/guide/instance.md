@@ -1,3 +1,4 @@
+---
 title: Vue インスタンス
 type: guide
 order: 3

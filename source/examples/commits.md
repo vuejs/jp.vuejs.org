@@ -1,3 +1,4 @@
+---
 title: GitHub コミット
 type: examples
 order: 1

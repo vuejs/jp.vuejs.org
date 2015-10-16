@@ -1,3 +1,4 @@
+---
 title: データバインディングシンタックス
 type: guide
 order: 4

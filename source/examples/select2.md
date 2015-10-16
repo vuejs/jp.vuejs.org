@@ -1,3 +1,4 @@
+---
 title: カスタムディレクティブ
 type: examples
 order: 7

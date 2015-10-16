@@ -1,3 +1,4 @@
+---
 title: ディレクティブ
 type: api
 order: 6

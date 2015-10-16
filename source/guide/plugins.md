@@ -1,3 +1,4 @@
+---
 title: プラグイン
 type: guide
 order: 17
