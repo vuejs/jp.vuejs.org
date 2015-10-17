@@ -1,4 +1,5 @@
-title: Comparison with Other Frameworks
+---
+title: 他のフレームワークとの比較
 type: guide
 order: 19
 ---
@@ -15,13 +16,13 @@ order: 19
 
 - Vue.js では、コンポーネントは独自の View とデータロジックを持つ自己完結型のユニットであり、その中でディレクティブは様々な DOM 操作の紐付け（カプセル化）を行うものとして、両者の役割を明確に分離しています。Angular では、両者の使い分けに多くの曖昧な点が存在しています。
 
-Interestingly, quite a few Angular 1 issues that are non-existent in Vue are also addressed by the design decisions in Angular 2.
+興味深いことに、Vue で存在していないかなりの数の Angular 1 の問題は、Angular 2 でも設計上の決定によって対処されます。
 
 ## React
 
-React.js と Vue.js は、どちらもリアクティブ＆コンポーザブルな View のコンポーネントを提供し、いくつかの類似性があります。There are, of course, many differences as well.
+React.js と Vue.js は、どちらもリアクティブ＆コンポーザブルな View のコンポーネントを提供し、いくつかの類似性があります。もちろん、多くの違いも同様にあります。
 
-First, the internal implementation is fundamentally different. React's rendering leverages the Virtual DOM - an in-memory representation of what the actual DOM should look like. When the state changes, React does a full re-render of the Virtual DOM, diffs it, and then patches the real DOM.
+まず、内部実装は根本的に違います。React のレンダリングは実際の DOM がどのような状態であるかのメモリ内表現した仮想 DOM を活用します。状態を変更するとき、React は仮想 DOM の完全な再レンダリングを行い、その差分を求めて、そして実際の DOM にパッチをします。
 
 仮想 DOM のアプローチは、任意のタイミングで View を描画する機能的な方法を提供します。オブザーバーを利用せず、更新ごとにアプリケーション全体を再描画しているため、View はデータと常に同期がされていることが保証されます。これは、他の isomorphic JavaScript アプリケーションでも同様の可能性を与えることができます。
 
@@ -31,15 +32,15 @@ React について別の問題を挙げるなら、DOM の更新が完全に仮�
 
 ## Ember
 
-Ember is a full-featured framework that is designed to be highly opinionated. It provides a lot of established conventions, and once you are familiar enough with them, it can make you very productive. However, it also means the learning curve is high and the flexibility suffers. It's a trade-off when you try to pick between an opinionated framework and a library with a loosely coupled set of tools that work together. The latter gives you more freedom but also requires you to make more architectural decisions.
+Ember は非常に独断的に設計されたフル機能フレームワークです。たくさんの確立された規約を提供し、一度あなたはそれらに十分精通していると、あなたは非常に生産的に作ることができます。しかしながら、それは学習曲線が高いことと柔軟性が悪くなることを意味します。あなたが独断的なフレームワークと一緒に動作するツールの疎結合セットなライブラリとの間で選択するのを試すのはトレードオフです。後者はよりあなたに自由を与えるだけではなく、あなたによりアーキテクチャの意思決定をする必要があります。
 
-That said, it would probably make a better comparison between Vue.js core and Ember's templating and object model layer:
+以下は、恐らく Vue.js コアと Ember のテンプレートとオブジェクトモデルレイヤとの間のよりよい比較になるでしょう:
 
-- Vue provides unobtrusive reactivity on plain JavaScript objects, and fully automatic computed properties. In Ember you need to wrap everything in Ember Objects and manually declare dependencies for computed properties.
+- Vue はプレーンな JavaScript オブジェクトでの控えめなリアクティブティ、そして完全に自動的な computed property を提供します。Ember では、あなたは Ember オブジェクトで全てラップする必要があり、手動で computed property の依存性を宣言する必要があります。
 
-- Vue's template syntax harnesses the full power of JavaScript expressions, while Handlebars' expression and helper syntax is quite limited in comparison.
+- Vue のテンプレートシンタックスは JavaScript 式のフルパワーであり、Handlebars の式とヘルパーシンタックスは比べてみるとかなり限定的です。
 
-- Performance wise, Vue outperforms Ember by a fair margin, even after the latest Glimmer engine update in Ember 2.0. Vue automatically batches updates, while in Ember you need to manually manage run loops in performance-critical situations.
+- Ember 2.0 の最新の Glimmer エンジン に更新した後で、公正な利鞘で比較しても、Vue は Ember よりもパフォーマンスがよいです。Ember ではパフォーマンスが重要な状況では、手動で実行ループを管理する必要がありながら、Vue は自動的にバッチ更新します。
 
 ## Polymer
 
