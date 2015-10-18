@@ -74,4 +74,4 @@ Vue.use(VueRouter)
 
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録できるようになるプラグイン。
 
-- [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
+- [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/vuejs/vue/wiki/User-Contributed-Components-&-Tools)

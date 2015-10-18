@@ -15,9 +15,9 @@ gz_size: "23.22"
 ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。
 
 <div id="downloads">
-<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり</span>
+<a class="button" href="https://raw.github.com/vuejs/vue/{{vue_version}}/dist/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり</span>
 
-<a class="button" href="https://raw.github.com/yyx990803/vue/{{vue_version}}/dist/vue.min.js" download>プロダクションバージョン</a><span class="light info">警告出力なし、{{gz_size}}kb min+gzip</span>
+<a class="button" href="https://raw.github.com/vuejs/vue/{{vue_version}}/dist/vue.min.js" download>プロダクションバージョン</a><span class="light info">警告出力なし、{{gz_size}}kb min+gzip</span>
 </div>
 
 ### CDN
@@ -26,7 +26,7 @@ gz_size: "23.22"
 
 ### CSP 準拠ビルド
 
-Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/yyx990803/vue/tree/csp/dist) を代わりに使用できます。
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/vuejs/vue/tree/csp/dist) を代わりに使用できます。
 
 ## NPM
 
@@ -35,7 +35,7 @@ $ npm install vue
 # CSP 準拠バージョン向け:
 $ npm install vue@csp
 # 開発ビルド向け(Github):
-$ npm install yyx990803/vue#dev
+$ npm install vuejs/vue#dev
 ```
 
 ## Bower

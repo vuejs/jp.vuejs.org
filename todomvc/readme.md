@@ -18,7 +18,7 @@
 他の Vue.js ユーザーからヘルプを得る:
 
 * [Vue.js の Twitter](https://twitter.com/vuejs)
-* [Vue.js の Gitter](https://gitter.im/yyx990803/vue)
+* [Vue.js の Gitter](https://gitter.im/vuejs/vue)
 * [Vue.js のディスカッションレポジトリ](https://github.com/vuejs/Discussion/issues)
 
 _もしあなたが他の役立つリンクをシェアしたい、またはもはや動作しない上記リンクのいずれかを見つけた場合、どうか[私達に教えてください](https://github.com/tastejs/todomvc/issues)._
