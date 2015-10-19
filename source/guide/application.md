@@ -12,7 +12,7 @@ Vue.js のエコシステムは、Vue で大規模なシングルページアプ
 
 大規模なプロジェクトの場合、あなたのコードをよく整理するためにモジュール化ビルドシステムを利用することが必要です。そうすることの推奨するアプローチは、CommonJS または ES6 モジュールにあなたのソースコードを書いて、[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) を使用してそれらをバンドルします。
 
-Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用して、将来サポートされる ES2015/2016 シンタックスでコードを書くことができます。
+Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用して、将来サポートされる ES2015/2016 構文でコードを書くことができます。
 
 あなたがこれまでにそれらを使用したことがない場合は，私は、いくつかのチュートリアルを通って、モジュールバンドラの概念に精通して得て、最新の ECMAScript の機能を使用して書き始めるのを、大いにお勧めします。
 
