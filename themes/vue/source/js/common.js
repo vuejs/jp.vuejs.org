@@ -175,7 +175,7 @@
     if (version.indexOf('1.') !== 0) {
       version = version.replace('.', '')
       var section = window.location.pathname.match(/\/(\w+?)\//)[1]
-      window.location.assign('http://' + version + '.vuejs.org/' + section + '/')
+      window.location.assign('http://' + version + '-jp.vuejs.org/' + section + '/')
     } else {
       // TODO when 1.x is out
     }
