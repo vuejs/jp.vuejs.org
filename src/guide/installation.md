@@ -1,7 +1,7 @@
 ---
 title: インストール
 type: guide
-order: 1
+order: 0
 vue_version: 0.12.16
 dev_size: "235.74"
 min_size: "71.44"
