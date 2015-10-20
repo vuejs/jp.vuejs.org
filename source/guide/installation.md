@@ -30,10 +30,10 @@ Google Chrome アプリのようなある環境では、Content Security Policy 
 
 ## NPM
 
-NPM is the recommended installation method when building large scale apps with Vue.js. It pairs nicely with a CommonJS module bundler such as [Webpack](http://webpack.github.io/) or [Browserify](http://browserify.org/). Vue.js also provides accompanying tools for authoring [Single File Components](http://localhost:4000/guide/application.html#Single_File_Components).
+NPM は Vue.js で大規模アプリケーションを構築するときのインストール方法を推奨します。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラでうまくペアにします。Vue.js は[単一ファイルコンポーネント](application.html#Single_File_Components)による著作のための、付随するツールも提供しています。
 
 ``` bash
-# latest stable
+# 最新の安定版
 $ npm install vue
 # 最新の安定版 + CSP 準拠
 $ npm install vue@csp
