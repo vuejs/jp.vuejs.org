@@ -4,7 +4,8 @@ type: guide
 order: 1
 ---
 
-The easiest way to try out Vue.js is using the [JSFiddle Hello World example](https://jsfiddle.net/yyx990803/okv0rgrk/). Feel free to open it in another tab and follow along as we go through some basic examples. If you prefer downloading / installing from a package manager, check out the [Installation](/guide/installation.html) page.
+
+Vue.js を試用する最も簡単な方法は、[JSFiddle Hello World example](https://jsfiddle.net/yyx990803/okv0rgrk/) を使用することです。自由に他のタブを開いて、私達といっしょにいくつかの基本的な例を試してみましょう。あなたが、パッケージマネージャからダウンロード/インスールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
 
 ### Hello World
 
@@ -35,7 +36,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Two-way Binding
+### 双方向 (Two-way) バインディング
 
 ``` html
 <div id="app">
@@ -66,7 +67,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Render a List
+### リストのレンダリング
 
 ``` html
 <div id="app">
@@ -111,7 +112,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Handle User Input
+### ユーザー入力のハンドリング
 
 ``` html
 <div id="app">
@@ -152,7 +153,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### All Together Now
+### All Together Now (TODO アプリケーション)
 
 ``` html
 <div id="app">
@@ -223,4 +224,4 @@ new Vue({
 </script>
 {% endraw %}
 
-I hope this gives you a basic idea of how Vue.js works. I'm sure you also have many questions now - read along, and we will cover them in the rest of the guide.
+私は、これがあなたに Vue.js がどのように動作するおか基本的なアイディアを提供することを望んでいます。私はあなたが今多くの質問を持っていると確信しています。これから沿って読んで、私達はガイドの残りの部分でそれらをカバーします。
