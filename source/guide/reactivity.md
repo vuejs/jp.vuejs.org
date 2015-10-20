@@ -1,96 +1,96 @@
 ---
-title: Reactivity in Depth
+title: リアクティブの探求
 type: guide
 order: 13
 ---
 
-We've covered most of the basics - now it's time to take a deep dive! One of Vue.js' most distinct features is the unobtrusive reactive system - models are just plain JavaScript objects, modify it and the view updates. It makes state management very simple and intuitive, but it's also important to understand how it works to avoid some common gotchas. In this section, we are going to dig into some of the lower-level details of Vue.js' reactivity system.
+私たちは基本のほとんどをカバーしてきました。これからは深いダイビングするための時間です！Vue.js の最も明確な特徴の1つは、控えめなリアクティブシステムです。モデルは単なるプレーンな JavaScript オブジェクトで、それを変更し view を更新します。それは状態管理が非常にシンプルで直感的になりますが、いくつかの一般的な落とし穴を避けるためにそれがどのように動作するか理解することも重要です。このセクションで、私達は Vue.js のリアクティブシステムの低レベルの詳細の一部について掘り下げていきます。
 
-## How Changes Are Tracked
+## 変更の追跡方法
 
-When you pass a plain JavaScript object to a Vue.js instance as its `data` option, Vue.js will walk through all of its properties and convert them to getter/setters using [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty). This is an ES5-only and un-shimmable feature, which is why Vue.js doesn't support IE8 and below.
+あなたはプレーンな JavaScript オブジェクトを `data` オプションとして Vue インスタンスに渡すとき、Vue.js はその全てのプロパティを渡り歩いて、それらを [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) を使用して、getter/setter に変換します。これは ES5 だけのシム (shim) ができない機能で、Vue.js が IE8 以下をサポートしない理由です。
 
-The getter/setters are invisible to the user, but under the hood they enable Vue.js to perform dependency-tracking and change-notification when properties are accessed or modified. One caveat is that browser consoles format getter/setters differently when converted data objects are logged, so make sure to use the `vm.$log()` instance method for more inspection-friendly output.
+getter/setter はユーザーには見えませんが、内部ではそれらは Vue.js で依存関係の追跡を実行したり、プロパティがアクセスされたまたは変更されたときは、変更通知します。注意事項の1つは、データオブジェクトが記録されたとき、getter/setter のブラウザコンソールのフォーマットが異なるので、よりフレンドリな閲覧出力にするため、`vm.$log()` インスタンスメソッドを使用してください。
 
-For every directive / data binding in the template, there will be a corresponding **watcher** object, which records any properties "touched" during its evaluation as dependencies. Later on when a dependency's setter is called, it triggers the watcher to re-evaluate, and in turn causes its associated directive to perform DOM updates.
+テンプレートでの全てのディレクティブ/データバインディングは、それが依存関係として評価されている間、全てのプロパティを**触れた (touched)** ものとして記録している**ウオッチャ(watcher)** オブジェクトが存在しています。その後、依存する setter が呼び出されるとき、それは再評価するウオッチャをトリガし、そして関連するディレクティブに DOM の更新する結果につながります。
 
 ![data](/images/data.png)
 
-## Change Detection Caveats
+## 変更検出の注意事項
 
-Due to the limitation of ES5, Vue.js **cannot detect property addition or deletion**. Since Vue.js performs the getter/setter conversion process during instance initialization, a property must be present in the `data` object in order for Vue.js to convert it and make it reactive. For example:
+ES5 の制限のため、Vue.js は**プロパティの追加または削除を検出できません**。Vue.js はインスタンスの初期化中に、getter/setter 変換処理を実行するため、プロパティは、Vue.js がそれを変換しそしてそれをリアクティブにするために、`data` オブジェクトに存在しなければなりません。例えば:
 
 ``` js
 var data = { a: 1 }
 var vm = new Vue({
   data: data
 })
-// `vm.a` and `data.a` are now reactive
+// `vm.a` と `data.a` は今はリアクティブです
 
 vm.b = 2
-// `vm.b` is NOT reactive
+// `vm.b` はリアクティブでは"ありません"
 
 data.b = 2
-// `data.b` is NOT reactive
+// `data.b` はリアクティブでは"ありません"
 ```
 
-However, there are ways to "add a property and make it reactive" after an instance has been created.
+しかしながら、インスタンス作成後に、"プロパティを追加してリアクティブにする"方法があります。
 
-For Vue instances, you can use the `$set(path, value)` instance method:
+Vue インスタンスに対して、あなたは `$set(path, value)` インスタンスメソッドを使用することができます:
 
 ``` js
 vm.$set('b', 2)
-// `vm.b` and `data.b` are now reactive
+// `vm.b` と `data.b` は今はリアクティブです
 ```
 
-For plain data objects, you can use the global `Vue.set(object, key, value)` method:
+プレーンなデータオブジェクトに対しては、あなたはブローバル `Vue.set(object, key, value)` メソッドを使用することができます:
 
 ``` js
 Vue.set(data, 'c', 3)
-// `vm.c` and `data.c` are now reactive
+// `vm.c` と `data.c` は今はリアクティブです
 ```
 
-There are also a few Array-related caveats, which were [discussed earlier in the list rendering section](/guide/list.html#Caveats).
+[以前に リストレンダリング のセクションで議論した](/guide/list.html#Caveats) いくつかの配列に関連した注意事項があります。
 
-## Initialize Your Data
+## データの初期化
 
-Although Vue.js provides the API to dynamically add reactive properties on the fly, it is recommended to declare all reactive properties upfront in the `data` option.
+Vue.js は動的にその場でリアクティブなプロパティを追加するための API を提供していますが、`data` オプションで前もって全てのリアクティブなプロパティを宣言することを推奨します。
 
-Instead of this:
+以下の代わりに:
 
 ``` js
 var vm = new Vue({
   template: '<div>{{msg}}</div>'
 })
-// add `msg` later
+// 後で、`msg` を追加する
 vm.$set('msg', 'Hello!')
 ```
 
-Prefer this:
+以下の方がよいです:
 
 ``` js
 var vm = new Vue({
   data: {
-    // declare msg with an empty value
+    // 空の値として msg を宣言する
     msg: ''
   },
   template: '<div>{{msg}}</div>'
 })
-// set `msg` later
+// 後で `msg` を設定する
 vm.msg = 'Hello!'
 ```
 
-There are two reasons behind this pattern:
+このパターンに背後に以下の2つの理由があります:
 
-1. The `data` object is like the schema for your component's state. Declaring all reactive properties upfront makes the component code easier to understand and reason about.
+1. `data` オブジェクトはあなたのコンポーネントの状態に対するスキーマのようなものです。
 
-2. Adding a top level reactive property on a Vue instance will force all the watchers in its scope to re-evaluate, because it didn't exist before and no watcher could have tracked it as a dependency. The performance is usually acceptable (essentially the same as Angular's dirty checking), but can be avoided when you initialize the data properly.
+2. Vue インスタンスでトップレベルのリアクティブなプロパティを追加すると、それは、以前に存在しないそしてウオッチャが依存関係として追跡することができないスコープを再評価するために全てのウオッチャに強制します。
 
-## Async Update Queue
+## 非同期更新キュー
 
-By default, Vue.js performs DOM updates **asynchronously**. Whenever a data change is observed, Vue will open a queue and buffer all the data changes that happens in the same event loop. If the same watcher is triggered multiple times, it will be pushed into the queue only once. Then, in the next event loop "tick", Vue flushes the queue and performs only the necessary DOM updates. Internally Vue uses `MutationObserver` if available for the asynchronous queuing and falls back to `setTimeout(fn, 0)`.
+デフォルトで、Vue.js は **非同期** に DOM 更新を実行します。データ変更が監視されている限り、Vue はキューをオープンし、同じイベントループで起こる全てのデータ変更をバッファリングします。同じウオッチャが複数回トリガされる場合、一度だけキューに押し込まれます。そして、次のイベントループの "tick" で、Vue はキューをフラッシュし、必要な DOM 更新だけ実行します。内部的には、Vue はもし非同期キューイング向けに `MutationObserver` が利用可能ならそれを使い、そうでなければ `setTimeout(fn, 0)` にフォールバックします。
 
-For example, when you set `vm.someData = 'new value'`, the DOM will not update immediately. It will update in the next "tick", when the queue is flushed. Most of the time we don't need to care about this, but it can be tricky when you want to do something that depends on the post-update DOM state. Although Vue.js generally encourages developers to think in a "data-driven" fashion and avoid touching the DOM directly, sometimes it might be necessary to get your hands dirty. In order to wait until Vue.js has finished updating the DOM after a data change, you can use `Vue.nextTick(callback)` immediately after the data is changed. The callback will be called after the DOM has been updated. For example:
+例として、`vm.someData = 'new value'` をセットした時、DOM はすぐには更新しません。 キューがフラッシュされた時、次の "tick" で更新します。ほとんどの場合、私達はこれについて気にする必要はありませんが、更新した DOM の状態に依存する何かをしたい時、注意が必要です。Vue.js は一般的に"データ駆動"的な流儀で考えることを開発者に奨励していますが、時々、それはあなたの手を汚し得る必要があるかもしれません。Vue.js でデータの変更後に、DOM の更新が完了するまでに待つためには、データが変更された直後に `Vue.nextTick(callback)` を使用することができます。コールバックが呼ばれた時、DOM は更新されているでしょう。例えば:
 
 ``` html
 <div id="example">{{msg}}</div>
@@ -103,14 +103,14 @@ var vm = new Vue({
     msg: '123'
   }
 })
-vm.msg = 'new message' // change data
+vm.msg = 'new message' // データを変更する
 vm.$el.textContent === 'new message' // false
 Vue.nextTick(function () {
   vm.$el.textContent === 'new message' // true
 })
 ```
 
-There is also the `vm.$nextTick()` instance method, which is especially handy inside components, because it doesn't need global `Vue` and its callback's `this` context will be automatically bound to the current Vue instance:
+特に便利な内部コンポーネントのインスタンスメソッド `vm.$nextTick()` もあります。なぜなら、それはグローバルな `Vue` とそのコールバックの `this` コンテキストは自動的に現在の Vue インスタンスにバウンドされるからです:
 
 ``` js
 Vue.component('example', {
@@ -132,13 +132,13 @@ Vue.component('example', {
 })
 ```
 
-## Inside Computed Properties
+## 算出プロパティの内部
 
-It should be noted that Vue.js computed properties are **not** simple getters. Each computed property keeps track of its own reactive dependencies. When a computed property is evaluated, Vue.js updates its dependency list and caches the result value. The cached value is only invalidated when one of the tracked dependencies have changed. Therefore, as long as the dependencies did not change, accessing the computed property will directly return the cached value instead of calling the getter.
+Vue.js の算出プロパティ (computed property) は getter は単純では**ない**ことに注意すべきです。各算出プロパティは独自のリアクティブな依存関係の追跡します。算出プロパティが評価されるとき、Vue.js は依存関係リストを更新し、結果の値をキャッシュします。キャッシュされた値は追跡された依存関係の1つが変更されたときだけ、無効化されます。したがって、依存関係が変更されなかった間ずっと、算出プロパティのアクセスは getter を呼び出す代わりに、直接キャッシュされた値を返します。
 
-Why do we need caching? Imagine we have an expensive computed property **A**, which requires looping through a huge Array and doing a lot of computations. Then, we may have other computed properties that in turn depend on **A**. Without caching, we would be calling **A**’s getter many more times than necessary!
+なぜ、私達はキャッシングする必要があるのでしょうか？私達が、巨大な配列をループして計算をたくさんする必要がある、高価な算出プロパティ **A** を持っていると想像してください。その後、私達は **A** に依存する同様の他の算出プロパティを持っているかもしれません。キャッシングがなければ、私達は必要以上 **A** の getter を呼び出すことになるでしょう！
 
-Because of computed property caching, the getter function is not always called when you access a computed property. Consider the following example:
+算出プロパティのキャッシングのために、getter 関数は、あなたが算出プロパティにアクセスするとき、常に呼び出されません。次の例を考えてみます:
 
 ``` js
 var vm = new Vue({
@@ -153,9 +153,9 @@ var vm = new Vue({
 })
 ```
 
-The computed property `example` has only one dependency: `vm.msg`. `Date.now()` is **not** a reactive dependency, because it has nothing to do with Vue's data observation system. Therefore, when you programmatically access `vm.example`, you will find the timestamp to remain the same unless `vm.msg` triggers a re-evaluation.
+算出プロパティ `example` は、`vm.msg` という1つだけの依存関係を持っています。`Date.now()` というタイムスタンプは、Vue のデータ監視システムとは何も関係ないため、リアクティブな依存関係では**ありません**。したがって、あなたがプログラムで `vm.example` にアクセスするとき、`vm.msg` が再評価をトリガしない限り、同じタイムスタンプを見つけるでしょう。
 
-In some use cases you may want to preserve the simple getter-like behavior, where every time you access `vm.example` it simply calls the getter again. You can do that by turning off caching for a specific computed property:
+いくつかのユースケースでは、あなたは、あなたが単純に再度 getter を呼び出す `vm.example` にアクセスする度に、簡単な getter のような振舞いを保存したいかもしれません。あなたは特定の算出プロパティに対してキャッシュをオフにすることによって、それを行うことができます:
 
 ``` js
 computed: {
@@ -168,4 +168,4 @@ computed: {
 }
 ```
 
-Now, every time you access `vm.example`, the timestamp will be up-to-date. **However, note this only affects programmatic access inside JavaScript; data-bindings are still dependency-driven.** When you bind to a computed property in the template as `{% raw %}{{example}}{% endraw %}`, the DOM will only be updated when a reactive dependency has changed.
+これにより、あなたが `vm.example` にアクセスする度に、タイムスタンプは最新になるでしょう。**しかしながら、これはプログラム的に JavaScript 内でのアクセスだけ影響することに注意してください。データバインディングはまだ依存関係駆動です。**あなたはテンプレートで `{% raw %}{{example}}{% endraw %}` として算出プロパティにバインドするとき、DOM はリアクティブな依存関係が変更されたときにだけ更新されます。
