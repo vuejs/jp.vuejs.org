@@ -131,6 +131,9 @@ methods: {
 
 <!-- モディファイアは繋ぎ合わせることができます -->
 <a v-on:click.stop.prevent="doThat">
+
+<!-- モディファイアだけ -->
+<form v-on:submit.prevent></form>
 ```
 
 ## キーモディファイア
