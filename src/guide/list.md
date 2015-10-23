@@ -107,6 +107,14 @@ var example2 = new Vue({
 </script>
 {% endraw %}
 
+あるいは、インデックス(または、オブジェクト使用されている場合はキー)に対してエイリアスを指定することもできます:
+
+``` html
+<div v-for="(index, item) in items">
+  {{ index }} {{ item.message }}
+</div>
+```
+
 ## テンプレートでの v-for
 
 テンプレート `v-if` と同様、複数の要素のブロックをレンダリングするために `v-for` で `<template>` タグも使用することができます。例えば:
@@ -257,6 +265,14 @@ new Vue({
 })
 </script>
 {% endraw %}
+
+キーに対してエイリアスも提供できます:
+
+``` html
+<div v-for="(key, val) in object">
+  {{ key }} {{ val }}
+</div>
+```
 
 <p class="tip">オブジェクトを反復処理するとき、順序は `Object.keys()` の列挙順のキーに基づいており、全ての JavaScript エンジンの実装で一貫性が保証されて**いません**。</p>
 

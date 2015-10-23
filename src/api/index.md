@@ -1496,6 +1496,13 @@ type: api
   </div>
   ```
 
+  あるいは、インデックス(またはオブジェクトで使用されている場合、キー)に対してエイリアスを指定することもできます:
+
+  ``` html
+  <div v-for="(index, item) in items"></div>
+  <div v-for="(key, val) in object"></div>
+  ```
+
   `v-for` の詳細な利用方法は下記にリンクしたガイドセクション内で説明しています。
 
 - **参考:** [List Rendering](/guide/list.html).
