@@ -1,7 +1,7 @@
 ---
 title: HackerNews クローン
 type: examples
-order: 9
+order: 10
 ---
 
 > これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、ビルドセットアップ向けに Webpack + vue-loader を使っています。
