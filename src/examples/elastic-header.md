@@ -1,5 +1,5 @@
 ---
-title: Elastic Header
+title: 弾力のあるヘッダ
 type: examples
 order: 7
 ---
