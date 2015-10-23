@@ -7,7 +7,7 @@ order: 17
 
 ## プラグインの記述
 
-プラグインは通常 Vue にグローバルレベルで機能を追加します。プラグインに対しては厳密に定義されたスコープはありません。あなたが書くことができるプラグインはいくつかのタイプがあります:
+プラグインは通常 Vue にグローバルレベルで機能を追加します。プラグインに対しては厳密に定義されたスコープはありません。書くことができるプラグインはいくつかのタイプがあります:
 
 1. 1つ、または複数のグローバル・メソッドを追加します。例: [vue-element](https://github.com/vuejs/vue-element)
 
@@ -41,13 +41,13 @@ CommonJS ベースのビルドを行っていると仮定します。
 Vue.use(MyPlugin)
 ```
 
-あなたは、いくつかのオプションに任意で渡すことができます:
+いくつかのオプションに任意で渡すことができます:
 
 ``` js
 Vue.use(MyPlugin, { someOption: true })
 ```
 
-`vue-router` のようないくつかのプラグインは、`Vue` はグローバル変数として使用可能な場合、自動的に `Vue.use()` は呼びます。しかしながら、モジュール環境ではあなたは常に明示的に `Vue.use()` を呼ぶ必要があります:
+`vue-router` のようないくつかのプラグインは、`Vue` はグローバル変数として使用可能な場合、自動的に `Vue.use()` は呼びます。しかしながら、モジュール環境では常に明示的に `Vue.use()` を呼ぶ必要があります:
 
 ``` js
 // Browserify または Webpack 経由で CommonJS を使用
@@ -74,4 +74,4 @@ Vue.use(VueRouter)
 
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録できるようになるプラグイン。
 
-- [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/yyx990803/vue/wiki/User-Contributed-Components-&-Tools)
+- [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/vuejs/vue/wiki/User-Contributed-Components-&-Tools)
