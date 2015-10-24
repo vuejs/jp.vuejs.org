@@ -33,9 +33,11 @@ $ hexo server
 
 - [bouzuya](https://github.com/bouzuya)
 - [chi-bd](https://github.com/chi-bd)
+- [chrispecoraro](https://github.com/chrispecoraro)
 - [hrysd](https://github.com/hrysd)
 - [mono0x](https://github.com/mono0x)
 - [pocke](https://github.com/pocke)
+- [showwin](https://github.com/showwin)
 - [sunya9](https://github.com/sunya9)
 - [y-yagi](https://github.com/y-yagi)
 - [zakuro9715](https://github.com/zakuro9715)
