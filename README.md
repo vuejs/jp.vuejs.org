@@ -1,5 +1,8 @@
 # vuejs-jp/vuejs.org
 
+このリポジトリは Vue.js 最新バージョン向けのドキュメントを管理しているレポジトリです。
+(Vue.js 0.12 向けのドキュメントを管理しているリポジトリは[こちら](https://github.com/vuejs-jp/012-jp.vuejs.org))
+
 このサイトは [hexo](http://zespia.tw/hexo) で構築されています。サイトコンテンツは `source` の位置に markdown フォーマットで書かれています。プルリクエスト、歓迎します！
 
 ## 貢献ガイド

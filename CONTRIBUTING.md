@@ -10,7 +10,14 @@
 2. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
 3. 変更をコミットします: `git commit -am 'Fix some files'`
 4. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
-5. プルリクエストを `vuejs-jp/vuejs.org` の `lang-ja` ブランチに送ります
+5. 翻訳が終わったら、翻訳スタイルにそっているかどうかチェックします: `npm run lint`
+6. 問題がなければ、プルリクエストを `vuejs-jp/vuejs.org` の `lang-ja` ブランチに送ります
+
+
+## 翻訳スタイル
+
+- [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/jp/style_guide/styleguide_top.html) に準拠
+- JTF日本語標準スタイルのチェックツールは [textlint-plugin-JTF-style](https://github.com/azu/textlint-plugin-JTF-style) を使用し、ルールはVue.js 公式サイト向けに[一部カスタマイズ](.textlintrc)
 
 
 ## 翻訳のゆらぎ & トーン
