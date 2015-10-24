@@ -16,5 +16,14 @@
     "hexo-renderer-marked": "^0.2.4",
     "hexo-renderer-stylus": "^0.2.0",
     "hexo-server": "^0.1.2"
+  },
+  "devDependencies": {
+    "textlint": "^4.1.2",
+    "textlint-plugin-jtf-style": "^0.8.4",
+    "textlint-checker-for-vuejs-jp-docs": "git@github.com:vuejs-jp/textlint-checker-for-vuejs-jp-docs.git"
+  },
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs ./src/guide/*.md ./src/api/*.md ./src/examples/*.md -f pretty-error"
   }
 }
