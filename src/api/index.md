@@ -1432,7 +1432,7 @@ type: api
   ``` html
   <div v-html="html"></div>
   <!-- 以下と同じ -->
-  <div>{{html}}</div>
+  <div>{{{html}}}</div>
   ```
 
 ### v-if
