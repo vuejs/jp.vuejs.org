@@ -151,7 +151,7 @@ methods: {
 <!-- 上記と同じです -->
 <input v-on:keyup.enter="submit">
 
-<!-- 簡略表記に対しても動作します -->
+<!-- 省略記法に対しても動作します -->
 <input @keyup.enter="submit">
 ```
 
