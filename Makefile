@@ -8,7 +8,7 @@ all: update
 	cp ../vue/test/unit/specs.js.map public/unit/specs.js.map
 
 test:
-	@echo 'test ignore !!' >/dev/null 2>&1
+	npm test
 
 deploy:	all
 	hexo deploy
