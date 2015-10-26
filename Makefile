@@ -8,7 +8,7 @@ all: update
 	cp ../vue/test/unit/specs.js.map public/unit/specs.js.map
 
 test:
-	@echo 'test ignore !!' >/dev/null 2>&1
+	npm test
 
 deploy:	all
 	hexo deploy
@@ -16,7 +16,7 @@ deploy:	all
 update:
 	cd ../vue && \
 		git checkout -- dist && \
-		git checkout master && \
+		git checkout 1.0.0-rc.2 && \
 		grunt build && \
 		webpack --config build/webpack.test.config.js > /dev/null
 	cp ../vue/dist/vue.min.js themes/vue/source/js/vue.min.js

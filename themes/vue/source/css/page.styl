@@ -9,7 +9,7 @@ $header-height = 40px
     box-shadow 0 0 4px rgba(0,0,0,.25)
     padding 25px 60px
     position relative
-    z-index 0
+    z-index 2
 
 #nav
     list-style-type none
@@ -24,6 +24,7 @@ $header-height = 40px
         display none
     li
         display inline-block
+        position relative
         margin 0 .6em
 
 .nav-link
@@ -93,11 +94,15 @@ $header-height = 40px
     top 0
     left 60px
     bottom 0
-    overflow-y scroll
     padding 2.2em 0
     width 260px
     margin-right 20px
+    overflow-x hidden
+    overflow-y auto
     -webkit-overflow-scrolling touch
+    -ms-overflow-style none
+    &::-webkit-scrollbar
+        width: 0 !important
     h2
         margin-top .2em
     ul
@@ -105,6 +110,9 @@ $header-height = 40px
         margin 0
         line-height 1.8em
         padding-left 1em
+    .version-select
+        vertical-align middle
+        margin-left 5px
     .menu-root
         padding-left 0
     .menu-sub
@@ -144,13 +152,12 @@ $header-height = 40px
     padding 2.2em 0
     max-width 600px
     margin 0 auto
-    &.with-sidebar
-        margin 0 0 0 280px
     &.api
         ul
-            font-size .9em
             padding-left 1.25em
-            color $light
+            line-height 1.4em
+            ul, p
+                margin .6em 0
     a.button
         font-size .9em
         color #fff
@@ -209,11 +216,10 @@ $header-height = 40px
         padding 12px 24px 12px 30px
         margin 2em 0
         border-left 4px solid $red
-        background-color #f9f9f9
+        background-color $codebg
         position relative
-        border-top-left-radius $radius
+        border-bottom-right-radius $radius
         border-top-right-radius $radius
-        box-shadow 0 1px 1px rgba(0,0,0,0.125)
         &:before
             position absolute
             top 14px
@@ -230,9 +236,13 @@ $header-height = 40px
             font-family $logo-font
             font-size 14px
 
+.guide-links
+    margin-top 2em
+    height 1em
+
 .footer
     color $light
-    margin-top 4em
+    margin-top 2em
     padding-top 2em
     border-top 1px solid #e5e5e5
     font-size .9em
@@ -243,6 +253,8 @@ $header-height = 40px
             position fixed
 
 @media screen and (max-width: 1200px)
+    .content.with-sidebar
+        margin-left 280px
     #ad
         z-index 8
         position relative
