@@ -458,7 +458,7 @@ props やイベントの存在にもかかわらず、時どき JavaScript で�
 ``` js
 var parent = new Vue({ el: '#parent' })
 // 子コンポーネントのインスタンスへのアクセス
-var child = parent.$.profile
+var child = parent.$refs.profile
 ```
 
 `v-ref` が `v-for` と共に使用された時は、得られる値はそのデータの配列またはオブジェクトをミラーリングした子コンポーネントが格納されているデータソースになります。
