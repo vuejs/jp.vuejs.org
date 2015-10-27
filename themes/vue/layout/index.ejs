@@ -23,7 +23,7 @@
     <ul id="translations">
       <li><a href="http://vuejs.org" class="nav-link">English</a></li>
       <li class="delimiter">|</li>
-      <li><a href="http://cn.vuejs.org" class="nav-link">中文</a></li>
+      <li><a href="http://cn.vuejs.org" class="nav-link wip">中文</a></li>
     </ul>
   </div>
   <div class="down"><img src="/images/down.png"></div>
@@ -140,10 +140,10 @@
 <script>
 // Temporarily block translation links until they are done
 // for 1.0 updates.
-[].forEach.call(document.querySelectorAll('#translations .nav-link'), function (link) {
+[].forEach.call(document.querySelectorAll('#translations .nav-link.wip'), function (link) {
   link.addEventListener('click', function (e) {
     e.preventDefault()
-    alert('Translations for the 1.0 docs are still work in progress.')
+    alert('1.0 translation for this language is still work in progress.')
   })
 })
 </script>
