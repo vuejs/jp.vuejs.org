@@ -1650,15 +1650,20 @@ type: api
 
   `v-for` と共に使用するとき、値はそれにバインドしている配列に対応するすべての子コンポーネントインスタンスを含む配列になります。`v-for` のデータソースがオブジェクトの場合、登録された値はソースオブジェクトとミラーリングされた各キーとインスタンスを含むオブジェクトになります。
 
+- **注意:**
+  HTML は case-insensitive であるため、`v-ref:someRef` のようなキャメルケース (camlCase) の使用は全て小文字に変換されます。適切に `this.$refs.someRef` を設定し、`v-ref:some-ref` を使用することができます。
+
 - **例:**
 
   ``` html
   <comp v-ref:child></comp>
+  <comp v-ref:some-child></comp>
   ```
 
   ``` js
   // 親からアクセス:
   this.$refs.child
+  this.$refs.someChild
   ```
 
   `v-for`と共に利用:
@@ -1684,13 +1689,18 @@ type: api
   
   簡単にアクセス可能にするために、所有者の Vue インスタンスの `$els` オブジェクト上に DOM 要素へのリファレンスを登録します。
 
+- **注意:**
+  HTML は case-insensitive であるため、`v-el:someEl` のようなキャメルケース (camlCase) の使用は全て小文字に変換されます。適切に `this.$els.someEl` を設定し、`v-el:some-el` を使用することができます。
+
 - **例:**
 
   ``` html
   <span v-el:msg>hello</span>
+  <span v-el:other-msg>world</span>
   ```
   ``` js
   this.$els.msg.textContent // -> "hello"
+  this.$els.otherMsg.textContent // -> "world"
   ```
 
 ### v-pre
