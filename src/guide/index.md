@@ -5,7 +5,7 @@ order: 1
 ---
 
 
-Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/yyx990803/okv0rgrk/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしパッケージマネージャからダウンロード/インスールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
+Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/yyx990803/okv0rgrk/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしパッケージマネージャからダウンロード/インストールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
 
 ### Hello World
 
