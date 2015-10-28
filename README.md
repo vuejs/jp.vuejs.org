@@ -33,6 +33,7 @@ $ hexo server
 
 - [bouzuya](https://github.com/bouzuya)
 - [chi-bd](https://github.com/chi-bd)
+- [chocoby](https://github.com/chocoby)
 - [chrispecoraro](https://github.com/chrispecoraro)
 - [hrysd](https://github.com/hrysd)
 - [kaorun343](https://github.com/kaorun343)
