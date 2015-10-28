@@ -1,5 +1,7 @@
 # vuejs-jp/vuejs.org
 
+![build status](https://circleci.com/gh/vuejs-jp/vuejs.org?style=shield&circle-token=6f7d3fb659f411f3bdcbbd935ad757bca81e158c)
+
 このリポジトリは Vue.js 最新バージョン向けのドキュメントを管理しているレポジトリです。
 (Vue.js 0.12 向けのドキュメントを管理しているリポジトリは[こちら](https://github.com/vuejs-jp/012-jp.vuejs.org))
 
