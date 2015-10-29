@@ -1,6 +1,6 @@
-# vuejs-jp/vuejs.org
+# vuejs-jp/jp.vuejs.org
 
-[![Circle CI](https://circleci.com/gh/vuejs-jp/vuejs.org/tree/lang-ja.svg?style=svg&circle-token=6f7d3fb659f411f3bdcbbd935ad757bca81e158c)](https://circleci.com/gh/vuejs-jp/vuejs.org/tree/lang-ja)
+[![Circle CI](https://circleci.com/gh/vuejs-jp/vuejs.org/tree/lang-ja.svg?style=svg&circle-token=6f7d3fb659f411f3bdcbbd935ad757bca81e158c)](https://circleci.com/gh/vuejs-jp/jp.vuejs.org/tree/lang-ja)
 
 このリポジトリは Vue.js 最新バージョン向けのドキュメントを管理しているレポジトリです。
 (Vue.js 0.12 向けのドキュメントを管理しているリポジトリは[こちら](https://github.com/vuejs-jp/012-jp.vuejs.org))
