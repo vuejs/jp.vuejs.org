@@ -11,7 +11,7 @@
 3. 変更をコミットします: `git commit -am 'Fix some files'`
 4. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
 5. 翻訳が終わったら、翻訳スタイルにそっているかどうかチェックします: `npm run lint`
-6. 問題がなければ、プルリクエストを `vuejs-jp/jp.vuejs.org` の `lang-ja` ブランチに送ります
+6. 問題がなければ、プルリクエストを `vuejs/jp.vuejs.org` の `lang-ja` ブランチに送ります
 
 
 ## 翻訳スタイル

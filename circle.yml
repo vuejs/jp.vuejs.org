@@ -20,8 +20,3 @@ general:
   branches:
     only:
       - lang-ja
-notify:
-  webhooks:
-    # A list of hook hashes, containing the url field
-    # gitter hook
-    - url: https://webhooks.gitter.im/e/909182d38e961fd28993

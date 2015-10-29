@@ -1,6 +1,6 @@
-# vuejs-jp/jp.vuejs.org
+# vuejs/jp.vuejs.org
 
-[![Circle CI](https://circleci.com/gh/vuejs-jp/vuejs.org/tree/lang-ja.svg?style=svg&circle-token=6f7d3fb659f411f3bdcbbd935ad757bca81e158c)](https://circleci.com/gh/vuejs-jp/jp.vuejs.org/tree/lang-ja)
+[![Circle CI](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja.svg?style=svg&circle-token=833967ff387fa4a8d91a738086d5c166ea0a6f85)](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja)
 
 このリポジトリは Vue.js 最新バージョン向けのドキュメントを管理しているレポジトリです。
 (Vue.js 0.12 向けのドキュメントを管理しているリポジトリは[こちら](https://github.com/vuejs-jp/012-jp.vuejs.org))
@@ -8,7 +8,7 @@
 このサイトは [hexo](http://zespia.tw/hexo) で構築されています。サイトコンテンツは `src` の位置に markdown フォーマットで書かれています。プルリクエスト、歓迎します！
 
 ## 貢献ガイド
-[Vue.js 公式サイト日本語翻訳ガイド](https://github.com/vuejs-jp/vuejs.org/blob/lang-ja/CONTRIBUTING.md) を一読お願いします！
+[Vue.js 公式サイト日本語翻訳ガイド](https://github.com/vuejs/jp.vuejs.org/blob/lang-ja/CONTRIBUTING.md) を一読お願いします！
 
 ## 開発
 
