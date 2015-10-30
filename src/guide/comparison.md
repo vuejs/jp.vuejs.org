@@ -30,6 +30,16 @@ API は賢いですが、React (または JSX) における1つの問題は、�
 
 React について別の問題を挙げるなら、DOM の更新が完全に仮想 DOM に委任されていることです。実際に、DOM を自分でコントロール**したい**とき、少しトリッキーです（理論的には出来ますが、React の思想に反する結果になります）。アドホックな DOM 操作を必要とするアプリケーションの場合、これがかなり厄介な制限になることになります。この面では、Vue.js はより柔軟性があり、例として [multiple FWA/Awwwards winning sites](https://github.com/vuejs/vue/wiki/Projects-Using-Vue.js#interactive-experiences) には Vue.js が組み込まれています。
 
+Some additional notes:
+
+- The React team has very ambitious goals in making React a platform-agnostic UI development paradigm, while Vue is focused on providing a pragmatic solution for the web.
+
+- React, due to its functional nature, plays very well with functional programming patterns. However it also introduces a higher learning barrier for junior developers and beginners. Vue is much easier to pick up and get productive with in this regard.
+
+- For large applications, the React community has been doing a lot of innovation in terms of state management solutions, e.g. Flux/Redux. Vue itself doesn't really address that problem (same for React core), but the state management patterns can be easily adopted for a similar architecture. I've seen users use Redux with Vue, and engineers at Optimizely have been using NuclearJS (their Flux dialect) with Vue as well.
+
+- The trend in React development is pushing you to put everything in JavaScript, including your CSS. There has been many CSS-in-JS solutions out there but all more or less have its own problems. And most importantly, it deviates from the standard CSS authoring experience and makes it very awkward to leverage existing work in the CSS community. Vue's [single file components](http://vuejs.org/guide/application.html#Single_File_Components) gives you component-encapsulated CSS while still allowing you to use your pre-processors of choice.
+
 ## Ember
 
 Ember は非常に独断的に設計されたフル機能フレームワークです。たくさんの確立された規約を提供し、一度それらに十分精通していると、非常に生産的に作ることができます。しかしながら、それは学習曲線が高いことと柔軟性が悪くなることを意味します。独断的なフレームワークと一緒に動作するツールの疎結合セットなライブラリとの間で選択するのを試すのはトレードオフです。後者はよりあなたに自由を与えるだけではなく、あなたによりアーキテクチャの意思決定をする必要があります。
