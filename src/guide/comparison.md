@@ -30,15 +30,15 @@ API は賢いですが、React (または JSX) における1つの問題は、�
 
 React について別の問題を挙げるなら、DOM の更新が完全に仮想 DOM に委任されていることです。実際に、DOM を自分でコントロール**したい**とき、少しトリッキーです（理論的には出来ますが、React の思想に反する結果になります）。アドホックな DOM 操作を必要とするアプリケーションの場合、これがかなり厄介な制限になることになります。この面では、Vue.js はより柔軟性があり、例として [multiple FWA/Awwwards winning sites](https://github.com/vuejs/vue/wiki/Projects-Using-Vue.js#interactive-experiences) には Vue.js が組み込まれています。
 
-Some additional notes:
+いくつかの追加注意事項です:
 
-- The React team has very ambitious goals in making React a platform-agnostic UI development paradigm, while Vue is focused on providing a pragmatic solution for the web.
+- React チームはプラットフォームに依存しない UI 開発パラダイムを React にさせるという非常に野心的な目標がありますが、Vue は web に対して実用的なソリューションを提供することに焦点を当てています。
 
-- React, due to its functional nature, plays very well with functional programming patterns. However it also introduces a higher learning barrier for junior developers and beginners. Vue is much easier to pick up and get productive with in this regard.
+- React はそれが関数型な性質のため、関数型プログラミングパターンでとてもよくできます。しかしながら、それはまた若い開発者や初心者に対して、高い学習の障壁を与えます。Vue はピックアップし、この点で生産性を得る方がはるかに簡単です。
 
-- For large applications, the React community has been doing a lot of innovation in terms of state management solutions, e.g. Flux/Redux. Vue itself doesn't really address that problem (same for React core), but the state management patterns can be easily adopted for a similar architecture. I've seen users use Redux with Vue, and engineers at Optimizely have been using NuclearJS (their Flux dialect) with Vue as well.
+- 大きいアプリケーションに対して、React コミュニティは状態管理ソリューションの面でたくさんの技術的革新をしています。例として、Flux/Redux があります。Vue それ自身は、実際に問題(React コアに対しても同じ)に対応していませんが、状態管理パターンは容易に同様のアーキテクチャを適用させることができます。私は、ユーザーが Vue で Redux を使用するのを見てきており、Optimizely のエンジニアは Vue と Nuclearjs (Flux の方言) を使用しています。
 
-- The trend in React development is pushing you to put everything in JavaScript, including your CSS. There has been many CSS-in-JS solutions out there but all more or less have its own problems. And most importantly, it deviates from the standard CSS authoring experience and makes it very awkward to leverage existing work in the CSS community. Vue's [single file components](http://vuejs.org/guide/application.html#Single_File_Components) gives you component-encapsulated CSS while still allowing you to use your pre-processors of choice.
+- React 開発でのトレンドは、あなたの CSS を含めて、JavaScript で全て置き換えよう推進しています。そこには多くの CSS-in-JS ソリューションがありますが、全ての多かれ少なかれ、独自の問題を抱えています。そしても最も重要なものは、それは CSS コミュニティで非常に厄介な既存の作業を活用するのは、それは標準的な CSS 著作経験がから外れます。Vue の [単一ファイルコンポーネント](http://vuejs.org/guide/application.html#単一ファイルコンポーネント)は、まだあなたがプリプロセッサの選択するために使用するのを許可しているため、コンポーネントでカプセル化された CSS を提供します。
 
 ## Ember
 
