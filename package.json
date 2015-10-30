@@ -24,6 +24,6 @@
   },
   "scripts": {
     "test": "npm run lint",
-    "lint": "textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs ./src/guide/*.md ./src/api/*.md ./src/examples/*.md -f pretty-error"
+    "lint": "textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs ./src/guide/*.md ./src/api/*.md ./src/examples/*.md ./src/_posts/1.0.0-release.md -f pretty-error"
   }
 }
