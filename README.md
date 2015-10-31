@@ -39,6 +39,7 @@ $ hexo server
 - [chrispecoraro](https://github.com/chrispecoraro)
 - [hrysd](https://github.com/hrysd)
 - [kaorun343](https://github.com/kaorun343)
+- [kuy](https://github.com/kuy)
 - [mono0x](https://github.com/mono0x)
 - [pocke](https://github.com/pocke)
 - [sapics](https://github.com/sapics)
