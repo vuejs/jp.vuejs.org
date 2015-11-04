@@ -29,7 +29,7 @@
     <ul id="translations">
       <li><a href="http://vuejs.org" class="nav-link">English</a></li>
       <li class="delimiter">|</li>
-      <li><a href="http://cn.vuejs.org" class="nav-link wip">中文</a></li>
+      <li><a href="http://cn.vuejs.org" class="nav-link">中文</a></li>
     </ul>
   </div>
   <div class="down"><img src="/images/down.png"></div>
@@ -91,7 +91,7 @@
       <p>いくつか HTML を書いて、いくつか JSON を持ってきて、Vue インスタンスを作って、それでおしまいです。</p>
     </div>
     <div class="feat">
-      <h2><span class="icon powerful"></span>パワフル</h2>
+      <h2><span class="icon powerful"></span>リアクティブ</h2>
       <p>式 (expression) と透過依存性トラッキングによる算出プロパティ (computed property) 。</p>
     </div>
     <div class="feat">
@@ -142,14 +142,3 @@
 
 <!-- Twitter follow button script -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<script>
-// Temporarily block translation links until they are done
-// for 1.0 updates.
-[].forEach.call(document.querySelectorAll('#translations .nav-link.wip'), function (link) {
-  link.addEventListener('click', function (e) {
-    e.preventDefault()
-    alert('1.0 translation for this language is still work in progress.')
-  })
-})
-</script>
