@@ -391,7 +391,7 @@ var parent = new Vue({
       // イベントのコールバックでの `this` は
       // それが登録されたとき、自動的にインスタンスに結びつけます
       this.messages.push(msg)
-    })
+    }
   }
 })
 ```
