@@ -1929,14 +1929,18 @@ type: api
 
 - **引数:**
   - `{Number} limit`
+  - `{Number} [offset]`
 
 - **使用方法:**
 
-  引数によって指定されたように、最初の N 個に配列を制限します。
+  引数によって指定されたように、最初の N 個に配列を制限します。任意の第 2 引数は開始するオフセットを設定するために提供することができます。
 
   ``` html
   <!-- 最初の 10 アイテムだけ表示される -->
   <div v-for="item in items | limitBy 10"></div>
+
+  <!-- アイテム 5 から 15 まで表示される -->
+  <div v-for="item in items | limitBy 10 5"></div>
   ```
 
 ### filterBy
