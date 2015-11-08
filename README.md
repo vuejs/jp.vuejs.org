@@ -42,6 +42,7 @@ $ hexo server
 - [kuy](https://github.com/kuy)
 - [mono0x](https://github.com/mono0x)
 - [pocke](https://github.com/pocke)
+- [ryonext](https://github.com/ryonext)
 - [sapics](https://github.com/sapics)
 - [showwin](https://github.com/showwin)
 - [sunya9](https://github.com/sunya9)
