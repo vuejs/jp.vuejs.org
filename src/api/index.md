@@ -51,7 +51,7 @@ type: api
 
   ``` js
   // より危険に見えるようにします
-  Vue.config.delimiters = ['{!!', '!!}']
+  Vue.config.unsafeDelimiters = ['{!!', '!!}']
   ```
 
   Raw HTML 展開デリミタを変更します。
