@@ -155,7 +155,7 @@ new Vue({
 
 2. `.fade-enter` は、entering transition (トランジションに入っている)の開始状態を定義します。単一のフレームに適用した後に、すぐに削除されます。
 
-3. `.fade-enter` は、leaving transition (トランジションから離れている)の終了状態を定義します。leaving transition が開始するときに適用され、トランジションが終了するときに削除されます。
+3. `.fade-leave` は、leaving transition (トランジションから離れている)の終了状態を定義します。leaving transition が開始するときに適用され、トランジションが終了するときに削除されます。
 
 `transition` が値を持たいない場合は、クラスはデフォルトで `.v-transition` 、`.v-enter` そして `v-leave` になります。
 
