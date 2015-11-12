@@ -84,6 +84,20 @@ type: api
 
   非同期モードがオフの場合、Vue はデータ変更を検知した時に、すべての DOM 更新を同期的に実行します。これは幾つかのシナリオでのデバッグに役立つかもしれませんが、パフォーマンスの悪化や watch のコールバックが呼ばれる順序に影響を及ぼす可能性があります。 ** `async: false` は本番環境での利用は非推奨です。 **
 
+### convertAllProperties
+
+- **型:** `Boolean`
+
+- **デフォルト:** `false`
+
+- **使用方法:**
+  
+  ``` js
+  Vue.config.convertAllProperties = true
+  ```
+
+  (1.0.8 で追加された) このオプションをオンにすると、変換して、既に `Object.defineProperty` で定義された getter/setter を既に含むオブジェクトを監視するために、Vue で可能になります。これは小さいパフォーマンスコストや一般的に必要とされないため、デフォルトでオフにしています。
+
 ## グローバル API
 
 ### Vue.extend( options )
