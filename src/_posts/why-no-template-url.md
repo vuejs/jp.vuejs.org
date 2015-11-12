@@ -1,20 +1,20 @@
 ---
-title: "Why Vue.js doesn't support templateURL"
+title: "Vue.js が templateURL をサポートしない理由"
 date: 2015-10-28 10:56:00
 ---
 
-A very common question from new Vue users, especially those who used Angular before, is "can I have `templateURL`?". I have answered this so many times and I figure it's better to write something about it.
+もともと Angular を使っていて、Vue に移行した新規ユーザから頻繁に寄せられる質問のひとつに「`templateURL` はありますか？」というものがあります。これについてはかなりの回数お答えしてきましたが、このことについて記事を書いた方が良いとわかりました。
 
 <!-- more -->
 
-In Angular, `templateURL` or `ng-include` allows the user to dynamically load a remote template file at runtime. This seems pretty convenient as a built-in feature, but let's rethink what problem it solves.
+Angular では、`templateURL` または `ng-include` を使うことで、外部のテンプレートファイルを実行時に動的ロードすることができます。これらは、組み込み機能としてはとても便利に思えます。しかしこれが解決する問題とは一体何なのか、再考してみましょう。
 
-First, it allows us to write our template in a separate HTML file. This gives us proper syntax highlighting in editors, which is probably why many prefer to do so. But is splitting your JavaScript code and the template really the best way? For a Vue.js component, its template and its JavaScript is tightly coupled by nature - it's in fact much simpler if things are just in the same file. The context switching of jumping back and forth between two files actually makes the development experience much worse. Conceptually, components are the basic building block of a Vue.js app, not templates. Every Vue.js template is coupled to an accompanying JavaScript context - there's no point in splitting them further apart.
+最初の1つは、分割した HTML ファイル内にテンプレートを書くと、エディタ内で正しいシンタックスハイライトが付くことです。だからこそ、 HTML ファイルを分割することが好む人がたくさんいるのでしょう。しかし JavaScript コードとテンプレートを分割するのは本当に最善の方法でしょうか？ Vue.js のコンポーネントでは、テンプレートと JavaScript はもともと密接に関連付けられています - 実際のところ、同じファイル内に存在したほうがよりシンプルです。2ファイル間を行ったり来たりするコンテキストの切り替えは、開発体験を悪化させてしまいます。概念的には、コンポーネントとは Vue.js アプリを構成する基本的なブロックであり、テンプレートではありません。すべての Vue.js テンプレートは JavaScript のコンテキストと関連付けられています - それらをさらに引き裂いても意味がありません。
 
-Second, because `templateURL` loads the template via Ajax at runtime, you don't need a build step in order to split up your files. This is convenient during development, but comes at a serious cost when you want to deploy it to production. Before HTTP/2 is universally supported, the number of HTTP requests is still probably the most critical factor in your app's initial load performance. Now imagine you use `templateURL` for every component in your app - the browser needs to perform dozens of HTTP requests before even being able to display anything! In case you don't know, most browsers limit the number of parallel requests it can perform to a single server. When you exceed that limit, your app's initial rendering will suffer for every extra round trip the browser has to wait for. Sure, there are build tools that can help you pre-register all those templates in `$templateCache` - but that shows us a build step is, in fact, inevitable for any serious frontend development.
+次に、ファイルを分割して開発する場合、結合するためのビルド手順が必要ですが、`templateURL` を使うと実行時に Ajax 経由でテンプレートを読み込むので、この手順は不要になります。これは開発中は便利ですが、本番環境にデプロイする時には深刻な代償を払うことになります。HTTP/2 が普遍的にサポートされるまでは、アプリケーションの初期ロードパフォーマンスにとって、HTTP リクエストの数は最も重大な要素であり続けるでしょう。あなたのアプリ内のすべてのコンポーネントで `templateURL` を使うことを想像してください - ブラウザは何を表示するのにも何ダースもの HTTP リクエストを実行する必要があります！ご存知かもしれませんが、ほとんどのブラウザは1つのサーバに実行できる並列リクエスト数を制限しています。この制限を超過すると、あなたのアプリの初期レンダリングはブラウザが待機状態になる余計なラウンドトリップに悩まされることになるでしょう。もちろん、ビルドツールを用いて `$templateCache` 内にそれらのテンプレートを事前登録することでこれに対処することはできます - しかしそのことは、どのようなフロントエンド開発においても、現実的にはビルド手順は必要不可欠である、ということを示しています。
 
-So, without `templateURL`, how do we deal with the development experience problem? Writing templates as inline JavaScript strings is terrible, faking templates with `<script type="x/template">` also feels like a hack. Well, maybe it's time to up the game a bit and use a proper module bundler like [Webpack](http://webpack.github.io/) or [Browserify](http://browserify.org/). It might seem daunting if you've never dealt with them before, but trust me it's worth it to take the leap. Proper modularization is a necessity if you want to build anything large and maintainable. More importantly, you get to write your [Vue components in a single file](http://vuejs.org/guide/application.html#Single_File_Components), with proper syntax highlighting and the extra benefits of custom pre-processors, hot-reloading, ES2015 by default, autoprefixing and scoped CSS, which makes the development experience 10 times better.
+では、`templateURL` なしでどのように開発体験の問題に取り組むべきでしょうか？テンプレートをインラインJavaScript文字列として書くのはひどいものですし、`<script type="x/template">` を使ってテンプレートを偽装するのはハックのように感じます。では、このゲームから降りて、[Webpack](http://webpack.github.io/) や [Browserify](http://browserify.org/) のような適切なモジュールバンドラを使う頃合いかもしれませんね。これらを使ったことがなければ、ひるんでしまうかもしれませんが、飛び込む価値はあると保証します。巨大でメンテナンス可能なものを作りたいのであれば、適切なモジュール化が必要です。さらに大事なことは、[Vue の単一ファイルコンポーネント](http://jp.vuejs.org/guide/application.html#単一ファイルコンポーネント)を使うと、適切なシンタックスハイライトと、カスタムプリプロセッサ、ホットリローディング、デフォルトで ES2015 準拠、自動プレフィックス付加や scoped CSS による利便性を得られますし、それによって開発体験は10倍はよくなるということです。
 
-Finally, Vue does allow you to [lazy load your components](http://vuejs.org/guide/components.html#Async_Components), and with Webpack it is trivially easy. Although this is only a concern when your initial bundle is so large that you are better off splitting it apart.
+最後に、Vue を使うことで[コンポーネントの遅延ローディング](http://jp.vuejs.org/guide/components.html#非同期コンポーネント)が可能になりますし、Webpack を使うことでより簡単にこれを行うことができます。ただ、初期バンドルが巨大になるので分割したほうがいいかもしれません。
 
-Think in components, not templates.
+テンプレートではなく、コンポーネントで考えましょう。
