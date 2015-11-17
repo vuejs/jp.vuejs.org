@@ -3,7 +3,7 @@ all: update
 	hexo generate
 	cp -R ./todomvc public/examples
 	cp -R ../vue/test/unit/lib/ public/unit/lib
-	cp ../vue/test/unit/runner.html public/unit/index.html
+	cp ../vue/test/unit/index.html public/unit/index.html
 	cp ../vue/test/unit/specs.js public/unit/specs.js
 	cp ../vue/test/unit/specs.js.map public/unit/specs.js.map
 
