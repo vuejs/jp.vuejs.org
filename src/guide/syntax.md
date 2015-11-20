@@ -148,6 +148,14 @@ Vue.js は式の終わりに任意で"フィルタ"を追加することがで�
 
 <!-- 省略記法 -->
 <a :href="url"></a>
+
+または
+
+<!-- 完全な構文 -->
+<button v-bind:disabled="someDynamicCondition">Button</button>
+
+<!-- 省略記法 -->
+<button :disabled="someDynamicCondition">Button</button>
 ```
 
 ### `v-on` 省略記法
