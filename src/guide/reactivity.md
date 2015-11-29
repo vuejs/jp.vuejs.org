@@ -50,6 +50,13 @@ Vue.set(data, 'c', 3)
 // `vm.c` と `data.c` は今はリアクティブです
 ```
 
+Sometimes you may want to assign a number of properties on to an existing object, for example using `Object.assign()` or `_.extend()`. However, new properties added to the object will not trigger changes. In such cases, create a fresh object with properties from both the original object and the mixin object:
+
+``` js
+// instead of `Object.assign(this.someObject, { a: 1, b: 2 })`
+this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+```
+
 [以前に リストレンダリング のセクションで議論した](/guide/list.html#Caveats) いくつかの配列に関連した注意事項があります。
 
 ## データの初期化
