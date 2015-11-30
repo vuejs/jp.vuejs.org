@@ -50,10 +50,10 @@ Vue.set(data, 'c', 3)
 // `vm.c` と `data.c` は今はリアクティブです
 ```
 
-Sometimes you may want to assign a number of properties on to an existing object, for example using `Object.assign()` or `_.extend()`. However, new properties added to the object will not trigger changes. In such cases, create a fresh object with properties from both the original object and the mixin object:
+時どき、既存のオブジェクトにプロパティの数を割り当てることができます。例えば、`Object.assign()` または `_.extend()` を使用します。しかしながら、新しいプロパティをオブジェクトに追加したとき、トリガーは変更しません。このような場合、元のオブジェクトとミックスインオブジェクトの両方のプロパティを持つ新たなオブジェクトを作成します:
 
 ``` js
-// instead of `Object.assign(this.someObject, { a: 1, b: 2 })`
+// `Object.assign(this.someObject, { a: 1, b: 2 })` の代わり
 this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
 ```
 
