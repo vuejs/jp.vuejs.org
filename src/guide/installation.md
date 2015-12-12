@@ -37,8 +37,17 @@ NPM は Vue.js で大規模アプリケーションを構築するときのイ�
 $ npm install vue
 # 最新の安定版 + CSP 準拠
 $ npm install vue@csp
-# 開発ビルド (Github から直接):
-$ npm install vuejs/vue#dev
+```
+
+## 開発版のビルド
+
+**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) は配信元のコードで制御されていません。従って、Github 上の最新のソースコードから Vue を使用するには、あなた自身それをビルドしなければなりません！
+
+``` bash
+git clone https://github.com/vuejs/vue.git node_modules/vue
+cd node_modules/vue
+npm install
+npm run build
 ```
 
 ## Bower
