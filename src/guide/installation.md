@@ -41,7 +41,7 @@ $ npm install vue@csp
 
 ## 開発版のビルド
 
-**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) は配信元のコードで制御されていません。従って、Github 上の最新のソースコードから Vue を使用するには、あなた自身それをビルドしなければなりません！
+**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) は配信元のコードで制御されていません。したがって、Github 上の最新のソースコードから Vue を使用するには、あなた自身それをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
