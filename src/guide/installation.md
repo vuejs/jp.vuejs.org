@@ -2,10 +2,10 @@
 title: インストール
 type: guide
 order: 0
-vue_version: 1.0.10
-dev_size: "240.69"
-min_size: "68.54"
-gz_size: "23.46"
+vue_version: 1.0.11
+dev_size: "243.36"
+min_size: "69.07"
+gz_size: "23.69"
 ---
 
 > **互換性に関する注意:** Vue.js は IE8 以下をサポートしていません。
@@ -37,8 +37,17 @@ NPM は Vue.js で大規模アプリケーションを構築するときのイ�
 $ npm install vue
 # 最新の安定版 + CSP 準拠
 $ npm install vue@csp
-# 開発ビルド (Github から直接):
-$ npm install vuejs/vue#dev
+```
+
+## 開発版のビルド
+
+**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) は配信元のコードで制御されていません。したがって、Github 上の最新のソースコードから Vue を使用するには、あなた自身それをビルドしなければなりません！
+
+``` bash
+git clone https://github.com/vuejs/vue.git node_modules/vue
+cd node_modules/vue
+npm install
+npm run build
 ```
 
 ## Bower
