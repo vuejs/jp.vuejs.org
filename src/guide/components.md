@@ -23,6 +23,8 @@ var MyComponent = Vue.extend({
 Vue.component('my-component', MyComponent)
 ```
 
+Note that Vue.js does not enforce the [W3C rules](http://www.w3.org/TR/custom-elements/#concepts) for custom tag-names (all-lowercase, must contain a hyphen) though following this convention is considered good practice.
+
 一度登録すると、コンポーネントはカスタム要素 `<my-component>` として親のインスタンスのテンプレートで使用できます。コンポーネントは root の Vue インスタンスをインスタンス化する**前**に登録しているか確認してください。ここに完全な例を示します:
 
 ``` html
