@@ -23,7 +23,7 @@ var MyComponent = Vue.extend({
 Vue.component('my-component', MyComponent)
 ```
 
-Vue.js はカスタムタグ(全て小文字、ハイフンが含まれている必要ある)に対して [W3C ルール](http://www.w3.org/TR/custom-elements/#concepts) に従ってもよいですが、この規則を強制する必要はないことに注意してください。
+Vue.js はカスタムタグ(全て小文字、ハイフンが含まれている必要ある)に対して [W3C ルール](http://www.w3.org/TR/custom-elements/#concepts) にしたがってもよいですが、この規則を強制する必要はないことに注意してください。
 
 一度登録すると、コンポーネントはカスタム要素 `<my-component>` として親のインスタンスのテンプレートで使用できます。コンポーネントは root の Vue インスタンスをインスタンス化する**前**に登録しているか確認してください。ここに完全な例を示します:
 
