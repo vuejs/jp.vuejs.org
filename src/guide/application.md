@@ -176,7 +176,7 @@ describe('my-component', function () {
 })
 ```
 
-There are example Karma configurations for both [Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) and [Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js).
+[Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) と [Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js) の両方、Karma の設定例があります。
 
 <p class="tip">Vue.js のディレクティブは、非同期でデータ更新に反応するので、データ更新後の DOM ステータスに対してアサーションを行うには、`Vue.nextTick` のコールバックを利用する必要があります。</p>
 
