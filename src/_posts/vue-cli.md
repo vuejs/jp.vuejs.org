@@ -1,51 +1,51 @@
 ---
-title: Announcing vue-cli
+title: vue-cli を発表
 date: 2015-12-28 00:00:00
 ---
 
-Recently there has been a lot of [discussion around the tooling hurdle](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4#.chg95e5p6) when you start a React project. Luckily for Vue.js, all you need to do to start with a quick prototype is including it from a CDN via a `<script>` tag, so we've got that part covered. However, that's not how you'd build a real world application. In real world applications we inevitably need a certain amount of tooling to give us modularization, transpilers, pre-processors, hot-reload, linting and testing. These tools are necessary for the long-term maintainability and productivity of large projects, but the initial setup can be a big pain. This is why we are announcing [vue-cli](https://github.com/vuejs/vue-cli), a simple CLI tool to help you quickly scaffold Vue.js projects with opinionated, battery-included build setups.
+最近、React プロジェクトを開始するとき、[ツールの障害を中心に議論](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4#.chg95e5p6) が多くありました。幸いにも Vue.js に対して、迅速なプロトタイプを開始するために必要な全てのものは、`<script>` タグを介して CDN から含めていて、カバーされている部分があります。しかしながら、それは、実際のアプリケーションを構築したいかではありません。実際のアプリケーションでは、必然的に私たちにモジュール化、トランスパイラ、プリプロセッサ、ホットリロード、リント、そしてテストを得るために一定量のツールが必要になります。これらのツールは大規模プロジェクトの長期的な保守性と生産性のために必要ではありますが、初期のセットアップは大きな痛みをともないます。これが [vue-cli](https://github.com/vuejs/vue-cli) を発表する理由で、シンプルな CLI ツールは独断で電池が付属されたビルドセットアップによって、Vue.js プロジェクトの足場をすぐ整えるのに役立ちます。
 
 <!-- more -->
 
-### Just The Scaffolding
+### 適切な足場(Scaffolding)
 
-The usage looks like this:
+使用方法は次のようになります:
 
 ``` bash
 npm install -g vue-cli
 vue init webpack my-project
-# answer prompts
+# プロンプトへ回答
 cd my-project
 npm install
-npm run dev # tada!
+npm run dev # ドジャーン!
 ```
 
-All the CLI does is pulling down templates from the [vuejs-templates](https://github.com/vuejs-templates) organization on GitHub. Dependencies are handled via NPM, and build tasks are simply NPM scripts.
+全ての CLI は、GitHub 上の [vuejs-templates](https://github.com/vuejs-templates) organization から引っ張っています。依存は、NPM 経由でハンドルされ、そしてビルドスクリプトは単純に NPM scripts です。
 
-### Official Templates
+### 公式テンプレート
 
-The purpose of official Vue project templates is providing opinionated, battery-included development tooling setups so that users can get started with actual app code as fast as possible. However, these templates are un-opinionated in terms of how you structure your app code and what libraries you use in addition to Vue.js.
+ユーザーができるだけ速く実際のアプリケーションコードを始めることができるように、公式 Vue プロジェクトテンプレートの目的は、電池を内蔵した開発ツールのセットアップを、独断で提供しています。しかしながら、これらのテンプレートは、あなたのアプリケーションコードを構造化する方法の観点では独断ではない、Vue.js に加えてあなたが使用するライブラリも加えることができます。
 
-All official project templates are repos in the [vuejs-templates organization](https://github.com/vuejs-templates). When a new template is added to the organization, you will be able to run `vue init <template-name> <project-name>` to use that template. You can also run `vue list` to see all available official templates.
+全ての公式プロジェクトテンプレートは [vuejs-templates organization](https://github.com/vuejs-templates) のレポジトリにあります。新しいテンプレートが organization に追加されたとき、そのテンプレートを使用するために `vue init <template-name> <project-name>` を動作させることができます。全ての利用可能な公式テンプレートを確認するために、`vue list` も動作させることができます。
 
-Current available templates include:
+現在利用可能なテンプレートは以下を含んでいます:
 
-- [browserify](https://github.com/vuejs-templates/browserify) - A full-featured Browserify + vueify setup with hot-reload, linting & unit testing.
+- [browserify](https://github.com/vuejs-templates/browserify) - フル装備された Browserify + vueify でホットリロード、リント、単体テストをセットアップ
 
-- [browserify-simple](https://github.com/vuejs-templates/browserify-simple) - A simple Browserify + vueify setup for quick prototyping.
+- [browserify-simple](https://github.com/vuejs-templates/browserify-simple) - シンプルな Browserify + vueify で迅速なプロトタイピングをセットアップ
 
-- [webpack](https://github.com/vuejs-templates/webpack) - A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
+- [webpack](https://github.com/vuejs-templates/webpack) - フル装備された Webpack + vue-loader ホットリロード、リント、テスト、そして css 抽出
 
-- [webpack-simple](https://github.com/vuejs-templates/webpack) - A simple Webpack + vue-loader setup for quick prototyping.
+- [webpack-simple](https://github.com/vuejs-templates/webpack) - シンプルな Webpack + vue-loader で迅速なプロトタイピングをセットアップ
 
-### Bring Your Own Setup
+### あなた自身のセットアップの導き
 
-If you are not happy with the offical templates, you can fork these templates, modify them to fit your specific needs (or even create your own from scratch), and use them via `vue-cli` too, because `vue-cli` can work directly on GitHub repos:
+公式テンプレートで嬉しくないなら、これらのテンプレートを fork することができ、それらを特定にニーズに合わせて変更 (またスクラッチからあなた自身の作成すら)でき、そして `vue-cli` は GitHub レポジトリ上で直接動作できるため、`vue-cli` 経由でそれらを使用できます:
 
 ``` bash
 vue init username/repo my-project
 ```
 
-### Vue Components Everywhere
+### どこでも Vue コンポーネント
 
-There are different templates for different purposes: simple setups for quick prototyping, and full-featured setups for ambitious applications. A common feature among these templates though, is that they all support `*.vue` single file components. This means any third party Vue components written as valid `*.vue` files can be shared among projects using these setups, and simply be distributed over NPM - let's create more reusable components!
+異なる目的のため、異なるテンプレートがあります。迅速なプロトタイピング向けのシンプルなセットアップ、そして野心的なアプリケーション向けへのフル装備されたセットアップ。これらのテンプレート間での共通の特徴は、それらは全て単一ファイルコンポーネント `*.vue` をサポートしていることです。これの意味は、確かな `*.vue` ファイルとして書かれた任意のサードパーティ Vue コンポーネントはこれらをセットアップしてプロジェクト間で共有して使用することができ、そしてシンプルに NPM 上に配信させることができます。より再利用可能なコンポーネントを作成しましょう！
