@@ -4,7 +4,7 @@ type: guide
 order: 18
 ---
 
-> **NEW:** Get up and running with single file Vue components, hot-reload, lint-on-save and unit testing in minutes with [vue-cli](https://github.com/vuejs/vue-cli)!
+> **NEW:** さあ立ち上がって、すぐに [vue-cli](https://github.com/vuejs/vue-cli) で単一ファイルコンポーネント、ホットリロード、リントを保存すると同時に、単体テストを実行しましょう！
 
 Vue.js コアライブラリは、View レイヤーにフォーカスされて柔軟に設計されており、全てのアプリケーションレベルのアーキテクチャと干渉しないライブラリです。これは既存プロジェクトとの統合のために素晴らしいことができますが、スクラッチからの大規模アプリケーションを構築する場合は、構築経験の少ない開発者にとって悩ましい問題にもなります。
 
@@ -30,7 +30,7 @@ Vue.js を利用した典型的なプロジェクトでは、たくさんの個�
 
 これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。Webpack ローダ API はより良いファイル依存関係追跡/キャッシング、そして Browserify transforms で実行できないいくつかの高度な機能があるため、Webpack をセットアップして使用することをお勧めします。
 
-The fastest way to get up and running with a pre-configured build setup is using the official [vue-cli](https://github.com/vuejs/vue-cli). GitHub のビルドセットアップの例も探すことができます:
+立ち上げるための最速の方法は、公式な [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub のビルドセットアップの例も探すことができます:
 
 - [Webpack + vue-loader](https://github.com/vuejs/vue-loader-example)
 - [Browserify + vueify](https://github.com/vuejs/vueify-example)
