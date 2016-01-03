@@ -1,10 +1,18 @@
 (function () {
 
+  initHashGenerator()
   initSearch()
   initMobileMenu()
   if (PAGE_TYPE) {
     initVersionSelect()
     initSubHeaders()
+  }
+
+  /**
+   * Initialize hash Generator
+   */
+  function initHashGenerator () {
+    window.__md5__ = new Hashes.MD5()
   }
 
   /**
@@ -154,6 +162,14 @@
       setActive(last.id)
     }
 
+    function makeHash (str) {
+      if (window.__md5__) {
+        return window.__md5__.hex(str)
+      } else {
+        return str
+      }
+    }
+
     function makeLink (h) {
       var link = document.createElement('li')
       var text = h.textContent.replace(/\(.*\)$/, '')
@@ -161,6 +177,7 @@
       h.id = h.id
         .replace(/_28.*$/, '') // remove anything after brackets
         .replace(/_24/g, '') // remove $
+      h.id = makeHash(h.id)
       link.innerHTML =
         '<a class="section-link" data-scroll href="#' + h.id + '">' +
           text +
