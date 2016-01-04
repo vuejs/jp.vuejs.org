@@ -323,6 +323,11 @@ Vue.component('example', {
       coerce: function (val) {
         return val + '' // 値を文字列にキャスト
       }
+    },
+    propH: {
+      coerce: function (val) {
+        return JSON.parse(val) // cast the value to Object
+      }
     }
   }
 })
