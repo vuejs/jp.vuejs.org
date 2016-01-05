@@ -326,7 +326,7 @@ Vue.component('example', {
     },
     propH: {
       coerce: function (val) {
-        return JSON.parse(val) // cast the value to Object
+        return JSON.parse(val) // 値をオブジェクトにキャスします
       }
     }
   }
