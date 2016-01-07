@@ -37,6 +37,7 @@ $ hexo server
 - [chi-bd](https://github.com/chi-bd)
 - [chocoby](https://github.com/chocoby)
 - [chrispecoraro](https://github.com/chrispecoraro)
+- [cocopon](https://github.com/cocopon)
 - [hrysd](https://github.com/hrysd)
 - [kaorun343](https://github.com/kaorun343)
 - [kuy](https://github.com/kuy)
