@@ -41,14 +41,14 @@ $ npm install vue@csp
 
 ## CLI
 
-Vue.js provides an [official CLI](https://github.com/vuejs/vue-cli) for quickly scaffolding ambitious Single Page Applications. It provides battery-included build setups for a modern frontend workflow. It takes only a few minutes to get up and running with hot-reload, lint-on-save and production-ready builds:
+Vue.js は意欲的なシングルページアプリケーションをすぐに足場固めするの対して、[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。それはモダンなフロントエンドのフレームワークのワークフローに対して、内蔵されたバッテリーの構築を提供します。これはわずか数秒で起き上がるためホットリローディング、リントエラー、そして本番環境のビルドに提供します。
 
 ``` bash
-# install vue-cli
+# インストール vue-cli
 $ npm install -g vue-cli
-# create a new project using the "webpack" boilerplate
+# "webpack" ボイラープレートを使用した新しいプロジェクトを作成する
 $ vue init webpack my-project
-# install dependencies and go!
+# 依存関係をインストールしてgo!
 $ cd my-project
 $ npm install
 $ npm run dev
