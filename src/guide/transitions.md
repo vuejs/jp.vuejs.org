@@ -159,11 +159,11 @@ new Vue({
 
 `transition` が値を持たいない場合は、クラスはデフォルトで `.v-transition` 、`.v-enter` そして `v-leave` になります。
 
-### Custom Transition Classes
+### カスタムトランジションクラス
 
-> New in 1.0.14
+> 1.0.14 で新規追加
 
-You can specify custom `enterClass` and `leaveClass` in the transition definition. These will override the conventional class names. Useful when you want to combine Vue's transition system with an existing CSS animation library, e.g. [Animate.css](https://daneden.github.io/animate.css/):
+トランジション定義でカスタムな `enterClass` と `leaveClass` を指定できます。これらは従来型のクラス名を上書きします。[Animate.css](https://daneden.github.io/animate.css/) の例のような、既に存在する CSS アニメーションライブラリで Vue のトランジションシステムに結合したい時は役に立ちます。
 
 ``` html
 <div v-show="ok" class="animated" transition="bounce">Watch me bounce</div>
@@ -176,16 +176,16 @@ Vue.transition('bounce', {
 })
 ```
 
-### Declaring Transition Type
+### トランジションタイプの宣言
 
-> New in 1.0.14
+> 1.0.14 で新規追加
 
-Vue.js needs to attach event listeners in order to know when the transition has ended. It can either be `transitionend` or `animationend`, depending on the type of CSS rules applied. If you are only using one or the other, Vue.js can automatically detect the correct type. However, if in some cases you want to have both on the same element, for example having a CSS animation triggered by Vue, and also having a CSS transition effect on hover, you will have to explicitly declare the type you want Vue to care about:
+Vue.js はトランジションが終了したのを知るためにイベントリスナにアタッチする必要があります。適当される CSS ルールのタイプ (type) に応じて、`transitionend` か `animationend` のどちらかできます。1 つだけまたは他のルールを適用したい場合は、Vue.js は自動的に正しいタイプを検出することができます。例えば CSS アニメーションが Vue によってトリガされ、ホバー (hover) において CSS トランジションエフェクトも持っているような、いくつかのケースで同じ要素で両方を持ちたい場合は、明示的に以下のようなタイプを宣言する必要があります。
 
 ``` js
 Vue.transition('bounce', {
-  // Vue will now only care about `animationend` events
-  // for this transition
+  // Vue はこのトランジションに対して直ちに
+  // `animationend` イベントだけに気にかけるようになります
   type: 'animation'
 })
 ```
