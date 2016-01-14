@@ -970,7 +970,7 @@ type: api
 ### vm.$watch( expOrFn, callback, [options] )
 
 - **引数:**
-  - `{String|Function} expOrFn`
+  - `{String | Function} expOrFn`
   - `{Function} callback`
   - `{Object} [options]`
     - `{Boolean} deep`
@@ -1288,7 +1288,7 @@ type: api
 ### vm.$appendTo( elementOrSelector, [callback] )
 
 - **引数:**
-  - `{Element|String} elementOrSelector`
+  - `{Element | String} elementOrSelector`
   - `{Function} [callback]`
 
 - **戻り値:** `vm` - インスタンス自身
@@ -1300,7 +1300,7 @@ type: api
 ### vm.$before( elementOrSelector, [callback] )
 
 - **引数:**
-  - `{Element|String} elementOrSelector`
+  - `{Element | String} elementOrSelector`
   - `{Function} [callback]`
 
 - **戻り値:** `vm` - インスタンス自身
@@ -1312,7 +1312,7 @@ type: api
 ### vm.$after( elementOrSelector, [callback] )
 
 - **引数:**
-  - `{Element|String} elementOrSelector`
+  - `{Element | String} elementOrSelector`
   - `{Function} [callback]`
 
 - **戻り値:** `vm` - インスタンス自身
@@ -1371,7 +1371,7 @@ type: api
 ### vm.$mount( [elementOrSelector] )
 
 - **引数:**
-  - `{Element|String} [elementOrSelector]`
+  - `{Element | String} [elementOrSelector]`
 
 - **戻り値:** `vm` - インスタンス自身
 
@@ -1778,6 +1778,10 @@ type: api
 
 - **属性:**
   - `is`
+
+- **Param Attributes:**
+  - [`keep-alive`](/guide/components.html#keep-alive)
+  - [`transition-mode`](/guide/components.html#transition-mode)
 
 - **使用方法:**
 
