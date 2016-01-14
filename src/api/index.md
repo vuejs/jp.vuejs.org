@@ -1779,9 +1779,9 @@ type: api
 - **属性:**
   - `is`
 
-- **Param Attributes:**
-  - [`keep-alive`](/guide/components.html#keep-alive)
-  - [`transition-mode`](/guide/components.html#transition-mode)
+- **パラメータ属性:**
+  - [`keep-alive`](/guide/components.html#369296fbbb4187530420a169398fc793)
+  - [`transition-mode`](/guide/components.html#42b43cde0b2a686d859e0a6b26117756)
 
 - **使用方法:**
 
