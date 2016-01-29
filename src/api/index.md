@@ -618,13 +618,13 @@ type: api
 
 ### init
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called synchronously after the instance has already been initialized, but not has started processing the options and the data for set up the scope.
+  データの監視とイベント/ウォッチャのセットアップより前の、インスタンスが初期化されるときに同期的に呼ばれます。
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle_Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
 
 ### created
 
