@@ -143,7 +143,7 @@ type: api
 ### Vue.nextTick( callback )
 
 - **引数:**
-  - `{Functon} callback`
+  - `{Function} callback`
 
 - **使用方法:**
 
