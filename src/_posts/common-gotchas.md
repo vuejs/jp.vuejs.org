@@ -1,38 +1,38 @@
 ---
-title: Common Beginner Gotchas
+title: よくある初心者の落とし穴
 date: 2016-02-06 10:00:00
 ---
 
-There are few types of questions that we frequently see from users who are new to Vue.js. Although they are all mentioned somewhere in the guide, they are easy to miss and can be hard to find when you do get bitten by the gotchas. Therefore we are aggregating them in this post and hopefully it can save you some time!
+Vue.js を使い始めたユーザーからたびたび幾つかの種類の質問があります。それら質問の回答はガイドでどこかに全て言及していますが、落とし穴にはまったときそれらはあまり目ただなく、そして見つけるのは難しいです。そこで、この記事では、うまくいけば、無駄な時間を節約できるよう、それら落とし穴についてまとめたものを紹介します！
 
 <!-- more -->
 
-### Why isn't the DOM updating?
+### なぜ DOM 更新をしないのですか？
 
-Most of the time, when you change a Vue instance's data, the view updates. But there are two edge cases:
+ほとんどの場合、あなたが Vue インスタンスのデータを変更するとき、view を更新します。しかし、2 つの稀なケースがあります:
 
-1. When you are **adding a new property** that wasn't present when the data was observed. Due to the limitation of ES5 and to ensure consistent behavior across browsers, Vue.js cannot detect property addition/deletions. The best practice is to always declare properties that need to be reactive upfront. In cases where you absolutely need to add or delete properties at runtime, use the global [`Vue.set`](/api/#Vue-set) or [`Vue.delete`](/api/#Vue-delete) methods.
+1. データが監視されるときに、あなたが追加する**新しいプロパティ**が存在しない場合。ES5 の制限とブラウザ間で一貫性のある動作を確保するために、Vue.js はプロパティの追加/削除を検出することはできません。ベストプラクティスは前もってリアクティブにする必要があるプロパティを常に宣言します。あなたが実行時にプロパティを追加または削除する必要がある場合は、グローバルな [`Vue.set`](/api/#a37eafb15120b1522c66496a8d00b2dc) または [`Vue.delete`](/api/#20d023aca3ad1d381dca35b98d399e6a) メソッドを使用します。
 
-2. When you modify an Array by directly setting an index (e.g. `arr[0] = val`) or modifying its `length` property. Similarly, Vue.js cannot pickup these changes. Always modify arrays by using an Array instance method, or replacing it entirely. Vue provides a convenience method `arr.$set(index, value)` which is just syntax sugar for `arr.splice(index, 1, value)`.
+2. あなたが直接インデックス(例: `arr[0] = val`) を設定、または `length` プロパティを変更することによって配列を変更する場合。同様に、Vue.js はこれらの変更をピックアップすることはできません。常に配列のインスタンスメソッドを使用することよって配列を変更、またはそれを完全に置き換えます。Vue は `arr.splice(index, 1, value)` に対するまさにシンタックスシュガーである便利メソッド `arr.$set(index, value)` を提供します。
 
-Further reading: [Reactivity in Depth](/guide/reactivity.html) and [Array Change Detection](http://vuejs.org/guide/list.html#Array_Change_Detection).
+参考文献: [リアクティブの探求](/guide/reactivity.html) と [配列の変化を検出](/guide/list.html#3adfd9b4d83a3dc935abed00011206ec)
 
-### When is the DOM updated?
+### いつ DOM が更新されますか？
 
-Vue.js uses an asynchronous queue to batch DOM updates. This means when you modify some data, the DOM updates do not happen instantly: they are applied asynchronously when the queue is flushed. So how do you know when the DOM has been updated? Use `Vue.nextTick` right after you modify the data. The callback function you pass to it will be called once the queue has been flushed.
+Vue.js はまとめて DOM を更新するために非同期キューを使用します。これはあなたがいくつかのデータを変更するとき、DOM の更新は瞬時に発生しないことを意味します。それらはキューがフラッシュされたとき非同期に適用されます。そこで、あなたは DOM が更新されたときにどうやって知るのでしょうか？あなたがデータを変更後、`Vue.nextTick` を使用するが正しいです。キューがフラッシュされた後、あなたが渡すそのコールバック関数が一度だけ呼ばれます。
 
-Further reading: [Async Update Queue](/guide/reactivity.html#Async_Update_Queue).
+参考文献: [非同期更新キュー](/guide/reactivity.html#de1eccb7d0300db8dd2eedc737f4e49f)
 
-### Why does `data` need to be a function?
+### なぜ `data` は関数として必要なのですか？
 
-In the basic examples, we declare the `data` directly as a plain object. This is because we are creating only a single instance with `new Vue()`. However, when defining a **component**, `data` must be declared as a function that returns the initial data object. Why? Because there will be many instances created using the same definition. If we still use a plain object for `data`, that same object will be **shared by reference** across all instance created! By providing a `data` function, every time a new instance is created, we can simply call it to return a fresh copy of the initial data.
+基本的な例では、`data` は直接プレーンなオブジェクトとして宣言しています。これは、`new Vue()` によって単一のインスタンスだけ作成されるためです。しかしながら、**コンポーネント**を定義するときは、`data` は初期データオブジェクトを返す関数として宣言されなければなりません。なぜでしょうか？同じ定義を使用して作成された多くのインスタンスがあるからです。まだ `data` に対してプレーンなオブジェクトを使用している場合、同じオブジェクトが作成された全てのインスタンス全体を横断して**参照によって共有**されます！`data` 関数を提供することによって、新しいインスタンスが作成される度に、単にそれは初期データの新しいコピーを返すための関数として呼び出すことができます。
 
-Further reading: [Component Option Caveats](/guide/components.html#Component_Option_Caveats).
+参考文献: [コンポーネントオプションの注意事項](/guide/components.html#f54fff76abf40a5536fab5891dc9a31c)
 
-### HTML case insensitivity
+### HTML は小文字・大文字を区別しない
 
-All Vue.js templates are valid, parsable HTML markup, and Vue.js relies on spec-compliant parsers to process its templates. However, as specified in the standard, HTML is case-insensitive when matching tag and attribute names. This means camelCase attributes like `:myProp="123"` will be matched as `:myprop="123"`. As a rule of thumb, you should use camelCase in JavaScript and kebab-case in templates. For example a prop defined in JavaScript as `myProp` should be bound in templates as `:my-prop`.
+全ての Vue.js テンプレートは有効で、解析可能な HTML マークアップ、そして Vue.js はそのテンプレートを処理するために仕様に準拠するパーサーに依存しています。しかしながら、標準で指定された、HTML はタグと属性名がマッチする小文字・大文字を区別しません。これは `:myProp="123"` のようなキャメルケース属性は`:myprop="123"`としてマッチされます。経験則として、あなたは JavaScript ではキャメルケースを使用し、テンプレートでは、ケバブケースを使用すべきです。例えば、`myProp` として JavaScript で定義する prop は `:my-prop` としてテンプレートでバウンドされるべきです。
 
-Further reading: [camelCase vs. kebab-case](http://vuejs.org/guide/components.html#camelCase_vs-_kebab-case).
+参考文献: [キャメルケース 対 ケバブケース](/guide/components.html#97006e1cc8606a7512bfa21f56a473cc)
 
-We are also discussing the possibility of eliminating this inconsistency by resolving props and components in a case-insensitive manner. Join the conversation [here](https://github.com/vuejs/vue/issues/2308).
+小文字、大文字を区別しない作法において props そして コンポーネントを解決することによって、この矛盾を解消する可能性を議論しています。[ここ](https://github.com/vuejs/vue/issues/2308)の会話に参加しましょう。
