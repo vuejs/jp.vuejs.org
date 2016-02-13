@@ -30,7 +30,7 @@ Google Chrome アプリのようなある環境では、Content Security Policy 
 
 ## NPM
 
-NPM は Vue.js で大規模アプリケーションを構築するときのインストール方法を推奨します。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラでうまくペアにします。Vue.js は[単一ファイルコンポーネント](application.html#Single_File_Components)による著作のための、付随するツールも提供しています。
+NPM は Vue.js で大規模アプリケーションを構築するときのインストール方法を推奨します。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラでうまくペアにします。Vue.js は[単一ファイルコンポーネント](application.html#単一ファイルコンポーネント)による著作のための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版

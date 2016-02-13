@@ -626,7 +626,7 @@ type: api
 
   データの監視とイベント/ウォッチャのセットアップより前の、インスタンスが初期化されるときに同期的に呼ばれます。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### created
 
@@ -1795,8 +1795,8 @@ type: api
   - `is`
 
 - **パラメータ属性:**
-  - [`keep-alive`](/guide/components.html#369296fbbb4187530420a169398fc793)
-  - [`transition-mode`](/guide/components.html#42b43cde0b2a686d859e0a6b26117756)
+  - [`keep-alive`](/guide/components.html#keep-alive)
+  - [`transition-mode`](/guide/components.html#transition-mode)
 
 - **使用方法:**
 

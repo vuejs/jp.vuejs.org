@@ -57,7 +57,7 @@ Vue.set(data, 'c', 3)
 this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
 ```
 
-[以前に リストレンダリング のセクションで議論した](/guide/list.html#Caveats) いくつかの配列に関連した注意事項があります。
+[以前に リストレンダリング のセクションで議論した](/guide/list.html#注意事項) いくつかの配列に関連した注意事項があります。
 
 ## データの初期化
 

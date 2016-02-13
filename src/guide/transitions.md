@@ -17,7 +17,7 @@ Vue.js のトランジション (Transition) システムを使用すると、DO
 - `v-if`
 - `v-show`
 - `v-for` (挿入および削除のみに対するトリガ)
-- 動的コンポーネント([次のセクション](components.html#Dynamic_Components)で導入)
+- 動的コンポーネント([次のセクション](components.html#動的コンポーネント)で導入)
 - コンポーネントのルートノード、そして Vue インスタンス の DOM メソッド経由によるトリガ(例、`vm.$appendTo(el)`)
 
 トランジションを持つ要素が挿入または削除されるとき、Vue は以下となります:
