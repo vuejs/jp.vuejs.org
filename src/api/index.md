@@ -158,7 +158,7 @@ type: api
   })
   ```
 
-- **参照:** [非同期更新キュー](/guide/reactivity.html#de1eccb7d0300db8dd2eedc737f4e49f)
+- **参照:** [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
 
 ### Vue.set( object, key, value )
 
@@ -238,7 +238,7 @@ type: api
   var myDirective = Vue.elementDirective('my-element')
   ```
 
-- **参照:** [エレメントディレクティブ](/guide/custom-directive.html#06de4283950cbb74327bbe2c8aeec3e6)
+- **参照:** [エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)
 
 ### Vue.filter( id, [definition] )
 
@@ -332,7 +332,7 @@ type: api
   var myPartial = Vue.partial('my-partial')
   ```
 
-- **参照:** [特別な要素 - &lt;partial&gt;](#0e87c1212a698494dcdb198af3e0eb2f)
+- **参照:** [特別な要素 - &lt;partial&gt;](#partial)
 
 ### Vue.use( plugin, [options] )
 
@@ -355,7 +355,7 @@ type: api
 
   全ての Vue インスタンスが作成された後に影響を及ぼす、ミックスイン (mixin) をグローバルに適用します。これは、コンポーネントにカスタム動作を注入するために、プラグイン作成者によって使用することができます。**アプリケーションコードでの使用は推奨されません。**
 
-- **参照:** [グローバルミックスイン](/guide/mixins.html#6632dc994be0b5e27b646d5f05d98a34)
+- **参照:** [グローバルミックスイン](/guide/mixins.html#グローバルミックスイン)
 
 ## オプション / データ
 
@@ -429,7 +429,7 @@ type: api
   })
   ```
 
-- **参照:** [Props](/guide/components.html#9ad963167cc06bd9873a2821497492cd)
+- **参照:** [Props](/guide/components.html#Props)
 
 ### computed
 
@@ -468,7 +468,7 @@ type: api
 
 - **参照:**
   - [算出プロパティ](/guide/computed.html)
-  - [リアクティブの探求: 算出プロパティの内部](/guide/reactivity.html#935a8aa9aba5829996e0d86fdd8679d4)
+  - [リアクティブの探求: 算出プロパティの内部](/guide/reactivity.html#算出プロパティの内部)
 
 ### methods
 
@@ -526,7 +526,7 @@ type: api
   vm.a = 2 // -> new: 2, old: 1
   ```
 
-- **参照:** [インスタンスメソッド - vm.$watch](#db4c7649683694165325639463ed3147)
+- **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
 
 ## オプション / DOM
 
@@ -544,7 +544,7 @@ type: api
 
   インスタンス化の際にオプションが有効であれば、そのインスタンスはただちにコンパイルの段階に入ります。さもなければ、ユーザーがコンパイルを始めるために手作業で明示的に `vm.$mount()` を呼ぶ必要があります。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### template
 
@@ -559,9 +559,9 @@ type: api
   テンプレートが1トップレベル以上ノードを含む場合は、インスタンスはフラグメントインスタンスになることに注意してください。すなわち、それは単一ノードではなくむしろノードのリストを管理します。フラグメントインスタンスのマウント位置上にある非 flow-control ディレクティブは無視されます。
 
 - **参照:**
-  - [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
-  - [スロットによるコンテンツ配信](/guide/components.html#81469d17081258a6a5d1f10cba818a04)
-  - [フラグメントインスタンス](/guide/components.html#8afe60a0f9fbcac1169521f0b77ae608)
+  - [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+  - [スロットによるコンテンツ配信](/guide/components.html#スロットによるコンテンツ配信)
+  - [フラグメントインスタンス](/guide/components.html#フラグメントインスタンス)
 
 ### replace
 
@@ -636,7 +636,7 @@ type: api
   
   インスタンスが作成された後に、同期的に呼ばれます。この段階では、インスタンスは次の設定されたオプションの処理を終了しています: data の監視、computed properties、methods、watch / event コールバック。 しかしながら、DOM のコンパイルは開始されておらず、`$el` プロパティはまだ有効ではありません。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### beforeCompile
 
@@ -646,7 +646,7 @@ type: api
   
   コンパイルが開始される寸前に呼ばれます。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### compiled
 
@@ -656,7 +656,7 @@ type: api
 
   コンパイルが終了した後に呼ばれます。この段階では、すべてのディレクティブはリンクされているため、データの変更は DOM の更新のトリガになります。しかし、`$el` がドキュメントに挿入されていることは保証されません。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### ready
 
@@ -666,7 +666,7 @@ type: api
 
   コンパイルが終了した後に呼ばれます。**そして**、`$el` が**ドキュメントの中に初めて挿入されます**(すなわち、最初の `attached` フックの直後)。この挿入は `ready` フックのトリガになるように (`vm.$appendTo()` のようなメソッドやディレクティブの更新の結果をもった) Vue 経由で実行されなくてはならないことに注意してください。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### attached
 
@@ -692,7 +692,7 @@ type: api
   
   Vue インスタンスが破棄される寸前に呼ばれます。この段階では、インスタンスはまだ完全に使用可能ではありません。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### destroyed
 
@@ -704,7 +704,7 @@ type: api
 
   leave トランジションが存在する場合、`destroyed` フックはトランジションが終了した**後に**呼ばれます。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ## オプション / アセット
 
@@ -718,7 +718,7 @@ type: api
 
 - **参照:**
   - [カスタムディレクティブ](/guide/custom-directive.html)
-  - [アセットの命名規則](/guide/components.html#d22ad1a18d0655ccfd1265c8cae89f5b)
+  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
 
 ### elementDirectives
 
@@ -729,8 +729,8 @@ type: api
   Vue インスタンスで使用できるような、エレメントディレクティブのハッシュです。
 
 - **参照:**
-  - [エレメントディレクティブ](/guide/custom-directive.html#06de4283950cbb74327bbe2c8aeec3e6)
-  - [アセットの命名規則](/guide/components.html#d22ad1a18d0655ccfd1265c8cae89f5b)
+  - [エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)
+  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
 
 ### filters
 
@@ -742,7 +742,7 @@ type: api
 
 - **参照:**
   - [カスタムフィルタ](/guide/custom-filter.html)
-  - [アセットの命名規則](/guide/components.html#d22ad1a18d0655ccfd1265c8cae89f5b)
+  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
 
 ### components
 
@@ -775,7 +775,7 @@ type: api
   Vue インスタンスで使用できるような partial 文字列のハッシュです。
 
 - **参照:**
-  - [特別な要素 - partial](#0e87c1212a698494dcdb198af3e0eb2f)
+  - [特別な要素 - partial](#partial)
 
 ## オプション / その他
 
@@ -787,7 +787,7 @@ type: api
 
   作成されるインスタンスの親インスタンスを指定します。2つのインスタンス間で親子関係を確立します。親は子の `this.$parent` としてアクセス可能となり、子は親の `$children` 配列に追加されます。
 
-- **参照:** [親子間の通信](/guide/components.html#381060ce1addc88d22fc3b1917ac4ac0)
+- **参照:** [親子間の通信](/guide/components.html#親子間の通信)
 
 ### events
 
@@ -822,8 +822,8 @@ type: api
   ```
 
 - **参照:**
-  - [インスタンスメソッド - イベント](#276b97a182ccbf924cd54acf0611c26e)
-  - [親子間の通信](/guide/components.html#381060ce1addc88d22fc3b1917ac4ac0)
+  - [インスタンスメソッド - イベント](#インスタンスメソッド_/_イベント)
+  - [親子間の通信](/guide/components.html#親子間の通信)
 
 ### mixins
 
@@ -900,7 +900,7 @@ type: api
 
 - **詳細:**
 
-  Vue インスタンスが管理している DOM 要素。これは[フラグメントインスタンス](/guide/components.html#8afe60a0f9fbcac1169521f0b77ae608)向けであることに注意が必要で、`vm.$el` はフラグメントの開始位置を示すアンカーノードを返します。
+  Vue インスタンスが管理している DOM 要素。これは[フラグメントインスタンス](/guide/components.html#フラグメントインスタンス)向けであることに注意が必要で、`vm.$el` はフラグメントの開始位置を示すアンカーノードを返します。
 
 ### vm.$options
 
@@ -962,8 +962,8 @@ type: api
   `v-ref` で登録した子コンポーネントを保持するオブジェクト。
 
 - **参照:**
-  - [子コンポーネントの参照](/guide/components.html#0a119df0d6c8d52f3b2668f750ee8bdf)
-  - [v-ref](#3c5d0885af916e7ce1021764d548da5b)
+  - [子コンポーネントの参照](/guide/components.html#子コンポーネントの参照)
+  - [v-ref](#v-ref)
 
 ### vm.$els
 
@@ -975,7 +975,7 @@ type: api
 
   `v-el` で登録した DOM 要素を保持するオブジェクト。
 
-- **参照:** [v-el](#127dcd29afb5167078ead80b039210c1)
+- **参照:** [v-el](#v-el)
 
 ## インスタンスメソッド / データ
 
@@ -1257,7 +1257,7 @@ type: api
   // child1 のコールバックが true を返していないため、親には通知されません。
   ```
 
-- **参照:** [親子間の通信](/guide/components.html#381060ce1addc88d22fc3b1917ac4ac0)
+- **参照:** [親子間の通信](/guide/components.html#親子間の通信)
 
 ### vm.$broadcast( event, [...args] )
 
@@ -1375,8 +1375,8 @@ type: api
   ```
 
 - **参照:**
-  - [Vue.nextTick](#7ab8c314279446fd030650cf1c20e8f8)
-  - [非同期更新キュー](/guide/reactivity.html#de1eccb7d0300db8dd2eedc737f4e49f)
+  - [Vue.nextTick](#Vue-nextTick)
+  - [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
 
 ## インスタンスメソッド / ライフサイクル
 
@@ -1412,7 +1412,7 @@ type: api
   new MyComponent().$mount().$appendTo('#container')
   ```
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### vm.$destroy( [remove] )
 
@@ -1425,7 +1425,7 @@ type: api
 
   `beforeDestroy` および `destroyed` をトリガします。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#80d2834701ca0b3ba9cde68470474595)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ## ディレクティブ
 
@@ -1453,7 +1453,7 @@ type: api
 
 - **詳細:**
 
-  ある要素の `innerHTML` を更新します。コンテンツはプレーン HTML として挿入され、データバインディングは無視されます。テンプレート片を再利用する必要があるならば、[partials](#0e87c1212a698494dcdb198af3e0eb2f) を使ってください。
+  ある要素の `innerHTML` を更新します。コンテンツはプレーン HTML として挿入され、データバインディングは無視されます。テンプレート片を再利用する必要があるならば、[partials](#partial) を使ってください。
 
   内部的には、`{% raw %}{{{ Mustache }}}{% endraw %}` 展開はアンカーノードを利用して `v-html` ディレクティブとしてもコンパイルされます。ディレクティブ形式はラッパー要素を必要としますが、パフォーマンスが若干改善し、FOUC (まだコンパイルされていないコンテンツのちらつき)を回避します。
 
@@ -1485,7 +1485,7 @@ type: api
 
   式の値の真偽に応じて、要素の CSS プロパティ `display` をトグルします。表示時にトランジションをトリガします。
 
-- **参照:** [条件付きレンダリング - v-show](/guide/conditional.html#36b26c4170af82b99c8d899100d6cb95)
+- **参照:** [条件付きレンダリング - v-show](/guide/conditional.html#v-show)
 
 ### v-else
 
@@ -1506,17 +1506,17 @@ type: api
   </div>
   ```
 
-- **参照:** [条件付きレンダリング - v-else](/guide/conditional.html#70fb53f2f9a2d50ea14d0fdbf239fb9e)
+- **参照:** [条件付きレンダリング - v-else](/guide/conditional.html#v-else)
 
 ### v-for
 
 - **要求事項:** `Array | Object | Number | String`
 
 - **パラメータ属性:**
-  - [`track-by`](/guide/list.html#f616d84918d1316867315db588cf2614)
-  - [`stagger`](/guide/transitions.html#09c6e146e1dff1ff76bed7aafe6e488b)
-  - [`enter-stagger`](/guide/transitions.html#09c6e146e1dff1ff76bed7aafe6e488b)
-  - [`leave-stagger`](/guide/transitions.html#09c6e146e1dff1ff76bed7aafe6e488b)
+  - [`track-by`](/guide/list.html#track-by)
+  - [`stagger`](/guide/transitions.html#スタガリングトランジション)
+  - [`enter-stagger`](/guide/transitions.html#スタガリングトランジション)
+  - [`leave-stagger`](/guide/transitions.html#スタガリングトランジション)
 
 - **使用方法:**
 
@@ -1660,7 +1660,7 @@ type: api
 
 - **参照:**
   - [クラスととスタイルのバインディング](/guide/class-and-style.html)
-  - [コンポーネント - Props](/guide/components.html#9ad963167cc06bd9873a2821497492cd)
+  - [コンポーネント - Props](/guide/components.html#Props)
   
 ### v-model
 
@@ -1672,9 +1672,9 @@ type: api
   - `<textarea>`
 
 - **パラメータ属性:**
-  - [`lazy`](/guide/forms.html#0ffe34b4e04c2b282c5a388b1ad8aa7a)
-  - [`number`](/guide/forms.html#b1bc248a7ff2b2e95569f56de68615df)
-  - [`debounce`](/guide/forms.html#c7f96522442c422bac20ae389f04863c)
+  - [`lazy`](/guide/forms.html#lazy)
+  - [`number`](/guide/forms.html#number)
+  - [`debounce`](/guide/forms.html#debounce)
 
 - **使用方法:**
 
@@ -1723,7 +1723,7 @@ type: api
   this.$refs.list
   ```
 
-- **参照:** [子コンポーネントの参照](/guide/components.html#0a119df0d6c8d52f3b2668f750ee8bdf)
+- **参照:** [子コンポーネントの参照](/guide/components.html#子コンポーネントの参照)
 
 ### v-el
 
@@ -1807,7 +1807,7 @@ type: api
   <component :is="componentId"></component>
   ```
 
-- **参照:** [動的コンポーネント](/guide/components.html#5801dbb63faac002cec193323e7f7878)
+- **参照:** [動的コンポーネント](/guide/components.html#動的コンポーネント)
 
 ### slot
 
@@ -1822,7 +1822,7 @@ type: api
 
   詳細な使用方法は、下記にリンクしたガイドセクションを参照してください。
 
-- **参照:** [スロットによるコンテンツ配信](/guide/components.html#81469d17081258a6a5d1f10cba818a04)
+- **参照:** [スロットによるコンテンツ配信](/guide/components.html#スロットによるコンテンツ配信)
 
 ### partial
 

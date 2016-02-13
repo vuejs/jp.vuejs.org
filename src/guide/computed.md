@@ -132,4 +132,4 @@ computed: {
 
 今、`vm.fullname = 'John Doe'` を呼ぶとき、setter が呼び出され、`vm.firstName` と `vm.lastName` は適宜更新します。
 
-技術的な詳細はリアクティブシステム専用の [別のセクション](reactivity.html#935a8aa9aba5829996e0d86fdd8679d4) で、どうやって算出プロパティが更新されるか、説明されています。
+技術的な詳細はリアクティブシステム専用の [別のセクション](reactivity.html#Inside_Computed_Properties) で、どうやって算出プロパティが更新されるか、説明されています。
