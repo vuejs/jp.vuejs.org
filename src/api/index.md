@@ -100,7 +100,7 @@ type: api
 
 ## グローバル API
 
-### Vue.extend( options )
+<h3 id="Vue-extend">Vue.extend( options )</h3>
 
 - **引数:**
   - `{Object} options`
@@ -140,7 +140,7 @@ type: api
 
 - **参照:** [コンポーネント](/guide/components.html)
 
-### Vue.nextTick( callback )
+<h3 id="Vue-nextTick">Vue.nextTick( callback )</h3>
 
 - **引数:**
   - `{Function} callback`
@@ -160,7 +160,7 @@ type: api
 
 - **参照:** [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
 
-### Vue.set( object, key, value )
+<h3 id="Vue-set">Vue.set( object, key, value )</h3>
 
 - **引数:**
   - `{Object} object`
@@ -175,7 +175,7 @@ type: api
 
 - **参照:** [リアクティブの探求](/guide/reactivity.html)
 
-### Vue.delete( object, key )
+<h3 id="Vue-delete">Vue.delete( object, key )</h3>
 
 - **引数:**
   - `{Object} object`
@@ -187,7 +187,7 @@ type: api
 
 - **参照:** [リアクティブの探求](/guide/reactivity.html)
 
-### Vue.directive( id, [definition] )
+<h3 id="Vue-directive">Vue.directive( id, [definition] )</h3>
 
 - **引数:**
   - `{String} id`
@@ -216,7 +216,7 @@ type: api
 
 - **参照:** [カスタムディレクティブ](/guide/custom-directive.html)
 
-### Vue.elementDirective( id, [definition] )
+<h3 id="Vue-elementDirective">Vue.elementDirective( id, [definition] )</h3>
 
 - **引数:**
   - `{String} id`
@@ -240,7 +240,7 @@ type: api
 
 - **参照:** [エレメントディレクティブ](/guide/custom-directive.html#エレメントディレクティブ)
 
-### Vue.filter( id, [definition] )
+<h3 id="Vue-filter">Vue.filter( id, [definition] )</h3>
 
 - **引数:**
   - `{String} id`
@@ -268,7 +268,7 @@ type: api
 
 - **参照:** [カスタムフィルタ](/guide/custom-filter.html)
 
-### Vue.component( id, [definition] )
+<h3 id="Vue-component">Vue.component( id, [definition] )</h3>
 
 - **引数:**
   - `{String} id`
@@ -291,7 +291,7 @@ type: api
 
 - **参照:** [コンポーネント](/guide/components.html)
 
-### Vue.transition( id, [hooks] )
+<h3 id="Vue-transition">Vue.transition( id, [hooks] )</h3>
 
 - **引数:**
   - `{String} id`
@@ -314,7 +314,7 @@ type: api
 
 - **参照:** [トランジション](/guide/transitions.html)
 
-### Vue.partial( id, [partial] )
+<h3 id="Vue-partial">Vue.partial( id, [partial] )</h3>
 
 - **引数:**
   - `{String} id`
@@ -334,7 +334,7 @@ type: api
 
 - **参照:** [特別な要素 - &lt;partial&gt;](#partial)
 
-### Vue.use( plugin, [options] )
+<h3 id="Vue-use">Vue.use( plugin, [options] )</h3>
 
 - **引数:**
   - `{Object | Function} plugin`
@@ -346,7 +346,7 @@ type: api
 
 - **参照:** [プラグイン](/guide/plugins.html)
 
-### Vue.mixin( mixin )
+<h3 id="Vue-mixin">Vue.mixin( mixin )</h3>
 
 - **引数:**
   - `{Object} mixin`
@@ -979,7 +979,7 @@ type: api
 
 ## インスタンスメソッド / データ
 
-### vm.$watch( expOrFn, callback, [options] )
+<h3 id="vm-watch">vm.$watch( expOrFn, callback, [options] )</h3>
 
 - **引数:**
   - `{String | Function} expOrFn`
@@ -1051,7 +1051,7 @@ type: api
   // その時の `a` の値でコールバックがただちに発火します
   ```
 
-### vm.$get( expression )
+<h3 id="vm-get">vm.$get( expression )</h3>
 
 - **引数:**
   - `{String} expression`
@@ -1074,7 +1074,7 @@ type: api
   vm.$get('a.b + 1') // -> 2
   ```
 
-### vm.$set( keypath, value )
+<h3 id="vm-set">vm.$set( keypath, value )</h3>
 
 - **引数:**
   - `{String} keypath`
@@ -1112,7 +1112,7 @@ type: api
 
 - **参照:** [リアクティブの探求](/guide/reactivity.html)
 
-### vm.$delete( key )
+<h3 id="vm-delete">vm.$delete( key )</h3>
 
 - **引数:**
   - `{String} key`
@@ -1121,7 +1121,7 @@ type: api
 
   Vue インスタンス（それと、その `$data`）のルートレベルのプロパティを削除します。 ダイジェストサイクルを強制します。非推奨です。
 
-### vm.$eval( expression )
+<h3 id="vm-eval">vm.$eval( expression )</h3>
 
 - **引数:**
   - `{String} expression`
@@ -1137,7 +1137,7 @@ type: api
   vm.$eval('msg | uppercase') // -> 'HELLO'
   ```
 
-### vm.$interpolate( templateString )
+<h3 id="vm-interpolate">vm.$interpolate( templateString )</h3>
 
 - **引数:**
   - `{String} templateString`
@@ -1153,7 +1153,7 @@ type: api
   vm.$interpolate('{{msg}} world!') // -> 'hello world!'
   ```
 
-### vm.$log( [keypath] )
+<h3 id="vm-log">vm.$log( [keypath] )</h3>
 
 - **引数:**
   - `{String} [keypath]`
@@ -1169,7 +1169,7 @@ type: api
 
 ## インスタンスメソッド / イベント
 
-### vm.$on( event, callback )
+<h3 id="vm-on">vm.$on( event, callback )</h3>
 
 - **引数:**
   - `{String} event`
@@ -1189,7 +1189,7 @@ type: api
   // -> "hi"
   ```
 
-### vm.$once( event, callback )
+<h3 id="vm-once">vm.$once( event, callback )</h3>
 
 - **引数:**
   - `{String} event`
@@ -1199,7 +1199,7 @@ type: api
 
   一度きりのイベントリスナを提供します。リスナは最初にトリガされた時に削除されます。
 
-### vm.$off( [event, callback] )
+<h3 id="vm-off">vm.$off( [event, callback] )</h3>
 
 - **引数:**
   - `{String} [event]`
@@ -1215,7 +1215,7 @@ type: api
 
   - イベントとコールバックの両方が与えられたら、その特定のコールバックに対するイベントリスナのみを削除します。
 
-### vm.$emit( event, [...args] )
+<h3 id="vm-emit">vm.$emit( event, [...args] )</h3>
 
 - **引数:**
   - `{String} event`
@@ -1223,7 +1223,7 @@ type: api
 
   現在のインスタンス上のイベントをトリガします。追加の引数はリスナのコールバックファンクションに渡されます。
 
-### vm.$dispatch( event, [...args] )
+<h3 id="vm-dispatch">vm.$dispatch( event, [...args] )</h3>
 
 - **引数:**
   - `{String} event`
@@ -1259,7 +1259,7 @@ type: api
 
 - **参照:** [親子間の通信](/guide/components.html#親子間の通信)
 
-### vm.$broadcast( event, [...args] )
+<h3 id="vm-broadcast">vm.$broadcast( event, [...args] )</h3>
 
 - **引数:**
   - `{String} event`
@@ -1297,7 +1297,7 @@ type: api
 
 ## インスタンスメソッド / DOM
 
-### vm.$appendTo( elementOrSelector, [callback] )
+<h3 id="vm-appendTo">vm.$appendTo( elementOrSelector, [callback] )</h3>
 
 - **引数:**
   - `{Element | String} elementOrSelector`
@@ -1309,7 +1309,7 @@ type: api
 
   Vue インスタンスの DOM 要素またはフラグメントを対象要素に追加します。対象には、要素またはクエリセレクタ文字列が指定できます。このメソッドは表示されている場合にトランジションをトリガします。トランジションが終了した後に（またはトランジションがトリガされなかった時は即座に）コールバックが発火します。
 
-### vm.$before( elementOrSelector, [callback] )
+<h3 id="vm-before">vm.$before( elementOrSelector, [callback] )</h3>
 
 - **引数:**
   - `{Element | String} elementOrSelector`
@@ -1321,7 +1321,7 @@ type: api
 
   Vue インスタンスの DOM 要素またはフラグメントを対象要素に挿入します。対象には、要素またはクエリセレクタ文字列が指定できます。このメソッドは表示されている場合にトランジションをトリガします。トランジションが終了した後に（またはトランジションがトリガされなかった時は即座に）コールバックが発火します。
 
-### vm.$after( elementOrSelector, [callback] )
+<h3 id="vm-after">vm.$after( elementOrSelector, [callback] )</h3>
 
 - **引数:**
   - `{Element | String} elementOrSelector`
@@ -1333,7 +1333,7 @@ type: api
 
   Vue インスタンスの DOM 要素またはフラグメントを対象要素の後に挿入します。対象には、要素またはクエリセレクタ文字列が指定できます。このメソッドは表示されている場合にトランジションをトリガします。トランジションが終了した後に（またはトランジションがトリガされなかった時は即座に）コールバックが発火します。
 
-### vm.$remove( [callback] )
+<h3 id="vm-remove">vm.$remove( [callback] )</h3>
 
 - **引数:**
   - `{Function} [callback]`
@@ -1344,7 +1344,7 @@ type: api
   
   Vue インスタンスの DOM 要素またはフラグメントを DOM から削除します。このメソッドは表示されている場合にトランジションをトリガします。トランジションが終了した後に（またはトランジションがトリガされなかった時は即座に）コールバックが発火します。
 
-### vm.$nextTick( callback )
+<h3 id="vm-nextTick">vm.$nextTick( callback )</h3>
 
 - **引数:**
   - `{Function} [callback]`
@@ -1380,7 +1380,7 @@ type: api
 
 ## インスタンスメソッド / ライフサイクル
 
-### vm.$mount( [elementOrSelector] )
+<h3 id="vm-mount">vm.$mount( [elementOrSelector] )</h3>
 
 - **引数:**
   - `{Element | String} [elementOrSelector]`
@@ -1414,7 +1414,7 @@ type: api
 
 - **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
-### vm.$destroy( [remove] )
+<h3 id="vm-destroy">vm.$destroy( [remove] )</h3>
 
 - **引数:**
   - `{Boolean} [remove] - default: false`
