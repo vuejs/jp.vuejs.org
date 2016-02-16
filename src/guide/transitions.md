@@ -404,7 +404,7 @@ Vue.transition('fade', {
 `v-for` で `transition` を使用するとき、スタガリングトランジションを作成することが可能です。`stagger`、か `enter-stagger`、かまたは `leave-stagger` のいずれかの属性をトランジション要素に追加することによってこれをすることができます:
 
 ``` html
-<div v-for="list" transition stagger="100"></div>
+<div v-for="item in list" transition="stagger" stagger="100"></div>
 ```
 
 または、より細かい制御のために、`stagger`、`enterStagger` または `leaveStagger` フックを提供することができます:
