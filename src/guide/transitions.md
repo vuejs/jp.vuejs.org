@@ -244,6 +244,9 @@ CSS アニメーションは、CSS トランジションと同じやり方で適
 ```
 
 ``` css
+bounce-transition {
+  display: inline-block; /* 他の場合、スケールアニメーションは動作しません */
+}
 .bounce-enter {
   animation: bounce-in .5s;
 }
@@ -282,6 +285,9 @@ CSS アニメーションは、CSS トランジションと同じやり方で適
 </div>
 
 <style>
+  .bounce-transition {
+    display: inline-block;
+  }
   .bounce-enter {
     -webkit-animation: bounce-in .5s;
     animation: bounce-in .5s;
@@ -292,52 +298,58 @@ CSS アニメーションは、CSS トランジションと同じやり方で適
   }
   @keyframes bounce-in {
     0% {
-      transform: scale(0);
       -webkit-transform: scale(0);
+      transform: scale(0);
     }
     50% {
-      transform: scale(1.5);
       -webkit-transform: scale(1.5);
+      transform: scale(1.5);
     }
     100% {
-      transform: scale(1);
       -webkit-transform: scale(1);
+      transform: scale(1);
     }
   }
   @keyframes bounce-out {
     0% {
-      transform: scale(1);
       -webkit-transform: scale(1);
+      transform: scale(1);
     }
     50% {
-      transform: scale(1.5);
       -webkit-transform: scale(1.5);
+      transform: scale(1.5);
     }
     100% {
-      transform: scale(0);
       -webkit-transform: scale(0);
+      transform: scale(0);
     }
   }
   @-webkit-keyframes bounce-in {
     0% {
       -webkit-transform: scale(0);
+      transform: scale(0);
     }
     50% {
       -webkit-transform: scale(1.5);
+      transform: scale(1.5);
     }
     100% {
       -webkit-transform: scale(1);
+      transform: scale(1);
     }
   }
   @-webkit-keyframes bounce-out {
     0% {
       -webkit-transform: scale(1);
+      transform: scale(1);
     }
     50% {
       -webkit-transform: scale(1.5);
+      transform: scale(1.5);
     }
     100% {
       -webkit-transform: scale(0);
+      transform: scale(0);
     }
   }
 </style>
