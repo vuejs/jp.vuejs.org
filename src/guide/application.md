@@ -30,10 +30,10 @@ Vue.js を利用した典型的なプロジェクトでは、たくさんの個�
 
 これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。Webpack ローダ API はより良いファイル依存関係追跡/キャッシング、そして Browserify transforms で実行できないいくつかの高度な機能があるため、Webpack をセットアップして使用することをお勧めします。
 
-立ち上げるための最速の方法は、公式な [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub のビルドセットアップの例も探すことができます:
+立ち上げるための最速の方法は、公式な [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub 上にある公式 scaffold テンプレートも探すことができます:
 
-- [Webpack + vue-loader](https://github.com/vuejs/vue-loader-example)
-- [Browserify + vueify](https://github.com/vuejs/vueify-example)
+- [Webpack + vue-loader](https://github.com/vuejs/vuejs-templates/webpack)
+- [Browserify + vueify](https://github.com/vuejs/vuejs-templates/browserify)
 
 ## ルーティング
 
