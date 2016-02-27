@@ -213,6 +213,8 @@ Vue.directive('example', {
 })
 ```
 
+<p class="tip">Note you need to use their camel-case at `paramWatchers`, when using kebab-case attributes. For example, if you have defined the attribute like `disable-effect`, you need to set `disableEffect` to `paramsWatchers`.</p>
+
 ### deep
 
 もしカスタムディレクティブでオブジェクトを扱いたい場合で、オブジェクトの内側のネストされたプロパティが変更された時に `update` をトリガしたい場合は、ディレクティブの定義に `deep: true` を渡す必要があります。
