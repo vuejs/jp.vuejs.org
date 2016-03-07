@@ -17,7 +17,7 @@ order: 17
 
 4. 同時に上記のいくつかの組み合わせを注入しながら、独自の API を提供するライブラリ。例: [vue-router](https://github.com/vuejs/vue-router)
 
-Vue.js プラグインは `install` メソッドを公開する必要があります。このメソッドは起こりうるオプションと一緒に、最初の引数として `Vue` コンストラクタで呼び出されます:
+Vue.js プラグインは `install` メソッドを公開する必要があります。このメソッドは第 1 引数は `Vue` コンストラクタ、第 2 引数は任意で `options` が指定されて呼び出されます:
 
 ``` js
 MyPlugin.install = function (Vue, options) {
