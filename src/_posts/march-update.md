@@ -1,42 +1,42 @@
 ---
-title: March 2016 Update
+title: 2016年3月最新情報
 date: 2016-03-14 18:45:00
 ---
 
-## Growing Community
+## コミュニティの成長
 
-Vue's growth in the past year has been nothing short of amazing. As of today we are at over 15,000 stars on GitHub, over 500k downloads from npm, and over 2,000 users in the Gitter channel. What's more exciting though, is that the community successfully organized the first [London Vue.js Meetup](http://www.meetup.com/London-Vue-js-Meetup/) and the first [Paris Vue.js Meetup](http://www.meetup.com/Vuejs-Paris/?scroll=true)! A big shoutout to the awesome organizers: [Jack](https://twitter.com/JackBarham), [James](https://twitter.com/onejamesbrowne/) and [Eduardo](https://twitter.com/posva/).
+この1年間における Vue の成長は素晴らしいです。今現在、GitHub では 15,000 を超えるスターがあり、npm から 500k を超えるダウンロード、そして Gitter チャンネルでは 2,000 ユーザーを超えています。何よりも、コミュニティによってロンドンで最初の[ミートアップ](http://www.meetup.com/London-Vue-js-Meetup/)とパリで最初の[ミートアップ](http://www.meetup.com/Vuejs-Paris/?scroll=true)がうまく開催されたのは、大変エキサイティングです！ミートアップの主催者である [Jack](https://twitter.com/JackBarham)、[James](https://twitter.com/onejamesbrowne/) そして [Eduardo](https://twitter.com/posva/) に大変感謝いたします。
 
 <!-- more -->
 
-If you are interested in connecting with Vue.js users near you and share your experiences in using Vue.js, joining a local Meetup is a great idea - even better, maybe you can organize one :)
+あなたの周りの Vue.js ユーザーと接することや Vue.js の使用についてあなたの知見を共有に興味があるならば、ローカルなミートアップに参加することは素晴らしいアイデアです。ミートアップを開催できたらとしたら、素晴らしいです :)
 
-## Cool Things Being Built
+## 作られたクールなもの
 
-More and more amazing things are being built with Vue. There are products like [PageKit](https://pagekit.com/), Laravel Spark (coming soon) and [Statamic](https://v2.statamic.com/), sleek apps like [Koel](http://koel.phanan.net/) and [Gokotta](https://github.com/Zhangdroid/Gokotta), UI components like [VueStrap](http://yuche.github.io/vue-strap/) and [Vue-MDL](http://posva.net/vue-mdl/), and smooth, interactive experiences like [YouTube Adblitz](https://adblitz.withyoutube.com) and even the [Facebook NewsFeed Marketing Site](https://newsfeed.fb.com/)!
+もっともっと素晴らしい物が Vue で作られています。[PageKit](https://pagekit.com/)、Laravel Spark (近日公開)と [Statamic](https://v2.statamic.com/) のようなプロダクトや、[Koel](http://koel.phanan.net/) と [Gokotta](https://github.com/Zhangdroid/Gokotta) のようなきれいなアプリケーション、[VueStrap](http://yuche.github.io/vue-strap/) と [Vue-MDL](http://posva.net/vue-mdl/) のような UI コンポーネント、そして [YouTube Adblitz](https://adblitz.withyoutube.com) と [Facebook NewsFeed Marketing Site](https://newsfeed.fb.com/) のような素晴らしいインタラクティブな体験をさせるものがあります！
 
-There are many other great projects - too many to be listed here - but you can check them all out in [awesome-vue](https://github.com/vuejs/awesome-vue). If you've built great things with Vue, you should also add them to the list!
+多くの他のすごいプロジェクトがありますが、ここでは多すぎてリストアップできませんが、[awesome-vue](https://github.com/vuejs/awesome-vue) でそれらを確認することができます。Vue ですごいものを作ったならば、そのリストにそれらを追加しましょう！
 
-## A New Vision For the Project
+## プロジェクトに対する新しいビジョン
 
-Some of you may have noticed that the development on the Vue.js core repo has slowed down lately - in the meanwhile, a lot of efforts went into other sub projects, namely [Vuex](https://github.com/vuejs/vuex), [vue-devtools](https://github.com/vuejs/vue-devtools) and the official [Webpack project boilerplate](https://github.com/vuejs-templates/webpack). The next step is a new release for [vue-router](https://github.com/vuejs/vue-router), and better documentation/examples demonstrating how Vue.js core, Vuex and vue-router work together in a large single page application.
+最近、Vue.js のコアレポジトリで開発が鈍くなっているのに気づいたかもしれません。その間は、[Vuex](https://github.com/vuejs/vuex)、[vue-devtools](https://github.com/vuejs/vue-devtools) そして公式 [Webpack ボイラープレートプロジェクト](https://github.com/vuejs-templates/webpack) と他のサブプロジェクトにたくさんの労力を注いでいました。次のステップは [vue-router](https://github.com/vuejs/vue-router)と大規模なシングルページアプリケーションで Vue.js のコアが Vuex そして vue-router といっしょに動作するドキュメント、例、そしてデモのリリースです。
 
-All this adds together towards a new vision for the Vue.js project: a progressive framework that can adapt to different complexity levels. Vue.js core will remain "just the view layer" - you can still drop it on whatever existing page to replace jQuery, but the Vue.js project also includes other pieces like vue-router, Vuex, vue-loader/vueify and vue-cli that works together as a more complete, opinionated framework for single page applications. More on this in a later post.
+これら全ては、異なる複雑なレベルに適応できるプログレッシブフレームワーク (progressive framework) という新しいビジョンに向けて一緒に Vue.js  プロジェクトに追加します。Vue.js コアは "view 層" のままです。jQuery をリプレースするため既存のページを Vue と置き換えることができますが、Vue.js プロジェクトは シングルページアプリケーションのためにより完全で独断的なフレームワークとして一緒に動作する vue-router 、Vuex 、vue-loader/vueify そして vue-cli のような他の部分を含んでいます。これに関する詳細は、後で投稿します。
 
-## Vue.js needs your help!
+## Vue.js はあなたの助けを必要としています！
 
-Open source is awesome, and I'm proud that Vue.js is helping people build real products all over the world. However, as the scope of the project grows, pushing new features while maintaining everything becomes a very demanding job. The good news is you can help!
+オープンソースは素晴らしく、そして私は Vue.js が世上で実プロダクトを構築する人々の助けになっているのを誇りに思います。しかしながら、プロジェクトが大きくなるにつれて、全てを維持しながら新しい機能をプッシュすることは大変厳しい仕事です。良いニュースはあなたが助けることができます！
 
-### Looking for collaborators
+### 協力者を探しています
 
-There are already users who frequently helps out in various ways, but this is an invitation to make things official. I'm looking for contributors to join the "team", which is currently mostly just me. If that sounds interesting to you, take a look at the application [here](https://docs.google.com/forms/d/1SgDgKZqyivEf5xl0EOWNfs68Xy3f4oBzLXIlwlS0BIs/viewform).
+たびたび、様々な方法で手助けするユーザーが既におりますが、これは公式な招待状になります。現在ほとんど私一人ですが、私は"チーム"に参加して貢献出来る方を探しています。もしあなたが興味あるならば、[こちら](https://docs.google.com/forms/d/1SgDgKZqyivEf5xl0EOWNfs68Xy3f4oBzLXIlwlS0BIs/viewform)をごらんください。
 
-### Looking for sponsors
+### スポンサーを探しています
 
-Another way to help making Vue development sustainable is providing direct financial support. The more financial support I receive, the more time I get to spend on making Vue even better.
+Vue の開発が持続可能を支援するためのもう1つの方法は、直接資金支援を提供して頂くことです。より資金支援を私が受け取ることで、より多くの時間を Vue をより良い開発に費やすことができます。
 
-If you run a business and is using Vue in a revenue-generating product, it would make business sense to sponsor Vue development: it ensures the project that your product relies on stays healthy and actively maintained. It can also help your exposure in the Vue community and makes it easier to attract Vue developers.
+もしあなたがビジネスをしていて、収益を創出するプロダクトで Vue を使用している場合は、Vue の開発のスポンサーすることでビジネスとして意味をなすでしょう。あなたのプロダクトが健全を保証し、かつ前向きに維持されるプロジェクトを保証します。また Vue コミュニティにあなたの公表を助けることができ、Vue 開発者を引き付けるのが容易になります。
 
-If you are an individual user and have enjoyed the productivity of using Vue, consider donating as a sign of appreciation - like buying me coffee once in a while :)
+もしあなたが個人ユーザーで Vue を使用して生産性を楽しめている場合は、たまには私にコーヒーを買うように、感謝の印として寄付をご検討頂くことができます :)
 
-In either case, you can provide recurring funding through Vue's [Patreon campaign](https://www.patreon.com/evanyou), or provide one-time donations via [PayPal](https://www.paypal.me/evanyou). There are many ideas for Vue that I have lined up but haven't had the time to embark on, and I would love to be able to work on them full time - I hope you can help me make that happen!
+いずれの場合も、Vue の[パトロンキャンペーン](https://www.patreon.com/evanyou)を通じて資金を繰り返し提供して頂くか、また [PayPal](https://www.paypal.me/evanyou) 経由で1回限りの寄付金を提供して頂けます。多くのアイデアが Vue に対してあるため、準備はしていましたが、着手する時間がありませんでしたので、私はぜひともそれらフルタイムで働きたいです。私はそれを実現するために私を助けて頂けるのを願っています！
