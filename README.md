@@ -34,6 +34,7 @@ $ hexo server
 (アルファベット順)
 
 - [bouzuya](https://github.com/bouzuya)
+- [BYODKM](https://github.com/BYODKM)
 - [chi-bd](https://github.com/chi-bd)
 - [chocoby](https://github.com/chocoby)
 - [chrispecoraro](https://github.com/chrispecoraro)
