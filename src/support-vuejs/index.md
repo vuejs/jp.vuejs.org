@@ -1,20 +1,19 @@
-# Support Vue.js Development
+# Vue.js の開発を支援する
 
-Vue.js is an MIT licensed open source project and completely free to use.
-However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing.
+Vue.js は MIT ライセンスのオープンソース・プロジェクトで、どなたでも無料で利用できます。しかしながら、プロジェクトの維持と新機能の開発には一定の労力を要するので、適度な資本の後ろ盾なしには持続することができません。
 
-If you run a business and is using Vue in a revenue-generating product, it makes business sense to sponsor Vue development: **it ensures the project that your product relies on stays healthy and actively maintained.** It can also help your exposure in the Vue community and makes it easier to attract Vue developers.
+もしあなたが実業家で、Vue.js を利用した製品で利益を生み出しているのなら、Vue の開発を支援することはビジネス的に妥当性があります。**それは、あなたの製品が頼りにしているプロジェクトを健全にし、活発に保守されることを保証します。**また同時に、それは Vue コミュニティの中であなたの存在を際立たせ、優秀な Vue 開発者を引き寄せることも容易にします。
 
-If you are an individual user and have enjoyed the productivity of using Vue, consider donating as a sign of appreciation - like buying me coffee once in a while :)
+もしあなたが個人の開発者で、Vue を使って生産性を楽しんでいるのなら、寄付をご検討ください。例えば、時々私にコーヒーをおごる、とか。:)
 
-As of now I am exploring the possibility of working on Vue.js fulltime - if you are a business that are building core products using Vue.js, I am also open to conversations regarding custom sponsorship arrangements. [Get in touch on Twitter](https://twitter.com/youyuxi).
+現在私は、Vue.js の開発をフルタイムで行える可能性を探しています。あなたのビジネスが Vue.js を利用して製品の開発を行っているのなら、個別の支援契約についてもお話したいと思っています。[ツイッターからご連絡ください](https://twitter.com/youyuxi)。
 
 <a href="https://www.patreon.com/evanyou" target="_blank">
   <img style="width:200px" src="https://s3.amazonaws.com/patreon_public_assets/toolbox/patreon.png">
-  <span>Support Vue.js on Patreon (recurring pledge)</span>
+  <span>Patreon で Vue.js を支援する（定期契約）</span>
 </a>
 
 <a href="https://www.paypal.me/evanyou" target="_blank">
   <img style="width:200px" src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png">
-  <span>Donate via PayPal (one time)</span>
+  <span>PayPal から寄付（ワンタイム）</span>
 </a>
