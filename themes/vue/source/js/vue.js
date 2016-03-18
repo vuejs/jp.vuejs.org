@@ -1,5 +1,5 @@
 /*!
- * Vue.js v1.0.17
+ * Vue.js v1.0.18
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -289,7 +289,7 @@
   var isArray = Array.isArray;
 
   /**
-   * Define a non-enumerable property
+   * Define a property.
    *
    * @param {Object} obj
    * @param {String} key
@@ -910,6 +910,13 @@
     warnExpressionErrors: true,
 
     /**
+     * Whether to allow devtools inspection.
+     * Disabled by default in production builds.
+     */
+
+    devtools: 'development' !== 'production',
+
+    /**
      * Internal flag to indicate the delimiters have been
      * changed.
      *
@@ -1483,13 +1490,6 @@
         this.$parent.$children.push(this);
       }
 
-      // save raw constructor data before merge
-      // so that we know which properties are provided at
-      // instantiation.
-      if ('development' !== 'production') {
-        this._runtimeData = options.data;
-      }
-
       // merge options.
       options = this.$options = mergeOptions(this.constructor.options, options, this);
 
@@ -1499,6 +1499,11 @@
       // initialize data as empty object.
       // it will be filled up in _initScope().
       this._data = {};
+
+      // save raw constructor data before merge
+      // so that we know which properties are provided at
+      // instantiation.
+      this._runtimeData = options.data;
 
       // call init hook
       this._callHook('init');
@@ -1915,7 +1920,7 @@
   var allowedKeywordsRE = new RegExp('^(' + allowedKeywords.replace(/,/g, '\\b|') + '\\b)');
 
   // keywords that don't make sense inside expressions
-  var improperKeywords = 'break,case,class,catch,const,continue,debugger,default,' + 'delete,do,else,export,extends,finally,for,function,if,' + 'import,in,instanceof,let,return,super,switch,throw,try,' + 'var,while,with,yield,enum,await,implements,package,' + 'proctected,static,interface,private,public';
+  var improperKeywords = 'break,case,class,catch,const,continue,debugger,default,' + 'delete,do,else,export,extends,finally,for,function,if,' + 'import,in,instanceof,let,return,super,switch,throw,try,' + 'var,while,with,yield,enum,await,implements,package,' + 'protected,static,interface,private,public';
   var improperKeywordsRE = new RegExp('^(' + improperKeywords.replace(/,/g, '\\b|') + '\\b)');
 
   var wsRE = /\s/g;
@@ -2106,6 +2111,8 @@
   // before user watchers so that when user watchers are
   // triggered, the DOM would have already been in updated
   // state.
+
+  var queueIndex;
   var queue = [];
   var userQueue = [];
   var has = {};
@@ -2135,7 +2142,7 @@
     runBatcherQueue(userQueue);
     // dev tool hook
     /* istanbul ignore if */
-    if (devtools) {
+    if (devtools && config.devtools) {
       devtools.emit('flush');
     }
     resetBatcherState();
@@ -2150,8 +2157,8 @@
   function runBatcherQueue(queue) {
     // do not cache length because more watchers might be pushed
     // as we run existing watchers
-    for (var i = 0; i < queue.length; i++) {
-      var watcher = queue[i];
+    for (queueIndex = 0; queueIndex < queue.length; queueIndex++) {
+      var watcher = queue[queueIndex];
       var id = watcher.id;
       has[id] = null;
       watcher.run();
@@ -2180,20 +2187,20 @@
   function pushWatcher(watcher) {
     var id = watcher.id;
     if (has[id] == null) {
-      // if an internal watcher is pushed, but the internal
-      // queue is already depleted, we run it immediately.
       if (internalQueueDepleted && !watcher.user) {
-        watcher.run();
-        return;
-      }
-      // push watcher into appropriate queue
-      var q = watcher.user ? userQueue : queue;
-      has[id] = q.length;
-      q.push(watcher);
-      // queue the flush
-      if (!waiting) {
-        waiting = true;
-        nextTick(flushBatcherQueue);
+        // an internal watcher triggered by a user watcher...
+        // let's run it immediately after current user watcher is done.
+        userQueue.splice(queueIndex + 1, 0, watcher);
+      } else {
+        // push watcher into appropriate queue
+        var q = watcher.user ? userQueue : queue;
+        has[id] = q.length;
+        q.push(watcher);
+        // queue the flush
+        if (!waiting) {
+          waiting = true;
+          nextTick(flushBatcherQueue);
+        }
       }
     }
   }
@@ -2227,13 +2234,15 @@
     var isFn = typeof expOrFn === 'function';
     this.vm = vm;
     vm._watchers.push(this);
-    this.expression = isFn ? expOrFn.toString() : expOrFn;
+    this.expression = expOrFn;
     this.cb = cb;
     this.id = ++uid$1; // uid for batching
     this.active = true;
     this.dirty = this.lazy; // for lazy watchers
-    this.deps = Object.create(null);
-    this.newDeps = null;
+    this.deps = [];
+    this.newDeps = [];
+    this.depIds = Object.create(null);
+    this.newDepIds = null;
     this.prevError = null; // for async error stacks
     // parse expression for getter/setter
     if (isFn) {
@@ -2249,23 +2258,6 @@
     // watchers during vm._digest()
     this.queued = this.shallow = false;
   }
-
-  /**
-   * Add a dependency to this directive.
-   *
-   * @param {Dep} dep
-   */
-
-  Watcher.prototype.addDep = function (dep) {
-    var id = dep.id;
-    if (!this.newDeps[id]) {
-      this.newDeps[id] = dep;
-      if (!this.deps[id]) {
-        this.deps[id] = dep;
-        dep.addSub(this);
-      }
-    }
-  };
 
   /**
    * Evaluate the getter, and re-collect dependencies.
@@ -2342,7 +2334,25 @@
 
   Watcher.prototype.beforeGet = function () {
     Dep.target = this;
-    this.newDeps = Object.create(null);
+    this.newDepIds = Object.create(null);
+    this.newDeps.length = 0;
+  };
+
+  /**
+   * Add a dependency to this directive.
+   *
+   * @param {Dep} dep
+   */
+
+  Watcher.prototype.addDep = function (dep) {
+    var id = dep.id;
+    if (!this.newDepIds[id]) {
+      this.newDepIds[id] = true;
+      this.newDeps.push(dep);
+      if (!this.depIds[id]) {
+        dep.addSub(this);
+      }
+    }
   };
 
   /**
@@ -2351,15 +2361,17 @@
 
   Watcher.prototype.afterGet = function () {
     Dep.target = null;
-    var ids = Object.keys(this.deps);
-    var i = ids.length;
+    var i = this.deps.length;
     while (i--) {
-      var id = ids[i];
-      if (!this.newDeps[id]) {
-        this.deps[id].removeSub(this);
+      var dep = this.deps[i];
+      if (!this.newDepIds[dep.id]) {
+        dep.removeSub(this);
       }
     }
+    this.depIds = this.newDepIds;
+    var tmp = this.deps;
     this.deps = this.newDeps;
+    this.newDeps = tmp;
   };
 
   /**
@@ -2447,10 +2459,9 @@
    */
 
   Watcher.prototype.depend = function () {
-    var depIds = Object.keys(this.deps);
-    var i = depIds.length;
+    var i = this.deps.length;
     while (i--) {
-      this.deps[depIds[i]].depend();
+      this.deps[i].depend();
     }
   };
 
@@ -2467,10 +2478,9 @@
       if (!this.vm._isBeingDestroyed && !this.vm._vForRemoving) {
         this.vm._watchers.$remove(this);
       }
-      var depIds = Object.keys(this.deps);
-      var i = depIds.length;
+      var i = this.deps.length;
       while (i--) {
-        this.deps[depIds[i]].removeSub(this);
+        this.deps[i].removeSub(this);
       }
       this.active = false;
       this.vm = this.cb = this.value = null;
@@ -2879,7 +2889,7 @@
       }
       // key filter
       var keys = Object.keys(this.modifiers).filter(function (key) {
-        return key !== 'stop' && key !== 'prevent';
+        return key !== 'stop' && key !== 'prevent' && key !== 'self';
       });
       if (keys.length) {
         handler = keyFilter(handler, keys);
@@ -3145,6 +3155,10 @@
         });
         this.on('blur', function () {
           self.focused = false;
+          // do not sync value after fragment removal (#2017)
+          if (!self._frag || self._frag.inserted) {
+            self.rawListener();
+          }
         });
       }
 
@@ -3359,7 +3373,7 @@
     return isTemplate(node) && isFragment(node.content);
   }
 
-  var tagRE$1 = /<([\w:]+)/;
+  var tagRE$1 = /<([\w:-]+)/;
   var entityRE = /&#?\w+?;/;
 
   /**
@@ -3481,6 +3495,7 @@
    */
 
   function cloneNode(node) {
+    /* istanbul ignore if */
     if (!node.querySelectorAll) {
       return node.cloneNode();
     }
@@ -3752,7 +3767,7 @@
    */
 
   function attach(child) {
-    if (!child._isAttached) {
+    if (!child._isAttached && inDoc(child.$el)) {
       child._callHook('attached');
     }
   }
@@ -3764,7 +3779,7 @@
    */
 
   function detach(child) {
-    if (child._isAttached) {
+    if (child._isAttached && !inDoc(child.$el)) {
       child._callHook('detached');
     }
   }
@@ -3829,12 +3844,11 @@
         var next = el.nextElementSibling;
         if (next && getAttr(next, 'v-else') !== null) {
           remove(next);
-          this.elseFactory = new FragmentFactory(next._context || this.vm, next);
+          this.elseEl = next;
         }
         // check main block
         this.anchor = createAnchor('v-if');
         replace(el, this.anchor);
-        this.factory = new FragmentFactory(this.vm, el);
       } else {
         'development' !== 'production' && warn('v-if="' + this.expression + '" cannot be ' + 'used on an instance root element.');
         this.invalid = true;
@@ -3857,6 +3871,10 @@
         this.elseFrag.remove();
         this.elseFrag = null;
       }
+      // lazy init factory
+      if (!this.factory) {
+        this.factory = new FragmentFactory(this.vm, this.el);
+      }
       this.frag = this.factory.create(this._host, this._scope, this._frag);
       this.frag.before(this.anchor);
     },
@@ -3866,7 +3884,10 @@
         this.frag.remove();
         this.frag = null;
       }
-      if (this.elseFactory && !this.elseFrag) {
+      if (this.elseEl && !this.elseFrag) {
+        if (!this.elseFactory) {
+          this.elseFactory = new FragmentFactory(this.elseEl._context || this.vm, this.elseEl);
+        }
         this.elseFrag = this.elseFactory.create(this._host, this._scope, this._frag);
         this.elseFrag.before(this.anchor);
       }
@@ -4086,7 +4107,7 @@
       // for two-way binding on alias
       scope.$forContext = this;
       // define scope properties
-      defineReactive(scope, alias, value);
+      defineReactive(scope, alias, value, true /* do not observe */);
       defineReactive(scope, '$index', index);
       if (key) {
         defineReactive(scope, '$key', key);
@@ -5227,6 +5248,7 @@
       if (!child || this.keepAlive) {
         if (child) {
           // remove ref
+          child._inactive = true;
           child._updateRef(true);
         }
         return;
@@ -5279,10 +5301,8 @@
       var self = this;
       var current = this.childVM;
       // for devtool inspection
-      if ('development' !== 'production') {
-        if (current) current._inactive = true;
-        target._inactive = false;
-      }
+      if (current) current._inactive = true;
+      target._inactive = false;
       this.childVM = target;
       switch (self.params.transitionMode) {
         case 'in-out':
@@ -5537,7 +5557,7 @@
         vm._props[path] = prop;
         if (raw === null) {
           // initialize absent prop
-          initProp(vm, prop, getDefault(vm, options));
+          initProp(vm, prop, undefined);
         } else if (prop.dynamic) {
           // dynamic prop
           if (prop.mode === propBindingModes.ONE_TIME) {
@@ -5570,29 +5590,6 @@
         }
       }
     };
-  }
-
-  /**
-   * Get the default value of a prop.
-   *
-   * @param {Vue} vm
-   * @param {Object} options
-   * @return {*}
-   */
-
-  function getDefault(vm, options) {
-    // no default, return undefined
-    if (!hasOwn(options, 'default')) {
-      // absent boolean value defaults to false
-      return options.type === Boolean ? false : undefined;
-    }
-    var def = options['default'];
-    // warn against non-factory defaults for Object & Array
-    if (isObject(def)) {
-      'development' !== 'production' && warn('Object/Array as default prop values will be shared ' + 'across multiple instances. Use a factory function ' + 'to return the default value instead.');
-    }
-    // call factory function for non-Function types
-    return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
   }
 
   // special binding prefixes
@@ -6479,7 +6476,7 @@
       if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
         to.setAttribute(name, value);
       } else if (name === 'class' && !parseText(value)) {
-        value.split(/\s+/).forEach(function (cls) {
+        value.trim().split(/\s+/).forEach(function (cls) {
           addClass(to, cls);
         });
       }
@@ -6497,39 +6494,25 @@
    * @param {Vue} vm
    */
 
-  function scanSlots(template, content, vm) {
+  function resolveSlots(vm, content) {
     if (!content) {
       return;
     }
-    var contents = vm._slotContents = {};
-    var slots = template.querySelectorAll('slot');
-    if (slots.length) {
-      var hasDefault, slot, name;
-      for (var i = 0, l = slots.length; i < l; i++) {
-        slot = slots[i];
-        /* eslint-disable no-cond-assign */
-        if (name = slot.getAttribute('name')) {
-          select(slot, name);
-        } else if ('development' !== 'production' && (name = getBindAttr(slot, 'name'))) {
-          warn('<slot :name="' + name + '">: slot names cannot be dynamic.');
-        } else {
-          // default slot
-          hasDefault = true;
-        }
-        /* eslint-enable no-cond-assign */
+    var contents = vm._slotContents = Object.create(null);
+    var el, name;
+    for (var i = 0, l = content.children.length; i < l; i++) {
+      el = content.children[i];
+      /* eslint-disable no-cond-assign */
+      if (name = el.getAttribute('slot')) {
+        (contents[name] || (contents[name] = [])).push(el);
       }
-      if (hasDefault) {
-        contents['default'] = extractFragment(content.childNodes, content);
-      }
+      /* eslint-enable no-cond-assign */
     }
-
-    function select(slot, name) {
-      // named slot
-      var selector = '[slot="' + name + '"]';
-      var nodes = content.querySelectorAll(selector);
-      if (nodes.length) {
-        contents[name] = extractFragment(nodes, content);
-      }
+    for (name in contents) {
+      contents[name] = extractFragment(contents[name], content);
+    }
+    if (content.hasChildNodes()) {
+      contents['default'] = extractFragment(content.childNodes, content);
     }
   }
 
@@ -6537,7 +6520,6 @@
    * Extract qualified content nodes from a node list.
    *
    * @param {NodeList} nodes
-   * @param {Element} parent
    * @return {DocumentFragment}
    */
 
@@ -6546,13 +6528,11 @@
     nodes = toArray(nodes);
     for (var i = 0, l = nodes.length; i < l; i++) {
       var node = nodes[i];
-      if (node.parentNode === parent) {
-        if (isTemplate(node) && !node.hasAttribute('v-if') && !node.hasAttribute('v-for')) {
-          parent.removeChild(node);
-          node = parseTemplate(node);
-        }
-        frag.appendChild(node);
+      if (isTemplate(node) && !node.hasAttribute('v-if') && !node.hasAttribute('v-for')) {
+        parent.removeChild(node);
+        node = parseTemplate(node);
       }
+      frag.appendChild(node);
     }
     return frag;
   }
@@ -6563,7 +6543,7 @@
   	compileRoot: compileRoot,
   	terminalDirectives: terminalDirectives,
   	transclude: transclude,
-  	scanSlots: scanSlots
+  	resolveSlots: resolveSlots
   });
 
   var arrayProto = Array.prototype;
@@ -6791,9 +6771,10 @@
    * @param {Object} obj
    * @param {String} key
    * @param {*} val
+   * @param {Boolean} doNotObserve
    */
 
-  function defineReactive(obj, key, val) {
+  function defineReactive(obj, key, val, doNotObserve) {
     var dep = new Dep();
 
     var property = Object.getOwnPropertyDescriptor(obj, key);
@@ -6805,7 +6786,11 @@
     var getter = property && property.get;
     var setter = property && property.set;
 
-    var childOb = observe(val);
+    // if doNotObserve is true, only use the child value observer
+    // if it already exists, and do not attempt to create it.
+    // this allows freezing a large object from the root and
+    // avoid unnecessary observation inside v-for fragments.
+    var childOb = doNotObserve ? isObject(val) && val.__ob__ : observe(val);
     Object.defineProperty(obj, key, {
       enumerable: true,
       configurable: true,
@@ -6835,7 +6820,7 @@
         } else {
           val = newVal;
         }
-        childOb = observe(newVal);
+        childOb = doNotObserve ? isObject(newVal) && newVal.__ob__ : observe(newVal);
         dep.notify();
       }
     });
@@ -6898,33 +6883,25 @@
      */
 
     Vue.prototype._initData = function () {
-      var propsData = this._data;
-      var optionsDataFn = this.$options.data;
-      var optionsData = optionsDataFn && optionsDataFn();
-      var runtimeData;
-      if ('development' !== 'production') {
-        runtimeData = (typeof this._runtimeData === 'function' ? this._runtimeData() : this._runtimeData) || {};
-        this._runtimeData = null;
-      }
-      if (optionsData) {
-        this._data = optionsData;
-        for (var prop in propsData) {
-          if ('development' !== 'production' && hasOwn(optionsData, prop) && !hasOwn(runtimeData, prop)) {
-            warn('Data field "' + prop + '" is already defined ' + 'as a prop. Use prop default value instead.');
-          }
-          if (this._props[prop].raw !== null || !hasOwn(optionsData, prop)) {
-            set(optionsData, prop, propsData[prop]);
-          }
-        }
-      }
-      var data = this._data;
+      var dataFn = this.$options.data;
+      var data = this._data = dataFn ? dataFn() : {};
+      var props = this._props;
+      var runtimeData = this._runtimeData ? typeof this._runtimeData === 'function' ? this._runtimeData() : this._runtimeData : null;
       // proxy data on instance
       var keys = Object.keys(data);
       var i, key;
       i = keys.length;
       while (i--) {
         key = keys[i];
-        this._proxy(key);
+        // there are two scenarios where we can proxy a data key:
+        // 1. it's not already defined as a prop
+        // 2. it's provided via a instantiation option AND there are no
+        //    template prop present
+        if (!props || !hasOwn(props, key) || runtimeData && hasOwn(runtimeData, key) && props[key].raw === null) {
+          this._proxy(key);
+        } else if ('development' !== 'production') {
+          warn('Data field "' + key + '" is already defined ' + 'as a prop. Use prop default value instead.');
+        }
       }
       // observe data
       observe(data, this);
@@ -7602,9 +7579,8 @@
       var contextOptions = this._context && this._context.$options;
       var rootLinker = compileRoot(el, options, contextOptions);
 
-      // scan for slot distribution before compiling the content
-      // so that it's decoupeld from slot/directive compilation order
-      scanSlots(el, options._content, this);
+      // resolve slot distribution
+      resolveSlots(this, options._content);
 
       // compile and link the rest
       var contentLinkFn;
@@ -8036,8 +8012,14 @@
       }
       // include computed fields
       if (!path) {
-        for (var key in this.$options.computed) {
+        var key;
+        for (key in this.$options.computed) {
           data[key] = clean(this[key]);
+        }
+        if (this._props) {
+          for (key in this._props) {
+            data[key] = clean(this[key]);
+          }
         }
       }
       console.log(data);
@@ -8527,8 +8509,8 @@
   eventsAPI(Vue);
   lifecycleAPI(Vue);
 
-  var commonTagRE = /^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre|table|th|td|tr|form|label|input|select|option|nav|article|section|header|footer)$/;
-  var reservedTagRE = /^(slot|partial|component)$/;
+  var commonTagRE = /^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre|table|th|td|tr|form|label|input|select|option|nav|article|section|header|footer)$/i;
+  var reservedTagRE = /^(slot|partial|component)$/i;
 
   var isUnknownElement = undefined;
   if ('development' !== 'production') {
@@ -8610,7 +8592,35 @@
   function initProp(vm, prop, value) {
     var key = prop.path;
     value = coerceProp(prop, value);
-    vm[key] = vm._data[key] = assertProp(prop, value) ? value : undefined;
+    if (value === undefined) {
+      value = getPropDefaultValue(vm, prop.options);
+    }
+    if (assertProp(prop, value)) {
+      defineReactive(vm, key, value, true /* doNotObserve */);
+    }
+  }
+
+  /**
+   * Get the default value of a prop.
+   *
+   * @param {Vue} vm
+   * @param {Object} options
+   * @return {*}
+   */
+
+  function getPropDefaultValue(vm, options) {
+    // no default, return undefined
+    if (!hasOwn(options, 'default')) {
+      // absent boolean value defaults to false
+      return options.type === Boolean ? false : undefined;
+    }
+    var def = options['default'];
+    // warn against non-factory defaults for Object & Array
+    if (isObject(def)) {
+      'development' !== 'production' && warn('Object/Array as default prop values will be shared ' + 'across multiple instances. Use a factory function ' + 'to return the default value instead.');
+    }
+    // call factory function for non-Function types
+    return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
   }
 
   /**
@@ -9671,14 +9681,16 @@
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.17';
+  Vue.version = '1.0.18';
 
   // devtools global hook
   /* istanbul ignore next */
-  if (devtools) {
-    devtools.emit('init', Vue);
-  } else if ('development' !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
-    console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+  if (config.devtools) {
+    if (devtools) {
+      devtools.emit('init', Vue);
+    } else if ('development' !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
+      console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+    }
   }
 
   return Vue;
