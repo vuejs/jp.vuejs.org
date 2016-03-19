@@ -19,9 +19,9 @@
     "hexo-server": "^0.2.0"
   },
   "devDependencies": {
-    "textlint": "^4.1.2",
-    "textlint-plugin-jtf-style": "^0.8.4",
-    "textlint-checker-for-vuejs-jp-docs": "git@github.com:vuejs-jp/textlint-checker-for-vuejs-jp-docs.git"
+    "textlint": "^5.5.0",
+    "textlint-checker-for-vuejs-jp-docs": "git@github.com:vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
+    "textlint-rule-preset-jtf-style": "^2.1.2"
   },
   "scripts": {
     "test": "npm run lint",
