@@ -138,6 +138,26 @@ var MyComponent = Vue.extend({
 
  HTML 要素の中には、例えば `<table>` のように、どの要素がそれら内部に表示可能かという制限があるものがあります。ホワイトリストに含まれていないカスタム要素は表示出来ない要素としてコンパイル処理でマッチするため、したがって適切にレンダリングしません。そのようなケースでは、`is` という特別な属性でカスタム要素に示すべきです:
 
+### Template Caveats
+
+Because Vue.js templates are not string-based, but rather DOM-based, they have to be individually valid pieces of HTML. Some HTML elements have restrictions on what elements can appear inside them. Most common of these restrictions are:
+
+- `a` can not contain other interactive elements (e.g. buttons and other links)
+- `li` should be a direct child of `ul`, and `ul` can only contain `li`
+- `option` should be a direct child of `select`, and `select` can only contain `option` (and `optgroup`)
+- `table` can only contain `thead`, `tbody`, `tfoot` and `tr`, and these elements should be direct cildren of `table`
+- `tr` can only contain `th` and `td`, and these elements should be direct children of `tr`
+
+In practive these restriction can cause unexpected behavior. Although in simple cases it might appear to work, you can not rely on custom elements being expanded before browser validation. E.g. `<my-select><option>...</option></my-select>` is not a valid template even if `my-select` component eventually expands to `<select>...</select>`.
+
+Another consequence is that you can not use custom elements inside of `ul`, `select`, `table` and other elements with similar  restrictions. Custom elements will be hoisted out and thus not render properly. In such cases you should use the `is` special attribute to indicate a custom element:
+
+``` html
+<ul is="my-list">
+  <li is="my-list-item"></li>
+</ul>
+```
+
 ``` html
 <table>
   <tr is="my-component"></tr>
