@@ -61,6 +61,12 @@ Vue.js のトランジション (Transition) システムを使用すると、DO
 }
 ```
 
+You can use dynamically named transitions
+
+``` html
+<div v-if="show" :transition="transitionName">hello</div>
+```
+
 加えて、JavaScript フックを提供できます。
 
 ``` js
