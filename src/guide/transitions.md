@@ -61,10 +61,20 @@ Vue.js のトランジション (Transition) システムを使用すると、DO
 }
 ```
 
-動的に命名されたトランジションを使用できます:
+動的なバインディングを使用することによって、同じ要素で異なるトランジションを実現することができます:
 
-``` html
+```html
 <div v-if="show" :transition="transitionName">hello</div>
+```
+
+```js
+new Vue({
+  el: '...',
+  data: {
+    show: false,
+    transitionName: 'fade'
+  }
+})
 ```
 
 加えて、JavaScript フックを提供できます。
