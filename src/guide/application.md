@@ -28,9 +28,9 @@ Vue.js を利用した典型的なプロジェクトでは、たくさんの個�
 
 <img src="/images/vue-component-with-pre-processors.png">
 
-これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。You can also play with it online at [Webpackbin.com](http://www.webpackbin.com/vue)!
+これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。[Webpackbin.com](http://www.webpackbin.com/vue) でオンラインで試すことができます！
 
-Which build tool to choose is largely dependent on your experience and needs. Webpack-based setup offers more powerful features such as code splitting, processing static assets as module dependencies and extracting component CSS into a separate file, but can be a bit more complex to configure. Browserify can be easier to setup in scenarios where you don't need the advanced features that Webpack offers.
+ビルドツールを選択するのは、あなたの経験やニーズに大きく依存しています。Webpack ベースのセットアップはコード分割 (code splitting) のようなより強力な機能を提供し、モジュール依存関係のような静的なアセットを処理してコンポーネントの CSS を別のファイルに抽出しますが、もう少しより複雑に設定することができます。Browserify は Webpack が提供する高度な機能を必要としないシナリオにおいて、簡単にセットアップすることができます。
 
 立ち上げるための最速の方法は、公式な [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub 上にある公式 scaffold テンプレートも探すことができます:
 
