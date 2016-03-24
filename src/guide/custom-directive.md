@@ -277,8 +277,50 @@ Vue.directive('my-directive', {
 
 ただし、テンプレート内のサイドエフェクトを避けるためにも、賢く使いましょう。
 
+### terminal
+
+In some cases, we may want to used as the **terminal** directives. For example, you may want to perform custom directive than normal directive like `v-if` or `v-for`. If you want to do so, you need to pass in `terminal: true` in your directive definition.
+
+The following is an example that inject to DOM is specified with argument of directive:
+
+``` js
+var FragmentFactory = Vue.FragmentFactory
+var remove = Vue.util.remove
+var createAnchor = Vue.util.createAnchor
+
+Vue.directive('inject', {
+  terminal: true,
+  bind: function () {
+    var container = document.getElementById(this.arg)
+    this.anchor = createAnchor('v-inject')
+    container.appendChild(this.anchor)
+    remove(this.el)
+    var factory = new FragmentFactory(this.vm, this.el)
+    this.frag = factory.create(this._host, this._scope, this._frag)
+    this.frag.before(this.anchor)
+  },
+  unbind: function () {
+    this.frag.remove()
+    remove(this.anchor)
+  }
+})
+```
+
+``` html
+<div id="modal"></div>
+...
+<div v-inject:modal>
+  <h1>header</h1>
+  <p>body</p>
+  <p>footer</p>
+</div>
+```
+
+If you want to define the terminal directive, we recommend that you understand internal API of Vue and other terminal directives like `v-if` and `v-for`. In the target element of the compilation, notice that when Vue.js finds the terminal directive, even if the other directives exist, these are not handled. As the above example code, you should be handled other directives.
+
+
 ### priority
 
-ディレクティブには任意で優先度の数値 (デフォルトは 1000) を与えることができます。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
+ディレクティブには任意で優先度の数値 (デフォルトは 1000) を与えることができます。もし、優先度を提供しない場合は、優先度はデフォルト値が設定されます。通常のディレクティブは `1000` に、ターミナルなディレクティブは `2000` に設定されます。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
 
 いくつかのビルトインディレクティブに関する優先度は [API](/api/#Directives) で確認できます。さらに フロー制御するディレクティブ `v-if` と `v-for` は、コンパイル処理の中で常に最も高い優先度を持ちます。
