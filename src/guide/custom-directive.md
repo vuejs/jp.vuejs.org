@@ -279,9 +279,9 @@ Vue.directive('my-directive', {
 
 ### terminal
 
-In some cases, we may want to used as the **terminal** directives. For example, you may want to perform custom directive than normal directive like `v-if` or `v-for`. If you want to do so, you need to pass in `terminal: true` in your directive definition.
+Vue compiles templates by recursively walking the DOM tree. However when it encounters a **terminal** directive, it will stop walking that element's children. The terminal directive takes over the job of compiling the element and its children. For example, `v-if` and `v-for` are both terminal directives.
 
-The following is an example that inject to DOM is specified with argument of directive:
+Writing a custom terminal directive is an advanced topic and requires decent knowledge of Vue's compilation pipeline, but it's possible. You can specify a custom terminal directive by specifying `terminal: true`. You will also likely need to use `Vue.FragmentFactory` for partial compilation. Here's an example of a custom terminal directive that compiles and "injects" its content template to another location on the page:
 
 ``` js
 var FragmentFactory = Vue.FragmentFactory
@@ -316,11 +316,10 @@ Vue.directive('inject', {
 </div>
 ```
 
-If you want to define the terminal directive, we recommend that you understand internal API of Vue and other terminal directives like `v-if` and `v-for`. In the target element of the compilation, notice that when Vue.js finds the terminal directive, even if the other directives exist, these are not handled. As the above example code, you should be handled other directives.
-
+If you want to write a custom terminal directive, it is recommend that you read through the source code of built-in terminal directives like `v-if` and `v-for` to get a better understanding of Vue internals.
 
 ### priority
 
-ディレクティブには任意で優先度の数値 (デフォルトは 1000) を与えることができます。もし、優先度を提供しない場合は、優先度はデフォルト値が設定されます。通常のディレクティブは `1000` に、ターミナルなディレクティブは `2000` に設定されます。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
+ディレクティブには任意で優先度の数値 (デフォルトは 1000) を与えることができます。もし、優先度を指定されない場合は、デフォルトの優先度が使用されます。通常のディレクティブは `1000` 、そしてターミナルなディレクティブは `2000` です。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
 
 いくつかのビルトインディレクティブに関する優先度は [API](/api/#Directives) で確認できます。さらに フロー制御するディレクティブ `v-if` と `v-for` は、コンパイル処理の中で常に最も高い優先度を持ちます。
