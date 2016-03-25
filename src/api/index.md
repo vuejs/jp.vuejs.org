@@ -1640,6 +1640,7 @@ type: api
   <!-- クラスバインディング -->
   <div :class="{ red: isRed }"></div>
   <div :class="[classA, classB]"></div>
+  <div :class="[classA, { classB: isB, classC: isC }]">
 
   <!-- スタイルバインディング -->
   <div :style="{ fontSize: size + 'px' }"></div>
