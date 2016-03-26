@@ -279,9 +279,9 @@ Vue.directive('my-directive', {
 
 ### terminal
 
-Vue compiles templates by recursively walking the DOM tree. However when it encounters a **terminal** directive, it will stop walking that element's children. The terminal directive takes over the job of compiling the element and its children. For example, `v-if` and `v-for` are both terminal directives.
+Vue は DOM ツリーを再帰的に渡り歩いくことによってテンプレートをコンパイルします。しかしながら、コンパイル処理において **ターミナル** なディレクティブに遭遇した場合、要素の子を渡り歩くのを停止します。ターミナルなディレクティブは要素とその子のコンパイルの仕事を引き継ぎます。例えば、 `v-if` と `v-for` は両方ともターミナルなディレクティブです。
 
-Writing a custom terminal directive is an advanced topic and requires decent knowledge of Vue's compilation pipeline, but it's possible. You can specify a custom terminal directive by specifying `terminal: true`. You will also likely need to use `Vue.FragmentFactory` for partial compilation. Here's an example of a custom terminal directive that compiles and "injects" its content template to another location on the page:
+カスタムなディレクティブを実装することは高度なトピックであり、そして Vue のコンパイルパイプラインの知識を必要としますが、そのターミナルなディレクティブを実装することは可能です。`terminal: true` を指定することによってカスタムターミナルディレクティブを指定することができます。また、おそらく部分的なコンパイルに対して `Vue.Fragmentfactory` を使用する必要があります。ここでは、コンパイルとページ上の他の場所にコンテンツテンプレートを"注入"するカスタムターミナルディレクティブの例を示します:
 
 ``` js
 var FragmentFactory = Vue.FragmentFactory
@@ -316,7 +316,7 @@ Vue.directive('inject', {
 </div>
 ```
 
-If you want to write a custom terminal directive, it is recommend that you read through the source code of built-in terminal directives like `v-if` and `v-for` to get a better understanding of Vue internals.
+カスタムターミナルディレクティブを実装したい場合、Vue 内部 のより良い理解を得るために、`v-if` と `v-for` のような組み込みのターミナルディレクティブのソースコードを読むことをお勧めします。
 
 ### priority
 
