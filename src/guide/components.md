@@ -134,23 +134,19 @@ var MyComponent = Vue.extend({
 
 全く同じ理由で、`el` オプションも `Vue.extend()` で使用した場合、関数の値が必要です。
 
-### `is` 属性
+### テンプレートの注意事項
 
- HTML 要素の中には、例えば `<table>` のように、どの要素がそれら内部に表示可能かという制限があるものがあります。ホワイトリストに含まれていないカスタム要素は表示出来ない要素としてコンパイル処理でマッチするため、したがって適切にレンダリングしません。そのようなケースでは、`is` という特別な属性でカスタム要素に示すべきです:
+Vue.js のテンプレートは文字列ベースではなく、むしろ DOM ベースであるため、それらは HTML の個々の妥当なピースでなければなりません。HTML 要素の中には、どの要素がそれら内部に表示できるものと表示できないものの制限があるものがあります。これらの制限の多くの共通的なものは:
 
-### Template Caveats
+- `a` は他のインタラクティブな要素に含むことができません (例、ボタンと他のリンク)
+- `li` は `ul` の直接的な子であるべきで、そして `ul` は `li` だけを含めることができます
+- `option` は `select` の直接的な子であるべきで、そして `select` は `option` (そして `optgroup`) だけを含めることができます
+- `table` は `thead` だけを含めることができ、`tbody` 、`tfoot` そして `tr`、さらにこれらの要素は `table` の直接子を含めることができます
+- `tr` は `th` そして `td` だけを含めることができ、そしてこれらの要素は直接 `tr` の子を含めることができます
 
-Because Vue.js templates are not string-based, but rather DOM-based, they have to be individually valid pieces of HTML. Some HTML elements have restrictions on what elements can appear inside them. Most common of these restrictions are:
+実際問題では、これらの制限は、予期しない動作を引き起こす可能性があります。簡単な例では、それが動作するように見えるかもしれませんが、カスタム要素に依存することはできませんが、ブラウザの検証前に展開されています。例えば、`<my-select><option>...</option></my-select>` は、最終的には `<select>...</select>` のために展開しても、妥当なテンプレートではありません。
 
-- `a` can not contain other interactive elements (e.g. buttons and other links)
-- `li` should be a direct child of `ul`, and `ul` can only contain `li`
-- `option` should be a direct child of `select`, and `select` can only contain `option` (and `optgroup`)
-- `table` can only contain `thead`, `tbody`, `tfoot` and `tr`, and these elements should be direct cildren of `table`
-- `tr` can only contain `th` and `td`, and these elements should be direct children of `tr`
-
-In practive these restriction can cause unexpected behavior. Although in simple cases it might appear to work, you can not rely on custom elements being expanded before browser validation. E.g. `<my-select><option>...</option></my-select>` is not a valid template even if `my-select` component eventually expands to `<select>...</select>`.
-
-Another consequence is that you can not use custom elements inside of `ul`, `select`, `table` and other elements with similar  restrictions. Custom elements will be hoisted out and thus not render properly. In such cases you should use the `is` special attribute to indicate a custom element:
+同様の制限で、`ul`、`select`、`table` そして他の要素の内部でカスタム要素を使用することができないです。カスタム要素押し上げられて、それがゆえに正しく表示されません。このようなケースでは、カスタム要素として示すために、`is` という特別な属性を使用する必要があります:
 
 ``` html
 <ul is="my-list">
