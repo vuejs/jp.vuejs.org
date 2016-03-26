@@ -76,7 +76,7 @@ data: {
 
 これは常に `classA` が適用されますが、`isB` が `true` のとき、`classB` だけ適用されます。
 
-However, this can be a bit verbose if you have multiple conditional classes. In version 1.0.19+, it's also possible to use the Object syntax inside Array syntax:
+しかしながら、これは複数条件のクラスがある場合は少し冗長です。1.0.19+ バージョンでは、配列構文内部にオブジェクト構文を使用することも可能です:
 
 ``` html
 <div v-bind:class="[classA, { classB: isB, classC: isC }]">
