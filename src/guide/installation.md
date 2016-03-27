@@ -8,7 +8,13 @@ min_size: "72.85"
 gz_size: "25.11"
 ---
 
-> **互換性に関する注意:** Vue.js は IE8 以下をサポートしていません。
+### 互換性の注意
+
+Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用するため、IE8 そしてそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMASCript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
+
+### リリースノート
+
+各バージョンの詳細なリリースノートは、[GitHub](https://github.com/vuejs/vue/releases) で入手できます。
 
 ## スタンドアロン
 
@@ -56,7 +62,7 @@ $ npm run dev
 
 ## 開発版のビルド
 
-**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) は配信元のコードで制御されていません。したがって、Github 上の最新のソースコードから Vue を使用するには、あなた自身それをビルドしなければなりません！
+**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) はリリース時に `master` ブランチにチェックインされたものであるため、`dev` ブランチのファイルは安定リリース版と同じです。Github 上の最新のソースコードから Vue を使用するためには、あなた自身それをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
