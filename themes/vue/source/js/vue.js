@@ -1,5 +1,5 @@
 /*!
- * Vue.js v1.0.19
+ * Vue.js v1.0.20
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -3921,6 +3921,299 @@
     }
   };
 
+  var arrayProto = Array.prototype;
+  var arrayMethods = Object.create(arrayProto)
+
+  /**
+   * Intercept mutating methods and emit events
+   */
+
+  ;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function (method) {
+    // cache original method
+    var original = arrayProto[method];
+    def(arrayMethods, method, function mutator() {
+      // avoid leaking arguments:
+      // http://jsperf.com/closure-with-arguments
+      var i = arguments.length;
+      var args = new Array(i);
+      while (i--) {
+        args[i] = arguments[i];
+      }
+      var result = original.apply(this, args);
+      var ob = this.__ob__;
+      var inserted;
+      switch (method) {
+        case 'push':
+          inserted = args;
+          break;
+        case 'unshift':
+          inserted = args;
+          break;
+        case 'splice':
+          inserted = args.slice(2);
+          break;
+      }
+      if (inserted) ob.observeArray(inserted);
+      // notify change
+      ob.dep.notify();
+      return result;
+    });
+  });
+
+  /**
+   * Swap the element at the given index with a new value
+   * and emits corresponding event.
+   *
+   * @param {Number} index
+   * @param {*} val
+   * @return {*} - replaced element
+   */
+
+  def(arrayProto, '$set', function $set(index, val) {
+    if (index >= this.length) {
+      this.length = Number(index) + 1;
+    }
+    return this.splice(index, 1, val)[0];
+  });
+
+  /**
+   * Convenience method to remove the element at given index.
+   *
+   * @param {Number} index
+   * @param {*} val
+   */
+
+  def(arrayProto, '$remove', function $remove(item) {
+    /* istanbul ignore if */
+    if (!this.length) return;
+    var index = indexOf(this, item);
+    if (index > -1) {
+      return this.splice(index, 1);
+    }
+  });
+
+  var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
+
+  /**
+   * By default, when a reactive property is set, the new value is
+   * also converted to become reactive. However in certain cases, e.g.
+   * v-for scope alias and props, we don't want to force conversion
+   * because the value may be a nested value under a frozen data structure.
+   *
+   * So whenever we want to set a reactive property without forcing
+   * conversion on the new value, we wrap that call inside this function.
+   */
+
+  var shouldConvert = true;
+
+  function withoutConversion(fn) {
+    shouldConvert = false;
+    fn();
+    shouldConvert = true;
+  }
+
+  /**
+   * Observer class that are attached to each observed
+   * object. Once attached, the observer converts target
+   * object's property keys into getter/setters that
+   * collect dependencies and dispatches updates.
+   *
+   * @param {Array|Object} value
+   * @constructor
+   */
+
+  function Observer(value) {
+    this.value = value;
+    this.dep = new Dep();
+    def(value, '__ob__', this);
+    if (isArray(value)) {
+      var augment = hasProto ? protoAugment : copyAugment;
+      augment(value, arrayMethods, arrayKeys);
+      this.observeArray(value);
+    } else {
+      this.walk(value);
+    }
+  }
+
+  // Instance methods
+
+  /**
+   * Walk through each property and convert them into
+   * getter/setters. This method should only be called when
+   * value type is Object.
+   *
+   * @param {Object} obj
+   */
+
+  Observer.prototype.walk = function (obj) {
+    var keys = Object.keys(obj);
+    for (var i = 0, l = keys.length; i < l; i++) {
+      this.convert(keys[i], obj[keys[i]]);
+    }
+  };
+
+  /**
+   * Observe a list of Array items.
+   *
+   * @param {Array} items
+   */
+
+  Observer.prototype.observeArray = function (items) {
+    for (var i = 0, l = items.length; i < l; i++) {
+      observe(items[i]);
+    }
+  };
+
+  /**
+   * Convert a property into getter/setter so we can emit
+   * the events when the property is accessed/changed.
+   *
+   * @param {String} key
+   * @param {*} val
+   */
+
+  Observer.prototype.convert = function (key, val) {
+    defineReactive(this.value, key, val);
+  };
+
+  /**
+   * Add an owner vm, so that when $set/$delete mutations
+   * happen we can notify owner vms to proxy the keys and
+   * digest the watchers. This is only called when the object
+   * is observed as an instance's root $data.
+   *
+   * @param {Vue} vm
+   */
+
+  Observer.prototype.addVm = function (vm) {
+    (this.vms || (this.vms = [])).push(vm);
+  };
+
+  /**
+   * Remove an owner vm. This is called when the object is
+   * swapped out as an instance's $data object.
+   *
+   * @param {Vue} vm
+   */
+
+  Observer.prototype.removeVm = function (vm) {
+    this.vms.$remove(vm);
+  };
+
+  // helpers
+
+  /**
+   * Augment an target Object or Array by intercepting
+   * the prototype chain using __proto__
+   *
+   * @param {Object|Array} target
+   * @param {Object} src
+   */
+
+  function protoAugment(target, src) {
+    /* eslint-disable no-proto */
+    target.__proto__ = src;
+    /* eslint-enable no-proto */
+  }
+
+  /**
+   * Augment an target Object or Array by defining
+   * hidden properties.
+   *
+   * @param {Object|Array} target
+   * @param {Object} proto
+   */
+
+  function copyAugment(target, src, keys) {
+    for (var i = 0, l = keys.length; i < l; i++) {
+      var key = keys[i];
+      def(target, key, src[key]);
+    }
+  }
+
+  /**
+   * Attempt to create an observer instance for a value,
+   * returns the new observer if successfully observed,
+   * or the existing observer if the value already has one.
+   *
+   * @param {*} value
+   * @param {Vue} [vm]
+   * @return {Observer|undefined}
+   * @static
+   */
+
+  function observe(value, vm) {
+    if (!value || typeof value !== 'object') {
+      return;
+    }
+    var ob;
+    if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+      ob = value.__ob__;
+    } else if (shouldConvert && (isArray(value) || isPlainObject(value)) && Object.isExtensible(value) && !value._isVue) {
+      ob = new Observer(value);
+    }
+    if (ob && vm) {
+      ob.addVm(vm);
+    }
+    return ob;
+  }
+
+  /**
+   * Define a reactive property on an Object.
+   *
+   * @param {Object} obj
+   * @param {String} key
+   * @param {*} val
+   */
+
+  function defineReactive(obj, key, val) {
+    var dep = new Dep();
+
+    var property = Object.getOwnPropertyDescriptor(obj, key);
+    if (property && property.configurable === false) {
+      return;
+    }
+
+    // cater for pre-defined getter/setters
+    var getter = property && property.get;
+    var setter = property && property.set;
+
+    var childOb = observe(val);
+    Object.defineProperty(obj, key, {
+      enumerable: true,
+      configurable: true,
+      get: function reactiveGetter() {
+        var value = getter ? getter.call(obj) : val;
+        if (Dep.target) {
+          dep.depend();
+          if (childOb) {
+            childOb.dep.depend();
+          }
+          if (isArray(value)) {
+            for (var e, i = 0, l = value.length; i < l; i++) {
+              e = value[i];
+              e && e.__ob__ && e.__ob__.dep.depend();
+            }
+          }
+        }
+        return value;
+      },
+      set: function reactiveSetter(newVal) {
+        var value = getter ? getter.call(obj) : val;
+        if (newVal === value) {
+          return;
+        }
+        if (setter) {
+          setter.call(obj, newVal);
+        } else {
+          val = newVal;
+        }
+        childOb = observe(newVal);
+        dep.notify();
+      }
+    });
+  }
+
   var uid$3 = 0;
 
   var vFor = {
@@ -4036,7 +4329,9 @@
           // update data for track-by, object repeat &
           // primitive values.
           if (trackByKey || convertedFromObject || primitive) {
-            frag.scope[alias] = value;
+            withoutConversion(function () {
+              frag.scope[alias] = value;
+            });
           }
         } else {
           // new isntance
@@ -4126,7 +4421,11 @@
       // for two-way binding on alias
       scope.$forContext = this;
       // define scope properties
-      defineReactive(scope, alias, value, true /* do not observe */);
+      // important: define the scope alias without forced conversion
+      // so that frozen data structures remain non-reactive.
+      withoutConversion(function () {
+        defineReactive(scope, alias, value);
+      });
       defineReactive(scope, '$index', index);
       if (key) {
         defineReactive(scope, '$key', key);
@@ -4988,286 +5287,6 @@
     }
   };
 
-  var arrayProto = Array.prototype;
-  var arrayMethods = Object.create(arrayProto)
-
-  /**
-   * Intercept mutating methods and emit events
-   */
-
-  ;['push', 'pop', 'shift', 'unshift', 'splice', 'sort', 'reverse'].forEach(function (method) {
-    // cache original method
-    var original = arrayProto[method];
-    def(arrayMethods, method, function mutator() {
-      // avoid leaking arguments:
-      // http://jsperf.com/closure-with-arguments
-      var i = arguments.length;
-      var args = new Array(i);
-      while (i--) {
-        args[i] = arguments[i];
-      }
-      var result = original.apply(this, args);
-      var ob = this.__ob__;
-      var inserted;
-      switch (method) {
-        case 'push':
-          inserted = args;
-          break;
-        case 'unshift':
-          inserted = args;
-          break;
-        case 'splice':
-          inserted = args.slice(2);
-          break;
-      }
-      if (inserted) ob.observeArray(inserted);
-      // notify change
-      ob.dep.notify();
-      return result;
-    });
-  });
-
-  /**
-   * Swap the element at the given index with a new value
-   * and emits corresponding event.
-   *
-   * @param {Number} index
-   * @param {*} val
-   * @return {*} - replaced element
-   */
-
-  def(arrayProto, '$set', function $set(index, val) {
-    if (index >= this.length) {
-      this.length = Number(index) + 1;
-    }
-    return this.splice(index, 1, val)[0];
-  });
-
-  /**
-   * Convenience method to remove the element at given index.
-   *
-   * @param {Number} index
-   * @param {*} val
-   */
-
-  def(arrayProto, '$remove', function $remove(item) {
-    /* istanbul ignore if */
-    if (!this.length) return;
-    var index = indexOf(this, item);
-    if (index > -1) {
-      return this.splice(index, 1);
-    }
-  });
-
-  var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
-
-  /**
-   * Observer class that are attached to each observed
-   * object. Once attached, the observer converts target
-   * object's property keys into getter/setters that
-   * collect dependencies and dispatches updates.
-   *
-   * @param {Array|Object} value
-   * @constructor
-   */
-
-  function Observer(value) {
-    this.value = value;
-    this.dep = new Dep();
-    def(value, '__ob__', this);
-    if (isArray(value)) {
-      var augment = hasProto ? protoAugment : copyAugment;
-      augment(value, arrayMethods, arrayKeys);
-      this.observeArray(value);
-    } else {
-      this.walk(value);
-    }
-  }
-
-  // Instance methods
-
-  /**
-   * Walk through each property and convert them into
-   * getter/setters. This method should only be called when
-   * value type is Object.
-   *
-   * @param {Object} obj
-   */
-
-  Observer.prototype.walk = function (obj) {
-    var keys = Object.keys(obj);
-    for (var i = 0, l = keys.length; i < l; i++) {
-      this.convert(keys[i], obj[keys[i]]);
-    }
-  };
-
-  /**
-   * Observe a list of Array items.
-   *
-   * @param {Array} items
-   */
-
-  Observer.prototype.observeArray = function (items) {
-    for (var i = 0, l = items.length; i < l; i++) {
-      observe(items[i]);
-    }
-  };
-
-  /**
-   * Convert a property into getter/setter so we can emit
-   * the events when the property is accessed/changed.
-   *
-   * @param {String} key
-   * @param {*} val
-   */
-
-  Observer.prototype.convert = function (key, val) {
-    defineReactive(this.value, key, val);
-  };
-
-  /**
-   * Add an owner vm, so that when $set/$delete mutations
-   * happen we can notify owner vms to proxy the keys and
-   * digest the watchers. This is only called when the object
-   * is observed as an instance's root $data.
-   *
-   * @param {Vue} vm
-   */
-
-  Observer.prototype.addVm = function (vm) {
-    (this.vms || (this.vms = [])).push(vm);
-  };
-
-  /**
-   * Remove an owner vm. This is called when the object is
-   * swapped out as an instance's $data object.
-   *
-   * @param {Vue} vm
-   */
-
-  Observer.prototype.removeVm = function (vm) {
-    this.vms.$remove(vm);
-  };
-
-  // helpers
-
-  /**
-   * Augment an target Object or Array by intercepting
-   * the prototype chain using __proto__
-   *
-   * @param {Object|Array} target
-   * @param {Object} src
-   */
-
-  function protoAugment(target, src) {
-    /* eslint-disable no-proto */
-    target.__proto__ = src;
-    /* eslint-enable no-proto */
-  }
-
-  /**
-   * Augment an target Object or Array by defining
-   * hidden properties.
-   *
-   * @param {Object|Array} target
-   * @param {Object} proto
-   */
-
-  function copyAugment(target, src, keys) {
-    for (var i = 0, l = keys.length; i < l; i++) {
-      var key = keys[i];
-      def(target, key, src[key]);
-    }
-  }
-
-  /**
-   * Attempt to create an observer instance for a value,
-   * returns the new observer if successfully observed,
-   * or the existing observer if the value already has one.
-   *
-   * @param {*} value
-   * @param {Vue} [vm]
-   * @return {Observer|undefined}
-   * @static
-   */
-
-  function observe(value, vm) {
-    if (!value || typeof value !== 'object') {
-      return;
-    }
-    var ob;
-    if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
-      ob = value.__ob__;
-    } else if ((isArray(value) || isPlainObject(value)) && Object.isExtensible(value) && !value._isVue) {
-      ob = new Observer(value);
-    }
-    if (ob && vm) {
-      ob.addVm(vm);
-    }
-    return ob;
-  }
-
-  /**
-   * Define a reactive property on an Object.
-   *
-   * @param {Object} obj
-   * @param {String} key
-   * @param {*} val
-   * @param {Boolean} doNotObserve
-   */
-
-  function defineReactive(obj, key, val, doNotObserve) {
-    var dep = new Dep();
-
-    var property = Object.getOwnPropertyDescriptor(obj, key);
-    if (property && property.configurable === false) {
-      return;
-    }
-
-    // cater for pre-defined getter/setters
-    var getter = property && property.get;
-    var setter = property && property.set;
-
-    // if doNotObserve is true, only use the child value observer
-    // if it already exists, and do not attempt to create it.
-    // this allows freezing a large object from the root and
-    // avoid unnecessary observation inside v-for fragments.
-    var childOb = doNotObserve ? isObject(val) && val.__ob__ : observe(val);
-    Object.defineProperty(obj, key, {
-      enumerable: true,
-      configurable: true,
-      get: function reactiveGetter() {
-        var value = getter ? getter.call(obj) : val;
-        if (Dep.target) {
-          dep.depend();
-          if (childOb) {
-            childOb.dep.depend();
-          }
-          if (isArray(value)) {
-            for (var e, i = 0, l = value.length; i < l; i++) {
-              e = value[i];
-              e && e.__ob__ && e.__ob__.dep.depend();
-            }
-          }
-        }
-        return value;
-      },
-      set: function reactiveSetter(newVal) {
-        var value = getter ? getter.call(obj) : val;
-        if (newVal === value) {
-          return;
-        }
-        if (setter) {
-          setter.call(obj, newVal);
-        } else {
-          val = newVal;
-        }
-        childOb = doNotObserve ? isObject(newVal) && newVal.__ob__ : observe(newVal);
-        dep.notify();
-      }
-    });
-  }
-
   var propBindingModes = config._propBindingModes;
   var empty = {};
 
@@ -5443,15 +5462,7 @@
       value = getPropDefaultValue(vm, prop.options);
     }
     if (assertProp(prop, value)) {
-      var doNotObserve =
-      // if the passed down prop was already converted, then
-      // subsequent sets should also be converted, because the user
-      // may mutate the prop binding in the child component (#2549)
-      !(value && value.__ob__) && (
-      // otherwise we can skip observation for props that are either
-      // literal or points to a simple path (non-derived values)
-      !prop.dynamic || isSimplePath(prop.raw));
-      defineReactive(vm, key, value, doNotObserve);
+      defineReactive(vm, key, value);
     }
   }
 
@@ -5570,11 +5581,18 @@
       var childKey = prop.path;
       var parentKey = prop.parentPath;
       var twoWay = prop.mode === bindingModes.TWO_WAY;
+      var isSimple = isSimplePath(parentKey);
 
       var parentWatcher = this.parentWatcher = new Watcher(parent, parentKey, function (val) {
         val = coerceProp(prop, val);
         if (assertProp(prop, val)) {
-          child[childKey] = val;
+          if (isSimple) {
+            withoutConversion(function () {
+              child[childKey] = val;
+            });
+          } else {
+            child[childKey] = val;
+          }
         }
       }, {
         twoWay: twoWay,
@@ -5585,7 +5603,14 @@
       });
 
       // set the child initial value.
-      initProp(child, prop, parentWatcher.value);
+      var value = parentWatcher.value;
+      if (isSimple && value !== undefined) {
+        withoutConversion(function () {
+          initProp(child, prop, value);
+        });
+      } else {
+        initProp(child, prop, value);
+      }
 
       // setup two-way binding
       if (twoWay) {
@@ -5853,7 +5878,9 @@
 
     unbuild: function unbuild(defer) {
       if (this.waitingFor) {
-        this.waitingFor.$destroy();
+        if (!this.keepAlive) {
+          this.waitingFor.$destroy();
+        }
         this.waitingFor = null;
       }
       var child = this.childVM;
@@ -6591,15 +6618,17 @@
       }
     }
 
-    var attr, name, value, matched, dirName, arg, def, termDef;
+    var attr, name, value, modifiers, matched, dirName, rawName, arg, def, termDef;
     for (var i = 0, j = attrs.length; i < j; i++) {
       attr = attrs[i];
-      if (matched = attr.name.match(dirAttrRE)) {
+      modifiers = parseModifiers(attr.name);
+      name = attr.name.replace(modifierRE, '');
+      if (matched = name.match(dirAttrRE)) {
         def = resolveAsset(options, 'directives', matched[1]);
         if (def && def.terminal) {
           if (!termDef || (def.priority || DEFAULT_TERMINAL_PRIORITY) > termDef.priority) {
             termDef = def;
-            name = attr.name;
+            rawName = attr.name;
             value = attr.value;
             dirName = matched[1];
             arg = matched[2];
@@ -6609,7 +6638,7 @@
     }
 
     if (termDef) {
-      return makeTerminalNodeLinkFn(el, dirName, value, options, termDef, name, arg);
+      return makeTerminalNodeLinkFn(el, dirName, value, options, termDef, rawName, arg, modifiers);
     }
   }
 
@@ -6627,28 +6656,24 @@
    * @param {String} value
    * @param {Object} options
    * @param {Object} def
-   * @param {String} [attrName]
+   * @param {String} [rawName]
    * @param {String} [arg]
+   * @param {Object} [modifiers]
    * @return {Function} terminalLinkFn
    */
 
-  function makeTerminalNodeLinkFn(el, dirName, value, options, def, attrName, arg) {
+  function makeTerminalNodeLinkFn(el, dirName, value, options, def, rawName, arg, modifiers) {
     var parsed = parseDirective(value);
     var descriptor = {
       name: dirName,
+      arg: arg,
       expression: parsed.expression,
       filters: parsed.filters,
       raw: value,
-      rawName: attrName,
+      attr: rawName,
+      modifiers: modifiers,
       def: def
     };
-    if (attrName) {
-      descriptor.rawName = attrName;
-      descriptor.modifiers = parseModifiers(attrName);
-    }
-    if (arg) {
-      descriptor.arg = arg.replace(modifierRE, '');
-    }
     // check ref for v-for and router-view
     if (dirName === 'for' || dirName === 'router-view') {
       descriptor.ref = findRef(el);
@@ -7576,7 +7601,7 @@
     var i = params.length;
     var key, val, mappedKey;
     while (i--) {
-      key = params[i];
+      key = hyphenate(params[i]);
       mappedKey = camelize(key);
       val = getBindAttr(this.el, key);
       if (val != null) {
@@ -9774,7 +9799,7 @@
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.19';
+  Vue.version = '1.0.20';
 
   // devtools global hook
   /* istanbul ignore next */
