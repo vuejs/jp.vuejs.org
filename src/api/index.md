@@ -2179,6 +2179,8 @@ type: api
 
 ## Array Extension Methods
 
+Vue.js extends `Array.prototype` with two additional methods that makes it easier to perform some common Array operations while ensuring reactive updates are properly triggered.
+
 ### array.$set(index, value)
 
 - **Arguments**
@@ -2186,14 +2188,14 @@ type: api
   - `{*} value`
 
 - **Usage**
-  
+
   Set an element in the array to a value by index and trigger view updates.
 
   ``` js
-    vm.animals.$set(0, { name: 'Aardvark' })
+  vm.animals.$set(0, { name: 'Aardvark' })
   ```
 
-- **See also:** [Mutation Methods](/guide/list.html#Mutation-Methods)
+- **See also:** [Array Detection Caveats](/guide/list.html#Caveats)
 
 ### array.$remove(reference)
 
@@ -2201,12 +2203,12 @@ type: api
   - `{Reference} reference`
 
 - **Usage**
-  
-  Remove an element from an array by reference and trigger view updates.
+
+  Remove an element from an array by reference and trigger view updates. This is a sugar method for first searching for the element in the array, and then if found, calling `array.splice(index, 1)`.
 
   ``` js
-    var aardvark = vm.animals[0]
-    vm.animals.$remove(aardvark)
+  var aardvark = vm.animals[0]
+  vm.animals.$remove(aardvark)
   ```
 
 - **See also:** [Mutation Methods](/guide/list.html#Mutation-Methods)
