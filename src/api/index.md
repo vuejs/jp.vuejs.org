@@ -93,7 +93,7 @@ type: api
 - **使用方法:**
 
   ``` js
-  // make sure to set this synchronously immediately after loading Vue
+  // Vue ローディング直後、この設定が同期的されているかどうか確認してください
   Vue.config.devtools = true
   ```
 
@@ -2178,38 +2178,38 @@ type: api
   </script>
   {% endraw %}
 
-## Array Extension Methods
+## 配列拡張メソッド
 
-Vue.js extends `Array.prototype` with two additional methods that makes it easier to perform some common Array operations while ensuring reactive updates are properly triggered.
+Vue.js は、リアクティブな更新が適切にトリガされるの維持しつつ、いくつかの一般的な配列操作を実行するために、簡単な 2 つのメソッドを `Array.prototype` に追加して拡張します。
 
 ### array.$set(index, value)
 
-- **Arguments**
+- **引数**
   - `{Number} index`
   - `{*} value`
 
-- **Usage**
+- **使用方法**
 
-  Set an element in the array to a value by index and trigger view updates.
+  インデックスと view の更新をトリガすることによって、配列の要素に値を設定します。
 
   ``` js
   vm.animals.$set(0, { name: 'Aardvark' })
   ```
 
-- **See also:** [Array Detection Caveats](/guide/list.html#Caveats)
+- **参照:** [配列の検出の注意事項](/guide/list.html#注意事項)
 
 ### array.$remove(reference)
 
-- **Arguments**
+- **引数**
   - `{Reference} reference`
 
-- **Usage**
+- **使用方法**
 
-  Remove an element from an array by reference and trigger view updates. This is a sugar method for first searching for the element in the array, and then if found, calling `array.splice(index, 1)`.
+  参照と view の更新をトリガすることによって、配列から要素を削除します。これは、配列の要素に対して検索するための糖衣メソッドで、もし見つかったとき、`array.splice(index, 1)` を呼びます。
 
   ``` js
   var aardvark = vm.animals[0]
   vm.animals.$remove(aardvark)
   ```
 
-- **See also:** [Mutation Methods](/guide/list.html#Mutation-Methods)
+- **参照:** [変更メソッド](/guide/list.html#変更メソッド)
