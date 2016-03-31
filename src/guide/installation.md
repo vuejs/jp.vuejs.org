@@ -10,7 +10,7 @@ gz_size: "25.12"
 
 ### 互換性の注意
 
-Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用するため、IE8 そしてそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMASCript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
+Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用するため、IE8 そしてそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
 
 ### リリースノート
 
