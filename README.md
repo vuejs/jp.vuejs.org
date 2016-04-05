@@ -1,7 +1,7 @@
 # vuejs/jp.vuejs.org
 
 [![Circle CI](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja.svg?style=svg&circle-token=833967ff387fa4a8d91a738086d5c166ea0a6f85)](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja)
-<script async defer src="https://vuejs-jp-slackin.herokuapp.com/slackin.js"></script>
+[![Slack Status](https://vuejs-jp-slackin.herokuapp.com/badge.svg)](https://vuejs-jp-slackin.herokuapp.com/)
 
 このリポジトリは Vue.js 最新バージョン向けのドキュメントを管理しているレポジトリです。
 (Vue.js 0.12 向けのドキュメントを管理しているリポジトリは[こちら](https://github.com/vuejs-jp/012-jp.vuejs.org))
