@@ -2148,16 +2148,6 @@ type: api
   </div>
   ```
 
-  Sort using two keys:
-
-  ``` html
-  <ul>
-    <li v-for="user in users | orderBy 'lastName' 'firstName'">
-      {{ user.lastName }} {{ user.firstName }}
-    </li>
-  </ul>
-  ```
-
   ``` js
   new Vue({
     el: '#orderby-example',
@@ -2166,6 +2156,16 @@ type: api
       users: [{ name: 'Bruce' }, { name: 'Chuck' }, { name: 'Jackie' }]
     }
   })
+  ```
+
+  2つのキーを使用するソート:
+
+  ``` html
+  <ul>
+    <li v-for="user in users | orderBy 'lastName' 'firstName'">
+      {{ user.lastName }} {{ user.firstName }}
+    </li>
+  </ul>
   ```
 
   {% raw %}
@@ -2188,11 +2188,11 @@ type: api
   </script>
   {% endraw %}
 
-  Sort using a Function:
+  関数を使用するソート:
 
   ``` html
   <div id="orderby-compare-example" class="demo">
-    <button @click="order = order * -1">Reverse Sort Order</button>
+    <button @click="order = order * -1">ソート順の反転</button>
     <ul>
       <li v-for="user in users | orderBy ageByTen">
         {{ user.name }} - {{ user.age }}
@@ -2231,7 +2231,7 @@ type: api
 
   {% raw %}
   <div id="orderby-compare-example" class="demo">
-    <button @click="order = order * -1">Reverse Sort Order</button>
+    <button @click="order = order * -1">ソート順の反転</button>
     <ul id="orderby-compare-example">
       <li v-for="user in users | orderBy ageByTen order">
         {{ user.name }} - {{ user.age }}
