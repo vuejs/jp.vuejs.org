@@ -313,6 +313,8 @@ Vue.component('example', {
   props: {
     // 基本な型チェック (`null` はどんな型でも受け付ける)
     propA: Number,
+    // 複数の可能な型 (1.0.21 以降)
+    propM: [String, Number],
     // 必須な文字列
     propB: {
       type: String,
