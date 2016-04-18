@@ -1,40 +1,40 @@
 ---
-title: Join the Vue Community!
+title: Vue コミュニティへ参加しましょう！
 type: guide
 order: 20
 ---
 
-## Join the Vue.js Community!
+## Vue コミュニティへ参加しましょう！
 
-The vibrant community around Vue.js is continually growing. Nevertheless, helpful hands are always welcome. In fact, a growing community is the best sign of a healthy OSS project worth putting any effort into, even if it is as the user of the software. 
-
-If you would like to also be a part of the Vue.js community, this page was meant to support your endeavors. Have a look at the resources listed below to get some orientation around the sailing ship of Vue.js and...
-
-....welcome aboard!
-
-## Resources You Should Know About!
-
-### The Community
-- [The Forum](http://forum.vuejs.org/) - THE best place to ask questions and get answers about Vue.js and its components.
-- [Gitter Channel](https://gitter.im/vuejs/vue) -  A place for devs to meet and chat. You can ask questions here, but the forum is the better platform, since the discussions are threaded.
-- [Github](https://github.com/vuejs) - Report bugs or fork repositories to offer pull requests. Any contribution is greatly appreciated!  
+Vue.js 周りのコミュニティの活気は、絶えず成長しています。それでも、援助の手は常に歓迎です。実際、成長しているコミュニティは、たとえ、それがソフトウェアのユーザーとしてでも、任意に力を入れるに値する健全な OSS プロジェクトの最高のサインです。
 
 
-### Third Party Contributions
+Vue.js コミュニティの一員になりたい場合は、このページはあなたの試みをサポートするためものになるでしょう。Vue.js の船旅をするためにいくつかの舵取りを得るために以下のリソースをご覧になりましょう、そして・・・
 
-- [The Awesome Vue Page](https://github.com/vuejs/awesome-vue) - See what other awesome resources have been published by other awesome people.
-- [The "Show and Tell" Subforum](http://forum.vuejs.org/category/15/show-tell) - Another great place to check out what others have built with and for the growing Vue ecosystem.
+・・・ ようこそ、Vue.js の世界へ！
+
+## あなたが知っておくべきリソース！
+
+### コミュニティ
+- [The Forum](http://forum.vuejs.org/) - Vue.js について回答を得たり、そのコンポーネントについて質問するために最適な場所です
+- [Gitter Channel](https://gitter.im/vuejs/vue) - 開発者とのチャットのための場所。ここで質問することができますが、議論がスレッド化されているフォーラムはより優れたプラットフォームです。
+- [Github](https://github.com/vuejs) - バグ報告またはフォークレポジトリはプルリクエストを提供します。任意の貢献は大歓迎です！
+
+
+### サードパーティの貢献
+
+- [素晴らしい Vue のページ](https://github.com/vuejs/awesome-vue) - 他の素晴らしいリソースは、他の素晴らしい人々によって公開されているものを参照してください。
+- [The "Show and Tell" Subforum](http://forum.vuejs.org/category/15/show-tell) - もう1つの大きな場所は、他の人が成長している Vue のエコシステムによって構築されてきたものをチェックすることです。
  
-### Contributing to Vue
+### Vue への貢献
 
-- [The rules to contribute](https://github.com/vuejs/vue/blob/dev/CONTRIBUTING.md) - As with any community, there has to be rules, in order to ensure everyone is doing the right things the right way.
+- [貢献するためのルール](https://github.com/vuejs/vue/blob/dev/CONTRIBUTING.md) - あらゆるコミュニティと同様に、全ての人が正しいことを正しい方法で行っていることを確保するために、ルールが存在しなければなりません。
 
-- The Main Components of Vue
-  - [Vue](https://github.com/vuejs/vue) - The core repository.
-  - [Vuex](https://github.com/vuejs/vuex) - A Flux-inspired Application Architecture for Vue.js.
-  - [Vue-router](https://github.com/vuejs/vue-router) - A routing system for SPAs with Vue.js.
-  - [Vue-resource](https://github.com/vuejs/vue-resource) - A plugin, which provides services for making web requests and to handle responses using XMLHttpRequests or JSONP. 
-
+- Vue のメインコンポーネント
+  - [vue](https://github.com/vuejs/vue) - コアレポジトリ
+  - [vuex](https://github.com/vuejs/vuex) - Vue.js 向けの Flux インスパイアアプリケーションアーキテクチャ
+  - [vue-router](https://github.com/vuejs/vue-router) - Vue.js による SPA のためのルーティングシステム
+  - [vue-resource](https://github.com/vuejs/vue-resource): XMLHttpRequest または JSONP を使用する Web リクエストの生成、そしてレスポンスのハンドルのためサービスを提供するプラグイン
 
 
 
