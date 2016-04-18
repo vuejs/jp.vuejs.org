@@ -543,9 +543,9 @@ var child = parent.$refs.profile
 API を掘り下げる前に、はじめにコンテンツがコンパイルされているスコープを明確にしましょう。このようなテンプレートを考えてみてください:
 
 ``` html
-<child>
+<child-component>
   {{ msg }}
-</child>
+</child-component>
 ```
 
 `msg` は親のデータまたは子のデータでバインドされるべきですか？答えは親です。コンポーネントスコープ対する親指の簡単なルールは単純です:
@@ -556,7 +556,7 @@ API を掘り下げる前に、はじめにコンテンツがコンパイルさ�
 
 ``` html
 <!-- 動作しません -->
-<child v-show="someChildProperty"></child>
+<child-component v-show="someChildProperty"></child-component>
 ```
 
 `someChildProperty` は子コンポーネントのプロパティであると仮定すると、上記例は意図したように動作しないでしょう。親のテンプレートは子コンポーネントの状態の認識すべきではありません。
