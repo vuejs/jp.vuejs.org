@@ -74,4 +74,6 @@ Vue.use(VueRouter)
 
 - [vue-element](https://github.com/vuejs/vue-element): Vue.js でカスタムエレメントを登録できるようになるプラグイン
 
+- [vue-animated-list](https://github.com/vuejs/vue-animated-list): 簡単に `v-for` でリストをアニメーション化するためのプラグイン
+
 - [ユーザーによって貢献されたコンポーネント & ツールのリスト](https://github.com/vuejs/awesome-vue#libraries--plugins)
