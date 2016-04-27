@@ -1,52 +1,52 @@
 ---
-title: Announcing Vue.js 2.0
+title: Vue.js 2.0 の発表
 date: 2016-04-27 13:33:00
 ---
 
-Today I am thrilled to announce the first public preview of Vue.js 2.0, which brings along many exciting improvements and new features. Let's take a peek at what's in store!
+本日、多くのエキサイティングな改善と新しい機能を盛り込んだ、 Vue.js 2.0 の最初のパブリックプレビュー (public preview) を発表してゾクゾクしています。何が起こっているのかのぞいてみましょう！
 
-## Even Leaner, Even Faster
+## さらにスリム、さらに高速
 
-Vue.js has always focused on staying light and fast, but 2.0 pushes it even further. The rendering layer is now based on a lightweight virtual-DOM implementation that improves initial rendering speed and memory consumption by up to 2~4x in most scenarios (check out [these benchmarks](https://github.com/vuejs/vue/tree/next/benchmarks)). The template-to-virtual-DOM compiler and the runtime can be separated, so you can pre-compile templates and ship your app with only the runtime, which is less than 12kb min+gzip (as a reference, React 15 is 44kb min+gzip). The compiler also works in the browser, which means you can still drop in one script tag and start hacking, just like before. Even with the compiler included, the build is sitting at 17kb min+gzip, still lighter than the current 1.0 build.
+Vue.js は軽くて速いままでいるのを常に焦点を当てて来ましたが、2.0 はさらにそれをプッシュします。レンダリングレイヤは、現在軽量な仮想 DOM 実装に基づいており、初期レンダリング速度とメモリ消費量は極度のシナリオにおいて 2 〜 4 倍まで改善します([これらのベンチマーク](https://github.com/vuejs/vue/tree/next/benchmarks)を調べてみてください)。テンプレートから仮想 DOM にするコンパイラとランタイムは分離することができ、そのため、テンプレートをプリコンパイルしたりラインタイムだけによるあなたのアプリケーションを提供でき、min+gzip された 12 キロバイトより小さいです (参考として、React 15 は min+gzip で 44 キロバイトです)。また、コンパイラはブラウザで動作し、以前と同じように、ある script タグを設定したりハッキングを開始することができることを意味します。コンパイラが含まれている場合でも、ビルドは、min+gzip されて 17 キロバイトであるので、現在の 1.x ビルドよりもまだ軽いです。
 
-## Not Your Average Virtual-DOM
+## 普通の Virtual-DOM ではありません
 
-Now, just virtual-DOM sounds boring because there are so many implementations out there - but this one is different. Combined with Vue's reactivity system, it provides optimized re-rendering out of the box without you having to do anything. Each component keeps track of its reactive dependencies during its render, so the system knows precisely when to re-render, and which components to re-render. No need for `shouldComponentUpdate` or immutable data structures - **it just works**.
+現在、非常に多くの実装があるので仮想 DOM は退屈に聞こえますが、これは違います。Vue のリアクティブシステムと組み合わせることで、あなたは何もすることもなく、形にとらわれない最適化された再レンダリングを提供します。各コンポーネントはレンダリング中にそのリアクティブな依存関係を追跡するため、再レンダリングするときシステムは正確に知っており、`shouldComponentUpdate` または不変(immutable)なデータは必要ありません。**それだけで動作します**。
 
-In addition, Vue 2.0 applies some advanced optimizations during the template-to-virtual-DOM compilation phase:
+また、Vue 2.0 はテンプレートから仮想 DOM にコンパイルするフェーズにいくつかの高度な最適化を適用します:
 
-1. It detects static class names and attributes so that they are never diffed after the initial render.
+1. 静的なクラス名と属性を検出し、その結果それらは最初のレンダリング後、差分(diff) を取ることはありません:
 
-2. It detects the maximum static sub trees (sub trees with no dynamic bindings) and hoist them out of the render function. So on each re-render, it directly reuses the exact same virtual nodes and skips the diffing.
+2. 最大限の静的なサブツリー(動的バインディングなしのサブツリー)と render 関数からそれらを巻き上げます。このため、それぞれにおける再レンダリングは、直接まったく同じ仮想 Node を再利用し、差分検出をスキップします。
 
-These advanced optimizations can usually only be achieved via Babel plugins when using JSX, but with Vue 2.0 you can get them even using the in-browser compiler.
+これらの高度な最適化は、JSX を使用するとき、通常 Babel プラグインを介して達成することができますが、Vue 2.0 でブラウザ内のコンパイラを使用してそれらを得ることができます。
 
-The new rendering system also allows you to disable reactive conversions by simply freezing your data and manually force updates, essentially giving you full control over the re-rendering process.
+新しいレンダリングシステムはまた、あなたのデータを凍結したり手動で強制的に更新することによって、リアクティブの転換を無効にすることができ、本質的に再レンダリング処理をあなたに完全に制御を与えます。
 
-With these techniques combined, Vue 2.0 ensures blazing fast performance in every possible scenario while requiring minimal optimization efforts from the developer.
+これらの技術を組み合わせると、Vue 2.0 は複雑なアプリケーションに対して非常に高速なアップデートを保証し、開発者から最小限の労力を必要とします。
 
-## Templates, JSX, or Hyperscript?
+## テンプレート、JSX 、または Hyperscript？
 
-Developers tend to have strong opinions on templates vs. JSX. On the one hand, templates are closer to HTML - they map better to the semantic structure of your app and make it much easier to think visually about the design, layout and styling. On the other hand, templates are limited to the DSL while the programmatic nature of JSX/hyperscript provides the full expressive power of a turing-complete language.
+開発者はテンプレート 対 JSX に強い感情を持つ傾向があります。一方では、テンプレートは HTML に近いです。それらは、あなたのアプリケーションのセマンティックな構造により良いマッピングをし、設計とレイアウトとスタイリングについて視覚的に考えることが遥かに容易になります。一方で、JSX / hyperscript は計算完備(turing-complete)の完全な表現力を提供しつつ、テンプレートは DSL に制限されています。
 
-Being a designer/developer hybrid, I prefer writing most of my interfaces in templates, but in certain cases I do miss the flexibility of JSX/hyperscript. An example would be writing a component that programmatically handles its children, something not feasible with just the template-based slot mechanism.
+デザイナー/開発者のハイブリッドであること、私はテンプレートで自分のインターフェイスのほとんどを書くことを好みますが、特定の場合においては、JSX / hyperscript の柔軟性を見逃しません。例としては、プログラム的に子を処理するコンポーネントを書き込む、テンプレートベースの slot 機構を備えた実現可能なものです。
 
-Well, why not have both? In Vue 2.0, you can keep using the familiar template syntax, or drop down to the virtual-DOM layer whenever you feel constrained by the template DSL. Instead of the `template` option, just replace it with a `render` function. You can even embed render functions in your templates using the special `<render>` tag! The best of both worlds, in the same framework.
+さて、なぜ、両方持っていないのでしょうか？ Vue 2.0 では、使い慣れたテンプレートの構文を使い続けることができ、また、いつでもテンプレートの DSL によって制約を感じるたびに、仮想 DOM に飛び降りることができます。`template` オプションの代わりに、`render` 関数でそれを置き換えます。あなたのテンプレートで特別な `<render>` タグを使用してレンダリング関数を埋め込むことができます！同じフレームワークにおいて、両方の長所があります。
 
-## Streaming Server-side Rendering
+## サーバサイドレンダリングのストリーミング
 
-With the migration to virtual-DOM, Vue 2.0 naturally supports server-side rendering with client-side hydration. One pain point of current mainstream server rendering implementations, such as React's, is that the rendering is synchronous so it can block the server's event loop if the app is complex. Synchronous server-side rendering may even adversely affect time-to-content on the client. Vue 2.0 provides built-in streaming server-side rendering, so that you can render your component, get a readable stream back and directly pipe it to the HTTP response. This ensures your server is responsive, and gets the rendered content to your users faster.
+仮想 DOM への移行では、Vue 2.0 は自然にクライアントサイド hydration によるサーバサイドレンダリングをサポートします。現在主流のサーバサイドレンダリング実装の辛いところは、React のような、アプリケーションが複雑な場合、サーバのイベントループをブロックすることができるため、レンダリングは同期であることです。同期的なサーバサイドレンダリングは、クライアント上のコンテンツに悪影響を与える可能性があります。Vue 2.0 は形にとらわれないサーバサイドレンダリングのストリーミングを提供するため、あなたのコンポーネントをレンダリングすることができ、読み込み可能なストリームを取得し、直接 それを HTTP レスポンスにパイプすることができます。これは、あなたのサーバが機敏に応答でき、あなたのユーザーにより速くレンダリングされたコンテンツを提供するのを保証します。
 
-## Unlocking More Possibilities
+## より多くの可能性をロックしません
 
-With the new architecture, there are even more possibilities to explore - for example, rendering to native interfaces on mobile. Currently, we are exploring a port of Vue.js 2.0 that uses [weex](http://alibaba.github.io/weex/) as a native rendering backend, a project maintained by engineers at Alibaba Group, the biggest tech enterprise of China. It is also technically feasible to adapt Vue 2.0's virtual-DOM to run inside ReactNative. We are excited to see how it goes!
+新しいアーキテクチャでは、模索するための多くの可能性があります。例えば、モバイル上でネイティブインターフェイスにレンダリングできます。現在、我々は Vue.js 2.0 の移植について模索しており、中国の最大技術企業のアリババグループでのエンジニアによって維持されているプロジェクト [weex](http://alibaba.github.io/weex/) はネイティブレンダリングのバックエンドとして使用しています。ReactNative 内部で実行するために Vue 2.0 の仮想 DOM を適合させることは技術的に可能です。我々は、どうなっていくのか興奮しています！
 
-## Compatibility and What to Expect Next
+## 互換性そして何を次に期待するのか
 
-Vue.js 2.0 is still in pre-alpha, but you can checkout the source code [here](https://github.com/vuejs/vue/tree/next/). Despite being a full rewrite, the API is largely compatible with 1.0 with the exception of some intentional deprecations. Check out [the same official examples written in 2.0](https://github.com/vuejs/vue/tree/next/examples) - you will see that not much has changed!
+Vue.js 2.0 はまだ pre-alpha ですが、[ここ](https://github.com/vuejs/vue/tree/next/)でソースコードを調べることができます。完全な書き直しにも関わらず、1.0 API は、いくつかの意図的な非推奨の例外をのぞいて、1.0 と互換性があります。[2.0 で書かれた同じ公式の example](https://github.com/vuejs/vue/tree/next/examples)を調べてみてください。あまり変わっていないことに確認できるでしょう！
 
-The feature deprecations are part of our continued effort to provide the simplest API possible for maximum developer productivity. You can check out a 1.0 vs. 2.0 feature comparison [here](https://github.com/vuejs/vue/wiki/2.0-features). This does mean that it will take some effort to migrate an existing app if you happen to use some of these deprecated features heavily, but we will provide detailed upgrade guides in the future.
+機能の非推奨するものは、最大限の開発者の生産性に対して可能な限り単純なAPIを提供するために継続的な労力の一環であり、1.0 と 2.0 の機能比較を[ここ](https://github.com/vuejs/vue/wiki/2.0-features)で調べることができます。これは、あなたがこれらの廃止機能のいくつかヘビーに使用している場合、恐らくアプリケーションを移行するためにいくつか労力を要することを意味しますが、将来においてより詳細な移行ガイドを提供するつもりです。
 
-There is still much work left to be done. We will be releasing the first alpha once we reach satisfactory test coverage, and we are aiming for beta by end of May / early June. In addition to more tests, we also need to update the supporting libraries (vue-router, Vuex, vue-loader, vueify...). Currently only Vuex works with 2.0 out of the box, but we will make sure that everything works smoothly together when 2.0 ships.
+まだ、完了するために残っている仕事はかなりあります。我々は十分なテストカバレッジに達した時、最初の alpah をリリースする予定であり、5月末または6月頭までに beta を目指しています。多くのテストに加えて、我々は、ライブラリ (vue-router、Vuex、vue-loader、vuerify など) のサポートのアップデートも必要です。現在、形にとらわれない 2.0 では、Vuex のみだけ動作しますが、我々は 2.0 を提供するとき、全てが一緒にスムーズに動作するでしょう。
 
-We are also not forgetting about 1.x! 1.1 will be released alongside 2.0 beta, with an LTS period of 6-month critical bug fixes and 9-month security updates. It will also ship with optional deprecation warnings to get you prepared for upgrading to 2.0. Stay tuned!
+我々は、1.x についても忘れていません！ 1.1 は、9ヶ月のセキュリティアップデートと6ヶ月の致命的なバグ修正の LTS (Long-term Support) 期間によって、2.0 beta と並んでリリースされます。また、2.0 にアップグレードするためにあなたが準備できるよう、任意の非推奨の警告も提供する予定です。乞うご期待下さい！
