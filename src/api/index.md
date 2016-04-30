@@ -574,46 +574,46 @@ type: api
 
 - **詳細:**
 
-  マウントされている要素を template で置き換えるかどうかを意味します。`false` を設定する場合は、template はコンテンツ内部の要素を要素自身で置き換えずに上書きします。
+  マウントされている要素をテンプレートで置き換えるかどうかを意味します。`false` を設定する場合は、テンプレートはコンテンツ内部の要素を要素自身で置き換えずに上書きします。`true` を設定する場合は、テンプレートは要素とコンポーネントの root ノードの属性で要素の属性をマージします。
 
 - **例**:
 
   ``` html
-  <div id="replace"></div>
+  <div id="replace" class="foo"></div>
   ```
 
   ``` js
   new Vue({
     el: '#replace',
-    template: '<p>replaced</p>'
+    template: '<p class="bar">replaced</p>'
   })
   ```
 
   結果は以下のとおり:
 
   ``` html
-  <p>replaced</p>
+  <p class="foo bar" id="replace">replaced</p>
   ```
 
   `replace` が `false` に設定される時との比較:
 
   ``` html
-  <div id="insert"></div>
+  <div id="insert" class="foo"></div>
   ```
 
   ``` js
   new Vue({
     el: '#insert',
     replace: false,
-    template: '<p>inserted</p>'
+    template: '<p class="bar">inserted</p>'
   })
   ```
 
   結果は以下のとおり:
 
   ``` html
-  <div id="insert">
-    <p>inserted</p>
+  <div id="insert" class="foo">
+    <p class="bar">inserted</p>
   </div>
   ```
 
