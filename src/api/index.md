@@ -425,7 +425,7 @@ type: api
       name: {
         type: String,
         required: true,
-        // warn if not two way bound
+        // two-way バインディングでなければ警告する
         twoWay: true
       }
     }
