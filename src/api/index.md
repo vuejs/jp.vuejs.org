@@ -424,7 +424,9 @@ type: api
       // 型チェックとその他のバリデーション
       name: {
         type: String,
-        required: true
+        required: true,
+        // warn if not two way bound
+        twoWay: true
       }
     }
   })
