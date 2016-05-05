@@ -2205,7 +2205,7 @@ type: api
   <div id="orderby-compare-example" class="demo">
     <button @click="order = order * -1">ソート順の反転</button>
     <ul>
-      <li v-for="user in users | orderBy ageByTen">
+      <li v-for="user in users | orderBy ageByTen order">
         {{ user.name }} - {{ user.age }}
       </li>
     </ul>
