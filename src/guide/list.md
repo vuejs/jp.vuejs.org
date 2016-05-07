@@ -218,6 +218,10 @@ if (index !== -1) {
 this.items.$remove(item)
 ```
 
+#### Using `Object.freeze()`
+
+When iterating over an array of objects frozen with `Object.freeze()`, you need to explicitly use a `track-by` key. A warning will be displayed in this scenario when Vue.js is unable to track objects automatically.
+
 ## オブジェクトの v-for
 
 オブジェクトのプロパティに対して、`v-for` を使って反復処理することができます。`$index` に加えて、それぞれのスコープは `$key` という特別なプロパティにアクセスします。
