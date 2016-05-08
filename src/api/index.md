@@ -438,15 +438,15 @@ type: api
 
 > 1.0.22+
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Restriction:** only respected in instance creation via `new`.
+- **制約:** `new` 経由でインスタンス作成のみだけなので注意してください。
 
-- **Details:**
+- **詳細:**
 
-  Pass props to an instance during its creation. This is primarily intended to make unit testing easier.
+  インスタン作成中に props に渡します。これは、主に単体テストを簡単にするのを目的としています。
 
-- **Example:**
+- **例:**
 
   ``` js
   var Comp = Vue.extend({
@@ -916,20 +916,20 @@ type: api
 
 > 1.0.22+
 
-- **Type:** `Object | Function`
+- **型:** `Object | Function`
 
-- **Details:**
+- **詳細:**
 
-  Allows declaratively extending another component (could be either a plain options object or a constructor) without having to use `Vue.extend`. This is primarily intended to make it easier to extend between single file components.
+  `Vue.extend` を使用しなくても、別のコンポーネントを宣言的に拡張できます(純粋なオプションオブジェクトまたはコンストラクタのどちらでも構いません)。これは主に単一ファイルコンポーネントにおいて簡単に拡張するのを目的としています。
 
-  This is similar to `mixins`, the difference being that the component's own options takes higher priority than the source component being extended.
+  これは `mixins` に似ており、違いは、コンポーネント自身のオプションは、元のコンポーネントが拡張されているものよりも優先であるのが違いです。
 
-- **Example:**
+- **例:**
 
   ``` js
   var CompA = { ... }
 
-  // extend CompA without having to call Vue.extend on either
+  // CompA を Vue.extend の呼び出しなしで拡張する
   var CompB = {
     extends: CompA,
     ...
