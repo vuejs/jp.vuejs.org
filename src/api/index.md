@@ -1561,6 +1561,7 @@ type: api
   ```
 
 - **参照:** [条件付きレンダリング - v-else](/guide/conditional.html#v-else)
+- **See also:** [Conditional Rendering - Component caveat](/guide/conditional.html#Component-caveat)
 
 ### v-for
 

@@ -67,6 +67,24 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 
 `v-else` 要素は、`v-if` または `v-show` の直後になければなりません。それ以外の場合は認識されません。
 
+### Component caveat
+
+When used with components and `v-show`, `v-else` doesn't get applied properly due to directives priorities. So instead of doing this:
+
+```html
+<custom-component v-show="condition"></custom-component>
+<p v-else>This could be a component too</p>
+```
+
+Replace the `v-else` with another `v-show`:
+
+```html
+<custom-component v-show="condition"></custom-component>
+<p v-show="!condition">This could be a component too</p>
+```
+
+It does work as intended with `v-if`.
+
 ## v-if 対 v-show
 
 `v-if` ブロックが切り替えられる時、Vue.js は `v-if` 内部のテンプレートコンテンツもデータバインディングまたは子コンポーネントを含むことができるため、部分的なコンパイル / teardown 処理を実行する必要があります。`v-if` は、イベントリスナと子コンポーネント内部の条件ブロックが適切に破棄され、そして切り替えられるまでの間再作成されるため、"リアル"な条件レンダリングです。
