@@ -67,23 +67,23 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 
 `v-else` 要素は、`v-if` または `v-show` の直後になければなりません。それ以外の場合は認識されません。
 
-### Component caveat
+### コンポーネントでの注意事項
 
-When used with components and `v-show`, `v-else` doesn't get applied properly due to directives priorities. So instead of doing this:
+コンポーネントで `v-show` を使用するとき、`v-else` はディレクティブの優先度のため正しく適用されません。このため、これをするためには:
 
 ```html
 <custom-component v-show="condition"></custom-component>
 <p v-else>This could be a component too</p>
 ```
 
-Replace the `v-else` with another `v-show`:
+別の `v-show` で `v-else` を置換してください:
 
 ```html
 <custom-component v-show="condition"></custom-component>
 <p v-show="!condition">This could be a component too</p>
 ```
 
-It does work as intended with `v-if`.
+`v-if` では意図したよう動作しません。
 
 ## v-if 対 v-show
 
