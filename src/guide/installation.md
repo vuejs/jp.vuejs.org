@@ -28,8 +28,9 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用する�
 
 ### CDN
 
- [jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
+[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
 
+[npmcdn](https://npmcdn.com/vue/dist/vue.min.js) 上でも利用可能で、npm に公開されるとすぐに最新バージョンが反映されます。[npmcdn.com/vue/](https://npmcdn.com/vue/) では npm パッケージのソースも確認することができます。
 ### CSP 準拠ビルド
 
 Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/vuejs/vue/tree/csp/dist) を代わりに使用できます。
