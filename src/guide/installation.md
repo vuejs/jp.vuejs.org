@@ -31,13 +31,14 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用する�
 [jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
 
 [npmcdn](https://npmcdn.com/vue/dist/vue.min.js) 上でも利用可能で、npm に公開されるとすぐに最新バージョンが反映されます。[npmcdn.com/vue/](https://npmcdn.com/vue/) では npm パッケージのソースも確認することができます。
+
 ### CSP 準拠ビルド
 
-Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式の評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/vuejs/vue/tree/csp/dist) を代わりに使用できます。
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/vuejs/vue/tree/csp/dist)を代わりに使用できます。
 
 ## NPM
 
-NPM は Vue.js で大規模アプリケーションを構築するときのインストール方法を推奨します。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラでうまくペアにします。Vue.js は[単一ファイルコンポーネント](application.html#単一ファイルコンポーネント)による著作のための、付随するツールも提供しています。
+NPM は Vue.js で大規模アプリケーションを構築するときのインストール方法を推奨します。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラとうまく組み合わせられます。Vue.js は[単一ファイルコンポーネント](application.html#単一ファイルコンポーネント)による著作のための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版
@@ -48,7 +49,7 @@ $ npm install vue@csp
 
 ## CLI
 
-Vue.js は意欲的なシングルページアプリケーションをすぐに足場固めするの対して、[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。それはモダンなフロントエンドのフレームワークのワークフローに対して、内蔵されたバッテリーの構築を提供します。ホットリローディング、リントの保存、そして本番可能なビルドを実行して準備するのは、わずか数分です。
+Vue.js は意欲的なシングルページアプリケーションをすぐに足場固めするために、[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。それはモダンなフロントエンドのフレームワークのワークフローに対して、Battery-included なビルド手順を提供します。ホットリローディング、保存時のリント、そして本番可能なビルドを実行して準備するのは、わずか数分です。
 
 ``` bash
 # インストール vue-cli
@@ -63,7 +64,7 @@ $ npm run dev
 
 ## 開発版のビルド
 
-**重要**: NPM に配信された CommonJS バンドル (`vue.commonjs.js`) はリリース時に `master` ブランチにチェックインされたものであるため、`dev` ブランチのファイルは安定リリース版と同じです。Github 上の最新のソースコードから Vue を使用するためには、あなた自身それをビルドしなければなりません！
+**重要**: NPM に配信された CommonJS バンドル (`vue.common.js`) はリリース時に `master` ブランチにチェックインされたものであるため、`dev` ブランチのファイルは安定リリース版と同じです。Github 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
@@ -80,5 +81,6 @@ $ bower install vue
 ```
 
 ## AMD モジュールローダ
-ダウンロードされたスタンドアロン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、 AMD モジュールとして直接利用することができます。
+
+ダウンロードされたスタンドアロン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、AMD モジュールとして直接利用することができます。
 
