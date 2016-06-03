@@ -50,6 +50,7 @@ $ hexo server
 - [maxiloc](https://github.com/maxiloc)
 - [mono0x](https://github.com/mono0x)
 - [pocke](https://github.com/pocke)
+- [poncot](https://github.com/poncot)
 - [ryonext](https://github.com/ryonext)
 - [sapics](https://github.com/sapics)
 - [showwin](https://github.com/showwin)
