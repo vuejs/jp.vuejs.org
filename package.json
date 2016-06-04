@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "textlint": "^5.5.0",
-    "textlint-checker-for-vuejs-jp-docs": "git@github.com:vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
+    "textlint-checker-for-vuejs-jp-docs": "git://github.com/vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
     "textlint-rule-preset-jtf-style": "^2.1.2"
   },
   "scripts": {
