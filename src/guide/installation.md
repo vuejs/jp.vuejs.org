@@ -10,7 +10,7 @@ gz_size: "25.79"
 
 ### 互換性の注意
 
-Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用するため、IE8 そしてそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
+Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
 
 ### リリースノート
 
@@ -28,17 +28,17 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を 使用する�
 
 ### CDN
 
-[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。 (同期に少し時間がかかるので、最新版ではないかもしれません)。
+[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。 (同期に少し時間がかかるため、最新版ではないかもしれません)。
 
 [npmcdn](https://npmcdn.com/vue/dist/vue.min.js) 上でも利用可能で、npm に公開されるとすぐに最新バージョンが反映されます。[npmcdn.com/vue/](https://npmcdn.com/vue/) では npm パッケージのソースも確認することができます。
 
 ### CSP 準拠ビルド
 
-Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を許可しません。これらのケースの場合、[CSP 準拠ビルド](https://github.com/vuejs/vue/tree/csp/dist)を代わりに使用できます。
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を許可しません。このような場合には、[CSP 準拠ビルド](https://github.com/vuejs/vue/tree/csp/dist)を代わりに使用できます。
 
 ## NPM
 
-NPM は Vue.js で大規模アプリケーションを構築するときのインストール方法を推奨します。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラとうまく組み合わせられます。Vue.js は[単一ファイルコンポーネント](application.html#単一ファイルコンポーネント)による著作のための、付随するツールも提供しています。
+Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のような CommonJS モジュールバンドラとうまく組み合わせられます。Vue.js は[単一ファイルコンポーネント](application.html#単一ファイルコンポーネント)を作成するための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版
