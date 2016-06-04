@@ -8,15 +8,15 @@ order: 18
 
 Vue.js コアライブラリは、View レイヤーにフォーカスされて柔軟に設計されており、全てのアプリケーションレベルのアーキテクチャと干渉しないライブラリです。これは既存プロジェクトとの統合のために素晴らしいことができますが、スクラッチからの大規模アプリケーションを構築する場合は、構築経験の少ない開発者にとって悩ましい問題にもなります。
 
-Vue.js のエコシステムは、Vue で大規模なシングルページアプリケーション (SPA: single page application) を構築する方法のライブラリのツールセットを提供します。このパートは、私達が少しだけ"フレームワーク"のように感じるようなものを開始しますが、それは本当にごく推奨するリストです。今までどおりに積み重ねられた各パートにおいて使用するものを選ぶとよいでしょう。
+Vue.js のエコシステムは、Vue で大規模なシングルページアプリケーション (SPA: single page application) を構築する方法のライブラリのツールセットを提供します。このパートでは、"フレームワーク"のようなものを導入しますが、あくまで推奨する方法に過ぎません。これまでの各パートで紹介した方法も利用するとよいでしょう。
 
 ## モジュール化
 
-大規模なプロジェクトの場合、あなたのコードをよく整理するためにモジュール化ビルドシステムを利用することが必要です。そうすることの推奨するアプローチは、CommonJS または ES6 モジュールにあなたのソースコードを書いて、[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) を使用してそれらをバンドルします。
+大規模なプロジェクトの場合、コードを整理するためにモジュール化ビルドシステムを利用する必要があります。推奨するアプローチとしては、CommonJS または ES6 モジュール形式でソースコードを書き、[Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) を使用してそれらをバンドルする方法です。
 
-Webpack と Browserify は単にモジュールバンドラ以上のものです。それら両方は、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用して、将来サポートされる ES2015/2016 構文でコードを書くことができます。
+Webpack と Browserify は単なるモジュールバンドラ以上の機能を有しています。これらは、他のプリプロセッサでソースコードを変換することができるソース変換 API を提供します。例えば、[babel-loader](https://github.com/babel/babel-loader) または [babelify](https://github.com/babel/babelify) を使用することで、将来サポートされる ES2015/2016 構文でコードを書くことができます。
 
-これまでにそれらを使用したことがない場合は、私は、いくつかのチュートリアルを通って、モジュールバンドラの概念に精通して得て、最新の ECMAScript の機能を使用して書き始めるのを、大いにお勧めします。
+これまでにこのようなモジュールバンドラを使用したことがない場合は、いくつかのチュートリアルによりモジュールバンドラの概念を習得した後に、最新の ECMAScript の機能を使用して書き始めることをお勧めします。
 
 ## 単一ファイルコンポーネント
 
@@ -28,20 +28,20 @@ Vue.js を利用した典型的なプロジェクトでは、たくさんの個�
 
 <img src="/images/vue-component-with-pre-processors.png">
 
-これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。[Webpackbin.com](http://www.webpackbin.com/vue) でオンラインで試すことができます！
+これらの単一ファイル Vue コンポーネントを Webpack + [vue-loader](https://github.com/vuejs/vue-loader) または Browserify + [vueify](https://github.com/vuejs/vueify) でビルドできます。実際に [Webpackbin.com](http://www.webpackbin.com/vue) にてオンラインで試すことも可能です！
 
-ビルドツールを選択するのは、あなたの経験やニーズに大きく依存しています。Webpack ベースのセットアップはコード分割 (code splitting) のようなより強力な機能を提供し、モジュール依存関係のような静的なアセットを処理してコンポーネントの CSS を別のファイルに抽出しますが、もう少しより複雑に設定することができます。Browserify は Webpack が提供する高度な機能を必要としないシナリオにおいて、簡単にセットアップすることができます。
+どのビルドツールを選択するのかは、あなたの経験やニーズに大きく依存しています。Webpack ベースのセットアップはコード分割 (code splitting) のようなより強力な機能を提供し、モジュール依存関係のような静的なアセットを処理してコンポーネントの CSS を別のファイルに抽出しますが、もう少しより複雑に設定することができます。Browserify は Webpack が提供する高度な機能を必要としないシナリオにおいて、簡単にセットアップすることができます。
 
-立ち上げるための最速の方法は、公式な [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub 上にある公式 scaffold テンプレートも探すことができます:
+立ち上げるための最速の方法は、公式の [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub 上にある公式 scaffold テンプレートも探すことができます:
 
 - [Webpack + vue-loader](https://github.com/vuejs/vuejs-templates/webpack)
 - [Browserify + vueify](https://github.com/vuejs/vuejs-templates/browserify)
 
 ## ルーティング
 
-シングルページアプリケーションについては、現在テクニカルプレビューな[オフィシャル vue-router ライブラリ](https://github.com/vuejs/vue-router)の使用を推奨します。詳細については、どうか vue-router の[ドキュメンテーション](http://vuejs.github.io/vue-router/)を参照してください。
+シングルページアプリケーションでは、現在テクニカルプレビュー状態ではありますが、[オフィシャル vue-router ライブラリ](https://github.com/vuejs/vue-router)の使用を推奨します。詳細は vue-router の[ドキュメンテーション](http://vuejs.github.io/vue-router/)を参照してください。
 
-もし、いくつかとてもシンプルなルーティングのロジックを必要としている場合は、ハッシュチェンジへのイベントリスニングと、動的なコンポーネントを利用することでそれを実装することができます。
+もし、シンプルなルーティングのロジックを必要としている場合は、ハッシュチェンジへのイベントリスニングと、動的なコンポーネントを利用することで実装することも可能です。
 
 **例：:**
 
@@ -128,9 +128,9 @@ Flux アーキテクチャは React アプリケーションで一般的に使�
 
 ## 単体テスト
 
-モジュールベースのビルドシステムと互換性のあるものであれば、お好きなものを選んでください。おすすめは、[Karma](http://karma-runner.github.io/0.12/index.html) テストランナーです。それは、たくさんのコミュニティプラグインがあり、[Webpack](https://github.com/webpack/karma-webpack) と [Browserify](https://github.com/Nikku/karma-browserify) にサポートを含んでいます。詳細なセットアップについては各プロジェクトのそれぞれのドキュメントを参照してください。
+モジュールベースのビルドシステムと互換性のあるものであれば、お好きなものを選んでください。おすすめは、[Karma](http://karma-runner.github.io/0.12/index.html) テストランナーです。多くのコミュニティプラグインがあり、[Webpack](https://github.com/webpack/karma-webpack) と [Browserify](https://github.com/Nikku/karma-browserify) をサポートしています。詳細なセットアップについては各プロジェクトのドキュメントを参照してください。
 
-テストのためにコード構造の観点から、ベストプラクティスはあなたのコンポーネントモジュールで生のオプション/機能をエクスポートすることです。この例を考えてみます:
+テストのためにコード構造の観点から、ベストプラクティスはあなたのコンポーネントモジュールで生のオプション/機能をエクスポートすることです。次の例を考えてみます:
 
 ``` js
 // my-component.js
@@ -189,7 +189,7 @@ Vue.js の縮小されたスタンドアローンビルド版は、既に小さ�
 
 ### Webpack
 
-警告ブロックが自動的に UglifyJS によって縮小中に削除されるように、プロダクション環境を示すために Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使ってください。設定例:
+警告ブロックが UglifyJS による圧縮中に自動的に削除されるように、プロダクション環境を示すために Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使ってください。設定例:
 
 ``` js
 var webpack = require('webpack')
@@ -222,4 +222,4 @@ NODE_ENV=production browserify -e main.js | uglifyjs -c -m > build.js
 
 ## アプリケーションの例
 
-[Vue.js Hackernews Clone](https://github.com/vuejs/vue-hackernews) は、Webpack と vue-loader を利用したソースコード管理と、vue-router を利用したルーティングの基本設計、また HackerNews の Firebase API をバックエンドとして利用したサンプルアプリケーションです。決して大きなアプリケーションではないですが、このページで説明する概念の併用を実証しています。
+[Vue.js Hackernews Clone](https://github.com/vuejs/vue-hackernews) は、Webpack と vue-loader を利用したソースコード管理と、vue-router を利用したルーティングの基本設計、また HackerNews の Firebase API をバックエンドとして利用したサンプルアプリケーションです。決して大きなアプリケーションではないですが、本パートで紹介した手法を用いて作られています。
