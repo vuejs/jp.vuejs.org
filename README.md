@@ -55,6 +55,7 @@ $ hexo server
 - [sapics](https://github.com/sapics)
 - [showwin](https://github.com/showwin)
 - [sunya9](https://github.com/sunya9)
+- [syagawa](https://github.com/syagawa)
 - [u1-tkzw](https://github.com/u1-tkzw)
 - [y-yagi](https://github.com/y-yagi)
 - [zakuro9715](https://github.com/zakuro9715)
