@@ -93,6 +93,7 @@ vm.$watch('lastName', function (val) {
 
 ``` js
 var demo = new Vue({
+  el: '#demo',
   data: {
     firstName: 'Foo',
     lastName: 'Bar'
