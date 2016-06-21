@@ -49,6 +49,7 @@ $ hexo server
 - [kyuden](https://github.com/kyuden)
 - [maxiloc](https://github.com/maxiloc)
 - [mono0x](https://github.com/mono0x)
+- [n0f](https://github.com/n0f)
 - [pocke](https://github.com/pocke)
 - [poncot](https://github.com/poncot)
 - [ryonext](https://github.com/ryonext)
