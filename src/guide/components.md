@@ -863,7 +863,7 @@ components: {
 <my-component></my-component>
 ```
 
-これは [ES6 object literal shorthand](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_6) でうまく動作します:
+これは [ES6 オブジェクトリテラル省略記法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#New_notations_in_ECMAScript_6) でうまく動作します:
 
 ``` js
 // PascalCase
