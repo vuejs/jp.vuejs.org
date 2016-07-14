@@ -92,7 +92,7 @@ vm.$watch('lastName', function (val) {
 上記のコードは命令的で冗長です。次の算出プロパティのを使ったバージョンと比較してみましょう:
 
 ``` js
-var demo = new Vue({
+var vm = new Vue({
   el: '#demo',
   data: {
     firstName: 'Foo',
