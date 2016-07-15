@@ -36,7 +36,7 @@ npm run dev # ドジャーン!
 
 - [webpack](https://github.com/vuejs-templates/webpack) - フル装備された Webpack + vue-loader ホットリロード、リント、テスト、そして css 抽出
 
-- [webpack-simple](https://github.com/vuejs-templates/webpack) - シンプルな Webpack + vue-loader で迅速なプロトタイピングをセットアップ
+- [webpack-simple](https://github.com/vuejs-templates/webpack-simple) - シンプルな Webpack + vue-loader で迅速なプロトタイピングをセットアップ
 
 ### あなた自身のセットアップへの導き
 
