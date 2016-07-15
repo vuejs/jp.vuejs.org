@@ -6,7 +6,7 @@ order: 10
 
 ## 基本的な使い方
 
-form の input 要素 で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法とはいえ、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するための糖衣構文 (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別な配慮が必要です。
+form の input 要素 と textarea 要素で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法とはいえ、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するための糖衣構文 (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別な配慮が必要です。
 
 ### Text
 
@@ -30,6 +30,32 @@ new Vue({
 })
 </script>
 {% endraw %}
+
+### TextArea
+
+``` html
+<span>Multiline message is:</span>
+<p>{{ message }}</p>
+<br>
+<textarea v-model="message"></textarea>
+```
+
+{% raw %}
+<div id="example-textarea" class="demo">
+  <span>Message is:</span>
+  <p style="white-space: pre">{{ message }}</p><br>
+  <textarea v-model="message" placeholder="add multiple lines"></textarea>
+</div>
+<script>
+new Vue({
+  el: '#example-textarea',
+  data: {
+    message: ''
+  }
+})
+</script>
+{% endraw %}
+
 
 ### Checkbox
 
