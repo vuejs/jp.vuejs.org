@@ -31,6 +31,9 @@
   <a href="https://htmlburger.com" target="_blank">
     <img width="250px" src="/images/htmlburger.png">
   </a>
+  <a href="https://starter.someline.com/" target="_blank">
+    <img width="250px" src="/images/someline.png">
+  </a>
 </p>
 
 Vue.js は MIT ライセンスのオープンソース・プロジェクトで、どなたでも無料で利用できます。しかしながら、プロジェクトの維持と新機能の開発には一定の労力を要するので、適度な資本の後ろ盾なしには持続することができません。[Patreon での支援](https://www.patreon.com/evanyou) または [PayPal での寄付](https://www.paypal.me/evanyou) によって Vue.js の開発を支援できます。
