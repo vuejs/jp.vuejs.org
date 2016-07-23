@@ -48,6 +48,7 @@ $ hexo server
 - [kaorun343](https://github.com/kaorun343)
 - [kuy](https://github.com/kuy)
 - [kyuden](https://github.com/kyuden)
+- [massa142](https://github.com/massa142)
 - [maxiloc](https://github.com/maxiloc)
 - [mono0x](https://github.com/mono0x)
 - [n0f](https://github.com/n0f)
