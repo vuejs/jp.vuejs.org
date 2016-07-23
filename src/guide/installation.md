@@ -64,7 +64,7 @@ $ npm run dev
 
 ## 開発版のビルド
 
-**重要**: NPM に配信された CommonJS バンドル (`vue.common.js`) はリリース時に `master` ブランチにチェックインされたものであるため、`dev` ブランチのファイルは安定リリース版と同じです。Github 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
+**重要**: NPM に配信された CommonJS バンドル (`vue.common.js`) はリリース時に `master` ブランチにチェックインされているため、`dev` ブランチのファイルは安定リリース版と同じです。Github 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
