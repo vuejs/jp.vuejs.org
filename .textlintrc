@@ -11,6 +11,11 @@
             "4.3.1.丸かっこ（）": false,
             "4.3.2.大かっこ［］": false
         },
-        "no-mix-dearu-desumasu": true
+        "no-mix-dearu-desumasu": {
+            "preferInHeader": "",
+            "preferInBody": "ですます",
+            "preferInList": "ですます",
+            "strict": true
+        }
     }
 }
