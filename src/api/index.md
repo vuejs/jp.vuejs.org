@@ -24,7 +24,7 @@ type: api
 
   2. 全てのアンカーノードは DOM でコメントノードとして表示します。これはレンダリングされた結果の構造を詳しく調べるために容易になります。
 
-  <p class="tip">デバッグモードは、 production ビルドのみ有効です。</p>
+  <p class="tip">デバッグモードは、 development ビルドのみ有効です。</p>
 
 ### delimiters
 
