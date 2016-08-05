@@ -20,9 +20,9 @@ type: api
 
   デバッグモードでは、 Vue は下記の動作を実行します:
 
-  1. 全て警告としてスタックトレースを出力します。
+  1. 全の警告のスタックトレースを出力します。
 
-  2. 全てのアンカーノードは DOM でコメントノードとして表示します。これはレンダリングされた結果の構造を詳しく調べるために容易になります。
+  2. 全てのアンカーノードを DOM のコメントノードとして表示します。これによってレンダリングされた結果の構造を詳しく調べることが容易になります。
 
   <p class="tip">デバッグモードは、 production ビルドのみ有効です。</p>
 
@@ -93,11 +93,11 @@ type: api
 - **使用方法:**
 
   ``` js
-  // Vue ローディング直後、この設定が同期的されているかどうか確認してください
+  // Vue ローディング直後、この設定が同期されていることを確認してください
   Vue.config.devtools = true
   ```
 
-  [vue-devtools](https://github.com/vuejs/vue-devtools) インスペクションを許可するかどうか設定します。このオプションのデフォルト値は development ビルドでは、`true` で production ビルドでは `false` になります。production ビルドに `true` に設定することでインスペクションを有効にできます。
+  [vue-devtools](https://github.com/vuejs/vue-devtools) インスペクションを許可するかどうか設定します。このオプションのデフォルト値は development ビルドでは、`true` で production ビルドでは `false` です。production ビルドで `true` に設定することでインスペクションを有効にできます。
 
 ## グローバル API
 
