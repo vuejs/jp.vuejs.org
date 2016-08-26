@@ -2,16 +2,12 @@ all: update
 	rm db.json
 	hexo generate
 	cp -R ./todomvc public/examples
-	cp -R ../vue/test/unit/lib/ public/unit/lib
-	cp ../vue/test/unit/index.html public/unit/index.html
-	cp ../vue/test/unit/specs.js public/unit/specs.js
-	cp ../vue/test/unit/specs.js.map public/unit/specs.js.map
-
-test:
-	npm test
 
 deploy:	all
 	hexo deploy
+
+test:
+	npm test
 
 update:
 	cd ../vue && \
