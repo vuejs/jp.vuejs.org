@@ -212,7 +212,7 @@ new Vue({
 
 ### キャメルケース 対 ケバブケース
 
-HTML の属性は大文字と小文字を区別しません。キャメルケースされた prop 名を属性として使用するとき、それらをケバブケース(kebab-case: ハイフンで句切られた)にして使用する必要があります:
+HTML の属性は大文字と小文字を区別しません。キャメルケースされた prop 名を属性として使用するとき、それらをケバブケース (kebab-case: ハイフンで句切られた) にして使用する必要があります:
 
 ``` js
 Vue.component('child', {
@@ -589,9 +589,10 @@ Vue.component('child-component', {
 
 ``` html
 <div>
-  <h1>私のコンポーネント!</h1>
+  <h1>This is my component!</h1>
   <slot>
-    ここは、コンテンツが配信されない時だけ表示されます
+    This will only be displayed if there is no content
+    to be distributed.
   </slot>
 </div>
 ```
@@ -600,8 +601,8 @@ Vue.component('child-component', {
 
 ``` html
 <my-component>
-  <p>配信コンテンツその１</p>
-  <p>配信コンテンツその２</p>
+  <p>This is some original content</p>
+  <p>This is some more original content</p>
 </my-component>
 ```
 
@@ -609,9 +610,9 @@ Vue.component('child-component', {
 
 ``` html
 <div>
-  <h1>私のコンポーネント!</h1>
-  <p>配信コンテンツその１</p>
-  <p>配信コンテンツその２</p>
+  <h1>This is my component!</h1>
+  <p>This is some original content</p>
+  <p>This is some more original content</p>
 </div>
 ```
 
@@ -903,17 +904,17 @@ var StackOverflow = Vue.extend({
 このようなテンプレートの代わりに:
 
 ``` html
-<div>ルートノード１</div>
-<div>ルートノード２</div>
+<div>root node 1</div>
+<div>root node 2</div>
 ```
 
 こうするようにしてください:
 
 ``` html
 <div>
-  ルートノードは1つ！
-  <div>ノード１</div>
-  <div>ノード２</div>
+  I have a single root node!
+  <div>node 1</div>
+  <div>node 2</div>
 </div>
 ```
 
