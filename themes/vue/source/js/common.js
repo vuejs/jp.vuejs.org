@@ -12,11 +12,18 @@
    */
 
   function initSearch () {
-    docsearch({
-      apiKey: '0a75952972806d9ad07e387d08e9cc4c',
-      indexName: 'vuejs_jp',
-      inputSelector: '.st-default-search-input'
-    });
+    [
+      '#search-query-nav',
+      '#search-query-sidebar'
+    ].forEach(function (selector) {
+      if (!document.querySelector(selector)) return
+      docsearch({
+        //appId: 'BH4D9OD16A',
+        apiKey: '0a75952972806d9ad07e387d08e9cc4c',
+        indexName: 'vuejs_jp',
+        inputSelector: selector
+      })
+    })
   }
 
   /**
