@@ -690,16 +690,16 @@ type: api
 
 ### activate
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Arguments:**
+- **引数:**
   - `{Function} done`
 
-- **Details:**
+- **詳細:**
 
-  Called after compilation is finished, right before the `ready` hook - but **only** during dynamic component swapping or in the initial render for static components. Unlike other lifecycle hooks, it accepts a `done` callback, which must be called for the rest of the lifecycle to complete. It's most useful for performing some asynchronous operation before a component is swapped in, like fetching data from an API.
+  コンパイルが終了した後、 `ready` フック前に呼び出されますが、これは 動的にコンポーネントがスワップしている間または静的なコンポーネントに対する初期レンダリングだけです。他のライフサイクルフックとは異なり、それはライフサイクルの残りに対して完了するために呼び出されなければならない、`done` コールバックを受け取ります。コンポーネントがスワップに入る前に、API からデータをフェッチするような非同期操作を実行するのにより便利です。
 
-- **See also:** [Dynamic Components](/guide/components.html#Dynamic-Components)
+- **参照:** [動的コンポーネント](/guide/components.html#動的コンポーネント)
 
 ### ready
 
