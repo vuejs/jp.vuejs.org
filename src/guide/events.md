@@ -171,7 +171,7 @@ methods: {
 
 - enter
 - tab
-- delete
+- delete (もし、キーボードがそれを持っている場合は、"Delete" と "Backspace" 両方キャプチャします)
 - esc
 - space
 - up
