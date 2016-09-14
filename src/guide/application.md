@@ -34,8 +34,8 @@ Vue.js を利用した典型的なプロジェクトでは、たくさんの個�
 
 立ち上げるための最速の方法は、公式の [vue-cli](https://github.com/vuejs/vue-cli) を使用して事前に設定されたビルドセットアップで実行することです。GitHub 上にある公式 scaffold テンプレートも探すことができます:
 
-- [Webpack + vue-loader](https://github.com/vuejs/vuejs-templates/webpack)
-- [Browserify + vueify](https://github.com/vuejs/vuejs-templates/browserify)
+- [Webpack + vue-loader](https://github.com/vuejs-templates/webpack)
+- [Browserify + vueify](https://github.com/vuejs-templates/browserify)
 
 ## ルーティング
 
