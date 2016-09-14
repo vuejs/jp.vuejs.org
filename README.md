@@ -35,6 +35,7 @@ $ hexo server
 (アルファベット順)
 
 - [bouzuya](https://github.com/bouzuya)
+- [Bcrikko](https://github.com/Bcrikko)
 - [BYODKM](https://github.com/BYODKM)
 - [ChangJoo-Park](https://github.com/ChangJoo-Park)
 - [chi-bd](https://github.com/chi-bd)
