@@ -438,3 +438,5 @@ Vue.transition('stagger', {
 例:
 
 <iframe width="100%" height="200" style="margin-left:10px" src="https://jsfiddle.net/yyx990803/mvo99bse/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p class="tip">`stagger` 属性は `v-if` または `v-show` によって追加されたまたは削除されたアイテムのトランジションに影響を及ぼしません。配列への変更または `v-for` に提供されたオブジェクトだけが、ずらした配置へのトランジションの原因となります。</p>
