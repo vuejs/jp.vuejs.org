@@ -1,38 +1,49 @@
 ---
-title: クラスとスタイルのバインディング
+title: Class and Style Bindings
 type: guide
 order: 6
 ---
 
-データバインディングに対する共通の必要なことは、要素のクラスリストとインラインスタイルを操作していることです。それらは両方属性になるので、私達はそれらを `v-bind` を使用して処理することができます。私達は私達の式で最終的に文字列を計算する必要があります。しかしながら、文字列の連結に私達が関わることは、迷惑なエラーが発生しやすいです。この理由のため、Vue.js は `v-bind` が `class` と `style` に対して使用されるとき、特別な拡張を提供します。文字列に加えて、式はオブジェクトまたは配列も評価することができます。
+A common need for data binding is manipulating an element's class list and its inline styles. Since they are both attributes, we can use `v-bind` to handle them: we just need to calculate a final string with our expressions. However, meddling with string concatenation is annoying and error-prone. For this reason, Vue provides special enhancements when `v-bind` is used with `class` and `style`. In addition to strings, the expressions can also evaluate to objects or arrays.
 
-## バインディング HTML クラス
+## Binding HTML Classes
 
-<p class="tip">`{% raw %}class="{{ className }}"{% endraw %}` のようなクラスをバインドするために、mustache 展開を使用することができますが、`v-bind:class` でスタイルで混合させることは推奨されません。1 つまたは他を使用してください。</p>
+### Object Syntax
 
-### オブジェクト構文
-
-私達は、`v-bind:class` に動的にクラスを切り替えるオブジェクトを渡すことが出来ます。`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できることに注意してください:
+We can pass an object to `v-bind:class` to dynamically toggle classes:
 
 ``` html
-<div class="static" v-bind:class="{ 'class-a': isA, 'class-b': isB }"></div>
+<div v-bind:class="{ active: isActive }"></div>
 ```
+
+The above syntax means the presence of the `active` class will be determined by the [truthiness](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) of the data property `isActive`.
+
+You can have multiple classes toggled by having more fields in the object. In addition, the `v-bind:class` directive can also co-exist with the plain `class` attribute. So given the following template:
+
+``` html
+<div class="static"
+     v-bind:class="{ active: isActive, 'text-danger': hasError }">
+</div>
+```
+
+And the following data:
+
 ``` js
 data: {
-  isA: true,
-  isB: false
+  isActive: true,
+  hasError: false
 }
 ```
 
-このようにレンダリングされます:
+It will render:
 
 ``` html
-<div class="static class-a"></div>
+<div class="static active"></div>
 ```
 
-`isA` と `isB` が変化するとき、クラスリストはそれに応じて更新されます。例えば、`isB` が `true` になった場合、クラスリストは `"static class-a class-b"` になります。
+When `isActive` or `hasError` changes, the class list will be updated accordingly. For example, if `hasError` becomes `true`, the class list will become `"static active text-danger"`.
 
-そして、データと同様に、直接オブジェクトにバインドすることができます:
+The bound object doesn't have to be inline:
 
 ``` html
 <div v-bind:class="classObject"></div>
@@ -40,53 +51,71 @@ data: {
 ``` js
 data: {
   classObject: {
-    'class-a': true,
-    'class-b': false
+    active: true,
+    'text-danger': false
   }
 }
 ```
 
-これは同じ結果をレンダリングします。気づいているかもしれませんが、私達がオブジェクトを返す[算出プロパティ](computed.html)にバインドもすることもできます。これは一般的で強力なパターンです。
-
-### 配列構文
-
-私達は、`v-bind:class` にクラスのリストを適用する配列を渡すことができます:
+This will render the same result. We can also bind to a [computed property](computed.html) that returns an object. This is a common and powerful pattern:
 
 ``` html
-<div v-bind:class="[classA, classB]">
+<div v-bind:class="classObject"></div>
 ```
 ``` js
 data: {
-  classA: 'class-a',
-  classB: 'class-b'
+  isActive: true,
+  error: null
+},
+computed: {
+  classObject: function () {
+    return {
+      active: this.isActive && !this.error,
+      'text-danger': this.error && this.error.type === 'fatal',
+    }
+  }
 }
 ```
 
-このようにレンダリングされます:
+### Array Syntax
+
+We can pass an array to `v-bind:class` to apply a list of classes:
 
 ``` html
-<div class="class-a class-b"></div>
+<div v-bind:class="[activeClass, errorClass]">
+```
+``` js
+data: {
+  activeClass: 'active',
+  errorClass: 'text-danger'
+}
 ```
 
-条件付きリストでクラスを切り替えたい場合、三項演算子式でそれを行うことができます:
+Which will render:
 
 ``` html
-<div v-bind:class="[classA, isB ? classB : '']">
+<div class="active text-danger"></div>
 ```
 
-これは常に `classA` が適用されますが、`isB` が `true` のとき、`classB` だけ適用されます。
-
-しかしながら、これは複数条件のクラスがある場合は少し冗長です。1.0.19+ バージョンでは、配列構文内部にオブジェクト構文を使用することも可能です:
+If you would like to also toggle a class in the list conditionally, you can do it with a ternary expression:
 
 ``` html
-<div v-bind:class="[classA, { classB: isB, classC: isC }]">
+<div v-bind:class="[isActive ? activeClass : '', errorClass]">
 ```
 
-## バインディングインラインスタイル
+This will always apply `errorClass`, but will only apply `activeClass` when `isActive` is `true`.
 
-### オブジェクト構文
+However, this can be a bit verbose if you have multiple conditional classes. That's why it's also possible to use the object syntax inside array syntax:
 
-`v-bind:style`向けのオブジェクト構文は非常に簡単です。それは、JavaScript オブジェクトを除いては、ほとんど CSS のように見えます。CSS プロパティ名に対して、キャメルケース (caml-case) またはケバブケース (kebab-case)のどちらでも使用することができます:
+``` html
+<div v-bind:class="[{ active: isActive }, errorClass]">
+```
+
+## Binding Inline Styles
+
+### Object Syntax
+
+The object syntax for `v-bind:style` is pretty straightforward - it looks almost like CSS, except it's a JavaScript object. You can use either camelCase or kebab-case for the CSS property names:
 
 ``` html
 <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
@@ -98,7 +127,7 @@ data: {
 }
 ```
 
-テンプレートがクリーンになれるようにするために、直接 style オブジェクトにバインドするのは、よいアイディアです:
+It is often a good idea to bind to a style object directly so that the template is cleaner:
 
 ``` html
 <div v-bind:style="styleObject"></div>
@@ -112,16 +141,16 @@ data: {
 }
 ```
 
-また、オブジェクト構文はよくオブジェクトを返す算出プロパティと併せて使用されます:
+Again, the object syntax is often used in conjunction with computed properties that return objects.
 
-### 配列構文
+### Array Syntax
 
-`v-bind:style` 向けの配列構文は、同じ要素に複数のスタイルオブジェクトを適用することができます:
+The array syntax for `v-bind:style` allows you to apply multiple style objects to the same element:
 
 ``` html
-<div v-bind:style="[styleObjectA, styleObjectB]">
+<div v-bind:style="[baseStyles, overridingStyles]">
 ```
 
-### 自動プリフィックス
+### Auto-prefixing
 
-`v-bind:style` でベンダー接頭辞を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に検出し、適用されるスタイルに適切な接頭辞をを追加します。
+When you use a CSS property that requires vendor prefixes in `v-bind:style`, for example `transform`, Vue will automatically detect and add appropriate prefixes to the applied styles.

@@ -1,17 +1,17 @@
 ---
-title: ミックスイン
+title: Mixins
 type: guide
-order: 16
+order: 17
 ---
 
-## 基本
+## Basics
 
-ミックスイン (mixin) は、Vue コンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。ミックスインオブジェクトは任意のコンポーネントオプションを含むことができます。コンポーネントがミックスインを使用するとき、ミックスインの全てのオプションはコンポーネント自身のオプションに"混ぜられ"ます。
+Mixins are a flexible way to distribute reusable functionalities for Vue components. A mixin object can contain any component options. When a component uses a mixin, all options in the mixin will be "mixed" into the component's own options.
 
-例:
+Example:
 
 ``` js
-// ミックスインオブジェクトを定義
+// define a mixin object
 var myMixin = {
   created: function () {
     this.hello()
@@ -23,7 +23,7 @@ var myMixin = {
   }
 }
 
-// このミックスインを使用するコンポーネントを定義
+// define a component that uses this mixin
 var Component = Vue.extend({
   mixins: [myMixin]
 })
@@ -31,9 +31,9 @@ var Component = Vue.extend({
 var component = new Component() // -> "hello from mixin!"
 ```
 
-## オプションのマージ
+## Option Merging
 
-ミックスインとコンポーネントそれ自身がオプションと重複するとき、それらは適切なストラテジを使用して"マージ"されます。例えば、同じ名前のフック関数はそれら全てが呼び出されるよう配列にマージされます。加えて、ミックスインのフックはコンポーネント自身のフック**前**に呼ばれます:
+When a mixin and the component itself contain overlapping options, they will be "merged" using appropriate strategies. For example, hook functions with the same name are merged into an array so that all of them will be called. In addition, mixin hooks will be called **before** the component's own hooks:
 
 ``` js
 var mixin = {
@@ -53,7 +53,7 @@ new Vue({
 // -> "component hook called"
 ```
 
-オブジェクトの値を期待するオプションは、例えば、`methods`、`components`、そして `directives` らは同じオブジェクトにマージされます。コンポーネントオプションはこれらのオブジェクトでキーのコンフリクトがあるとき、優先されます:
+Options that expect object values, for example `methods`, `components` and `directives`, will be merged into the same object. The component's options will take priority when there are conflicting keys in these objects:
 
 ``` js
 var mixin = {
@@ -84,14 +84,14 @@ vm.bar() // -> "bar"
 vm.conflicting() // -> "from self"
 ```
 
-同じマージストラテジが `Vue.extend()` で使用されることに注意してください。
+Note that the same merge strategies are used in `Vue.extend()`.
 
-## グローバルミックスイン
+## Global Mixin
 
-グローバルにミックスインを適用することもできます。使用に注意してください！一度、グローバルにミックスインを適用すると、それはその後に作成する**全ての** Vue インスタンスに影響します。適切に使用されるとき、これはカスタムオプションに対して処理ロジックを注入するために使用することができます:
+You can also apply a mixin globally. Use caution! Once you apply a mixin globally, it will affect **every** Vue instance created afterwards. When used properly, this can be used to inject processing logic for custom options:
 
 ``` js
-// `myOption` カスタムオプションにハンドラを注入する
+// inject a handler for `myOption` custom option
 Vue.mixin({
   created: function () {
     var myOption = this.$options.myOption
@@ -107,21 +107,36 @@ new Vue({
 // -> "hello!"
 ```
 
-<p class="tip">サードパーティのコンポーネントを含んでいる、すべての単一の作成された Vue インスタンスに影響があるため、グローバルミックスインは多用せずかつ慎重に使用してください。多くのケースでは、上記の例のような、カスタムオプションを処理するようなものに使用すべきです。</p>
+<p class="tip">Use global mixins sparsely and carefully, because it affects every single Vue instance created, including third party components. In most cases, you should only use it for custom option handling like demonstrated in the example above. It's also a good idea to ship them as [Plugins](/guide/plugins.html) to avoid duplicate application.</p>
 
-## カスタムオプションのマージストラテジ
+## Custom Option Merge Strategies
 
-カスタムオプションでがマージされるとき、それらは単純に既存の値を上書きするデフォルトのストラテジを使用します。カスタムロジックを使用してカスタムオプションをマージする場合、`Vue.config.optionMergeStrategies` をアタッチする必要があります:
+When custom options are merged, they use the default strategy, which simply overwrites the existing value. If you want a custom option to be merged using custom logic, you need to attach a function to `Vue.config.optionMergeStrategies`:
 
 ``` js
 Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
-  // マージされた値を返す
+  // return mergedVal
 }
 ```
 
-ほとんどのオブジェクトベースのオプションでは、単純に `methods` で使用されるのと同じストラテジを使用することができます:
+For most object-based options, you can simply use the same strategy used by `methods`:
 
 ``` js
 var strategies = Vue.config.optionMergeStrategies
 strategies.myOption = strategies.methods
+```
+
+A more advanced example can be found on [Vuex](https://github.com/vuejs/vuex)'s merging strategy:
+
+``` js
+const merge = Vue.config.optionMergeStrategies.computed
+Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
+  if (!toVal) return fromVal
+  if (!fromVal) return toVal
+  return {
+    getters: merge(toVal.getters, fromVal.getters),
+    state: merge(toVal.state, fromVal.state),
+    actions: merge(toVal.actions, fromVal.actions)
+  }
+}
 ```

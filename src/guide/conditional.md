@@ -1,36 +1,36 @@
 ---
-title: 条件付きレンダリング
+title: Conditional Rendering
 type: guide
 order: 7
 ---
 
 ## v-if
 
-文字列テンプレートでは、例えば Handlebars の例は、このような条件ブロックを記述します:
+In string templates, for example Handlebars, we would write a conditional block like this:
 
 ``` html
-<!-- Handlebars の例 -->
+<!-- Handlebars template -->
 {{#if ok}}
   <h1>Yes</h1>
 {{/if}}
 ```
 
-Vue.js では、同じことを達成するために、`v-if` ディレクティブを使用します:
+In Vue, we use the `v-if` directive to achieve the same:
 
 ``` html
 <h1 v-if="ok">Yes</h1>
 ```
 
-これは、`v-else` で "else" ブロックを追加することも可能です:
+It is also possible to add an "else" block with `v-else`:
 
 ``` html
 <h1 v-if="ok">Yes</h1>
 <h1 v-else>No</h1>
 ```
 
-## テンプレートでの v-if
+### Template v-if
 
-`v-if` はディレクティブなので、単一の要素にアタッチする必要があります。しかし、1 要素よりも多くの要素と切り替えたい場合はどうでしょうか？このケースでは、非表示ラッパー (wrapper) として提供される、`<template>` 要素で `v-if` を使用できます。最終的にレンダリングされる結果は、`<template>` 要素は含まれません。
+Because `v-if` is a directive, it has to be attached to a single element. But what if we want to toggle more than one element? In this case we can use `v-if` on a `<template>` element, which serves as an invisible wrapper. The final rendered result will not include the `<template>` element.
 
 ``` html
 <template v-if="ok">
@@ -40,57 +40,39 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 </template>
 ```
 
+### v-else
+
+You can use the `v-else` directive to indicate an "else block" for `v-if`:
+
+``` html
+<div v-if="Math.random() > 0.5">
+  Now you see me
+</div>
+<div v-else>
+  Now you don't
+</div>
+```
+
+The `v-else` element must immediately follow the `v-if` element - otherwise it will not be recognized.
+
 ## v-show
 
-条件的に要素を表示するための別のオプションは `v-show` です。使用方法はほとんど同じです:
+Another option for conditionally displaying an element is the `v-show` directive. The usage is largely the same:
 
 ``` html
 <h1 v-show="ok">Hello!</h1>
 ```
 
-違いは `v-show` をによる要素は常にレンダリングされて DOM に維持するということです。`v-show` はシンプルに要素の `display` CSS プロパティを切り替えます。
+The difference is that an element with `v-show` will always be rendered and remain in the DOM; `v-show` simply toggles the `display` CSS property of the element.
 
-`v-show` は `<template>` 構文をサポートしていないということに注意してください。
+<p class="tip">Note that `v-show` doesn't support the `<template>` syntax, nor does it work with `v-else`.</p>
 
-## v-else
+## v-if vs. v-show
 
-`v-if` または `v-show` に対して "else block" を示すために、`v-else` ディレクティブを使用できます:
+`v-if` is "real" conditional rendering because it ensures that event listeners and child components inside the conditional block are properly destroyed and re-created during toggles.
 
-``` html
-<div v-if="Math.random() > 0.5">
-  Sorry
-</div>
-<div v-else>
-  Not sorry
-</div>
-```
+`v-if` is also **lazy**: if the condition is false on initial render, it will not do anything - the conditional block won't be rendered until the condition becomes true for the first time.
 
-`v-else` 要素は、`v-if` または `v-show` の直後になければなりません。それ以外の場合は認識されません。
+In comparison, `v-show` is much simpler - the element is always rendered regardless of initial condition, with just simple CSS-based toggling.
 
-### コンポーネントでの注意事項
-
-コンポーネントで `v-show` を使用するとき、`v-else` はディレクティブの優先度のため正しく適用されません。このため、これをするためには:
-
-```html
-<custom-component v-show="condition"></custom-component>
-<p v-else>This could be a component too</p>
-```
-
-別の `v-show` で `v-else` を置換してください:
-
-```html
-<custom-component v-show="condition"></custom-component>
-<p v-show="!condition">This could be a component too</p>
-```
-
-`v-if` では意図したよう動作しません。
-
-## v-if 対 v-show
-
-`v-if` ブロックが切り替えられる時、Vue.js は `v-if` 内部のテンプレートコンテンツもデータバインディングまたは子コンポーネントを含むことができるため、部分的なコンパイル / teardown 処理を実行する必要があります。`v-if` は、イベントリスナと子コンポーネント内部の条件ブロックが適切に破棄され、そして切り替えられるまでの間再作成されるため、"リアル"な条件レンダリングです。
-
-`v-if` は **lazy** です。初期表示において false の場合、何もしません。部分コンパイルは、条件が最初に true になる(そしてコンパイルがその後にキャッシュされるまで)まで開始されません。
-
-一方で、`v-show` はとてもシンプルです。要素は常にコンパイルされ、シンプルな CSS ベースの切り替えとして保存されます。
-
-一般的に、`v-if` はより高い切り替えコストを持っているのに対して、`v-show` はより高い初期レンダリングコストを持っています。そのため、とても頻繁に何かを切り替える必要があれば `v-show` を選び、条件が実行時に変更することがほとんどない場合は、`v-if` を選びます。
+Generally speaking, `v-if` has higher toggle costs while `v-show` has higher initial render costs. So prefer `v-show` if you need to toggle something very often, and prefer `v-if` if the condition is unlikely to change at runtime.

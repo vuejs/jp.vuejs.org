@@ -12,7 +12,7 @@ test:
 update:
 	cd ../vue && \
 		git checkout -- dist && \
-		git checkout master && \
+		git checkout next && \
 		npm run build && \
 		npm run build-test > /dev/null
 	cp ../vue/dist/vue.min.js themes/vue/source/js/vue.min.js

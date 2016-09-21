@@ -1,327 +1,164 @@
 ---
-title: カスタムディレクティブ
+title: Custom Directives
 type: guide
-order: 14
+order: 16
 ---
 
-## 基本
+## Intro
 
-コアで出荷されたディレクティブのデフォルトセットに加えて、カスタムディレクティブ (custom directive) を登録することができます。カスタムディレクティブは任意の DOM の振舞いへのマッピングデータを変更するためのメカニズムを提供します。
+In addition to the default set of directives shipped in core (`v-model` and `v-show`), Vue also allows you to register your own custom directives. Note that in Vue 2.0, the primary form of code reuse and abstraction is components - however there may be cases where you just need some low-level DOM access on plain elements, and this is where custom directives would still be useful. An example would be focusing on an input element, like this one:
 
-`Vue.directive(id, definition)` メソッドで、**directive id** と **definition object** を続けて渡して、グローバルカスタムディレクティブに登録できます。それをコンポーネントの `directives` オプションによってローカルカスタムディレクティブに登録することもできます。
+{% raw %}
+<div id="simplest-directive-example" class="demo">
+  <input v-focus>
+</div>
+<script>
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus()
+  }
+})
+new Vue({
+  el: '#simplest-directive-example'
+})
+</script>
+{% endraw %}
 
-### フック関数
-
-definition object はいくつかのフック関数(全て任意)を提供します:
-
-- **bind**: ディレクティブが初めて対象の要素にひも付いた時に一度だけ呼ばれます。
-
-- **update**: 初めの一度は bind の直後に初期値とともに呼ばれ、以降、バインディングされている値が変更される度に呼ばれます。引数には新しい値と以前の値が渡されます。
-
-- **unbind**: ディレクティブがひも付いている要素から取り除かれた時に一度だけ呼ばれます。
-
-**例**
+When the page loads, that element gains focus. In fact, if you haven't clicked on anything else since visiting this page, the input above should be focused now. Now let's build the directive that accomplishes this:
 
 ``` js
-Vue.directive('my-directive', {
-  bind: function () {
-    // 準備のための作業をします
-    // e.g. イベントリスナを追加したり、一回だけ実行が必要なコストのかかる処理を行う
-  },
-  update: function (newValue, oldValue) {
-    // 更新された値に何か処理をします
-    // この部分は初期値に対しても呼ばれます
-  },
-  unbind: function () {
-    // クリーンアップのための処理を行います
-    // e.g. bind()の中で追加されたイベントリスナの削除
+// Register a global custom directive called v-focus
+Vue.directive('focus', {
+  // When the bound element is inserted into the DOM...
+  inserted: function (el) {
+    // Focus the element
+    el.focus()
   }
 })
 ```
 
-一度登録された後は、以下のように Vue.js のテンプレート内で使用することができます (`v-` の接頭辞を追加するのを忘れないでください):
-
-``` html
-<div v-my-directive="someValue"></div>
-```
-
-`update` 関数のみが必要な場合は、definition object の代わりに関数を1つ渡すこともできます:
-
+If you want to register a directive locally instead, components also accept a `directives` option:
 
 ``` js
-Vue.directive('my-directive', function (value) {
-  // この関数は update() として使用される
-})
+directives: {
+  focus: {
+    // directive definition
+  }
+}
 ```
 
-### ディレクティブインスタンスのプロパティ
-
-全てのフック関数は実際に **ディレクティブオブジェクト (directive object)** にコピーされます。ディレクティブオブジェクトはフック関数の内側で `this` のコンテキストとしてアクセスすることができます。このディレクティブオブジェクトはいくつかの便利なプロパティを持っています:
-
-- **el**: ディレクティブがひも付く要素
-- **vm**: このディレクティブを所有する ViewModel
-- **expression**: 引数とフィルタ以外のバインディング式
-- **arg**: 引数(もしある場合)
-- **name**: 接頭辞 (prefix) 無しのディレクティブの名前
-- **modifiers**: もしあれば、修飾子 (modifier) を含んでいるオブジェクト
-- **descriptor**: 全体のディレクティブの解析結果を含むオブジェクト
-- **params**: params 属性を含んでいるオブジェクト。[以下で説明します](#params)
-
-<p class="tip">これらの全てのプロパティは読み込みのみ (read-only) で変更しないものとして扱わなくてはいけません。カスタムプロパティをディレクティブオブジェクトに追加することができますが、意図せずに既存の内部プロパティを上書きしないように注意が必要です。</p>
-
-いくつかのプロパティを使用したカスタムディレクティブの例:
+Then in a template, you can use the new `v-focus` attribute on any element, like this:
 
 ``` html
-<div id="demo" v-demo:hello.a.b="msg"></div>
+<input v-focus>
+```
+
+## Hook Functions
+
+A directive definition object can provide several hook functions (all optional):
+
+- `bind`: called only once, when the directive is first bound to the element. This is where you can do one-time setup work.
+
+- `inserted`: called when the bound element has been inserted into its parent node (this only guarantees parent node presence, not necessarily in-document).
+
+- `update`: called whenever the bound element's containing component is updated. The directive's value may or may not have changed. You can skip unnecessary updates by comparing the binding's current and old values (see below on hook arguments).
+
+- `componentUpdated`: called after the containing component has completed an update cycle.
+
+- `unbind`: called only once, when the directive is unbound from the element.
+
+We'll explore the arguments passed into these hooks (i.e. `el`, `binding`, `vnode`, and `oldVnode`) in the next section.
+
+## Directive Hook Arguments
+
+Directive hooks are passed these arguments:
+
+- **el**: The element the directive is bound to. This can be used to directly manipulate the DOM.
+- **binding**: An object containing the following properties.
+  - **name**: The name of the directive, without the `v-` prefix.
+  - **value**: The value passed to the directive. For example in `v-my-directive="1 + 1"`, the value would be `2`.
+  - **oldValue**: The previous value, only available in `update` and `componentUpdated`. It is available whether or not the value has changed.
+  - **expression**: The expression of the binding as a string. For example in `v-my-directive="1 + 1"`, the expression would be `"1 + 1"`.
+  - **arg**: The argument passed to the directive, if any. For example in `v-my-directive:foo`, the arg would be `"foo"`.
+  - **modifiers**: An object containing modifiers, if any. For example in `v-my-directive.foo.bar`, the modifiers object would be `{ foo: true, bar: true }`.
+- **vnode**: The virtual node produced by Vue's compiler.<!--See the [VNode API]([!!TODO: Add link to the VNode API doc when it exists]) for full details.-->
+- **oldVnode**: The previous virtual node, only available in the `update` and `componentUpdated` hooks.
+
+<p class="tip">Apart from `el`, you should treat these arguments as read-only and never modify them. If you need to share information across hooks, it is recommended to do so through element's [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).</p>
+
+An example of a custom directive using some of these properties:
+
+``` html
+<div id="hook-arguments-example" v-demo:hello.a.b="message"></div>
 ```
 
 ``` js
 Vue.directive('demo', {
-  bind: function () {
-    console.log('demo bound!')
-  },
-  update: function (value) {
-    this.el.innerHTML =
-      'name - '       + this.name + '<br>' +
-      'expression - ' + this.expression + '<br>' +
-      'argument - '   + this.arg + '<br>' +
-      'modifiers - '  + JSON.stringify(this.modifiers) + '<br>' +
-      'value - '      + value
+  bind: function (el, binding, vnode) {
+    var s = JSON.stringify
+    el.innerHTML =
+      'name: '       + s(binding.name) + '<br>' +
+      'value: '      + s(binding.value) + '<br>' +
+      'expression: ' + s(binding.expression) + '<br>' +
+      'argument: '   + s(binding.arg) + '<br>' +
+      'modifiers: '  + s(binding.modifiers) + '<br>' +
+      'vnode keys: ' + Object.keys(vnode).join(', ')
   }
 })
-var demo = new Vue({
-  el: '#demo',
+
+new Vue({
+  el: '#hook-arguments-example',
   data: {
-    msg: 'hello!'
+    message: 'hello!'
   }
 })
 ```
 
-**結果**
-
-<div id="demo" v-demo:hello.a.b="msg"></div>
+{% raw %}
+<div id="hook-arguments-example" v-demo:hello.a.b="message" class="demo"></div>
 <script>
 Vue.directive('demo', {
-  bind: function () {
-    console.log('demo bound!')
-  },
-  update: function (value) {
-    this.el.innerHTML =
-      'name - ' + this.name + '<br>' +
-      'expression - ' + this.expression + '<br>' +
-      'argument - ' + this.arg + '<br>' +
-      'modifiers - '  + JSON.stringify(this.modifiers) + '<br>' +
-      'value - ' + value
+  bind: function (el, binding, vnode) {
+    var s = JSON.stringify
+    el.innerHTML =
+      'name: '       + s(binding.name) + '<br>' +
+      'value: '      + s(binding.value) + '<br>' +
+      'expression: ' + s(binding.expression) + '<br>' +
+      'argument: '   + s(binding.arg) + '<br>' +
+      'modifiers: '  + s(binding.modifiers) + '<br>' +
+      'vnode keys: ' + Object.keys(vnode).join(', ')
   }
 })
-var demo = new Vue({
-  el: '#demo',
+new Vue({
+  el: '#hook-arguments-example',
   data: {
-    msg: 'hello!'
+    message: 'hello!'
   }
 })
 </script>
+{% endraw %}
 
-### オブジェクトリテラル
+## Function Shorthand
 
-あなたのディレクティブが複数の値を必要ならば、JavaScript オブジェクトリテラルも渡すことができます。ディレクティブは任意の妥当な JavaScript 式を取ることができるのを覚えておいてください:
+In many cases, you may want the same behavior on `bind` and `update`, but don't care about the other hooks. For example:
+
+``` js
+Vue.directive('color-swatch', function (el, binding) {
+  el.style.backgroundColor = binding.value
+})
+```
+
+## Object Literals
+
+If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression.
 
 ``` html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
 ```
 
 ``` js
-Vue.directive('demo', function (value) {
-  console.log(value.color) // "white"
-  console.log(value.text) // "hello!"
+Vue.directive('demo', function (el, binding) {
+  console.log(binding.value.color) // => "white"
+  console.log(binding.value.text)  // => "hello!"
 })
 ```
-
-### リテラル修飾子
-
-ディレクティブがリテラル修飾子 (literal modifier) で使用されるとき、属性の値は、プレーンな文字列として解釈され、そして直接 `update` メソッドに渡されます。`update` メソッドはプレーンな文字列はリアクティブにできないため、一度だけ呼ばれます。
-
-``` html
-<div v-demo.literal="foo bar baz">
-```
-``` js
-Vue.directive('demo', function (value) {
-  console.log(value) // "foo bar baz"
-})
-```
-
-### エレメントディレクティブ
-
-いくつのケースでは、属性としてよりむしろカスタム要素の形でディレクティブを使いたい場合があります。これは、Angular の "E" モードディレクティブの概念に非常に似ています。エレメントディレクティブ (element directive) は軽量な代替を本格的なコンポーネントとして提供します(ガイドの前半で説明されています)。カスタム要素をディレクティブのように登録できます:
-
-``` js
-Vue.elementDirective('my-directive', {
-  // 標準のディレクティブのような同じ API
-  bind: function () {
-    // this.el を操作 ...
-  }
-})
-```
-
-この時、以下の代わりに:
-
-``` html
-<div v-my-directive></div>
-```
-
-以下のように書くことができます:
-
-``` html
-<my-directive></my-directive>
-```
-
-エレメントディレクティブは引数または式を受け付けることはできません。しかし、その振舞いを決定するために要素の属性を読み取ることはできます。
-
-標準のディレクティブとの大きな違いは、エレメントディレクティブは**ターミナル**で、Vue が一度エレメントディレクティブに遭遇したことを意味します。それは、要素とその子を残したまま、エレメントディレクティブそれ自体、要素とその子を操作することができるようになります。
-
-## 高度なオプション
-
-### params
-
-カスタムディレクティブは `params` 配列を提供でき、Vue コンパイラは自動的にディレクティブがバインドされた要素でこれらの属性を抽出します。例:
-
-``` html
-<div v-example a="hi"></div>
-```
-``` js
-Vue.directive('example', {
-  params: ['a'],
-  bind: function () {
-    console.log(this.params.a) // -> "hi"
-  }
-})
-```
-
-この API は動的な属性もサポートします。`this.params[key]` の値は自動的に最新に保ちます。加えて、値が変更されたときコールバックも指定できます:
-
-``` html
-<div v-example v-bind:a="someValue"></div>
-```
-``` js
-Vue.directive('example', {
-  params: ['a'],
-  paramWatchers: {
-    a: function (val, oldVal) {
-      console.log('a changed!')
-    }
-  }
-})
-```
-
-<p class="tip">ディレクティブの params はJavaScript と HTML の間で同じキャメルケース⇔ケバブケースのマッピングに従うように、props と同様であることに注意してください。例えば、テンプレートで `disable-effect` として param を使用するためには、JavaScript で `disableEffect` としてそれにアクセスする必要があります。</p>
-
-### deep
-
-もしカスタムディレクティブでオブジェクトを扱いたい場合で、オブジェクトの内側のネストされたプロパティが変更された時に `update` をトリガしたい場合は、ディレクティブの定義に `deep: true` を渡す必要があります。
-
-``` html
-<div v-my-directive="obj"></div>
-```
-
-``` js
-Vue.directive('my-directive', {
-  deep: true,
-  update: function (obj) {
-    // `obj` の中のネストされたプロパティが
-    // 変更された時に呼ばれる
-  }
-})
-```
-
-### twoWay
-
-あなたのディレクティブが Vue インスタンスにデータを書き戻す場合、`twoWay: true` で渡す必要があります。このオプションは、ディレクティブ内部で `this.set(value)` を使用することができます:
-
-``` js
-Vue.directive('example', {
-  twoWay: true,
-  bind: function () {
-    this.handler = function () {
-      // vm にデータをセットします
-      // もしディレクティブが v-example="a.b.c" とひも付いている場合,
-      // 与えられた値を `vm.a.b.c` に
-      // セットしようと試みます
-      this.set(this.el.value)
-    }.bind(this)
-    this.el.addEventListener('input', this.handler)
-  },
-  unbind: function () {
-    this.el.removeEventListener('input', this.handler)
-  }
-})
-```
-
-### acceptStatement
-
-`acceptStatement: true` を渡すことでカスタムディレクティブが `v-on` が行っているようなインラインステートメントを使用できるようになります: 
-
-``` html
-<div v-my-directive="a++"></div>
-```
-
-``` js
-Vue.directive('my-directive', {
-  acceptStatement: true,
-  update: function (fn) {
-    // 呼び出される際に渡される値は function です
-    // function は "a++" ステートメントを
-    // 所有者の vm　のスコープで実行します
-  }
-})
-```
-
-ただし、テンプレート内のサイドエフェクトを避けるためにも、賢く使いましょう。
-
-### terminal
-
-> 1.0.19+
-
-Vue は DOM ツリーを再帰的に渡り歩くことによってテンプレートをコンパイルします。しかしながら、コンパイル処理において **ターミナル** なディレクティブに遭遇した場合、要素の子を渡り歩くのを停止します。ターミナルなディレクティブは要素とその子のコンパイルの仕事を引き継ぎます。例えば、 `v-if` と `v-for` は両方ともターミナルなディレクティブです。
-
-カスタムディレクティブを実装することは高度なトピックで、そして Vue のコンパイルパイプラインの知識を必要としますが、ターミナルなディレクティブを実装することは可能です。`terminal: true` を指定することによってカスタムターミナルディレクティブを指定することができます。また、おそらく部分的なコンパイルに対して `Vue.Fragmentfactory` を使用する必要があります。ここでは、コンパイルとページ上の他の場所にコンテンツテンプレートを"注入"するカスタムターミナルディレクティブの例を示します:
-
-``` js
-var FragmentFactory = Vue.FragmentFactory
-var remove = Vue.util.remove
-var createAnchor = Vue.util.createAnchor
-
-Vue.directive('inject', {
-  terminal: true,
-  bind: function () {
-    var container = document.getElementById(this.arg)
-    this.anchor = createAnchor('v-inject')
-    container.appendChild(this.anchor)
-    remove(this.el)
-    var factory = new FragmentFactory(this.vm, this.el)
-    this.frag = factory.create(this._host, this._scope, this._frag)
-    this.frag.before(this.anchor)
-  },
-  unbind: function () {
-    this.frag.remove()
-    remove(this.anchor)
-  }
-})
-```
-
-``` html
-<div id="modal"></div>
-...
-<div v-inject:modal>
-  <h1>header</h1>
-  <p>body</p>
-  <p>footer</p>
-</div>
-```
-
-カスタムターミナルディレクティブを実装したい場合、Vue 内部 のより良い理解を得るために、`v-if` と `v-for` のような組み込みのターミナルディレクティブのソースコードを読むことをお勧めします。
-
-### priority
-
-ディレクティブには任意で優先度の数値 (デフォルトは 1000) を与えることができます。もし、優先度を指定されない場合は、デフォルトの優先度が使用されます。通常のディレクティブは `1000` 、そしてターミナルなディレクティブは `2000` です。同じ要素上で高い優先度をもつディレクティブは他のディレクティブより早く処理されます。同じ優先度をもつディレクティブは要素上の属性のリストに出現する順番で処理されますが、ブラウザが異なる場合、一貫した順番になることは保証されません。
-
-いくつかのビルトインディレクティブに関する優先度は [API](/api/#Directives) で確認できます。さらに フロー制御するディレクティブ `v-if` と `v-for` は、コンパイル処理の中で常に最も高い優先度を持ちます。
