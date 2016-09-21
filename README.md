@@ -22,14 +22,12 @@ $ hexo server
 ```
 
 ## 翻訳プロジェクト発起人
-(アルファベット順)
 
-- [hashrock](https://github.com/hashrock)
-- [kazupon](https://github.com/kazupon)
-- [kojimakazuto](https://github.com/kojimakazuto)
-- [positiveflat](https://github.com/positiveflat)
-- [tejitak](https://github.com/tejitak)
-- [yasunobuigarashi](https://github.com/yasunobuigarashi)
+[![hashrock](https://avatars.githubusercontent.com/u/3132889?s=130)](https://github.com/hashrock) | [![kazupon](https://avatars.githubusercontent.com/u/72989?s=130)](https://github.com/kazupon) | [![kojimakazuto](https://avatars.githubusercontent.com/u/3478945?s=130)](https://github.com/kojimakazuto) | [![positiveflat](https://avatars.githubusercontent.com/u/543033?s=130)](https://github.com/positiveflat) | [![tejitak](https://avatars.githubusercontent.com/u/5313274?s=130)](https://github.com/tejitak) | [![yasunobuigarashi](https://avatars.githubusercontent.com/u/9955583?s=130)](https://github.com/yasunobuigarashi)
+---|---|---|---|---|---|---
+[hashrock](https://github.com/hashrock) | [kazupon](https://github.com/kazupon) | [kojimakazuto](https://github.com/kojimakazuto) | [positiveflat](https://github.com/positiveflat) | [tejitak](https://github.com/tejitak) | [yasunobuigarashi](https://github.com/yasunobuigarashi)
+
+(アルファベット順)
 
 ## 貢献者
 (アルファベット順)
