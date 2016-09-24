@@ -1,16 +1,16 @@
 ---
-title: Routing
+title: ルーティング
 type: guide
 order: 20
 ---
 
-## Official Router
+## 公式ルータ
 
-For most Single Page Applications, it's recommended to use the officially-supported [vue-router library](https://github.com/vuejs/vue-router). For more details, see vue-router's [documentation](http://vuejs.github.io/vue-router/).
+ほとんどのシングルページアプリケーション (SPA: single page application) を作成する場合、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router) を使うことをお勧めします。さらに詳しい内容は vue-router's [ドキュメント](http://vuejs.github.io/vue-router/) を参照してください。
 
-## Simple Routing From Scratch
+## スクラッチからの単純なルーティング
 
-If you just need very simple routing, you can do so by dynamically rendering a page-level component like this:
+とてもシンプルなルーティングの場合は、このようにページレベルのコンポーネントで動的にレンダリングすることができます。
 
 ``` js
 const NotFound = { template: '<p>Page not found</p>' }
@@ -36,8 +36,8 @@ new Vue({
 })
 ```
 
-Combined with the HTML5 History API, you can build a very basic but fully-functional client-side router. To see that in practice, check out [this example app](https://github.com/chrisvfritz/vue-2.0-simple-routing-example).
+HTML5の History API と組み合わせることで、とても基本ですが、完全に機能するクライアント側のルータを構築することができます。実際に確認するには [サンプル](https://github.com/chrisvfritz/vue-2.0-simple-routing-example) を取得してください。
 
-## Integrating 3rd-Party Routers
+## サードパーティのルータとの統合
 
-If there's a 3rd-party router you prefer to use, such as [Page.js](https://github.com/visionmedia/page.js) or [Director](https://github.com/flatiron/director), integration is [similarly easy](https://github.com/chrisvfritz/vue-2.0-simple-routing-example/compare/master...pagejs). Here's a [complete example](https://github.com/chrisvfritz/vue-2.0-simple-routing-example/tree/pagejs) using Page.js.
+もし、[Page.js](https://github.com/visionmedia/page.js) や [Director](https://github.com/flatiron/director) の様なサードパーティのルータを使いたい場合、統合するのは [非常に簡単](https://github.com/chrisvfritz/vue-2.0-simple-routing-example/compare/master...pagejs) です。ここに Page.js を使った [サンプル](https://github.com/chrisvfritz/vue-2.0-simple-routing-example/tree/pagejs) があります。
