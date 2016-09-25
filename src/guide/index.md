@@ -4,19 +4,19 @@ type: guide
 order: 2
 ---
 
-## What is Vue.js?
+## Vue.js とは？
 
-Vue (pronounced /vjuː/, like **view**) is a **progressive framework** for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is very easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with [modern tooling](application.html) and [supporting libraries](https://github.com/vuejs/awesome-vue#libraries--plugins).
+Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他のモノリシックなフレームワークとは異なり、Vue は初めから少しづつ適用していけるように設計されています。コアとなるライブラリは view レイヤだけに焦点を当てているため、Vue.js を使い始めたり、他のライブラリや既存のプロジェクトに統合することはとても簡単です。一方、[モダンなツール](application.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#libraries--plugins)と併せて利用することで、洗練されたシングルページアプリケーションを開発することも可能です。
 
-If you are an experienced frontend developer and want to know how Vue compares to other libraries/frameworks, check out the [Comparison with Other Frameworks](comparison.html).
+あなたが経験豊富なフロントエンド開発者で、 Vue.js と他のライブラリ/フレームワークを比較したい場合、[他のフレームワークとの比較](comparison.html)をチェックしてください。
 
-## Getting Started
+## はじめに
 
-The easiest way to try out Vue.js is using the [JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/4tpzm3e1/). Feel free to open it in another tab and follow along as we go through some basic examples. If you prefer downloading / installing from a package manager, check out the [Installation](/guide/installation.html) page.
+Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/4tpzm3e1/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしパッケージマネージャからダウンロード/インストールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
 
-## Declarative Rendering
+## 宣言的レンダリング
 
-At the core of Vue.js is a system that enables us to declaratively render data to the DOM using straightforward template syntax:
+Vue.js のコアは、単純なテンプレート構文を使って宣言的にデータを DOM にレンダリングすることを可能にするシステムです:
 
 ``` html
 <div id="app">
@@ -45,9 +45,9 @@ var app = new Vue({
 </script>
 {% endraw %}
 
-We have already created our very first Vue app! This looks pretty similar to just rendering a string template, but Vue has done a lot of work under the hood. The data and the DOM are now linked, and everything is now **reactive**. How do we know? Just open up your browser's JavaScript console and set `app.message` to a different value. You should see the rendered example above update accordingly.
+これで初めての Vue アプリケーションが作成できました！一見するとただテンプレートをレンダリングしているように見えますが、Vue.js は内部で多くの作業を行っています。データと DOM はリンクされ、そして全てが**リアクティブ**になっています。しかし、どうしてそれが分かるのでしょうか？ブラウザの JavaScript コンソールを開いて、`app.message` の値を変えてみましょう。レンダリングされたサンプルが、上記に応じて更新されるのが確認できるでしょう。
 
-In addition to text interpolation, we can also bind element attributes like this:
+文字列の展開に加えて、このように要素の属性をバインドすることもできます:
 
 ``` html
 <div id="app-2">
@@ -76,13 +76,13 @@ var app2 = new Vue({
 </script>
 {% endraw %}
 
-Here we are encountering something new. The `v-bind` attribute you are seeing is called a **directive**. Directives are prefixed with `v-` to indicate that they are special attributes provided by Vue, and as you may have guessed, they apply special reactive behavior to the rendered DOM. Here it is basically saying "bind this element's `id` attribute to the `id` property on the Vue instance."
+ここには、何か新しいものがあります。`v-bind` 属性はディレクティブと呼ばれています。ディレクティブは Vue.js によって提供された特別な属性を示すために `v-` が接頭辞がついており、あなたが推測したように、レンダリングされた DOM に特定のリアクティブな振舞いを与えます。ここで宣言されているのは、「この要素の `id` 属性を Vue インスタンスの `id` プロパティにバインドする」ということになります。
 
-Use the browser devtools to inspect the element above - you should see that it has the id `inspect-me`. And yes, it would update if you modify `app2.id` in the console.
+ブラウザの開発者ツールを使って上の要素を調べてみましょう。`inspect-me` という id を持っているのが見えるはずです。そして、コンソールから `app2.id` を変更すれば更新されるでしょう。
 
-## Conditionals and Loops
+## 条件分岐とループ
 
-It's quite simple to toggle the presence of an element, too:
+要素の有無を切り替えることも非常にシンプルにできます:
 
 ``` html
 <div id="app-3">
@@ -113,11 +113,11 @@ var app3 = new Vue({
 </script>
 {% endraw %}
 
-Go ahead and enter `app3.seen = false` in the console. You should see the message disappear.
+コンソールから `app3.seen = false` を入力してみましょう。メッセージが消えるはずです。
 
-This second example demonstrates that we can bind data to not only text and attributes, but also the **structure** of the DOM. Moreover, Vue also provides a powerful transition effect system that can automatically apply [transition effects](transitions.html) when elements are inserted/updated/removed by Vue.
+この2つ目の例は、テキストをデータにバインドできるだけではなく、 DOM の**構造**にデータをバインドできることを示しています。さらに Vue は、要素が Vue によって挿入/更新/削除されたとき、自動的に[トランジションエフェクト(遷移効果)](transitions.html)を適用できる強力なトランジションエフェクトシステムも提供します。
 
-There are quite a few other directives, each with its own special functionality. For example, the `v-for` directive can be used for displaying a list of items using the data from an Array:
+Vue.js にはかなりの数のディレクティブがあり、それぞれ独自に特別な機能を持っています。例えば、`v-for` ディレクティブを使えばアイテムのリストを配列内のデータを使って表示することができます:
 
 ``` html
 <div id="app-4">
@@ -162,11 +162,11 @@ var app4 = new Vue({
 </script>
 {% endraw %}
 
-In the console, enter `app4.todos.push({ text: 'New item' })`. You should see a new item appended to the list.
+コンソールで `app4.todos.push({ text: 'New item' })` と入力してみましょう。リストに新しいアイテムが追加されたはずです。
 
-## Handling User Input
+## ユーザー入力の制御
 
-To let users interact with your app, we can use the `v-on` directive to attach event listeners that invoke methods on our Vue instances:
+あなたのアプリケーション上でユーザーにインタラクションをとってもらうために、`v-on` ディレクティブを使ってイベントリスナを加え、Vue インスタンスのメソッドを呼び出すことができます:
 
 ``` html
 <div id="app-5">
@@ -207,9 +207,9 @@ var app5 = new Vue({
 </script>
 {% endraw %}
 
-Note in the method we simply update the state of our app without touching the DOM - all DOM manipulations are handled by Vue, and the code you write is focused on the underlying logic.
+メソッドの中では DOM に触ることなくアプリケーションの状態を更新しているだけなことに注意してください。すべての DOM 操作は Vue によって処理され、あなたが書くコードはその後ろにあるロジックに集中できます。
 
-Vue also provides the `v-model` directive that makes two-way binding between form input and app state a breeze:
+Vue は入力とアプリケーションの状態の双方向バインディングが簡単に行える `v-model` ディレクティブも提供します:
 
 ``` html
 <div id="app-6">
@@ -240,13 +240,13 @@ var app6 = new Vue({
 </script>
 {% endraw %}
 
-## Composing with Components
+## コンポーネントによる構成
 
-The component system is another important concept in Vue, because it's an abstraction that allows us to build large-scale applications composed of small, self-contained, and often reusable components. If we think about it, almost any type of application interface can be abstracted into a tree of components:
+コンポーネントシステムは Vue.js におけるもうひとつの重要な概念です。なぜならコンポーネントシステムは、小さく、自己完結的で、多くの場合再利用可能なコンポーネントで構成される大規模アプリケーションの構築を可能にする抽象概念だからです。アプリケーションのインターフェイスについて考えてみると、ほぼすべてのタイプのインターフェイスはコンポーネントツリーとして抽象化することができます:
 
 ![Component Tree](/images/components.png)
 
-In Vue, a component is essentially a Vue instance with pre-defined options. Registering a component in Vue is straightforward:
+Vue においては、コンポーネントは本質的にはあらかじめ定義されたオプションを持つ Vue インスタンスです。Vue を使ってコンポーネントを登録するのはいたって簡単です:
 
 ``` js
 Vue.component('todo', {
@@ -254,7 +254,7 @@ Vue.component('todo', {
 })
 ```
 
-Now you can compose it in another component's template:
+これで他のコンポーネントのテンプレートからこのコンポーネントを利用することができるようになります:
 
 ``` html
 <ul>
@@ -262,7 +262,7 @@ Now you can compose it in another component's template:
 </ul>
 ```
 
-But this would render the same text for every todo, which is not super interesting. We should be able to pass data from the parent scope into child components. Let's modify the component definition to make it accept a [prop](/guide/components.html#Props):
+しかし、これだと全ての todo で同じテキストがレンダリングされてしまうだけで、あまり面白くありません。親のスコープから子コンポーネントへとデータを渡せるようにすべきです。[prop](/guide/components.html#Props) を受け取れるようにコンポーネントの定義を変えてみましょう:
 
 ``` js
 Vue.component('todo', {
@@ -271,7 +271,7 @@ Vue.component('todo', {
 })
 ```
 
-Now we can pass the todo into each repeated component using `v-bind`:
+こうすることで、繰り返されるコンポーネントそれぞれに `v-bind` を使って todo を渡すことができます:
 
 ``` html
 <div id="app-7">
@@ -312,9 +312,9 @@ var app7 = new Vue({
 </script>
 {% endraw %}
 
-This is just a contrived example, but we have managed to separate our app into two smaller units, and the child is reasonably well-decoupled from the parent via the props interface. We can now further improve our `<todo>` component with more complex template and logic without affecting the parent app.
+このサンプルは不自然ではありますが、アプリケーションをより小さな単位に分割することに成功し、また props のインターフェイスによって子コンポーネントは適切に疎結合な状態になりました。ここからさらに `<todo>` コンポーネントを、より複雑なテンプレートやロジックを使って、親コンポーネントに影響を与えることなく改良することができます。
 
-In a large application, it is necessary to divide the whole app into components to make development manageable. We will talk a lot more about components [later in the guide](/guide/components.html), but here's an (imaginary) example of what an app's template might look like with components:
+大規模なアプリケーションでは、開発を行いやすくするために、アプリケーション全体をコンポーネントに分割することが必要です。コンポーネントについては[ガイドの後半](/guide/components.html)でより詳しく話しますが、コンポーネントを駆使した(架空の)アプリケーションのテンプレートがどういうものになるかをここに載せておきます:
 
 ``` html
 <div id="app">
@@ -326,14 +326,14 @@ In a large application, it is necessary to divide the whole app into components 
 </div>
 ```
 
-### Relation to Custom Elements
+### カスタム要素との関係
 
-You may have noticed that Vue components are very similar to **Custom Elements**, which are part of the [Web Components Spec](http://www.w3.org/wiki/WebComponents/). That's because Vue's component syntax is loosely modeled after the spec. For example, Vue components implement the [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) and the `is` special attribute. However, there are a few key differences:
+Vue のコンポーネントが [Web Components Spec](http://www.w3.org/wiki/WebComponents/) の一部のカスタム要素 (Custom Element) にとても似ていることに気付いたかもしれません。なぜなら、Vue のコンポーネント構文は仕様に沿って緩くモデル化されているからです。。例えば、Vue コンポーネントは [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) と `is` という特別な属性を実装しています。しかしながら、いくつか重要な違いがあります:
 
-1. The Web Components Spec is still in draft status, and is not natively implemented in every browser. In comparison, Vue components don't require any polyfills and work consistently in all supported browsers (IE9 and above). When needed, Vue components can also be wrapped inside a native custom element.
+1. Web Components の仕様はまだ草案の状態で、全てのブラウザにネイティブ実装されているわけではありません。一方、Vue コンポーネントはどんなポリフィル (polyfill) も必要とせず、サポートされる全てのブラウザ (IE9 とそれ以上) で同じ動作をします。必要に応じて、Vue コンポーネントはネイティブなカスタム要素内でラップ (wrap) することができます。
 
-2. Vue components provide important features that are not available in plain custom elements, most notably cross-component data flow, custom event communication and built tool integrations.
+2. Vue コンポーネントは、クロスコンポーネントデータフローをはじめ、カスタムイベント通信やビルドツールとの統合など、プレーンなカスタム要素内では利用できないいくつかの重要な機能を提供します。
 
-## Ready for More?
+## 準備完了？
 
-We've just briefly introduced the most basic features of Vue.js core - the rest of this guide will cover them and other advanced features with much finer details, so make sure to read through it all!
+Vue.js のコアの基本的な機能について手短に紹介しましたが、このガイドの残りでは、基本的な機能だけでなく他の高度な機能についてももっと詳しく扱うので、全てに目を通すようにしてください！
