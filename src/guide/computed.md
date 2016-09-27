@@ -1,12 +1,12 @@
 ---
-title: Computed Properties and Watchers
+title: 算出プロパティとウォッチャ
 type: guide
 order: 5
 ---
 
-## Computed Properties
+## 算出プロパティ
 
-In-template expressions are very convenient, but they are really only meant for simple operations. Putting too much logic into your templates can make them bloated and hard to maintain. For example:
+テンプレート内に式を書けるのはとても便利ですが、非常に簡単な操作しかできません。テンプレート内に多くのロジックを詰め込むと、コードが肥大化し、メンテナンスが難しくなります。例えば:
 
 ``` html
 <div id="example">
@@ -14,11 +14,11 @@ In-template expressions are very convenient, but they are really only meant for 
 </div>
 ```
 
-At this point, the template is no longer simple and declarative. You have to look at it for a second before realizing that it displays `message` in reverse. The problem is made worse when you want to include the reversed message in your template more than once.
+こうなってくると、テンプレートはシンプルでも宣言的でもなくなってしまっています。しばらく眺めて、やっとこれが `message` を逆にして表示していることに気付くでしょう。逆にしたメッセージをテンプレートの中で2回以上使おうとすると、問題はより深刻になります。
 
-That's why for any complex logic, you should use a **computed property**.
+上記の理由から、複雑なロジックには**算出プロパティ**を利用すべきです。
 
-### Basic Example
+### 基本的な例
 
 ``` html
 <div id="example">
@@ -34,16 +34,16 @@ var vm = new Vue({
     message: 'Hello'
   },
   computed: {
-    // a computed getter
+    // 算出 getter 関数
     reversedMessage: function () {
-      // `this` points to the vm instance
+      // `this` は vm インスタンスを指します
       return this.message.split('').reverse().join('')
     }
   }
 })
 ```
 
-Result:
+結果:
 
 {% raw %}
 <div id="example" class="demo">
@@ -65,7 +65,7 @@ var vm = new Vue({
 </script>
 {% endraw %}
 
-Here we have declared a computed property `reversedMessage`. The function we provided will be used as the getter function for the property `vm.reversedMessage`:
+ここでは、算出プロパティ `reversedMessage` を宣言しました。私たちが提供した機能は、プロパティ `vm.reversedMessage` に対する getter 関数として利用されます:
 
 ``` js
 console.log(vm.reversedMessage) // -> 'olleH'
@@ -73,20 +73,20 @@ vm.message = 'Goodbye'
 console.log(vm.reversedMessage) // -> 'eybdooG'
 ```
 
-You can open the console and play with the example vm yourself. The value of `vm.reversedMessage` is always dependent on the value of `vm.message`.
+コンソールを開いて、vm で遊んでみてください。`vm.reversedMessage` の値は、常に `vm.message` の値に依存しています。
 
-You can data-bind to computed properties in templates just like a normal property. Vue is aware that `vm.reversedMessage` depends on `vm.message`, so it will update any bindings that depend on `vm.reversedMessage` when `vm.message` changes. And the best part is that we've created this dependency relationship declaratively: the computed getter function is pure and has no side effects, which makes it easy to test and reason about.
+通常のプロパティと同じように、テンプレート内の算出プロパティにデータバインドすることもできます。Vue は `vm.reversedMessage` が `vm.message` に依存していることを知っているので、`vm.message` が変わると `vm.reversedMessage` に依存する全てのバインディングを更新します。さらに、最も良いところは、この依存関係が宣言的に作成されていることです。算出 getter 関数は純粋で副作用がないので、テストや値の推論が容易になります。
 
-### Computed Caching vs Methods
+### 算出プロパティ vs メソッド
 
-You may have noticed we can achieve the same result by invoking a method in the expression:
+こういった式を持つメソッドを呼び出すことで、同じ結果が実現できることに気付かれたかもしれません:
 
 ``` html
 <p>Reversed message: "{{ reverseMessage() }}"</p>
 ```
 
 ``` js
-// in component
+// コンポーネント内
 methods: {
   reverseMessage: function () {
     return this.message.split('').reverse().join('')
@@ -94,9 +94,9 @@ methods: {
 }
 ```
 
-Instead of a computed property, we can define the same function as a method instead. For the end result, the two approaches are indeed exactly the same. However, the difference is that **computed properties are cached based on its dependencies.** A computed property will only re-evaluate when some of its dependencies have changed. This means as long as `message` has not changed, multiple access to the `reversedMessage` computed property will immediately return the previously computed result without having to run the function again.
+算出プロパティの代わりに、同じような関数をメソッドとして定義することも可能です。最終的には、2つのアプローチは完全に同じ結果になります。しかしながら、**算出プロパティは依存関係にもとづきキャッシュされる**という違いがあります。算出プロパティは、それが依存するものが更新されたときにだけ再評価されます。これはつまり、`message` が変わらない限りは、`reversedMessage` に何度アクセスしても、関数をふたたび実行することなく以前計算された結果を即時に返すということです。
 
-This also means the following computed property will never update, because `Date.now()` is not a reactive dependency:
+`Date.now()` はリアクティブな依存ではないため、次の算出プロパティは二度と更新されないことを意味します:
 
 ``` js
 computed: {
@@ -106,13 +106,13 @@ computed: {
 }
 ```
 
-In comparison, a method invocation will **always** run the function whenever a re-render happens.
+対称的に、メソッド呼び出しは、再レンダリングが起きると**常に**関数を実行します。
 
-Why do we need caching? Imagine we have an expensive computed property **A**, which requires looping through a huge Array and doing a lot of computations. Then we may have other computed properties that in turn depend on **A**. Without caching, we would be executing **A**’s getter many more times than necessary! In cases where you do not want caching, use a method instead.
+なぜキャッシングが必要なのでしょうか？巨大な配列をループしたり多くの計算を必要とする、コストの高い **A** という算出プロパティがあることを想像してみてください。**A** に依存する他の算出プロパティもあるかもしれません。その場合、キャッシングがなければ必要以上に **A** の getter を実行することになってしまいます。キャッシングしたくない場合は、代わりにメソッドを使いましょう。
 
-### Computed vs Watched Property
+### 算出プロパティ vs 監視プロパティ
 
-Vue does provide a more generic way to observe and react to data changes on a Vue instance: **watch properties**. When you have some data that needs to change based on some other data, it is tempting to overuse `watch` - especially if you are coming from an AngularJS background. However, it is often a better idea to use a computed property rather than an imperative `watch` callback. Consider this example:
+Vue は Vue インスタンス上のデータの変更を監視し反応させることができる、より汎用的な **監視プロパティ(watched property)** を提供しています。他のデータに基づいて変更する必要があるデータがある場合、特に AngularJS に慣れていたら、`watch` を多く利用したいと思うかもしれません。しかし、命令的な `watch` コールバックよりも、多くの場合では算出プロパティを利用するほうが良いでしょう。次の例で考えてみましょう:
 
 ``` html
 <div id="demo">{{ fullName }}</div>
@@ -137,7 +137,7 @@ var vm = new Vue({
 })
 ```
 
-The above code is imperative and repetitive. Compare it with a computed property version:
+上記のコードは命令的で冗長です。算出プロパティを利用したバージョンと比較してみましょう:
 
 ``` js
 var vm = new Vue({
@@ -154,21 +154,21 @@ var vm = new Vue({
 })
 ```
 
-Much better, isn't it?
+こちらの方が、はるかに良くありませんか？
 
-### Computed Setter
+### 算出 Setter 関数
 
-Computed properties are by default getter-only, but you can also provide a setter when you need it:
+算出プロパティはデフォルトでは getter 関数のみですが、必要があれば setter 関数も使えます:
 
 ``` js
 // ...
 computed: {
   fullName: {
-    // getter
+    // getter 関数
     get: function () {
       return this.firstName + ' ' + this.lastName
     },
-    // setter
+    // setter 関数
     set: function (newValue) {
       var names = newValue.split(' ')
       this.firstName = names[0]
@@ -179,13 +179,13 @@ computed: {
 // ...
 ```
 
-Now when you run `vm.fullName = 'John Doe'`, the setter will be invoked and `vm.firstName` and `vm.lastName` will be updated accordingly.
+`vm.fullname = 'John Doe'` を呼ぶと、setter 関数が呼び出され、`vm.firstName` と `vm.lastName` が適切に更新されます。
 
-## Watchers
+## ウォッチャ
 
-While computed properties are more appropriate in most cases, there are times when a custom watcher is necessary. That's why Vue provides a more generic way to react to data changes through the `watch` option. This is most useful when you want to perform asynchronous or expensive operations in response to changing data.
+多くの場合では算出プロパティの方が適切ではありますが、カスタムウォッチャが必要な時もあるでしょう。データの変更に対して反応する、より汎用的な `watch` オプションを Vue が提供しているのはそのためです。データが変わるのに応じて非同期やコストの高い処理を実行したいときに最も便利です。
 
-For example:
+例:
 
 ``` html
 <div id="watch-example">
@@ -198,10 +198,10 @@ For example:
 ```
 
 ``` html
-<!-- Since there is already a rich ecosystem of ajax libraries    -->
-<!-- and collections of general-purpose utility methods, Vue core -->
-<!-- is able to remain small by not reinventing them. This also   -->
-<!-- gives you the freedom to just use what you're familiar with. -->
+<!-- ajax ライブラリの豊富なエコシステムや、汎用的なユーティリティ	-->
+<!-- メソッドがたくさんあるので、Vue のコアはそれらを再発明せずに		-->
+<!-- 小さく保たれています。この結果として、慣れ親しんでいるものだけを	-->
+<!-- 使えるような自由さを Vue は持ち合わせています。			-->
 <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
 <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
 <script>
@@ -212,20 +212,19 @@ var watchExampleVM = new Vue({
     answer: 'I cannot give you an answer until you ask a question!'
   },
   watch: {
-    // whenever question changes, this function will run
+    // この関数は questions が変わるごとに実行されます。
     question: function (newQuestion) {
       this.answer = 'Waiting for you to stop typing...'
       this.getAnswer()
     }
   },
   methods: {
-    // _.debounce is a function provided by lodash to limit how
-    // often a particularly expensive operation can be run.
-    // In this case, we want to limit how often we access
-    // yesno.wtf/api, waiting until the user has completely
-    // finished typing before making the ajax request. To learn
-    // more about the _.debounce function (and its cousin
-    // _.throttle), visit: https://lodash.com/docs#debounce
+    // _.debounce は特にコストの高い処理の実行を制御するための
+    // lodash の関数です。この場合は、どのくらい頻繁に yesno.wtf/api
+    // へのアクセスすべきかを制限するために、ユーザーの入力が完全に
+    // 終わるのを待ってから ajax リクエストを実行しています。
+    // _.debounce (とその親戚である _.throttle )  についての詳細は
+    // https://lodash.com/docs#debounce を見てください。
     getAnswer: _.debounce(
       function () {
         var vm = this
@@ -242,8 +241,7 @@ var watchExampleVM = new Vue({
             vm.answer = 'Error! Could not reach the API. ' + error
           })
       },
-      // This is the number of milliseconds we wait for the
-      // user to stop typing.
+      // ユーザーの入力が終わるのを待つ時間をミリ秒で指定します。
       500
     )
   }
@@ -251,7 +249,7 @@ var watchExampleVM = new Vue({
 </script>
 ```
 
-Result:
+結果:
 
 {% raw %}
 <div id="watch-example" class="demo">
@@ -300,6 +298,6 @@ var watchExampleVM = new Vue({
 </script>
 {% endraw %}
 
-In this case, using the `watch` option allows us to perform an asynchronous operation (accessing an API), limit how often we perform that operation, and set intermediary states until we get a final answer. None of that would be possible with a computed property.
+この場合では、`watch` オプションを利用することで、非同期処理( API のアクセス)の実行や、処理をどのくらいの頻度で実行するかを制御したり、最終的な answer が取得できるまでは中間の状態にしておく、といったことが可能になっています。これらはいずれも算出プロパティでは実現できません。
 
-In addition to the `watch` option, you can also use the imperative [vm.$watch API](/api/#vm-watch).
+`watch` オプションに加えて、命令的な [vm.$watch API](/api/#vm-watch) を利用することもできます。
