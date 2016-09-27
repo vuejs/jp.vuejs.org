@@ -4,14 +4,14 @@ type: guide
 order: 17
 ---
 
-## Basics
+## 基本
 
-Mixins are a flexible way to distribute reusable functionalities for Vue components. A mixin object can contain any component options. When a component uses a mixin, all options in the mixin will be "mixed" into the component's own options.
+ミックスイン (mixin) は、Vue コンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。ミックスインオブジェクトは任意のコンポーネントオプションを含むことができます。コンポーネントがミックスインを使用するとき、ミックスインの全てのオプションはコンポーネント自身のオプションに"混ぜられ"ます。
 
-Example:
+例:
 
 ``` js
-// define a mixin object
+// ミックスインオブジェクトを定義
 var myMixin = {
   created: function () {
     this.hello()
@@ -23,7 +23,7 @@ var myMixin = {
   }
 }
 
-// define a component that uses this mixin
+// このミックスインを使用するコンポーネントを定義
 var Component = Vue.extend({
   mixins: [myMixin]
 })
@@ -31,9 +31,10 @@ var Component = Vue.extend({
 var component = new Component() // -> "hello from mixin!"
 ```
 
-## Option Merging
+## オプションのマージ
 
-When a mixin and the component itself contain overlapping options, they will be "merged" using appropriate strategies. For example, hook functions with the same name are merged into an array so that all of them will be called. In addition, mixin hooks will be called **before** the component's own hooks:
+ミックスインとコンポーネントそれ自身がオプションと重複するとき、それらは適切なストラテジを使用して"マージ"されます。例えば、同じ名前のフック関数はそれら全てが呼び出されるよう配列にマージされます。加えて、ミックスインのフックはコンポーネント自身のフック**前**に呼ばれます:
+
 
 ``` js
 var mixin = {
@@ -53,7 +54,7 @@ new Vue({
 // -> "component hook called"
 ```
 
-Options that expect object values, for example `methods`, `components` and `directives`, will be merged into the same object. The component's options will take priority when there are conflicting keys in these objects:
+オブジェクトの値を期待するオプションは、例えば、`methods`、`components`、そして `directives` らは同じオブジェクトにマージされます。コンポーネントオプションはこれらのオブジェクトでキーのコンフリクトがあるとき、優先されます:
 
 ``` js
 var mixin = {
@@ -84,14 +85,14 @@ vm.bar() // -> "bar"
 vm.conflicting() // -> "from self"
 ```
 
-Note that the same merge strategies are used in `Vue.extend()`.
+同じマージストラテジが `Vue.extend()` で使用されることに注意してください。
 
-## Global Mixin
+## グローバルミックスイン
 
-You can also apply a mixin globally. Use caution! Once you apply a mixin globally, it will affect **every** Vue instance created afterwards. When used properly, this can be used to inject processing logic for custom options:
+グローバルにミックスインを適用することもできます。使用に注意してください！一度、グローバルにミックスインを適用すると、それはその後に作成する**全ての** Vue インスタンスに影響します。適切に使用されるとき、これはカスタムオプションに対して処理ロジックを注入するために使用することができます:
 
 ``` js
-// inject a handler for `myOption` custom option
+// `myOption` カスタムオプションにハンドラを注入する
 Vue.mixin({
   created: function () {
     var myOption = this.$options.myOption
@@ -107,26 +108,26 @@ new Vue({
 // -> "hello!"
 ```
 
-<p class="tip">Use global mixins sparsely and carefully, because it affects every single Vue instance created, including third party components. In most cases, you should only use it for custom option handling like demonstrated in the example above. It's also a good idea to ship them as [Plugins](/guide/plugins.html) to avoid duplicate application.</p>
+<p class="tip">サードパーティのコンポーネントを含んでいる、すべての単一の作成された Vue インスタンスに影響があるため、グローバルミックスインは多用せずかつ慎重に使用してください。多くのケースでは、上記の例のような、カスタムオプションを処理するようなものに使用すべきです。また、重複適用を避けるため [プラグイン](/guide/plugins.html) としてそれらを作成することをお勧めします。</p>
 
-## Custom Option Merge Strategies
+## カスタムオプションのマージストラテジ
 
-When custom options are merged, they use the default strategy, which simply overwrites the existing value. If you want a custom option to be merged using custom logic, you need to attach a function to `Vue.config.optionMergeStrategies`:
+カスタムオプションがマージされるとき、それらは単純に既存の値を上書きするデフォルトのストラテジを使用します。カスタムロジックを使用してカスタムオプションをマージする場合、`Vue.config.optionMergeStrategies` をアタッチする必要があります:
 
 ``` js
 Vue.config.optionMergeStrategies.myOption = function (toVal, fromVal) {
-  // return mergedVal
+  // マージされた値を返す
 }
 ```
 
-For most object-based options, you can simply use the same strategy used by `methods`:
+ほとんどのオブジェクトベースのオプションでは、単純に `methods` で使用されるのと同じストラテジを使用することができます:
 
 ``` js
 var strategies = Vue.config.optionMergeStrategies
 strategies.myOption = strategies.methods
 ```
 
-A more advanced example can be found on [Vuex](https://github.com/vuejs/vuex)'s merging strategy:
+より高度な例として [Vuex](https://github.com/vuejs/vuex) のマージストラテジがあります:
 
 ``` js
 const merge = Vue.config.optionMergeStrategies.computed
