@@ -43,7 +43,7 @@ MyPlugin.install = function (Vue, options) {
   })
   // 4. インスタンスメソッドを追加
   Vue.prototype.$myMethod = function (options) {
-    // something logic ...
+    // 何らかのロジック ...
   }
 }
 ```
