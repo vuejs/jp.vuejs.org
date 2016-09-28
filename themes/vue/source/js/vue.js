@@ -1,5 +1,5 @@
 /*!
- * Vue.js v1.0.27
+ * Vue.js v1.0.28
  * (c) 2016 Evan You
  * Released under the MIT License.
  */
@@ -405,6 +405,7 @@
   var isIE = UA && UA.indexOf('trident') > 0;
   var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
   var isAndroid = UA && UA.indexOf('android') > 0;
+  var isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);
 
   var transitionProp = undefined;
   var transitionEndEvent = undefined;
@@ -421,6 +422,12 @@
     animationEndEvent = isWebkitAnim ? 'webkitAnimationEnd' : 'animationend';
   }
 
+  /* istanbul ignore next */
+  function isNative(Ctor) {
+    return (/native code/.test(Ctor.toString())
+    );
+  }
+
   /**
    * Defer a task to execute it asynchronously. Ideally this
    * should be executed as a microtask, so we leverage
@@ -434,33 +441,53 @@
   var nextTick = (function () {
     var callbacks = [];
     var pending = false;
-    var timerFunc;
+    var timerFunc = undefined;
+
     function nextTickHandler() {
       pending = false;
       var copies = callbacks.slice(0);
-      callbacks = [];
+      callbacks.length = 0;
       for (var i = 0; i < copies.length; i++) {
         copies[i]();
       }
     }
 
-    /* istanbul ignore else */
-    if (inBrowser && window.postMessage && !window.importScripts && // not in WebWorker
-    !(isAndroid && !window.requestAnimationFrame) // not in Android <= 4.3
-    ) {
-        (function () {
-          var NEXT_TICK_TOKEN = '__vue__nextTick__';
-          window.addEventListener('message', function (e) {
-            if (e.source === window && e.data === NEXT_TICK_TOKEN) {
-              nextTickHandler();
-            }
-          });
-          timerFunc = function () {
-            window.postMessage(NEXT_TICK_TOKEN, '*');
-          };
-        })();
-      } else {
-      timerFunc = typeof global !== 'undefined' && global.setImmediate || setTimeout;
+    // the nextTick behavior leverages the microtask queue, which can be accessed
+    // via either native Promise.then or MutationObserver.
+    // MutationObserver has wider support, however it is seriously bugged in
+    // UIWebView in iOS >= 9.3.3 when triggered in touch event handlers. It
+    // completely stops working after triggering a few times... so, if native
+    // Promise is available, we will use it:
+    /* istanbul ignore if */
+    if (typeof Promise !== 'undefined' && isNative(Promise)) {
+      var p = Promise.resolve();
+      var noop = function noop() {};
+      timerFunc = function () {
+        p.then(nextTickHandler);
+        // in problematic UIWebViews, Promise.then doesn't completely break, but
+        // it can get stuck in a weird state where callbacks are pushed into the
+        // microtask queue but the queue isn't being flushed, until the browser
+        // needs to do some other work, e.g. handle a timer. Therefore we can
+        // "force" the microtask queue to be flushed by adding an empty timer.
+        if (isIOS) setTimeout(noop);
+      };
+    } else if (typeof MutationObserver !== 'undefined') {
+      // use MutationObserver where native Promise is not available,
+      // e.g. IE11, iOS7, Android 4.4
+      var counter = 1;
+      var observer = new MutationObserver(nextTickHandler);
+      var textNode = document.createTextNode(String(counter));
+      observer.observe(textNode, {
+        characterData: true
+      });
+      timerFunc = function () {
+        counter = (counter + 1) % 2;
+        textNode.data = String(counter);
+      };
+    } else {
+      // fallback to setTimeout
+      /* istanbul ignore next */
+      timerFunc = setTimeout;
     }
 
     return function (cb, ctx) {
@@ -476,7 +503,7 @@
 
   var Set$1 = undefined;
   /* istanbul ignore if */
-  if (typeof Set !== 'undefined' && Set.toString().match(/native code/)) {
+  if (typeof Set !== 'undefined' && isNative(Set)) {
     // use native Set when available.
     Set$1 = Set;
   } else {
@@ -1553,24 +1580,6 @@
       container.appendChild(el.cloneNode(true));
       return container.innerHTML;
     }
-  }
-
-  /**
-   * Find a vm from a fragment.
-   *
-   * @param {Fragment} frag
-   * @return {Vue|undefined}
-   */
-
-  function findVmFromFrag(frag) {
-    var node = frag.node;
-    // handle multi-node frag
-    if (frag.end) {
-      while (!node.__vue__ && node !== frag.end && node.nextSibling) {
-        node = node.nextSibling;
-      }
-    }
-    return node.__vue__;
   }
 
   var uid = 0;
@@ -4079,10 +4088,8 @@
       if (value) {
         if (!this.frag) {
           this.insert();
-          this.updateRef(value);
         }
       } else {
-        this.updateRef(value);
         this.remove();
       }
     },
@@ -4111,29 +4118,6 @@
         }
         this.elseFrag = this.elseFactory.create(this._host, this._scope, this._frag);
         this.elseFrag.before(this.anchor);
-      }
-    },
-
-    updateRef: function updateRef(value) {
-      var ref = this.descriptor.ref;
-      if (!ref) return;
-      var hash = (this.vm || this._scope).$refs;
-      var refs = hash[ref];
-      var key = this._frag.scope.$key;
-      if (!refs) return;
-      if (value) {
-        if (Array.isArray(refs)) {
-          refs.push(findVmFromFrag(this._frag));
-        } else {
-          refs[key] = findVmFromFrag(this._frag);
-        }
-      } else {
-        if (Array.isArray(refs)) {
-          refs.$remove(findVmFromFrag(this._frag));
-        } else {
-          refs[key] = null;
-          delete refs[key];
-        }
       }
     },
 
@@ -4449,6 +4433,10 @@
     params: ['track-by', 'stagger', 'enter-stagger', 'leave-stagger'],
 
     bind: function bind() {
+      if ('development' !== 'production' && this.el.hasAttribute('v-if')) {
+        warn('<' + this.el.tagName.toLowerCase() + ' v-for="' + this.expression + '" v-if="' + this.el.getAttribute('v-if') + '">: ' + 'Using v-if and v-for on the same element is not recommended - ' + 'consider filtering the source Array instead.', this.vm);
+      }
+
       // support "item in/of items" syntax
       var inMatch = this.expression.match(/(.*) (?:in|of) (.*)/);
       if (inMatch) {
@@ -5026,6 +5014,24 @@
     vFor.warnDuplicate = function (value) {
       warn('Duplicate value found in v-for="' + this.descriptor.raw + '": ' + JSON.stringify(value) + '. Use track-by="$index" if ' + 'you are expecting duplicate values.', this.vm);
     };
+  }
+
+  /**
+   * Find a vm from a fragment.
+   *
+   * @param {Fragment} frag
+   * @return {Vue|undefined}
+   */
+
+  function findVmFromFrag(frag) {
+    var node = frag.node;
+    // handle multi-node frag
+    if (frag.end) {
+      while (!node.__vue__ && node !== frag.end && node.nextSibling) {
+        node = node.nextSibling;
+      }
+    }
+    return node.__vue__;
   }
 
   var html = {
@@ -6500,18 +6506,20 @@
 
     var groupedMap = {};
     var i, j, k, l;
+    var index = 0;
+    var priorities = [];
     for (i = 0, j = dirs.length; i < j; i++) {
       var dir = dirs[i];
       var priority = dir.descriptor.def.priority || DEFAULT_PRIORITY;
       var array = groupedMap[priority];
       if (!array) {
         array = groupedMap[priority] = [];
+        priorities.push(priority);
       }
       array.push(dir);
     }
 
-    var index = 0;
-    var priorities = Object.keys(groupedMap).sort(function (a, b) {
+    priorities.sort(function (a, b) {
       return a > b ? -1 : a === b ? 0 : 1;
     });
     for (i = 0, j = priorities.length; i < j; i++) {
@@ -7033,7 +7041,7 @@
       def: def
     };
     // check ref for v-for, v-if and router-view
-    if (dirName === 'for' || dirName === 'if' || dirName === 'router-view') {
+    if (dirName === 'for' || dirName === 'router-view') {
       descriptor.ref = findRef(el);
     }
     var fn = function terminalNodeLinkFn(vm, el, host, scope, frag) {
@@ -9544,6 +9552,7 @@
   	isIE: isIE,
   	isIE9: isIE9,
   	isAndroid: isAndroid,
+  	isIOS: isIOS,
   	get transitionProp () { return transitionProp; },
   	get transitionEndEvent () { return transitionEndEvent; },
   	get animationProp () { return animationProp; },
@@ -9574,7 +9583,6 @@
   	removeNodeRange: removeNodeRange,
   	isFragment: isFragment,
   	getOuterHTML: getOuterHTML,
-  	findVmFromFrag: findVmFromFrag,
   	mergeOptions: mergeOptions,
   	resolveAsset: resolveAsset,
   	checkComponentAttr: checkComponentAttr,
@@ -10200,7 +10208,7 @@
 
   installGlobalAPI(Vue);
 
-  Vue.version = '1.0.27';
+  Vue.version = '1.0.28';
 
   // devtools global hook
   /* istanbul ignore next */
