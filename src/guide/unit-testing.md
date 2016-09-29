@@ -1,16 +1,16 @@
 ---
-title: Unit Testing
+title: ユニットテスト
 type: guide
 order: 22
 ---
 
 ## テストツールとセットアップ
 
-テストツールは、モジュールベースのビルドシステムで動作するものならどのようなものでも問題ありませんが、テストツールをお探しの場合、[Karma](http://karma-runner.github.io/0.12/index.html) を試してみて下さい。 Karma には多くのコミュニティ製プラグインが存在し、[Webpack](https://github.com/webpack/karma-webpack) や [Browserify](https://github.com/Nikku/karma-browserify)へのサポートも充実しています。 Karma の設定例として、 [Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) と [Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js) のサンプル設定が最初のスタートに役立ちますが、詳しいセットアップについては、各テストツールのドキュメントを確認して下さい。
+テストツールは、モジュールベースのビルドシステムで動作するものならどのようなものでも問題ありませんが、テストツールを探している場合、[Karma](http://karma-runner.github.io/0.12/index.html) を試してみましょう。 Karma には多くのコミュニティ製プラグインが存在し、[Webpack](https://github.com/webpack/karma-webpack) や [Browserify](https://github.com/Nikku/karma-browserify)へのサポートも充実しています。 Karma の設定例として、 [Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) と [Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js) のサンプル設定が最初のスタートに役立ちますが、詳しいセットアップについては、各テストツールのドキュメントを確認して下さい。
 
-## Simple Assertions
+## 単純なテスト
 
-テスト設計の観点から、コンポーネントのテスタビリティを向上させるためにコンポーネント内で特別な何かを行う必要はありません。単純に options を export するだけで構いません。
+テスト設計の観点から、コンポーネントのテスタビリティを向上させるためにコンポーネント内で特別な何かを行う必要はありません。単純に options をエクスポートするだけです。
 
 ``` html
 <template>
@@ -31,7 +31,7 @@ order: 22
 </script>
 ```
 
-コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトを import し、検証を実施します。
+コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトをインポートし、検証を実施します。
 
 ``` js
 // Vue と テスト対象の component を import する
@@ -39,9 +39,9 @@ import Vue from 'vue'
 import MyComponent from 'path/to/MyComponent.vue'
 
 // テストランナーや検証には、どのようなライブラリを用いても構いませんが
-//　ここでは Jasmine 2.0 をもちいたテスト記述を行っています。
+//　ここでは Jasmine 2.0 を用いたテスト記述を行っています。
 describe('MyComponent', () => {
-  // コンポーネントの　options を直接検証します。
+  // コンポーネントの options を直接検証します。
   it('has a created hook', () => {
     expect(typeof MyComponent.created).toBe('function')
   })
@@ -116,12 +116,12 @@ describe('MyComponent', () => {
 Vue は [非同期に DOM の更新を行う](/guide/reactivity.html#Async-Update-Queue) ため、 state の変更に対する DOM の更新に関する検証は、 `Vue.nextTick` コールバックを用いて行う必要があります。
 
 ``` js
-// state の更新後、生成されたHTMLの検証を行う
+// state の更新後、生成された HTML の検証を行う
 it('updates the rendered message when vm.message updates', done => {
   const vm = new Vue(MyComponent).$mount()
   vm.message = 'foo'
 
-  // state変更後、DOMが更新されるまでの "tick"で待機する
+  // state 変更後、 DOM が更新されるまでの "tick" で待機する
   Vue.nextTick(() => {
     expect(vm.$el.textContent).toBe('foo')
     done()
@@ -129,4 +129,4 @@ it('updates the rendered message when vm.message updates', done => {
 })
 ```
 
-コンポーネントを特別な状態で描画し検証する(例えば、子コンポーネントを無視した浅い描画など)ような、テストをより簡単にするためのヘルパーセットの開発も検討しています。
+私たちは、コンポーネントを特別な状態で描画し検証する(例えば、子コンポーネントを無視した浅い描画など)ような、テストをより簡単にするためのヘルパーセットの開発も検討しています。
