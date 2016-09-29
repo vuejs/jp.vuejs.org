@@ -39,7 +39,7 @@ import Vue from 'vue'
 import MyComponent from 'path/to/MyComponent.vue'
 
 // テストランナーや検証には、どのようなライブラリを用いても構いませんが
-//　ここでは Jasmine 2.0 を用いたテスト記述を行っています。
+// ここでは Jasmine 2.0 を用いたテスト記述を行っています。
 describe('MyComponent', () => {
   // コンポーネントの options を直接検証します。
   it('has a created hook', () => {
@@ -47,7 +47,7 @@ describe('MyComponent', () => {
   })
 
   // コンポーネントの options 内にある関数を実行し、
-  //　結果を検証します。
+  // 結果を検証します。
   it('sets the correct default data', () => {
     expect(typeof MyComponent.data).toBe('function')
     const defaultData = MyComponent.data()
