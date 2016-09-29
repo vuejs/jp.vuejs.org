@@ -28,7 +28,7 @@ Vue.js コミュニティの一員になりたい場合は、このページは�
  
 ### Vue への貢献
 
-- [貢献するためのルール](https://github.com/vuejs/vue/blob/dev/CONTRIBUTING.md) - あらゆるコミュニティと同様に、全ての人が正しいことを正しい方法で行っていることを確保するために、ルールが存在しなければなりません。
+- [貢献するためのルール](https://github.com/vuejs/vue/blob/dev/.github/CONTRIBUTING.md) - あらゆるコミュニティと同様に、全ての人が正しいことを正しい方法で行っていることを確保するために、ルールが存在しなければなりません。
 
 - Vue のメインコンポーネント
   - [vue](https://github.com/vuejs/vue) - コアレポジトリ
