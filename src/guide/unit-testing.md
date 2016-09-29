@@ -46,7 +46,7 @@ describe('MyComponent', () => {
     expect(typeof MyComponent.created).toBe('function')
   })
 
-  // コンポーネントの　options 内にある関数を実行し、
+  // コンポーネントの options 内にある関数を実行し、
   //　結果を検証します。
   it('sets the correct default data', () => {
     expect(typeof MyComponent.data).toBe('function')
