@@ -52,6 +52,7 @@ $ hexo server
 - [mono0x](https://github.com/mono0x)
 - [n0f](https://github.com/n0f)
 - [nakajmg](https://github.com/nakajmg)
+- [noliaki](https://github.com/noliaki)
 - [pocke](https://github.com/pocke)
 - [poncot](https://github.com/poncot)
 - [ryonext](https://github.com/ryonext)
