@@ -6,7 +6,7 @@ order: 22
 
 ## テストツールとセットアップ
 
-テストツールは、モジュールベースのビルドシステムで動作するものならどのようなものでも問題ありませんが、テストツールを探している場合、[Karma](http://karma-runner.github.io/0.12/index.html) を試してみましょう。 Karma には多くのコミュニティ製プラグインが存在し、[Webpack](https://github.com/webpack/karma-webpack) や [Browserify](https://github.com/Nikku/karma-browserify)へのサポートも充実しています。 Karma の設定例として、 [Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) と [Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js) のサンプル設定が最初のスタートに役立ちますが、詳しいセットアップについては、各テストツールのドキュメントを確認して下さい。
+テストツールは、モジュールベースのビルドシステムで動作するものならどのようなものでも問題ありませんが、テストツールを探している場合、[Karma](http://karma-runner.github.io/0.12/index.html)を試してみましょう。 Karma には多くのコミュニティ製プラグインが存在し、[Webpack](https://github.com/webpack/karma-webpack)や[Browserify](https://github.com/Nikku/karma-browserify)へのサポートも充実しています。 Karma の設定例として、[Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) と[Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js)のサンプル設定が最初のスタートに役立ちますが、詳しいセットアップについては、各テストツールのドキュメントを確認して下さい。
 
 ## 単純なテスト
 
@@ -34,7 +34,7 @@ order: 22
 コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトをインポートし、検証を実施します。
 
 ``` js
-// Vue と テスト対象の component を import する
+// Vue と テスト対象のコンポーネントをインポートする
 import Vue from 'vue'
 import MyComponent from 'path/to/MyComponent.vue'
 
