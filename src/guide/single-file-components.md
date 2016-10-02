@@ -11,8 +11,8 @@ order: 19
 これはビューを拡張するだけに利用された小さな中規模プロジェクトにおいてはとても有効です。 あなたのフロントエンドでJavaScript全体を操作するようなもっと複雑なプロジェクトでは、これらの点において不利益になることは明白です。:
 
 - 全てのコンポーネントでユニークな名前の**グローバル宣言**が強制される
-- **String templates** lack syntax highlighting and require ugly slashes for multiline HTML
-- **No CSS support** means that while HTML and JavaScript are modularized into components, CSS is conspicuously left out
+- シンタックスハイライトの無い**文字列テンプレート**と複数行HTML時に醜いスラッシュの要求
+- **CSSサポート無し** とは、HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されます。
 - **ビルドステップ無し** は Pug(前 Jade) やBabel のようなプリプロセッサよりむしろ、 HTMLや ES5 JavaScript を制限します 
 
 これら全ては Webpack や Browserify のビルドルールで実現された `.vue` 拡張子の **シングルファイル・コンポーネント** で解決します。
@@ -54,6 +54,7 @@ Webpackでバンドルの中に含まれる前にそれぞれのモジュール�
 ### 上級者ユーザー向け
 
 Whether you prefer Webpack or Browserify, we have documented templates for both simple and more complex projects. We recommend browsing [github.com/vuejs-templates](https://github.com/vuejs-templates), picking a template that's right for you, then following the instructions in the README to generate a new project with [vue-cli](https://github.com/vuejs/vue-cli).
+あなたが Webpack か Browserify のどちらが好みでも、私達はシンプル、複雑なプロジェクトのテンプレート両方を用意しました。[github.com/vuejs-templates](https://github.com/vuejs-templates) を閲覧し、あなたに合ったテンプレートを選んでください。そしたら、 [vue-cli](https://github.com/vuejs/vue-cli) で新しいプロジェクトを生成するために README 内の手順に沿ってください。
 
 ## 本番デプロイ
 
@@ -61,7 +62,7 @@ Whether you prefer Webpack or Browserify, we have documented templates for both 
 
 ### Webpack
 
-Use Webpack's [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) to indicate a production environment, so that warning blocks can be automatically dropped by UglifyJS during minification. Example config:
+Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使用して本番環境を示してください、そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下はコンフィグ例です:
 
 ``` js
 var webpack = require('webpack')
@@ -86,15 +87,15 @@ module.exports = {
 
 ### Browserify
 
-- Run your bundling command with `NODE_ENV` set to `"production"`. This tells `vueify` to avoid including hot-reload and development related code.
-- Apply a global [envify](https://github.com/hughsk/envify) transform to your bundle. This allows the minifier to strip out all the warnings in Vue's source code wrapped in env variable conditional blocks. For example:
+- `NODE_ENV` に `"production"` をセットしてビルドコマンドを実行してください。これは `vueify` にホットリローディングと開発関連コードを含まないことを伝えます。
+- あなたのバンドルに [envify](https://github.com/hughsk/envify) グローバル変換を適用してください。 これは minifier で Vue ソースコード内で環境変数の条件上で囲われた箇所全てを取り除くことを許可します。
 
 
 ``` bash
 NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 ```
 
-- To extract styles to a separate css file use a extract-css plugin which is included in vueify.
+- 別の CSS ファイルに抽出するには、 vueify に含まれている CSS 抽出プラグインを使用してください。
 
 ``` bash
 NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o build.css ] -e main.js | uglifyjs -c -m > build.js
