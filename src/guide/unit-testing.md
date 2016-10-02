@@ -1,16 +1,16 @@
 ---
-title: Unit Testing
+title: ユニットテスト
 type: guide
 order: 22
 ---
 
-## Setup and Tooling
+## テストツールとセットアップ
 
-Anything compatible with a module-based build system will work, but if you're looking for a specific recommendation, try the [Karma](http://karma-runner.github.io/0.12/index.html) test runner. It has a lot of community plugins, including support for [Webpack](https://github.com/webpack/karma-webpack) and [Browserify](https://github.com/Nikku/karma-browserify). For detailed setup, please refer to each project's respective documentation, though these example Karma configurations for [Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) and [Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js) may help you get started.
+テストツールは、モジュールベースのビルドシステムで動作するものならどのようなものでも問題ありませんが、テストツールを探している場合、[Karma](http://karma-runner.github.io/0.12/index.html)を試してみましょう。 Karma には多くのコミュニティ製プラグインが存在し、[Webpack](https://github.com/webpack/karma-webpack)や[Browserify](https://github.com/Nikku/karma-browserify)へのサポートも充実しています。 Karma の設定例として、[Webpack](https://github.com/vuejs/vue-loader-example/blob/master/build/karma.conf.js) と[Browserify](https://github.com/vuejs/vueify-example/blob/master/karma.conf.js)のサンプル設定が最初のスタートに役立ちますが、詳しいセットアップについては、各テストツールのドキュメントを確認して下さい。
 
-## Simple Assertions
+## 単純なテスト
 
-In terms of code structure for testing, you don't have to do anything special in your components to make them testable. Just export the raw options:
+テスト設計の観点から、コンポーネントのテスタビリティを向上させるためにコンポーネント内で特別な何かを行う必要はありません。単純に options をエクスポートするだけです。
 
 ``` html
 <template>
@@ -31,36 +31,36 @@ In terms of code structure for testing, you don't have to do anything special in
 </script>
 ```
 
-When you test that component, all you have to do is import the object along with Vue to make many common assertions:
+コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトをインポートし、検証を実施します。
 
 ``` js
-// Import Vue and the component being tested
+// Vue と テスト対象のコンポーネントをインポートする
 import Vue from 'vue'
 import MyComponent from 'path/to/MyComponent.vue'
 
-// Here are some Jasmine 2.0 tests, though you can
-// use any test runner / assertion library combo you prefer
+// テストランナーや検証には、どのようなライブラリを用いても構いませんが
+// ここでは Jasmine 2.0 を用いたテスト記述を行っています。
 describe('MyComponent', () => {
-  // Inspect the raw component options
+  // コンポーネントの options を直接検証します。
   it('has a created hook', () => {
     expect(typeof MyComponent.created).toBe('function')
   })
 
-  // Evaluate the results of functions in
-  // the raw component options
+  // コンポーネントの options 内にある関数を実行し、
+  // 結果を検証します。
   it('sets the correct default data', () => {
     expect(typeof MyComponent.data).toBe('function')
     const defaultData = MyComponent.data()
     expect(defaultData.message).toBe('hello!')
   })
 
-  // Inspect the component instance on mount
+  // コンポーネントインスタンスをマウントして検証します。
   it('correctly sets the message when created', () => {
     const vm = new Vue(MyComponent).$mount()
     expect(vm.message).toBe('bye!')
   })
 
-  // Mount an instance and inspect the render output
+  // マウントされたコンポーネントインスタンスを描画して検証します。
   it('renders the correct message', () => {
     const Ctor = Vue.extend(MyComponent)
     const vm = new Ctor().$mount()
@@ -69,9 +69,9 @@ describe('MyComponent', () => {
 })
 ```
 
-## Writing Testable Components
+## テストしやすいコンポーネントの記述
 
-A lot of components' render output are primarily determined by the props they receive. In fact, if a component's render output solely depends on its props, it becomes quite straightforward to test, similar to asserting the return value of a pure function with different arguments. Take an contrived example:
+コンポーネントの描画結果は、コンポーネントの受け取る props によってその大半が決定されます。実際、コンポーネントの描画結果が、単に props の値によってのみ決まる場合、異なる引数を用いた関数の戻り値の検証と同じ様に、シンプルに考えることができます。例を見てみましょう。
 
 ``` html
 <template>
@@ -85,13 +85,13 @@ A lot of components' render output are primarily determined by the props they re
 </script>
 ```
 
-You can assert its render output with different props using the `propsData` option:
+`propsData`オプションを利用して、異なる props を用いた描画結果の検証が可能です。
 
 ``` js
 import Vue from 'vue'
 import MyComponent from './MyComponent.vue'
 
-// helper function that mounts and returns the rendered text
+// コンポーネントをマウントし描画結果を返すヘルパー関数
 function getRenderedText (Component, propsData) {
   const Ctor = Vue.extend(MyComponent)
   const vm = new Ctor({ propsData }).$mount()
@@ -111,17 +111,17 @@ describe('MyComponent', () => {
 })
 ```
 
-## Asserting Asynchronous Updates
+## 非同期な更新の検証
 
-Since Vue [performs DOM updates asynchronously](/guide/reactivity.html#Async-Update-Queue), assertions on DOM updates resulting from state change will have to be made in a `Vue.nextTick` callback:
+Vue は [非同期に DOM の更新を行う](/guide/reactivity.html#Async-Update-Queue) ため、 state の変更に対する DOM の更新に関する検証は、 `Vue.nextTick` コールバックを用いて行う必要があります。
 
 ``` js
-// Inspect the generated HTML after a state update
+// state の更新後、生成された HTML の検証を行う
 it('updates the rendered message when vm.message updates', done => {
   const vm = new Vue(MyComponent).$mount()
   vm.message = 'foo'
 
-  // wait a "tick" after state change before asserting DOM updates
+  // state 変更後、 DOM が更新されるまでの "tick" で待機する
   Vue.nextTick(() => {
     expect(vm.$el.textContent).toBe('foo')
     done()
@@ -129,4 +129,4 @@ it('updates the rendered message when vm.message updates', done => {
 })
 ```
 
-We are planning to work on a collection of common test helpers that makes it even simpler to render components with different constraints (e.g. shallow rendering that ignores child components) and assert their output.
+私たちは、コンポーネントを特別な状態で描画し検証する(例えば、子コンポーネントを無視した浅い描画など)ような、テストをより簡単にするためのヘルパーセットの開発も検討しています。
