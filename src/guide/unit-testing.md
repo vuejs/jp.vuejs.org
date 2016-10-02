@@ -93,7 +93,7 @@ import MyComponent from './MyComponent.vue'
 
 // コンポーネントをマウントし描画結果を返すヘルパー関数
 function getRenderedText (Component, propsData) {
-  const Ctor = Vue.extend(MyComponent)
+  const Ctor = Vue.extend(Component)
   const vm = new Ctor({ propsData }).$mount()
   return vm.$el.textContent
 }
