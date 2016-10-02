@@ -40,6 +40,7 @@ $ hexo server
 - [chocoby](https://github.com/chocoby)
 - [chrispecoraro](https://github.com/chrispecoraro)
 - [cocopon](https://github.com/cocopon)
+- [edwardkenfox](https://github.com/edwardkenfox)
 - [haru01](https://github.com/haru01)
 - [hrysd](https://github.com/hrysd)
 - [hypermkt](https://github.com/hypermkt)
