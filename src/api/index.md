@@ -2,31 +2,31 @@
 type: api
 ---
 
-## Global Config
+## グローバル設定
 
-`Vue.config` is an object containing Vue's global configurations. You can modify its properties listed below before bootstrapping your application:
+`Vue.config` は Vue のグローバル設定を含んでいるオブジェクトです。あなたのアプリケーションが読み込まれる前に、下記のプロパティを変更することが出来ます:
 
 ### silent
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `false`
+- **デフォルト:** `false`
 
-- **Usage:**
+- **使用方法:**
 
   ``` js
   Vue.config.silent = true
   ```
 
-  Suppress all Vue logs and warnings.
+  すべての Vue のログと警告を抑制します。
 
 ### optionMergeStrategies
 
-- **Type:** `{ [key: string]: Function }`
+- **型:** `{ [key: string]: Function }`
 
-- **Default:** `{}`
+- **デフォルト:** `{}`
 
-- **Usage:**
+- **使用方法:**
 
   ``` js
   Vue.config.optionMergeStrategies._my_option = function (parent, child, vm) {
@@ -40,163 +40,163 @@ type: api
   // Profile.options._my_option = 2
   ```
 
-  Define custom merging strategies for options.
+  オプションに対してカスタムマージストラテジを定義します。
 
-  The merge strategy receives the value of that option defined on the parent and child instances as the first and second arguments, respectively. The context Vue instance is passed as the third argument.
+  マージ戦略を親で定義されたオプションの値と子のインスタンスの値が、それぞれ第1引数、第2引数として受け取ります。Vue インスタンスのコンテキストは第3引数として渡されます。
 
-- **See also**: [Custom Option Merging Strategies](/guide/mixins.html#Custom-Option-Merge-Strategies)
+- **参照**: [カスタムオプションのマージストラテジ](/guide/mixins.html#カスタムオプションのマージストラテジ)
 
 ### devtools
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `true` (`false` in production builds)
+- **デフォルト:** `true` (プロダクションビルドでは `false`)
 
-- **Usage:**
+- **使用方法:**
 
   ``` js
-  // make sure to set this synchronously immediately after loading Vue
+  // Vue ローディング直後、この設定が同期されていることを確認してください
   Vue.config.devtools = true
   ```
 
-  Configure whether to allow [vue-devtools](https://github.com/vuejs/vue-devtools) inspection. This option's default value is `true` in development builds and `false` in production builds. You can set it to `true` to enable inspection for production builds.
+  [vue-devtools](https://github.com/vuejs/vue-devtools) インスペクションを許可するかどうか設定します。このオプションのデフォルト値は development ビルドでは、`true` で production ビルドでは `false` です。production ビルドで `true` に設定することでインスペクションを有効にできます。
 
 ### errorHandler
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Default:** Error is thrown in place
+- **デフォルト:** エラーが代わりにスローされます
 
-- **Usage:**
+- **使用方法:**
 
   ``` js
   Vue.config.errorHandler = function (err, vm) {
-    // handle error
+    // エラー処理
   }
   ```
 
-  Assign a handler for uncaught errors during component render and watchers. The handler gets called with the error and the Vue instance.
+  コンポーネントのレンダリングとウォッチャいおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
 
 ### keyCodes
 
-- **Type:** `{ [key: string]: number }`
+- **型:** `{ [key: string]: number }`
 
-- **Default:** `{}`
+- **デフォルト:** `{}`
 
-- **Usage:**
+- **使用方法:**
 
   ``` js
   Vue.config.keyCodes = { esc: 27 }
   ```
 
-  Define custom key aliases for v-on.
+  `v-on` 向けにカスタムキーエイリアスを定義します。
 
-## Global API
+## グローバル API
 
 <h3 id="Vue-extend">Vue.extend( options )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object} options`
 
-- **Usage:**
+- **使用方法:**
 
-  Create a "subclass" of the base Vue constructor. The argument should be an object containing component options.
+  Vue コンストラクタベースの "サブクラス" を作成します。引数はコンポーネントオプションを含むオブジェクトにする必要があります。
 
-  The special cases to note here are `el` and `data` options - they must be functions when used with `Vue.extend()`.
+  ここでの注意すべき特別なケースは、data` プションは、これらは `Vue.extend()` で使用されるとき、関数にしなければなりません。
 
   ``` html
   <div id="mount-point"></div>
   ```
 
   ``` js
-  // create reusable constructor
+  // 再利用可能なコンストラクタを作成
   var Profile = Vue.extend({
-    template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>'
-  })
-  // create an instance of Profile
-  var profile = new Profile({
-    data: {
-      firstName: 'Walter',
-      lastName: 'White',
-      alias: 'Heisenberg'
+    template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+    data: function () {
+      return {
+        firstName: 'Walter',
+        lastName: 'White',
+        alias: 'Heisenberg'
+      }
     }
   })
-  // mount it on an element
-  profile.$mount('#mount-point')
+  // Profile のインスタンスを作成して、要素上にマウントする
+  new Profile().$mount('#mount-point')
   ```
 
-  Will result in:
+  結果は以下のようになります:
 
   ``` html
   <p>Walter White aka Heisenberg</p>
   ```
 
-- **See also:** [Components](/guide/components.html)
+- **参照:** [コンポーネント](/guide/components.html)
 
 <h3 id="Vue-nextTick">Vue.nextTick( callback, [context] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Function} callback`
   - `{Object} [context]`
 
-- **Usage:**
+- **使用方法:**
 
-  Defer the callback to be executed after the next DOM update cycle. Use it immediately after you've changed some data to wait for the DOM update.
+  callback を延期し、DOM の更新サイクル後に実行します。DOM 更新を待ち受けるために、いくつかのデータを変更した直後に使用してください。
 
   ``` js
-  // modify data
+  // データを変更する
   vm.msg = 'Hello'
-  // DOM not updated yet
+  // DOM はまだ更新されていません
   Vue.nextTick(function () {
-    // DOM updated
+    // DOM が更新されています
   })
   ```
 
-- **See also:** [Async Update Queue](/guide/reactivity.html#Async-Update-Queue)
+- **参照:** [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
 
 <h3 id="Vue-set">Vue.set( object, key, value )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object} object`
   - `{string} key`
   - `{any} value`
 
-- **Returns:** the set value.
+- **戻り値:** 設定した値
 
-- **Usage:**
+- **使用方法:**
 
-  Set a property on an object. If the object is reactive, ensure the property is created as a reactive property and trigger view updates. This is primarily used to get around the limitation that Vue cannot detect property additions.
+  オブジェクトにプロパティを設定します。オブジェクトがリアクティブの場合、プロパティがリアクティブプロパティとして作成されることを保証し、View 更新をトリガします。これは主に Vue がプロパティの追加を検知できないという制約を回避するために使われます。
 
-  **Note the object cannot be a Vue instance, or the root data object of a Vue instance.**
+  **オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできないことに注意してください。**
 
-- **See also:** [Reactivity in Depth](/guide/reactivity.html)
+- **参照:** [リアクティブの探求](/guide/reactivity.html)
+
 
 <h3 id="Vue-delete">Vue.delete( object, key )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object} object`
   - `{string} key`
 
-- **Usage:**
+- **使用方法:**
 
-  Delete a property on an object. If the object is reactive, ensure the deletion triggers view updates. This is primarily used to get around the limitation that Vue cannot detect property deletions, but you should rarely need to use it.
+  オブジェクトのプロパティを削除します。オブジェクトがリアクティブの場合、削除がトリガし View が更新されることを保証します。これは主に Vue がプロパティの削除を検知できないという制約を回避するために使われますが、使う必要があることはまれです。
 
-  **Note the object cannot be a Vue instance, or the root data object of a Vue instance.**
+  **オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできないことに注意してください。**
 
-- **See also:** [Reactivity in Depth](/guide/reactivity.html)
+- **参照:** [リアクティブの探求](/guide/reactivity.html)
 
 <h3 id="Vue-directive">Vue.directive( id, [definition] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} id`
   - `{Function | Object} [definition]`
 
-- **Usage:**
+- **使用方法:**
 
-  Register or retrieve a global directive.
+  グローバルディレクティブを登録または取得します。
 
   ``` js
-  // register
+  // 登録
   Vue.directive('my-directive', {
     bind: function () {},
     inserted: function () {},
@@ -205,92 +205,92 @@ type: api
     unbind: function () {}
   })
 
-  // register (simple function directive)
+  // 登録 (シンプルな function directive)
   Vue.directive('my-directive', function () {
-    // this will be called as `bind` and `update`
+    / `bind` と `update` として呼ばれる
   })
 
-  // getter, return the directive definition if registered
+  // getter、登録されていればディレクティブ定義を返す
   var myDirective = Vue.directive('my-directive')
   ```
 
-- **See also:** [Custom Directives](/guide/custom-directive.html)
+- **参照:** [カスタムディレクティブ](/guide/custom-directive.html)
 
 <h3 id="Vue-filter">Vue.filter( id, [definition] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} id`
   - `{Function} [definition]`
 
-- **Usage:**
+- **使用方法:**
 
-  Register or retrieve a global filter.
+  グローバルフィルタに登録または取得します。
 
   ``` js
-  // register
+  // 登録
   Vue.filter('my-filter', function (value) {
-    // return processed value
+    // 処理された値を返す
   })
 
-  // getter, return the filter if registered
+  // getter、登録されていればフィルタを返す
   var myFilter = Vue.filter('my-filter')
   ```
 
 <h3 id="Vue-component">Vue.component( id, [definition] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} id`
   - `{Function | Object} [definition]`
 
-- **Usage:**
+- **使用方法:**
 
-  Register or retrieve a global component.
+  グローバルコンポーネントに登録または取得します。
 
   ``` js
-  // register an extended constructor
+  // 拡張されたコンストラクタを登録
   Vue.component('my-component', Vue.extend({ /* ... */ }))
 
-  // register an options object (automatically call Vue.extend)
+  // オプションオブジェクトを登録 (Vue.extend を自動的に呼ぶ)
   Vue.component('my-component', { /* ... */ })
 
-  // retrieve a registered component (always return constructor)
+  // 登録されたコンポーネントを取得 (常にコンストラクタを返す)
   var MyComponent = Vue.component('my-component')
   ```
 
-- **See also:** [Components](/guide/components.html)
+- **参照:** [コンポーネント](/guide/components.html)
 
 <h3 id="Vue-use">Vue.use( plugin )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object | Function} plugin`
 
-- **Usage:**
+- **使用方法:**
 
-  Install a Vue.js plugin. If the plugin is an Object, it must expose an `install` method. If it is a function itself, it will be treated as the install method. The install method will be called with Vue as the argument.
+  Vue.js のプラグインをインストールします。plugin がオブジェクトならば、それは `install` メソッドを実装していなければなりません。それ自身が関数ならば、それは install メソッドとして扱われます。install メソッドは、Vue を引数として呼び出されます。
 
-  When this method is called on the same plugin multiple times, the plugin will be installed only once.
+  このメソッドが同じプラグインで複数呼ばれるとき、プラグインは一度だけインストールされます。
 
-- **See also:** [Plugins](/guide/plugins.html)
+- **参照:** [プラグイン](/guide/plugins.html)
 
 <h3 id="Vue-mixin">Vue.mixin( mixin )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object} mixin`
 
-- **Usage:**
+- **使用方法:**
 
-  Apply a mixin globally, which affects every Vue instance created afterwards. This can be used by plugin authors to inject custom behavior into components. **Not recommended in application code**.
+  全ての Vue インスタンスが作成された後に影響を及ぼす、ミックスイン (mixin) をグローバルに適用します。これは、コンポーネントにカスタム動作を注入するために、プラグイン作成者によって使用することができます。**アプリケーションコードでの使用は推奨されません。**
 
-- **See also:** [Global Mixins](/guide/mixins.html#Global-Mixin)
+- **参照:** [グローバルミックスイン](/guide/mixins.html#グローバルミックスイン)
 
 <h3 id="Vue-compile">Vue.compile( template )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} template`
 
-- **Usage:**
+- **使用方法:**
 
-  Compiles a template string into a render function. **Only available in the standalone build.**
+  テンプレート文字列を render 関数にコンパイルします。**スタンダアロンビルドだけ利用できます。**
 
   ``` js
   var res = Vue.compile('<div><span>{{ msg }}</span></div>')
@@ -304,43 +304,43 @@ type: api
   })
   ```
 
-- **See also:** [Render Functions](/guide/render-function.html)
+- **参照:** [Render 関数](/guide/render-function.html)
 
-## Options / Data
+## オプション / データ
 
 ### data
 
-- **Type:** `Object | Function`
+- **型:** `Object | Function`
 
-- **Restriction:** Only accepts `Function` when used in a component definition.
+- **制約:** コンポーネント定義の中で使用する場合は、`Function` タイプのみを受け付けます。
 
-- **Details:**
+- **詳細:**
 
-  The data object for the Vue instance. Vue will recursively convert its properties into getter/setters to make it "reactive". **The object must be plain**: native objects such as browser API objects and prototype properties are ignored. A rule of thumb is that data should just be data - it is not recommended to observe objects with its own stateful behavior.
+  Vue インスタンスのためのデータオブジェクトです。Vue.js は再帰的にインスタンスのプロパティを getter/setter に変換し、"リアクティブ" にします。**オブジェクトはプレーンなものでなければなりません。** ブラウザの API オブジェクトのようなネイティブオブジェクトやプロトタイププロパティは無視されます。経験則としては、データはデータになるべきです。自身で状態を持つ振舞いによってオブジェクトを監視することは推奨されません。
 
-  Once observed, you can no longer add reactive properties to the root data object. It is therefore recommended to declare all root-level reactive properties upfront, before creating the instance.
+  一度監視されると、もはやルータなデータオブジェクトに対してリアクティブプロパティを追加することはできません。それゆえ、インスタンスを作成する前に、前もって全てのルートレベルのリアクティブプロパティを宣言することを推奨します。
 
-  After the instance is created, the original data object can be accessed as `vm.$data`. The Vue instance also proxies all the properties found on the data object, so `vm.a` will be equivalent to `vm.$data.a`.
+  インスタンスの作成後、元のデータオブジェクトは `vm.$data` としてアクセスすることができます。Vue インスタンスはデータオブジェクト上に見つかったすべてのプロパティに代理アクセスします。
 
-  Properties that start with `_` or `$` will **not** be proxied on the Vue instance because they may conflict with Vue's internal properties and API methods. You will have to access them as `vm.$data._property`.
+  Vue の内部的なプロパティや API メソッドと衝突する可能性があるため、`_` または `$` から始まるプロパティは Vue インスタンスにプロキシ**されない**ことに注意してください。それらは `vm.$data._property` としてアクセスできます。
 
-  When defining a **component**, `data` must be declared as a function that returns the initial data object, because there will be many instances created using the same definition. If we still use a plain object for `data`, that same object will be **shared by reference** across all instances created! By providing a `data` function, every time a new instance is created, we can simply call it to return a fresh copy of the initial data.
+  **コンポーネント**を定義しているとき、同じ定義を使用して作成された多くのインスタンスがあるため、`data` は初期データオブジェクトを返す関数として宣言しなければなりません。まだ、`data` に対してプレーンなオブジェクトを使用している場合、同じオブジェクトが作成された全てのインスタンス全体を横断して**参照によって共有**されます！`data` 関数を提供することによって、新しいインスタンスが作成される度に、単にそれは初期データの新しいコピーを返すための関数として呼びだすことができます。
 
-  If required, a deep clone of the original object can be obtained by passing `vm.$data` through `JSON.parse(JSON.stringify(...))`.
+  必要に応じて、オリジナルなデータオブジェクトの深いコピー (deep clone) は `vm.$data` を渡すことによって `JSON.parse(JSON.stringify(...))` を通して得ることができます。
 
-- **Example:**
+- **例:**
 
   ``` js
   var data = { a: 1 }
 
-  // direct instance creation
+  // インスタンスを直接生成
   var vm = new Vue({
     data: data
   })
   vm.a // -> 1
   vm.$data === data // -> true
 
-  // must use function when in Vue.extend()
+  // Vue.extend() 内では、関数を使わなければいけない
   var Component = Vue.extend({
     data: function () {
       return { a: 1 }
@@ -348,30 +348,30 @@ type: api
   })
   ```
 
-- **See also:** [Reactivity in Depth](/guide/reactivity.html)
+- **参照:** [リアクティブの探求](/guide/reactivity.html)
 
 ### props
 
-- **Type:** `Array<string> | Object`
+- **型:** `Array<string> | Object`
 
-- **Details:**
+- **詳細:**
 
-  A list/hash of attributes that are exposed to accept data from the parent component. It has a simple Array-based syntax and an alternative Object-based syntax that allows advanced configurations such as type checking, custom validation and default values.
+  親コンポーネントからデータを受け取るためにエクスポートされた属性のリスト/ハッシュです。シンプルな配列ベースの構文、そして型チェック、カスタム検証そしてデフォルト値などの高度な構成を可能とする配列ベースの代わりとなるオブジェクトベースの構文があります。
 
-- **Example:**
+- **例:**
 
   ``` js
-  // simple syntax
+  // シンプルな構文
   Vue.component('props-demo-simple', {
     props: ['size', 'myMessage']
   })
 
-  // object syntax with validation
+  // バリデーション付きのオブジェクト構文
   Vue.component('props-demo-advanced', {
     props: {
-      // just type check
+      // 単なる型チェック
       height: Number,
-      // type check plus other validations
+      // 型チェックとその他のバリデーション
       age: {
         type: Number,
         default: 0,
@@ -384,19 +384,19 @@ type: api
   })
   ```
 
-- **See also:** [Props](/guide/components.html#Props)
+- **参照:** [Props](/guide/components.html#Props)
 
 ### propsData
 
-- **Type:** `{ [key: string]: any }`
+- **型:** `{ [key: string]: any }`
 
-- **Restriction:** only respected in instance creation via `new`.
+- **制約:** `new` 経由でインスタンス作成のみだけなので注意してください。
 
-- **Details:**
+- **詳細:**
 
-  Pass props to an instance during its creation. This is primarily intended to make unit testing easier.
+  インスタン作成中に props に渡します。これは、主に単体テストを簡単にするのを目的としています。
 
-- **Example:**
+- **例:**
 
   ``` js
   var Comp = Vue.extend({
@@ -413,25 +413,25 @@ type: api
 
 ### computed
 
-- **Type:** `{ [key: string]: Function | { get: Function, set: Function } }`
+- **型:** `{ [key: string]: Function | { get: Function, set: Function } }`
 
-- **Details:**
+- **詳細:**
 
-  Computed properties to be mixed into the Vue instance. All getters and setters have their `this` context automatically bound to the Vue instance.
+  Vue インスタンスに組み込まれる算出プロパティ (Computed property) です。すべての getter や setter は、自動的に Vue インスタンスにバインドされた `this` コンテキストを持ちます。
 
-  Computed properties are cached, and only re-computed on reactive dependency changes.
+  算出プロパティはキャッシュされ、そしてリアクティブ依存が変更されたときにだけ再算出します。
 
-- **Example:**
+- **例:**
 
   ```js
   var vm = new Vue({
     data: { a: 1 },
     computed: {
-      // get only, just need a function
+      // get のみ。必要なのは関数一つだけ
       aDouble: function () {
         return this.a * 2
       },
-      // both get and set
+      // get と set 両方
       aPlus: {
         get: function () {
           return this.a + 1
@@ -448,18 +448,18 @@ type: api
   vm.aDouble // -> 4
   ```
 
-- **See also:**
-  - [Computed Properties](/guide/computed.html)
+- **参照:**
+  - [算出プロパティ](/guide/computed.html)
 
 ### methods
 
-- **Type:** `{ [key: string]: Function }`
+- **型:** `{ [key: string]: Function }`
 
-- **Details:**
+- **詳細:**
 
-  Methods to be mixed into the Vue instance. You can access these methods directly on the VM instance, or use them in directive expressions. All methods will have their `this` context automatically bound to the Vue instance.
+  Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブの式で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバインドされた `this` コンテキストを持ちます。
 
-- **Example:**
+- **例:**
 
   ```js
   var vm = new Vue({
@@ -474,17 +474,18 @@ type: api
   vm.a // 2
   ```
 
-- **See also:** [Methods and Event Handling](/guide/events.html)
+- **参照:** [イベントの購読](/guide/events.html)
 
 ### watch
 
-- **Type:** `{ [key: string]: string | Function | Object }`
+- **型:** `{ [key: string]: string | Function | Object }`
 
-- **Details:**
+- **詳細:**
 
-  An object where keys are expressions to watch and values are the corresponding callbacks. The value can also be a string of a method name, or an Object that contains additional options. The Vue instance will call `$watch()` for each entry in the object at instantiation.
+  キーが監視する評価式で、値が対応するコールバックをもつオブジェクトです。値はメソッド名の文字列、または追加のオプションが含まれているオブジェクトを取ることができます。Vue インスタンスはインスタンス化の際にオブジェクトの各エントリに対して `$watch()` を呼びます。
 
-- **Example:**
+
+- **例:**
 
   ``` js
   var vm = new Vue({
@@ -495,9 +496,9 @@ type: api
       'a': function (val, oldVal) {
         console.log('new: %s, old: %s', val, oldVal)
       },
-      // string method name
+      // 文字列メソッド名
       'b': 'someMethod',
-      // deep watcher
+      // 深いウオッチャ (watcher)
       'c': {
         handler: function (val, oldVal) { /* ... */ },
         deep: true
@@ -507,78 +508,78 @@ type: api
   vm.a = 2 // -> new: 2, old: 1
   ```
 
-- **See also:** [Instance Methods - vm.$watch](#vm-watch)
+- **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
 
-## Options / DOM
+## オプション / DOM
 
 ### el
 
-- **Type:** `string | HTMLElement`
+- **型:** `string | HTMLElement`
 
-- **Restriction:** only respected in instance creation via `new`.
+- **制約:** `new` 経由でインスタンス作成のみだけなので注意してください。
 
-- **Details:**
+- **詳細:**
 
-  Provide the Vue instance an existing DOM element to mount on. It can be a CSS selector string or an actual HTMLElement.
+  既存の DOM 要素に Vue インスタンスを与えます。CSS セレクタの文字列、実際の HTML 要素をとることができます。
 
-  After the instance is mounted, the resolved element will be accessible as `vm.$el`.
+  インスタンスがマウント後、解決された要素は `vm.$el` としてアクセス可能になります。
 
-  If this option is available at instantiation, the instance will immediately enter compilation; otherwise, the user will have to explicitly call `vm.$mount()` to manually start the compilation.
+  インスタンス化の際にオプションが有効ならば、そのインスタンスはただちにコンパイルの段階に入ります。さもなければ、ユーザーがコンパイルを始めるために手作業で明示的に `vm.$mount()` を呼ぶ必要があります。
 
-  <p class="tip">The provided element merely serves as a mounting point. Unlike in Vue 1.x, the mounted element will be replaced with Vue-generated DOM in all cases. It is therefore not recommended to mount the root instance to `<html>` or `<body>`.</p>
+  <p class="tip">与えられた要素は単にマウントするポイントとして機能します。Vue 1.x とは異なり、マウントされた要素は、全てのケースで Vue によって生成された DOM に置き換えられます。従って、ルートインスタンスを `<html>` または `<body>` にマウントすることは推奨されません。</p>
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### template
 
-- **Type:** `string`
+- **型:** `string`
 
-- **Details:**
+- **詳細:**
 
-  A string template to be used as the markup for the Vue instance. The template will **replace** the mounted element. Any existing markup inside the mounted element will be ignored, unless content distribution slots are present in the template.
+  Vue インスタンスに対してマークアップとして使用するための、文字列のテンプレートです。テンプレートはマウントされた要素として**置換**されます。コンテンツ挿入 slot がテンプレートの中にない限り、マウントされた要素内部のあらゆる既存のマークアップは無視されます。
 
-  If the string starts with `#` it will be used as a querySelector and use the selected element's innerHTML as the template string. This allows the use of the common `<script type="x-template">` trick to include templates.
+  `#` による文字列で始まる場合、querySelector として使用され、選択された要素の innerHTML をテンプレート文字列として使用します。これにより、テンプレートを組み込むための共通の `<script type="x-template">` というやり方を使うことができるようになります。
 
-  <p class="tip">From a security perspective, you should only use Vue templates that you can trust. Never use user-generated content as your template.</p>
+  <p class="tip">セキュリティの観点から、信頼できる Vue のテンプレートだけ使用するべきです。決してユーザーによって生成されたコンテンツをテンプレートとして使用しないでください。</p>
 
-- **See also:**
-  - [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
-  - [Content Distribution](/guide/components.html#Content-Distribution-with-Slots)
+- **参照:**
+  - [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+  - [コンテンツ配信](/guide/components.html#スロットによるコンテンツ配信)
 
 ### render
 
-  - **Type:** `Function`
+- **型:** `Function`
 
-  - **Details:**
+- **詳細:**
 
-    An alternative to string templates allowing you to leverage the full programmatic power of JavaScript. The render function receives a `createElement` method as it's first argument used to create `VNode`s.
+  JavaScript による完全なプログラミングパワーを活用するために文字列テンプレートの代替として許可します。render 関数は、`VNode` を作成するために最初の引数として `createElement` メソッドを受け取ります
 
-    If the component is a functional component, the render function also receives an extra argument `context`, which provides access to contextual data since functional components are instance-less.
+  コンポーネントが関数型コンポーネントならば、render 関数は、関数型コンポーネントが状態を持たないため、コンテキストなデータにアクセスするために提供する `context` を追加の引数として受け取ります。
 
-  - **See also:**
-    - [Render Functions](/guide/render-function)
+- **参照:**
+  - [Render 関数](/guide/render-function)
 
-## Options / Lifecycle Hooks
+## オプション / ライフサイクルフック
 
 ### beforeCreate
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called synchronously after the instance has just been initialized, before data observation and event/watcher setup.
+  データの監視とイベント/ウォッチャのセットアップより前の、インスタンスが初期化されるときに同期的に呼ばれます。
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### created
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called synchronously after the instance is created. At this stage, the instance has finished processing the options which means the following have been set up: data observation, computed properties, methods, watch/event callbacks. However, the mounting phase has not been started, and the `$el` property will not be available yet.
+  インスタンスが作成された後に同期的に呼ばれます。この段階では、インスタンスは、データ監視、算出プロパティ、メソッド、watch/event コールバックらのオプションのセットアップ処理が完了したことを意味します。しかしながら、マウンティングの段階は未開始で、`$el` プロパティはまだ利用できません。
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### beforeMount
 
