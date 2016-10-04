@@ -115,7 +115,7 @@ var app3 = new Vue({
 
 コンソールから `app3.seen = false` を入力してみましょう。メッセージが消えるはずです。
 
-この2つ目の例は、テキストをデータにバインドできるだけではなく、 DOM の**構造**にデータをバインドできることを示しています。さらに Vue は、要素が Vue によって挿入/更新/削除されたとき、自動的に[トランジションエフェクト(遷移効果)](transitions.html)を適用できる強力なトランジションエフェクトシステムも提供します。
+この例は、テキストをデータにバインドできるだけではなく、 DOM の**構造**にデータをバインドできることを示しています。さらに Vue は、要素が Vue によって挿入/更新/削除されたとき、自動的に[トランジションエフェクト(遷移効果)](transitions.html)を適用できる強力なトランジションエフェクトシステムも提供します。
 
 Vue.js にはかなりの数のディレクティブがあり、それぞれ独自に特別な機能を持っています。例えば、`v-for` ディレクティブを使えばアイテムのリストを配列内のデータを使って表示することができます:
 
@@ -249,7 +249,8 @@ var app6 = new Vue({
 Vue においては、コンポーネントは本質的にはあらかじめ定義されたオプションを持つ Vue インスタンスです。Vue を使ってコンポーネントを登録するのはいたって簡単です:
 
 ``` js
-Vue.component('todo', {
+// todo-item と呼ばれる新しいコンポーネントを定義
+Vue.component('todo-item', {
   template: '<li>This is a todo</li>'
 })
 ```
@@ -258,14 +259,17 @@ Vue.component('todo', {
 
 ``` html
 <ul>
-  <todo v-for="todo in todos"></todo>
+  <!-- todos 配列にある各 todo に対して todo-item コンポーネントのインスタンス作成する -->
+  <todo-item v-for="todo in todos"></todo-item>
 </ul>
 ```
 
 しかし、これだと全ての todo で同じテキストがレンダリングされてしまうだけで、あまり面白くありません。親のスコープから子コンポーネントへとデータを渡せるようにすべきです。[prop](/guide/components.html#Props) を受け取れるようにコンポーネントの定義を変えてみましょう:
 
 ``` js
-Vue.component('todo', {
+Vue.component('todo-item', {
+  // todo-item コンポーネントはカスタム属性のような "prop" で受け取ります。
+  // この prop は todo と呼ばれます。
   props: ['todo'],
   template: '<li>{{ todo.text }}</li>'
 })
@@ -276,7 +280,8 @@ Vue.component('todo', {
 ``` html
 <div id="app-7">
   <ol>
-    <todo v-for="todo in todos" v-bind:todo="todo"></todo>
+    <!-- todo オブジェクトによって各 todo-item を提供します。それは、内容を動的にできるように、表すします。-->
+    <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
   </ol>
 </div>
 ```
@@ -284,18 +289,18 @@ Vue.component('todo', {
 var app7 = new Vue({
   el: '#app-7',
   data: {
-  todos: [{ /* ... */}]
+    todos: [/* ... */]
   }
 })
 ```
 {% raw %}
 <div id="app-7" class="demo">
   <ol>
-    <todo v-for="todo in todos" v-bind:todo="todo"></todo>
+    <todo-item v-for="todo in todos" v-bind:todo="todo"></todo-item>
   </ol>
 </div>
 <script>
-Vue.component('todo', {
+Vue.component('todo-item', {
   props: ['todo'],
   template: '<li>{{ todo.text }}</li>'
 })
@@ -312,7 +317,7 @@ var app7 = new Vue({
 </script>
 {% endraw %}
 
-このサンプルは不自然ではありますが、アプリケーションをより小さな単位に分割することに成功し、また props のインターフェイスによって子コンポーネントは適切に疎結合な状態になりました。ここからさらに `<todo>` コンポーネントを、より複雑なテンプレートやロジックを使って、親コンポーネントに影響を与えることなく改良することができます。
+このサンプルは不自然ではありますが、アプリケーションをより小さな単位に分割することに成功し、また props のインターフェイスによって子コンポーネントは適切に疎結合な状態になりました。ここからさらに `<todo-item>` コンポーネントを、より複雑なテンプレートやロジックを使って、親コンポーネントに影響を与えることなく改良することができます。
 
 大規模なアプリケーションでは、開発を行いやすくするために、アプリケーション全体をコンポーネントに分割することが必要です。コンポーネントについては[ガイドの後半](/guide/components.html)でより詳しく話しますが、コンポーネントを駆使した(架空の)アプリケーションのテンプレートがどういうものになるかをここに載せておきます:
 

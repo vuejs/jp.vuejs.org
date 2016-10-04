@@ -1,7 +1,7 @@
 ---
 title: Comparison with Other Frameworks
 type: guide
-order: 25
+order: 26
 ---
 
 This is definitely the most difficult page in the guide to write, but we do feel it's important. Odds are, you've had problems you tried to solve and you've used another library to solve them. You're here because you want to know if Vue can solve your specific problems better. That's what we hope to answer for you.
@@ -213,7 +213,7 @@ React is renowned for its steep learning curve. Before you can really get starte
 While Vue scales up just as well as, if not better than React, it also scales down just as well as jQuery. That's right - all you have to do is drop a single script tag into a page:
 
 ``` html
-<script src="https://unpkg.com/vue@next/dist/vue.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
 ```
 
 Then you can start writing Vue code and even ship the minified version to production without feeling guilty or having to worry about performance problems.
@@ -268,7 +268,7 @@ We have a separate section for Angular 2 because it really is a completely new f
 
 While Angular 1 could be used for smaller applications, Angular 2 has shifted focus to best facilitate large enterprise applications. As part of this, it almost requires TypeScript, which can be very useful for developers that desire the type safety of languages such as Java and C#.
 
-Vue is also well-suited to [enterprise environments](https://github.com/vuejs/awesome-vue#enterprise-usage) and can even be used with TypeScript via our [official typings](https://github.com/vuejs/vue/tree/next/types) and [user-contributed decorators](https://github.com/itsFrank/vue-typescript), though it's definitely optional in our case.
+Vue is also well-suited to [enterprise environments](https://github.com/vuejs/awesome-vue#enterprise-usage) and can even be used with TypeScript via our [official typings](https://github.com/vuejs/vue/tree/dev/types) and [user-contributed decorators](https://github.com/itsFrank/vue-typescript), though it's definitely optional in our case.
 
 ### Size and Performance
 

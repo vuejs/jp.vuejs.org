@@ -1,14 +1,15 @@
 ---
-title: Render Functions
+title: Render 関数
 type: guide
 order: 14
 ---
 
-## Basics
+## 基本
 
-Vue recommends using templates to build your HTML in the vast majority of cases. There are situations however, where you really need the full programmatic power of JavaScript. That's where you can use the **render  function**, a closer-to-the-compiler alternative to templates.
+Vue ではほとんどの場合 HTML をビルドするためにテンプレートを使うことが推奨されます。しかし、JavaScript による完全なプログラミングパワー
+を必要とするシチュエーションもあります。そこでテンプレートへの代替で、よりコンパイラに近い **Render 関数**が使用できます。
 
-Let's dive into a simple example where a `render` function would be practical. Say you want to generate anchored headings:
+`render` 関数が実用的になりうる簡単な例を見てみましょう。では、アンカーヘッダを生成したいとします。
 
 ``` html
 <h1>
@@ -18,13 +19,13 @@ Let's dive into a simple example where a `render` function would be practical. S
 </h1>
 ```
 
-For the HTML above, you decide you want this component interface:
+上記の HTML に対して、望ましいコンポーネントのインターフェースを決めましょう。
 
 ``` html
 <anchored-heading :level="1">Hello world!</anchored-heading>
 ```
 
-When you get started with a component that just generates a heading based on the `level` prop, you quickly arrive at this:
+`level` プロパティを元にしてヘッダを生成するだけのコンポーネントから始める時、すぐに以下の例に辿りつくでしょう。
 
 ``` html
 <script type="text/x-template" id="anchored-heading-template">
@@ -63,16 +64,16 @@ Vue.component('anchored-heading', {
 })
 ```
 
-That template doesn't feel great. It's not only verbose, but we're duplicating `<slot></slot>` for every heading level and will have to do the same when we add the anchor element. The whole thing is also wrapped in a useless `div` because components must contain exactly one root node.
+このテンプレートは良い気がしません。冗長なだけでなく、全てのヘッダレベルで `<slot></slot>` を重複させており、アンカー要素を追加したい時に同じことをする必要があります。コンポーネントは 1 つの root ノードのみ含めることができるので、全体もまた無駄な `div` で囲まれています。
 
-While templates work great for most components, it's clear that this isn't one of them. So let's try rewriting it with a `render` function:
+テンプレートはほとんどのコンポーネントでうまく動作しますが、この例はそうではないことが明確です。では、 `render` 関数を使ってこれを書き直してみましょう。
 
 ``` js
 Vue.component('anchored-heading', {
   render: function (createElement) {
     return createElement(
-      'h' + this.level,   // tag name
-      this.$slots.default // array of children
+      'h' + this.level,   // タグ名
+      this.$slots.default // 子の配列
     )
   },
   props: {
@@ -84,29 +85,29 @@ Vue.component('anchored-heading', {
 })
 ```
 
-Much simpler! Sort of. The code is shorter, but also requires greater familiarity with Vue instance properties. In this case, you have to know that when you pass children without a `slot` attribute into a component, like the `Hello world!` inside of `anchored-heading`, those children are stored on the component instance at `$slots.default`. If you haven't already, **it's recommended to read through the [instance properties API](/api/#vm-slots) before diving into render functions.**
+少しシンプルになりましたね！コードは短くなりましたが、これもまた Vue インスタンスプロパティの豊富な知識を必要とします。このケースでは、 `slot` 属性無しでコンポーネントに子を渡した時に ( `anchored-heading` の内側の `Hello world!` のような) 、それらの子がコンポーネントインスタンス上の  `$slots.default` にストアされているかを知っている必要があります。**もしあなたがまだ知らないなら、render 関数に進む前に、 [インスタンスプロパティAPI](/api/#vm-slots) を読むことをオススメします。**
 
-## `createElement` Arguments
+## `createElement` 引数
 
-The second thing you'll have to become familiar with is how to use template features in the `createElement` function. Here are the arguments that `createElement` accepts:
+あなたが精通する必要がある 2 つ目のことは `createElement` 関数の中でテンプレートの機能をどのように使うかについてです。こちらが `createElement` の受け付ける引数です。
 
 ``` js
 // @returns {VNode}
 createElement(
   // {String | Object | Function}
-  // An HTML tag name, component options, or function
-  // returning one of these. Required.
+  // HTML タグ名、コンポーネントオプションもしくは関数
+  // これらの一つを返します。必須です。
   'div',
 
   // {Object}
-  // A data object corresponding to the attributes
-  // you would use in a template. Optional.
+  // テンプレート内で使うであろう属性と一致する
+  // データオブジェクト。任意です。
   {
-    // (see details in the next section below)
+    // (詳細は下の次のセクションをご参照ください)
   },
 
   // {String | Array}
-  // Children VNodes. Optional.
+  // VNodes の子。任意です。
   [
     createElement('h1', 'hello world')
     createElement(MyComponent, {
@@ -119,56 +120,56 @@ createElement(
 )
 ```
 
-### The Data Object In-Depth
+### データオブジェクト詳解
 
-One thing to note: similar to how `v-bind:class` and `v-bind:style` have special treatment in templates, they have their own top-level fields in VNode data objects.
+1 つ注意点: `v-bind:class` と `v-bind:style` がテンプレート内で特殊な扱いをされているのと同じように、それらは VNode のデータオブジェクト内で自身のトップレベルフィールドを持ちます。
 
 ``` js
 {
-  // Same API as `v-bind:class`
+  // `v-bind:class` と同じ API
   'class': {
     foo: true,
     bar: false
   },
-  // Same API as `v-bind:style`
+  // `v-bind:style` と同じ API
   style: {
     color: 'red',
     fontSize: '14px'
   },
-  // Normal HTML attributes
+  // 通常の HTML 属性
   attrs: {
     id: 'foo'
   },
-  // Component props
+  // コンポーネントプロパティ
   props: {
     myProp: 'bar'
   },
-  // DOM properties
+  // DOM プロパティ
   domProps: {
     innerHTML: 'baz'
   },
-  // Event handlers are nested under "on", though
-  // modifiers such as in v-on:keyup.enter are not
-  // supported. You'll have to manually check the
-  // keyCode in the handler instead.
+  // v-on:keyup.enter などの修飾詞はサポートされませんが、
+  // "on" の配下にイベントハンドラはネストされます。
+  // その代わり、手動で keyCode をハンドラの中で
+  // 確認することが可能です。
   on: {
     click: this.clickHandler
   },
-  // For components only. Allows you to listen to
-  // native events, rather than events emitted from
-  // the component using vm.$emit.
+  // コンポーネントに限って、
+  // vm.$emit を使っているコンポーネントから emit されるイベントではなく
+  // ネイティブのイベントを listen することができます。
   nativeOn: {
     click: this.nativeClickHandler
   },
-  // Other special top-level properties
+  // 他の特殊なトップレベルのプロパティ
   key: 'myKey',
   ref: 'myRef'
 }
 ```
 
-### Complete Example
+### 完全な例
 
-With this knowledge, we can now finish the component we started:
+これらの知識を使えば、私たちが始めたコンポーネントを完了させることができるようになりました。
 
 ``` js
 var getChildrenTextContent = function (children) {
@@ -181,7 +182,7 @@ var getChildrenTextContent = function (children) {
 
 Vue.component('anchored-heading', {
   render: function (createElement) {
-    // create kebabCase id
+    // kebabCase id の作成
     var headingId = getChildrenTextContent(this.$slots.default)
       .toLowerCase()
       .replace(/\W+/g, '-')
@@ -208,23 +209,23 @@ Vue.component('anchored-heading', {
 })
 ```
 
-### Constraints
+### 制約
 
-#### VNodes Must Be Unique
+#### VNodes は一意でなければならない
 
-All VNodes in the component tree must be unique. That means the following render function is invalid:
+コンポーネントツリーの中で全ての VNode は一意でなければなりません。つまり、以下の render 関数は不正です。
 
 ``` js
 render: function (createElement) {
   var myParagraphVNode = createElement('p', 'hi')
   return createElement('div', [
-    // Yikes - duplicate VNodes!
+    // うわ - 重複の VNodes ！
     myParagraphVNode, myParagraphVNode
   ])
 }
 ```
 
-If you really want to duplicate the same element/component many times, you can do so with a factory function. For example, the following render function is a perfectly valid way of rendering 20 identical paragraphs:
+もし同じ要素 / コンポーネントを何度も重複させたい場合には、factory 関数を使うことで対応できます。例えば、次の render 関数は 20 個の一意に特定できるパラグラフをレンダリングする完全に正当な方法です。
 
 ``` js
 render: function (createElement) {
@@ -237,9 +238,9 @@ render: function (createElement) {
 }
 ```
 
-## Replacing Template Features with Plain JavaScript
+## 素の JavaScript を使ったテンプレート置換機能
 
-Wherever something can be easily accomplished in plain JavaScript, Vue render functions do not provide a proprietary alternative. For example, in a template using `v-if` and `v-for`:
+どんなところでも素の JavaScript で簡単に物事は成し遂げることができるので、Vue の render 関数は独自の代替手段を提供しません。例えば、`v-if` と `v-for` を使っているテンプレート内です。
 
 ``` html
 <ul v-if="items.length">
@@ -248,7 +249,7 @@ Wherever something can be easily accomplished in plain JavaScript, Vue render fu
 <p v-else>No items found.</p>
 ```
 
-This could be rewritten with JavaScript's `if`/`else` and `map` in a render function:
+これは render 関数の中で JavaScript の `if` / `else` と `map` を使って書き換えることができます。
 
 ``` js
 render: function (createElement) {
@@ -264,7 +265,7 @@ render: function (createElement) {
 
 ## JSX
 
-If you're writing a lot of `render` functions, it might feel painful that we're using 14 lines above in place of this much simpler and arguably more readable template:
+もしあなたが多くの render 関数を書いている場合は、よりシンプルでほぼ間違いなく読み易いテンプレート JSX の代わりに上記の 14 行を使っていることがつらいと感じるかもしれません。
 
 ``` html
 <anchored-heading :level="1">
@@ -272,7 +273,7 @@ If you're writing a lot of `render` functions, it might feel painful that we're 
 </anchored-heading>
 ```
 
-That's why there's a [Babel plugin](https://github.com/vuejs/babel-plugin-transform-vue-jsx) to use JSX with Vue, getting us back to a syntax that's closer to templates:
+そのような理由から Vue で JSX を使うための [Babel プラグイン](https://github.com/vuejs/babel-plugin-transform-vue-jsx) があります。よりテンプレートに近い文法が戻ってきました。
 
 ``` js
 import AnchoredHeading from './AnchoredHeading.vue'
@@ -289,47 +290,48 @@ new Vue({
 })
 ```
 
-<p class="tip">Aliasing `createElement` to `h` is a common convention you'll see in the Vue ecosystem and is actually required for JSX. If `h` is not available in the scope, your app will throw an error.</p>
+<p class="tip">`createElement` を `h` にエイリアスしていることは、 Vue のエコシステムの中でよく見かける慣習です。そして、それは実は JSX には必須です。もし `h` がそのスコープ内で利用可能でない場合、アプリケーションはエラーを throw するでしょう。</p>
 
-For more on how JSX maps to JavaScript, see the [usage docs](https://github.com/vuejs/babel-plugin-transform-vue-jsx#usage).
+より詳しい JSX の JavaScript へのマップの仕方については、[usage docs](https://github.com/vuejs/babel-plugin-transform-vue-jsx#usage) をご参照ください。
 
-## Functional Components
+## 関数型コンポーネント
 
-The anchored heading component we created earlier is relatively simple. It doesn't manage any state, watch any state passed to it, and it has no lifecycle methods. Really, it's just a function with some props.
+私たちが先ほど作成したアンカーヘッダコンポーネントは比較的シンプルです。状態の管理や渡された状態の watch をしておらず、また、何もライフサイクルメソッドを持ちません。実際、これはいくつかのプロパティを持つただの関数です。
 
-In cases like this, we can mark components as `functional`, which means that they're stateless (no `data`) and instanceless (no `this` context). A **functional component** looks like this:
+このようなケースにおいて、私たちは `関数型` としてのコンポーネントと特徴づけることができます。それは状態を持たない ( `data` が無い) でインスタンスを持たない ( `this` のコンテキストが無い) ことを意味します。**関数型コンポーネント** は次のような形式をしています。
 
 ``` js
 Vue.component('my-component', {
   functional: true,
-  // To compensate for the lack of an instance,
-  // we are now provided a 2nd context argument.
+  // インスタンスが無いことを補うために、
+  // 2 つ目の context 引数が提供されます。
   render: function (createElement, context) {
     // ...
   },
-  // Props are optional
+  // プロパティは任意です
   props: {
     // ...
   }
 })
 ```
 
-Everything the component needs is passed through `context`, which is an object containing:
+このコンポーネントが必要な全てのことは `context` を受け取ることです。それは次を含むオブジェクトです。
 
-- `props`: An object of the provided props
-- `children`: An array of the VNode children
-- `slots`: A function returning a slots object
-- `data`: The entire data object passed to the component
-- `parent`: A reference to the parent component
+- `props`: 提供されるプロパティのオブジェクト
+- `children`: 子 VNode の配列
+- `slots`: slots オブジェクトを返す関数
+- `data`: コンポーネントに渡される全体のデータオブジェクト
+- `parent`: 親コンポーネントへの参照
 
-After adding `functional: true`, updating the render function of our anchored heading component would simply require adding the `context` argument, updating `this.$slots.default` to `context.children`, then updating `this.level` to `context.props.level`.
+`functional: true` を追加した後、私たちのアンカーヘッダコンポーネントの render 関数の更新として単に必要になるのは、
+`context` 引数の追加、`this.$slots.default` の `context.children` への更新、`this.level` の `context.props.level` への更新でしょう。
 
-Since functional components are just functions, they're much cheaper to render. They're also very useful as wrapper components. For example, when you need to:
+関数型コンポーネントはただの関数なので、レンダリングのコストは少ないです。また、ラッパーコンポーネントとしてもとても便利です。例えば、以下が必要な時に。
 
-- Programmatically choose one of several other components to delegate to
-- Manipulate children, props, or data before passing them on to a child component
+- いくつかの他のコンポーネントから 1 つ delegate するためのものをプログラムで選ぶ時
+- 子、プロパティ、または、データを子コンポーネントへ渡る前に操作したい時
 
-Here's an example of a `smart-list` component that delegates to more specific components, depending on the props passed to it:
+こちらが、渡されるプロパティに応じてより具体的なコンポーネントに委譲する `smart-list` コンポーネントの例です。
 
 ``` js
 var EmptyList = { /* ... */ }
@@ -368,7 +370,7 @@ Vue.component('smart-list', {
 
 ### `slots()` vs `children`
 
-You may wonder why we need both `slots()` and `children`. Wouldn't `slots().default` be the same as `children`? In some cases, yes - but what if you have a functional component with the following children?
+もしかするとなぜ `slots()` と `children` の両方が必要なのか不思議に思うかもしれません。 `slots().default` は `children` と同じではないのですか？いくつかのケースではそうですが、もし以下の子を持つ関数型コンポーネントの場合はどうなるでしょう。
 
 ``` html
 <my-functional-component>
@@ -379,11 +381,11 @@ You may wonder why we need both `slots()` and `children`. Wouldn't `slots().defa
 </my-functional-component>
 ```
 
-For this component, `children` will give you both paragraphs, `slots().default` will give you only the second, and `slots().foo` will give you only the first. Having both `children` and `slots()` therefore allows you to choose whether this component knows about a slot system or perhaps delegates that responsibility to another component by simply passing along `children`.
+このコンポーネントの場合、 `children` は両方のパラグラフが与えられます。`slots().default` は 2 つ目のものだけ与えられます。そして `slots().foo` は 1 つ目のものだけです。したがって、 `children` と `slots()` の両方を持つことで このコンポーネントが slot システムを知っているか、もしくは、単純に `children` を渡しておそらく他のコンポーネントへその責任を delegate するかどうかを選べるようになります。
 
-## Template Compilation
+## テンプレートコンパイル
 
-You may be interested to know that Vue's templates actually compile to render functions. This is an implementation detail you usually don't need to know about, but if you'd like to see how specific template features are compiled, you may find it interesting. Below is a little demo using `Vue.compile` to live-compile a template string:
+もしかするとあなたは Vue のテンプレートが実際に render 関数にコンパイルされることを知ることに興味を持つかもしれません。これは普段あなたは知る必要もない実装の詳細ですが、どのように特定のテンプレート機能がコンパイルされるかをもし見たいならこれに興味を持つかもしれません。以下は `Vue.compile` を使ってテンプレート文字列をその場でコンパイルをするちょっとしたデモです。
 
 {% raw %}
 <div id="vue-compile-demo" class="demo">
