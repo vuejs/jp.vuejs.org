@@ -583,168 +583,168 @@ type: api
 
 ### beforeMount
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called right before the mounting begins: the `render` function is about to be called for the first time.
+  `render` 関数が初めて呼び出されようと、マウンティングが開始される直前に呼ばれます。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### mounted
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called after the instance has just been mounted where `el` is replaced by the newly created `vm.$el`. If the root instance is mounted to an in-document element, `vm.$el` will also be in-document when `mounted` is called.
+  インスタンスが `el` は新たに作成された `vm.$el` によって置換されたちょうどマウントされた後に呼ばれます。ルートインスタンスがドキュメントの中の要素にマウントされる場合、`vm.$el` は `mounted` が呼び出されるときにドキュメントに入ります。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### beforeUpdate
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called when the data changes, before the virtual DOM is re-rendered and patched.
+  データが変更されるとき、仮想DOM は再レンダリングそしてパッチを適用する前に呼ばれます。
 
-  You can perform further state changes in this hook and they will not trigger additional re-renders.
+  このフックでさらに状態を変更することができ、それらは追加で再レンダリングのトリガーになりません。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### updated
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called after a data change causes the virtual DOM to be re-rendered and patched.
+  データが変更後、仮想 DOM が再レンダリングそしてパッチを適用によって呼ばれます。
 
-  The component's DOM will be in updated state when this hook is called, so you can perform DOM-dependent operations in this hook. However, in most cases you should avoid changing state in this hook, because it may lead to an infinite update loop.
+  このフックが呼び出されるとき、コンポーネントの DOM は更新した状態になり、このフックで DOM に依存する操作を行うことができます。しかしがながら、ほとんどの場合、無限更新ループに陥る可能性があるため、このフックでは状態を変更するのを回避すべきです。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### activated
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called when a kept-alive component is activated.
+  生き続けたコンポーネントが活性化するとき呼ばれます。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:**
-  - [Built-in Components - keep-alive](#keep-alive)
-  - [Dynamic Components - keep-alive](/guide/components.html#keep-alive)
+- **参照:**
+  - [組み込みコンポーネント - keep-alive](#keep-alive)
+  - [動的コンポーネント - keep-alive](/guide/components.html#keep-alive)
 
 ### deactivated
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called when a kept-alive component is deactivated.
+  生き続けたコンポーネントが非活性化するとき呼ばれます。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:**
-  - [Built-in Components - keep-alive](#keep-alive)
-  - [Dynamic Components - keep-alive](/guide/components.html#keep-alive)
+- **参照:**
+  - [組み込みコンポーネント - keep-alive](#keep-alive)
+  - [動的コンポーネント - keep-alive](/guide/components.html#keep-alive)
 
 ### beforeDestroy
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called right before a Vue instance is destroyed. At this stage the instance is still fully functional.
+  Vue インスタンスが破棄される直前に呼ばれます。この段階ではインスタンスはまだ完全に機能しています。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
 ### destroyed
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Details:**
+- **詳細:**
 
-  Called after a Vue instance has been destroyed. When this hook is called, all directives of the Vue instance have been unbound, all event listeners have been removed, and all child Vue instances have also been destroyed.
+  Vue インスタンスが破棄された後に呼ばれます。このフックが呼ばれるとき、Vue インスタンスの全てのディレクティブはバウンドしておらず、全てのイベントリスナは削除されており、そして全ての子の Vue インスタンスは破棄されています。
 
-  **This hook is not called during server-side rendering.**
+  **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
-## Options / Assets
+## オプション / アセット
 
 ### directives
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  A hash of directives to be made available to the Vue instance.
+  Vue インスタンスで利用可能なディレクティブのハッシュです。
 
-- **See also:**
-  - [Custom Directives](/guide/custom-directive.html)
-  - [Assets Naming Convention](/guide/components.html#Assets-Naming-Convention)
+- **参照:**
+  - [カスタムディレクティブ](/guide/custom-directive.html)
+  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
 
 ### filters
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  A hash of filters to be made available to the Vue instance.
+  Vue インスタンスで利用可能なフィルタのハッシュです。
 
-- **See also:**
-  - [Custom Filters](/guide/custom-filter.html)
-  - [Assets Naming Convention](/guide/components.html#Assets-Naming-Convention)
+- **参照:**
+  - [カスタムフィルタ](/guide/custom-filter.html)
+  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
 
 ### components
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
-  A hash of components to be made available to the Vue instance.
+  Vue インスタンスで利用可能なコンポーネントのハッシュです。
 
-- **See also:**
-  - [Components](/guide/components.html)
+- **参照:**
+  - [コンポーネント](/guide/components.html)
 
-## Options / Misc
+## オプション / その他
 
 ### parent
 
-- **Type:** `Vue instance`
+- **型:** `Vue instance`
 
-- **Details:**
+- **詳細:**
 
-  Specify the parent instance for the instance to be created. Establishes a parent-child relationship between the two. The parent will be accessible as `this.$parent` for the child, and the child will be pushed into the parent's `$children` array.
+  作成されるインスタンスの親インスタンスを指定します。2つのインスタンス間で親子関係を確立します。親は子の `this.$parent` としてアクセス可能となり、子は親の `$children` 配列に追加されます。
 
-  <p class="tip">Use `$parent` and `$children` sparringly - they mostly serve as an escape-hatch. Prefer using props and events for parent-child communication.</p>
+  <p class="tip">`$parent` と `$children` の使用は控えてください。これらはどうしても避けられないときに使用します。親子感の通信に対して props と イベントを使用すべきです。</p>
 
 ### mixins
 
-- **Type:** `Array<Object>`
+- **型:** `Array<Object>`
 
-- **Details:**
+- **詳細:**
 
-  The `mixins` option accepts an array of mixin objects. These mixin objects can contain instance options just like normal instance objects, and they will be merged against the eventual options using the same option merging logic in `Vue.extend()`. e.g. If your mixin contains a created hook and the component itself also has one, both functions will be called.
+  `mixins` オプションは、ミックスインオブジェクトの配列を受け入れます。ミックスインオブジェクトは、通常のインスタンスオブジェクトのようなインスタンスオプションを含むことができ、`Vue.extend()` における同じオプションを併合するロジックを使った結果のオプションに対して併合されます。例えば、あなたのミックスインが作成されたフックをもち、コンポーネントそのものもそれを持っていた場合、両方の関数が呼ばれます。
 
-  Mixin hooks are called in the order they are provided, and called before the component's own hooks.
+  ミックスインのフックはそれらが提供された順に呼び出され、コンポーネント自身のフックの前に呼び出されます。
 
-- **Example:**
+- **例:**
 
   ``` js
   var mixin = {
@@ -758,36 +758,36 @@ type: api
   // -> 2
   ```
 
-- **See also:** [Mixins](/guide/mixins.html)
+- **参照:** [ミックスイン](/guide/mixins.html)
 
 ### name
 
-- **Type:** `string`
+- **型:** `string`
 
-- **Restriction:** only respected when used as a component option.
+- **制約:** コンポーネントのオプションで使われたときのみ、有効なので注意してください。
 
-- **Details:**
+- **詳細:**
 
-  Allow the component to recursively invoke itself in its template. Note that when a component is registered globally with `Vue.component()`, the global ID is automatically set as its name.
+  テンプレート内でのコンポーネント自身の再帰呼び出しを許可します。コンポーネントは `Vue.component()` でグローバルに登録され、グローバル ID はその名前に自動的に設定される事に注意してください。
 
-  Another benefit of specifying a `name` option is debugging. Named components result in more helpful warning messages. Also, when inspecting an app in the Vue devtool, unnamed components will show up as `<AnonymousComponent>`, which isn't very informative. By providing the `name` option, you will get a much more informative component tree.
+  `name` オプションのもう1つの利点は、デバッギングです。名前付きコンポーネントはより便利な警告メッセージが表示されます。また、Vue devtool でアプリケーションを検査するとき、名前付きでないコンポーネントは `<AnonymousComponent>` として表示され、とても有益ではありません。`name` オプションの提供によって、はるかに有益なコンポーネントツリーを取得できるでしょう。
 
 ### extends
 
-- **Type:** `Object | Function`
+- **型:** `Object | Function`
 
-- **Details:**
+- **詳細:**
 
-  Allows declaratively extending another component (could be either a plain options object or a constructor) without having to use `Vue.extend`. This is primarily intended to make it easier to extend between single file components.
+  `Vue.extend` を使用しなくても、別のコンポーネントを宣言的に拡張できます(純粋なオプションオブジェクトまたはコンストラクタのどちらでも構いません)。これは主に単一ファイルコンポーネントにおいて簡単に拡張するのを目的としています。
 
-  This is similar to `mixins`, the difference being that the component's own options takes higher priority than the source component being extended.
+  これは `mixins` に似ており、違いは、コンポーネント自身のオプションは、元のコンポーネントが拡張されているものよりも優先するというのが違いです。
 
-- **Example:**
+- **例:**
 
   ``` js
   var CompA = { ... }
 
-  // extend CompA without having to call Vue.extend on either
+  // CompA を Vue.extend の呼び出しなしで拡張する
   var CompB = {
     extends: CompA,
     ...
@@ -796,65 +796,67 @@ type: api
 
 ### delimiters
 
-- **Type:** `Array<string>`
+- **型:** `Array<string>`
 
-- **default:** `["{{", "}}"]`
+- **デフォルト:** `["{{", "}}"]`
 
-- **Details:**
+- **詳細:**
 
-  Change the plain text interpolation delimiters. **This option is only available in the standalone build.**
+  プレーンテキスト展開デリミタを変更します。**このオプションはスタンダアロンビルドでのみ利用可能です。**
 
-- **Example:**
+- **例:**
 
   ``` js
   new Vue({
     delimiters: ['${', '}']
   })
 
-  // Delimiters changed to ES6 template string style
+  // デリミタを ES6 template string のスタイルに変更する
   ```
 
 ### functional
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Details:**
+- **詳細:**
 
-  Causes a component to be stateless (no `data`) and instanceless (no `this` context). They are simply a `render` function that returns virtual nodes making them much cheaper to render.
+  状態を持たない (`data` なし) そしてインスタンスを持たない (`this` コンテキストなし)コンポーネントにするかどうか設定します。レンダリングするために仮想ノードを遥かに安価に作成しそれらを返す単純な`render` 関数を実装する必要があります。
 
-- **See also:** [Functional Components](/guide/render-function.html#Functional-Components)
+- **参照:** [関数型コンポーネント](/guide/render-function.html#関数型コンポーネント)
 
-## Instance Properties
+## インスタンスプロパティ
 
 ### vm.$data
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Details:**
+- **詳細:**
 
+  TODO:
+  Vue インスタンスが監視しているデータオブジェクトです。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
   The data object that the Vue instance is observing. You can swap it with a new object. The Vue instance proxies access to the properties on its data object.
 
-- **See also:** [Options - data](#data)
+- **参照:** [オプション - データ](#data)
 
 ### vm.$el
 
-- **Type:** `HTMLElement`
+- **型:** `HTMLElement`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The root DOM element that the Vue instance is managing.
+  Vue インスタンスが管理している ルートな DOM 要素。
 
 ### vm.$options
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The instantiation options used for the current Vue instance. This is useful when you want to include custom properties in the options:
+  現在の Vue インスタンスのためのインストールオプションとして使われます。これはオプションにカスタムプロパティを含めたいとき便利です:
 
   ``` js
   new Vue({
@@ -867,47 +869,47 @@ type: api
 
 ### vm.$parent
 
-- **Type:** `Vue instance`
+- **型:** `Vue instance`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The parent instance, if the current instance has one.
+  現在のインスタンスが1つ持つ場合は、親のインスタンス。
 
 ### vm.$root
 
-- **Type:** `Vue instance`
+- **型:** `Vue instance`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The root Vue instance of the current component tree. If the current instance has no parents this value will be itself.
+  現在のコンポーネントツリーのルート Vue インスタンス。現在のインスタンスが親ではない場合、この値はそれ自身でしょう。
 
 ### vm.$children
 
-- **Type:** `Array<Vue instance>`
+- **型:** `Array<Vue instance>`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  The direct child components of the current instance. **Note there's no order guarantee for `$children`, and it is not reactive.** If you find yourself trying to use `$children` for data binding, consider using an Array and `v-for` to generate child components, and use the Array as the source of truth.
+  現在のインスタンスの直接的な子コンポーネント。**`$children` に対して順序の保証がなく、リアクティブでないことに注意してください。**あなた自身、データバインディングに対して `$children` を使用するためにそれを見つけようとする場合、子コンポーネントを生成するために配列と `v-for` を使用することを検討し、正しいソースとして配列を使用してください。
 
 ### vm.$slots
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **デフォルト:**
 
-  Used to access content [distributed by slots](/guide/components.html#Content-Distribution-with-Slots). Each [named slot](/guide/components.html#Named-Slots) has its own corresponding property (e.g. the contents of `slot="foo"` will be found at `vm.$slots.foo`). The `default` property contains any nodes not included in a named slot.
+  [slot よる配信された](/guide/components.html#Slotによるコンテンツ配信) コンテンツにアクセスするために使用されます。各[名前付き slot](/guide/components.html#名前付きSlot) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付き slot に含まれない任意のノードを含みます。
 
-  Accessing `vm.$slots` is most useful when writing a component with a [render function](/guide/render-function.html).
+  `vm.$slots` のアクセスは、[render 関数](/guide/render-function.html) によるコンポーネントを書くときに最も便利です。
 
-- **Example:**
+- **例:**
 
   ```html
   <blog-post>
@@ -940,151 +942,151 @@ type: api
   })
   ```
 
-- **See also:**
-  - [`<slot>` Component](#slot)
-  - [Content Distribution with Slots](/guide/components.html#Content-Distribution-with-Slots)
-  - [Render Functions](/guide/render-function.html)
+- **参照:**
+  - [`<slot>` コンポーネント](#slot)
+  - [Slot によるコンテンツ配信](/guide/components.html#Slotsによるコンテンツ配信)
+  - [Render 関数](/guide/render-function.html)
 
 ### vm.$refs
 
-- **Type:** `Object`
+- **型:** `Object`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  An object that holds child components that have `ref` registered.
+  `ref` によって登録された子コンポーネントを保持するオブジェクト。
 
-- **See also:**
+- **参照:**
   - [Child Component Refs](/guide/components.html#Child-Component-Refs)
   - [ref](#ref)
 
 ### vm.$isServer
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  Whether the current Vue instance is running on the server.
+  現在の Vue インスタンスがサーバ上で動作しているかどうか。
 
-- **See also:** [Server-Side Rendering](/guide/ssr.html)
+- **参照:** [サーバサイドレンダリング](/guide/ssr.html)
 
-## Instance Methods / Data
+## インスタンスメソッド / データ
 
 <h3 id="vm-watch">vm.$watch( expOrFn, callback, [options] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string | Function} expOrFn`
   - `{Function} callback`
   - `{Object} [options]`
     - `{boolean} deep`
     - `{boolean} immediate`
 
-- **Returns:** `{Function} unwatch`
+- **戻り値:** `{Function} unwatch`
 
-- **Usage:**
+- **使用方法:**
 
-  Watch an expression or a computed function on the Vue instance for changes. The callback gets called with the new value and the old value. The expression can be a single keypath or any valid binding expressions.
+  Vue インスタンス上でのひとつの式または算出関数 (computed function) の変更を監視します。コールバックは新しい値と古い値とともに呼びだされます。引数の式には、単一の keypath か、任意の有効なバインディング式を入れることができます。
 
-<p class="tip">Note: when mutating (rather than replacing) an Object or an Array, the old value will be the same as new value because they reference the same Object/Array. Vue doesn't keep a copy of the pre-mutate value.</p>
+<p class="tip">オブジェクトまたは配列を変更する(というよりむしろ置換する)とき、それらは同じオブジェクト/配列を参照するため、古い値は新しい値と同じになることに注意してください。Vue は変更前の値のコピーしません。</p>
 
-- **Example:**
+- **例:**
 
   ``` js
-  // keypath
+  // キーパス
   vm.$watch('a.b.c', function (newVal, oldVal) {
-    // do something
+    // 何かの処理
   })
 
-  // expression
+  // 式
   vm.$watch('a + b', function (newVal, oldVal) {
-    // do something
+    // 何かの処理
   })
 
-  // function
+  // 関数
   vm.$watch(
     function () {
       return this.a + this.b
     },
     function (newVal, oldVal) {
-      // do something
+      // 何かの処理
     }
   )
   ```
 
-  `vm.$watch` returns an unwatch function that stops firing the callback:
+  `vm.$watch` はコールバックの実行を停止する unwatch 関数を返します。
 
   ``` js
   var unwatch = vm.$watch('a', cb)
-  // later, teardown the watcher
+  // 後で watcher を破棄する
   unwatch()
   ```
 
-- **Option: deep**
+- **任意: deep**
 
-  To also detect nested value changes inside Objects, you need to pass in `deep: true` in the options argument. Note that you don't need to do so to listen for Array mutations.
+  オブジェクトの中のネストされた値の変更を検出するには、options 引数に `deep: true` を渡す必要があります。Array の値の変更は、リッスンする必要はないことに注意してください。
 
   ``` js
   vm.$watch('someObject', callback, {
     deep: true
   })
   vm.someObject.nestedValue = 123
-  // callback is fired
+  // コールバックが発火する
   ```
 
-- **Option: immediate**
+- **任意: immediate**
 
-  Passing in `immediate: true` in the option will trigger the callback immediately with the current value of the expression:
+  options 引数に `immediate: true` を渡すと、その時の式の値で、コールバックが直ちに実行されます:
 
   ``` js
   vm.$watch('a', callback, {
     immediate: true
   })
-  // callback is fired immediately with current value of `a`
+  // その時の `a` の値でコールバックがただちに発火します
   ```
 
 <h3 id="vm-set">vm.$set( object, key, value )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object} object`
   - `{string} key`
   - `{any} value`
 
-- **Returns:** the set value.
+- **戻り値:** 設定した値
 
-- **Usage:**
+- **使用方法:**
 
-  This is the **alias** of the global `Vue.set`.
+  これはグローバルメソッド `Vue.set` の**エイリアス**です。
 
-- **See also:** [Vue.set](#Vue-set)
+- **参照:** [Vue.set](#Vue-set)
 
 <h3 id="vm-delete">vm.$delete( object, key )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Object} object`
   - `{string} key`
 
-- **Usage:**
+- **使用方法:**
 
-  This is the **alias** of the global `Vue.delete`.
+  これはグローバルメソッド `Vue.delete` の**エイリアス**です。
 
-- **See also:** [Vue.delete](#Vue-delete)
+- **参照:** [Vue.delete](#Vue-delete)
 
-## Instance Methods / Events
+## インスタンスメソッド / イベント
 
 <h3 id="vm-on">vm.$on( event, callback )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} event`
   - `{Function} callback`
 
-- **Usage:**
+- **使用方法:**
 
-  Listen for a custom event on the current vm. Events can be triggered by `vm.$emit`. The callback will receive all the additional arguments passed into these event-triggering methods.
+  現在の vm 上のイベントを監視します。イベントは `vm.$emit` によってトリガすることができます。それらのイベントトリガを行うメソッドに渡した追加の引数は、コールバックがすべて受け取ります。
 
-- **Example:**
+- **例:**
 
   ``` js
   vm.$on('test', function (msg) {
@@ -1096,77 +1098,77 @@ type: api
 
 <h3 id="vm-once">vm.$once( event, callback )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} event`
   - `{Function} callback`
 
-- **Usage:**
+- **使用方法:**
 
-  Listen for a custom event, but only once. The listener will be removed once it triggers for the first time.
+  一度きりのイベントリスナを提供します。リスナは最初にトリガされた時に削除されます。
 
 <h3 id="vm-off">vm.$off( [event, callback] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} [event]`
   - `{Function} [callback]`
 
-- **Usage:**
+- **使用方法:**
 
-  Remove event listener(s).
+  イベントリスナを削除します。
 
-  - If no arguments are provided, remove all event listeners;
+  - 引数が与えられなければ、すべてのイベントリスナを削除します。
 
-  - If only the event is provided, remove all listeners for that event;
+  - イベントがひとつだけ与えられたら、そのイベントに関するすべてのイベントリスナを削除します。
 
-  - If both event and callback are given, remove the listener for that specific callback only.
+  - イベントとコールバックの両方が与えられたら、その特定のコールバックに対するイベントリスナのみを削除します。
 
 <h3 id="vm-emit">vm.$emit( event, [...args] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{string} event`
   - `[...args]`
 
-  Trigger an event on the current instance. Any additional arguments will be passed into the listener's callback function.
+  現在のインスタンス上のイベントをトリガします。追加の引数はリスナのコールバックファンクションに渡されます。
 
-## Instance Methods / Lifecycle
+## インスタンスメソッド / ライフサイクル
 
 <h3 id="vm-mount">vm.$mount( [elementOrSelector] )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Element | string} [elementOrSelector]`
   - `{boolean} [hydrating]`
 
-- **Returns:** `vm` - the instance itself
+- **戻り値:** `vm` - インスタンス自身
 
-- **Usage:**
+- **使用方法:**
 
-  If a Vue instance didn't receive the `el` option at instantiation, it will be in "unmounted" state, without an associated DOM element. `vm.$mount()` can be used to manually start the mounting of an unmounted Vue instance.
+  Vue インスタンスがインスタンス化において `el` オプションを受け取らない場合は、DOM 要素は関連付けなしで、"アンマウント(マウントされていない)" 状態になります。`vm.$mount()` は アンマウントな Vue インスタンスのマウンティングを手動で開始するために使用することができます。
 
-  If `elementOrSelector` argument is not provided, the template will be rendered as an off-document element, and you will have to use native DOM API to insert it into the document yourself.
+  `elementOrSelector` 引数が提供されない場合、テンプレートはドキュメント要素外でレンダリングされ、あなた自身ドキュメントにそれを挿入するためにネイティブ DOM API を使用しなければなりません。
 
-  The method returns the instance itself so you can chain other instance methods after it.
+  メソッドはインスタンス自身返し、その後に他のインスタンスメソッドをチェインすることができます。
 
-- **Example:**
+- **例:**
 
   ``` js
   var MyComponent = Vue.extend({
     template: '<div>Hello!</div>'
   })
 
-  // create and mount to #app (will replace #app)
+  // インスタンスを生成し、#app にマウント(#app を置換) します
   new MyComponent().$mount('#app')
 
-  // the above is the same as:
+  // 上記と同じです:
   new MyComponent({ el: '#app' })
 
-  // or, render off-document and append afterwards:
+  // また、ドキュメント外でレンダリングし、その後加えます。
   var component = new MyComponent().$mount()
   document.getElementById('app').appendChild(vm.$el)
   ```
 
-- **See also:**
-  - [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
-  - [Server-Side Rendering](/guide/ssr.html)
+- **参照:**
+  - [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+  - [サーバサイドレンダリング](/guide/ssr.html)
 
 <h3 id="vm-forceUpdate">vm.$forceUpdate()</h3>
 
