@@ -6,32 +6,32 @@ order: 19
 
 ## 紹介
 
-多くの Vue プロジェクトでは、各ページの本体でコンテナー要素を参照した `new Vue({ el: '#container '})` に従って、グローバルコンポーネントは `Vue.component` を使用して宣言されます。
+多くの Vue プロジェクトでは、グローバルコンポーネントは各ページの本体でコンテナー要素を参照した `new Vue({ el: '#container '})` に沿って宣言されたのを使用します。
 
 これはビューを拡張するだけに利用された小さな中規模プロジェクトにおいてはとても有効です。 あなたのフロントエンドで JavaScript 全体を操作するようなもっと複雑なプロジェクトでは、これらの点において不利益になることは明白です。:
 
-- 全てのコンポーネントでユニークな名前の**グローバル宣言**が強制される
-- シンタックスハイライトの無い**文字列テンプレート**と複数行 HTML 時に醜いスラッシュの要求
-- **CSS サポート無し** とは、 HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されます。
-- **ビルドステップ無し** は Pug(前 Jade) や Babel のようなプリプロセッサよりむしろ、 HTML や ES5 JavaScript を制限します 
+- **グローバル宣言**は全てのコンポーネントにユニークな名前を強制します
+- シンタックスハイライトの無い**文字列テンプレート**と複数行 HTML 時に醜いスラッシュが強要されます
+- **CSS サポート無し**だと、 HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されます
+- **ビルドステップ無し**だと Pug(前 Jade) や Babel のようなプリプロセッサよりむしろ、 HTML や ES5 JavaScript を制限します 
 
-これら全ては Webpack や Browserify のビルドルールで実現された `.vue` 拡張子の **シングルファイル・コンポーネント** で解決します。
+これら全ては Webpack や Browserify のビルドツールにより実現された `.vue` 拡張子の **シングルファイル・コンポーネント** で解決します。
 
 こちらが `Hello.vue` と呼ばれたファイルのシンプルな例です:
 
 <img src="/images/vue-component.png" style="display: block; margin: 30px auto">
 
-Now we get:
+さて次にこちらに入ります:
 
-- [Complete syntax highlighting](https://github.com/vuejs/awesome-vue#syntax-highlighting)
-- [CommonJS modules](https://webpack.github.io/docs/commonjs.html)
-- [Component-scoped CSS](https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md)
+- [完全版シンタックスハイライト](https://github.com/vuejs/awesome-vue#syntax-highlighting)
+- [CommonJS モジュール](https://webpack.github.io/docs/commonjs.html)
+- [コンポーネントスコープ CSS](https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md)
 
-約束したとおり、 Jade 、 Babel(ES2015 モジュールと一緒に）や Stylus などより美しつかつ機能が豊富なコンポーネントをプリプロセッサとして利用できます。
+約束したとおり、 Jade 、 Babel(ES2015 モジュールと一緒に）や Stylus などより美しくかつ機能が豊富なコンポーネントもプリプロセッサとして利用できます。
 
 <img src="/images/vue-component-with-preprocessors.png" style="display: block; margin: 30px auto">
 
-これらの特定の言語は単なる一例です。Babel, TypeScript, SCSS, PostCSS など生産的なプリプロセッサを簡単に使うことが出来ます。
+これらの特定の言語は単なる一例です。Bubble, TypeScript, SCSS, PostCSS などの生産的なプリプロセッサも簡単に使うことが出来ます。
 
 <!-- TODO: include CSS modules once it's supported in vue-loader 9.x -->
 
@@ -45,7 +45,7 @@ Now we get:
 
 - **Modern JavaScript with ES2015/16**: Babel の [Learn ES2015 guide](https://babeljs.io/docs/learn-es2015/) を読んで下さい。現状では全ての機能を暗記する必要はないですが、参考として戻れるようにしておいてください。
 
-これらのリソースに飛び込んだ後は、 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートを確認することをオススメします。インストラクションに沿って学習することで、あっという間に ES2015 とホットリローディングで動作した `.vue` コンポーネントの Vue プロジェクトを持っているはずです！
+これらのリソースに飛び込んだ後は、 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートを確認することをオススメします。手順に沿って学習することで、あっという間に ES2015 とホットリローディングで動作した `.vue` コンポーネントの Vue プロジェクトを持っているはずです！
 
 テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.github.io/) というモジュールバンドラーを使用します。 Webpack についてもっと学ぶには、 [このビデオ](https://www.youtube.com/watch?v=WQue1AN93YU) がとても良い導入となります。一度基本を終えてしまえば、[Egghead.io上の上級 Webpack コース](https://egghead.io/courses/using-webpack-for-production-javascript-applications)もチェックしたくなるでしょう。
 
@@ -53,8 +53,7 @@ Webpack でバンドルの中に含まれる前にそれぞれのモジュール
 
 ### 上級者ユーザー向け
 
-Whether you prefer Webpack or Browserify, we have documented templates for both simple and more complex projects. We recommend browsing [github.com/vuejs-templates](https://github.com/vuejs-templates), picking a template that's right for you, then following the instructions in the README to generate a new project with [vue-cli](https://github.com/vuejs/vue-cli).
-あなたが Webpack か Browserify のどちらが好みでも、私達はシンプル、複雑なプロジェクトのテンプレート両方を用意しました。[github.com/vuejs-templates](https://github.com/vuejs-templates) を閲覧し、あなたに合ったテンプレートを選んでください。そしたら、 [vue-cli](https://github.com/vuejs/vue-cli) で新しいプロジェクトを生成するために README 内の手順に沿ってください。
+あなたが Webpack か Browserify のどちらが好みでも、私達はシンプルなものと、複雑なプロジェクトのテンプレート両方を用意しました。[github.com/vuejs-templates](https://github.com/vuejs-templates) を閲覧し、あなたに合ったテンプレートを選んでください。そしたら、 [vue-cli](https://github.com/vuejs/vue-cli) で新しいプロジェクトを生成するために README 内の手順に沿ってください。
 
 ## 本番デプロイ
 
@@ -62,7 +61,7 @@ Whether you prefer Webpack or Browserify, we have documented templates for both 
 
 ### Webpack
 
-Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使用して本番環境を示してください、そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下はコンフィグ例です:
+Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使用して本番環境を指定ください。そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下はコンフィグ例です:
 
 ``` js
 var webpack = require('webpack')
