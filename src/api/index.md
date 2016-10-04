@@ -820,7 +820,7 @@ type: api
 
 - **詳細:**
 
-  状態を持たない (`data` なし) そしてインスタンスを持たない (`this` コンテキストなし)コンポーネントにするかどうか設定します。レンダリングするために仮想ノードを遥かに安価に作成しそれらを返す単純な`render` 関数を実装する必要があります。
+  状態を持たない (`data` なし) そしてインスタンスを持たない (`this` コンテキストなし)コンポーネントにするかどうか設定します。描画するために仮想ノードを遥かに安価に作成しそれらを返す単純な`render` 関数を実装する必要があります。
 
 - **参照:** [関数型コンポーネント](/guide/render-function.html#関数型コンポーネント)
 
@@ -832,9 +832,7 @@ type: api
 
 - **詳細:**
 
-  TODO:
   Vue インスタンスが監視しているデータオブジェクトです。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
-  The data object that the Vue instance is observing. You can swap it with a new object. The Vue instance proxies access to the properties on its data object.
 
 - **参照:** [オプション - データ](#data)
 
@@ -1144,7 +1142,7 @@ type: api
 
   Vue インスタンスがインスタンス化において `el` オプションを受け取らない場合は、DOM 要素は関連付けなしで、"アンマウント(マウントされていない)" 状態になります。`vm.$mount()` は アンマウントな Vue インスタンスのマウンティングを手動で開始するために使用することができます。
 
-  `elementOrSelector` 引数が提供されない場合、テンプレートはドキュメント要素外でレンダリングされ、あなた自身ドキュメントにそれを挿入するためにネイティブ DOM API を使用しなければなりません。
+  `elementOrSelector` 引数が提供されない場合、テンプレートはドキュメント要素外で描画され、ドキュメントにそれを挿入するためにあなた自身でネイティブ DOM API を使用しなければなりません。
 
   メソッドはインスタンス自身返し、その後に他のインスタンスメソッドをチェインすることができます。
 
@@ -1161,7 +1159,7 @@ type: api
   // 上記と同じです:
   new MyComponent({ el: '#app' })
 
-  // また、ドキュメント外でレンダリングし、その後加えます。
+  // また、ドキュメント外で描画し、その後加えます。
   var component = new MyComponent().$mount()
   document.getElementById('app').appendChild(vm.$el)
   ```
@@ -1172,20 +1170,20 @@ type: api
 
 <h3 id="vm-forceUpdate">vm.$forceUpdate()</h3>
 
-- **Usage:**
+- **使用方法:**
 
-  Force the Vue instance to re-render. Note it does not affect all child components, only the instance itself and child components with inserted slot content.
+  Vue インスタンスに再描画を強制します。インスタンス自身と slot コンテンツに挿入された子コンポーネントだけで、全ての子コンポーネントに影響しないことに注意してください。
 
 <h3 id="vm-nextTick">vm.$nextTick( callback )</h3>
 
-- **Arguments:**
+- **引数:**
   - `{Function} callback`
 
-- **Usage:**
+- **使用方法:**
 
-  Defer the callback to be executed after the next DOM update cycle. Use it immediately after you've changed some data to wait for the DOM update. This is the same as the global `Vue.nextTick`, except that the callback's `this` context is automatically bound to the instance calling this method.
+  callback を延期し、DOM の更新サイクル後に実行します。DOM の更新を待ち受けるためにいくつかのデータを更新した直後に使用してください。callback の `this` コンテキストは自動的にこのメソッドを呼びだすインスタンスにバインドされることを除いて、グローバルな `Vue.nextTick` と同じです。
 
-- **Example:**
+- **例:**
 
   ``` js
   new Vue({
@@ -1193,12 +1191,12 @@ type: api
     methods: {
       // ...
       example: function () {
-        // modify data
+        // データを変更
         this.message = 'changed'
-        // DOM is not updated yet
+        // DOM はまだ更新されない
         this.$nextTick(function () {
-          // DOM is now updated
-          // `this` is bound to the current instance
+          // DOM が更新された
+          // `this` は現在のインスタンスにバインドされる
           this.doSomethingElse()
         })
       }
@@ -1206,92 +1204,93 @@ type: api
   })
   ```
 
-- **See also:**
+- **参照:**
   - [Vue.nextTick](#Vue-nextTick)
-  - [Async Update Queue](/guide/reactivity.html#Async-Update-Queue)
+  - [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
 
 <h3 id="vm-destroy">vm.$destroy()</h3>
 
-- **Usage:**
+- **使用方法:**
 
-  Completely destroy a vm. Clean up its connections with other existing vms, unbind all its directives, turn off all event listeners.
+  vm を完全に破棄します。既存の他の vm との接続を切り、そのすべてのディレクティブとのバインドを解消し、すべてのイベントリスナを開放します。
 
-  Triggers the `beforeDestroy` and `destroyed` hooks.
+  `beforeDestroy` と `destroyed` フックをトリガします。
 
-  <p class="tip">In normal use cases you shouldn't have to call this method yourself. Prefer controlling the lifecycle of child components in a data-driven fashion using `v-if` and `v-for`.</p>
+  <p class="tip">通常のケースでは、このメソッドはあなた自身で呼ぶべきではありません。`v-if` と `v-for` を使用してデータ駆動による方法で子コンポーネントのライフサイクルを制御することを推奨します。</p>
 
-- **See also:** [Lifecycle Diagram](/guide/instance.html#Lifecycle-Diagram)
+- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
 
-## Directives
+## ディレクティブ
 
 ### v-text
 
-- **Expects:** `string`
+- **要求事項:** `string`
 
-- **Details:**
+- **詳細:**
 
-  Updates the element's `textContent`. If you need to update the part of `textContent`, you should use `{% raw %}{{ Mustache }}{% endraw %}` interpolations.
+  要素の`textContent`を更新します。`textContent` の一部を更新する必要がある場合は、`{% raw %}{{ Mustache }}{% endraw %}` 展開を使用すべきです。
 
-- **Example:**
+- **例:**
 
   ```html
   <span v-text="msg"></span>
-  <!-- same as -->
+  <!-- 同じ -->
   <span>{{msg}}</span>
   ```
 
-- **See also:** [Data Binding Syntax - interpolations](/guide/syntax.html#Text)
+- **参照:** [データバインディング構文 - 展開](/guide/syntax.html#Text)
 
 ### v-html
 
-- **Expects:** `string`
+- **要求事項:** `string`
 
-- **Details:**
+- **詳細:**
 
-  Updates the element's `innerHTML`. **Note that the contents are inserted as plain HTML - they will not be compiled as Vue templates**. If you find yourself trying to compose templates using `v-html`, try to rethink the solution by using components instead.
+  要素の `innerHTML` を更新します。**コンテンツはプレーンな HTML として挿入されることに注意してください。Vue テンプレートとしてコンパイルされません。** `v-html` を使用してテンプレートをあなた自身で構成するために試みるならば、コンポーネントを代わりとして使用することで解決するのを再考してみてください。
 
-  <p class="tip">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS attacks](https://en.wikipedia.org/wiki/Cross-site_scripting). Only use `v-html` on trusted content and **never** on user-provided content.</p>
+  <p class="tip">任意の HTML をあなたの Web サイト上で動的にレンダリングすることは、 [XSS 攻撃](https://en.wikipedia.org/wiki/Cross-site_scripting)を招くため大変危険です。`v-html` は信頼済みコンテンツのみに利用し、 **絶対に** ユーザの提供するコンテンツには使わないで下さい。</p>
 
-- **Example:**
+
+- **例:**
 
   ```html
   <div v-html="html"></div>
   ```
-- **See also:** [Data Binding Syntax - interpolations](/guide/syntax.html#Raw-HTML)
+- **参照:** [データバインディング構文 - 展開](/guide/syntax.html#生のHTML)
 
 ### v-if
 
-- **Expects:** `any`
+- **要求事項:** `any`
 
-- **Usage:**
+- **使用方法:**
 
-  Conditionally render the element based on the truthy-ness of the expression value. The element and its contained directives / components are destroyed and re-constructed during toggles. If the element is a `<template>` element, its content will be extracted as the conditional block.
+  バインディングの値の真偽値に基いて要素のレンダリングを行います。要素および、ディレクティブまたはコンポーネントを含むコンテンツは、トグルしている間に破壊され再構築されます。要素が `<template>` 要素ならば、その内容は状態ブロックとして抽出されます。
 
-  This directive triggers transitions when its condition changes.
+  このディレクティブは条件が変更されたとき、トランジションをトリガーします。
 
-- **See also:** [Conditional Rendering - v-if](/guide/conditional.html)
+- **参照:** [条件付きレンダリング - v-if](/guide/conditional.html)
 
 ### v-show
 
-- **Expects:** `any`
+- **要求事項:** `any`
 
-- **Usage:**
+- **使用方法:**
 
-  Toggle's the element's `display` CSS property based on the truthy-ness of the expression value.
+  式の値の真偽に応じて、要素の CSS プロパティ `display` をトグルします。
 
-  This directive triggers transitions when its condition changes.
+  このディレクティブは条件が変更されたとき、トランジションをトリガーします。
 
-- **See also:** [Conditional Rendering - v-show](/guide/conditional.html#v-show)
+- **参照:** [条件付きレンダリング - v-show](/guide/conditional.html#v-show)
 
 ### v-else
 
-- **Does not expect expression**
+- **式を受け付けません**
 
-- **Restriction:** previous sibling element must have `v-if`.
+- **制約:** 直前の兄弟要素は `v-if` を持つ必要があります。
 
-- **Usage:**
+- **使用方法:**
 
-  Denote the "else block" for `v-if`.
+  `v-if` に対応する "else block" ということを示します。
 
   ```html
   <div v-if="Math.random() > 0.5">
@@ -1302,16 +1301,16 @@ type: api
   </div>
   ```
 
-- **See also:**
-  - [Conditional Rendering - v-else](/guide/conditional.html#v-else)
+- **参照:**
+  - [条件付きレンダリング - v-else](/guide/conditional.html#v-else)
 
 ### v-for
 
-- **Expects:** `Array | Object | number | string`
+- **要求事項:** `Array | Object | number | string`
 
-- **Usage:**
+- **使用方法:**
 
-  Render the element or template block multiple times based on the source data. The directive's value must use the special syntax `alias in expression` to provide an alias for the current element being iterated on:
+  ソースデータに基づき、要素またはテンプレートブロックを複数回描画します。ディレクティブの値は、繰り返される要素へのエイリアスを提供する為に、特別な文法 (in|of) 式を使う必要があります:
 
   ``` html
   <div v-for="item in items">
@@ -1319,7 +1318,7 @@ type: api
   </div>
   ```
 
-  Alternatively, you can also specify an alias for the index (or the key if used on an Object):
+  あるいは、インデックス(またはオブジェクトで使用されている場合はキー)に対してエイリアスを指定することもできます:
 
   ``` html
   <div v-for="(item, index) in items"></div>
@@ -1327,7 +1326,7 @@ type: api
   <div v-for="(key, val, index) in object"></div>
   ```
 
-  The default behavior of `v-for` will try to patch the elements in-place without moving them. To force it to reorder elements, you need to provide an ordering hint with the `key` special attribute:
+  `v-for` のデフォルトの振舞いは、それらを移動しないで所定の位置の要素にパッチを適用しようとします。要素の順序を変更するのを強制するためには、`key` という特別な属性によって順序のヒントを提供する必要があります:
 
   ``` html
   <div v-for="item in items" :key="item.id">
@@ -1335,171 +1334,171 @@ type: api
   </div>
   ```
 
-  The detailed usage for `v-for` is explained in the guide section linked below.
+  `v-for` の詳細な使用方法は下記にリンクしたガイドセクション内で説明しています。
 
-- **See also:**
-  - [List Rendering](/guide/list.html)
+- **参照:**
+  - [リストレンダリング](/guide/list.html)
   - [key](/guide/list.html#key)
 
 ### v-on
 
-- **Shorthand:** `@`
+- **省略記法:** `@`
 
-- **Expects:** `Function | Inline Statement`
+- **要求事項:** `Function | Inline Statement`
 
-- **Argument:** `event (required)`
+- **引数:** `event (必須)`
 
-- **Modifiers:**
-  - `.stop` - call `event.stopPropagation()`.
-  - `.prevent` - call `event.preventDefault()`.
-  - `.capture` - add event listener in capture mode.
-  - `.self` - only trigger handler if event was dispatched from this element.
-  - `.{keyCode | keyAlias}` - only trigger handler on certain keys.
-  - `.native` - listen for a native event on the root element of component.
+- **修飾子:**
+  - `.stop` - `event.stopPropagation()` を呼びます。
+  - `.prevent` - `event.preventDefault()` を呼びます。
+  - `.capture` - キャプチャモードでイベントリスナを追加します。
+  - `.self` - イベントがこの要素からディスパッチされたときだけハンドラをトリガします。
+  - `.{keyCode | keyAlias}` - 指定したキーが押された時のみトリガされるハンドラです。
+  - `.native` - コンポーネントのルート要素上のネイティブイベントに対して購読します。
 
-- **Usage:**
+- **使用方法:**
 
-  Attaches an event listener to the element. The event type is denoted by the argument. The expression can either be a method name or an inline statement, or simply omitted when there are modifiers present.
+  要素にイベントリスナをアタッチします。イベント種別は引数で示されます。式はメソッド名またはインラインステートメントのいずれかを指定することができ、または修飾子 (modifier) が存在するときは、単純に省略されます。
 
-  When used on a normal element, it listens to **native DOM events** only. When used on a custom element component, it also listens to **custom events** emitted on that child component.
+  通常の要素上で利用した場合、**ネイティブ DOM イベント** だけ購読します。カスタム要素コンポーネント上で利用した場合、子コンポーネント上での **カスタムイベント** の発行も購読します。
 
-  When listening to native DOM events, the method receives the native event as the only argument. If using inline statement, the statement has access to the special `$event` property: `v-on:click="handle('ok', $event)"`.
+  ネイティブな DOM イベントを購読しているとき、メソッドはネイティブなイベントを引数としてだけ受信します。インラインステートメントで使用する場合、ステートメントでは特別な `$event` プロパティに `v-on:click="handle('ok', $event)"` のようにしてアクセスすることができます。
 
-- **Example:**
+- **例:**
 
   ```html
-  <!-- method handler -->
+  <!-- メソッドハンドラ -->
   <button v-on:click="doThis"></button>
 
-  <!-- inline statement -->
+  <!-- インラインステートメント -->
   <button v-on:click="doThat('hello', $event)"></button>
 
-  <!-- shorthand -->
+  <!-- 省略記法 -->
   <button @click="doThis"></button>
 
-  <!-- stop propagation -->
+  <!-- イベント伝播の停止 -->
   <button @click.stop="doThis"></button>
 
-  <!-- prevent default -->
+  <!-- デフォルト挙動を防ぐ -->
   <button @click.prevent="doThis"></button>
 
-  <!-- prevent default without expression -->
+  <!-- 式なしでデフォルト挙動を防ぐ -->
   <form @submit.prevent></form>
 
-  <!-- chain modifiers -->
+  <!-- 修飾子の繋ぎ合わせ -->
   <button @click.stop.prevent="doThis"></button>
 
-  <!-- key modifier using keyAlias -->
+  <!-- キーエイリアスを使ったキー修飾子 -->
   <input @keyup.enter="onEnter">
 
-  <!-- key modifier using keyCode -->
+  <!-- キーコードを使ったキー修飾子 -->
   <input @keyup.13="onEnter">
   ```
 
-  Listening to custom events on a child component (the handler is called when "my-event" is emitted on the child):
+  子コンポーネント上のカスタムイベントを購読できます (ハンドラは "my-event" が子コンポーネント上で発行された時に呼ばれる):
 
   ```html
   <my-component @my-event="handleThis"></my-component>
 
-  <!-- inline statement -->
+  <!-- インラインステートメント -->
   <my-component @my-event="handleThis(123, $event)"></my-component>
 
-  <!-- native event on component -->
+  <!-- コンポーネント上のネイティブイベント -->
   <my-component @click.native="onClick"></my-component>
   ```
 
-- **See also:**
-  - [Methods and Event Handling](/guide/events.html)
-  - [Components - Custom Events](/guide/components.html#Custom-Events)
+- **参照:**
+  - [メソッドとイベントハンドリング](/guide/events.html)
+  - [コンポーネント - カスタムイベント](/guide/components.html#カスタムイベント)
 
 ### v-bind
 
-- **Shorthand:** `:`
+- **省略記法:** `:`
 
-- **Expects:** `any (with argument) | Object (without argument)`
+- **要求事項:** `any (引数あり) | Object (引数なし)`
 
-- **Argument:** `attrOrProp (optional)`
+- **引数:** `attrOrProp (任意)`
 
-- **Modifiers:**
-  - `.prop` - Used for binding DOM attributes.
+- **修飾子:**
+  - `.prop` - DOM 属性のバインディングに対して使用されます。
 
-- **Usage:**
+- **使用方法:**
 
-  Dynamically bind one or more attributes, or a component prop to an expression.
+  1つ以上の属性またはコンポーネント prop と式を動的にバインドします。
 
-  When used to bind the `class` or `style` attribute, it supports additional value types such as Array or Objects. See linked guide section below for more details.
+  `class` または `style` 属性とバインドする場合、配列やオブジェクトのような追加の値タイプをサポートします。詳細は下記にリンクしたガイドセクションを参照してください。
 
-  When used for prop binding, the prop must be properly declared in the child component.
+  prop バインディングに使う場合、prop は子コンポーネント内で適切に宣言される必要があります。
 
-  When used without an argument, can be used to bind an object containing attribute name-value pairs. Note in this mode `class` and `style` does not support Array or Objects.
+  引数なしで使用した場合、名前-値のペアの属性を含むオブジェクトをバインドするため使用することができます。このモードでは、`class` と `style` では配列とオブジェクトをサポートしないことに注意してください。
 
-- **Example:**
+- **例:**
 
   ```html
-  <!-- bind an attribute -->
+  <!-- 属性をバインド -->
   <img v-bind:src="imageSrc">
 
-  <!-- shorthand -->
+  <!-- 省略記法 -->
   <img :src="imageSrc">
 
-  <!-- class binding -->
+  <!-- クラスバインディング -->
   <div :class="{ red: isRed }"></div>
   <div :class="[classA, classB]"></div>
   <div :class="[classA, { classB: isB, classC: isC }]">
 
-  <!-- style binding -->
+  <!-- スタイルバインディング -->
   <div :style="{ fontSize: size + 'px' }"></div>
   <div :style="[styleObjectA, styleObjectB]"></div>
 
-  <!-- binding an object of attributes -->
+  <!-- 属性のオブジェクトのバインディング -->
   <div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
 
-  <!-- DOM attribute binding with prop modifier -->
+  <!-- prop 修飾子による DOM 属性バインディング -->
   <div v-bind:text-content.prop="text"></div>
 
-  <!-- prop binding. "prop" must be declared in my-component. -->
+  <!-- prop バインディング。"prop" は my-component 内で宣言される必要があります -->
   <my-component :prop="someThing"></my-component>
 
   <!-- XLink -->
   <svg><a :xlink:special="foo"></a></svg>
   ```
 
-- **See also:**
-  - [Class and Style Bindings](/guide/class-and-style.html)
-  - [Components - Component Props](/guide/components.html#Props)
+- **参照:**
+  - [クラスとスタイルバインディング](/guide/class-and-style.html)
+  - [コンポーネント - コンポーネント Props](/guide/components.html#Props)
 
 ### v-model
 
-- **Expects:** varies based on value of form inputs element or output of components
+- **要求事項:** コンポーネントの出力、または input 要素 からの値に応じて変化します
 
-- **Limited to:**
+- **適用対象制限:**
   - `<input>`
   - `<select>`
   - `<textarea>`
-  - components
+  - コンポーネント
 
-- **Modifiers:**
-  - [`.lazy`](/guide/forms.html#lazy) - listen to `change` events instead of `input`
-  - [`.number`](/guide/forms.html#number) - cast input string to numbers
-  - [`.trim`](/guild/forms.html#trim) - trim input
+- **修飾子:**
+  - [`.lazy`](/guide/forms.html#lazy) - `input` の代わりに `change` イベントを購読します
+  - [`.number`](/guide/forms.html#number) - input の文字列を数値にキャストします
+  - [`.trim`](/guild/forms.html#trim) - input をトリムします
 
-- **Usage:**
+- **使用方法:**
 
-  Create a two-way binding on a form input element or a component. For detailed usage, see guide section linked below.
+  form input 要素またはコンポーネント上に双方向バインディングを作成します。詳細は下にリンクしたガイドセクションを参照してください。
 
 - **See also:**
-  - [Form Input Bindings](/guide/forms.html)
-  - [Components - Form Input Components using Custom Events](/guide/components.html#Form-Input-Components-using-Custom-Events)
+  - [フォーム入力バインディング](/guide/forms.html)
+  - [コンポーネント - カスタムイベントを使用してフォーム入力コンポーネント](/guide/components.html#Form-Input-Components-using-Custom-Events)
 
 ### v-pre
 
-- **Does not expect expression**
+- **式を受け付けません**
 
-- **Usage**
+- **使用方法**
 
-  Skip compilation for this element and all its children. You can use this for displaying raw mustache tags. Skipping large numbers of nodes with no directives on them can also speed up compilation.
+  この要素とすべての子要素のコンパイルをスキップします。生の mustache タグを表示するためにも使うことができます。ディレクティブのない大量のノードをスキップすることで、コンパイルのスピードを上げます。
 
-- **Example:**
+- **例:**
 
   ```html
   <span v-pre>{{ this will not be compiled }}</span>
@@ -1507,13 +1506,13 @@ type: api
 
 ### v-cloak
 
-- **Does not expect expression**
+- **式を受け付けません**
 
-- **Usage:**
+- **使用方法:**
 
-  This directive will remain on the element until the associated Vue instance finishes compilation. Combined with CSS rules such as `[v-cloak] { display: none }`, this directive can be used to hide un-compiled mustache bindings until the Vue instance is ready.
+  このディレクティブは関連付けられた Vue インスタンスのコンパイルが終了するまでの間残存します。`[v-cloak] { display: none }` のような CSS のルールと組み合わせて、このディレクティブは Vue インスタンス が用意されるまでの間、コンパイルされていない Mustache バインディングを隠すのに使うことができます。
 
-- **Example:**
+- **例:**
 
   ```css
   [v-cloak] {
@@ -1527,35 +1526,35 @@ type: api
   </div>
   ```
 
-  The `<div>` will not be visible until the compilation is done.
+  `<div>` はコンパイルが終了するまでは不可視となります。
 
 ### v-once
 
-- **Does not expect expression**
+- **式を受け付けません**
 
-- **Details:**
+- **詳細:**
 
-  Render the element and component **once** only. On subsequent re-renders, the element/component and all its children will be treated as static content and skipped. This can be used to optimize update performance.
+  要素とコンポーネントを**一度**だけ描画します。その後再描画は、要素 / コンポーネントと全てのその子は、静的コンテンツとして扱われスキップされます。これは、更新パフォーマンスを最適化するために使用することができます。
 
   ```html
-  <!-- single element -->
+  <!-- 単一要素 -->
   <span v-once>This will never change: {{msg}}</span>
-  <!-- the element have children -->
+  <!-- 子を持つ要素 -->
   <div v-once>
     <h1>comment</h1>
     <p>{{msg}}</p>
   </div>
-  <!-- component -->
+  <!-- コンポーネント -->
   <my-component v-once :comment="msg"></my-component>
-  <!-- v-for directive -->
+  <!-- v-for ディレクティブ -->
   <ul>
     <li v-for="i in list" v-once>{{i}}</li>
   </ul>
   ```
 
-- **See also:**
-  - [Data Binding Syntax - interpolations](/guide/syntax.html#Text)
-  - [Components - Cheap Static Components with v-once](/guide/components.html#Cheap-Static-Components-with-v-once)
+- **参照:**
+  - [データバインディング構文 - 展開](/guide/syntax.html#Text)
+  - [コンポーネント - v-once による安価な静的コンポーネント](/guide/components.html#Cheap-Static-Components-with-v-once)
 
 ## Special Attributes
 
