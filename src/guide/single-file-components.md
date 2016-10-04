@@ -8,12 +8,12 @@ order: 19
 
 多くの Vue プロジェクトでは、各ページの本体でコンテナー要素を参照した `new Vue({ el: '#container '})` に従って、グローバルコンポーネントは `Vue.component` を使用して宣言されます。
 
-これはビューを拡張するだけに利用された小さな中規模プロジェクトにおいてはとても有効です。 あなたのフロントエンドでJavaScript全体を操作するようなもっと複雑なプロジェクトでは、これらの点において不利益になることは明白です。:
+これはビューを拡張するだけに利用された小さな中規模プロジェクトにおいてはとても有効です。 あなたのフロントエンドで JavaScript 全体を操作するようなもっと複雑なプロジェクトでは、これらの点において不利益になることは明白です。:
 
 - 全てのコンポーネントでユニークな名前の**グローバル宣言**が強制される
-- シンタックスハイライトの無い**文字列テンプレート**と複数行HTML時に醜いスラッシュの要求
-- **CSSサポート無し** とは、HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されます。
-- **ビルドステップ無し** は Pug(前 Jade) やBabel のようなプリプロセッサよりむしろ、 HTMLや ES5 JavaScript を制限します 
+- シンタックスハイライトの無い**文字列テンプレート**と複数行 HTML 時に醜いスラッシュの要求
+- **CSS サポート無し** とは、 HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されます。
+- **ビルドステップ無し** は Pug(前 Jade) や Babel のようなプリプロセッサよりむしろ、 HTML や ES5 JavaScript を制限します 
 
 これら全ては Webpack や Browserify のビルドルールで実現された `.vue` 拡張子の **シングルファイル・コンポーネント** で解決します。
 
@@ -27,7 +27,7 @@ Now we get:
 - [CommonJS modules](https://webpack.github.io/docs/commonjs.html)
 - [Component-scoped CSS](https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md)
 
-約束したとおり、Jade、Babel(ES2015モジュールと一緒に）やStylusなどより美しつかつ機能が豊富なコンポーネントをプリプロセッサとして利用できます。
+約束したとおり、 Jade 、 Babel(ES2015 モジュールと一緒に）や Stylus などより美しつかつ機能が豊富なコンポーネントをプリプロセッサとして利用できます。
 
 <img src="/images/vue-component-with-preprocessors.png" style="display: block; margin: 30px auto">
 
@@ -47,9 +47,9 @@ Now we get:
 
 これらのリソースに飛び込んだ後は、 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートを確認することをオススメします。インストラクションに沿って学習することで、あっという間に ES2015 とホットリローディングで動作した `.vue` コンポーネントの Vue プロジェクトを持っているはずです！
 
-テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.github.io/) というモジュールバンドラーを使用します。 Webpackについてもっと学ぶには、 [このビデオ](https://www.youtube.com/watch?v=WQue1AN93YU) がとても良い導入となります。一度基本を終えてしまえば、[Egghead.io上の上級Webpackコース](https://egghead.io/courses/using-webpack-for-production-javascript-applications)もチェックしたくなるでしょう。
+テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.github.io/) というモジュールバンドラーを使用します。 Webpack についてもっと学ぶには、 [このビデオ](https://www.youtube.com/watch?v=WQue1AN93YU) がとても良い導入となります。一度基本を終えてしまえば、[Egghead.io上の上級 Webpack コース](https://egghead.io/courses/using-webpack-for-production-javascript-applications)もチェックしたくなるでしょう。
 
-Webpackでバンドルの中に含まれる前にそれぞれのモジュールは "loader" により変換されます。また Vue では `.vue` シングルファイル・コンポーネントを翻訳するために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](vue-loader.vuejs.org) を読むことも出来ます。
+Webpack でバンドルの中に含まれる前にそれぞれのモジュールは "loader" により変換されます。また Vue では `.vue` シングルファイル・コンポーネントを翻訳するために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](vue-loader.vuejs.org) を読むことも出来ます。
 
 ### 上級者ユーザー向け
 
