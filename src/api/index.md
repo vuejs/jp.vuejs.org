@@ -1728,7 +1728,7 @@ type: api
   ```
 
 - **参照:**
-  - [クラスととスタイルのバインディング](/guide/class-and-style.html)
+  - [クラスとスタイルのバインディング](/guide/class-and-style.html)
   - [コンポーネント - Props](/guide/components.html#Props)
   
 ### v-model
