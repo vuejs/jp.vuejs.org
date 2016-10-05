@@ -1,5 +1,5 @@
 ---
-title: Migration from Vue 1.x
+title: Vue 1.xからの移行
 type: guide
 order: 24
 ---
@@ -8,9 +8,9 @@ order: 24
 
 > Woah - this is a super long page! Does that mean 2.0 is completely different, I'll have to learn the basics all over again, and migrating will be practically impossible?
 
-I'm glad you asked! The answer is no. About 90% of the API is the same and the core concepts haven't changed. It's long because we like to offer very detailed explanations and include a lot of examples. Rest assured, __this is not something you have to read from top to bottom!__
+よくぞ聞いてくれました！その答えは No です。 API のおおよそ 90% が同じで、かつ基本となるコンセプトは変わっていません。 It's long because we like to offer very detailed explanations and include a lot of examples. 安心してください、 __これは、上から下まで全て読むようなものではありません !__
 
-> Where should I start in a migration?
+> どこから移行をはじめるべきですか？
 
 1. Start by running the [migration helper](https://github.com/vuejs/vue-migration-helper) on a current project. We've carefully minified and compressed a senior Vue dev into a simple command line interface. Whenever they recognize a deprecated pattern, they'll let you know, offer suggestions, and provide links to more info.
 
@@ -36,18 +36,19 @@ Only Vue-Router 2 is compatible with Vue 2, so yes, you'll have to follow the [m
 
 As for Vuex, even version 0.8 is compatible with Vue 2, so you're not forced to upgrade. The only reason you may want to upgrade immediately is to take advantage of the new features in Vuex 2, such as modules and reduced boilerplate.
 
-## Templates
+## テンプレート
 
-### Fragment Instances <sup>deprecated</sup>
+### フラグメントインスタンス <sup>非推奨</sup>
 
-Every component must have exactly one root element. Fragment instances are no longer allowed. If you have a template like this:
+すべてのコンポーネントは、1つのルート要素を持っている必要があります。フラグメントインスタンスは、もはや許されません。もし、あなたが以下のようなテンプレートを使用している場合:
 
 ``` html
 <p>foo</p>
 <p>bar</p>
 ```
 
-It's recommended to simply wrap the entire contents in a new element, like this:
+単に全体を新しい要素で囲うことを推奨します。  
+例えばそれは、このような形となります:
 
 ``` html
 <div>
@@ -63,22 +64,11 @@ It's recommended to simply wrap the entire contents in a new element, like this:
 </div>
 {% endraw %}
 
-## Lifecycle Hooks
+## ライフサイクルフック
 
-### `beforeCompile` <sup>deprecated</sup>
+### `beforeCompile` <sup>非推奨</sup>
 
-Use the `created` hook instead.
-
-{% raw %}
-<div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find all examples of this hook.</p>
-</div>
-{% endraw %}
-
-### `compiled` <sup>deprecated</sup>
-
-Use the new `mounted` hook instead.
+代わりに、 `created` フックを使用します。
 
 {% raw %}
 <div class="upgrade-path">
@@ -87,9 +77,20 @@ Use the new `mounted` hook instead.
 </div>
 {% endraw %}
 
-### `attached` <sup>deprecated</sup>
+### `compiled` <sup>非推奨</sup>
 
-Use a custom in-dom check in other hooks. For example, to replace:
+代わりに、新たに `mounted` フックを使用します。
+
+{% raw %}
+<div class="upgrade-path">
+  <h4>Upgrade Path</h4>
+  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find all examples of this hook.</p>
+</div>
+{% endraw %}
+
+### `attached` <sup>非推奨</sup>
+
+他のフックで DOM チェックをカスタムして使用します。 For example, to replace:
 
 ``` js
 attached: function () {
@@ -97,7 +98,7 @@ attached: function () {
 }
 ```
 
-You could use:
+このように使うことができます:
 
 ``` js
 mounted: function () {
@@ -114,9 +115,9 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### `detached` <sup>deprecated</sup>
+### `detached` <sup>非推奨</sup>
 
-Use a custom in-dom check in other hooks. For example, to replace:
+他のフックで DOM チェックをカスタムして使用します。 For example, to replace:
 
 ``` js
 detached: function () {
@@ -124,7 +125,7 @@ detached: function () {
 }
 ```
 
-You could use:
+このように使うことができます:
 
 ``` js
 destroyed: function () {
@@ -141,9 +142,9 @@ destroyed: function () {
 </div>
 {% endraw %}
 
-### `init` <sup>deprecated</sup>
+### `init` <sup>非推奨</sup>
 
-Use the new `beforeCreate` hook instead, which is essentially the same thing. It was renamed for consistency with other lifecycle methods.
+代わりに新しい `beforeCreate` フックを使用します。 which is essentially the same thing. It was renamed for consistency with other lifecycle methods.
 
 {% raw %}
 <div class="upgrade-path">
@@ -152,7 +153,7 @@ Use the new `beforeCreate` hook instead, which is essentially the same thing. It
 </div>
 {% endraw %}
 
-### `ready` <sup>deprecated</sup>
+### `ready` <sup>非推奨</sup>
 
 Use the new `mounted` hook instead. It should be noted though that with `mounted`, there's no guarantee to be in-document. For that, also include `Vue.nextTick`/`vm.$nextTick`. For example:
 
@@ -195,7 +196,7 @@ When including a `key`, the argument order for objects used to be `(key, value)`
 </div>
 {% endraw %}
 
-### `$index` and `$key` <sup>deprecated</sup>
+### `$index` および `$key` <sup>非推奨</sup>
 
 The implicitly assigned `$index` and `$key` variables have been deprecated in favor of explicitly defining them in `v-for`. This makes the code easier to read for developers less experienced with Vue and also results in much clearer behavior when dealing with nested loops.
 
@@ -206,7 +207,7 @@ The implicitly assigned `$index` and `$key` variables have been deprecated in fa
 </div>
 {% endraw %}
 
-### `track-by` <sup>deprecated</sup>
+### `track-by` <sup>非推奨</sup>
 
 `track-by` has been replaced with `key`, which works like any other attribute: without the `v-bind:` or `:` prefix, it is treated as a literal string. In most cases, you'd want to use a dynamic binding which expects a full expression instead of a key. For example, in place of:
 
@@ -214,7 +215,7 @@ The implicitly assigned `$index` and `$key` variables have been deprecated in fa
 <div v-for="item in items" track-by="id">
 ```
 
-You would now write:
+今はこう書きます:
 
 ``` html
 <div v-for="item in items" v-bind:key="item.id">
@@ -240,7 +241,7 @@ Previously, `v-for="number in 10"` would have `number` starting at 0 and ending 
 
 ## Props
 
-### `coerce` Prop Option <sup>deprecated</sup>
+### `coerce` Prop Option <sup>非推奨</sup>
 
 If you want to coerce a prop, setup a local computed value based on it instead. For example, instead of:
 
@@ -257,7 +258,7 @@ props: {
 }
 ```
 
-You could write:
+このように書くことができます:
 
 ``` js
 props: {
@@ -272,7 +273,7 @@ computed: {
 }
 ```
 
-There are a few advantages:
+これには、いくつかの利点があります:
 
 - You still have access to the original value of the prop.
 - You are forced to be more explicit, by giving your coerced value a name that differentiates it from the value passed in the prop.
@@ -284,7 +285,7 @@ There are a few advantages:
 </div>
 {% endraw %}
 
-### `twoWay` Prop Option <sup>deprecated</sup>
+### `twoWay` Prop Option <sup>非推奨</sup>
 
 Props are now always one-way down. To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding. For more information, see:
 
@@ -299,7 +300,7 @@ Props are now always one-way down. To produce side effects in the parent scope, 
 </div>
 {% endraw %}
 
-### `v-bind` with `.once` and `.sync` Modifiers <sup>deprecated</sup>
+### `v-bind` with `.once` and `.sync` Modifiers <sup>非推奨</sup>
 
 Props are now always one-way down. To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding. For more information, see:
 
@@ -314,7 +315,7 @@ Props are now always one-way down. To produce side effects in the parent scope, 
 </div>
 {% endraw %}
 
-### Prop Mutation <sup>deprecated</sup>
+### Prop Mutation <sup>非推奨</sup>
 
 Mutating a prop locally is now considered an anti-pattern, e.g. declaring a prop and then setting `this.myProp = 'someOtherValue'` in the component. Due to the new rendering mechanism, whenever the parent component re-renders, the child component's local changes will be overwritten.
 
@@ -330,7 +331,7 @@ Most use cases of mutating a prop can be replaced by one of these options:
 </div>
 {% endraw %}
 
-### Props on a Root Instance <sup>deprecated</sup>
+### Props on a Root Instance <sup>非推奨</sup>
 
 On root Vue instances (i.e. instances created with `new Vue({ ... })`), you must use `propsData` instead instead of `props`.
 
@@ -373,7 +374,7 @@ When used on a component, `v-on` now only listens to custom events `$emit`ted by
 </div>
 {% endraw %}
 
-### `v-model` with `debounce` <sup>deprecated</sup>
+### `v-model` と `debounce` <sup>非推奨</sup>
 
 Debouncing is used to limit how often we execute Ajax requests and other expensive operations. Vue's `debounce` attribute parameter for `v-model` made this easy for very simple cases, but it actually debounced __state updates__ rather than the expensive operations themselves. It's a subtle difference, but it comes with limitations as an application grows.
 
@@ -486,7 +487,7 @@ Another advantage of this approach is there will be times when debouncing isn't 
 </div>
 {% endraw %}
 
-### `v-model` with `lazy` or `number` Param Attributes <sup>deprecated</sup>
+### `v-model` with `lazy` or `number` Param Attributes <sup>非推奨</sup>
 
 The `lazy` and `number` param attributes are now modifiers, to make it more clear what That means instead of:
 
@@ -495,7 +496,7 @@ The `lazy` and `number` param attributes are now modifiers, to make it more clea
 <input v-model="age" type="number" number>
 ```
 
-You would use:
+このように使用します:
 
 ``` html
 <input v-model.lazy="name">
@@ -509,10 +510,11 @@ You would use:
 </div>
 {% endraw %}
 
-### `v-model` with Inline `value` <sup>deprecated</sup>
+### `v-model` with Inline `value` <sup>非推奨</sup>
 
 `v-model` no longer cares about the initial value of an inline `value` attribute. For predictability, it will instead always treat the Vue instance data as the source of truth.
 
+これは、以下のような要素を
 That means this element:
 
 ``` html
@@ -544,7 +546,7 @@ You should ensure your initial value for `text` is "hello world".
 </div>
 {% endraw %}
 
-### `v-model` with `v-for` Iterated Primitive Values <sup>deprecated</sup>
+### `v-model` with `v-for` Iterated Primitive Values <sup>非推奨</sup>
 
 Cases like this no longer work:
 
@@ -575,7 +577,7 @@ Instead, you should use an array of __objects__ so that `v-model` can update the
 </div>
 {% endraw %}
 
-### `v-bind:style` with Object Syntax and `!important` <sup>deprecated</sup>
+### `v-bind:style` with Object Syntax and `!important` <sup>非推奨</sup>
 
 This will no longer work:
 
@@ -596,7 +598,7 @@ If you really need to override another `!important`, you must use the string syn
 </div>
 {% endraw %}
 
-### `v-el` and `v-ref` <sup>deprecated</sup>
+### `v-el` and `v-ref` <sup>非推奨</sup>
 
 For simplicity, `v-el` and `v-ref` have been merged into the `ref` attribute, accessible on a component instance via `$refs`. That means `v-el:my-element` would become `ref="myElement"` and `v-ref:my-component` would become `ref="myComponent"`. When used on a normal element, the `ref` will be the DOM element, and when used on a component, the `ref` will be the component instance.
 
@@ -623,7 +625,7 @@ On the other hand, `$refs` are designed primarily for programmatic access in Jav
 </div>
 {% endraw %}
 
-### `v-else` with `v-show` <sup>deprecated</sup>
+### `v-else` with `v-show` <sup>非推奨</sup>
 
 `v-else` no longer works with `v-show`. Use `v-if` with a negation expression instead. For example, instead of:
 
@@ -667,7 +669,7 @@ Fortunately, since the new directives are much simpler, you can master them more
 
 ## Transitions
 
-### `transition` Attribute <sup>deprecated</sup>
+### `transition` Attribute <sup>非推奨</sup>
 
 Vue's transition system has changed quite drastically and now uses `<transition>` and `<transition-group>` wrapper elements, rather than the `transition` attribute. It's recommended to read the new [Transitions guide](transitions.html) to learn more.
 
@@ -678,7 +680,7 @@ Vue's transition system has changed quite drastically and now uses `<transition>
 </div>
 {% endraw %}
 
-### `Vue.transition` for Reusable Transitions <sup>deprecated</sup>
+### `Vue.transition` for Reusable Transitions <sup>非推奨</sup>
 
 With the new transition system, you can now just [use components for reusable transitions](http://rc.vuejs.org/guide/transitions.html#Reusable-Transitions).
 
@@ -689,7 +691,7 @@ With the new transition system, you can now just [use components for reusable tr
 </div>
 {% endraw %}
 
-### Transition `stagger` Attribute <sup>deprecated</sup>
+### Transition `stagger` Attribute <sup>非推奨</sup>
 
 If you need to stagger list transitions, you can control timing by setting and accessing a `data-index` (or similar attribute) on an element. See [an example here](transitions.html#Staggering-List-Transitions).
 
@@ -702,7 +704,7 @@ If you need to stagger list transitions, you can control timing by setting and a
 
 ## Events
 
-### `Vue.directive('on').keyCodes` <sup>deprecated</sup>
+### `Vue.directive('on').keyCodes` <sup>非推奨</sup>
 
 The new, more concise way to configure `keyCodes` is through`Vue.config.keyCodes`. For example:
 
@@ -717,7 +719,7 @@ Vue.config.keyCodes.f1 = 112
 </div>
 {% endraw %}
 
-### `$dispatch` and `$broadcast` <sup>deprecated</sup>
+### `$dispatch` および `$broadcast` <sup>非推奨</sup>
 
 `$dispatch` and `$broadcast` are being deprecated in favor of more explicitly cross-component communication and more maintainable state management solutions, such as [Vuex](https://github.com/vuejs/vuex).
 
@@ -799,9 +801,9 @@ This pattern can serve as a replacement for `$dispatch` and `$broadcast` in simp
 </div>
 {% endraw %}
 
-## Filters
+## フィルタ
 
-### Filters Outside Text Interpolations <sup>deprecated</sup>
+### Filters Outside Text Interpolations <sup>非推奨</sup>
 
 Filters can now only be used inside text interpolations (`{% raw %}{{ }}{% endraw %}` tags). In the past we've found using filters within directives such as `v-model`, `v-on`, etc led to more complexity than convenience. For list filtering on `v-for`, it's also better to move that logic into JavaScript as computed properties, so that it can be reused throughout your component.
 
@@ -953,7 +955,7 @@ We surround the arguments with parentheses and delimit the arguments with commas
 </div>
 {% endraw %}
 
-### Built-In Text Filters <sup>deprecated</sup>
+### Built-In Text Filters <sup>非推奨</sup>
 
 Although filters within text interpolations are still allowed, all of the filters have been removed. Instead, it's recommended to use more specialized libraries for solving problems in each domain (e.g. [`date-fns`](https://date-fns.org/) to format dates and [`accounting`](http://openexchangerates.github.io/accounting.js/) for currencies).
 
@@ -1016,7 +1018,7 @@ In many cases though, you'll still run into strange behavior (e.g. `0.035.toFixe
 
 ## Slots
 
-### Duplicate Slots <sup>deprecated</sup>
+### Duplicate Slots <sup>非推奨</sup>
 
 It is no longer supported to have `<slot>`s with the same name in the same template. When a slot is rendered it is "used up" and cannot be rendered elsewhere in the same render tree. If you must render the same content in multiple places, pass that content as a prop.
 
@@ -1027,7 +1029,7 @@ It is no longer supported to have `<slot>`s with the same name in the same templ
 </div>
 {% endraw %}
 
-### `slot` Attribute Styling <sup>deprecated</sup>
+### `slot` Attribute Styling <sup>非推奨</sup>
 
 Content inserted via named `<slot>` no longer preserves the `slot` attribute. Use a wrapper element to style them, or for advanced use cases, modify the inserted content programmatically using [render functions](render-function.html).
 
@@ -1040,7 +1042,7 @@ Content inserted via named `<slot>` no longer preserves the `slot` attribute. Us
 
 ## Special Attributes
 
-### `keep-alive` Attribute <sup>deprecated</sup>
+### `keep-alive` Attribute <sup>非推奨</sup>
 
 `keep-alive` is no longer a special attribute, but rather a wrapper component, similar to `<transition>`. For example:
 
@@ -1080,7 +1082,7 @@ When used together with `<transition>`, make sure to nest it inside:
 
 ## Interpolation
 
-### Interpolation within Attributes <sup>deprecated</sup>
+### Interpolation within Attributes <sup>非推奨</sup>
 
 Interpolation within attributes is no longer valid. For example:
 
@@ -1115,7 +1117,7 @@ computed: {
 </div>
 {% endraw %}
 
-### HTML Interpolation <sup>deprecated</sup>
+### HTML Interpolation <sup>非推奨</sup>
 
 HTML interpolations (`{% raw %}{{{ foo }}}{% endraw %}`) have been deprecated in favor of the [`v-html` directive](/api/#v-html).
 
@@ -1126,7 +1128,7 @@ HTML interpolations (`{% raw %}{{{ foo }}}{% endraw %}`) have been deprecated in
 </div>
 {% endraw %}
 
-### One-Time Bindings <sup>deprecated</sup>
+### One-Time Bindings <sup>非推奨</sup>
 
 One time bindings (`{% raw %}{{* foo }}{% endraw %}`) have been deprecated in favor of the new [`v-once` directive](/api/#v-once).
 
@@ -1174,9 +1176,9 @@ The former `vm.$delete` behavior has been deprecated and it is now just an alias
 </div>
 {% endraw %}
 
-### `Array.prototype.$set`  <sup>deprecated</sup>
+### `Array.prototype.$set`  <sup>非推奨</sup>
 
-use Vue.set instead
+代わりに、 Vue.set を使用します。
 
 (console error, migration helper)
 
@@ -1187,7 +1189,7 @@ use Vue.set instead
 </div>
 {% endraw %}
 
-### `Array.prototype.$remove` <sup>deprecated</sup>
+### `Array.prototype.$remove` <sup>非推奨</sup>
 
 Use `Array.prototype.splice` instead. For example:
 
@@ -1217,7 +1219,7 @@ methods: {
 </div>
 {% endraw %}
 
-### `Vue.set` and `Vue.delete` on Vue instances <sup>deprecated</sup>
+### `Vue.set` and `Vue.delete` on Vue instances <sup>非推奨</sup>
 
 Vue.set and Vue.delete can no longer work on Vue instances. It is now mandatory to properly declare all top-level reactive properties in the data option. If you'd like to delete properties on a Vue instance or its `$data`, just set it to null.
 
@@ -1228,7 +1230,7 @@ Vue.set and Vue.delete can no longer work on Vue instances. It is now mandatory 
 </div>
 {% endraw %}
 
-### Replacing `vm.$data` <sup>deprecated</sup>
+### Replacing `vm.$data` <sup>非推奨</sup>
 
 It is now prohibited to replace a component instance's root $data. This prevents some edge cases in the reactivity system and makes the component state more predictable (especially with type-checking systems).
 
@@ -1239,7 +1241,7 @@ It is now prohibited to replace a component instance's root $data. This prevents
 </div>
 {% endraw %}
 
-### `vm.$get` <sup>deprecated</sup>
+### `vm.$get` <sup>非推奨</sup>
 
 Just retrieve reactive data directly.
 
@@ -1252,9 +1254,9 @@ Just retrieve reactive data directly.
 
 ## DOM-Focused Instance Methods
 
-### `vm.$appendTo` <sup>deprecated</sup>
+### `vm.$appendTo` <sup>非推奨</sup>
 
-Use the native DOM API:
+ネイティブの DOM API を使用します:
 
 ``` js
 myElement.appendChild(vm.$el)
@@ -1267,9 +1269,9 @@ myElement.appendChild(vm.$el)
 </div>
 {% endraw %}
 
-### `vm.$before` <sup>deprecated</sup>
+### `vm.$before` <sup>非推奨</sup>
 
-Use the native DOM API:
+ネイティブの DOM API を使用します:
 
 ``` js
 myElement.parentNode.insertBefore(vm.$el, myElement)
@@ -1282,9 +1284,9 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 </div>
 {% endraw %}
 
-### `vm.$after` <sup>deprecated</sup>
+### `vm.$after` <sup>非推奨</sup>
 
-Use the native DOM API:
+ネイティブの DOM API を使用します:
 
 ``` js
 myElement.parentNode.insertBefore(vm.$el, myElement.nextSibling)
@@ -1303,9 +1305,9 @@ myElement.parentNode.appendChild(vm.$el)
 </div>
 {% endraw %}
 
-### `vm.$remove` <sup>deprecated</sup>
+### `vm.$remove` <sup>非推奨</sup>
 
-Use the native DOM API:
+ネイティブの DOM API を使用します:
 
 ``` js
 vm.$el.remove()
@@ -1320,7 +1322,7 @@ vm.$el.remove()
 
 ## Meta Instance Methods
 
-### `vm.$eval` <sup>deprecated</sup>
+### `vm.$eval` <sup>非推奨</sup>
 
 No real use. If you do happen to rely on this feature somehow and aren't sure how to work around it, post on [the forum](http://forum.vuejs.org/) for ideas.
 
@@ -1331,7 +1333,7 @@ No real use. If you do happen to rely on this feature somehow and aren't sure ho
 </div>
 {% endraw %}
 
-### `vm.$interpolate` <sup>deprecated</sup>
+### `vm.$interpolate` <sup>非推奨</sup>
 
 No real use. If you do happen to rely on this feature somehow and aren't sure how to work around it, post on [the forum](http://forum.vuejs.org/) for ideas.
 
@@ -1342,7 +1344,7 @@ No real use. If you do happen to rely on this feature somehow and aren't sure ho
 </div>
 {% endraw %}
 
-### `vm.$log` <sup>deprecated</sup>
+### `vm.$log` <sup>非推奨</sup>
 
 Use the [Vue Devtools](https://github.com/vuejs/vue-devtools) for the optimal debugging experience.
 
@@ -1355,7 +1357,7 @@ Use the [Vue Devtools](https://github.com/vuejs/vue-devtools) for the optimal de
 
 ## Instance DOM Options
 
-### `replace: false` <sup>deprecated</sup>
+### `replace: false` <sup>非推奨</sup>
 
 Components now always replace the element they're bound to. To simulate the behavior of `replace: false`, you can wrap your root component with an element similar to the one you're replacing. For example:
 
@@ -1390,7 +1392,7 @@ new Vue({
 
 ## Global Config
 
-### `Vue.config.debug` <sup>deprecated</sup>
+### `Vue.config.debug` <sup>非推奨</sup>
 
 No longer necessary, since warnings come with stack traces by default now.
 
@@ -1401,7 +1403,7 @@ No longer necessary, since warnings come with stack traces by default now.
 </div>
 {% endraw %}
 
-### `Vue.config.async` <sup>deprecated</sup>
+### `Vue.config.async` <sup>非推奨</sup>
 
 Async is now required for rendering performance.
 
@@ -1412,7 +1414,7 @@ Async is now required for rendering performance.
 </div>
 {% endraw %}
 
-### `Vue.config.delimiters` <sup>deprecated</sup>
+### `Vue.config.delimiters` <sup>非推奨</sup>
 
 This has been reworked as a [component-level option](/api/#delimiters). This allows you to use alternative delimiters within your app without breaking 3rd-party components.
 
@@ -1423,7 +1425,7 @@ This has been reworked as a [component-level option](/api/#delimiters). This all
 </div>
 {% endraw %}
 
-### `Vue.config.unsafeDelimiters` <sup>deprecated</sup>
+### `Vue.config.unsafeDelimiters` <sup>非推奨</sup>
 
 HTML interpolation has been [deprecated in favor of `v-html`](#HTML-Interpolation-deprecated).
 
@@ -1434,9 +1436,9 @@ HTML interpolation has been [deprecated in favor of `v-html`](#HTML-Interpolatio
 </div>
 {% endraw %}
 
-## Global API
+## グローバル API
 
-### `Vue.extend` with `el` <sup>deprecated</sup>
+### `Vue.extend` with `el` <sup>非推奨</sup>
 
 The el option can no longer be used in `Vue.extend`. It's only valid as an instance creation option.
 
@@ -1447,9 +1449,9 @@ The el option can no longer be used in `Vue.extend`. It's only valid as an insta
 </div>
 {% endraw %}
 
-### `Vue.elementDirective` <sup>deprecated</sup>
+### `Vue.elementDirective` <sup>非推奨</sup>
 
-Use components instead.
+代わりに components を使用します。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1458,9 +1460,9 @@ Use components instead.
 </div>
 {% endraw %}
 
-### `Vue.partial` <sup>deprecated</sup>
+### `Vue.partial` <sup>非推奨</sup>
 
-Use [functional components](render-function.html#Functional-Components) instead.
+代わりに、 [functional components](render-function.html#Functional-Components) を使用します。
 
 {% raw %}
 <div class="upgrade-path">
