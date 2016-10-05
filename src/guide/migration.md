@@ -64,7 +64,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>アップグレード後に end-to-end のテストスイートやアプリケーションを実行し、テンプレート内の複数のルート要素に対してのコンソールの警告を探します。</p>
 </div>
 {% endraw %}
@@ -77,7 +77,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
@@ -88,7 +88,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
@@ -115,7 +115,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
@@ -142,7 +142,7 @@ destroyed: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
@@ -153,7 +153,7 @@ destroyed: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
@@ -173,7 +173,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
@@ -186,7 +186,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated argument order. Note that if you name your index arguments something unusual like <code>position</code> or <code>num</code>, the helper will not flag them.</p>
 </div>
 {% endraw %}
@@ -197,7 +197,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated argument order. Note that if you name your key arguments something like <code>name</code> or <code>property</code>, the helper will not flag them.</p>
 </div>
 {% endraw %}
@@ -209,7 +209,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of these deprecated variables. If you miss any, you should also see <strong>console errors</strong> such as: <code>Uncaught ReferenceError: $index is not defined</code></p>
 </div>
 {% endraw %}
@@ -234,7 +234,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>track-by</code> を見つけます。
 </div>
 {% endraw %}
@@ -245,7 +245,7 @@ mounted: function () {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Search your codebase for the regex <code>/\w+ in \d+/</code>. Wherever it appears in a <code>v-for</code>, check to see if you may be affected.</p>
 </div>
 {% endraw %}
@@ -291,7 +291,7 @@ computed: {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>coerce</code> option.</p>
 </div>
 {% endraw %}
@@ -306,7 +306,7 @@ Props are now always one-way down. To produce side effects in the parent scope, 
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>twoWay</code> option.</p>
 </div>
 {% endraw %}
@@ -321,7 +321,7 @@ Props are now always one-way down. To produce side effects in the parent scope, 
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>.once</code> and <code>.sync</code> modifiers.</p>
 </div>
 {% endraw %}
@@ -337,7 +337,7 @@ Most use cases of mutating a prop can be replaced by one of these options:
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite or app after upgrading and look for <strong>console warnings</strong> about prop mutations.</p>
 </div>
 {% endraw %}
@@ -348,7 +348,7 @@ On root Vue instances (i.e. instances created with `new Vue({ ... })`), you must
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to the fact that props passed to root instances are no longer working.</p>
 </div>
 {% endraw %}
@@ -365,7 +365,7 @@ For enumerated attributes, in addition to the falsy values above, the string `"f
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to any parts of your app that may be affected by this change.</p>
 </div>
 {% endraw %}
@@ -380,7 +380,7 @@ When used on a component, `v-on` now only listens to custom events `$emit`ted by
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to any parts of your app that may be affected by this change.</p>
 </div>
 {% endraw %}
@@ -493,7 +493,7 @@ Another advantage of this approach is there will be times when debouncing isn't 
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>debounce</code> attribute.</p>
 </div>
 {% endraw %}
@@ -516,7 +516,7 @@ The `lazy` and `number` param attributes are now modifiers, to make it more clea
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the these deprecated param attributes.</p>
 </div>
 {% endraw %}
@@ -551,7 +551,7 @@ You should ensure your initial value for `text` is "hello world".
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite or app after upgrading and look for <strong>console warnings</strong> about inline value attributes with <code>v-model</code>.</p>
 </div>
 {% endraw %}
@@ -582,7 +582,7 @@ Instead, you should use an array of __objects__ so that `v-model` can update the
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your test suite, if you have one. The <strong>failed tests</strong> should alert to you to any parts of your app that may be affected by this change.</p>
 </div>
 {% endraw %}
@@ -603,7 +603,7 @@ If you really need to override another `!important`, you must use the string syn
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of style bindings with <code>!important</code> in objects.</p>
 </div>
 {% endraw %}
@@ -630,7 +630,7 @@ On the other hand, `$refs` are designed primarily for programmatic access in Jav
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>v-el</code> and <code>v-ref</code> を見つけます。
 </div>
 {% endraw %}
@@ -653,7 +653,7 @@ On the other hand, `$refs` are designed primarily for programmatic access in Jav
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>v-else</code> with <code>v-show</code>.</p>
 </div>
 {% endraw %}
@@ -672,7 +672,7 @@ Fortunately, since the new directives are much simpler, you can master them more
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of defined directives. The helper will flag all of them, as it's likely in most cases that you'll want to refactor to a component.</p>
 </div>
 {% endraw %}
@@ -685,7 +685,7 @@ Vue's transition system has changed quite drastically and now uses `<transition>
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>transition</code> attribute.</p>
 </div>
 {% endraw %}
@@ -696,7 +696,7 @@ With the new transition system, you can now just [use components for reusable tr
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.transition</code> を見つけます。
 </div>
 {% endraw %}
@@ -707,7 +707,7 @@ If you need to stagger list transitions, you can control timing by setting and a
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>transition</code> attribute. During your update, you can transition (pun very much intended) to the new staggering strategy as well.</p>
 </div>
 {% endraw %}
@@ -724,7 +724,7 @@ Vue.config.keyCodes.f1 = 112
 ```
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the the old <code>keyCode</code> configuration syntax.</p>
 </div>
 {% endraw %}
@@ -806,7 +806,7 @@ This pattern can serve as a replacement for `$dispatch` and `$broadcast` in simp
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>$dispatch</code> and <code>$broadcast</code> を見つけます。
 </div>
 {% endraw %}
@@ -939,7 +939,7 @@ _.orderBy(this.users, ['name', 'last_login'], ['asc', 'desc'])
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of filters being used inside directives. If you miss any, you should also see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -960,7 +960,7 @@ We surround the arguments with parentheses and delimit the arguments with commas
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the old filter syntax. If you miss any, you should also see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1021,7 +1021,7 @@ In many cases though, you'll still run into strange behavior (e.g. `0.035.toFixe
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated text filters. If you miss any, you should also see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1036,7 +1036,7 @@ In many cases though, you'll still run into strange behavior (e.g. `0.035.toFixe
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite or app after upgrading and look for <strong>console warnings</strong> about duplicate slots <code>v-model</code>.</p>
 </div>
 {% endraw %}
@@ -1049,7 +1049,7 @@ Content inserted via named `<slot>` no longer preserves the `slot` attribute. Us
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find CSS selectors targeting named slots (e.g. <code>[slot="my-slot-name"]</code>).</p>
 </div>
 {% endraw %}
@@ -1089,7 +1089,7 @@ When used together with `<transition>`, make sure to nest it inside:
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find <code>keep-alive</code> attributes.</p>
 </div>
 {% endraw %}
@@ -1126,7 +1126,7 @@ computed: {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of interpolation used within attributes.</p>
 </div>
 {% endraw %}
@@ -1137,7 +1137,7 @@ HTML interpolations (`{% raw %}{{{ foo }}}{% endraw %}`) have been deprecated in
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find HTML interpolations.</p>
 </div>
 {% endraw %}
@@ -1148,7 +1148,7 @@ One time bindings (`{% raw %}{{* foo }}{% endraw %}`) have been deprecated in fa
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find one-time bindings.</p>
 </div>
 {% endraw %}
@@ -1163,7 +1163,7 @@ If you were previously relying on `vm.$watch` to do something with the DOM after
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to the fact that a watcher was relying on the old behavior.</p>
 </div>
 {% endraw %}
@@ -1174,7 +1174,7 @@ The former `vm.$set` behavior has been deprecated and it is now just an alias fo
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated usage.</p>
 </div>
 {% endraw %}
@@ -1185,7 +1185,7 @@ The former `vm.$delete` behavior has been deprecated and it is now just an alias
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated usage.</p>
 </div>
 {% endraw %}
@@ -1198,14 +1198,14 @@ The former `vm.$delete` behavior has been deprecated and it is now just an alias
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>.$set</code> on an array. If you miss any, you should see <strong>console errors</strong> from the missing method.</p>
 </div>
 {% endraw %}
 
 ### `Array.prototype.$remove` <sup>非推奨</sup>
 
-Use `Array.prototype.splice` instead. For example:
+例えば、代わりに `Array.prototype.splice` を使用します:
 
 ``` js
 methods: {
@@ -1216,7 +1216,7 @@ methods: {
 }
 ```
 
-Or better yet, just pass removal methods an index:
+いっそのこと、削除メソッドに index を渡す方法も良いでしょう:
 
 ``` js
 methods: {
@@ -1228,18 +1228,22 @@ methods: {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>.$remove</code> on an array. If you miss any, you should see <strong>console errors</strong> from the missing method.</p>
 </div>
 {% endraw %}
 
-### `Vue.set` and `Vue.delete` on Vue instances <sup>非推奨</sup>
+### Vue インスタンス上での `Vue.set` および `Vue.delete` <sup>非推奨</sup>
 
-Vue.set and Vue.delete can no longer work on Vue instances. It is now mandatory to properly declare all top-level reactive properties in the data option. If you'd like to delete properties on a Vue instance or its `$data`, just set it to null.
+Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作することはできません。
+
+[x] Vue.set and Vue.delete can no longer work on Vue instances.
+[ ] It is now mandatory to properly declare all top-level reactive properties in the data option.
+[ ] If you'd like to delete properties on a Vue instance or its `$data`, just set it to null.
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>Vue.set</code> or <code>Vue.delete</code> on a Vue instance. If you miss any, they'll trigger <strong>console warnings</strong>.</p>
 </div>
 {% endraw %}
@@ -1250,7 +1254,7 @@ It is now prohibited to replace a component instance's root $data. This prevents
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of overwriting <code>vm.$data</code>. If you miss any, <strong>console warnings</strong> will be emitted.</p>
 </div>
 {% endraw %}
@@ -1261,7 +1265,7 @@ Just retrieve reactive data directly.
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$get</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1278,7 +1282,7 @@ myElement.appendChild(vm.$el)
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$appendTo</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1293,7 +1297,7 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$before</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1314,7 +1318,7 @@ myElement.parentNode.appendChild(vm.$el)
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$after</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1329,7 +1333,7 @@ vm.$el.remove()
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$remove</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1342,7 +1346,7 @@ No real use. If you do happen to rely on this feature somehow and aren't sure ho
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$eval</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1353,7 +1357,7 @@ No real use. If you do happen to rely on this feature somehow and aren't sure ho
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$interpolate</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1364,7 +1368,7 @@ Use the [Vue Devtools](https://github.com/vuejs/vue-devtools) for the optimal de
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$log</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
@@ -1399,7 +1403,7 @@ new Vue({
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>replace: false</code> を見つけます。
 </div>
 {% endraw %}
@@ -1412,7 +1416,7 @@ new Vue({
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.config.debug</code> を見つけます。
 </div>
 {% endraw %}
@@ -1423,7 +1427,7 @@ new Vue({
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.config.async</code> を見つけます。
 </div>
 {% endraw %}
@@ -1435,7 +1439,7 @@ new Vue({
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.config.delimiters</code> を見つけます。
 </div>
 {% endraw %}
@@ -1446,7 +1450,7 @@ HTML interpolation has been [deprecated in favor of `v-html`](#HTML-Interpolatio
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>Vue.config.unsafeDelimiters</code>. After this, the helper will also find instances of HTML interpolation so that you can replace them with `v-html`.</p>
 </div>
 {% endraw %}
@@ -1459,7 +1463,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>アップグレード後に end-to-end のテストスイートやアプリケーションを実行し、 <code>Vue.extend</code> への <code>el</code> に対してのコンソールの警告を探します。</p>
 </div>
 {% endraw %}
@@ -1470,7 +1474,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.elementDirective</code> を見つけます。
 </div>
 {% endraw %}
@@ -1481,7 +1485,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
+  <h4>移行ガイド</h4>
   <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.partial</code> を見つけます。
 </div>
 {% endraw %}
