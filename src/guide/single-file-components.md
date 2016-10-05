@@ -1,10 +1,10 @@
 ---
-title: シングルファイル・コンポーネント
+title: 単一ファイルコンポーネント
 type: guide
 order: 19
 ---
 
-## 紹介
+## 前書き
 
 多くの Vue プロジェクトでは、グローバルコンポーネントは各ページの本体でコンテナー要素を参照した `new Vue({ el: '#container '})` に沿って宣言されたのを使用します。
 
@@ -15,9 +15,9 @@ order: 19
 - **CSS サポート無し**だと、 HTML と JavaScript がコンポーネントにモジュール化されている間、これ見よがしに無視されます
 - **ビルドステップ無し**だと Pug(前 Jade) や Babel のようなプリプロセッサよりむしろ、 HTML や ES5 JavaScript を制限します 
 
-これら全ては Webpack や Browserify のビルドツールにより実現された `.vue` 拡張子の **シングルファイル・コンポーネント** で解決します。
+これら全ては Webpack や Browserify のビルドツールにより実現された `.vue` 拡張子の **単一ファイルコンポーネント** で解決します。
 
-こちらが `Hello.vue` と呼ばれたファイルのシンプルな例です:
+こちらが `Hello.vue` と呼ばれたファイルの単純な例です:
 
 <img src="/images/vue-component.png" style="display: block; margin: 30px auto">
 
@@ -35,7 +35,7 @@ order: 19
 
 <!-- TODO: include CSS modules once it's supported in vue-loader 9.x -->
 
-## はじめに
+## 始める
 
 ### JavaScript でモジュールビルドシステムが初めてなユーザー向け
 
@@ -49,7 +49,7 @@ order: 19
 
 テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.github.io/) というモジュールバンドラーを使用します。 Webpack についてもっと学ぶには、 [このビデオ](https://www.youtube.com/watch?v=WQue1AN93YU) がとても良い導入となります。一度基本を終えてしまえば、[Egghead.io上の上級 Webpack コース](https://egghead.io/courses/using-webpack-for-production-javascript-applications)もチェックしたくなるでしょう。
 
-Webpack でバンドルの中に含まれる前にそれぞれのモジュールは "loader" により変換されます。また Vue では `.vue` シングルファイル・コンポーネントを翻訳するために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](https://vue-loader.vuejs.org) を読むことも出来ます。
+Webpack でバンドルの中に含まれる前にそれぞれのモジュールは "loader" により変換されます。また Vue では `.vue` 単一ファイルコンポーネントを翻訳するために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](https://vue-loader.vuejs.org) を読むことも出来ます。
 
 ### 上級者ユーザー向け
 
