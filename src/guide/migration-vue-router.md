@@ -1,14 +1,10 @@
 ---
-title: Vue Router 0.7.x からの移行
+title: Vue ルーター 0.7.x からの移行
 type: guide
 order: 25
 ---
 
-質問
-- 共通移行ガイドの翻訳形式
-- リンクは英語ドキュメントで良いのか
-
-> Vue Router 2 は Vue 2 に対応する唯一のルーターなので、 Vue を更新する場合には Vue Router も同様に更新する必要があります。2のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Router を用いた包括的なドキュメントは [Vue Router ドキュメント](http://router.vuejs.org/ja/)を確認してください。
+> Vue ルーター 2 は Vue 2 に対応する唯一のルーターなので、 Vue を更新する場合には Vue ルーター も同様に更新する必要があります。2のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Vue ルーター を用いた包括的なドキュメントは [Vue ルーター ドキュメント](http://router.vuejs.org/ja/)を確認してください。
 
 <p class="tip">ここに記載されている廃止された機能の一覧は完全なものですが、移行ヘルパーはこれらに対応するため、今も改良が続けられています。</p>
 
@@ -40,7 +36,7 @@ var router = new VueRouter({
 })
 ```
 
-オブジェクトの反復走査はブラウザ間でのキー順序に一貫性がないため、配列を用いた記法はより予測可能なルート検出を可能にします。
+オブジェクトの反復走査はキー順序に関するブラウザ毎の一貫性がないため、配列を用いた記法を用いて、より予測可能なルート検出を実現しています。
 
 {% raw %}
 <div class="upgrade-path">
@@ -77,7 +73,7 @@ var router = new Router({
 })
 ```
 
-ルーターが初期化された後に新しいルートを追加する必要がある場合、ルーターの機構を追加したいルートを含む新しいもので置き換える事ができます:
+ルーターが初期化された後に新しいルートを追加する必要がある場合、加筆された新しいルート機構で、既存のものを置き換えることができます。
 
 ``` js
 router.match = createMatcher(
@@ -171,7 +167,7 @@ alias: ['/manage', '/administer', '/administrate']
 
 ### 1つ以上の名前付きパラメータ
 
-構文に微妙な変化があり、例えば `/category/*tags` は `/category/:tags+` に変更する必要があります。
+構文に多少の変化があります。例えば `/category/*tags` は `/category/:tags+` に変更する必要があります。
 
 {% raw %}
 <div class="upgrade-path">
@@ -184,14 +180,13 @@ alias: ['/manage', '/administer', '/administrate']
 
 ### `v-link` <sup>deprecated</sup>
 
-`v-link` directive has been replaced with a new [`<router-link>` component](http://router.vuejs.org/ja/api/router-link.html), as this sort of job is now solely the responsibility of components in Vue 2. That means whenever wherever you have a link like this:
 Vue 2 におけるコンポーネントの機能の一環として、`v-link` ディレクティブは新しく [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) に置き換えられました。以下の様な形で記述されたリンクは:
 
 ``` html
 <a v-link="'/about'">About</a>
 ```
 
-どのようなケースであっても次のように変更しなければなりません:
+次のように変更しなければなりません:
 
 ``` html
 <router-link to="/about">About</router-link>
@@ -222,7 +217,7 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 </router-link>
 ```
 
-`<a>` が実際のリンクとなり (正しい href を得), active クラスは外側の `<li>` に付与されます。
+`<a>` が実際のリンクとなり (正しい href をもっています), active クラスは外側の `<li>` に付与されます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -248,12 +243,12 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 
 ### `hashbang: false` <sup>deprecated</sup>
 
-Google にURLをクロールさせるために Hashbangs を用いる必要はもはやなくなりました。よってハッシュの方式としてデフォルトではなくなり、オプションとして利用できなくなりました。
+Google にURL をクロールさせるために Hashbangs を用いる必要はもはやなくなりました。よってハッシュの方式としてデフォルトではなくなり、オプションとして利用できなくなりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>hashbang: false</code> オプションが利用されている箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper"> 移行ヘルパー </a> を実行し <code>hashbang: false</code> オプションが利用されている箇所を検出して下さい。</p>
 </div>
 {% endraw %}
 
@@ -311,13 +306,13 @@ var router = new VueRouter({
 
 ### `saveScrollPosition` <sup>deprecated</sup>
 
-関数を受け付ける [`scrollBehavior` オプション](http://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの事を実装可能になりましたが、以前の挙動を再現するには、次の様な記述を:
+関数を受け付ける [`scrollBehavior` オプション](http://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの可能性がひらかれましたが、単に以前の挙動を再現したい場合もあるでしょう。これまで、次の様に記述していた所は:
 
 ``` js
 saveScrollPosition: true
 ```
 
-このように変更しなければなりません:
+このように変更すれば、同じ動作が保たれます:
 
 ``` js
 scrollBehavior: function (to, from, savedPosition) {
