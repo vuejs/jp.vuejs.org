@@ -201,7 +201,7 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 
 ### `v-link-active` <sup>deprecated</sup>
 
-[the `<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) でタグの指定が可能なため、 `v-link-active` ディレクティブは廃止されました。よって、例えば次のような例は:
+[`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) でタグの指定が可能なため、 `v-link-active` ディレクティブは廃止されました。よって、例えば次のような例は:
 
 ``` html
 <li v-link-active>
