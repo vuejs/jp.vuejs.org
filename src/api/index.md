@@ -1556,17 +1556,17 @@ type: api
   - [データバインディング構文 - 展開](/guide/syntax.html#Text)
   - [コンポーネント - v-once による安価な静的コンポーネント](/guide/components.html#Cheap-Static-Components-with-v-once)
 
-## Special Attributes
+## 特別属性
 
 ### key
 
-- **Expects:** `string`
+- **要求事項:** `string`
 
-  The `key` special attribute is primarily used as a hint for Vue's virtual DOM algorithm to identify VNodes when diffing the new list of nodes against the old list. Without keys, Vue uses an algorithm that minimizes element movement and tries to patch/reuse elements of the same type in-place as much as possible. With keys, it will reorder elements based on the order change of keys, and elements with keys that are no longer present will always be removed/destroyed.
+  `key` 特別属性は、主に古いリストの代わりにノードの新しいリストを差分算出する VNode を識別するために Vue の仮想 DOM アルゴリズムに対するヒントとして使用されます。キーがない場合、Vue は要素の移動を最小限に抑えるアルゴリズムを使用し、可能な限りその場で同じタイプの要素にパッチ適用/再利用しようとします。キーがある場合は、キーの順序の変化に基づいて要素を並べ替え、そして、もはや存在しないキーを持つ要素は常に削除/破棄されます。
 
-  Children of the same common parent must have **unique keys**. Duplicate keys will cause render errors.
+  同じ共通の親を持つ子は、**ユニークなキー**を持っていなければなりません。重複するキーはエラーを描画する原因になります。
 
-  The most common use case is combined with `v-for`:
+  最も一般的なユースケースは、`v-for` によって組合せられます:
 
   ``` html
   <ul>
@@ -1574,12 +1574,12 @@ type: api
   </ul>
   ```
 
-  It can also be used to force replacement of an element/component instead of reusing it. This can be useful when you want to:
+  また、それを再利用するのではなく要素/コンポーネントの置換を強制するために使用することができます。これはあなたが以下のようなことをしたい場合は便利です:
 
-  - Properly trigger lifecycle hooks of a component
-  - Trigger transitions
+  - 適切にコンポーネントのライフサイクルフックをトリガー
+  - トランジションのトリガー
 
-  For example:
+  例:
 
   ``` html
   <transition>
@@ -1587,69 +1587,68 @@ type: api
   </transition>
   ```
 
-  When `text` changes, the `<span>` will always be replaced instead of patched, so a transition will be triggered.
+  `text` を変更するとき、`<span>` は常にパッチ適用の代わりに置換され、トランジションはトリガーされるでしょう。
 
 ### ref
 
-- **Expects:** `string`
+- **要求事項:** `string`
 
-  `ref` is used to register a reference to an element or a child component. The reference will be registered under the parent component's `$refs` object. If used on a plain DOM element, the reference will be that element; if used on a child component, the reference will be component instance:
+  `ref` は要素または子コンポーネントに参照を登録するために使用されます。参照は親コンポーネントの `$refs` オブジェクトのもとに登録されます。プレーンな DOM 要素に使用する場合は、参照はその要素になります。子コンポーネントに使用する場合は、参照はコンポーネントインスタンスになります:
 
   ``` html
-  <!-- vm.$refs.p will the DOM node -->
+  <!-- vm.$refs.p は DOM ノード -->
   <p ref="p">hello</p>
 
-  <!-- vm.$refs.child will be the child comp instance -->
+  <!-- vm.$refs.child は child-comp インスタンス -->
   <child-comp ref="child"></child-comp>
   ```
 
-  When used on elements/components with `v-for`, the registered reference will be an Array containing DOM nodes or component instances.
+  `v-for` で要素/コンポーネントに対して使用されるとき、登録された参照は DOM ノードまたはコンポーネントインスタンスを含んでいる配列になります。
 
-  An important note about the ref registration timing: because the refs themselves are created as a result of the render function, you cannot access them on the initial render - they don't exist yet! `$refs` is also non-reactive, therefore you should not attempt to use it in templates for data-binding.
+  ref の登録タイミングに関する重要な注意事項として、参照自体は、render 関数の結果として作成されているため、最初の描画においてそれらにアクセスすることができません。それらはまだ存在しておらず、`$refs` はリアクティブではなく、従ってデータバインディングのためにテンプレートでそれを使用すべきではありません。
 
-- **See also:** [Child Component Refs](/guide/components.html#Child-Component-Refs)
+- **参照:** [Child Component Refs](/guide/components.html#Child-Component-Refs)
 
 ### slot
 
-- **Expects:** `string`
+- **要求事項:** `string`
 
-  Used on content inserted into child components to indicate which named slot the content belongs to.
+  名前付き slot のコンテンツが属しているというのを示すために、コンテンツを子コンポーネントに挿入するために使用されます。
 
-  For detailed usage, see the guide section linked below.
+  詳しい使い方については、以下のリンク先のガイドを参照してください。
 
-- **See also:** [Named Slots](/guide/components.html#Named-Slots)
+- **参照:** [名前付きSlot](/guide/components.html#名前付きSlot)
 
-## Built-In Components
+## 組み込みコンポーネント
 
 ### component
 
-- **Props:**
+- **プロパティ:**
   - `is` - string | ComponentDefinition | ComponentConstructor
   - `inline-template` - boolean
 
-- **Usage:**
+- **使用方法:**
 
-  A "meta component" for rendering dynamic components. The actual component to render is determined by the `is` prop:
+  動的コンポーネントのレンダリングに対する"メタコンポーネント"。描画する実際のコンポーネントは `is` プロパティによって決定されます:
 
   ```html
-  <!-- a dynamic component controlled by -->
-  <!-- the `componentId` property on the vm -->
+  <!-- 動的コンポーネントは、vm 上の `componentId` プロパティ によって制御される -->
   <component :is="componentId"></component>
 
-  <!-- can also render registered component or component passed as prop -->
+  <!-- また登録されたコンポーネントまたはプロパティとして渡されるコンポーネントを描画できる -->>
   <component :is="$options.components.child"></component>
   ```
 
-- **See also:** [Dynamic Components](/guide/components.html#Dynamic-Components)
+- **参照:** [動的コンポーネント](/guide/components.html#動的コンポーネント)
 
 ### transition
 
-- **Props:**
-  - `name` - string, Used to automatically generate transition CSS class names. e.g. `name: 'fade'` will auto expand to `.fade-enter`, `.fade-enter-active`, etc. Defaults to `"v"`.
-  - `appear` - boolean, Whether to apply transition on initial render. Defaults to `false`.
-  - `css` - boolean, Whether to apply CSS transition classes. Defaults to `true`. If set to `false`, will only trigger JavaScript hooks registered via component events.
-  - `type` - string, Specify the type of transition events to wait for to determine transition end timing. Available values are `"transition"` and `"animation"`. By default, it will automatically detect the type that has a longer duration.
-  - `mode` - string, Controls the timing sequence of leaving/entering transitions. Available modes are `"out-in"` and `"in-out"`; defaults to simultaneous.
+- **プロパティ:**
+  - `name` - string、自動的に生成されるトランジション CSS クラス名で使用する。例: `name: 'fade' は `.fade-enter`、`.fade-enter-active`などに自動で展開する。デフォルトは`"v"`
+  - `appear` - boolean、初期描画でのトランジションを適用するかどうか。デフォルトは `false`
+  - `css` - boolean、CSS トランジションクラスを提供するかどうか。デフォルトは `true`。`false` に設定する場合、コンポーネントイベント経由登録された JavaScript フックだけトリガーする
+  - `type` - string、トランジションの終了タイミングを決定するためにトランジションイベントのタイプを指定する。利用可能な値は `"transition"`、`"animation"`。デフォルトでは自動的により長い時間を持つタイプを検出する
+  - `mode` - string、leaving/entering トランジションのタイミングシーケンスを制御する。利用可能なモードは、`"out-in"`、`"in-out"`。デフォルトは同時になる。
   - `enter-class` - string
   - `leave-class` - string
   - `enter-active-class` - string
@@ -1657,7 +1656,7 @@ type: api
   - `appear-class` - string
   - `appear-active-class` - string
 
-- **Events:**
+- **イベント:**
   - `before-enter`
   - `enter`
   - `after-enter`
@@ -1668,22 +1667,22 @@ type: api
   - `appear`
   - `after-appear`
 
-- **Usage:**
+- **使用方法:**
 
-  `<transition>` serve as transition effects for **single** element/component. The `<transition>` does not render an extra DOM element, nor does it show up in the inspected component hierarchy. It simply applies the transition behavior to the wrapped content inside.
+  `<transition>` は**単一**要素/コンポーネントに対してトランジション効果を提供します。`<transition>` は余計な DOM 要素を描画しません。またコンポーネント階層をインスペクトにおいて表示しません。単純にトランジションの振舞いをラップされたコンテンツ内部に適用します。
 
   ```html
-  <!-- simple element -->
+  <!-- 単一要素 -->
   <transition>
     <div v-if="ok">toggled content</div>
   </transition>
 
-  <!-- dynamic component -->
+  <!-- 動的コンポーネント -->
   <transition name="fade" mode="out-in" appear>
     <component :is="view"></component>
   </transition>
 
-  <!-- event hooking -->
+  <!-- イベントのフック -->
   <div id="transition-demo">
     <transition @after-enter="transitionComplete">
       <div v-show="ok">toggled content</div>
@@ -1696,32 +1695,32 @@ type: api
     ...
     methods: {
       transitionComplete: function (el) {
-        // for passed 'el' that DOM element as the argument, something ...
+        // 引数として DOM 要素を `el` で渡され、何かを処理を...
       }
     }
     ...
   }).$mount('#transition-demo')
   ```
 
-- **See also:** [Transitions: Entering, Leaving, and Lists](/guide/transitions.html)
+- **参照:** [Transitions: Entering, Leaving, and Lists](/guide/transitions.html)
 
 ### transition-group
 
-- **Props:**
-  - `tag` - string, defaults to `span`.
-  - `move-class` - overwrite CSS class applied during moving transition.
-  - exposes the same props as `<transition>` except `mode`.
+- **プロパティ:**
+  - `tag` - string、デフォルトは `span`
+  - `move-class` - トランジションの移動中に提供される CSS クラスを上書きします
+  - `mode` を除いて、`<transition>` と同じプロパティも公開します
 
-- **Events:**
-  - exposes the same events as `<transition>`.
+- **イベント:**
+  - `<transition>` と同じイベントも公開します。
 
-- **Usage:**
+- **使用方法:**
 
-  `<transition-group>` serve as transition effects for **multiple** elements/components. The `<transition-group>` renders a real DOM element. By default it renders a `<span>`, and you can configure what element is should render via the `tag` attribute.
+  `<transition-group>` は**複数の要素/コンポーネント**に対してトランジション効果を提供します。`<transition-group>` はあるがままに DOM 要素を描画します。デフォルトでは `<span>` で描画し、`tag` 属性経由で要素を描画するよう設定できます。
 
-  Note every child in a `<transition-group>` must be **uniquely keyed** for the animations to work properly.
+  `<transition-group>` での全ての子は、アニメーションを正しく動作させるために**一意なキーで割り振れられて**なければならないことに注意してください。
 
-  `<transition-group>` supports moving transitions via CSS transform. When a child's position on screen has changed after an updated, it will get applied a moving CSS class (auto generated from the `name` attribute or configured with the `move-class` attribute). If the CSS `transform` property is "transition-able" when the moving class is applied, the element will be smoothly animated to its destination using the [FLIP technique](https://aerotwist.com/blog/flip-your-animations/).
+  `<transition-group>` は CSS transform 経由によるトランジション移動をサポートします。更新後、スクリーン上の子の位置が変更されたとき、CSS クラス (`name` 属性または `move-class` による設定か自動的に生成された) の移動を適用します。もし、クラスの移動が適用されるとき、CSS `transform` プロパティが"トランジション可能"である場合、要素は [FLIP 技術](https://aerotwist.com/blog/flip-your-animations/)を使用して宛先に滑らかにアニメーション化されます。
 
   ```html
   <transition-group tag="ul" name="slide">
@@ -1731,31 +1730,31 @@ type: api
   </transition-group>
   ```
 
-- **See also:** [Transitions: Entering, Leaving, and Lists](/guide/transitions.html)
+- **参照:** [Transitions: Entering, Leaving, and Lists](/guide/transitions.html)
 
 ### keep-alive
 
-- **Usage:**
+- **使用方法:**
 
-  When wrapped around a dynamic component, `<keep-alive>` caches the inactive component instances without destroying them. Similar to `<transition>`, `<keep-alive>` is an abstract component: it doesn't render a DOM element itself, and doesn't show up in the component parent chain.
+  動的コンポーネント周りでラップされるとき、`<keep-alive>` はそれらを破棄しないで非アクティブなコンポーネントのインスタンスをキャッシュします。`<trasition>` に似ていて、`<keep-alive>` はそれ自身 DOM 要素で描画されない抽象型コンポーネントです。`activated` と `deactivated` ライフサイクルフックはそれに応じて呼び出されます。
 
-  When a component is toggled inside `<keep-alive>`, its `activated` and `deactivated` lifecycle hooks will be invoked accordingly.
+  コンポーネントが `<keep-alive>` 内部でトグルされるとき、`activated` と `deactivated` ライフサイクルフックはそれに応じて呼び出されます。
 
-  Primarily used with preserve component state or avoid re-rendering.
+  主に、コンポーネント状態を保存したり、再描画を避けるために使用されます。
 
   ```html
-  <!-- basic -->
+  <!-- 基本 -->
   <keep-alive>
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- multiple conditional children -->
+  <!-- children の複数条件 -->
   <keep-alive>
     <comp-a v-if="a > 1"></comp-a>
     <comp-b v-else></comp-b>
   </keep-alive>
 
-  <!-- used together with <transition> -->
+  <!-- <transition> といっしょに使用する -->
   <transition>
     <keep-alive>
       <component :is="view"></component>
@@ -1763,27 +1762,27 @@ type: api
   </transition>
   ```
 
-  <p class="tip">`<keep-alive>` does not work with functional components because they do not have instances to be cached.</p>
+  <p class="tip">`<keep-alive>` はキャッシュされるインスタンスを持っていないため、関数型コンポーネントで動作しません。</p>
 
-- **See also:** [Dynamic Components - keep-alive](/guide/components.html#keep-alive)
+- **参照:** [動的コンポーネント - keep-alive](/guide/components.html#keep-alive)
 
 ### slot
 
-- **Props:**
-  - `name` - string, Used for named slot.
+- **プロパティ:**
+  - `name` - string、名前付き slot に対して使用されます
 
-- **Usage:**
+- **使用方法:**
 
-  `<slot>` serve as content distribution outlets in component templates. `<slot>` itself will be replaced.
+  `<slot>` はコンポーネントのテンプレートにおいてコンテンツ配信のアウトレットとして提供します。`<slot>` 自身置き換えられます。
 
-  For detailed usage, see the guide section linked below.
+  詳しい使い方については、以下のリンク先のガイドを参照してください。
 
-- **See also:** [Content Distribution with Slots](/guide/components.html#Content-Distribution-with-Slots)
+- **参照:** [Slot によるコンテンツ配信](/guide/components.html#Content-Distribution-with-Slots)
 
-## VNode Interface
+## VNodeインターフェイス
 
-- Please refer to the [VNode class declaration](https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js).
+- [VNode クラスの宣言](https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js)を参照してください。
 
-## Server-Side Rendering
+## サーバサイドレンダリング
 
-- Please refer to the [vue-server-renderer package documentation](https://github.com/vuejs/vue/tree/dev/packages/vue-server-renderer).
+- [vue-server-renderer パッケージのドキュメント](https://github.com/vuejs/vue/tree/dev/packages/vue-server-renderer)を参照してください。
