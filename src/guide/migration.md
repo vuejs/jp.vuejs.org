@@ -1,5 +1,5 @@
 ---
-title: Migration from 1.x
+title: Migration from Vue 1.x
 type: guide
 order: 24
 ---
@@ -29,6 +29,12 @@ It depends on a few factors:
 - How many times you get distracted and start playing with a cool new feature. 😉 &nbsp;Not judging, it also happened to us while building 2.0!
 
 - Which deprecated features you're using. Most can be upgraded with find-and-replace, but others might take a few minutes. If you're not currently following best practices, Vue 2.0 will also try harder to force you to. This is a good thing in the long run, but could also mean a significant (though possibly overdue) refactor.
+
+> If I upgrade to Vue 2, will I also have to upgrade Vuex and Vue-Router?
+
+Only Vue-Router 2 is compatible with Vue 2, so yes, you'll have to follow the [migration path for Vue-Router](migration-vue-router.html) as well. Fortunately, most applications don't have a lot of router code, so this likely won't take more than an hour.
+
+As for Vuex, even version 0.8 is compatible with Vue 2, so you're not forced to upgrade. The only reason you may want to upgrade immediately is to take advantage of the new features in Vuex 2, such as modules and reduced boilerplate.
 
 ## Templates
 
@@ -218,6 +224,17 @@ You would now write:
 <div class="upgrade-path">
   <h4>Upgrade Path</h4>
   <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>track-by</code>.</p>
+</div>
+{% endraw %}
+
+### `v-for` Range Values
+
+Previously, `v-for="number in 10"` would have `number` starting at 0 and ending at 9. Now it starts at 1 and ends at 10.
+
+{% raw %}
+<div class="upgrade-path">
+  <h4>Upgrade Path</h4>
+  <p>Search your codebase for the regex <code>/\w+ in \d+/</code>. Wherever it appears in a <code>v-for</code>, check to see if you may be affected.</p>
 </div>
 {% endraw %}
 
@@ -973,7 +990,7 @@ function pluralizeKnife (count) {
   if (count === 0) {
     return 'no knives'
   } else if (count === 1) {
-    return count + 'knife'
+    return '1 knife'
   } else {
     return count + 'knives'
   }

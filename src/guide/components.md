@@ -12,7 +12,7 @@ Components are one of the most powerful features of Vue. They help you extend ba
 
 ### Registration
 
-We've learned in the previous sections that we can create a new Vue instances with:
+We've learned in the previous sections that we can create a new Vue instance with:
 
 ``` js
 new Vue({
@@ -936,6 +936,8 @@ Vue.component(
   () => System.import('./my-async-component')
 )
 ```
+
+<p class="tip">If you're a <strong>Browserify</strong> user that would like to use async components, it's unfortunately not possible and probably never will be, as its creator has [made it clear](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224) that async loading "is not something that Browserify will ever support." If this is a feature that's important to you, we recommend using Webpack instead.</p>
 
 ### Component Naming Conventions
 
