@@ -30,15 +30,9 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 ### CDN
 
-[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) を利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
+推奨: [unpkg](https://unpkg.com/vue/dist/vue.min.js) は、npm に公開されるとすぐに最新バージョンが反映されます。  [unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
 
-[unpkg](https://unpkg.com/vue/dist/vue.min.js) 上でも利用可能で、npm に公開されるとすぐに最新バージョンが反映されます。  [unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
-
-### CSP 環境
-
-Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、スタンドアロンビルドに依存するため、これらの環境では使用できません。
-
-しかし、_1つだけ_ 解決策があります。[Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple-2.0) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple-2.0) のVueのビルドシステムを使用する場合、テンプレートはCSP環境下でも完璧に動作するように `render` 関数がプリコンパイルされます。
+[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
 
 ## NPM
 
@@ -46,14 +40,18 @@ Vue.js による大規模アプリケーションを構築するときには、N
 
 ``` bash
 # 最新の安定版
-$ npm install vue@next
+$ npm install vue
 ```
 
-### NPM ビルドの注意
+### スタンドアロン vs. ランタイム限定ビルド
 
-デフォルト出力である**ランタイム限定**のNPMパッケージは、`template` オプションをサポートしていないため、単一ファイルコンポーネントは、テンプレートをビルド時に `render` 関数にプリコンパイルします。あなたのバンドラをスタンドアロンとして `vue` を設定する必要があります。
+スタンドアロンビルドとランタイム限定ビルドの2つのビルドが使用可能です。
 
-webpack の場合、下記のエイリアスを webpack のコンフィグに追加します。
+- スタンドアロンビルドはコンパイラを内蔵しており、 `template` オプションをサポートしています。 *+ブラウザのAPIに依存しているため、サーバサイドレンダリングに使用することはできません。**
+
+- ランタイム限定ビルドは、テンプレートコンパイラを内蔵しておらず、 `template` オプションはサポートされていません。ランタイム限定ビルドを使用している場合は `render` オプションのみ使用することが可能ですが、単一ファイルコンポーネントのテンプレートはビルド時に `render` 関数をプリコンパイルされるので使用可能です。ランタイム限定ビルドは 16kb min+gzip であり、スタンドアロンビルドよりも30%軽量です。
+
+NPMパッケージはデフォルトで**ランタイム限定**ビルドを出力します。スタンドアロンビルドを使用する場合は、webpackのコンフィグに下記のエイリアスを追加します。
 
 ``` js
 resolve: {
@@ -66,6 +64,12 @@ resolve: {
 Browserify に関しては、 [aliasify](https://github.com/benbria/aliasify) を使うことで同じ効果を発揮します。
 
 <p class="tip">`import Vue from 'vue/dist/vue'` をしないでください - いくつかのツールまたはサードパーティのライブラリもインポートしている可能性があります。これはアプリが同時にランタイムとスタンドアロンビルドをロードするとエラーを引き起こす恐れがあります。</p>
+
+### CSP 環境
+
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、スタンドアロンビルドに依存するため、これらの環境では使用できません。
+
+一方では、ランタイム限定ビルドではCSPに準拠しています。 [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple) でランタイム限定ビルドを使用する場合は、テンプレートはCSP環境でも完璧に動作する `render` 関数にプリコンパイルされます。
 
 ## CLI
 
@@ -84,12 +88,11 @@ $ npm run dev
 
 ## 開発版のビルド
 
-**重要**: NPM に配信された CommonJS バンドル (`vue.common.js`) はリリース時にのみ `next` ブランチにチェックインされています。 Github 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
+**重要** Github上の `/dist` フォルダに存在するビルドされたファイルは、リリース時にのみチェックインされます。 Github 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
 cd node_modules/vue
-git checkout next
 npm install
 npm run build
 ```
