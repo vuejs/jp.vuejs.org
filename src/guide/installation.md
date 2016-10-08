@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: インストール
 type: guide
 order: 1
 vue_version: 2.0.0-rc.6
@@ -8,50 +8,50 @@ min_size: "64"
 gz_size: "22"
 ---
 
-### Compatibility Note
+### 互換性の注意
 
-Vue does **not** support IE8 and below, because it uses ECMAScript 5 features that are un-shimmable in IE8. However it supports all [ECMAScript 5 compliant browsers](http://caniuse.com/#feat=es5).
+Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
 
-### Release Notes
+### リリースノート
 
-Detailed release notes for each version are available on [GitHub](https://github.com/vuejs/vue/releases).
+各バージョンの詳細なリリースノートは、[GitHub](https://github.com/vuejs/vue/releases) で入手できます。
 
-## Standalone
+## スタンドアロン
 
-Simply download and include with a script tag. `Vue` will be registered as a global variable.
+ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。
 
-<p class="tip">Don't use the minified version during development. You will miss out all the nice warnings for common mistakes!</p>
+<p class="tip">開発中はプロダクションバージョンを使用しないでください。 警告や一般的な間違いを見逃す可能性があります!</p>
 
 <div id="downloads">
-<a class="button" href="/js/vue.js" download>Development Version</a><span class="light info">With full warnings and debug mode</span>
+<a class="button" href="/js/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり </span>
 
-<a class="button" href="/js/vue.min.js" download>Production Version</a><span class="light info">Warnings stripped, {{gz_size}}kb min+gzip</span>
+<a class="button" href="/js/vue.min.js" download>プロダクションバージョン</a><span class="light info">警告出力なし、 {{gz_size}}kb min+gzip</span>
 </div>
 
 ### CDN
 
-Recommended: [unpkg](https://unpkg.com/vue/dist/vue.js), which will reflect the latest version as soon as it is published to npm. You can also browse the source of the npm package at [unpkg.com/vue/](https://unpkg.com/vue/).
+推奨: [unpkg](https://unpkg.com/vue/dist/vue.min.js) は、npm に公開されるとすぐに最新バージョンが反映されます。  [unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
 
-Also available on [jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.js) or [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js), but these two services take some time to sync so the latest release may not be available yet.
+[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
 
 ## NPM
 
-NPM is the recommended installation method when building large scale applications with Vue. It pairs nicely with module bundlers such as [Webpack](http://webpack.github.io/) or [Browserify](http://browserify.org/). Vue also provides accompanying tools for authoring [Single File Components](application.html#Single-File-Components).
+Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](application.html#Single-File-Components)を作成するための、付随するツールも提供しています。
 
 ``` bash
-# latest stable
+# 最新の安定版
 $ npm install vue
 ```
 
-### Standalone vs. Runtime-only Build
+### スタンドアロン vs. ランタイム限定ビルド
 
-There are two builds available, the standalone build and the runtime-only build.
+スタンドアロンビルドとランタイム限定ビルドの2つのビルドが使用可能です。
 
-- The standalone build includes the compiler and supports the `template` option. **It also relies on the presence of browser APIs so you cannot use it for server-side rendering.**
+- スタンドアロンビルドはコンパイラを内蔵しており、 `template` オプションをサポートしています。 *+ブラウザのAPIに依存しているため、サーバサイドレンダリングに使用することはできません。**
 
-- The runtime-only build does not include the template compiler, and does not support the `template` option. You can only use the `render` option when using the runtime-only build, but it works with single-file components, because single-file components' templates are pre-compiled into `render` functions during the build step. The runtime-only build is roughly 30% lighter-weight than the standalone build, weighing only 16kb min+gzip.
+- ランタイム限定ビルドは、テンプレートコンパイラを内蔵しておらず、 `template` オプションはサポートされていません。ランタイム限定ビルドを使用している場合は `render` オプションのみ使用することが可能ですが、単一ファイルコンポーネントのテンプレートはビルド時に `render` 関数をプリコンパイルされるので使用可能です。ランタイム限定ビルドは 16kb min+gzip であり、スタンドアロンビルドよりも30%軽量です。
 
-By default, the NPM package exports the **runtime-only** build. To use the standalone build, add the following alias to your webpack config:
+NPMパッケージはデフォルトで**ランタイム限定**ビルドを出力します。スタンドアロンビルドを使用する場合は、webpackのコンフィグに下記のエイリアスを追加します。
 
 ``` js
 resolve: {
@@ -61,34 +61,34 @@ resolve: {
 }
 ```
 
-For Browserify, you can use [aliasify](https://github.com/benbria/aliasify) to achieve the same.
+Browserify に関しては、 [aliasify](https://github.com/benbria/aliasify) を使うことで同じ効果を発揮します。
 
-<p class="tip">Do NOT do `import Vue from 'vue/dist/vue.js'` - since some tools or 3rd party libraries may import vue as well, this may cause the app to load both the runtime and standalone builds at the same time and lead to errors.</p>
+<p class="tip">`import Vue from 'vue/dist/vue'` をしないでください - いくつかのツールまたはサードパーティのライブラリもインポートしている可能性があります。これはアプリが同時にランタイムとスタンドアロンビルドをロードするとエラーを引き起こす恐れがあります。</p>
 
-### CSP environments
+### CSP 環境
 
-Some environments, such as Google Chrome Apps, enforce Content Security Policy (CSP), which prohibits the use of `new Function()` for evaluating expressions. The standalone build depends on this feature to compile templates, so is unusable in these environments.
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、スタンドアロンビルドに依存するため、これらの環境では使用できません。
 
-On the other hand, the runtime-only build is fully CSP-compliant. When using the runtime-only build with [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) or [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple), your templates will be precompiled into `render` functions which work perfectly in CSP environments.
+一方では、ランタイム限定ビルドではCSPに準拠しています。 [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple) でランタイム限定ビルドを使用する場合は、テンプレートはCSP環境でも完璧に動作する `render` 関数にプリコンパイルされます。
 
 ## CLI
 
-Vue.js provides an [official CLI](https://github.com/vuejs/vue-cli) for quickly scaffolding ambitious Single Page Applications. It provides batteries-included build setups for a modern frontend workflow. It takes only a few minutes to get up and running with hot-reload, lint-on-save, and production-ready builds:
+Vue.js は意欲的なシングルページアプリケーションをすぐに足場固めするために、[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。それはモダンなフロントエンドのフレームワークのワークフローに対して、Battery-included なビルド手順を提供します。ホットリローディング、保存時のリント、そして本番可能なビルドを実行して準備するのは、わずか数分です。
 
 ``` bash
-# install vue-cli
+# vue-cli をインストール
 $ npm install --global vue-cli
-# create a new project using the "webpack" template
+# "webpack" ボイラープレートを使用した新しいプロジェクトを作成する
 $ vue init webpack my-project
-# install dependencies and go!
+# 依存関係をインストールしてgo!
 $ cd my-project
 $ npm install
 $ npm run dev
 ```
 
-## Dev Build
+## 開発版のビルド
 
-**Important**: the built files in GitHub's `/dist` folder are only checked-in during releases. To use Vue from the latest source code on GitHub, you will have to build it yourself!
+**重要** GitHub上の `/dist` フォルダに存在するビルドされたファイルは、リリース時にのみチェックインされます。 GitHub上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
@@ -100,10 +100,10 @@ npm run build
 ## Bower
 
 ``` bash
-# latest stable
-$ bower install vue
+# 最新の安定板
+$ bower install vue#next
 ```
 
-## AMD Module Loaders
+## AMD モジュールローダ
 
-The standalone downloads or versions installed via Bower are wrapped with UMD so they can be used directly as an AMD module.
+ダウンロードされたスタンドアロン版 Vue.js と Bower 経由でインストールされた Vue.js は UMD でラップされています。そのため、AMD モジュールとして直接利用することができます。
