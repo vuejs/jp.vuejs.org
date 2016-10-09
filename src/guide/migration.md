@@ -12,13 +12,13 @@ order: 24
 
 > どこから移行をはじめるべきですか？
 
-1. 現在のプロジェクト上で、[マイグレーションヘルパ](https://github.com/vuejs/vue-migration-helper)を実行します。
+1. 現在のプロジェクト上で、[移行ヘルパー](https://github.com/vuejs/vue-migration-helper)を実行します。
 [ ] We've carefully minified and compressed a senior Vue dev into a simple command line interface.
 そしてそれは、非推奨のパターンを認識するたびに、移行をサジェストし、そして詳しい情報へのリンクを提供します。
 
-2. その後、このページのサイドバーの目次より、あなたが影響を受ける可能性のあるトピックを参照してください。移行ヘルパーが何もキャッチしていない場合、それは素晴らしいことです。
+2. その後、このページのサイドバーの目次より、あなたが影響を受ける可能性のあるトピックを参照してください。移行ヘルパーーが何もキャッチしていない場合、それは素晴らしいことです。
 
-3. もし、テストがある場合は、それらを実行し、失敗したものを参照してください。テストがない場合は、ブラウザ上でアプリケーションを開き、警告やエラーに対して、あなた自身の目を光らせてください。
+3. もし、テストがある場合は、それらを実行し、失敗したものを参照してください。テストがない場合は、ブラウザ上でアプリケーションを開き、警告やエラーに対して、あなた自身の目で確認してください。
 
 4. そろそろ、あなたのアプリケーションは完全に移行されるべきでしょう。もし、あなたがよりいっそう飢えている場合は、このページを残りの部分を読む、もしくは新しく、かつ改良されたガイドに [the beginning](index.html) から飛び込むこともできます。あなたは既に基本となるコンセプトに精通しているので、多くの場合、拾い読みすることとなります。
 
@@ -53,7 +53,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 ```
 
 単に全体を新しい要素で囲うことを推奨します。  
-例えばそれは、このような形となります:
+例えば、このような形となります:
 
 ``` html
 <div>
@@ -78,7 +78,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
 
@@ -89,7 +89,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
 
@@ -116,7 +116,7 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
 
@@ -143,18 +143,19 @@ destroyed: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
 
 ### `init` <sup>非推奨</sup>
 
-代わりに新しい `beforeCreate` フックを使用します。これは本質的には同じものです。これは、他のライフサイクルメソッドとの整合性のために改名されました。
+代わりに新しい `beforeCreate` フックを使用します。これは本質的には同じものです。
+他のライフサイクルメソッドとの整合性のために改名されました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
 
@@ -174,7 +175,7 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、このフックを全て見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、このフックを全て見つけます。</p>
 </div>
 {% endraw %}
 
@@ -205,7 +206,7 @@ mounted: function () {
 ### `$index` および `$key` <sup>非推奨</sup>
 
 暗黙的に割り当てられていた `$index` および `$key` 変数が、 `v-for` にて明示的にそれらを定義するために廃止されました。
-これは、 Vue の経験が浅い開発者がネストされたループを扱う場合に、より明確に動作が発生するコードを読むことが容易になります。
+これは、 Vue の経験が浅い開発者がネストされたループを扱う場合に、コードを読むことが容易になります。
 
 {% raw %}
 <div class="upgrade-path">
@@ -235,7 +236,7 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>track-by</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>track-by</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -286,7 +287,7 @@ computed: {
 
 これには、いくつかの利点があります:
 
-- You still have access to the original value of the prop.
+- prop の元の値にアクセスし続けることができます。
 - You are forced to be more explicit, by giving your coerced value a name that differentiates it from the value passed in the prop.
 
 {% raw %}
@@ -342,7 +343,7 @@ Most use cases of mutating a prop can be replaced by one of these options:
 </div>
 {% endraw %}
 
-### Props on a Root Instance <sup>非推奨</sup>
+### ルートインスタンス上での Props <sup>非推奨</sup>
 
 On root Vue instances (i.e. instances created with `new Vue({ ... })`), you must use `propsData` instead instead of `props`.
 
@@ -353,7 +354,7 @@ On root Vue instances (i.e. instances created with `new Vue({ ... })`), you must
 </div>
 {% endraw %}
 
-## Built-In Directives
+## 内蔵ディレクティブ
 
 ### Truthiness/Falsiness with `v-bind`
 
@@ -589,7 +590,7 @@ Instead, you should use an array of __objects__ so that `v-model` can update the
 
 ### `v-bind:style` with Object Syntax and `!important` <sup>非推奨</sup>
 
-これはもはや、動かなくなります:
+もはや、これは動かなくなります:
 
 ``` html
 <p v-bind:style="{ color: myColor + ' !important' }">hello</p>
@@ -631,7 +632,7 @@ On the other hand, `$refs` are designed primarily for programmatic access in Jav
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>v-el</code> and <code>v-ref</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>v-el</code> and <code>v-ref</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -697,7 +698,7 @@ With the new transition system, you can now just [use components for reusable tr
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.transition</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.transition</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -807,7 +808,7 @@ This pattern can serve as a replacement for `$dispatch` and `$broadcast` in simp
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>$dispatch</code> and <code>$broadcast</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>$dispatch</code> and <code>$broadcast</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -1404,7 +1405,7 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>replace: false</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>replace: false</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -1417,7 +1418,7 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.config.debug</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.debug</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -1428,7 +1429,7 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.config.async</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.async</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -1440,7 +1441,7 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.config.delimiters</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.delimiters</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -1475,7 +1476,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.elementDirective</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.elementDirective</code> を見つけます。
 </div>
 {% endraw %}
 
@@ -1486,6 +1487,6 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">マイグレーションヘルパ</a>を実行し、 <code>Vue.partial</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.partial</code> を見つけます。
 </div>
 {% endraw %}
