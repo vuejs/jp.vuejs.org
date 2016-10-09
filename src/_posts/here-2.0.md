@@ -36,8 +36,8 @@ Vue 2.0 は強烈な高速レンダリングを実現するため、ストリー
 特に、vue-router と vuex はともにそれぞれの 2.0 バージョンで多くの改善を受けています:
 
 #### vue-router
-- 複数の名前付<router-view>サポート
-- <router-link>コンポーネントでの改善されたナビゲーション
+- 複数の名前付き`<router-view>`サポート
+- `<router-link>`コンポーネントでの改善されたナビゲーション
 - 簡素化されたナビゲーションフックAPI
 - カスタマイズ可能なスクロールの挙動制御
 - [より包括的な例](https://github.com/vuejs/vue-router/tree/dev/examples)
