@@ -1,40 +1,41 @@
 ---
-title: The Vue Instance
+title: Vue インスタンス
 type: guide
 order: 3
 ---
 
-## Constructor
+## コンストラクタ
 
-Every Vue vm is bootstrapped by creating a **root Vue instance** with the `Vue` constructor function:
+全ての Vue vm は、`Vue` コンストラクタ関数で**ルート Vue インスタンス(root Vue instance)**を作成することによって起動されます:
 
 ``` js
 var vm = new Vue({
-  // options
+  // オプション
 })
 ```
 
-Although not strictly associated with the [MVVM pattern](https://en.wikipedia.org/wiki/Model_View_ViewModel), Vue's design was no doubt inspired by it. As a convention, we often use the variable `vm` (short for ViewModel) to refer to our Vue instances.
+厳密な定義とは異なりますが、Vue のデザインは、[MVVM パターン](https://en.wikipedia.org/wiki/Model_View_ViewModel)の影響を確かに受けています。
+慣例として、よく `vm` (ViewModel の略) を Vue インスタンスの変数名として、よく利用します。
 
-When you instantiate a Vue instance, you need to pass in an **options object** which can contain options for data, template, element to mount on, methods, lifecycle callbacks and more. The full list of options can be found in the [API reference](/api).
+Vue インスタンスを生成するには、**オプションオブジェクト**を渡す必要があります。これには、データ、テンプレート、マウントさせる要素、メソッド、ライフサイクルコールバックなどをオプションとして指定することができます。全てのオプションの一覧は[API リファレンス](/api)で参照できます。
 
-The `Vue` constructor can be extended to create reusable **component constructors** with pre-defined options:
+`Vue` コンストラクタは、あらかじめ定義されたオプションを伴った再利用可能な**コンポーネントコンストラクタ**を生成するために拡張できます:
 
 ``` js
 var MyComponent = Vue.extend({
-  // extension options
+  // 拡張オプション
 })
 
-// all instances of `MyComponent` are created with
-// the pre-defined extension options
+// `MyComponent` から生成された全てのインスタンスは、あらかじめ定義された拡張オプションを利用して生成されます
 var myComponentInstance = new MyComponent()
 ```
 
-Although it is possible to create extended instances imperatively, most of the time it is recommended to compose them declaratively in templates as custom elements. We will talk about [the component system](components.html) in detail later. For now, you just need to know that all Vue components are essentially extended Vue instances.
+プログラムから命令的に拡張されたインスタンスを生成できますが、ほとんどの場合は、カスタムエレメントとしてテンプレートに宣言的に組み立てることをおすすめします。後ほど [コンポーネントシステム](components.html) で詳細を説明します。
+いまは、全ての Vue コンポーネントは、本質的に Vue インスタンスを拡張したと理解しておけば十分です。
 
-## Properties and Methods
+## プロパティとメソッド
 
-Each Vue instance **proxies** all the properties found in its `data` object:
+Vue インスタンスは、自身の `data` オブジェクトの全てのプロパティを**プロキシ**します:
 
 ``` js
 var data = { a: 1 }
@@ -44,18 +45,18 @@ var vm = new Vue({
 
 vm.a === data.a // -> true
 
-// setting the property also affects original data
+// プロパティへの代入は、元のデータにも反映されます
 vm.a = 2
 data.a // -> 2
 
-// ... and vice-versa
+// ... そして、その逆もまたしかりです
 data.a = 3
 vm.a // -> 3
 ```
 
-It should be noted that only these proxied properties are **reactive**. If you attach a new property to the instance after it has been created, it will not trigger any view updates. We will discuss the reactivity system in detail later.
+これらのプロキシされたプロパティだけが**リアクティブ**なことに注意しましょう。もし、インスタンスを生成した後にインスタンスに新しいプロパティを追加した場合には、ビューの更新は起こりません。後ほど、リアクティブシステムの章で詳細を説明します。
 
-In addition to data properties, Vue instances expose a number of useful instance properties and methods. These properties and methods are prefixed with `$` to differentiate them from proxied data properties. For example:
+data プロパティに加えて、Vue インスタンスは、いくつかの便利なプロパティとメソッドを持っています。
 
 ``` js
 var data = { a: 1 }
@@ -67,17 +68,19 @@ var vm = new Vue({
 vm.$data === data // -> true
 vm.$el === document.getElementById('example') // -> true
 
-// $watch is an instance method
+// $watch はインスタンスメソッドです
 vm.$watch('a', function (newVal, oldVal) {
-  // this callback will be called when `vm.a` changes
+  // このコールバックは `vm.a` の値が変わる時に呼ばれます
 })
 ```
 
-Consult the [API reference](/api) for the full list of instance properties and methods.
+インスタンスの全てのプロパティとメソッドのリストは、 [API referene](/api) を参照してください。
 
-## Instance Lifecycle Hooks
+## インスタンスライフサイクルフック
 
-Each Vue instance goes through a series of initialization steps when it is created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it will also invoke some **lifecycle hooks**, which give us the opportunity to execute custom logic. For example, the `created` hook is called after the instance is created:
+各 Vue インスタンスは、生成時に一連の初期化を行います。例えば、データの監視のセットアップやテンプレートのコンパイル、DOM へのインスタンスのマウント、データが変化したときの DOM の更新などがあります。
+その初期化の過程で、カスタムロジックの実行を可能にする、いくつかの **ライフサイクルフック(lifecycle hooks)** を呼び出します。
+例えば、`created` フックはインスタンスが生成された後に呼ばれます。
 
 ``` js
 var vm = new Vue({
@@ -85,17 +88,21 @@ var vm = new Vue({
     a: 1
   },
   created: function () {
-    // `this` points to the vm instance
+    // `this` は vm インスタンスを指します
     console.log('a is: ' + this.a)
   }
 })
 // -> "a is: 1"
 ```
 
-There are also other hooks which will be called at different stages of the instance's lifecycle, for example `mounted`, `updated`, and `destroyed`. All lifecycle hooks are called with their `this` context pointing to the Vue instance invoking it. Some users may have been wondering where the concept of "controllers" lives in the Vue world and the answer is: there are no controllers. Your custom logic for a component would be split among these lifecycle hooks.
+この他にもインスタンスのライフサイクルの様々な段階で呼ばれるフックがあります。例えば、`mounted`, `updated`, `destroyed` があります。
+全てのライフサイクル フックは、`this` が Vue インスタンスを指す形で実行さます。
+Vue の世界における "コントローラ" の概念について知りたい方もいるかもしれません。その答えとしては「コントローラはない」です。
+コンポーネントのためのカスタムロジックは、これらのライフサイクルフックの中に分割されることになります。
 
-## Lifecycle Diagram
+## ライフサイクルダイアグラム
 
-Below is a diagram for the instance lifecycle. You don't need to fully understand everything going on right now, but this diagram will be helpful in the future.
+以下は、インスタンスライフサイクルのダイアグラムです。
+今はこのダイアグラムを完全に理解する必要はありませんが、将来役に立つことでしょう。
 
 ![Lifecycle](/images/lifecycle.png)

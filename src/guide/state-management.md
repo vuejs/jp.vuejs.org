@@ -1,20 +1,20 @@
 ---
-title: State Management
+title: 状態管理
 type: guide
 order: 21
 ---
 
-## Official Flux-Like Implementation
+## 公式 Flux ライクな実装
 
-Large applications can often grow in complexity, due to multiple pieces of state scattered across many components and the interactions between them. To solve this problem, Vue offers [vuex](https://github.com/vuejs/vuex/tree/next): our own Elm-inspired state management library. It even integrates into [vue-devtools](https://github.com/vuejs/vue-devtools), providing zero-setup access to time travel.
+大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は [vuex](https://github.com/vuejs/vuex)を提供します。これは Elm にインスパイアされた状態管理ライブラリで、特別なセットアップなしで時間を巻き戻せる [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携します。
 
-### Information for React Developers
+### React 開発者への情報
 
-If you're coming from React, you may be wondering how vuex compares to [redux](https://github.com/reactjs/redux), the most popular Flux implementation in that ecosystem. Redux is actually view-layer agnostic, so it can easily be used with Vue via some [simple bindings](https://github.com/egoist/revue). Vuex is different in that it _knows_ it's in a Vue app. This allows it to better integrate with Vue, offering a more intuitive API and improved development experience.
+もしあなたが React のエコシステムから来たのなら、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどう比較されるか気になっていることでしょう。Redux は実際に view レイヤの知識を持たないので、[シンプルなバインディング](https://github.com/egoist/revue) を通して簡単に Vue とあわせて利用することができます。Vuex は、 自らが Vue のアプリケーション内にいることを**知っている**、という点で異なります。これにより Vue といっそう良く連携することができ、より直感的な API を提供したり、開発体験を向上させることができます。
 
-## Simple State Management from Scratch
+## シンプルな状態管理をゼロから作る
 
-It is often overlooked that the source of truth in Vue applications is the raw `data` object - a Vue instance simply proxies access to it. Therefore, if you have a piece of state that should be shared by multiple instances, you can simply share it by identity:
+Vue アプリケーションの妥当性を担保しているのが生の `data` オブジェクトだということは見過ごされがちです。Vue インスタンスは単純に `data` オブジェクトへのアクセスをプロキシします。それゆえに、複数のインスタンスによって共有されうる状態がある場合、シンプルに同一の状態を共有することができます:
 
 ``` js
 const sourceOfTruth = {}
@@ -28,9 +28,9 @@ const vmB = new Vue({
 })
 ```
 
-Now whenever `sourceOfTruth` is mutated, both `vmA` and `vmB` will update their views automatically. Subcomponents within each of these instances would also have access via `this.$root.$data`. We have a single source of truth now, but debugging would be a nightmare. Any piece of data could be changed by any part of our app at any time, without leaving a trace.
+こうすれば、`sourceOfTruth` が変化するたびに、`vmA` と `vmB` の両方が自動的にそれぞれの view を更新します。これらのインスタンス内のサブコンポーネントから `this.$root.$data` を通じてアクセスすることもできます。ただ1つの情報源を持つことにはなりましたが、このままだとデバッグは悪夢になるでしょう。どんなデータでも、アプリケーションのどこからでも痕跡を残すことなく変えることができてしまいます。
 
-To help solve this problem, we can adopt a simple **store pattern**:
+単純な **store パターン** を適用することで、この問題を解決することができます:
 
 ``` js
 var store = {
@@ -49,9 +49,9 @@ var store = {
 }
 ```
 
-Notice all actions that mutate the store's state are put inside the store itself. This type of centralized state management makes it easier to understand what type of mutations could happen and how are they triggered. When something goes wrong, we'll also now have a log of what happened leading up to the bug.
+Store の状態を変える action はすべて store 自身の中にあることに注意してください。このように状態管理を中央集権的にすることで、どういった種類の状態変化が起こりうるか、あるいはそれがどうやってトリガされているか、が分かりやすくなります。これなら何か良くないことが起きても、バグが起きるに至ったまでのログを見ることもできます。
 
-In additon, each instance/component can still own and manage its own private state:
+さらに、それぞれのインスタンスやコンポーネントに、プライベートな状態を持たせ管理することも可能です:
 
 ``` js
 var vmA = new Vue({
@@ -71,8 +71,8 @@ var vmB = new Vue({
 
 ![State Management](/images/state.png)
 
-<p class="tip">It's important to note that you should never replace the original state object in your actions - the components and the store need to share reference to the same object in order for mutations to be observed.</p>
+<p class="tip">action によって元の状態を決して置き換えてはいけないことに注意してください。状態変化が監視され続けるためには、コンポーネントと store が同じオブジェクトへの参照を共有している必要があるからです。</p>
 
-As we continue developing the convention where components are never allowed to directly mutate state that belongs to a store, but should instead dispatch events that notify the store to perform actions, we eventually arrive at the [Flux](https://facebook.github.io/flux/) architecture. The benefit of this convention is we can record all state mutations happening to the store and implement advanced debugging helpers such as mutation logs, snapshots, and history re-rolls / time travel.
+コンポーネントが store が持つ状態を直接変えることは許さず、代わりにコンポーネントは store に通知するイベントを送り出しアクションを実行する、という規約を発展させていくに従って、私たちは最後には [Flux](https://facebook.github.io/flux/) アーキテクチャに辿り着きました。この規約によって、store に起こるすべての状態変化を記録することができたり、変更ログやスナップショット、履歴や時間を巻き戻す、といった高度なデバッギングヘルパーの実装などの利点をもたらします。
 
-This brings us full circle back to [vuex](https://github.com/vuejs/vuex/tree/next), so if you've read this far it's probably time to try it out!
+ここまで来ると一周まわって [vuex](https://github.com/vuejs/vuex) に戻ってきました。ここまで読み進めてきたなら、vuex も試してみましょう！
