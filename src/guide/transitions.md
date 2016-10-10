@@ -1,5 +1,5 @@
 ---
-title: 'Transitions: Entering, Leaving, and Lists'
+title: トランジション効果
 type: guide
 order: 12
 ---
