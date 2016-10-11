@@ -4,34 +4,35 @@ type: guide
 order: 11
 ---
 
-## What are Components?
+## コンポーネントとはなにか？
 
-Components are one of the most powerful features of Vue. They help you extend basic HTML elements to encapsulate reusable code. At a high level, components are custom elements that Vue's compiler attaches behavior to. In some cases, they may also appear as a native HTML element extended with the special `is` attribute.
+コンポーネントは Vue.js の最も強力な機能の1つです。基本的な HTML 要素を拡張して再利用可能なコードのカプセル化を助けます。高度なレベルでは、コンポーネントは Vue.js のコンパイラが指定された振舞いをアタッチするカスタム要素です。場合によっては、特別な `is` 属性で拡張されたネイティブな HTML 要素の姿をとることもあります。
 
-## Using Components
+## コンポーネントの使用
 
-### Registration
+### 登録
 
 We've learned in the previous sections that we can create a new Vue instance with:
+以前のセクションで、以下のように Vue インスタンスを作成できることを学習しました:
 
 ``` js
 new Vue({
   el: '#some-element',
-  // options
+  // オプション
 })
 ```
 
-To register a global component, you can use `Vue.component(tagName, options)`. For example:
+グローバルなコンポーネントを登録するためには、 `Vue.component(tagName, options)` を使うことができます。例:
 
 ``` js
 Vue.component('my-component', {
-  // options
+  // オプション
 })
 ```
 
-<p class="tip">Note that Vue does not enforce the [W3C rules](http://www.w3.org/TR/custom-elements/#concepts) for custom tag names (all-lowercase, must contain a hyphen) though following this convention is considered good practice.</p>
+<p class="tip">カスタムタグの名前について [W3C ルール](http://www.w3.org/TR/custom-elements/#concepts) (全て小文字で、ハイフンが含まれている必要がある)にしたがうことは良い取り組みと考えられますが、 Vue はそれを強制しないことを覚えておいてください。</p>
 
-Once registered, a component can be used in an instance's template as a custom element, `<my-component></my-component>`. Make sure the component is registered **before** you instantiate the root Vue instance. Here's the full example:
+一度登録すると、コンポーネントはカスタム要素 `<my-component>` として親のインスタンスのテンプレートで使用できます。コンポーネントは root の Vue インスタンスをインスタンス化する**前**に登録しているか確認してください。ここに完全な例を示します:
 
 ``` html
 <div id="example">
@@ -40,18 +41,18 @@ Once registered, a component can be used in an instance's template as a custom e
 ```
 
 ``` js
-// register
+// 登録する
 Vue.component('my-component', {
   template: '<div>A custom component!</div>'
 })
 
-// create a root instance
+// root インスタンスを作成する
 new Vue({
   el: '#example'
 })
 ```
 
-Which will render:
+レンダリングされる内容は以下になります:
 
 ``` html
 <div id="example">
@@ -71,9 +72,9 @@ new Vue({ el: '#example' })
 </script>
 {% endraw %}
 
-### Local Registration
+### ローカル登録
 
-You don't have to register every component globally. You can make a component available only in the scope of another instance/component by registering it with the `components` instance option:
+グローバルに全てのコンポーネントを登録する必要はありません。別のコンポーネントのインスタンスオプションの `components` に登録することで、そのコンポーネントのスコープ内でのみ利用可能なコンポーネントを作成できます:
 
 ``` js
 var Child = {
@@ -83,19 +84,19 @@ var Child = {
 new Vue({
   // ...
   components: {
-    // <my-component> will only be available in parent's template
+    // <my-component> は親テンプレートでのみ有効になります
     'my-component': Child
   }
 })
 ```
 
-The same encapsulation applies for other registerable Vue features, such as directives.
+同じカプセル化は、ディレクティブ、フィルタ、そしてトランジションのようなアセットタイプに対して適用されます。
 
-### DOM Template Parsing Caveats
+### DOM テンプレート解析の注意事項
 
-When using the DOM as your template (e.g. using the `el` option to mount an element with existing content), you will be subject to some restrictions that are inherent to how HTML works, because Vue can only retrieve the template content **after** the browser has parsed and normalized it. Most notably, some elements such as `<ul>`, `<ol>`, `<table>` and `<select>` have restrictions on what elements can appear inside them, and some elements such as `<option>` can only appear inside certain other elements.
+DOM をテンプレートとして使うとき(例、ある要素をすでに存在する要素にマウントするために `el` オプションを使うとき)、あなたはHTMLがどのように動くかに内在する幾つかの制約の対象となります。なぜなら、 Vue はブラウザがテンプレートを解析して標準化した **後** にのみテンプレートの内容を検索することができるからです。特に、 `<ul>`, `<ol>`, `<table>`, `<select>` のようないくつかの要素は、その要素の内部にどの要素を表示させることができるかの制約を持ち、 `<option>` のようないくつかの要素は、ある特定の要素の内部でのみ表示されます。
 
-This will lead to issues when using custom components with elements that have such restrictions, for example:
+このことは、いくつかの制約をもつ要素と共にカスタムコンポーネントを使うときに問題につながるかもしれません。例:
 
 ``` html
 <table>
@@ -105,23 +106,26 @@ This will lead to issues when using custom components with elements that have su
 
 The custom component `<my-row>` will be hoisted out as invalid content, thus causing errors in the eventual rendered output. A workaround is to use the `is` special attribute:
 
+カスタムコンポーネントの `<my-row>` は個別のコンテンツとして巻き上げられます。TODO。回避策は `is` という特殊な属性を使うことです:
+
 ``` html
 <table>
   <tr is="my-row"></tr>
 </table>
 ```
-
-**It should be noted that these limitations do not apply if you are using string templates from one of the following sources**:
+**注目すべきは、もしあなたが以下のソースのどれかから文字列テンプレートを使う場合には、これらの制約は適用されないということです。**
 
 - `<script type="text/x-template">`
-- JavaScript inline template strings
-- `.vue` components
+- JavaScript inline template strings // TODO
+- JavaScript のインラインテンプレート文字列
+- `.vue` コンポーネント
 
 Therefore, prefer using string templates whenever possible.
+そのため、可能なときはいつでも文字列テンプレートの使用が好まれます。
 
-### `data` Must Be a Function
+### `data` は関数でなければならない
 
-Most of the options that can be passed into the Vue constructor can be used in a component, with one special case: `data` must be function. In fact, if you try this:
+Vue コンストラクタに渡すことのできるほとんどのオプションは、コンポーネントの中で使用できます。しかし、１つだけ特別なケースがあります: `data` は関数でなければいけません。実際、以下をためすと:
 
 ``` js
 Vue.component('my-component', {
@@ -133,6 +137,8 @@ Vue.component('my-component', {
 ```
 
 Then Vue will halt and emit warnings in the console, telling you that `data` must be a function for component instances. It's good to understand why the rules exist though, so let's cheat.
+
+そのあと、Vue は止まりコンソールへ、コンポーネントインスタンスでは `data` は関数でなければならないと伝える警告を出します。しかし、どうしてそのルールが存在するかの理解にはいいでしょう。
 
 ``` html
 <div id="example-2">
@@ -147,9 +153,9 @@ var data = { counter: 0 }
 
 Vue.component('simple-counter', {
   template: '<button v-on:click="counter += 1">{{ counter }}</button>',
-  // data is technically a function, so Vue won't
-  // complain, but we return the same object
-  // reference for each component instance
+  // data は技術的には関数なので、Vue は警告を出しません。
+  // しかし、各コンポーネントのインスタンスは
+  // 同じオブジェクトの参照を返します。
   data: function () {
     return data
   }
@@ -181,6 +187,7 @@ new Vue({
 {% endraw %}
 
 Since all three component instances share the same `data` object, incrementing one counter increments them all! Ouch. Let's fix this by instead returning a fresh data object:
+3つのコンポーネントはすべて同じ `data` オブジェクトを共有しているので、ひとつのカウンタをインクリメントするとすべてのカウンタだインクリメントします! 代わりに未使用の data オブジェクトを返すことにより、これを修正しましょう:
 
 ``` js
 data: function () {
@@ -191,6 +198,7 @@ data: function () {
 ```
 
 Now all our counters each have their own internal state:
+これで、すべてのカウンタはそれぞれカウンタ自身の内部状態を持ちます:
 
 {% raw %}
 <div id="example-2-5" class="demo">
@@ -215,7 +223,9 @@ new Vue({
 
 The `el` option also requires a function value when used in a component instance, for exactly the same reason.
 
-### Composing Components
+また、`el` オプションも、まったく同様の理由で、コンポーネントインスタンスの中で使用されるときは、関数の値を必要とします。
+
+### コンポーネントの構成
 
 Components are meant to be used together, most commonly in parent-child relationships: component A may use component B in its own template. They inevitably need to communicate to one another: the parent may need to pass data down to the child, and the child may need to inform the parent of something that happened in the child. However, it is also very important to keep the parent and the child as decoupled as possible via a clearly-defined interface. This ensures each component's code can be written and reasoned about in relative isolation, thus making them more maintainable and potentially easier to reuse.
 
