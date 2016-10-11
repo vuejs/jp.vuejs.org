@@ -4,27 +4,27 @@ type: guide
 order: 12
 ---
 
-## Overview
+# 概要
 
-Vue provides a variety of ways to apply transition effects when items are inserted, updated, or removed from the DOM. This includes tools to:
+Vue は、DOM からアイテムが追加、更新、削除されたときにトランジションエフェクトを適用するための方法を複数提供しています:
 
-- automatically apply classes for CSS transitions and animations
-- integrate 3rd-party CSS animation libraries, such as Animate.css
-- use JavaScript to directly manipulate the DOM during transition hooks
-- integrate 3rd-party JavaScript animation libraries, such as Velocity.js
+- 自動的に CSS トランジションやアニメーションのためのクラスを適用します
+- Animate.css のようなサードパーティの CSS アニメーションライブラリとの連携します
+- トランジションフックが実行されている間、JavaScript を使って直接 DOM 操作を行います
+- Velocity.js のようなサードパーティの JavaScript アニメーションライブラリと連携します
 
-On this page, we'll only cover entering, leaving, and list transitions, but you can see the next section for [managing state transitions](transitioning-state.html).
+このページでは、entering, leaving, リストのトランジションについて扱いますが、次の章では、[状態のトランジション](transitioning-state.html) について、扱います。
 
-## Transitioning Single Elements/Components
+## 単一要素/コンポーネントのトランジション
 
-Vue provides a `transition` wrapper component, allowing you to add entering/leaving transitions for any element or component in the following contexts:
+Vue は、`transition` ラッパーコンポーネントを提供しています。このコンポーネントは、次のコンテキストにある要素やコンポーネントに entering/leaving トランジションを追加することを可能にします:
 
-- Conditional rendering (using `v-if`)
-- Conditional display (using `v-show`)
-- Dynamic components
-- Component root nodes
+- 条件付きのレンダリング (`v-if` を使用)
+- 条件付きの表示 (`v-show` を利用)
+- ダイナミックコンポーネント
+- コンポーネントルートノード (Component root nodes)
 
-This is what a very simple example looks like in action:
+これは、アクションのように見える非常にシンプルな例です:
 
 ``` html
 <div id="demo">
@@ -82,32 +82,32 @@ new Vue({
 </style>
 {% endraw %}
 
-When an element wrapped in a `transition` component is inserted or removed, this is what happens:
+`transition` コンポーネントにラップされた要素が挿入あるいは削除されるとき、次のことが行われますす:
 
-1. Vue will automatically sniff whether the target element has CSS transitions or animations applied. If it does, CSS transition classes will be added/removed at appropriate timings.
+1. Vue は、対象の要素が CSS トランジションあるいはアニメーションが適用されるか自動的に察知します。それがない場合、適切なタイミングで、CSS トランジションのクラスを追加/削除します。
 
-2. If the transition component provided [JavaScript hooks](#JavaScript-Hooks), these hooks will be called at appropriate timings.
+2. もし、トランジションコンポーネントが [JavaScript フック](#JavaScript-Hooks) を提供している場合は、適切なタイミングでそれらのフックが呼ばれます。
 
-3. If no CSS transitions/animations are detected and no JavaScript hooks are provided, the DOM operations for insertion and/or removal will be executed immediately on next frame (Note: this is a browser animation frame, different from Vue's concept of `nextTick`).
+3. もし、CSS トランジション/アニメーションが検出されず、JavaScript フックも提供されない場合、挿入、削除のいずれか、あるいは両方の DOM 操作を次のフレームでただちに実行します。(注意: ここでのフレームはブラウザのアニメーションフレームを指します。 Vue の `nextTick` のコンセプトのそれとは異なるものです)
 
-### Transition Classes
+### トランジションクラス
 
-There are four classes applied for enter/leave transitions.
+これらは、enter/leave トランジションのために適用される4つのクラスです。
 
-1. `v-enter`: Starting state for enter. Applied before element is inserted, removed after one frame.
-2. `v-enter-active`: Active and ending state for enter. Applied before element is inserted, removed when transition/animation finishes.
-3. `v-leave`: Starting state for leave. Applied when leave transition is triggered, removed after one frame.
-4. `v-leave-active`: Active and ending state for leave. Applied when leave transition is triggered, removed when the transition/animation finishes.
+1. `v-enter`: enter の開始状態。要素が挿入される前に適用され、1フレーム後に削除されます。
+2. `v-enter-active`: enter の活性と終了状態。要素が挿入される前に適用され、トランジション/アニメーションが終わる時に削除されます。
+3. `v-leave`: leave の開始状態。leave トランジションがトリガーされるときに適用され、1フレーム後に削除されます。
+4. `v-leave-active`: leave の活性と終了状態。leave トランジションがトリガーされるときに適用され、トランジション/アニメーションが終わる時に削除されます。
 
-![Transition Diagram](/images/transition.png)
+![トランジションダイアグラム](/images/transition.png)
 
-Each of these classes will be prefixed with the name of the transition. Here the `v-` prefix is the default when you use a `<transition>` element with no name. If you use `<transition name="my-transition">` for example, then the `v-enter` class would instead be `my-transition-enter`.
+各クラスは、トランジションの名前が先頭に付きます。`<transition>` 要素に名前がない場合は、デフォルトで `v-` が先頭に付きます。例えば、`<transition name="my-transition">` の場合は、`v-enter` クラスではなく、`my-transition-enter` となります。
 
-`v-enter-active` and `v-leave-active` give you the ability to specify different easing curves for enter/leave transitions, which you'll see an example of in the following section.
+`v-enter-active` と `v-leave-active` は、次のセクションの例で見ることができるような、enter/leave トランジションで異なるイージングカーブの指定を可能にします。
 
-### CSS Transitions
+### CSS トランジション
 
-One of the most common transition types uses CSS transitions. Here's a simple example:
+トランジションを実現する最も一般な方法として、CSS トランジションを使います。これはシンプルな例です:
 
 ``` html
 <div id="example-1">
@@ -130,8 +130,7 @@ new Vue({
 ```
 
 ``` css
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
+/* enter、 leave アニメーションで異なる間隔やタイミング関数を利用することができます */
 .slide-fade-enter-active {
   transition: all .3s ease;
 }
@@ -175,11 +174,11 @@ new Vue({
 </style>
 {% endraw %}
 
-### CSS Animations
+### CSS アニメーション
 
-CSS animations are applied in the same way as CSS transitions, the difference being that `v-enter` is not removed immediately after the element is inserted, but on an `animationend` event.
+CSS アニメーションは、CSS トランジションと同じように適用されますが、異なるのは `v-enter` が要素が挿入された直後に削除されないことです。しかし、`animationend` イベント時には削除されています。
 
-Here's an example, omitting prefixed CSS rules for the sake of brevity:
+これは簡潔にするために CSS ルールの接頭辞を除いた例です。
 
 ``` html
 <div id="example-2">
@@ -314,18 +313,18 @@ new Vue({
 </script>
 {% endraw %}
 
-### Custom Transition Classes
+### カスタムトランジションクラス
 
-You can also specify custom transition classes by providing the following attributes:
+次の属性で、カスタムトランジションクラスを指定できます:
 
 - `enter-class`
 - `enter-active-class`
 - `leave-class`
 - `leave-active-class`
 
-These will override the conventional class names. This is especially useful when you want to combine Vue's transition system with an existing CSS animation library, such as [Animate.css](https://daneden.github.io/animate.css/).
+これらは、クラス名の規約を上書きします。これは、Vue のトランジションシステムと [Animate.css](https://daneden.github.io/animate.css/) のような既存の CSS アニメーションライブラリを組み合わせたいときに特に便利です。
 
-Here's an example:
+これが例になります:
 
 ``` html
 <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
@@ -377,15 +376,15 @@ new Vue({
 </script>
 {% endraw %}
 
-### Using Transitions and Animations Together
+### トランジションとアニメーションを両方使う
 
-Vue needs to attach event listeners in order to know when a transition has ended. It can either be `transitionend` or `animationend`, depending on the type of CSS rules applied. If you are only using one or the other, Vue can automatically detect the correct type.
+Vue はトランジションが終了したことを把握するためのイベントリスナーのアタッチを必要とします。イベントは、適用される CSS ルールに応じて `transitionend` か `animationend` のいずれかのタイプになります。あなたがトランジションとアニメーション、どちらか一方だけ使用する場合は、Vue は自動的に正しいタイプを判断することが出来ます。
 
-However, in some cases you may want to have both on the same element, for example having a CSS animation triggered by Vue, along with a CSS transition effect on hover. In these cases, you will have to explicitly declare the type you want Vue to care about in a `type` attribute, with a value of either `animation` or `transition`.
+しかし、例えば、ホバーの CSS トランジション効果と Vue による CSS アニメーションのトリガーの両方を持つ場合など、時には、同じ要素に両方を使うこともあるかもしれません。これらのケースでは、Vue に扱って欲しいタイプを `type` 属性で明示的に宣言するべきでしょう。この属性の値は、`animation` あるいは `transition` を取ります。
 
-### JavaScript Hooks
+### JavaScript フック
 
-You can also define JavaScript hooks in attributes:
+属性で JavaScript フックを定義することができます:
 
 ``` html
 <transition
@@ -413,8 +412,7 @@ methods: {
   beforeEnter: function (el) {
     // ...
   },
-  // the done callback is optional when
-  // used in combination with CSS
+  // CSS と組み合わせて使う時、done コールバックはオプションです
   enter: function (el, done) {
     // ...
     done()
@@ -433,8 +431,7 @@ methods: {
   beforeLeave: function (el) {
     // ...
   },
-  // the done callback is optional when
-  // used in combination with CSS
+  // CSS と組み合わせて使う時、done コールバックはオプションです
   leave: function (el, done) {
     // ...
     done()
@@ -442,25 +439,25 @@ methods: {
   afterLeave: function (el) {
     // ...
   },
-  // leaveCancelled only available with v-show
+  // v-show と共に使うときだけ leaveCancelled は有効です
   leaveCancelled: function (el) {
     // ...
   }
 }
 ```
 
-These hooks can be used in combination with CSS transitions/animations or on their own.
+これらのフックは、CSS トランジション/アニメーション、または別の何かと組み合わせて使うことができます。
 
-<p class="tip">When using JavaScript-only transitions, **the `done` callbacks are required for the `enter` and `leave` hooks**. Otherwise, they will be called synchronously and the transition will finish immediately.</p>
+<p class="tip">JavaScript のみを利用したトランジションの場合は、**`done` コールバックを `enter` と `leave` フックで呼ぶ必要があります**。さもないと、これらは同期的に呼ばれ、トランジションはただちに終了します。</p>
 
-<p class="tip">It's also a good idea to explicitly add `v-bind:css="false"` for JavaScript-only transitions so that Vue can skip the CSS detection. This also prevents CSS rules from accidentally interfering with the transition.</p>
+<p class="tip">JavaScript のみのトランジションのために明示的に `v-bind:css="false"` を追加するのは良いアイディアです。これは、Vue に CSS 判定をスキップさせます。また、誤って CSS ルールがトランジションに干渉するのを防ぎます。</p>
 
-Now let's dive into an example. Here's a simple JavaScript transition using Velocity.js:
+今から例をみていきましょう。これが Velocity.js を使ったシンプルな JavaScript トランジションの例です:
 
 ``` html
 <!--
-Velocity works very much like jQuery.animate and is
-a great option for JavaScript animations
+Velocity は jQuery.animate と非常によく似ています。
+JavaScript アニメーションのための良い選択です。
 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
 
@@ -555,9 +552,9 @@ new Vue({
 </script>
 {% endraw %}
 
-## Transitions on Initial Render
+## 初期描画時のトランジション
 
-If you also want to apply a transition on the initial render of a node, you can add the `appear` attribute:
+ノードの初期描画時にトランジションを適用したい場合は、`appear` 属性を追加することができます:
 
 ``` html
 <transition appear>
@@ -565,7 +562,7 @@ If you also want to apply a transition on the initial render of a node, you can 
 </transition>
 ```
 
-By default, this will use the transitions specified for entering and leaving. If you'd like however, you can also specify custom CSS classes:
+デフォルトで、これは entering と leaving のために指定されたトランジションが使用されます。あるいは、カスタム CSS クラスを指定することもできます:
 
 ``` html
 <transition
@@ -577,7 +574,7 @@ By default, this will use the transitions specified for entering and leaving. If
 </transition>
 ```
 
-and custom JavaScript hooks:
+そして、カスタム JavaScript フックも指定できます:
 
 ``` html
 <transition
@@ -590,9 +587,9 @@ and custom JavaScript hooks:
 </transition>
 ```
 
-## Transitioning Between Elements
+## 要素間のトランジション
 
-We discuss [transitioning between components](#Transitioning-Between-Components) later, but you can also transition between raw elements using `v-if`/`v-else`. One of the most common two-element transitions is between a list container and a message describing an empty list:
+あとで [コンポーネント間のトランジション](#Transitioning-Between-Components) について説明しますが、`v-if`/`v-else` を使った通常の要素同士でもトランジションできます。最も共通の2つの要素のトランジションの例として、リストコンテナとリストが空と説明するメッセージの間でおこなうものがあります:
 
 ``` html
 <transition>
@@ -603,11 +600,11 @@ We discuss [transitioning between components](#Transitioning-Between-Components)
 </transition>
 ```
 
-This works well, but there's one caveat to be aware of:
+これは動きますが、注意すべき点がひとつあります:
 
-<p class="tip">When toggling between elements that have **the same tag name**, you must tell Vue that they are distinct elements by giving them unique `key` attributes. Otherwise, Vue's compiler will only replace the content of the element for efficiency. Even when technically unnecessary though, **it's considered good practice to always key multiple items within a `<transition>` component.**</p>
+<p class="tip">**同じタグ名**を持つ要素同士でトグルするとき、それらに `key` 属性を指定することで、個別の要素であることを Vue に伝えなければいけません。そうしないと、 Vue のコンパイラは効率化のために要素の内容だけを置き換えようとします。技術的には不要な場合でも、**常に `<transition>` コンポーネント内の複数のアイテムを区別しようとすることは、よい習慣です**</p>
 
-For example:
+例:
 
 ``` html
 <transition>
@@ -620,7 +617,7 @@ For example:
 </transition>
 ```
 
-In these cases, you can also use the `key` attribute to transition between different states of the same element. Instead of using `v-if` and `v-else`, the above example could be rewritten as:
+このケースでは、他にも `key` 属性を同一要素の異なる状態のトランジションのために使うこともできます。`v-if` と `v-else` を使う代わりに、以下のように書きかえることができます:
 
 ``` html
 <transition>
@@ -630,7 +627,7 @@ In these cases, you can also use the `key` attribute to transition between diffe
 </transition>
 ```
 
-It's actually possible to transition between any number of elements, either by using multiple `v-if`s or binding a single element to a dynamic property. For example:
+`v-if` を複数使ったり、ひとつの要素に対して動的プロパティでバインディングをおこなういずれの場合でも、複数個の要素を対象にトランジションすることが可能です。例:
 
 ``` html
 <transition>
@@ -646,7 +643,7 @@ It's actually possible to transition between any number of elements, either by u
 </transition>
 ```
 
-Which could also be written as:
+このようにも書き換えることもできます:
 
 ``` html
 <transition>
@@ -669,9 +666,9 @@ computed: {
 }
 ```
 
-### Transition Modes
+### トランジションノード
 
-There's still one problem though. Try clicking the button below:
+またひとつ問題が残っています。以下のボタンをクリックしてください:
 
 {% raw %}
 <div id="no-mode-demo" class="demo">
@@ -702,9 +699,9 @@ new Vue({
 </style>
 {% endraw %}
 
-As it's transitioning between the "on" button and the "off" button, both buttons are rendered - one transitioning out while the other transitions in. This is the default behavior of `<transition>` - entering and leaving happens simultaneously.
+それは、"on" ボタンと "off" ボタン間でトランジションをおこなうとき、片方のボタンがトランジションアウトして、別の片方がトランジションインするとき、両方のボタンがレンダリングされてしまうことです。これは、`<transition>` のデフォルトの振る舞いです - entering と leaving は同時に起きます。
 
-Sometimes this works great, like when transitioning items are absolutely positioned on top of each other:
+時には、これで問題なく、うまく動作する場合があります。例えば、位置が絶対位置で指定されているアイテムのトランジションをおこなうような場合です:
 
 {% raw %}
 <div id="no-mode-absolute-demo" class="demo">
@@ -744,7 +741,7 @@ new Vue({
 </style>
 {% endraw %}
 
-And then maybe also translated so that they look like slide transitions:
+また、スライドのようなトランジションをおこなう場合も同様です:
 
 {% raw %}
 <div id="no-mode-translate-demo" class="demo">
@@ -790,13 +787,13 @@ new Vue({
 </style>
 {% endraw %}
 
-Simultaneous entering and leaving transitions aren't always desirable though, so Vue offers some alternative **transition modes**:
+ただ、同時に entering と leaving が行われることは必ずしも望ましくないこともあります。このために Vue は代替となる **トランジションモード ** を提供しています:
 
-- `in-out`: New element transitions in first, then when complete, the current element transitions out.
+- `in-out`: 最初に新しい要素がトランジションして、それが完了したら、現在の要素がトランジションアウトする。
 
-- `out-in`: Current element transitions out first, then when complete, the new element transitions in.
+- `out-in`: 最初に現在の要素がトランジションアウトして、それが完了したら、新しい要素がトランジションインする。
 
-Now let's update the transition for our on/off buttons with `out-in`:
+今から、`out-in` を使って、先程の on/off ボタンのトランジションを書き換えてみましょう:
 
 ``` html
 <transition name="fade" mode="out-in">
@@ -833,9 +830,9 @@ new Vue({
 </style>
 {% endraw %}
 
-With one simple attribute addition, we've fixed that original transition without having to add any special styling.
+特別なスタイルの追加無しで、ひとつのシンプルな属性を追加するだけでオリジナルのトランジションを修正できました。
 
-The `in-out` mode isn't used as often, but can sometimes be useful for a slightly different transition effect. Let's try combining it with the slide-fade transition we worked on earlier:
+`in-out` モードは使用されることは多くありませんが、微妙に異なるトランジション効果を実現するために有用です。前の例のスライドフェードトランジションと組み合わせてみましょう:
 
 {% raw %}
 <div id="in-out-translate-demo" class="demo">
@@ -881,11 +878,11 @@ new Vue({
 </style>
 {% endraw %}
 
-Pretty cool, right?
+かなり良いと思いませんか？
 
-## Transitioning Between Components
+## コンポーネント間のトランジション
 
-Transitioning between components is even simpler - we don't even need the `key` attribute. Instead, we just wrap a [dynamic component](components.html#Dynamic-Components):
+コンポーネント間のトランジションは、 `key` 属性が必要ではないのでさらに単純です。代わりに、ただ [動的コンポーネント](components.html#Dynamic-Components) でラップするだけです:
 
 ``` html
 <transition name="component-fade" mode="out-in">
@@ -953,21 +950,21 @@ new Vue({
 </script>
 {% endraw %}
 
-## List Transitions
+## リストトランジション
 
-So far, we've managed transitions for:
+ここまでで、次のトランジションを扱えるようになりました:
 
-- Individual nodes
-- Multiple nodes where only 1 is rendered at a time
+- 独立したノード
+- 一度にレンダリングされる個別の複数のノード
 
-So what about for when we have a whole list of items we want to render simultaneously, for example with `v-for`? In this case, we'll use the `<transition-group>` component. Before we dive into an example though, there are a few things that are important to know about this component:
+それでは、例えば、`v-for` のように同時にレンダリングしたいアイテムがリスト全体の場合はどうすればよいでしょう？　この場合は、`<transition-group>` コンポーネントを使うことができます。例を詳しく見ていく前に、このコンポーネントについて知っておくべき幾つかの重要なことをあげておきましょう。
 
-- Unlike `<transition>`, it renders an actual element: a `<span>` by default. You can change the element that's rendered with the `tag` attribute.
-- Elements inside are **always required** to have a unique `key` attribute
+- `<transition>` と異なり、実際に要素をレンダリングします: `<span>` がデフォルトです。この要素は、`tag` 属性で変えることができます。
+- 中の要素は、`key` 属性を持つことが **必須** です。
 
-### List Entering/Leaving Transitions
+### リスト Entering/Leaving トランジション
 
-Now let's dive into a simple example, transitioning entering and leaving using the same CSS classes we've used previously:
+では、シンプルな例をみていきましょう。これまでに使っていたものと同じ CSS クラスを entering と leaving のトランジションで使います:
 
 ``` html
 <div id="list-demo" class="demo">
@@ -1061,13 +1058,13 @@ new Vue({
 </style>
 {% endraw %}
 
-There's one problem with this example. When you add or remove an item, the ones around it instantly snap into their new place instead of smoothly transitioning. We'll fix that later.
+この例にはひとつ問題があります。アイテムを追加、削除するとき、周りのアイテムはスムーズにトランジションするのではなく、新しい位置にカチッと収まってしまうことです。それは後ほど修正します。
 
-### List Move Transitions
+### リスト移動トランジション
 
-The `<transition-group>` component has another trick up its sleeve. It can not only animate entering and leaving, but also changes in position. The only new concept you need to know to use this feature is the addition of **the `v-move` class**, which is added when items are changing positions. Like the other classes, its prefix will match the value of a provided `name` attribute and you can also manually specify a class with the `move-class` attribute.
+`<transition-group>` コンポーネントは、別の秘策を持っています。 entering と leaving のアニメーションだけでなく、位置の変化も同様にアニメーションできます。この新しい機能を使うために知らないといけない新しいコンセプトは、アイテムの位置が変わる時に追加される**`v-move` クラス**だけです。他のクラスと同様に、接頭辞は `name` 属性値と一致しますし、`move-class` 属性でクラスを指定することもできます。
 
-This class is mostly useful for specifying the transition timing and easing curve, as you'll see below:
+以下で分かるように、このクラスは主にトランジションのタイミングやイージングカーブを指定するのに便利です:
 
 ``` html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
@@ -1132,9 +1129,9 @@ new Vue({
 </style>
 {% endraw %}
 
-This might seem like magic, but under the hood, Vue is using a simple animation technique called [FLIP](https://aerotwist.com/blog/flip-your-animations/) to smoothly transition elements from their old position to their new position using transforms.
+これは魔法のように見えるかもしれませんが、内部で Vue は transforms を使って、前の位置から新しい位置へ要素を滑らかにトランジションさせるために [FLIP](https://aerotwist.com/blog/flip-your-animations/) と呼ばれる単純なアニメーションテクニックを使っています。
 
-We can combine this technique with our previous implementation to animate every possible change to our list!
+これまでの実装とこのテクニックを組み合わせることで、リストに対する全ての変更をアニメーションさせることができます！
 
 ``` html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
@@ -1245,9 +1242,9 @@ new Vue({
 </style>
 {% endraw %}
 
-<p class="tip">One important note is that these FLIP transitions do not work with elements set to `display: inline`. As an alternative, you can use `display: inline-block` or place elements in a flex context.</p>
+<p class="tip">一点、FLIP トランジションは `display: inline` が指定されていると動かないことに注意しましょう。 代わりに `display: inline-block` を使うか、flex コンテキストに要素を置き換えることで動かすことができます。</p>
 
-These FLIP animations are also not limited to a single axis. Items in a multidimensional grid can transitioned [just as easily](https://jsfiddle.net/chrisvfritz/sLrhk1bc/):
+FLIP アニメーションは、単一の軸だけに限定されるものではありません。多次元のグリッドにあるアイテムも [同じように簡単に](https://jsfiddle.net/chrisvfritz/sLrhk1bc/) トランジションできます:
 
 {% raw %}
 <div id="sudoku-demo" class="demo">
@@ -1310,9 +1307,9 @@ new Vue({
 </style>
 {% endraw %}
 
-### Staggering List Transitions
+### スタッガリングリストトランジション
 
-By communicating with JavaScript transitions through data attributes, it's also possible to stagger transitions in a list:
+data 属性を介して、JavaScript トランジションとやりとりを行うことで、リスト内の遷移をずらすことが可能です:
 
 ``` html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
@@ -1456,11 +1453,11 @@ new Vue({
 </script>
 {% endraw %}
 
-## Reusable Transitions
+## トランジションの再利用
 
-Transitions can be reused through Vue's component system. To create a reusable transition, all you have to do is place a `<transition>` or `<transition-group>` component at the root, then pass any children into the transition component.
+Vue のコンポーネントシステムを通して、トランジションを再利用することができます。再利用できるトランジションを生成するには、ルートに `<transition>` や `<transition-group>` を配置しなければいけません。そして、トランジションコンポーネントに子を渡します。
 
-Here's an example using a template component:
+ここにテンプレートコンポーネントを使った例があります:
 
 ``` js
 Vue.component('my-special-transition', {
@@ -1485,7 +1482,7 @@ Vue.component('my-special-transition', {
 })
 ```
 
-And functional components are especially well-suited to this task:
+そして、ファンクショナルコンポーネントは、このタスクにとてもよく適しています:
 
 ``` js
 Vue.component('my-special-transition', {
@@ -1510,9 +1507,9 @@ Vue.component('my-special-transition', {
 })
 ```
 
-## Dynamic Transitions
+## ダイナミックトランジション
 
-Yes, even transitions in Vue are data-driven! The most basic example of a dynamic transition binds the `name` attribute to a dynamic property.
+はい、Vue ではトランジションさえも、データドリブンです！　ダイナミックトランジションの最も基本的な例は、`name` 属性をダイナミックプロパティとしてバインドすることでしょう。
 
 ```html
 <transition v-bind:name="transitionName">
@@ -1520,9 +1517,9 @@ Yes, even transitions in Vue are data-driven! The most basic example of a dynami
 </transition>
 ```
 
-This can be useful when you've defined CSS transitions/animations using Vue's transition class conventions and simply want to switch between them.
+これは、Vue のトランジションクラス規約を使って CSS トランジション/アニメーションを定義したとき、それらをシンプルに切り替える場合に便利でしょう。
 
-Really though, any transition attribute can be dynamically bound. And it's not just attributes. Since event hooks are just methods, they have access to any data in the context. That means depending on the state of your component, your JavaScript transitions can behave differently.
+任意のトランジション属性を動的にバインドできますが、それは属性だけに限りません。イベントフックはメソッドなので、コンテキストのいかなるデータにもアクセスできます。これは、コンポーネントの状態に応じて、JavaScript トランジションが異なる振る舞いをすることを意味します。
 
 ``` html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
@@ -1652,5 +1649,4 @@ new Vue({
 </script>
 {% endraw %}
 
-Finally, the ultimate way of creating dynamic transitions is through components that accept props to change the nature of the transition(s) to be used. It may sound cheesy, but the only limit really is your imagination.
-
+動的なトランジションを作成する究極の方法は、プロパティでトランジションの性質を変えながら試行錯誤することです。チープに聞こえるかもしれませんが、本当の限界はあなたの想像力だけなのです。
