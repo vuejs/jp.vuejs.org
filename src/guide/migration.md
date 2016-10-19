@@ -13,14 +13,14 @@ order: 24
 > どこから移行をはじめるべきですか？
 
 1. 現在のプロジェクト上で、[移行ヘルパー](https://github.com/vuejs/vue-migration-helper)を実行します。
-[ ] We've carefully minified and compressed a senior Vue dev into a simple command line interface.
-そしてそれは、非推奨のパターンを認識するたびに、移行をサジェストし、そして詳しい情報へのリンクを提供します。
+私たちは以前の Vue 開発を単純なコマンドライン インターフェースに最小構成で注意深く詰め込みました。
+それは、非推奨のパターンを認識するたびに移行をサジェストし、その上で詳しい情報へのリンクを提供します。
 
-2. その後、このページのサイドバーの目次より、あなたが影響を受ける可能性のあるトピックを参照してください。移行ヘルパーーが何もキャッチしていない場合、それは素晴らしいことです。
+2. その後、このページのサイドバーの目次より、あなたが影響を受ける可能性のあるトピックを参照してください。移行ヘルパーが何も検出していない場合、それは素晴らしいことです。
 
 3. もし、テストがある場合は、それらを実行し、失敗したものを参照してください。テストがない場合は、ブラウザ上でアプリケーションを開き、警告やエラーに対して、あなた自身の目で確認してください。
 
-4. そろそろ、あなたのアプリケーションは完全に移行されるべきでしょう。もし、あなたがよりいっそう飢えている場合は、このページを残りの部分を読む、もしくは新しく、かつ改良されたガイドに [the beginning](index.html) から飛び込むこともできます。あなたは既に基本となるコンセプトに精通しているので、多くの場合、拾い読みすることとなります。
+4. そろそろ、あなたのアプリケーションは完全に移行されるべきでしょう。もし、あなたがよりいっそう飢えている場合は、このページを残りの部分を読む、もしくは新しく、かつ改良されたガイドに「[はじめに](index.html)」から飛び込むこともできます。あなたは既に基本となるコンセプトに精通しているので、多くの場合、拾い読みすることとなります。
 
 > Vue 1.x のアプリケーションを 2.0 に移行するにはどのくらいの時間がかかりますか？
 
@@ -34,12 +34,11 @@ order: 24
 
 > もし Vue 2 へアップグレードする場合、 Vuex および Vue-Router もアップグレードする必要がありますか？
 
-Vue-Router 2 は、 Vue 2 のみに互換性があるため、その答えは yes です、同様に、 [migration path for Vue-Router](migration-vue-router.html) に従う必要があります。
+Vue-Router 2は、 Vue 2のみに互換性があるため、アップグレードする必要があります。同様に、 [migration path for Vue-Router](migration-vue-router.html) に従う必要があります。
 幸いなことに、ほとんどのアプリケーションは、ルーターに関するコードが多くないため、この作業が1時間以上かかることはおそらくありません。
-Only Vue-Router 2 is compatible with Vue 2, so yes, you'll have to follow the [migration path for Vue-Router](migration-vue-router.html) as well. Fortunately, most applications don't have a lot of router code, so this likely won't take more than an hour.
 
 Vuex については、バージョン 0.8 は Vue 2 との互換性があるため、アップグレードは強制ではありません。
-[ ] The only reason you may want to upgrade immediately is to take advantage of the new features in Vuex 2, such as modules and reduced boilerplate.
+Vuex 2に導入された、新たな機能やボイラープレートを使用したい場合でないかぎり、直ちにアップグレードする必要はないでしょう。
 
 ## テンプレート
 
@@ -65,7 +64,7 @@ Vuex については、バージョン 0.8 は Vue 2 との互換性があるた
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>アップグレード後に end-to-end のテストスイートやアプリケーションを実行し、テンプレート内の複数のルート要素に対してのコンソールの警告を探します。</p>
+  <p>アップグレード後に end-to-end のテストスイートや、それに準ずるアプリケーションを実行し、テンプレート内の複数のルート要素に対してのコンソールの警告を探します。</p>
 </div>
 {% endraw %}
 
@@ -161,8 +160,7 @@ destroyed: function () {
 
 ### `ready` <sup>非推奨</sup>
 
-代わりに、新しい `mounted` を使用します。
-Use the new `mounted` hook instead. It should be noted though that with `mounted`, there's no guarantee to be in-document. For that, also include `Vue.nextTick`/`vm.$nextTick`. For example:
+Use the new mounted hook instead. It should be noted though that with mounted, there’s no guarantee to be in-document. For that, also include Vue.nextTick/vm.$nextTick. For example:
 
 ``` js
 mounted: function () {
@@ -183,23 +181,27 @@ mounted: function () {
 
 ### 配列においての `v-for` の引数の順序
 
-`index` を含む場合、引数を `(index, value)` の順序で使用していました。それは今は、 `(value, index)` となり、 JavaScript ネイティブの `forEach` や `map` と一致するようになりました。
+`index` を含む場合、引数を `(index, value)` の順序で使用していました。それは今は、 `(value, index)` となり、 JavaScript ネイティブの `forEach` や `map` と一貫性を持つようになりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated argument order. Note that if you name your index arguments something unusual like <code>position</code> or <code>num</code>, the helper will not flag them.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨な引数の順序を見つけます。
+  注意：
+  Note that if you name your index arguments something unusual like <code>position</code> or <code>num</code>, the helper will not flag them.</p>
 </div>
 {% endraw %}
 
 ### オブジェクトにおいての `v-for` の引数の順序
 
-`key` を含む場合、引数を `(key, value)` の順序で使用していました。それは今は、 `(value, key)` となり、 lodash などの一般的なオブジェクトのイテレータと一致するようになりました。
+`key` を含む場合、引数を `(key, value)` の順序で使用していました。それは今は、 `(value, key)` となり、 lodash などの一般的なオブジェクトのイテレータと一貫性を持つようになりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated argument order. Note that if you name your key arguments something like <code>name</code> or <code>property</code>, the helper will not flag them.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨な引数の順序を見つけます。
+  注意：
+  Note that if you name your key arguments something like <code>name</code> or <code>property</code>, the helper will not flag them.</p>
 </div>
 {% endraw %}
 
@@ -211,23 +213,22 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of these deprecated variables. If you miss any, you should also see <strong>console errors</strong> such as: <code>Uncaught ReferenceError: $index is not defined</code></p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、これらの非推奨な変数を見つけます。もし間違いがある場合、 <strong>console errors</strong> などが表示されます: <code>Uncaught ReferenceError: $index is not defined</code></p>
 </div>
 {% endraw %}
 
 ### `track-by` <sup>非推奨</sup>
 
 `track-by` は `key` に置き換えられました。
+他の属性と同様に、 `v-bind` または `:` プリフィックスがない場合は文字列として処理されます。
+殆どの場合、式として動的なバインディングを行いたいでしょう。その場合、例えば、以下の代わりに
 
-[x] `track-by` has been replaced with `key`,
-[ ] which works like any other attribute: without the `v-bind:` or `:` prefix, it is treated as a literal string.
-[ ] In most cases, you'd want to use a dynamic binding which expects a full expression instead of a key. For example, in place of:
 
 ``` html
 <div v-for="item in items" track-by="id">
 ```
 
-今はこう書きます:
+このように使用します:
 
 ``` html
 <div v-for="item in items" v-bind:key="item.id">
@@ -240,9 +241,9 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### `v-for` Range Values
+### `v-for` の値の範囲
 
-以前は、 `v-for="number in 10"` がもつ `number` は0ではじまり、9で終わっていましたが、1ではじまり10で終わるようになりました。
+以前は、 `v-for="number in 10"` がもつ `number` は0ではじまり、9で終わっていましたが、1ではじまり、10で終わるようになりました。
 
 {% raw %}
 <div class="upgrade-path">
@@ -255,7 +256,7 @@ mounted: function () {
 
 ### `coerce` Prop オプション <sup>非推奨</sup>
 
-If you want to coerce a prop, setup a local computed value based on it instead. For example, instead of:
+もしあなたが prop に対して `coerce` オプションを利用したい場合、代わりにそのコンポーネント内に、その値に基づく computed value を設定してください。例えば、以下の代わりに:
 
 ``` js
 props: {
@@ -270,7 +271,7 @@ props: {
 }
 ```
 
-このように書きます:
+このように使用します:
 
 ``` js
 props: {
@@ -288,64 +289,68 @@ computed: {
 これには、いくつかの利点があります:
 
 - prop の元の値にアクセスし続けることができます。
-- You are forced to be more explicit, by giving your coerced value a name that differentiates it from the value passed in the prop.
+- 強制された値に別名をつけることによって、よりはっきりと prop で与えられた値とは違うことがわかるようになります。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>coerce</code> option.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>coerce</code> オプションを見つけます。</p>
 </div>
 {% endraw %}
 
 ### `twoWay` Prop オプション <sup>非推奨</sup>
 
-Props are now always one-way down. To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding. For more information, see:
+Prop は今や、全て単方向となりました。
+To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding.
+より詳細な情報については、以下を参照します:
 
-- [Custom component events](components.html#Custom-Events)
-- [Custom input components](components.html#Form-Input-Components-using-Custom-Events) (using component events)
-- [Global state managment](state-management.html)
+- [カスタムイベント](components.html#カスタムイベント)
+- [カスタム入力コンポーネント](components.html#カスタム入力コンポーネント) (コンポーネントイベントを使用)
+- [状態管理](state-management.html)
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>twoWay</code> option.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>twoWay</code> オプションを見つけます。</p>
 </div>
 {% endraw %}
 
 ### `v-bind` への `.once` と `.sync` 修飾子 <sup>非推奨</sup>
 
-Props are now always one-way down. To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding. For more information, see:
+Props are now always one-way down.
+To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding.
+For more information, see:
 
-- [Custom component events](components.html#Custom-Events)
-- [Custom input components](components.html#Form-Input-Components-using-Custom-Events) (using component events)
-- [Global state managment](state-management.html)
+- [カスタムイベント](components.html#カスタムイベント)
+- [カスタム入力コンポーネント](components.html#カスタム入力コンポーネント) (コンポーネントイベントを使用)
+- [状態管理](state-management.html)
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>.once</code> and <code>.sync</code> modifiers.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>.once</code> と <code>.sync</code> 修飾子を見つけます。</p>
 </div>
 {% endraw %}
 
-### Prop Mutation <sup>非推奨</sup>
+### Prop のミューテーション <sup>非推奨</sup>
 
 Mutating a prop locally is now considered an anti-pattern, e.g. declaring a prop and then setting `this.myProp = 'someOtherValue'` in the component. Due to the new rendering mechanism, whenever the parent component re-renders, the child component's local changes will be overwritten.
 
-Most use cases of mutating a prop can be replaced by one of these options:
+prop のミューテーションのユースケースのほとんどの場合は、以下のオプションのいずれかで置き換えることができます:
 
-- a data property, with the prop used to set its default value
-- a computed property
+- デフォルト値を設定したデータプロパティ
+- 算出プロパティ
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite or app after upgrading and look for <strong>console warnings</strong> about prop mutations.</p>
+  <p>アップグレード後に end-to-end のテストスイートや、それに準ずるアプリケーションを実行し、 Prop のミューテーションに関するコンソールの警告を探します。</p>
 </div>
 {% endraw %}
 
 ### ルートインスタンス上での Props <sup>非推奨</sup>
 
-On root Vue instances (i.e. instances created with `new Vue({ ... })`), you must use `propsData` instead instead of `props`.
+ルートの Vue インスタンス(言い換えれば、 `new Vue({ ... })` によって作成されたインスタンス)においては、 `props` の代わりに `propsData` を使用します。
 
 {% raw %}
 <div class="upgrade-path">
@@ -499,7 +504,7 @@ Another advantage of this approach is there will be times when debouncing isn't 
 </div>
 {% endraw %}
 
-### `v-model` への `lazy` or `number` Param Attributes <sup>非推奨</sup>
+### `v-model` への `lazy` や `number` 属性 <sup>非推奨</sup>
 
 The `lazy` and `number` param attributes are now modifiers, to make it more clear what That means instead of:
 
@@ -508,7 +513,7 @@ The `lazy` and `number` param attributes are now modifiers, to make it more clea
 <input v-model="age" type="number" number>
 ```
 
-このように使用します:
+このように置き換えます:
 
 ``` html
 <input v-model.lazy="name">
@@ -522,7 +527,7 @@ The `lazy` and `number` param attributes are now modifiers, to make it more clea
 </div>
 {% endraw %}
 
-### `v-model` with Inline `value` <sup>非推奨</sup>
+### `v-model` においてのインライン `value` <sup>非推奨</sup>
 
 `v-model` はもはや、 インラインの `value` 属性を尊重しません。予測可能性のため、それは代わりに、常に Vue インスタンスをデータをソースとして扱います。
 
@@ -548,18 +553,18 @@ will render with a value of "bar" instead of "foo". The same goes for a `<textar
 </textarea>
 ```
 
-You should ensure your initial value for `text` is "hello world".
+この場合の `text` の初期値が "hello world" であることが確認できます。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite or app after upgrading and look for <strong>console warnings</strong> about inline value attributes with <code>v-model</code>.</p>
+  <p>アップグレード後に end-to-end のテストスイートや、それに準ずるアプリケーションを実行し、 <code>v-model</code> においてのインライン value 属性に対してのコンソールの警告を探します。</p>
 </div>
 {% endraw %}
 
-### `v-model` への `v-for` Iterated Primitive Values <sup>非推奨</sup>
+### `v-model` への `v-for` プリミティブ値のイテレート <sup>非推奨</sup>
 
-Cases like this no longer work:
+このようなケースは、もはや動作しません:
 
 ``` html
 <input v-for="str in strings" v-model="str">
@@ -655,11 +660,11 @@ On the other hand, `$refs` are designed primarily for programmatic access in Jav
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>v-else</code> with <code>v-show</code>.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>v-else</code> への <code>v-show</code> を見つけます。</p>
 </div>
 {% endraw %}
 
-## Custom Directives
+## カスタムディレクティブ
 
 Directives have a greatly reduced scope of responsibility: they are now only used for applying low-level direct DOM manipulations. In most cases, you should prefer using components as the main code-reuse abstraction.
 
@@ -678,9 +683,9 @@ Fortunately, since the new directives are much simpler, you can master them more
 </div>
 {% endraw %}
 
-## Transitions
+## トランジション
 
-### `transition` Attribute <sup>非推奨</sup>
+### `transition` 属性 <sup>非推奨</sup>
 
 Vue's transition system has changed quite drastically and now uses `<transition>` and `<transition-group>` wrapper elements, rather than the `transition` attribute. It's recommended to read the new [Transitions guide](transitions.html) to learn more.
 
@@ -698,11 +703,11 @@ With the new transition system, you can now just [use components for reusable tr
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.transition</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.transition</code> を見つけます。</p>
 </div>
 {% endraw %}
 
-### Transition `stagger` Attribute <sup>非推奨</sup>
+### `stagger` トランジション属性 <sup>非推奨</sup>
 
 If you need to stagger list transitions, you can control timing by setting and accessing a `data-index` (or similar attribute) on an element. See [an example here](transitions.html#Staggering-List-Transitions).
 
@@ -808,13 +813,13 @@ This pattern can serve as a replacement for `$dispatch` and `$broadcast` in simp
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>$dispatch</code> and <code>$broadcast</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>$dispatch</code> and <code>$broadcast</code> を見つけます。</p>
 </div>
 {% endraw %}
 
 ## フィルタ
 
-### Filters Outside Text Interpolations <sup>非推奨</sup>
+### フィルタ外でのテキストの展開 <sup>非推奨</sup>
 
 Filters can now only be used inside text interpolations (`{% raw %}{{ }}{% endraw %}` tags). In the past we've found using filters within directives such as `v-model`, `v-on`, etc led to more complexity than convenience. For list filtering on `v-for`, it's also better to move that logic into JavaScript as computed properties, so that it can be reused throughout your component.
 
@@ -912,13 +917,13 @@ this.users.filter(function (user) {
 
 #### `orderBy` フィルタの置き換え
 
-Instead of:
+このような記述の代わりに:
 
 ``` html
 <p v-for="user in users | orderBy 'name'">{{ user.name }}</p>
 ```
 
-Use [lodash's `orderBy`](https://lodash.com/docs/4.15.0#orderBy) (or possibly [`sortBy`](https://lodash.com/docs/4.15.0#sortBy)) in a computed property:
+算術プロパティへ、[lodash の `orderBy`](https://lodash.com/docs/4.15.0#orderBy) (もしくは [`sortBy`](https://lodash.com/docs/4.15.0#sortBy))を使用します。
 
 ``` html
 <p v-for="user in orderedUsers">{{ user.name }}</p>
@@ -966,7 +971,7 @@ We surround the arguments with parentheses and delimit the arguments with commas
 </div>
 {% endraw %}
 
-### 内臓フィルタ <sup>非推奨</sup>
+### 内蔵フィルタ <sup>非推奨</sup>
 
 Although filters within text interpolations are still allowed, all of the filters have been removed. Instead, it's recommended to use more specialized libraries for solving problems in each domain (e.g. [`date-fns`](https://date-fns.org/) to format dates and [`accounting`](http://openexchangerates.github.io/accounting.js/) for currencies).
 
@@ -1038,7 +1043,7 @@ In many cases though, you'll still run into strange behavior (e.g. `0.035.toFixe
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite or app after upgrading and look for <strong>console warnings</strong> about duplicate slots <code>v-model</code>.</p>
+  <p>アップグレード後に end-to-end のテストスイートや、それに準ずるアプリケーションを実行し、 <code>v-model</code> においての重複スロットに対してのコンソールの警告を探します。</p>
 </div>
 {% endraw %}
 
@@ -1091,27 +1096,27 @@ When used together with `<transition>`, make sure to nest it inside:
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find <code>keep-alive</code> attributes.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>keep-alive</code> 属性を見つけます。</p>
 </div>
 {% endraw %}
 
-## Interpolation
+## 展開
 
-### Interpolation within Attributes <sup>非推奨</sup>
+### 属性内での展開 <sup>非推奨</sup>
 
-Interpolation within attributes is no longer valid. For example:
+属性内での展開は、もはや有効ではありません。例えば、以下の場合:
 
 ``` html
 <button v-bind:class="btn btn-{{ size }}"></button>
 ```
 
-Should either be updated to use an inline expression:
+いずれかのインライン式を使用するように更新する必要があります:
 
 ``` html
 <button v-bind:class="'btn btn-' + size"></button>
 ```
 
-Or a data/computed property:
+もしくはデータ/算出プロパティを使用します:
 
 ``` html
 <button v-bind:class="buttonClasses"></button>
@@ -1128,29 +1133,29 @@ computed: {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of interpolation used within attributes.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、属性内で使用されている interpolation を見つけます。</p>
 </div>
 {% endraw %}
 
-### HTML Interpolation <sup>非推奨</sup>
+### HTML の展開 <sup>非推奨</sup>
 
-HTML interpolations (`{% raw %}{{{ foo }}}{% endraw %}`) have been deprecated in favor of the [`v-html` directive](/api/#v-html).
+新たな [`v-html` ディレクティブ](/api/#v-html) を支持することによって、 HTML の展開(`{% raw %}{{{ foo }}}{% endraw %}`) は非推奨となりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find HTML interpolations.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 HTML の展開が行われているコードを検索します。</p>
 </div>
 {% endraw %}
 
-### One-Time Bindings <sup>非推奨</sup>
+### ワンタイムバインディング <sup>非推奨</sup>
 
-One time bindings (`{% raw %}{{* foo }}{% endraw %}`) have been deprecated in favor of the new [`v-once` directive](/api/#v-once).
+新たな [`v-once` ディレクティブ](/api/#v-once) を支持することによって、ワンタイムバインディング  (`{% raw %}{{* foo }}{% endraw %}`) は非推奨となりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find one-time bindings.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、ワンタイムバインディングを見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1171,7 +1176,7 @@ If you were previously relying on `vm.$watch` to do something with the DOM after
 
 ### `vm.$set`
 
-The former `vm.$set` behavior has been deprecated and it is now just an alias for [`Vue.set`](/api/#Vue-set).
+`vm.$set` は非推奨となっており、 [`Vue.set`](/api/#Vue-delete) という名称になっています。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1182,7 +1187,7 @@ The former `vm.$set` behavior has been deprecated and it is now just an alias fo
 
 ### `vm.$delete`
 
-The former `vm.$delete` behavior has been deprecated and it is now just an alias for [`Vue.delete`](/api/#Vue-delete)
+`vm.$delete` は非推奨となっており、 [`Vue.delete`](/api/#Vue-delete) という名称になっています。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1262,7 +1267,7 @@ It is now prohibited to replace a component instance's root $data. This prevents
 
 ### `vm.$get` <sup>非推奨</sup>
 
-Just retrieve reactive data directly.
+リアクティブなデータを直接取得します。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1311,7 +1316,7 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 myElement.parentNode.insertBefore(vm.$el, myElement.nextSibling)
 ```
 
-また、もし `myElement` が最後の要素の場合:
+もし `myElement` が最後の要素の場合は、以下のように対処します:
 
 ``` js
 myElement.parentNode.appendChild(vm.$el)
@@ -1339,11 +1344,12 @@ vm.$el.remove()
 </div>
 {% endraw %}
 
-## Meta Instance Methods
+## メタインスタンスメソッド
 
 ### `vm.$eval` <sup>非推奨</sup>
 
-No real use. If you do happen to rely on this feature somehow and aren't sure how to work around it, post on [the forum](http://forum.vuejs.org/) for ideas.
+この機能が実際に使用されることはありません。
+もしあなたがこの機能を利用する機会があり、それを回避する方法が思いつかない場合は、[フォーラム](http://forum.vuejs.org/)にてアイデアを募ってください。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1354,7 +1360,8 @@ No real use. If you do happen to rely on this feature somehow and aren't sure ho
 
 ### `vm.$interpolate` <sup>非推奨</sup>
 
-No real use. If you do happen to rely on this feature somehow and aren't sure how to work around it, post on [the forum](http://forum.vuejs.org/) for ideas.
+この機能が実際に使用されることはありません。
+もしあなたがこの機能を利用する機会があり、それを回避する方法が思いつかない場合は、[フォーラム](http://forum.vuejs.org/)にてアイデアを募ってください。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1365,7 +1372,7 @@ No real use. If you do happen to rely on this feature somehow and aren't sure ho
 
 ### `vm.$log` <sup>非推奨</sup>
 
-Use the [Vue Devtools](https://github.com/vuejs/vue-devtools) for the optimal debugging experience.
+最適なデバッグのために、 [Vue Devtools](https://github.com/vuejs/vue-devtools) を利用してください。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1379,6 +1386,7 @@ Use the [Vue Devtools](https://github.com/vuejs/vue-devtools) for the optimal de
 ### `replace: false` <sup>非推奨</sup>
 
 Components now always replace the element they're bound to. To simulate the behavior of `replace: false`, you can wrap your root component with an element similar to the one you're replacing. For example:
+例えば以下の場合:
 
 ``` js
 new Vue({
@@ -1387,7 +1395,7 @@ new Vue({
 })
 ```
 
-Or with a render function:
+render 関数で行います:
 
 ``` js
 new Vue({
@@ -1405,7 +1413,7 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>replace: false</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>replace: false</code> を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1418,7 +1426,7 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.debug</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.debug</code> を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1429,30 +1437,33 @@ new Vue({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.async</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.async</code> を見つけます。</p>
 </div>
 {% endraw %}
 
 ### `Vue.config.delimiters` <sup>非推奨</sup>
 
-[component-level option](/api/#delimiters) として作り直されました。
+[コンポーネントレベルのオプション](/api/#delimiters) として作り直されました。
 これは、サードパーティのコンポーネントを壊すことなく、アプリケーション内で代替のデリミタを使用することができます。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.delimiters</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.delimiters</code> を見つけます。</p>
 </div>
 {% endraw %}
 
 ### `Vue.config.unsafeDelimiters` <sup>非推奨</sup>
 
-HTML interpolation has been [deprecated in favor of `v-html`](#HTML-Interpolation-deprecated).
+[`v-html` を支持すること](#HTML-Interpolation-deprecated) によって、 HTML の展開は非推奨となりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>Vue.config.unsafeDelimiters</code>. After this, the helper will also find instances of HTML interpolation so that you can replace them with `v-html`.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.config.delimiters</code> を見つけます。
+    その後、ヘルパーは <code>v-html</code> に置き換えることができる HTML の展開が行われているコードを検索します。
+  </p>
 </div>
 {% endraw %}
 
@@ -1465,7 +1476,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>アップグレード後に end-to-end のテストスイートやアプリケーションを実行し、 <code>Vue.extend</code> への <code>el</code> に対してのコンソールの警告を探します。</p>
+  <p>アップグレード後に end-to-end のテストスイートやアプリケーションを実行し、 <code>Vue.extend</code> への <code>el</code> に関するコンソールの警告を探します。</p>
 </div>
 {% endraw %}
 
@@ -1476,7 +1487,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.elementDirective</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.elementDirective</code> を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1487,6 +1498,6 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.partial</code> を見つけます。
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>Vue.partial</code> を見つけます。</p>
 </div>
 {% endraw %}
