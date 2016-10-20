@@ -707,7 +707,7 @@ With the new transition system, you can now just [use components for reusable tr
 </div>
 {% endraw %}
 
-### `stagger` トランジション属性 <sup>非推奨</sup>
+### `stagger` 属性 <sup>非推奨</sup>
 
 If you need to stagger list transitions, you can control timing by setting and accessing a `data-index` (or similar attribute) on an element. See [an example here](transitions.html#Staggering-List-Transitions).
 
@@ -827,7 +827,7 @@ In general, whenever something can be achieved in plain JavaScript, we want to a
 
 #### `debounce` フィルタの置き換え
 
-Instead of:
+このような記述の代わりに:
 
 ``` html
 <input v-on:keyup="doStuff | debounce 500">
@@ -841,7 +841,11 @@ methods: {
 }
 ```
 
-Use [lodash's `debounce`](https://lodash.com/docs/4.15.0#debounce) (or possibly [`throttle`](https://lodash.com/docs/4.15.0#throttle)) to directly limit calling the expensive method. You can achieve the same as above like this:
+[loadshの `debounce` メソッド](https://lodash.com/docs/4.15.0#debounce)(または可能であれば [`throttle`](https://lodash.com/docs/4.15.0#throttle))を直接メソッドに対して使用します。
+その際、が可能です:
+
+Use [lodash's `debounce`] (or possibly [`throttle`] to directly limit calling the expensive method.
+    You can achieve the same as above like this:
 
 ``` html
 <input v-on:keyup="doStuff">
@@ -855,17 +859,18 @@ methods: {
 }
 ```
 
-For more on the advantages of this strategy, see [the example here with `v-model`](#v-model-with-debounce-deprecated).
+この方法に対するより詳細な利点は[the example here with `v-model`](#v-model-with-debounce-deprecated)を参照してください。
+For more on the advantages of this strategy, see
 
 #### `limitBy` フィルタの置き換え
 
-Instead of:
+このような記述の代わりに:
 
 ``` html
 <p v-for="item in items | limitBy 10">{{ item }}</p>
 ```
 
-Use JavaScript's built-in [`.slice` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples) in a computed property:
+JavaScript内蔵の [`.slice` メソッド](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples)を算術プロパティへ使用します:
 
 ``` html
 <p v-for="item in filteredItems">{{ item }}</p>
@@ -881,13 +886,13 @@ computed: {
 
 #### `filterBy` フィルタの置き換え
 
-Instead of:
+このような記述の代わりに:
 
 ``` html
 <p v-for="user in users | filterBy searchQuery in 'name'">{{ user.name }}</p>
 ```
 
-Use JavaScript's built-in [`.filter` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Examples) in a computed property:
+JavaScript内蔵の [`.filter` メソッド](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples) を算術プロパティへ使用します:
 
 ``` html
 <p v-for="user in filteredUsers">{{ user.name }}</p>
@@ -1064,7 +1069,7 @@ Content inserted via named `<slot>` no longer preserves the `slot` attribute. Us
 
 ### `keep-alive` 属性 <sup>非推奨</sup>
 
-`keep-alive` はもはや、特別な属性ではなく、 `<transition>` と同様に、コンポーネントのラッパーではありません。例えば:
+`keep-alive` はもはや、特別な属性ではなく、 `<transition>` と同様に、コンポーネントのラッパーではありません。例えば以下の場合:
 
 ``` html
 <keep-alive>
@@ -1081,7 +1086,10 @@ This makes it possible to use `<keep-alive>` on multiple conditional children:
 </keep-alive>
 ```
 
-<p class="tip">When `<keep-alive>` has multiple children, they should eventually evaluate to a single child. Any child other than the first one will simply be ignored.</p>
+<p class="tip">
+    `<keep-alive>` が複数の子要素を持っている場合、
+    When `<keep-alive>` has multiple children, they should eventually evaluate to a single child. Any child other than the first one will simply be ignored.
+</p>
 
 When used together with `<transition>`, make sure to nest it inside:
 
@@ -1272,7 +1280,11 @@ It is now prohibited to replace a component instance's root $data. This prevents
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$get</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$get</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
+  </p>
 </div>
 {% endraw %}
 
@@ -1289,7 +1301,9 @@ myElement.appendChild(vm.$el)
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$appendTo</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$appendTo</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1304,7 +1318,9 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$before</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$before</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1325,7 +1341,9 @@ myElement.parentNode.appendChild(vm.$el)
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$after</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$after</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1340,7 +1358,9 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$remove</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$remove</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1354,7 +1374,9 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$eval</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$eval</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1366,7 +1388,9 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$interpolate</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$interpolate</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1377,7 +1401,9 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>vm.$log</code>. If you miss any, you'll see <strong>console errors</strong>.</p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$log</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1385,8 +1411,7 @@ vm.$el.remove()
 
 ### `replace: false` <sup>非推奨</sup>
 
-Components now always replace the element they're bound to. To simulate the behavior of `replace: false`, you can wrap your root component with an element similar to the one you're replacing. For example:
-例えば以下の場合:
+コンポーネントは常に紐づく要素に置き換えられます。 `replace:false` の挙動を再現するには、コンポーネントのルートを置き換えたい要素で囲みます。例えば、このような場合は:
 
 ``` js
 new Vue({
@@ -1421,7 +1446,7 @@ new Vue({
 
 ### `Vue.config.debug` <sup>非推奨</sup>
 
-もはや、警告に対して、必要に応じてデフォルトでスタックトレースが付随しています。
+警告に対して、必要に応じてデフォルトでスタックトレースが付随しています。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1432,7 +1457,7 @@ new Vue({
 
 ### `Vue.config.async` <sup>非推奨</sup>
 
-非同期処理は現在、レンダリングパフォーマンスのために必要とされます。
+非同期処理は現在では、レンダリングパフォーマンスのために必要とされます。
 
 {% raw %}
 <div class="upgrade-path">
