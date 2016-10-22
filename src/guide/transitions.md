@@ -1,7 +1,7 @@
 ---
 title: トランジション効果
 type: guide
-order: 12
+order: 13
 ---
 
 # 概要

@@ -1,7 +1,7 @@
 ---
 title: Render 関数
 type: guide
-order: 14
+order: 15
 ---
 
 ## 基本
@@ -165,7 +165,7 @@ createElement(
   // Vue はあなたのバインディングを追跡するため、設定できません。
   directives: [
     {
-      name: 'my-custom-directive', 
+      name: 'my-custom-directive',
       value: '2'
       expression: '1 + 1',
       arg: 'foo',
