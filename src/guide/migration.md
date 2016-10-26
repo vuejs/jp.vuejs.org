@@ -26,11 +26,11 @@ order: 24
 
 移行期間は、いくつかの要因に依存します:
 
-- アプリケーションの規模（小〜中規模アプリケーションの場合、おそらく1日未満となります）
+- アプリケーションの規模（小〜中規模アプリケーションの場合、おそらく1日かからないでしょう）
 
-- How many times you get distracted and start playing with a cool new feature. 😉 &nbsp;Not judging, it also happened to us while building 2.0!
+- 新しい機能を使う場合は、何度も混乱したことがあるでしょう。特に差別をしているわけではなく、 Vue 2.0 で作る際も、同様のことは起こるでしょう。
 
-- Which deprecated features you're using. Most can be upgraded with find-and-replace, but others might take a few minutes. If you're not currently following best practices, Vue 2.0 will also try harder to force you to. This is a good thing in the long run, but could also mean a significant (though possibly overdue) refactor.
+- 将来的に廃止される機能を使用している場合、大半は検索と置換でアップグレードできますが、一部は少し時間がかかるかもしれません。もしあなたが、現在のベスト・プラクティスを踏襲していない場合、 Vue 2.0 はあなたにそれを強制します。これは、長期的に見ると良いことですが、大幅(though possibly overdue)なリファクタリングを意味するかもしれません。
 
 > もし Vue 2 へアップグレードする場合、 Vuex および Vue-Router もアップグレードする必要がありますか？
 
@@ -160,6 +160,7 @@ destroyed: function () {
 
 ### `ready` <sup>非推奨</sup>
 
+<!-- 質問する -->
 Use the new mounted hook instead. It should be noted though that with mounted, there’s no guarantee to be in-document. For that, also include Vue.nextTick/vm.$nextTick. For example:
 
 ``` js
@@ -186,9 +187,10 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨な引数の順序を見つけます。
-  注意：
-  Note that if you name your index arguments something unusual like <code>position</code> or <code>num</code>, the helper will not flag them.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨な引数の順序を見つけます。
+    <code>position</code> や <code>num</code> のような、あまり使われないような名称をインデックスの引数につけた場合、ヘルパーはそれを検出できないことがありますが、ご了承ください。
+  </p>
 </div>
 {% endraw %}
 
@@ -199,9 +201,10 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨な引数の順序を見つけます。
-  注意：
-  Note that if you name your key arguments something like <code>name</code> or <code>property</code>, the helper will not flag them.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨な引数の順序を見つけます。
+    もしキーとなる引数に <code>name</code> や <code>property</code> のような、名称をつけていた場合、ヘルパーはそれを検出できないことがありますが、ご了承ください。
+  </p>
 </div>
 {% endraw %}
 
@@ -248,7 +251,10 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Search your codebase for the regex <code>/\w+ in \d+/</code>. Wherever it appears in a <code>v-for</code>, check to see if you may be affected.</p>
+  <p>
+    あなたのコードから <code>/\w+ in \d+/</code> の正規表現を探し出します。
+    そして、それが <code>v-for</code> 内で使われている場合、あなたが影響を受ける可能性があるかどうかを確認してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -301,7 +307,7 @@ computed: {
 ### `twoWay` Prop オプション <sup>非推奨</sup>
 
 Prop は今や、全て単方向となりました。
-To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding.
+親スコープ内への副作用を生成するために、コンポーネントは暗黙のバインディングの代わりに、明示的にイベントを発生させる必要があります。
 より詳細な情報については、以下を参照します:
 
 - [カスタムイベント](components.html#カスタムイベント)
@@ -317,9 +323,9 @@ To produce side effects in the parent scope, a component needs to explicitly emi
 
 ### `v-bind` への `.once` と `.sync` 修飾子 <sup>非推奨</sup>
 
-Props are now always one-way down.
-To produce side effects in the parent scope, a component needs to explicitly emit an event instead of relying on implicit binding.
-For more information, see:
+Prop は今や、全て単方向となりました。
+親スコープ内への副作用を生成するために、コンポーネントは暗黙のバインディングの代わりに、明示的にイベントを発生させる必要があります。
+より詳細な情報については、以下を参照します:
 
 - [カスタムイベント](components.html#カスタムイベント)
 - [カスタム入力コンポーネント](components.html#カスタム入力コンポーネント) (コンポーネントイベントを使用)
@@ -334,7 +340,8 @@ For more information, see:
 
 ### Prop のミューテーション <sup>非推奨</sup>
 
-Mutating a prop locally is now considered an anti-pattern, e.g. declaring a prop and then setting `this.myProp = 'someOtherValue'` in the component. Due to the new rendering mechanism, whenever the parent component re-renders, the child component's local changes will be overwritten.
+ローカルでの prop のミューテーションは、今はアンチパターンとみなされます。例えば、 prop を宣言した後に、コンポーネントに対して `this.myProp = 'someOtherValue'` 設定することなどです。
+新しいレンダリング機構によって、親コンポーネントを再描画するたびに、子コンポーネントのローカルな変更は上書きされます。
 
 prop のミューテーションのユースケースのほとんどの場合は、以下のオプションのいずれかで置き換えることができます:
 
@@ -355,30 +362,36 @@ prop のミューテーションのユースケースのほとんどの場合は
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to the fact that props passed to root instances are no longer working.</p>
+  <p>
+    もしあれば、 end-to-end のテストを走らせます。
+    失敗したテストについては、ルートインスタンスに渡された prop はもはや動かないということをあなたに警告します。
+  </p>
 </div>
 {% endraw %}
 
 ## 内蔵ディレクティブ
 
-### Truthiness/Falsiness with `v-bind`
+### `v-bind` においての Truthiness/Falsiness
 
-When used with `v-bind`, the only falsy values are now: `null`, `undefined`, and `false`. This means `0` and empty strings will render as truthy. So for example, `v-bind:draggable="''"` will render as `draggable="true"`.
+`v-bind` を使用する時、 falsy な値は `null`, `undefined`, そして `false` のみとなります。これは、 `0` や空の文字列は truthy な値としてレンダリングされることを意味します。例として、 `v-bind:draggable="''"` は `draggable="true"` としてレンダリングされます。
 
-For enumerated attributes, in addition to the falsy values above, the string `"false"` will also render as `attr="false"`.
+列挙された属性について、上記の falsy な値に加え、文字列の `"false"` は、 `atr="false"` としてレンダリングされます。
 
-<p class="tip">Note that for other directives (e.g. `v-if` and `v-show`), JavaScript's normal truthiness still applies.</p>
+<p class="tip">その他のディレクティブ(たとえば、 `v-if` や `v-show` )は、 JavaScript の一般的な truthiness がまだ適用されます。</p>
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to any parts of your app that may be affected by this change.</p>
+  <p>
+    もしあれば、 end-to-end のテストを走らせます。
+    失敗したテストについては、上記の変更によって影響を受ける可能性があり、その可能性があるアプリケーションの箇所を警告します。
+  </p>
 </div>
 {% endraw %}
 
-### Listening for Native Events on Components with `v-on`
+### コンポーネントにおける `v-on` を用いたネイティブイベントのListen
 
-When used on a component, `v-on` now only listens to custom events `$emit`ted by that component. To listen for a native DOM event on the root element, you can use the `.native` modifier. For example:
+コンポーネントを使用している時、 `v-on` は、そのコンポーネントに向けて発生したカスタムイベントのみを待ち受けるようになりました。ルートエレメント上でネイティブの DOM イベントを待ち受けたい時は、 `.native` 修飾子によって実現できます。以下がその例です:
 
 ``` html
 <my-component v-on:click.native="doSomething"></my-component>
@@ -387,15 +400,20 @@ When used on a component, `v-on` now only listens to custom events `$emit`ted by
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to any parts of your app that may be affected by this change.</p>
+  <p>
+    もしあれば、 end-to-end のテストを走らせます。
+    失敗したテストについては、上記の変更によって影響を受ける可能性があり、その可能性があるアプリケーションの箇所を警告します。
+  </p>
 </div>
 {% endraw %}
 
-### `v-model` と `debounce` <sup>非推奨</sup>
+### `v-model` の `debounce` <sup>非推奨</sup>
 
-Debouncing is used to limit how often we execute Ajax requests and other expensive operations. Vue's `debounce` attribute parameter for `v-model` made this easy for very simple cases, but it actually debounced __state updates__ rather than the expensive operations themselves. It's a subtle difference, but it comes with limitations as an application grows.
+デバウンスは、 Ajax リクエストやその他の高不可な処理の実装頻度を制限するために使用されます。
+Vue の `v-model` の `debounce` 属性パラメータは、非常に単純な用法を想定し、簡潔に作りましたが、それによって実際の状態の更新ではなく、自身をデバウンスする仕組みとなっています。
+これは、小さな違いではありますが、アプリケーションの規模が大きくなるに連れて、この手法には限界がきます。
 
-These limitations become apparent when designing a search indicator, like this one for example:
+例えば、このように、検索指標を設計する際にこれらの限界が明らかになります:
 
 {% raw %}
 <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.js"></script>
@@ -429,7 +447,7 @@ new Vue({
     }
   },
   methods: {
-    expensiveOperation: _.debounce(function () {
+    expensiveOperation: **********.debounce(function () {
       this.isCalculating = true
       setTimeout(function () {
         this.isCalculating = false
@@ -495,18 +513,21 @@ new Vue({
 })
 ```
 
-Another advantage of this approach is there will be times when debouncing isn't quite the right wrapper function. For example, when hitting an API for search suggestions, waiting to offer suggestions until after the user has stopped typing for a period of time isn't an ideal experience. What you probably want instead is a __throttling__ function. Now since you're already using a utility library like lodash, refactoring to use its `throttle` function instead takes only a few seconds.
+この方法のもう1つの利点として、デバウンスが完全なるラッパー関数でないことが挙げられます。
+例えば、検索候補の為の API を叩く時、ユーザーが入力の手を止めてから候補を提供することは、理想的な体験とは言えません。
+その代わりに欲しいのは、スロットリング関数になるでしょう。
+現状、既にあなたが lodash のようなユーティリティライブラリを利用している場合、 `throttle` 関数を使用する形に置き換えます。これは、数分もあれば終わることです。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>debounce</code> attribute.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>debounce</code> 属性を見つけます。</p>
 </div>
 {% endraw %}
 
 ### `v-model` への `lazy` や `number` 属性 <sup>非推奨</sup>
 
-The `lazy` and `number` param attributes are now modifiers, to make it more clear what That means instead of:
+`lazy` と `number` の属性値は修飾子となりました。それは、以下のように置き換えることを意味します:
 
 ``` html
 <input v-model="name" lazy>
@@ -523,21 +544,20 @@ The `lazy` and `number` param attributes are now modifiers, to make it more clea
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the these deprecated param attributes.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、これらの非推奨の属性を見つけます。</p>
 </div>
 {% endraw %}
 
 ### `v-model` においてのインライン `value` <sup>非推奨</sup>
 
 `v-model` はもはや、 インラインの `value` 属性を尊重しません。予測可能性のため、それは代わりに、常に Vue インスタンスをデータをソースとして扱います。
-
 これは、以下のような要素を意味します:
 
 ``` html
 <input v-model="text" value="foo">
 ```
 
-backed by this data:
+このようなデータに裏付けられる場合:
 
 ``` js
 data: {
@@ -545,7 +565,7 @@ data: {
 }
 ```
 
-will render with a value of "bar" instead of "foo". The same goes for a `<textarea>` with existing content. Instead of:
+"foo" の代わりに "bar" がレンダリングされます。これは、既に内容を持つ場合の `<textarea>` においても同じことが言えます。以下の場合:
 
 ``` html
 <textarea v-model="text">
@@ -553,7 +573,7 @@ will render with a value of "bar" instead of "foo". The same goes for a `<textar
 </textarea>
 ```
 
-この場合の `text` の初期値が "hello world" であることが確認できます。
+`text` の初期値が "hello world" となることが確認できます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -570,7 +590,7 @@ will render with a value of "bar" instead of "foo". The same goes for a `<textar
 <input v-for="str in strings" v-model="str">
 ```
 
-The reason is this is the equivalent JavaScript that the `<input>` would compile to:
+その理由は、以下の `<input>` にコンパイルされる JavaScript と同等の処理をおこなっているためです:
 
 ``` js
 strings.map(function (str) {
@@ -578,9 +598,10 @@ strings.map(function (str) {
 })
 ```
 
-As you can see, `v-model`'s two-way binding doesn't make sense here. Setting `str` to another value in the iterator function will do nothing because it's just a local variable in the function scope.
+これを見てわかるように、 `v-model` による双方向バインディングは、ここでは意味がありません。
+それは、関数内のローカルスコープのみの変数なので、イテレータにて `str` に別の値を設定した場合にも何もしません。
 
-Instead, you should use an array of __objects__ so that `v-model` can update the field on the object. For example:
+代わりに、 `v-model` が、オブジェクトのフィールドを更新できるようにするためには、 __オブジェクト__ の配列を使用する必要があります。例えば以下となります:
 
 ``` html
 <input v-for="obj in objects" v-model="obj.str">
@@ -589,7 +610,10 @@ Instead, you should use an array of __objects__ so that `v-model` can update the
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your test suite, if you have one. The <strong>failed tests</strong> should alert to you to any parts of your app that may be affected by this change.</p>
+  <p>
+    もしあれば、テストスイートを走らせます。
+    失敗したテストについては、ルートインスタンスに渡された prop はもはや動かないということをあなたに警告します。
+  </p>
 </div>
 {% endraw %}
 
@@ -601,7 +625,7 @@ Instead, you should use an array of __objects__ so that `v-model` can update the
 <p v-bind:style="{ color: myColor + ' !important' }">hello</p>
 ```
 
-If you really need to override another `!important`, you must use the string syntax:
+もしあなたが本当に `!important` をオーバーライドする必要がある場合、文字列の構文として使用します:
 
 ``` html
 <p v-bind:style="'color: ' + myColor + ' !important'">hello</p>
@@ -610,7 +634,7 @@ If you really need to override another `!important`, you must use the string syn
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of style bindings with <code>!important</code> in objects.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、オブジェクトへのスタイルのバインディングにおいての <code>!important</code> を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -630,9 +654,11 @@ Previously, `v-el`/`v-ref` combined with `v-for` would produce an array of eleme
 <p v-for="item in items" ref="items"></p>
 ```
 
-Unlike in 1.x, these `$refs` are not reactive, because they're registered/updated during the render process itself. Making them reactive would require duplicate renders for every change.
+1.x とは異なり、これらの `$refs` は、それら自身のレンダリングに登録および更新をおこなっているため、リアクティブではありません。
+それらを重複して反応させる際は、変更があるたびにレンダリングします。
 
-On the other hand, `$refs` are designed primarily for programmatic access in JavaScript - it is not recommended to rely on them in templates, because that would mean referring to state that does not belong to the instance itself. This would violate Vue's data-driven view model.
+一方で、 `$refs` は JavaScript によるプログラム的なアクセスとして主に利用するために設計されているため、テンプレートでそれらに依存することは推奨しません。
+それは、インスタンス自体に属していない状態を指すこととなるので、 Vue のデータ駆動な ViewModel の設計に違反することとなります。
 
 {% raw %}
 <div class="upgrade-path">
@@ -666,20 +692,25 @@ On the other hand, `$refs` are designed primarily for programmatic access in Jav
 
 ## カスタムディレクティブ
 
-Directives have a greatly reduced scope of responsibility: they are now only used for applying low-level direct DOM manipulations. In most cases, you should prefer using components as the main code-reuse abstraction.
+ディレクティブはその責任範囲を大幅に削減しました: ディレクティブは、今やローレベルの直接な DOM 操作を適用するためにのみ使用されます。
+ほとんどの場合、メインのコード再利用可能にし、抽象化したコンポーネントを使用するべきです。
 
-Some of the most notable differences include:
+顕著な違いとして、以下のようなものがあります:
 
-- Directives no longer have instances. This means there's no more `this` inside directive hooks. Instead, they receive everything they might need as arguments. If you really must persist state across hooks, you can do so on `el`.
-- Options such as `acceptStatement`, `deep`, `priority`, etc are all deprecated.
-- Some of the current hooks have different behavior and there are also a couple new hooks.
+- ディレクティブはもはや、インスタンスを持ちません。これは、もはや `this` 内部にディレクティブのフックがないことを意味します。その代わり、彼らは引数として必要なものを全て受け取ります。もし、あなたが本当にフック間で状態を保持する必要がある場合、 `el` 上にて行うことができます。
+- `acceptStatement`, `deep`, `priority` などのようなオプションは全て非推奨となりました。
+- 一部のフックが異なる振るまいをおこなっており、また、新たなフックと対になっているものもあります。
 
-Fortunately, since the new directives are much simpler, you can master them more easily. Read the new [Custom Directives guide](custom-directive.html) to learn more.
+新しいディレクティブははるかにシンプルなので、幸いにも、よりかんたんに習得することができます。
+より多くを学ぶには、新しい [Custom Directives guide](custom-directive.html) をお読みください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of defined directives. The helper will flag all of them, as it's likely in most cases that you'll want to refactor to a component.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 定義済みのディレクティブを見つけます。
+    ヘルパーによって検出された箇所は、ほとんどの場合、将来的にコンポーネントにリファクタリングしたくなる部分となります。
+  </p>
 </div>
 {% endraw %}
 
@@ -687,18 +718,20 @@ Fortunately, since the new directives are much simpler, you can master them more
 
 ### `transition` 属性 <sup>非推奨</sup>
 
-Vue's transition system has changed quite drastically and now uses `<transition>` and `<transition-group>` wrapper elements, rather than the `transition` attribute. It's recommended to read the new [Transitions guide](transitions.html) to learn more.
+Vue のトランジション機構は大幅な変更を遂げました。
+`transition` 属性ではなく、 `<transition>` および `<transition-group>` ラッパー要素を使用します。
+より多くを学ぶためには、新しい[トランジションガイド](transitions.html)を読むことをおすすめします。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>transition</code> attribute.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>transition</code> 属性を見つけます。</p>
 </div>
 {% endraw %}
 
-### `Vue.transition` for Reusable Transitions <sup>非推奨</sup>
+### 再利用可能なトランジションへの `Vue.transition` <sup>非推奨</sup>
 
-With the new transition system, you can now just [use components for reusable transitions](http://rc.vuejs.org/guide/transitions.html#Reusable-Transitions).
+新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](http://rc.vuejs.org/guide/transitions.html#Reusable-Transitions) によって実現することができます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -714,7 +747,10 @@ If you need to stagger list transitions, you can control timing by setting and a
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>transition</code> attribute. During your update, you can transition (pun very much intended) to the new staggering strategy as well.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>transition</code> 属性を見つけます。
+    During your update, you can transition (pun very much intended) to the new staggering strategy as well.
+  </p>
 </div>
 {% endraw %}
 
@@ -722,7 +758,7 @@ If you need to stagger list transitions, you can control timing by setting and a
 
 ### `Vue.directive('on').keyCodes` <sup>非推奨</sup>
 
-The new, more concise way to configure `keyCodes` is through`Vue.config.keyCodes`. For example:
+`keyCodes` を設定するための、より新しくかつ簡潔な方法は、`Vue.config.keyCodes` を介して行うことです。例えば、以下のようなものとなります:
 
 ``` js
 // enable v-on:keyup.f1
@@ -731,7 +767,7 @@ Vue.config.keyCodes.f1 = 112
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the the old <code>keyCode</code> configuration syntax.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 古い <code>keyCode</code>のコンフィグが用いられた属性見つけます。</p>
 </div>
 {% endraw %}
 
@@ -752,7 +788,8 @@ Todos
     |-- DeleteTodoButton
 ```
 
-We could manage communication between components with this single event hub:
+
+これらの単一のイベントハブとコンポーネント間の通信を管理することができました:
 
 ``` js
 // This is the event hub we'll use in every
@@ -760,7 +797,8 @@ We could manage communication between components with this single event hub:
 var eventHub = new Vue()
 ```
 
-Then in our components, we can use `$emit`, `$on`, `$off` to emit events, listen for events, and clean up event listeners, respectively:
+そして、コンポーネントにて、それによって `$emit` や `$on` 、 `$off` を用いてイベントを発生させることや、新たに待ち受けること、そしてそれらを初期化することができます。
+以下がそれぞれの例となります:
 
 ``` js
 // NewTodoInput
@@ -821,9 +859,12 @@ This pattern can serve as a replacement for `$dispatch` and `$broadcast` in simp
 
 ### フィルタ外でのテキストの展開 <sup>非推奨</sup>
 
-Filters can now only be used inside text interpolations (`{% raw %}{{ }}{% endraw %}` tags). In the past we've found using filters within directives such as `v-model`, `v-on`, etc led to more complexity than convenience. For list filtering on `v-for`, it's also better to move that logic into JavaScript as computed properties, so that it can be reused throughout your component.
+フィルタは、今やテキスト内での補完(`{% raw %}{{ }}{% endraw %}` タグ)のみで使用することができます。
+今までの `v-model` や `v-on` ディレクティブ上でのフィルタリングは、それ自体の利便性よりも、コードの複雑化につながることのほうが多いことに気がつきました。
+`v-for` 上でのリストのフィルタリングについては、それをコンポーネント上で再利用可能とするために、 computed property としてJavaScript上のそのロジックを移動させるようにしても良いでしょう。
 
-In general, whenever something can be achieved in plain JavaScript, we want to avoid introducing a special syntax like filters to take care of the same concern. Here's how you can replace Vue's built-in directive filters:
+行いたい処理がプレーンな JavaScript で実現可能な場合は、基本的には同じ結果をもたらすフィルタのような特殊な構文を導入しないようにしたいです。
+この項で紹介する方法によって、 Vue の内蔵のディレクティブフィルタを置き換えることができます。具体的な方法は以下のとおりです:
 
 #### `debounce` フィルタの置き換え
 
@@ -841,11 +882,7 @@ methods: {
 }
 ```
 
-[loadshの `debounce` メソッド](https://lodash.com/docs/4.15.0#debounce)(または可能であれば [`throttle`](https://lodash.com/docs/4.15.0#throttle))を直接メソッドに対して使用します。
-その際、が可能です:
-
-Use [lodash's `debounce`] (or possibly [`throttle`] to directly limit calling the expensive method.
-    You can achieve the same as above like this:
+[lodash の `debounce` メソッド](https://lodash.com/docs/4.15.0#debounce)(または可能ならば [`throttle`](https://lodash.com/docs/4.15.0#throttle))を直接メソッドに対して使用します。上記のような挙動を望む場合、以下のように書くことで達成できます:
 
 ``` html
 <input v-on:keyup="doStuff">
@@ -860,7 +897,6 @@ methods: {
 ```
 
 この方法に対するより詳細な利点は[the example here with `v-model`](#v-model-with-debounce-deprecated)を参照してください。
-For more on the advantages of this strategy, see
 
 #### `limitBy` フィルタの置き換え
 
@@ -870,7 +906,7 @@ For more on the advantages of this strategy, see
 <p v-for="item in items | limitBy 10">{{ item }}</p>
 ```
 
-JavaScript内蔵の [`.slice` メソッド](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples)を算術プロパティへ使用します:
+JavaScript 内蔵の [`.slice` メソッド](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples)を算術プロパティへ使用します:
 
 ``` html
 <p v-for="item in filteredItems">{{ item }}</p>
@@ -892,7 +928,7 @@ computed: {
 <p v-for="user in users | filterBy searchQuery in 'name'">{{ user.name }}</p>
 ```
 
-JavaScript内蔵の [`.filter` メソッド](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples) を算術プロパティへ使用します:
+JavaScript 内蔵の [`.filter` メソッド](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice#Examples) を算術プロパティへ使用します:
 
 ``` html
 <p v-for="user in filteredUsers">{{ user.name }}</p>
@@ -908,7 +944,8 @@ computed: {
 }
 ```
 
-JavaScript's native `.filter` can also manage much more complex filtering operations, because you have access to the full power of JavaScript within computed properties. For example, if you wanted to find all active users and case-insensitively match against both their name and email:
+算術プロパティに対しては、完全なるアクセス権があるため、 JavaScript 内蔵の `.filter` は、非常に複雑なフィルタリングの管理を行うことができます。
+例えば、もしあなたがすべてのアクティブユーザーを見つけるために、大文字小文字を区別せず、名前と E メールアドレスの両方を調べたい場合は、以下のようになります:
 
 ``` js
 this.users.filter(function (user) {
@@ -942,7 +979,7 @@ computed: {
 }
 ```
 
-You can even order by multiple columns:
+複数のカラムを用いた並び替えも可能です:
 
 ``` js
 _.orderBy(this.users, ['name', 'last_login'], ['asc', 'desc'])
@@ -951,19 +988,22 @@ _.orderBy(this.users, ['name', 'last_login'], ['asc', 'desc'])
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of filters being used inside directives. If you miss any, you should also see <strong>console errors</strong>.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 ディレクティブ内部で使用されているフィルタを見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
 ### フィルタ引数の構文
 
-Filters' syntax for arguments now better aligns with JavaScript function invocation. So instead of taking space-delimited arguments:
+JavaScript の関数を呼び出す際、引数のフィルタがより良い構文となります。例えば、スペースで区切る形には以下のように置き換えることができます。
 
 ``` html
 <p>{{ date | formatDate 'YY-MM-DD' timeZone }}</p>
 ```
 
-We surround the arguments with parentheses and delimit the arguments with commas:
+カッコで引数を囲んだ上で、カンマを用いて引数を区切ります:
 
 ``` html
 <p>{{ date | formatDate('YY-MM-DD', timeZone) }}</p>
@@ -972,19 +1012,25 @@ We surround the arguments with parentheses and delimit the arguments with commas
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the old filter syntax. If you miss any, you should also see <strong>console errors</strong>.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、古いフィルタが用いられているコードを見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
 ### 内蔵フィルタ <sup>非推奨</sup>
 
-Although filters within text interpolations are still allowed, all of the filters have been removed. Instead, it's recommended to use more specialized libraries for solving problems in each domain (e.g. [`date-fns`](https://date-fns.org/) to format dates and [`accounting`](http://openexchangerates.github.io/accounting.js/) for currencies).
+テキストを展開するためのフィルタは、現状はまだ利用できますが、すべてのフィルタが削除されました。
+それらの代わりに、（例えば日付のフォーマットには [`date-fns`](https://date-fns.org/)　、通貨処理には [`accounting`](http://openexchangerates.github.io/accounting.js/) と言った形で) より専門的なライブラリの使用を推奨します。
 
-For each of Vue's built-in text filters, we go through how you can replace them below. The example code could exist in custom helper functions, methods, or computed properties.
+Vue に内蔵されたテキストフィルタ群は、それぞれ以下のように置き換えることができます。
+これらの例には、カスタムヘルパーや関数、メソッドの他、算術プロパティなどが含まれます。
 
 #### `json` フィルタの置き換え
 
-You actually don't need to for debugging anymore, as Vue will nicely format output for you automatically, whether it's a string, number, array, or plain object. If you want the exact same functionality as JavaScript's `JSON.stringify` though, then you can use that in a method or computed property.
+Vue がうまい具合に文字列や数値、配列からオブジェクトまで、自動的にフォーマットした上で出力するようになったため、あなたがデバッグする必要はありません。
+もし、あなたが JavaScript の `JSON.stringify` と全く同じ機能が必要ならば、 computed property にて行うことが可能です。
 
 #### `capitalize` フィルタの置き換え
 
@@ -1006,7 +1052,7 @@ text.toLowerCase()
 
 #### `pluralize` フィルタの置き換え
 
-The [pluralize](https://www.npmjs.com/package/pluralize) package on NPM serves this purpose nicely, but if you only want to pluralize a specific word or want to have special output for cases like `0`, then you can also easily define your own pluralize functions. For example:
+npm 上にある [pluralize](https://www.npmjs.com/package/pluralize) パッケージによってこの目的を果たすことができますが、あなたがもし、特定の単語のみを複数形にしたい場合や、 `0` のようなケースの場合に特別な出力を行いたい場合は、例えば、以下のように簡単に独自の複数形にする関数を定義することができます。:
 
 ``` js
 function pluralizeKnife (count) {
@@ -1022,18 +1068,22 @@ function pluralizeKnife (count) {
 
 #### `currency` フィルタの置き換え
 
-For a very naive implementation, you could just do something like this:
+非常に単純な実装例として、このような形で実現することができます:
 
 ``` js
 '$' + price.toFixed(2)
 ```
 
-In many cases though, you'll still run into strange behavior (e.g. `0.035.toFixed(2)` rounds up to `0.4`, but `0.045` rounds down to `0.4`). To work around these issues, you can use the [`accounting`](http://openexchangerates.github.io/accounting.js/) library to more reliably format currencies.
+しかしながら、ほとんどの場合、これらは奇妙な動作をする場合があります(例えば、 0.035.toFixed(2) の丸め誤差が 0.4 として評価されるにも関わらず、 0.045 の丸め誤差が 0.4と評価されるなどです)。
+これらの問題を解消するためには、より確実な [通貨のフォーマット管理のライブラリ](http://openexchangerates.github.io/accounting.js/) などを使用します。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated text filters. If you miss any, you should also see <strong>console errors</strong>.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨のフィルタを見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1056,12 +1106,12 @@ In many cases though, you'll still run into strange behavior (e.g. `0.035.toFixe
 
 名前付きスロットを経由して挿入されたコンテンツは、もはや `slot` 属性を保持しません。
 
-Content inserted via named `<slot>` no longer preserves the `slot` attribute. Use a wrapper element to style them, or for advanced use cases, modify the inserted content programmatically using [render functions](render-function.html).
+スタイル属性を付与したい場合は、なんらかのラップした要素に適用するか、複雑なユースケースの場合は、 [`render` 関数](render-function.html) を用いて、プログラムにてコンテンツを変更してください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find CSS selectors targeting named slots (e.g. <code>[slot="my-slot-name"]</code>).</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 名前付き slot を対象としているCSSのセレクタ(例えば、 <code>slot="my-slot-name"]</code> など)を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1077,7 +1127,7 @@ Content inserted via named `<slot>` no longer preserves the `slot` attribute. Us
 </keep-alive>
 ```
 
-This makes it possible to use `<keep-alive>` on multiple conditional children:
+これによって、 `<keep-alive>` を複数条件下において使用することができます:
 
 ``` html
 <keep-alive>
@@ -1087,11 +1137,11 @@ This makes it possible to use `<keep-alive>` on multiple conditional children:
 ```
 
 <p class="tip">
-    `<keep-alive>` が複数の子要素を持っている場合、
-    When `<keep-alive>` has multiple children, they should eventually evaluate to a single child. Any child other than the first one will simply be ignored.
+    `<keep-alive>` が複数の子要素を持っているとき、 `<keep-alive>` は単一の子要素のみを評価します。
+    最初のひとつ目の要素以外は、単純に無視されます。
 </p>
 
-When used together with `<transition>`, make sure to nest it inside:
+`<transition>` とともに用いるときは、それらをネストさせてください:
 
 ``` html
 <transition>
@@ -1167,18 +1217,23 @@ computed: {
 </div>
 {% endraw %}
 
-## Reactivity
+## リアクティブ
 
 ### `vm.$watch`
 
-Watchers created via `vm.$watch` are now fired before the associated component rerenders. This gives you the chance to further update state before the component rerender, thus avoiding unnecessary updates. For example, you can watch a component prop and update the component's own data when the prop changes.
+Watchers created via `vm.$watch` are now fired before the associated component rerenders.
+This gives you the chance to further update state before the component rerender, thus avoiding unnecessary updates.
+For example, you can watch a component prop and update the component's own data when the prop changes.
 
-If you were previously relying on `vm.$watch` to do something with the DOM after a component updates, you can instead do so in the `updated` lifecycle hook.
+これまで、 `vm.$watch` を利用することでコンポーネントのアップデート後に　DOM に対して何らかの操作をしていた場合、それを `updated` ライフサイクルフックに置き換えることができます。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run your end-to-end test suite, if you have one. The <strong>failed tests</strong> should alert to you to the fact that a watcher was relying on the old behavior.</p>
+  <p>
+    もしあれば、 end-to-end のテストを走らせます。
+    失敗したテストについては、ウォッチャーが古い動作であることを警告します。
+  </p>
 </div>
 {% endraw %}
 
@@ -1189,7 +1244,7 @@ If you were previously relying on `vm.$watch` to do something with the DOM after
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated usage.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨の用法を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1200,7 +1255,7 @@ If you were previously relying on `vm.$watch` to do something with the DOM after
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the deprecated usage.</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨の用法を見つけます。</p>
 </div>
 {% endraw %}
 
@@ -1213,7 +1268,10 @@ If you were previously relying on `vm.$watch` to do something with the DOM after
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>.$set</code> on an array. If you miss any, you should see <strong>console errors</strong> from the missing method.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、配列に対しての <code>.$set</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1243,33 +1301,41 @@ methods: {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>.$remove</code> on an array. If you miss any, you should see <strong>console errors</strong> from the missing method.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、配列に対しての <code>.$remove</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
 ### Vue インスタンス上での `Vue.set` および `Vue.delete` <sup>非推奨</sup>
 
 Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作することはできません。
-
-[x] Vue.set and Vue.delete can no longer work on Vue instances.
-[ ] It is now mandatory to properly declare all top-level reactive properties in the data option.
-[ ] If you'd like to delete properties on a Vue instance or its `$data`, just set it to null.
+データオプション内で、全てのトップレベルのリアクティブなプロパティが必須となりました。
+もし、 Vue のインスタンス上で `$data` を削除したい場合、単に null を代入します。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>Vue.set</code> or <code>Vue.delete</code> on a Vue instance. If you miss any, they'll trigger <strong>console warnings</strong>.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 Vue インスタンス上で使われている  <code>Vue.set</code> もしくは <code>Vue.delete</code> を見つけます。
+    もし間違いがある場合、 <strong>consoleの警告</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
 ### Replacing `vm.$data` <sup>非推奨</sup>
 
-It is now prohibited to replace a component instance's root $data. This prevents some edge cases in the reactivity system and makes the component state more predictable (especially with type-checking systems).
+現在では、コンポーネントのインスタンスのルートにある `$data` を書き換えることは禁止されています。
+これは、リアクティブなシステムの上での極端なケースを防ぎ、(特に型チェックシステム上での)コンポーネントの状態をより予測しやすくします。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of overwriting <code>vm.$data</code>. If you miss any, <strong>console warnings</strong> will be emitted.</p>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$data</code> が上書きされている箇所を見つけます。
+    もし間違いがある場合、 <strong>consoleの警告</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
@@ -1284,11 +1350,10 @@ It is now prohibited to replace a component instance's root $data. This prevents
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$get</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
-  </p>
 </div>
 {% endraw %}
 
-## DOM-Focused Instance Methods
+## DOM を中心としたインスタンスメソッド
 
 ### `vm.$appendTo` <sup>非推奨</sup>
 
@@ -1301,6 +1366,7 @@ myElement.appendChild(vm.$el)
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$appendTo</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
@@ -1318,6 +1384,7 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$before</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
@@ -1341,6 +1408,7 @@ myElement.parentNode.appendChild(vm.$el)
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$after</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
@@ -1358,6 +1426,7 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$remove</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
@@ -1374,6 +1443,7 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$eval</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
@@ -1388,6 +1458,7 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$interpolate</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
@@ -1401,6 +1472,7 @@ vm.$el.remove()
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
+  <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>vm.$log</code> を見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
