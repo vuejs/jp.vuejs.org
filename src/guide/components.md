@@ -106,7 +106,7 @@ DOM をテンプレートとして使うとき(例、ある要素をすでに存
 
 The custom component `<my-row>` will be hoisted out as invalid content, thus causing errors in the eventual rendered output. A workaround is to use the `is` special attribute:
 
-カスタムコンポーネントの `<my-row>` は個別のコンテンツとして巻き上げられます。TODO。回避策は `is` という特殊な属性を使うことです:
+カスタムコンポーネントの `<my-row>` は無効なコンテンツとして巻き上げられます。それゆえ、のちにレンダリングされたアウトプットの中でエラーを引き起こします。回避策は `is` という特殊な属性を使うことです:
 
 ``` html
 <table>
@@ -116,7 +116,6 @@ The custom component `<my-row>` will be hoisted out as invalid content, thus cau
 **注目すべきは、もしあなたが以下のソースのどれかから文字列テンプレートを使う場合には、これらの制約は適用されないということです。**
 
 - `<script type="text/x-template">`
-- JavaScript inline template strings // TODO
 - JavaScript のインラインテンプレート文字列
 - `.vue` コンポーネント
 
@@ -519,7 +518,7 @@ new Vue({
 
 In this example, it's important to note that the child component is still completely decoupled from what happens outside of it. All it does is report information about its own activity, just in case a parent component might care.
 
-この例では、子コンポーネントはその外で起こったこととはまだ完全に分離しているということに注目することが大切です。TODO:
+この例では、子コンポーネントはその外で起こったこととはまだ完全に分離しているということに注目することが大切です。子コンポーネントが唯一行っていることは、親コンポーネントが監視している場合に備えて、自分自身の活動に関する情報を報告することです。
 
 #### ネイティブイベントとコンポーネントのバインディング
 
@@ -936,7 +935,7 @@ var child = parent.$refs.profile
 
 <p class="tip">`$refs` are only populated after the component has been rendered, and it is not reactive. It is only meant as an escape hatch for direct child manipulation - you should avoid using `$refs` in templates or computed properties.</p>
 
-<p class="tip">`$refs` はコンポーネントがレンダリングされた後にのみ追加されます。そしてそれはリアクティブではありません。TODO - テンプレートまたは算出プロパティ(computed property)の中での `$refs` の使用は避けるべきです。</p>
+<p class="tip">`$refs` はコンポーネントがレンダリングされた後にのみ追加されます。そしてそれはリアクティブではありません。直接子コンポーネントを操作するための最終手段としての意味しかありません。 - テンプレートまたは算出プロパティ(computed property)の中での `$refs` の使用は避けるべきです。</p>
 
 ### 非同期コンポーネント
 
