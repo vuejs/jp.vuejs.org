@@ -160,8 +160,7 @@ destroyed: function () {
 
 ### `ready` <sup>非推奨</sup>
 
-<!-- 質問する -->
-Use the new mounted hook instead. It should be noted though that with mounted, there’s no guarantee to be in-document. For that, also include Vue.nextTick/vm.$nextTick. For example:
+かわりに、新しい mounted フックを使用します。ただし、マウントされたとしてもドキュメントに存在する保証はありません。 そのため、`Vue.nextTick/vm.$nextTick` で包む必要があります。 例えば、以下のようになります:
 
 ``` js
 mounted: function () {
@@ -216,7 +215,7 @@ mounted: function () {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、これらの非推奨な変数を見つけます。もし間違いがある場合、 <strong>console errors</strong> などが表示されます: <code>Uncaught ReferenceError: $index is not defined</code></p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、これらの非推奨な変数を見つけます。もし間違いがある場合以下のような、 <strong>console errors</strong> などが表示されます: <code>Uncaught ReferenceError: $index is not defined</code></p>
 </div>
 {% endraw %}
 
@@ -389,7 +388,7 @@ prop のミューテーションのユースケースのほとんどの場合は
 </div>
 {% endraw %}
 
-### コンポーネントにおける `v-on` を用いたネイティブイベントのListen
+### コンポーネントにおける `v-on` を用いたネイティブイベントの待ち受け
 
 コンポーネントを使用している時、 `v-on` は、そのコンポーネントに向けて発生したカスタムイベントのみを待ち受けるようになりました。ルートエレメント上でネイティブの DOM イベントを待ち受けたい時は、 `.native` 修飾子によって実現できます。以下がその例です:
 
@@ -447,7 +446,7 @@ new Vue({
     }
   },
   methods: {
-    expensiveOperation: **********.debounce(function () {
+    expensiveOperation: _.debounce(function () {
       this.isCalculating = true
       setTimeout(function () {
         this.isCalculating = false
@@ -459,7 +458,8 @@ new Vue({
 </script>
 {% endraw %}
 
-Using the `debounce` attribute, there'd be no way to detect the "Typing" state, because we lose access to the input's real-time state. By decoupling the debounce function from Vue however, we're able to debounce only the operation we want to limit, removing the limits on features we can develop:
+デバウンス属性を使用している場合、入力の状態に関するリアルタイムなアクセス権を失うため、「タイピング中」の状態を検出する方法がないと思います。
+しかし、 Vue からデバウンス機能を切り離すことによって、将来的な開発での制限を取り除くことができます。
 
 ``` html
 <!--
@@ -617,7 +617,7 @@ strings.map(function (str) {
 </div>
 {% endraw %}
 
-### `v-bind:style` with Object Syntax and `!important` <sup>非推奨</sup>
+### `v-bind:style` においての オブジェクトおよび `!important` 構文 <sup>非推奨</sup>
 
 もはや、これは動かなくなります:
 
@@ -640,15 +640,19 @@ strings.map(function (str) {
 
 ### `v-el` と `v-ref` <sup>非推奨</sup>
 
-For simplicity, `v-el` and `v-ref` have been merged into the `ref` attribute, accessible on a component instance via `$refs`. That means `v-el:my-element` would become `ref="myElement"` and `v-ref:my-component` would become `ref="myComponent"`. When used on a normal element, the `ref` will be the DOM element, and when used on a component, the `ref` will be the component instance.
+わかりやすくするために、 `v-el` と `v-ref` は コンポーネントのインスタンスよりアクセス可能な `$refs` として、 `ref` 属性に統合されました。
+これは、 `v-el:my-element` は `ref="myElement"` となり、 `v-ref:my-component` もまた `ref="myComponent"` となることを意味します。
+通常の要素で使用する場合、 `ref` は DOM Element となり、コンポーネント内で使用する場合、 `ref` はコンポーネントのインスタンスになります。
 
-Since `v-ref` is no longer a directive, but a special attribute, it can also be dynamically defined. This is especially useful in combination with `v-for`. For example:
+`v-ref` は、もはやディレクティブではありません。しかし、特別な値であり、動的な定義が可能となっています。
+これは、 `v-for` との組み合わせで使用する場合に、特に役にたちます。例えば、以下のような場合:
 
 ``` html
 <p v-for="item in items" v-bind:ref="'item' + item.id"></p>
 ```
 
-Previously, `v-el`/`v-ref` combined with `v-for` would produce an array of elements/components, because there was no way to give each item a unique name. You can still achieve this behavior by given each item the same `ref`:
+以前は、 `v-el` や `v-ref` と組み合わせた `v-for` の各項目に対して、ユニークな名前をつけること方法はなかったため、要素やコンポーネントの配列を生成していたと思います。
+各項目に同じ参照が与えることによって、現在でもその動作を実現することが可能です。
 
 ``` html
 <p v-for="item in items" ref="items"></p>
@@ -702,7 +706,7 @@ Previously, `v-el`/`v-ref` combined with `v-for` would produce an array of eleme
 - 一部のフックが異なる振るまいをおこなっており、また、新たなフックと対になっているものもあります。
 
 新しいディレクティブははるかにシンプルなので、幸いにも、よりかんたんに習得することができます。
-より多くを学ぶには、新しい [Custom Directives guide](custom-directive.html) をお読みください。
+より多くを学ぶには、新しい [カスタムディレクティブガイド](custom-directive.html) をお読みください。
 
 {% raw %}
 <div class="upgrade-path">
@@ -742,14 +746,14 @@ Vue のトランジション機構は大幅な変更を遂げました。
 
 ### `stagger` 属性 <sup>非推奨</sup>
 
-If you need to stagger list transitions, you can control timing by setting and accessing a `data-index` (or similar attribute) on an element. See [an example here](transitions.html#Staggering-List-Transitions).
+もしあなたがリストに繊維を遅延させたい場合、その要素の設定やデータのインデックス(もしくは同様の属性)にアクセスすることによって、そのタイミングを制御することができます。詳しくは、[こちら](transitions.html#Staggering-List-Transitions)にあるサンプルを参照してください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
   <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>transition</code> 属性を見つけます。
-    During your update, you can transition (pun very much intended) to the new staggering strategy as well.
+    アップデートの間に、(これはダジャレですが、)あなたは新たな、かつ __スタガリング__ な遷移手法へ置き換えることが可能です。
   </p>
 </div>
 {% endraw %}
@@ -761,7 +765,7 @@ If you need to stagger list transitions, you can control timing by setting and a
 `keyCodes` を設定するための、より新しくかつ簡潔な方法は、`Vue.config.keyCodes` を介して行うことです。例えば、以下のようなものとなります:
 
 ``` js
-// enable v-on:keyup.f1
+// v-on:keyup.f1 を有効化します。
 Vue.config.keyCodes.f1 = 112
 ```
 {% raw %}
@@ -773,13 +777,16 @@ Vue.config.keyCodes.f1 = 112
 
 ### `$dispatch` および `$broadcast` <sup>非推奨</sup>
 
-`$dispatch` and `$broadcast` are being deprecated in favor of more explicitly cross-component communication and more maintainable state management solutions, such as [Vuex](https://github.com/vuejs/vuex).
+`$dispatch` および `$broadcast` については、 [Vuex](https://github.com/vuejs/vuex) などような、よりはっきりとしたコンポーネント間の通信及び状態管理のソリューションを支持するかたちで廃止となりました。
 
-The problem is event flows that depend on a component's tree structure can be hard to reason about and very brittle when the tree becomes large. It simply doesn't scale well and we don't want to set you up for pain later. `$dispatch` and `$broadcast` also do not solve communication between sibling components.
+これまでの問題として、コンポーネントツリーが肥大化した際、その動作を推論することが非常に困難であり、また、コンポーネントのツリー構造に依存する、非常に脆いイベントフローがありました。
+それは、単純にうまくスケールしませんし、後々に痛みを伴う変更であるべきではありません。
+`$dispatch` および `$broadcast` に関しても、兄弟コンポーネント間の通信を解決するものではありません。
 
-For the simplest possible upgrade from `$dispatch` and `$broadcast`, you can use a centralized event hub that allows components to communicate no matter where they are in the component tree. Because Vue instances implement an event emitter interface, you can actually use an empty Vue instance for this purpose.
+`$dispatch` および `$broadcast` からの最も簡単なアップグレードの方法として、コンポーネントがそれぞれのツリー内の状態に関係なく、通信することを可能とする、集中型のイベントハブを使用することができます。
+Vue のインスタンスはイベントエミッタのインターフェースを持っているため、実際に使用する場合、この目的のために空の Vue インスタンスを作成することになるでしょう。
 
-For example, let's say we have a todo app structured like this:
+例えば、このような ToDo アプリケーションがある場合:
 
 ```
 Todos
@@ -789,7 +796,7 @@ Todos
 ```
 
 
-これらの単一のイベントハブとコンポーネント間の通信を管理することができました:
+これらを単一のイベントハブによって、コンポーネント間の通信を管理することができるようになりました:
 
 ``` js
 // This is the event hub we'll use in every
@@ -846,7 +853,7 @@ methods: {
 }
 ```
 
-This pattern can serve as a replacement for `$dispatch` and `$broadcast` in simple scenarios, but for more complex cases, it's recommended to use a dedicated state management layer such as [Vuex](https://github.com/vuejs/vuex).
+単純なシナリオ上では、 `$dispatch` および `$boardcast` を代替品に置き換えるパターンで動かすことができますが、より複雑なケースを想定して、 [Vuex](https://github.com/vuejs/vuex) のような専門的な状態管理層を設けることをおすすめします。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1221,9 +1228,9 @@ computed: {
 
 ### `vm.$watch`
 
-Watchers created via `vm.$watch` are now fired before the associated component rerenders.
-This gives you the chance to further update state before the component rerender, thus avoiding unnecessary updates.
-For example, you can watch a component prop and update the component's own data when the prop changes.
+`vm.$watch` を経由して作成されたウォッチャーは、関連するコンポーネントのレンダリングの前に発火します。
+これは、不要な更新を避けることと、レンダリング前にコンポーネントの状態を更新する機会を与えてくれます。
+例えば、コンポーネントの prop や、それらの値の変更をウォッチすることができます。
 
 これまで、 `vm.$watch` を利用することでコンポーネントのアップデート後に　DOM に対して何らかの操作をしていた場合、それを `updated` ライフサイクルフックに置き換えることができます。
 
@@ -1324,7 +1331,7 @@ Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作�
 </div>
 {% endraw %}
 
-### Replacing `vm.$data` <sup>非推奨</sup>
+### `vm.$data` の置き換え <sup>非推奨</sup>
 
 現在では、コンポーネントのインスタンスのルートにある `$data` を書き換えることは禁止されています。
 これは、リアクティブなシステムの上での極端なケースを防ぎ、(特に型チェックシステム上での)コンポーネントの状態をより予測しやすくします。
