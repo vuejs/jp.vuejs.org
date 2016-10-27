@@ -458,10 +458,8 @@ new Vue({
 
 ``` html
 <!--
-By using the debounce function from lodash or another dedicated
-utility library, we know the specific debounce implementation we
-use will be best-in-class - and we can use it ANYWHERE. Not just
-in our template.
+lodash もしくは他の専用のユーティリティライブラリのデバウンス機能を用いてデバウンスを行うことが最も良いでしょう。また、それを Vue ではあらゆるかしょで利用することが可能です。
+そしてそれは、テンプレート内に限った話ではありません。
 -->
 <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.js"></script>
 <div id="debounce-search-demo">
@@ -496,7 +494,7 @@ new Vue({
     }
   },
   methods: {
-    // This is where the debounce actually belongs.
+    // これが、実際のデバウンスが書かれているところです。
     expensiveOperation: _.debounce(function () {
       this.isCalculating = true
       setTimeout(function () {
@@ -813,8 +811,8 @@ created: function () {
   eventHub.$on('add-todo', this.addTodo)
   eventHub.$on('delete-todo', this.deleteTodo)
 },
-// It's good to clean up event listeners before
-// a component is destroyed.
+// 以下は、コンポーネントの削除前に
+// イベントリスナーをクリアするための良い手法です。
 beforeDestroy: function () {
   eventHub.$off('add-todo', this.addTodo)
   eventHub.$off('delete-todo', this.deleteTodo)
