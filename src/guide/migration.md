@@ -1235,14 +1235,12 @@ computed: {
 
 代わりに、 Vue.set を使用します。
 
-(console error, migration helper)
-
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
   <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、配列に対しての <code>.$set</code> を見つけます。
-    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+    そうすることで、メソッドが見つからないエラーがコンソールに出力されているので確認してください。
   </p>
 </div>
 {% endraw %}
@@ -1275,7 +1273,7 @@ methods: {
   <h4>移行ガイド</h4>
   <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、配列に対しての <code>.$remove</code> を見つけます。
-    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+    そうすることで、メソッドが見つからないエラーがコンソールに出力されているので確認してください。
   </p>
 </div>
 {% endraw %}
