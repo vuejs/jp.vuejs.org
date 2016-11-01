@@ -12,7 +12,6 @@ order: 11
 
 ### 登録
 
-We've learned in the previous sections that we can create a new Vue instance with:
 以前のセクションで、以下のように Vue インスタンスを作成できることを学習しました:
 
 ``` js
@@ -104,8 +103,6 @@ DOM をテンプレートとして使うとき(例、ある要素をすでに存
 </table>
 ```
 
-The custom component `<my-row>` will be hoisted out as invalid content, thus causing errors in the eventual rendered output. A workaround is to use the `is` special attribute:
-
 カスタムコンポーネントの `<my-row>` は無効なコンテンツとして巻き上げられます。それゆえ、のちにレンダリングされたアウトプットの中でエラーを引き起こします。回避策は `is` という特殊な属性を使うことです:
 
 ``` html
@@ -119,7 +116,6 @@ The custom component `<my-row>` will be hoisted out as invalid content, thus cau
 - JavaScript のインラインテンプレート文字列
 - `.vue` コンポーネント
 
-Therefore, prefer using string templates whenever possible.
 そのため、可能なときはいつでも文字列テンプレートの使用が好まれます。
 
 ### `data` は関数でなければならない
@@ -552,7 +548,6 @@ This strategy can also be used to create custom form inputs that work with `v-mo
 <input v-bind:value="something" v-on:input="something = arguments[0]">
 ```
 
-So for a component to work with `v-model`, it must:
 そのため、コンポーネントを `v-model` と共に動かすためには、以下が必要です:
 
 - `value` prop を受け入れる
@@ -648,8 +643,6 @@ new Vue({
 
 ### 否親子間の通信
 
-Sometimes two components may need to communicate with one-another but they are not parent/child to each other. In simple scenarios, you can use an empty Vue instance as a central event bus:
-
 たびたび、互いに親子関係ではない2つのコンポーネントが互いに通信する必要があるかもしれません。簡単なシナリオとして、空の Vue インスタンスを中心のイベントバスとして使用することができます:
 
 ``` js
@@ -665,8 +658,6 @@ bus.$on('id-selected', function (id) {
   // ...
 })
 ```
-
-In more complex cases, you should consider employing a dedicated [state-management pattern](/guide/state-management.html).
 
 より複雑なケースでは、専用の [state-management pattern](/guide/state-management.html) 採用することを考えるべきです。
 
@@ -733,8 +724,6 @@ Vue.component('child-component', {
 
 `<slot>` タグ内に元々あった全てのものは、**フォールバックコンテンツ**と見なされます。フォールバックコンテンツは子スコープでコンパイルされ、ホストしている要素が空で挿入されるコンテンツがない場合にのみ、表示されます。
 
-Suppose we have a component called `my-component` with the following template:
-
 `my-component` と呼ばれる以下のテンプレートによるコンポーネントがあるとします。
 
 ``` html
@@ -759,8 +748,6 @@ Suppose we have a component called `my-component` with the following template:
 </div>
 ```
 
-The rendered result will be:
-
 レンダリング結果は以下になります:
 
 ``` html
@@ -779,8 +766,6 @@ The rendered result will be:
 `<slot>` 要素は特別な属性 `name` を持ち、コンテンツを配信する方法をカスタマイズするために使用できます。異なる名前で複数のスロットを持つことができます。名前付きスロットは、コンテンツ内の対応する `slot` 属性を持つ任意の要素にマッチします。
 
 マッチしなかったコンテンツのためのキャッチオールアウトレットの機能を持つ**デフォルトスロット**として、名前無しのスロットを残すことができます。デフォルトスロットがない場合は、マッチしなかったコンテンツは破棄されます。
-
-For example, suppose we have an `app-layout` component with the following template:
 
 例として、以下のテンプレートのような、`app-layout` コンポーネントがあると仮定します:
 
@@ -850,11 +835,10 @@ var vm = new Vue({
 
 ``` html
 <component v-bind:is="currentView">
-  <!-- component changes when vm.currentView changes! -->
+  <!-- vm.currentview が変更されると、中身が変更されます! -->
 </component>
 ```
 
-If you prefer, you can also bind directly to component objects:
 もしお好みならば、コンポーネントオブジェクトを直接バインドすることもできます:
 
 ``` js
@@ -889,11 +873,9 @@ Check out more details on `<keep-alive>` in the [API reference](/api/#keep-alive
 
 ### 再利用可能なコンポーネントの作成
 
-When authoring components, it's good to keep in mind whether you intend to reuse it somewhere else later. It's OK for one-off components to be tightly coupled, but reusable components should define a clean public interface and make no assumptions about the context it's used in.
 コンポーネントを作成するとき、あとでこのコンポーネントをどこかほかの箇所で再利用するつもりかどうかを心に留めておくとよいでしょう。一度限りのコンポーネントが密に結びつくことは良いとしても、再利用可能なコンポーネントはきれいな公開インタフェースを定義し、どの中で使われるかに関してはなにも仮定しないようにするべきです。
 
-The API for a Vue component comes in three parts - props, events, and slots:
-Vue コンポーネントのための API は、本質的に、props 、events 、slots の3つの部分からなります:
+Vue コンポーネントのための API は、本質的に、props 、events 、slots の3つの部分から成ります:
 
 - **Props** 外部環境がコンポーネントにデータを渡すことを可能にします。
 
@@ -932,8 +914,6 @@ var child = parent.$refs.profile
 ```
 
 `ref` が `v-for` と共に使用された時は、得られる値はデータソースをミラーリングした子コンポーネントが格納されている配列またはオブジェクトになります。
-
-<p class="tip">`$refs` are only populated after the component has been rendered, and it is not reactive. It is only meant as an escape hatch for direct child manipulation - you should avoid using `$refs` in templates or computed properties.</p>
 
 <p class="tip">`$refs` はコンポーネントがレンダリングされた後にのみ追加されます。そしてそれはリアクティブではありません。直接子コンポーネントを操作するための最終手段としての意味しかありません。 - テンプレートまたは算出プロパティ(computed property)の中での `$refs` の使用は避けるべきです。</p>
 
@@ -974,14 +954,16 @@ Vue.component(
 
 <p class="tip">If you're a <strong>Browserify</strong> user that would like to use async components, it's unfortunately not possible and probably never will be, as its creator has [made it clear](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224) that async loading "is not something that Browserify will ever support." If this is a feature that's important to you, we recommend using Webpack instead.</p>
 
+<p class="tip">もしあなたが非同期コンポーネントを使いたい<strong>Browserify</strong> のユーザなら[made it clear](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224) that async loading "is not something that Browserify will ever support." If this is a feature that's important to you, we recommend using Webpack instead.</p>
+
 ### Component Naming Conventions
 
-When registering components (or props), you can use kebab-case, camelCase, or TitleCase. Vue doesn't care.
+components (または props)を登録する時、ケバスケース、キャメルケース、タイトルケースを使うことができます。Vue は気にしません。
 
 ``` js
-// in a component definition
+//コンポーネント内での定義
 components: {
-  // register using camelCase
+  // キャメルケースを使った登録
   'kebab-cased-component': { /* ... */ },
   'camelCasedComponent': { /* ... */ },
   'TitleCasedComponent': { /* ... */ }
@@ -989,30 +971,36 @@ components: {
 ```
 
 Within HTML templates though, you have to use the kebab-case equivalents:
+しかし、HTMLテンプレートの中では、ケバブケースを使用する必要があります。
 
 ``` html
 <!-- alway use kebab-case in HTML templates -->
+<!-- HTMLテンプレートの中では、常にケバブケースを使用する -->
 <kebab-cased-component></kebab-cased-component>
 <camel-cased-component></camel-cased-component>
 <title-cased-component></title-cased-component>
 ```
 
-When using _string_ templates however, we're not bound by HTML's case-insensitive restrictions. That means even in the template, you reference your components and props using camelCase, PascalCase, or kebab-case:
+しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しないHTMLの制約に縛られません。このことは、テンプレートの中であっても、キャメルケース、パスカルケースまたは、ケバブケースを使用して components と props を参照できるということを意味します。
 
 ``` html
-<!-- use whatever you want in string templates! -->
+<!-- 文字列テンプレートの中では使用したいケースをなんでも使用できます！ -->
 <my-component></my-component>
 <myComponent></myComponent>
 <MyComponent></MyComponent>
 ```
 
-If your component isn't passed content via `slot` elements, you can even make it self-closing with a `/` after the name:
+もしコンポーネントが `slot` を介してコンテンツを伝えない場合は、名前のあとに `/` をつけることによって自己終了( self-closing )タグにすることもできます。
+
 
 ``` html
 <my-component/>
 ```
 
 Again, this _only_ works within string templates, as self-closing custom elements are not valid HTML and your browser's native parser will not understand them.
+
+自己終了カスタム要素は有効な HMTL でなく、あなたのブラウザのネイティブパーサーはそれらを理解しないため、これは文字列テンプレートの中で_のみ_動作します。
+
 
 ### 再帰的なコンポーネント
 
@@ -1031,7 +1019,7 @@ Vue.component('unique-name-of-my-component', {
 ```
 上記のようなコンポーネントは、"max stack size exceeded" エラーに想定されるため、再帰呼び出しは条件付きになるようにしてください。(i.e. 最終的に `false` となる `v-if` を使用します。)
 
-### Inline Templates
+### インラインテンプレート
 
 特別な属性 `inline-template` が子コンポーネントに存在するとき、配信コンテンツとして扱うよりむしろ、コンポーネントはそれをテンプレートとして内部コンテンツを使用します。これは、より柔軟なテンプレートを作成可能にします。
 
@@ -1042,11 +1030,11 @@ Vue.component('unique-name-of-my-component', {
 </my-component>
 ```
 
-However, `inline-template` makes the scope of your templates harder to reason about. As a best practice, prefer defining templates inside the component using the `template` option or in a `template` element in a `.vue` file.
+しかしながら、`inline-template` はテンプレートのスコープを推理するのが難しくなります。ベストプラクティスとして、`template` オプションを使用して、コンポーネント内部でテンプレートを定義するようにするか、`.vue` ファイルの `template` 要素の中で定義します。
 
-### X-Templates
+### X-テンプレート
 
-Another way to define templates is inside of a script element with the type `text/x-template`, then referencing the template by an id. For example:
+テンプテートを定義するもうひとつの方法は、`text/x-template` タイプとともに script 要素の中で定義するというものです。そのあと、id によってテンプレートを参照します。例:
 
 ``` html
 <script type="text/x-template" id="hello-world-template">
@@ -1060,11 +1048,13 @@ Vue.component('hello-world', {
 })
 ```
 
-These can be useful for demos with large templates or in extremely small applications, but should otherwise be avoided, because they separate templates from the rest of the component definition.
+これらは大きなテンプレートを使ったデモまたは、極めて小さなアプリケーションに便利です。しかし、それ以外では避けるべきです。なぜなら、コンポーネントの定義の残りからテンプレートを分離するからです。
 
 ### Cheap Static Components with `v-once`
 
-Rendering plain HTML elements is very fast in Vue, but sometimes you might have a component that contains **a lot** of static content. In these cases, you can ensure that it's only evaluated once and then cached by adding the `v-once` directive to the root element, like this:
+### `v-once` を使用したチープな静的コンポーネント
+
+Vue では、素の HTML 要素をレンダリングするのはとても高速です。しかし、ときどき、静的なコンテンツを **大量に** 含むコンポーネントがあるかもしれません。このような場合、以下のように root 要素で `v-once` ディレクティブを追加することによって、コンポーネントを一度のみ評価しキャッシュしておくことを保証することができます。
 
 ``` js
 Vue.component('terms-of-service', {
