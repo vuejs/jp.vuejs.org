@@ -93,7 +93,7 @@ new Vue({
 
 ### DOM テンプレート解析の注意事項
 
-DOM をテンプレートとして使うとき(例、ある要素をすでに存在する要素にマウントするために `el` オプションを使うとき)、あなたはHTMLがどのように動くかに内在する幾つかの制約の対象となります。なぜなら、 Vue はブラウザがテンプレートを解析して標準化した **後** にのみテンプレートの内容を検索することができるからです。特に、 `<ul>`, `<ol>`, `<table>`, `<select>` のようないくつかの要素は、その要素の内部にどの要素を表示させることができるかの制約を持ち、 `<option>` のようないくつかの要素は、ある特定の要素の内部でのみ表示されます。
+DOM をテンプレートとして使うとき(例、ある要素をすでに存在する要素にマウントするために `el` オプションを使うとき)、あなたは HTML がどのように動くかに内在する幾つかの制約の対象となります。なぜなら、 Vue はブラウザがテンプレートを解析して標準化した **後** にのみテンプレートの内容を検索することができるからです。特に、 `<ul>`, `<ol>`, `<table>`, `<select>` のようないくつかの要素は、その要素の内部にどの要素を表示させることができるかの制約を持ち、 `<option>` のようないくつかの要素は、ある特定の要素の内部でのみ表示されます。
 
 このことは、いくつかの制約をもつ要素と共にカスタムコンポーネントを使うときに問題につながるかもしれません。例:
 
@@ -120,7 +120,7 @@ DOM をテンプレートとして使うとき(例、ある要素をすでに存
 
 ### `data` は関数でなければならない
 
-Vue コンストラクタに渡すことのできるほとんどのオプションは、コンポーネントの中で使用できます。しかし、１つだけ特別なケースがあります: `data` は関数でなければいけません。実際、以下をためすと:
+Vue コンストラクタに渡すことのできるほとんどのオプションは、コンポーネントの中で使用できます。しかし、1つだけ特別なケースがあります: `data` は関数でなければいけません。実際、以下をためすと:
 
 ``` js
 Vue.component('my-component', {
@@ -130,8 +130,6 @@ Vue.component('my-component', {
   }
 })
 ```
-
-Then Vue will halt and emit warnings in the console, telling you that `data` must be a function for component instances. It's good to understand why the rules exist though, so let's cheat.
 
 そのあと、Vue は止まりコンソールへ、コンポーネントインスタンスでは `data` は関数でなければならないと伝える警告を出します。しかし、どうしてそのルールが存在するかの理解にはいいでしょう。
 
@@ -181,7 +179,7 @@ new Vue({
 </script>
 {% endraw %}
 
-3つのコンポーネントはすべて同じ `data` オブジェクトを共有しているので、ひとつのカウンタをインクリメントするとすべてのカウンタをインクリメントします! 代わりに未使用の data オブジェクトを返すことにより、これを修正しましょう:
+3つのコンポーネントはすべて同じ `data` オブジェクトを共有しているので、ひとつのカウンタをインクリメントするとすべてのカウンタをインクリメントします！代わりに未使用の data オブジェクトを返すことにより、これを修正しましょう:
 
 ``` js
 data: function () {
@@ -214,8 +212,6 @@ new Vue({
 </script>
 {% endraw %}
 
-The `el` option also requires a function value when used in a component instance, for exactly the same reason.
-
 また、`el` オプションも、まったく同様の理由で、コンポーネントインスタンスの中で使用されるときは、関数の値を必要とします。
 
 ### コンポーネントの構成
@@ -230,7 +226,7 @@ Vue.js では、親子のコンポーネントの関係は、**props down, event
 
 ## Props
 
-### Passing Data with Props
+### Props によるデータの伝達
 
 全てのコンポーネントインスタンスは、各自の**隔離されたスコープ (isolated scope)** を持ちます。つまり、子コンポーネントのテンプレートで親データを直接参照できない(そしてすべきでない)ということです。データは **props** を使用して子コンポーネントに伝達できます。
 
@@ -290,7 +286,7 @@ Vue.component('child', {
 
 また、もし文字列テンプレートを使用する場合は、この制限は適用されません。
 
-### Dynamic Props
+### 動的な Props
 
 式に通常の属性をバインディングするのと同様に、 `v-bind` を使用して親のデータに props を動的にバインディングすることもできます。親でデータが更新される度に、そのデータが子に流れ落ちます:
 
@@ -332,7 +328,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Literal vs Dynamic
+### リテラル 対 動的
 
 初心者にありがちな誤りは、リテラル構文を使用して数を渡そうとすることです:
 
@@ -341,21 +337,20 @@ new Vue({
 <comp some-prop="1"></comp>
 ```
 
-However, since this is a literal prop, its value is passed down as a plain string `"1"` instead of an actual number. If we want to pass down an actual JavaScript number, we need to use `v-bind` so that its value is evaluated as a JavaScript expression:
-しかしながら、これはリテラルな prop なので、その値は実際に数の代わりに純粋な文字列 `"1"`が渡されています。実際に JavaScript の数を渡したい場合は、その値が JavaScript の式として評価されるよう、`v-bind` を使う必要があります。
+しかしながら、これはリテラルな prop なので、その値は実際に数の代わりに純粋な文字列 `"1"`が渡されています。実際に JavaScript の数を渡したい場合は、その値が JavaScript の式として評価されるよう、`v-bind` を使う必要があります:
 
 ``` html
 <!-- これは実際の数を渡します -->
 <comp v-bind:some-prop="1"></comp>
 ```
 
-### One-Way Data Flow
+### 一方向のデータフロー
 
 すべての prop は、子プロパティと親プロパティの間の **one-way-down** バインディングを形成します: 親プロパティが更新したとき、それは子プロパティに伝わり、その反対はありません。これは、あなたのアプリケーションのデータフローの説明を難しくしてしまうような、子コンポーネントが偶然親の状態を変化させることを防ぎます。
 
 それに加えて、親コンポーネントが更新されるたびに、子コンポーネント内のすべての prop が最新の値に再読込されます。これは、子コンポーネント内部の prop を変更しようとするべきでないことを意味しています。もし変更しようとすると、 Vue はコンソール内で警告します。
 
-prop を変更したくなる２つのケースがあります。
+prop を変更したくなる2つのケースがあります。
 
 1. prop は初期値を渡すためにのみ使われ、子コンポーネントは単にその値をローカルデータプロパティとして使用したい場合。
 
@@ -366,8 +361,6 @@ prop を変更したくなる２つのケースがあります。
 1. prop の初期値をその初期値とするようなローカルデータプロパティを定義する。
 
 2. prop の値から計算される算出プロパティ (computed property) を定義する。
-
-<p class="tip">Note that objects and arrays in JavaScript are passed by reference, so if the prop is an array or object, mutating the object or array itself inside the child **will** affect parent state.</p>
 
 <p class="tip"> JavaScript のオブジェクトや配列は参照渡しのため、もし prop が配列やオブジェクトなら、子内部のオブジェクトまたは配列自身の変更は、親の状態に影響を**与えます**。</p>
 
@@ -512,8 +505,6 @@ new Vue({
 </script>
 {% endraw %}
 
-In this example, it's important to note that the child component is still completely decoupled from what happens outside of it. All it does is report information about its own activity, just in case a parent component might care.
-
 この例では、子コンポーネントはその外で起こったこととはまだ完全に分離しているということに注目することが大切です。子コンポーネントが唯一行っていることは、親コンポーネントが監視している場合に備えて、自分自身の活動に関する情報を報告することです。
 
 #### ネイティブイベントとコンポーネントのバインディング
@@ -524,11 +515,7 @@ In this example, it's important to note that the child component is still comple
 <my-component v-on:click.native="doTheThing"></my-component>
 ```
 
-### Form Input Components using Custom Events
-
 ### カスタムイベントを使用したフォーム入力コンポーネント
-
-This strategy can also be used to create custom form inputs that work with `v-model`. Remember:
 
 この戦略は、`v-model`とともに動く、カスタムフォーム入力を作成するためにも使用されます。以下を思い出しましょう:
 
@@ -639,8 +626,6 @@ new Vue({
 <webcam-retinal-scanner v-model="retinalImage"></webcam-retinal-scanner>
 ```
 
-### Non Parent-Child Communication
-
 ### 否親子間の通信
 
 たびたび、互いに親子関係ではない2つのコンポーネントが互いに通信する必要があるかもしれません。簡単なシナリオとして、空の Vue インスタンスを中心のイベントバスとして使用することができます:
@@ -718,7 +703,7 @@ Vue.component('child-component', {
 
 同様に、配信コンテンツは親スコープでコンパイルされます。
 
-### Single Slot
+### 単一スロット
 
 親コンテンツは子コンポーネントのテンプレートが少なくとも1つの `<slot>` アウトレットを含んでいない限り**破棄されます**。属性なしのスロットが1つだけあるときは、全コンテンツはスロットそのものを置き換え、DOM 内のその位置に挿入されます。
 
@@ -866,7 +851,6 @@ var vm = new Vue({
 </keep-alive>
 ```
 
-Check out more details on `<keep-alive>` in the [API reference](/api/#keep-alive).
 `<keep-alive>` のさらなる詳細については、[API reference](/api/#keep-alive) を確認して下さい。
 
 ## その他
@@ -897,7 +881,7 @@ Vue コンポーネントのための API は、本質的に、props 、events �
 </my-component>
 ```
 
-### Child Component Refs
+### 子コンポーネントの参照
 
 props やイベントの存在にもかかわらず、時には子コンポーネントに JavaScript で直接アクセスする必要があるかもしれません。それを実現するためには `ref` を用いて子コンポーネントに対して参照 ID を割り当てる必要があります。例えば:
 
@@ -915,7 +899,7 @@ var child = parent.$refs.profile
 
 `ref` が `v-for` と共に使用された時は、得られる値はデータソースをミラーリングした子コンポーネントが格納されている配列またはオブジェクトになります。
 
-<p class="tip">`$refs` はコンポーネントがレンダリングされた後にのみ追加されます。そしてそれはリアクティブではありません。直接子コンポーネントを操作するための最終手段としての意味しかありません。 - テンプレートまたは算出プロパティ(computed property)の中での `$refs` の使用は避けるべきです。</p>
+<p class="tip"> `$refs` はコンポーネントがレンダリングされた後にのみ追加されます。そしてそれはリアクティブではありません。直接子コンポーネントを操作するための最終手段としての意味しかありません。 - テンプレートまたは算出プロパティ(computed property)の中での `$refs` の使用は避けるべきです。</p>
 
 ### 非同期コンポーネント
 
@@ -935,7 +919,7 @@ Vue.component('async-example', function (resolve, reject) {
 
 ``` js
 Vue.component('async-webpack-example', function (resolve) {
-  // この特別な require 構文は webpack に対して、
+  // この特別な require 構文は webpack に対して
   // ビルドコードを自動的に分割し、
   // ajaxリクエストでロードされるバンドルに
   // するよう指示します
@@ -943,7 +927,7 @@ Vue.component('async-webpack-example', function (resolve) {
 })
 ```
 
-resolve 関数の `Promise` を返すこともできます。Webpack 2 + ES2015構文を使うと以下のようにできます:
+resolve 関数の `Promise` を返すこともできます。Webpack 2 + ES2015 構文を使うと以下のようにできます:
 
 ``` js
 Vue.component(
@@ -952,11 +936,9 @@ Vue.component(
 )
 ```
 
-<p class="tip">If you're a <strong>Browserify</strong> user that would like to use async components, it's unfortunately not possible and probably never will be, as its creator has [made it clear](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224) that async loading "is not something that Browserify will ever support." If this is a feature that's important to you, we recommend using Webpack instead.</p>
+<p class="tip">もしあなたが非同期コンポーネントを使いたい<strong>Browserify</strong> のユーザなら残念なことに不可能で、これからも使うことはできないでしょう。なぜなら、その開発者たちが[はっきりと](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224)非同期読み込みは Browserify は今後もサポートしないでしょう"とのべているからです。もしこれがあなたにとって大事な特徴であるなら、変わりに Webpack を使うことをおすすめします。</p>
 
-<p class="tip">もしあなたが非同期コンポーネントを使いたい<strong>Browserify</strong> のユーザなら[made it clear](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224) that async loading "is not something that Browserify will ever support." If this is a feature that's important to you, we recommend using Webpack instead.</p>
-
-### Component Naming Conventions
+### コンポーネントの命名の慣習
 
 components (または props)を登録する時、ケバスケース、キャメルケース、タイトルケースを使うことができます。Vue は気にしません。
 
@@ -970,8 +952,7 @@ components: {
 }
 ```
 
-Within HTML templates though, you have to use the kebab-case equivalents:
-しかし、HTMLテンプレートの中では、ケバブケースを使用する必要があります。
+しかし、HTML テンプレートの中では、ケバブケースを使用する必要があります。
 
 ``` html
 <!-- alway use kebab-case in HTML templates -->
@@ -981,7 +962,7 @@ Within HTML templates though, you have to use the kebab-case equivalents:
 <title-cased-component></title-cased-component>
 ```
 
-しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しないHTMLの制約に縛られません。このことは、テンプレートの中であっても、キャメルケース、パスカルケースまたは、ケバブケースを使用して components と props を参照できるということを意味します。
+しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しない HTML の制約に縛られません。このことは、テンプレートの中でも、キャメルケース、パスカルケースまたは、ケバブケースを使用して components と props を参照できるということを意味します。
 
 ``` html
 <!-- 文字列テンプレートの中では使用したいケースをなんでも使用できます！ -->
@@ -996,8 +977,6 @@ Within HTML templates though, you have to use the kebab-case equivalents:
 ``` html
 <my-component/>
 ```
-
-Again, this _only_ works within string templates, as self-closing custom elements are not valid HTML and your browser's native parser will not understand them.
 
 自己終了カスタム要素は有効な HMTL でなく、あなたのブラウザのネイティブパーサーはそれらを理解しないため、これは文字列テンプレートの中で_のみ_動作します。
 
@@ -1017,7 +996,7 @@ Vue.component('unique-name-of-my-component', {
   // ...
 })
 ```
-上記のようなコンポーネントは、"max stack size exceeded" エラーに想定されるため、再帰呼び出しは条件付きになるようにしてください。(i.e. 最終的に `false` となる `v-if` を使用します。)
+上記のようなコンポーネントは、"max stack size exceeded" エラーに想定されるため、再帰呼び出しは条件付きになるようにしてください。(i.e. 最終的に `false` となる `v-if` を使用します)
 
 ### インラインテンプレート
 
@@ -1049,8 +1028,6 @@ Vue.component('hello-world', {
 ```
 
 これらは大きなテンプレートを使ったデモまたは、極めて小さなアプリケーションに便利です。しかし、それ以外では避けるべきです。なぜなら、コンポーネントの定義の残りからテンプレートを分離するからです。
-
-### Cheap Static Components with `v-once`
 
 ### `v-once` を使用したチープな静的コンポーネント
 
