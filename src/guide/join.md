@@ -14,7 +14,7 @@ Vue コミュニティは驚くべき速さで成長しています、そして�
 
 - [フォーラム](http://forum.vuejs.org/): Vue について回答を得たり、そのエコシステムについて質問するために最適な場所です。
 - [Gitter Channel](https://gitter.im/vuejs/vue): 開発者とチャットするための場所です。ここで質問することもできますが、議論がスレッド化されているのであればフォーラムの方がプラットフォームとして適切です。
-- [Github](https://github.com/vuejs): 報告すべきバグや要請したい仕様があれば、GitHub issues が最適です。プルリクエストも歓迎します！
+- [GitHub](https://github.com/vuejs): 報告すべきバグや要請したい仕様があれば、GitHub issues が最適です。プルリクエストも歓迎します！
 
 ### エコシステムを調べる
 
