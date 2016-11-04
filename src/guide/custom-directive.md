@@ -1,12 +1,14 @@
 ---
-title: Custom Directives
+title: カスタムディレクティブ
 type: guide
 order: 16
 ---
 
-## Intro
+## 基本
 
-In addition to the default set of directives shipped in core (`v-model` and `v-show`), Vue also allows you to register your own custom directives. Note that in Vue 2.0, the primary form of code reuse and abstraction is components - however there may be cases where you just need some low-level DOM access on plain elements, and this is where custom directives would still be useful. An example would be focusing on an input element, like this one:
+コアで出荷されたディレクティブのデフォルトセットに加えて (`v-model` と `v-show`)、カスタムディレクティブ (custom directive) を登録することができます。
+Vue 2.0 では、コードの再利用と抽象化における基本の形はコンポーネントです。 - しかしながら、通常の要素で低レベル DOM にアクセスしなければならないケースがあるかもしれません。こういった場面では、カスタムディレクティブが役立つでしょう。
+ひとつの例として、以下のような input 要素へのフォーカスが挙げられます:
 
 {% raw %}
 <div id="simplest-directive-example" class="demo">
@@ -24,69 +26,71 @@ new Vue({
 </script>
 {% endraw %}
 
-When the page loads, that element gains focus. In fact, if you haven't clicked on anything else since visiting this page, the input above should be focused now. Now let's build the directive that accomplishes this:
+ページを読み込むと、この要素はフォーカスを手に入れます。実際、このページに訪れてから他のところをクリックしていなければ、この input にフォーカスが当たっているでしょう。
+さあ、これを実現させるディレクティブを作りましょう。
 
 ``` js
-// Register a global custom directive called v-focus
+// v-focus というグローバルカスタムディレクティブを登録します
 Vue.directive('focus', {
-  // When the bound element is inserted into the DOM...
+  // ひも付いている要素が DOM に挿入される時...
   inserted: function (el) {
-    // Focus the element
+    // 要素にフォーカスを当てる
     el.focus()
   }
 })
 ```
 
-If you want to register a directive locally instead, components also accept a `directives` option:
+代わりにローカルディレクティブに登録したいのであれば、コンポーネントの `directives` オプションで登録できます:
 
 ``` js
 directives: {
   focus: {
-    // directive definition
+    // ディレクティブ定義
   }
 }
 ```
 
-Then in a template, you can use the new `v-focus` attribute on any element, like this:
+これでテンプレートで、以下のような新しい `v-focus` 属性が使えるようになります。
 
 ``` html
 <input v-focus>
 ```
 
-## Hook Functions
 
-A directive definition object can provide several hook functions (all optional):
+### フック関数
 
-- `bind`: called only once, when the directive is first bound to the element. This is where you can do one-time setup work.
+directive definition object はいくつかのフック関数(全て任意)を提供します:
 
-- `inserted`: called when the bound element has been inserted into its parent node (this only guarantees parent node presence, not necessarily in-document).
+- `bind`: ディレクティブが初めて対象の要素にひも付いた時に一度だけ呼ばれます。ここで一回だけ実行するセットアップ処理を行えます。
 
-- `update`: called whenever the bound element's containing component is updated. The directive's value may or may not have changed. You can skip unnecessary updates by comparing the binding's current and old values (see below on hook arguments).
+- `inserted`: ひも付いている要素が親 Node に挿入された時に呼ばれます。(これは親 Node が存在していることのみ保証します。必ずしも in-document ではありません)
 
-- `componentUpdated`: called after the containing component has completed an update cycle.
+- `update`: 含んでいるコンポーネントが更新された後に呼ばれます。__しかし、おそらく子コンポーネントが更新される前でしょう。__ ディレクティブの値が変化してもしなくても、バインディングされている値と以前の値との比較によって不要な更新を回避することができます。(フック引数に関しては下記を参照してください)
 
-- `unbind`: called only once, when the directive is unbound from the element.
+- `componentUpdated`: 含んでいるコンポーネント __と子コンポーネント__ が更新された後に呼ばれます。
 
-We'll explore the arguments passed into these hooks (i.e. `el`, `binding`, `vnode`, and `oldVnode`) in the next section.
+- `unbind`: ディレクティブがひも付いている要素から取り除かれた時に一度だけ呼ばれます。
 
-## Directive Hook Arguments
+次のセクションで、これらのフックに渡す引数(すなわち `el`, `binging`, `vnode`, `oldVnode`)を見ていきましょう。
 
-Directive hooks are passed these arguments:
+### ディレクティブフック引数
 
-- **el**: The element the directive is bound to. This can be used to directly manipulate the DOM.
-- **binding**: An object containing the following properties.
-  - **name**: The name of the directive, without the `v-` prefix.
-  - **value**: The value passed to the directive. For example in `v-my-directive="1 + 1"`, the value would be `2`.
-  - **oldValue**: The previous value, only available in `update` and `componentUpdated`. It is available whether or not the value has changed.
-  - **expression**: The expression of the binding as a string. For example in `v-my-directive="1 + 1"`, the expression would be `"1 + 1"`.
-  - **arg**: The argument passed to the directive, if any. For example in `v-my-directive:foo`, the arg would be `"foo"`.
-  - **modifiers**: An object containing modifiers, if any. For example in `v-my-directive.foo.bar`, the modifiers object would be `{ foo: true, bar: true }`.
-- **vnode**: The virtual node produced by Vue's compiler. See the [VNode API](/api/#VNode-Interface) for full details.
-- **oldVnode**: The previous virtual node, only available in the `update` and `componentUpdated` hooks.
+ディレクティブフックには以下の引数が渡せます:
 
-<p class="tip">Apart from `el`, you should treat these arguments as read-only and never modify them. If you need to share information across hooks, it is recommended to do so through element's [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset).</p>
+- **el**: ディレクティブがひも付く要素。DOMを直接操作するために使用できます。
+- **binding**: 以下のプロパティを含んでいるオブジェクト。
+  - **name**: `v-` 接頭辞 (prefix) 無しのディレクティブ名。
+  - **value**: ディレクティブに渡される値。例えば `v-my-directive="1 + 1"` では、 value は `2` です.
+  - **oldValue**: `update` と `componentUpdated` においてのみ利用できる以前の値。値が変化したかどうかに関わらず利用できます。
+  - **expression**: 文字列としてのバインディング式。例えば `v-my-directive="1 + 1"` では、expression は `"1 + 1"` です。
+  - **arg**: もしあれば、ディレクティブに渡される引数。例えば `v-my-directive:foo` では、arg は `"foo"` です。
+  - **modifiers**: もしあれば、修飾子 (modifier) を含んでいるオブジェクト。例えば `v-my-directive.foo.bar` では、modifiers オブジェクトは `{ foo: true, bar: true }` です。
+- **vnode**: Vue のコンパイラによって生成される仮想 Node。さらに詳しくは [VNode API](/api/#VNode-Interface) を参照してください。
+- **oldVnode**: `update` と `componentUpdated` フックにおいてのみ利用できる以前の仮想 Node。
 
-An example of a custom directive using some of these properties:
+<p class="tip">`el` を除いて、これらの全てのプロパティは読み込みのみ (read-only) で変更しないものとして扱わなくてはいけません。フックを超えてデータを共有する必要がある場合は, 要素の [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) を通じて行うことが推奨されています。</p>
+
+いくつかのプロパティを使用したカスタムディレクティブの例:
 
 ``` html
 <div id="hook-arguments-example" v-demo:hello.a.b="message"></div>
@@ -138,9 +142,9 @@ new Vue({
 </script>
 {% endraw %}
 
-## Function Shorthand
+## 関数省略記法
 
-In many cases, you may want the same behavior on `bind` and `update`, but don't care about the other hooks. For example:
+多くの場合、`bind` と `update` には同じ振舞いが欲しいでしょうが、その他のフックに関しては気にかけません。例えば:
 
 ``` js
 Vue.directive('color-swatch', function (el, binding) {
@@ -148,9 +152,9 @@ Vue.directive('color-swatch', function (el, binding) {
 })
 ```
 
-## Object Literals
+## オブジェクトリテラル
 
-If your directive needs multiple values, you can also pass in a JavaScript object literal. Remember, directives can take any valid JavaScript expression.
+あなたのディレクティブが複数の値を必要ならば、JavaScript オブジェクトリテラルも渡すことができます。ディレクティブは任意の妥当な JavaScript 式を取ることができるのを覚えておいてください:
 
 ``` html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
