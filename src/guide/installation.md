@@ -47,11 +47,11 @@ $ npm install vue
 
 スタンドアロンビルドとランタイム限定ビルドの2つのビルドが使用可能です。
 
-- スタンドアロンビルドはコンパイラを内蔵しており、 `template` オプションをサポートしています。 **ブラウザのAPIに依存しているため、サーバサイドレンダリングに使用することはできません。**
+- スタンドアロンビルドはコンパイラを内蔵しており、 `template` オプションをサポートしています。 **ブラウザの API に依存しているため、サーバサイドレンダリングに使用することはできません。**
 
 - ランタイム限定ビルドは、テンプレートコンパイラを内蔵しておらず、 `template` オプションはサポートされていません。ランタイム限定ビルドを使用している場合は `render` オプションのみ使用することが可能ですが、単一ファイルコンポーネントのテンプレートはビルド時に `render` 関数をプリコンパイルされるので使用可能です。ランタイム限定ビルドは 16kb min+gzip であり、スタンドアロンビルドよりも30%軽量です。
 
-NPMパッケージはデフォルトで**ランタイム限定**ビルドを出力します。スタンドアロンビルドを使用する場合は、webpackのコンフィグに下記のエイリアスを追加します。
+NPM パッケージはデフォルトで**ランタイム限定**ビルドを出力します。スタンドアロンビルドを使用する場合は、webpack のコンフィグに下記のエイリアスを追加します。
 
 ``` js
 resolve: {
@@ -69,7 +69,7 @@ Browserify に関しては、 [aliasify](https://github.com/benbria/aliasify) �
 
 Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、スタンドアロンビルドに依存するため、これらの環境では使用できません。
 
-一方では、ランタイム限定ビルドではCSPに準拠しています。 [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple) でランタイム限定ビルドを使用する場合は、テンプレートはCSP環境でも完璧に動作する `render` 関数にプリコンパイルされます。
+一方では、ランタイム限定ビルドでは CSP に準拠しています。 [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple) でランタイム限定ビルドを使用する場合は、テンプレートは CSP 環境でも完璧に動作する `render` 関数にプリコンパイルされます。
 
 ## CLI
 
@@ -88,7 +88,7 @@ $ npm run dev
 
 ## 開発版のビルド
 
-**重要** GitHub上の `/dist` フォルダに存在するビルドされたファイルは、リリース時にのみチェックインされます。 GitHub上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
+**重要** GitHub 上の `/dist` フォルダに存在するビルドされたファイルは、リリース時にのみチェックインされます。 GitHub 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！
 
 ``` bash
 git clone https://github.com/vuejs/vue.git node_modules/vue
