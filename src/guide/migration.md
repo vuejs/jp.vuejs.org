@@ -787,7 +787,9 @@ Vue.config.keyCodes.f1 = 112
 
 これまでの問題として、コンポーネントツリーが肥大化した際、その動作を推論することが非常に困難となり、また、コンポーネントのツリー構造に依存する、非常に脆いイベントフローがありました。それは、単純にうまくスケールしませんし、後々に痛みを伴う変更となってはなりません。`$dispatch` および `$broadcast` に関しても、兄弟コンポーネント間の通信を解決するものではありません。
 
-`$dispatch` および `$broadcast` からの最も簡単なアップグレードの方法として、コンポーネントがそれぞれのツリー内の状態に関係なく、通信することを可能とする、集中型のイベントハブを使用することができます。Vue のインスタンスは Event Emitter のインターフェースを持っているため、実際に使用する場合、この目的のために空の Vue インスタンスを作成することになるでしょう。
+One of the most common uses for these methods is to communicate between a parent and its direct children. In these cases, you can actually [listen to an `$emit` from a child with `v-on`](http://vuejs.org/guide/components.html#Form-Input-Components-using-Custom-Events). This allows you to keep the convenience of events with added explicitness.
+
+However, when communicating between distant descendants/ancestors, `$emit` won't help you. Instead, the simplest possible upgrade would be to use a centralized event hub. This has the added benefit of allowing you to communicate between components no matter where they are in the component tree - even between siblings! Because Vue instances implement an event emitter interface, you can actually use an empty Vue instance for this purpose.
 
 例えば、このような ToDo アプリケーションがある場合:
 
