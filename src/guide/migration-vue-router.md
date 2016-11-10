@@ -269,12 +269,12 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 
 ### `router.go`
 
-[HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) で使用されている用語との一貫性を取るために、 [`router.push` に名前が変更されました。](http://router.vuejs.org/ja/essentials/navigation.html#routerpushlocation)
+For consistency with the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API), `router.go` is now only used for [back/forward navigation](https://router.vuejs.org/en/essentials/navigation.html#routergon), while [`router.push`](http://router.vuejs.org/en/essentials/navigation.html#routerpushlocation) is used to navigate to a specific page.
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.go</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.push</code> の代わりに使用される <code>router.go</code> がコールされる箇所を検出して下さい。</p>
 </div>
 {% endraw %}
 
