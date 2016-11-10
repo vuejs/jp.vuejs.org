@@ -708,8 +708,7 @@ type: api
   Vue インスタンスで利用可能なフィルタのハッシュです。
 
 - **参照:**
-  - [カスタムフィルタ](/guide/custom-filter.html)
-  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
+  - [`Vue.filter`](#Vue-filter)
 
 ### components
 
