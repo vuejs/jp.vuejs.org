@@ -946,8 +946,9 @@ JavaScript 組み込みの [`.filter` メソッド](https://developer.mozilla.or
 ``` js
 computed: {
   filteredUsers: function () {
-    return this.users.filter(function (user) {
-      return user.name.indexOf(this.searchQuery) !== -1
+    var self = this
+    return self.users.filter(function (user) {
+      return user.name.indexOf(self.searchQuery) !== -1
     })
   }
 }
@@ -956,8 +957,9 @@ computed: {
 算出プロパティに対しては、完全なるアクセス権があるため、 JavaScript 組み込みの `.filter` は、非常に複雑なフィルタリングの管理を行うことができます。例えば、もしあなたがすべてのアクティブユーザーを見つけるために、大文字小文字を区別せず、名前と E メールアドレスの両方を調べたい場合は、以下のようになります:
 
 ``` js
-this.users.filter(function (user) {
-  var searchRegex = new RegExp(this.searchQuery, 'i')
+var self = this
+self.users.filter(function (user) {
+  var searchRegex = new RegExp(self.searchQuery, 'i')
   return user.isActive && (
     searchRegex.test(user.name) ||
     searchRegex.test(user.email)
