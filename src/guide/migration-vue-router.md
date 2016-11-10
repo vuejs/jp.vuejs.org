@@ -130,14 +130,14 @@ router.match = createMatcher(
 </div>
 {% endraw %}
 
-### `subroutes` <sup>deprecated</sup>
+### `subRoutes` <sup>deprecated</sup>
 
 Vue と他のルーターライブラリとの一貫性のために、[`children`に名前が変更されました。](http://router.vuejs.org/ja/essentials/nested-routes.html) 
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>subroutes</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>subRoutes</code> がコールされる箇所を検出して下さい。</p>
 </div>
 {% endraw %}
 
