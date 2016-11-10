@@ -12,7 +12,7 @@ Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインター
 
 ## はじめに
 
-Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/4tpzm3e1/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしパッケージマネージャからダウンロード/インストールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
+Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしパッケージマネージャからダウンロード/インストールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
 
 ## 宣言的レンダリング
 
