@@ -1181,7 +1181,7 @@ You may notice that:
 属性内での展開は、もはや有効ではありません。例えば、以下の場合:
 
 ``` html
-<button v-bind:class="btn btn-{{ size }}"></button>
+<button class="btn btn-{{ size }}"></button>
 ```
 
 いずれかのインライン式を使用するように更新する必要があります:
