@@ -8,6 +8,45 @@ order: 26
 
 <p class="tip">ここに記載されている廃止された機能の一覧は完全なものですが、移行ヘルパーはこれらに対応するため、今も改良が続けられています。</p>
 
+## Router Initialization
+
+### `router.start` <sup>deprecated</sup>
+
+There is no longer a special API to initialize an app with Vue Router. That means instead of:
+
+``` js
+router.start({
+  template: '<router-view></router-view>'
+}, '#app')
+```
+
+You'll just pass a router property to a Vue instance:
+
+``` js
+new Vue({
+  el: '#app',
+  router: router,
+  template: '<router-view></router-view>'
+})
+```
+
+Or, if you're using the runtime-only build of Vue:
+
+``` js
+new Vue({
+  el: '#app',
+  router: router,
+  render: h => h('router-view')
+})
+```
+
+{% raw %}
+<div class="upgrade-path">
+  <h4>Upgrade Path</h4>
+  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>router.start</code> being called.</p>
+</div>
+{% endraw %}
+
 ## ルートの定義
 
 ### `router.map` <sup>deprecated</sup>
