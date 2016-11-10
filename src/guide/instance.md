@@ -14,8 +14,7 @@ var vm = new Vue({
 })
 ```
 
-厳密な定義とは異なりますが、Vue のデザインは、[MVVM パターン](https://en.wikipedia.org/wiki/Model_View_ViewModel)の影響を確かに受けています。
-慣例として、よく `vm` (ViewModel の略) を Vue インスタンスの変数名として、よく利用します。
+厳密な定義とは異なりますが、Vue のデザインは、[MVVM パターン](https://en.wikipedia.org/wiki/Model_View_ViewModel)の影響を確かに受けています。慣例として、よく `vm` (ViewModel の略) を Vue インスタンスの変数名として、よく利用します。
 
 Vue インスタンスを生成するには、**オプションオブジェクト**を渡す必要があります。これには、データ、テンプレート、マウントさせる要素、メソッド、ライフサイクルコールバックなどをオプションとして指定することができます。全てのオプションの一覧は[API リファレンス](/api)で参照できます。
 
@@ -30,8 +29,7 @@ var MyComponent = Vue.extend({
 var myComponentInstance = new MyComponent()
 ```
 
-プログラムから命令的に拡張されたインスタンスを生成できますが、ほとんどの場合は、カスタムエレメントとしてテンプレートに宣言的に組み立てることをおすすめします。後ほど [コンポーネントシステム](components.html) で詳細を説明します。
-いまは、全ての Vue コンポーネントは、本質的に Vue インスタンスを拡張したと理解しておけば十分です。
+プログラムから命令的に拡張されたインスタンスを生成できますが、ほとんどの場合は、カスタムエレメントとしてテンプレートに宣言的に組み立てることをおすすめします。後ほど [コンポーネントシステム](components.html) で詳細を説明します。今は、全ての Vue コンポーネントは、本質的に Vue インスタンスを拡張したと理解しておけば十分です。
 
 ## プロパティとメソッド
 
@@ -74,15 +72,14 @@ vm.$watch('a', function (newVal, oldVal) {
 })
 ```
 
-<p class="tip">Don't use [arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) on an instance property or callback (e.g. `vm.$watch('a', newVal => this.myMethod())`). As arrow functions are bound to the parent context, `this` will not be the Vue instance as you'd expect and `this.myMethod` will be undefined.</p>
+
+<p class="tip">インスタンスプロパティまたはコールバック(例: `vm.$watch('a', newval => this.myMethod())`) 上で[アロー関数](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) を使用しないで下さい。アロー関数は親コンテキストにバウンドされるため、`this` は期待どおりに Vue インスタンスにならず、そして `this.myMethod` は undefined になります。</p>
 
 インスタンスの全てのプロパティとメソッドのリストは、 [API referene](/api) を参照してください。
 
 ## インスタンスライフサイクルフック
 
-各 Vue インスタンスは、生成時に一連の初期化を行います。例えば、データの監視のセットアップやテンプレートのコンパイル、DOM へのインスタンスのマウント、データが変化したときの DOM の更新などがあります。
-その初期化の過程で、カスタムロジックの実行を可能にする、いくつかの **ライフサイクルフック(lifecycle hooks)** を呼び出します。
-例えば、`created` フックはインスタンスが生成された後に呼ばれます。
+各 Vue インスタンスは、生成時に一連の初期化を行います。例えば、データの監視のセットアップやテンプレートのコンパイル、DOM へのインスタンスのマウント、データが変化したときの DOM の更新などがあります。その初期化の過程で、カスタムロジックの実行を可能にする、いくつかの **ライフサイクルフック(lifecycle hooks)** を呼び出します。例えば、`created` フックはインスタンスが生成された後に呼ばれます。
 
 ``` js
 var vm = new Vue({
@@ -97,10 +94,7 @@ var vm = new Vue({
 // -> "a is: 1"
 ```
 
-この他にもインスタンスのライフサイクルの様々な段階で呼ばれるフックがあります。例えば、`mounted`, `updated`, `destroyed` があります。
-全てのライフサイクル フックは、`this` が Vue インスタンスを指す形で実行さます。
-Vue の世界における "コントローラ" の概念について知りたい方もいるかもしれません。その答えとしては「コントローラはない」です。
-コンポーネントのためのカスタムロジックは、これらのライフサイクルフックの中に分割されることになります。
+この他にもインスタンスのライフサイクルの様々な段階で呼ばれるフックがあります。例えば、`mounted`, `updated`, `destroyed` があります。全てのライフサイクル フックは、`this` が Vue インスタンスを指す形で実行さます。Vue の世界における "コントローラ" の概念について知りたい方もいるかもしれません。その答えとしては「コントローラはない」です。コンポーネントのためのカスタムロジックは、これらのライフサイクルフックの中に分割されることになります。
 
 ## ライフサイクルダイアグラム
 
