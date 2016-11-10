@@ -8,7 +8,7 @@ order: 26
 
 ## Router Initialization
 
-### `router.start` <sup>deprecated</sup>
+### `router.start` <sup>replaced</sup>
 
 There is no longer a special API to initialize an app with Vue Router. That means instead of:
 
@@ -47,7 +47,7 @@ new Vue({
 
 ## ルートの定義
 
-### `router.map` <sup>deprecated</sup>
+### `router.map` <sup>replaced</sup>
 
 ルートは [`routes` オプション](http://router.vuejs.org/ja/essentials/getting-started.html#javascript) に配列として定義されるようになりました。例えばこのようなルートの記述は:
 
@@ -82,7 +82,7 @@ var router = new VueRouter({
 </div>
 {% endraw %}
 
-### `router.on` <sup>deprecated</sup>
+### `router.on` <sup>removed</sup>
 
 アプリケーションの開始時に、機械的にルートを生成する必要がある場合、ルートの配列に対し動的に定義を追加することが出来ます。例えば次の様な形です:
 
@@ -128,7 +128,7 @@ router.match = createMatcher(
 </div>
 {% endraw %}
 
-### `subRoutes` <sup>deprecated</sup>
+### `subRoutes` <sup>renamed</sup>
 
 Vue と他のルーターライブラリとの一貫性のために、[`children`に名前が変更されました。](http://router.vuejs.org/ja/essentials/nested-routes.html) 
 
@@ -139,7 +139,7 @@ Vue と他のルーターライブラリとの一貫性のために、[`children
 </div>
 {% endraw %}
 
-### `router.redirect` <sup>deprecated</sup>
+### `router.redirect` <sup>replaced</sup>
 
 [ルート定義におけるオプション](http://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
 
@@ -165,7 +165,7 @@ router.redirect({
 </div>
 {% endraw %}
 
-### `router.alias` <sup>deprecated</sup>
+### `router.alias` <sup>replaced</sup>
 
 [ルート定義におけるオプション](http://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
 
@@ -198,7 +198,7 @@ alias: ['/manage', '/administer', '/administrate']
 </div>
 {% endraw %}
 
-### Arbitrary Route Properties
+### Arbitrary Route Properties <sup>replaced</sup>
 
 Arbitrary route properties must now be scoped under the new meta property, to avoid conflicts with future features. So for example, if you had defined:
 
@@ -236,7 +236,7 @@ if (route.meta.requiresAuth) {
 </div>
 {% endraw %}
 
-## ルートのマッチング
+## ルートのマッチング <sup>changed</sup>
 
 より柔軟性を高めるために、ルートのマッチングの内部処理には、 [path-to-regexp](https://github.com/pillarjs/path-to-regexp) が利用されるようになりました。
 
@@ -253,7 +253,7 @@ if (route.meta.requiresAuth) {
 
 ## リンク
 
-### `v-link` <sup>deprecated</sup>
+### `v-link` <sup>replaced</sup>
 
 Vue 2 におけるコンポーネントの機能の一環として、`v-link` ディレクティブは新しく [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) に置き換えられました。以下の様な形で記述されたリンクは:
 
@@ -276,7 +276,7 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 </div>
 {% endraw %}
 
-### `v-link-active` <sup>deprecated</sup>
+### `v-link-active` <sup>replaced</sup>
 
 [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) でタグの指定が可能なため、 `v-link-active` ディレクティブは廃止されました。よって、例えば次のような例は:
 
@@ -305,7 +305,7 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 
 ## 動的なナビゲーション
 
-### `router.go`
+### `router.go` <sup>changed</sup>
 
 For consistency with the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API), `router.go` is now only used for [back/forward navigation](https://router.vuejs.org/en/essentials/navigation.html#routergon), while [`router.push`](http://router.vuejs.org/en/essentials/navigation.html#routerpushlocation) is used to navigate to a specific page.
 
@@ -318,7 +318,7 @@ For consistency with the [HTML5 History API](https://developer.mozilla.org/en-US
 
 ## Router Options: Modes
 
-### `hashbang: false` <sup>deprecated</sup>
+### `hashbang: false` <sup>removed</sup>
 
 Google にURL をクロールさせるために Hashbangs を用いる必要はもはやなくなりました。よってハッシュの方式としてデフォルトではなくなり、オプションとして利用できなくなりました。
 
@@ -329,7 +329,7 @@ Google にURL をクロールさせるために Hashbangs を用いる必要は�
 </div>
 {% endraw %}
 
-### `history: true` <sup>deprecated</sup>
+### `history: true` <sup>replaced</sup>
 
 ルーティングの動作に関するオプションは [`mode` オプション](http://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
 
@@ -354,7 +354,7 @@ var router = new VueRouter({
 </div>
 {% endraw %}
 
-### `abstract: true` <sup>deprecated</sup>
+### `abstract: true` <sup>replaced</sup>
 
 ルーティングの動作に関するオプションは [`mode` オプション](http://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
 
@@ -381,7 +381,7 @@ var router = new VueRouter({
 
 ## その他のルートオプション
 
-### `saveScrollPosition` <sup>deprecated</sup>
+### `saveScrollPosition` <sup>replaced</sup>
 
 関数を受け付ける [`scrollBehavior` オプション](http://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの可能性がひらかれましたが、単に以前の挙動を再現したい場合もあるでしょう。これまで、次の様に記述していた所は:
 
@@ -404,7 +404,7 @@ scrollBehavior: function (to, from, savedPosition) {
 </div>
 {% endraw %}
 
-### `root` <sup>deprecated</sup>
+### `root` <sup>renamed</sup>
 
 [HTML の `<base>` 要素](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base)と合わせるため `base` に名称変更されました。
 
@@ -415,7 +415,7 @@ scrollBehavior: function (to, from, savedPosition) {
 </div>
 {% endraw %}
 
-### `transitionOnLoad` <sup>deprecated</sup>
+### `transitionOnLoad` <sup>removed</sup>
 
 Vue のトランジション機能に、[`appear` トランジションの制御](transitions.html#Transitions-on-Initial-Render) が実装されたため、このオプションはもはや不要になりました。
 
@@ -426,7 +426,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `suppressTransitionError` <sup>deprecated</sup>
+### `suppressTransitionError` <sup>removed</sup>
 
 フックをよりシンプルにするために削除されました。どうしてもトランジションのエラーを抑制しなければならない場合 [`try`...`catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) 構文を代わりに使用して下さい。
 
@@ -439,7 +439,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 
 ## Route Hooks
 
-### `activate` <sup>deprecated</sup>
+### `activate` <sup>replaced</sup>
 
 代わりにコンポーネントにて [`beforeRouteEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
 
@@ -450,7 +450,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `canActivate` <sup>deprecated</sup>
+### `canActivate` <sup>replaced</sup>
 
 代わりに、ルート内で [`beforeEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#perroute-guard) を使用して下さい。
 
@@ -461,7 +461,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `deactivate` <sup>deprecated</sup>
+### `deactivate` <sup>removed</sup>
 
 代わりに、コンポーネントにて [`beforeDestroy`](/api/#beforeDestroy) を使用するか [`destroyed`](/api/#destroyed) フックを使用するようにしてください。
 
@@ -472,7 +472,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `canDeactivate` <sup>deprecated</sup>
+### `canDeactivate` <sup>removed</sup>
 
 代わりに、コンポーネント内で [`beforeRouteLeave`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用して下さい。
 
@@ -483,7 +483,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `canReuse: false` <sup>deprecated</sup>
+### `canReuse: false` <sup>removed</sup>
 
 新しい Vue ルーターではこれを使用する場面は無いでしょう。
 
@@ -494,9 +494,9 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `data` <sup>deprecated</sup>
+### `data` <sup>replaced</sup>
 
-`$route` プロパティはリアクティブに出来ているため、ルートの変更は次のようにウォッチ機能を利用する事で検出できます:
+`$route` プロパティは常にリアクティブなため、ルートの変更は次のようにウォッチ機能を利用する事で検出できます:
 
 ``` js
 watch: {
@@ -516,7 +516,7 @@ methods: {
 </div>
 {% endraw %}
 
-### `$loadingRouteData` <sup>deprecated</sup>
+### `$loadingRouteData` <sup>removed</sup>
 
 Define your own property (e.g. `isLoading`), then update the loading state in a watcher on the route. For example, if fetching data with [axios](https://github.com/mzabriskie/axios):
 独自のプロパティを定義し (例えば `isLoading`), ルートのウォッチャーでローティングの状態を更新して下さい。例えば [axios](https://github.com/mzabriskie/axios)のデータを取り込む場合、次のような例になります:
