@@ -1339,8 +1339,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   ``` html
   <div v-for="(item, index) in items"></div>
-  <div v-for="(key, val) in object"></div>
-  <div v-for="(key, val, index) in object"></div>
+  <div v-for="(val, key) in object"></div>
+  <div v-for="(val, key, index) in object"></div>
   ```
 
   `v-for` のデフォルトの振舞いは、それらを移動しないで所定の位置の要素にパッチを適用しようとします。要素の順序を変更するのを強制するためには、`key` という特別な属性によって順序のヒントを提供する必要があります:
