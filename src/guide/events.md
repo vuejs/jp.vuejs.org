@@ -217,13 +217,7 @@ methods: {
 - left
 - right
 
-単一文字のキーエイリアスもサポートされています。
-
-``` html
-<input v-on:keyup.v="say('That is the first letter in Vue')">
-```
-
-必要であれば、カスタムキー修飾子のエイリアスを定義することもできます:
+グローバルな `config.keyCodes` オブジェクト経由でカスタムキー修飾子のエイリアスも定義できます:
 
 ``` js
 // v-on:keyup.f1 を可能にします
