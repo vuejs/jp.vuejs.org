@@ -1082,7 +1082,7 @@ function pluralizeKnife (count) {
 '$' + price.toFixed(2)
 ```
 
-しかしながら、ほとんどの場合、これらは奇妙な動作をする場合があります(例えば、 0.035.toFixed(2) の丸め誤差が 0.4 として評価されるにも関わらず、 0.045 の丸め誤差が 0.4と評価されるなどです)。これらの問題を解消するためには、より確実な [通貨のフォーマット管理のライブラリ](http://openexchangerates.github.io/accounting.js/) などを使用します。
+しかしながら、ほとんどの場合、これらは奇妙な動作をする場合があります(例えば、 0.035.toFixed(2) の丸め誤差が 0.04 として評価されるにも関わらず、 0.045 の丸め誤差が 0.04と評価されるなどです)。これらの問題を解消するためには、より確実な [通貨のフォーマット管理のライブラリ](http://openexchangerates.github.io/accounting.js/) などを使用します。
 
 {% raw %}
 <div class="upgrade-path">
