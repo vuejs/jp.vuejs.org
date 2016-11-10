@@ -173,7 +173,7 @@ methods: {
 <form v-on:submit.prevent="onSubmit"></form>
 
 <!-- 修飾子は繋げることができます -->
-<a v-on:click.stop.prevent="doThat">
+<a v-on:click.stop.prevent="doThat"></a>
 
 <!-- 値を指定せず、修飾子だけ利用することもできます -->
 <form v-on:submit.prevent></form>
