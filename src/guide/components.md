@@ -532,7 +532,7 @@ new Vue({
 
 ### カスタムイベントを使用したフォーム入力コンポーネント
 
-この戦略は、`v-model`とともに動く、カスタムフォーム入力を作成するためにも使用されます。以下を思い出しましょう:
+カスタムイベントは、`v-model`とともに動く、カスタムフォーム入力を作成するためにも使用されます。以下を思い出しましょう:
 
 ``` html
 <input v-model="something">
@@ -555,85 +555,84 @@ new Vue({
 - `value` prop を受け入れる
 - 新しい値と共に `input` イベントを送出する
 
-実行して見てみましょう:
+とても簡単な通貨入力で、実行して見てみましょう:
 
 ``` html
-<div id="v-model-example">
-  <p>{{ message }}</p>
-  <my-input
-    label="Message"
-    v-model="message"
-  ></my-input>
-</div>
+<currency-input v-model="price"></currency-input>
 ```
 
 ``` js
-Vue.component('my-input', {
+Vue.component('currency-input', {
   template: '\
-    <div class="form-group">\
-      <label v-bind:for="randomId">{{ label }}:</label>\
-      <input v-bind:id="randomId" v-bind:value="value" v-on:input="onInput">\
-    </div>\
+    <span>\
+      $\
+      <input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+      >\
+    </span>\
   ',
-  props: ['value', 'label'],
-  data: function () {
-    return {
-      randomId: 'input-' + Math.random()
-    }
-  },
+  props: ['value'],
   methods: {
-    onInput: function (event) {
-      this.$emit('input', event.target.value)
+    // 値を直接的に更新する代わりに、このメソッドは input の値において
+    // 制約における置き換えとフォーマットのために使用される
+    updateValue: function (value) {
+      var formattedValue = value
+        // 両端のスペースを削除
+        .trim()
+        // 小数点2桁以下まで短縮
+        .slice(0, value.indexOf('.') + 3)
+      // 値が既に正規化されていないならば、
+      // 手動で適合するように上書き
+      if (formattedValue !== value) {
+        this.$refs.input.value = formattedValue
+      }
+      // input イベントを通して数値を発行する
+      this.$emit('input', Number(formattedValue))
     }
-  },
-})
-
-new Vue({
-  el: '#v-model-example',
-  data: {
-    message: 'hello'
   }
 })
 ```
 
 {% raw %}
-<div id="v-model-example" class="demo">
-  <p>{{ message }}</p>
-  <my-input
-    label="Message"
-    v-model="message"
-  ></my-input>
+<div id="currency-input-example" class="demo">
+  <currency-input v-model="price"></currency-input>
 </div>
 <script>
-Vue.component('my-input', {
+Vue.component('currency-input', {
   template: '\
-    <div class="form-group">\
-      <label v-bind:for="randomId">{{ label }}:</label>\
-      <input v-bind:id="randomId" v-bind:value="value" v-on:input="onInput">\
-    </div>\
+    <span>\
+      $\
+      <input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+      >\
+    </span>\
   ',
-  props: ['value', 'label'],
-  data: function () {
-    return {
-      randomId: 'input-' + Math.random()
-    }
-  },
+  props: ['value'],
   methods: {
-    onInput: function (event) {
-      this.$emit('input', event.target.value)
+    updateValue: function (value) {
+      var formattedValue = value
+        .trim()
+        .slice(0, value.indexOf('.') + 3)
+      if (formattedValue !== value) {
+        this.$refs.input.value = formattedValue
+      }
+      this.$emit('input', Number(formattedValue))
     }
-  },
-})
-new Vue({
-  el: '#v-model-example',
-  data: {
-    message: 'hello'
   }
 })
+new Vue({ el: '#currency-input-example' })
 </script>
 {% endraw %}
 
-このインタフェースはコンポーネント内のフォーム入力との接続だけでなく、あなた自身が作った入力タイプを簡単に統合するためにも使用することができます。これらの可能性を想像して下さい:
+上記の実装は、かなり素朴です。例えば、複数のピリオドや文字を入力することができます。うわっ！そこで、些細な例を見たい人は、より堅固な通貨フィルタが以下にあります:
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+イベントインターフェイスは、より珍しい入力を作成するために使用することもできます。例えば、次のような可能性を想像してみてください:
 
 ``` html
 <voice-recognizer v-model="question"></voice-recognizer>

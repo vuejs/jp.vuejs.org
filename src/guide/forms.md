@@ -4,7 +4,7 @@ type: guide
 order: 10
 ---
 
-## Basic Usage
+## 基本的な使い方
 
 form の input 要素 と textarea 要素で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法とはいえ、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するための糖衣構文 (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別な配慮が必要です。
 
@@ -296,7 +296,8 @@ radio 、 checkbox 、そして select オプションは、 `v-model` バイン
   type="checkbox"
   v-model="toggle"
   v-bind:true-value="a"
-  v-bind:false-value="b">
+  v-bind:false-value="b"
+>
 ```
 
 ``` js
@@ -360,3 +361,9 @@ vm.selected.number // -> 123
 ```html
 <input v-model.trim="msg">
 ```
+
+## コンポーネントの `v-model`
+
+> Vue のコンポーネントにまだ精通していない人は、この部分をスキップしてください。
+
+HTML の組み込みの input 要素は常にあなたの要望に合うとは限りません。幸いにも、Vue のコンポーネントを使用すると、完全にカスタマイズされた動作で再利用可能な独自の input 要素的なものを作成することができます。これらの入力コンポーネントは `v-model` を使用することができます！より詳細については、[カスタム入力](components.html#カスタムイベントを使用したフォーム入力コンポーネント)をコンポーネントガイドで参照してください。
