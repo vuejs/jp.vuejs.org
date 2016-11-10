@@ -161,6 +161,19 @@ createElement(
   nativeOn: {
     click: this.nativeClickHandler
   },
+  // カスタムディレクティブ。バインディングの古い値は、
+  // Vue はあなたのバインディングを追跡するため、設定できません。
+  directives: [
+    {
+      name: 'my-custom-directive', 
+      value: '2'
+      expression: '1 + 1',
+      arg: 'foo',
+      modifiers: {
+        bar: true
+      }
+    }
+  ],
   // コンポーネントの子があるならば、スロット名
   slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
