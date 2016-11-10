@@ -290,6 +290,10 @@ Vue.component('todo-item', {
 </div>
 ```
 ``` js
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
 var app7 = new Vue({
   el: '#app-7',
   data: {
