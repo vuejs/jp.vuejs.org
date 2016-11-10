@@ -126,6 +126,14 @@
       })
     }
 
+    var hoveredOverSidebar = false
+    sidebar.addEventListener('mouseover', function () {
+      hoveredOverSidebar = true
+    })
+    sidebar.addEventListener('mouseleave', function () {
+      hoveredOverSidebar = false
+    })
+
     // listen for scroll event to do positioning & highlights
     window.addEventListener('scroll', updateSidebar)
     window.addEventListener('resize', updateSidebar)
@@ -145,7 +153,7 @@
         }
       }
       if (last)
-      setActive(last.id, true)
+      setActive(last.id, !hoveredOverSidebar)
     }
 
     function makeLink (h) {
