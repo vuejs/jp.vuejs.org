@@ -51,34 +51,38 @@ var app = new Vue({
 
 ``` html
 <div id="app-2">
-  <span v-bind:id="id">Inspect me</span>
+  <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+  </span>
 </div>
 ```
 ``` js
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    id: 'inspect-me'
+    message: 'You loaded this page on ' + new Date()
   }
 })
 ```
 {% raw %}
 <div id="app-2" class="demo">
-  <span v-bind:id="id">Inspect me</span>
+  <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+  </span>
 </div>
 <script>
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    id: 'inspect-me'
+    message: 'You loaded this page on ' + new Date()
   }
 })
 </script>
 {% endraw %}
 
-ここには、何か新しいものがあります。`v-bind` 属性はディレクティブと呼ばれています。ディレクティブは Vue.js によって提供された特別な属性を示すために `v-` が接頭辞がついており、あなたが推測したように、レンダリングされた DOM に特定のリアクティブな振舞いを与えます。ここで宣言されているのは、「この要素の `id` 属性を Vue インスタンスの `id` プロパティにバインドする」ということになります。
+ここには、何か新しいものがあります。`v-bind` 属性はディレクティブと呼ばれています。ディレクティブは Vue.js によって提供された特別な属性を示すために `v-` が接頭辞がついており、あなたが推測したように、レンダリングされた DOM に特定のリアクティブな振舞いを与えます。ここで宣言されているのは、「この要素の `title` 属性を Vue インスタンスの `message` プロパティによって更新して保存する」ということになります。
 
-ブラウザの開発者ツールを使って上の要素を調べてみましょう。`inspect-me` という id を持っているのが見えるはずです。そして、コンソールから `app2.id` を変更すれば更新されるでしょう。
+あなたの JavaScript コンソールをまた開いて、`app2.message = 'some new message'` を打ち込むと、このケースでは、`title` 属性が更新されるのを、一度また HTML にバウンドされるの確認するでしょう。
 
 ## 条件分岐とループ
 
