@@ -86,7 +86,11 @@ type: api
 - **使用方法:**
 
   ``` js
-  Vue.config.keyCodes = { esc: 27 }
+  Vue.config.keyCodes = {
+    v: 86,
+    f1: 112,
+    mediaPlayPause: 179
+  } 
   ```
 
   `v-on` 向けにカスタムキーエイリアスを定義します。
