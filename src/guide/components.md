@@ -994,6 +994,14 @@ Vue.component('unique-name-of-my-component', {
   // ...
 })
 ```
+
+注意がない場合、再帰的なコンポーネントは無限ループにつながる可能性があります:
+
+``` js
+name: 'stack-overflow',
+template: '<div><stack-overflow></stack-overflow></div>'
+```
+
 上記のようなコンポーネントは、"max stack size exceeded" エラーに想定されるため、再帰呼び出しは条件付きになるようにしてください。(i.e. 最終的に `false` となる `v-if` を使用します)
 
 ### インラインテンプレート
