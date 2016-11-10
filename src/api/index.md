@@ -348,6 +348,8 @@ type: api
   })
   ```
 
+  <p class="tip">Note that __you should not use an arrow function with the `data` property__ (e.g. `data: () => { return { a: this.myProp }}`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.myProp` will be undefined.</p>
+
 - **参照:** [リアクティブの探求](/guide/reactivity.html)
 
 ### props
@@ -421,6 +423,8 @@ type: api
 
   算出プロパティはキャッシュされ、そしてリアクティブ依存が変更されたときにだけ再算出します。
 
+  <p class="tip">Note that __you should not use an arrow function to define a computed property__ (e.g. `aDouble: () => this.a * 2`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.a` will be undefined.</p>
+
 - **例:**
 
   ```js
@@ -459,6 +463,8 @@ type: api
 
   Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブの式で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバインドされた `this` コンテキストを持ちます。
 
+  <p class="tip">Note that __you should not use an arrow function to define a method__ (e.g. `plus: () => this.a++`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.a` will be undefined.</p>
+
 - **例:**
 
   ```js
@@ -490,16 +496,18 @@ type: api
   ``` js
   var vm = new Vue({
     data: {
-      a: 1
+      a: 1,
+      b: 2,
+      c: 3
     },
     watch: {
-      'a': function (val, oldVal) {
+      a: function (val, oldVal) {
         console.log('new: %s, old: %s', val, oldVal)
       },
       // 文字列メソッド名
-      'b': 'someMethod',
+      b: 'someMethod',
       // 深いウオッチャ (watcher)
-      'c': {
+      c: {
         handler: function (val, oldVal) { /* ... */ },
         deep: true
       }
@@ -507,6 +515,8 @@ type: api
   })
   vm.a = 2 // -> new: 2, old: 1
   ```
+
+  <p class="tip">Note that __you should not use an arrow function to define a watcher__ (e.g. `searchQuery: newValue => this.updateAutocomplete(newValue)`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.updateAutocomplete` will be undefined.</p>
 
 - **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
 
@@ -560,6 +570,8 @@ type: api
   - [Render 関数](/guide/render-function)
 
 ## オプション / ライフサイクルフック
+
+All lifecycle hooks automatically have their `this` context bound to the instance, so that you can access data, computed properties, and methods. This means __you should not use an arrow function to define a lifecycle method__ (e.g. `created: () => this.fetchTodos()`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.fetchTodos` will be undefined.
 
 ### beforeCreate
 
