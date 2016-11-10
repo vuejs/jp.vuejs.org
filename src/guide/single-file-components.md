@@ -49,7 +49,7 @@ order: 19
 
 テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.github.io/) というモジュールバンドラーを使用します。 Webpack についてもっと学ぶには、 [このビデオ](https://www.youtube.com/watch?v=WQue1AN93YU) がとても良い導入となります。一度基本を終えてしまえば、[Egghead.io上の上級 Webpack コース](https://egghead.io/courses/using-webpack-for-production-javascript-applications)もチェックしたくなるでしょう。
 
-Webpack でバンドルの中に含まれる前にそれぞれのモジュールは "loader" により変換されます。また Vue では `.vue` 単一ファイルコンポーネントをコンパイルするために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](https://vue-loader.vuejs.org) を読むことも出来ます。
+Webpack で、各モジュールは、バンドルに含まれる前に "loader" により変換されます。また Vue では `.vue` 単一ファイルコンポーネントをコンパイルするために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](https://vue-loader.vuejs.org) を読むことも出来ます。
 
 ### 上級者ユーザー向け
 
