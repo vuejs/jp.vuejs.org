@@ -762,6 +762,10 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 
 ## イベント
 
+### `events` option <sup>deprecated</sup>
+
+The `events` option has been deprecated. Event handlers should now be registered in the `created` hook instead. Check out the [`$dispatch` and `$broadcast` migration guide](#dispatch-and-broadcast-deprecated) for a detailed example.
+
 ### `Vue.directive('on').keyCodes` <sup>非推奨</sup>
 
 `keyCodes` を設定するための、より新しくかつ簡潔な方法は、`Vue.config.keyCodes` を介して行うことです。例えば、以下のようなものとなります:
