@@ -264,7 +264,7 @@ Vue.component('todo-item', {
 ``` html
 <ul>
   <!-- todos 配列にある各 todo に対して todo-item コンポーネントのインスタンス作成する -->
-  <todo-item v-for="todo in todos"></todo-item>
+  <todo-item></todo-item>
 </ul>
 ```
 
