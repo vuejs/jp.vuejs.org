@@ -1511,7 +1511,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **式を受け付けません**
 
-- **使用方法**
+- **使用方法:**
 
   この要素とすべての子要素のコンパイルをスキップします。生の mustache タグを表示するためにも使うことができます。ディレクティブのない大量のノードをスキップすることで、コンパイルのスピードを上げます。
 
