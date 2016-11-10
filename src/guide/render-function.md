@@ -109,7 +109,7 @@ createElement(
   // {String | Array}
   // VNodes の子。任意です。
   [
-    createElement('h1', 'hello world')
+    createElement('h1', 'hello world'),
     createElement(MyComponent, {
       props: {
         someProp: 'foo'
