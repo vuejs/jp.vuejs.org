@@ -1178,7 +1178,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   // また、ドキュメント外で描画し、その後加える
   var component = new MyComponent().$mount()
-  document.getElementById('app').appendChild(vm.$el)
+  document.getElementById('app').appendChild(component.$el)
   ```
 
 - **参照:**
