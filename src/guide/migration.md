@@ -947,7 +947,7 @@ JavaScript 組み込みの [`.filter` メソッド](https://developer.mozilla.or
 computed: {
   filteredUsers: function () {
     return this.users.filter(function (user) {
-      return user.name.indexOf(this.searchQuery)
+      return user.name.indexOf(this.searchQuery) !== -1
     })
   }
 }
