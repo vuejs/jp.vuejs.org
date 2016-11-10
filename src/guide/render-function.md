@@ -267,7 +267,22 @@ render: function (createElement) {
 
 ## JSX
 
-もしあなたが多くの render 関数を書いている場合は、よりシンプルでほぼ間違いなく読み易いテンプレート JSX の代わりに上記の 14 行を使っていることがつらいと感じるかもしれません。
+もしあなたが多くの render 関数を書いている場合は、このような書き方の方が良いと感じるかもしれません。
+
+``` js
+createElement(
+  'anchored-heading', {
+    props: {
+      level: 1
+    }
+  }, [
+    createElement('span', 'Hello'),
+    ' world!'
+  ]
+)
+```
+
+特にテンプレートが簡単なバージョンの場合は、次のようになります:
 
 ``` html
 <anchored-heading :level="1">
