@@ -737,7 +737,7 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 
 ### 再利用可能なトランジションへの `Vue.transition` <sup>非推奨</sup>
 
-新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](http://rc.vuejs.org/guide/transitions.html#Reusable-Transitions) によって実現することができます。
+新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](/guide/transitions.html#Reusable-Transitions) によって実現することができます。
 
 {% raw %}
 <div class="upgrade-path">
