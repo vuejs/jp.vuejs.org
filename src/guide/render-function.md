@@ -161,6 +161,8 @@ createElement(
   nativeOn: {
     click: this.nativeClickHandler
   },
+  // コンポーネントの子があるならば、スロット名
+  slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
   key: 'myKey',
   ref: 'myRef'
