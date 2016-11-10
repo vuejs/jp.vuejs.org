@@ -815,7 +815,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **型:** `Array<string>`
 
-- **デフォルト:** `["{{", "}}"]`
+- **デフォルト:** `{% raw %}["{{", "}}"]{% endraw %}`
 
 - **詳細:**
 
