@@ -44,7 +44,7 @@ type: api
 
   マージ戦略を親で定義されたオプションの値と子のインスタンスの値が、それぞれ第1引数、第2引数として受け取ります。Vue インスタンスのコンテキストは第3引数として渡されます。
 
-- **参照**: [カスタムオプションのマージストラテジ](/guide/mixins.html#カスタムオプションのマージストラテジ)
+- **参照:** [カスタムオプションのマージストラテジ](/guide/mixins.html#カスタムオプションのマージストラテジ)
 
 ### devtools
 
@@ -77,6 +77,8 @@ type: api
 
   コンポーネントのレンダリングとウォッチャいおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
 
+  > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
+
 ### keyCodes
 
 - **型:** `{ [key: string]: number }`
@@ -86,7 +88,11 @@ type: api
 - **使用方法:**
 
   ``` js
-  Vue.config.keyCodes = { esc: 27 }
+  Vue.config.keyCodes = {
+    v: 86,
+    f1: 112,
+    mediaPlayPause: 179
+  } 
   ```
 
   `v-on` 向けにカスタムキーエイリアスを定義します。
@@ -244,7 +250,7 @@ type: api
 
 - **使用方法:**
 
-  グローバルコンポーネントに登録または取得します。
+  グローバルコンポーネントに登録または取得します。また登録は、与えられた `id` によって自動的にコンポーネントの `name` に設定されます。
 
   ``` js
   // 拡張されたコンストラクタを登録
@@ -348,6 +354,8 @@ type: api
   })
   ```
 
+  <p class="tip">Note that __you should not use an arrow function with the `data` property__ (e.g. `data: () => { return { a: this.myProp }}`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.myProp` will be undefined.</p>
+
 - **参照:** [リアクティブの探求](/guide/reactivity.html)
 
 ### props
@@ -421,6 +429,8 @@ type: api
 
   算出プロパティはキャッシュされ、そしてリアクティブ依存が変更されたときにだけ再算出します。
 
+  <p class="tip">Note that __you should not use an arrow function to define a computed property__ (e.g. `aDouble: () => this.a * 2`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.a` will be undefined.</p>
+
 - **例:**
 
   ```js
@@ -459,6 +469,8 @@ type: api
 
   Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブの式で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバインドされた `this` コンテキストを持ちます。
 
+  <p class="tip">Note that __you should not use an arrow function to define a method__ (e.g. `plus: () => this.a++`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.a` will be undefined.</p>
+
 - **例:**
 
   ```js
@@ -490,16 +502,18 @@ type: api
   ``` js
   var vm = new Vue({
     data: {
-      a: 1
+      a: 1,
+      b: 2,
+      c: 3
     },
     watch: {
-      'a': function (val, oldVal) {
+      a: function (val, oldVal) {
         console.log('new: %s, old: %s', val, oldVal)
       },
       // 文字列メソッド名
-      'b': 'someMethod',
+      b: 'someMethod',
       // 深いウオッチャ (watcher)
-      'c': {
+      c: {
         handler: function (val, oldVal) { /* ... */ },
         deep: true
       }
@@ -507,6 +521,8 @@ type: api
   })
   vm.a = 2 // -> new: 2, old: 1
   ```
+
+  <p class="tip">Note that __you should not use an arrow function to define a watcher__ (e.g. `searchQuery: newValue => this.updateAutocomplete(newValue)`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.updateAutocomplete` will be undefined.</p>
 
 - **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
 
@@ -560,6 +576,8 @@ type: api
   - [Render 関数](/guide/render-function)
 
 ## オプション / ライフサイクルフック
+
+All lifecycle hooks automatically have their `this` context bound to the instance, so that you can access data, computed properties, and methods. This means __you should not use an arrow function to define a lifecycle method__ (e.g. `created: () => this.fetchTodos()`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.fetchTodos` will be undefined.
 
 ### beforeCreate
 
@@ -708,8 +726,7 @@ type: api
   Vue インスタンスで利用可能なフィルタのハッシュです。
 
 - **参照:**
-  - [カスタムフィルタ](/guide/custom-filter.html)
-  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
+  - [`Vue.filter`](#Vue-filter)
 
 ### components
 
@@ -798,7 +815,7 @@ type: api
 
 - **型:** `Array<string>`
 
-- **デフォルト:** `["{{", "}}"]`
+- **デフォルト:** `{% raw %}["{{", "}}"]{% endraw %}`
 
 - **詳細:**
 
@@ -1161,7 +1178,7 @@ type: api
 
   // また、ドキュメント外で描画し、その後加える
   var component = new MyComponent().$mount()
-  document.getElementById('app').appendChild(vm.$el)
+  document.getElementById('app').appendChild(component.$el)
   ```
 
 - **参照:**
@@ -1322,8 +1339,8 @@ type: api
 
   ``` html
   <div v-for="(item, index) in items"></div>
-  <div v-for="(key, val) in object"></div>
-  <div v-for="(key, val, index) in object"></div>
+  <div v-for="(val, key) in object"></div>
+  <div v-for="(val, key, index) in object"></div>
   ```
 
   `v-for` のデフォルトの振舞いは、それらを移動しないで所定の位置の要素にパッチを適用しようとします。要素の順序を変更するのを強制するためには、`key` という特別な属性によって順序のヒントを提供する必要があります:
@@ -1494,7 +1511,7 @@ type: api
 
 - **式を受け付けません**
 
-- **使用方法**
+- **使用方法:**
 
   この要素とすべての子要素のコンパイルをスキップします。生の mustache タグを表示するためにも使うことができます。ディレクティブのない大量のノードをスキップすることで、コンパイルのスピードを上げます。
 

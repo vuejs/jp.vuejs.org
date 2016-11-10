@@ -12,10 +12,10 @@
 
 ## 現在のプレミアムスポンサー:
 
-<p style="text-align: center; margin-bottom: 60px" class="sponsors-page">
-  <a href="https://itunescn.com">
-    <img src="/images/itunescn.png">
-  </a><a href="https://jsfiddle.net">
+<p style="text-align: center; padding-top: 30px; margin-bottom: 0"><a href="http://www.thedifferenceengine.io/"><img src="/images/tde.png" style="width: 300px"></a></p>
+
+<p style="text-align: center; margin-top: 0; margin-bottom: 60px" class="sponsors-page">
+  <a href="https://jsfiddle.net">
     <img src="/images/jsfiddle.png">
   </a><a href="https://laravel.com">
     <img src="/images/laravel.png">
@@ -33,6 +33,10 @@
     <img src="/images/trisoft.png">
   </a><a href="http://actualize.co" target="_blank" style="width:180px">
     <img src="/images/actualize.png" style="width:180px">
+  </a><a href="https://www.2mhost.com/" target="_blank">
+    <img src="/images/2mhost.png">
+  </a><a href="https://vuejsjob.com/?ref=vuejs" target="_blank" style="position:relative;top:6px">
+    <img src="/images/vuejobs.png">
   </a>
 </p>
 
@@ -40,6 +44,6 @@ Vue.js は MIT ライセンスのオープンソース・プロジェクトで�
 
 もしあなたが実業家で、Vue.js を利用した製品で利益を生み出しているのなら、Vue の開発を支援することはビジネス的に妥当性があります。**それは、あなたの製品が頼りにしているプロジェクトを健全にし、活発に保守されることを保証します。**また同時に、それは Vue コミュニティの中であなたの存在を際立たせ、優秀な Vue 開発者を引き寄せることも容易にします。
 
-もしあなたが個人の開発者で、Vue を使って生産性を楽しんでいるのなら、寄付をご検討ください。例えば、時々私にコーヒーをおごる、とか。:)
+あなたのビジネスが Vue.js を利用して製品の開発を行っているのなら、個別の支援契約/コンサルティングについてもお話したいと思っています。[ツイッターからご連絡ください](https://twitter.com/youyuxi)。
 
-現在私は、Vue.js の開発をフルタイムで行える可能性を探しています。あなたのビジネスが Vue.js を利用して製品の開発を行っているのなら、個別の支援契約/コンサルティングについてもお話したいと思っています。[ツイッターからご連絡ください](https://twitter.com/youyuxi)。
+もしあなたが個人の開発者で、Vue を使って生産性を楽しんでいるのなら、寄付をご検討ください。例えば、時々私にコーヒーをおごる、とか。:)

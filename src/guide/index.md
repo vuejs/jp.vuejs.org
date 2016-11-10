@@ -6,13 +6,21 @@ order: 2
 
 ## Vue.js とは？
 
-Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他のモノリシックなフレームワークとは異なり、Vue は初めから少しづつ適用していけるように設計されています。コアとなるライブラリは view レイヤだけに焦点を当てているため、Vue.js を使い始めたり、他のライブラリや既存のプロジェクトに統合することはとても簡単です。一方、[モダンなツール](application.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#libraries--plugins)と併せて利用することで、洗練されたシングルページアプリケーションを開発することも可能です。
+Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他のモノリシックなフレームワークとは異なり、Vue は初めから少しづつ適用していけるように設計されています。コアとなるライブラリは view レイヤだけに焦点を当てているため、Vue.js を使い始めたり、他のライブラリや既存のプロジェクトに統合することはとても簡単です。一方、[モダンなツール](single-file-components.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#libraries--plugins)と併せて利用することで、洗練されたシングルページアプリケーションを開発することも可能です。
 
 あなたが経験豊富なフロントエンド開発者で、 Vue.js と他のライブラリ/フレームワークを比較したい場合、[他のフレームワークとの比較](comparison.html)をチェックしてください。
 
 ## はじめに
 
-Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/4tpzm3e1/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしパッケージマネージャからダウンロード/インストールする方を好むなら、[インストール](/guide/installation.html)のページをチェックしてください。
+<p class="tip">公式ガイドは、HTML、CSS そして JavaScript の中レベルのフロントエンドの知識を前提にしています。フロントエンドの開発が初めてであるならば、最初のステップとして、フレームワークに直接入門するのは良いアイデアではないかもしれません。基礎を学んで戻ってきましょう！他のフレームワークでの以前の経験は役に立ちますが、必至ではありません。</p>
+
+Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。また、単純に `.html` を作成し、以下のように Vue を含むことができます:
+
+``` html
+<script src="https://unpkg.com/vue/dist/vue.js">
+```
+
+[インストール](/guide/installation.html) ページは、Vue のインストールについてより多くのオプションを提供します。特に、まだ Node.js ベースのツールについて精通していないならば、`vue-cli` で開始するには初心者には推奨**しない**ことに注意してください。
 
 ## 宣言的レンダリング
 
@@ -51,34 +59,38 @@ var app = new Vue({
 
 ``` html
 <div id="app-2">
-  <span v-bind:id="id">Inspect me</span>
+  <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+  </span>
 </div>
 ```
 ``` js
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    id: 'inspect-me'
+    message: 'You loaded this page on ' + new Date()
   }
 })
 ```
 {% raw %}
 <div id="app-2" class="demo">
-  <span v-bind:id="id">Inspect me</span>
+  <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+  </span>
 </div>
 <script>
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    id: 'inspect-me'
+    message: 'You loaded this page on ' + new Date()
   }
 })
 </script>
 {% endraw %}
 
-ここには、何か新しいものがあります。`v-bind` 属性はディレクティブと呼ばれています。ディレクティブは Vue.js によって提供された特別な属性を示すために `v-` が接頭辞がついており、あなたが推測したように、レンダリングされた DOM に特定のリアクティブな振舞いを与えます。ここで宣言されているのは、「この要素の `id` 属性を Vue インスタンスの `id` プロパティにバインドする」ということになります。
+ここには、何か新しいものがあります。`v-bind` 属性はディレクティブと呼ばれています。ディレクティブは Vue.js によって提供された特別な属性を示すために `v-` が接頭辞がついており、あなたが推測したように、レンダリングされた DOM に特定のリアクティブな振舞いを与えます。ここで宣言されているのは、「この要素の `title` 属性を Vue インスタンスの `message` プロパティによって更新して保存する」ということになります。
 
-ブラウザの開発者ツールを使って上の要素を調べてみましょう。`inspect-me` という id を持っているのが見えるはずです。そして、コンソールから `app2.id` を変更すれば更新されるでしょう。
+あなたの JavaScript コンソールをまた開いて、`app2.message = 'some new message'` を打ち込むと、このケースでは、`title` 属性が更新されるのを、一度また HTML にバウンドされるの確認するでしょう。
 
 ## 条件分岐とループ
 
@@ -260,7 +272,7 @@ Vue.component('todo-item', {
 ``` html
 <ul>
   <!-- todos 配列にある各 todo に対して todo-item コンポーネントのインスタンス作成する -->
-  <todo-item v-for="todo in todos"></todo-item>
+  <todo-item></todo-item>
 </ul>
 ```
 
@@ -286,6 +298,10 @@ Vue.component('todo-item', {
 </div>
 ```
 ``` js
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
 var app7 = new Vue({
   el: '#app-7',
   data: {

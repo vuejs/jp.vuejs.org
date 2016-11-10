@@ -7,7 +7,14 @@ body
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
     color $medium
+    background-color white
     margin 0
+    &.docs
+        padding-top: $header-height
+
+@media screen and (max-width: 900px)
+    body.docs
+        padding-top: 0
 
 a
     text-decoration none
@@ -105,6 +112,8 @@ a.button
 
 #ad
     width 125px
+    text-align center
+    position fixed
     z-index 99
     bottom 10px
     right 10px
@@ -113,9 +122,11 @@ a.button
     border-radius 3px
     font-size 13px
     a
+        display inline-block
         color $light
         font-weight normal
     span
+        color $light
         display inline-block
         margin-bottom 5px
     img
@@ -175,32 +186,23 @@ a.button
         border-top 5px solid #ccc
 
 #donate
-    height 24px
-    .wrapper
-        vertical-align top
-        height 20px
-        border 1px solid #d4d4d4
-        display inline-block
-        box-sizing border-box
-        line-height 16px
-        border-radius 3px
-        cursor pointer
-        background-image linear-gradient(to bottom,#fcfcfc 0,#eee 100%)
-        position relative
-        width 72px
-        &:hover
-            border-color #ccc
-            background-image linear-gradient(to bottom,#eee 0,#ddd 100%)
-        img
-            width 14px
-            height 14px
-            position absolute
-            top 2px
-            left 5px
-        a
-            font 700 11px/14px 'Helvetica Neue', Helvetica, Arial, sans-serif
-            color #333333
-            text-shadow 0 1px 0 #fff
-            position absolute
-            top 2px
-            left 24px
+    display: inline-block
+    line-height: 0;
+    padding: 3px 6px
+    border-radius: 3px
+    cursor: pointer
+    background-image: linear-gradient(to bottom, #fcfcfc 0, #eee 100%)
+    border: 1px solid #d4d4d4
+    img
+        display: inline-block
+        vertical-align: bottom
+        width 14px
+        height 14px
+    a
+        font 700 14px/14px $body-font
+        margin-left: 2px
+        color #333333
+        text-shadow 0 1px 0 #fff
+    &:hover
+        border-color: #ccc
+        background-image: linear-gradient(to bottom, #eee 0, #ddd 100%)

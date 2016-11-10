@@ -1,7 +1,7 @@
 ---
-title: 'Transitions: Entering, Leaving, and Lists'
+title: トランジション効果
 type: guide
-order: 12
+order: 13
 ---
 
 # 概要
@@ -1081,7 +1081,7 @@ new Vue({
 
 ``` js
 new Vue({
-  el: '#list-move-demo',
+  el: '#flip-list-demo',
   data: {
     items: [1,2,3,4,5,6,7,8,9]
   },
@@ -1465,7 +1465,7 @@ Vue.component('my-special-transition', {
     <transition\
       name="very-special-transition"\
       mode="out-in"\
-      v-on:before-enter="beforEnter"\
+      v-on:before-enter="beforeEnter"\
       v-on:after-enter="afterEnter"\
     >\
       <slot></slot>\

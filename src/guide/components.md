@@ -212,8 +212,6 @@ new Vue({
 </script>
 {% endraw %}
 
-また、`el` オプションも、まったく同様の理由で、コンポーネントインスタンスの中で使用されるときは、関数の値を必要とします。
-
 ### コンポーネントの構成
 
 コンポーネントは、一緒に使われるということを意味します。多くの場合は、親子関係: コンポーネント A は自分自身のテンプレートとして、コンポーネント B を使用します。それらは必ずお互いに通信する必要があります。親は子にデータを伝える必要があるかもしれませんし、子は、子で何が起こったかを、親に伝える必要があるかもしれません。しかし、はっきりと定義されたインタフェースを経由して、親と子を可能な限り分離されたものとしておくこともまた、とても大切です。このことは、比較的独立した状態で、各々のコンポーネントが書かれ説明される、ということを保証します。それゆえ、コンポーネントを、よりメンテナンス可能で潜在的に再利用可能にできます。
@@ -344,7 +342,7 @@ new Vue({
 <comp v-bind:some-prop="1"></comp>
 ```
 
-### 一方向のデータフロー
+### 単方向データフロー
 
 すべての prop は、子プロパティと親プロパティの間の **one-way-down** バインディングを形成します: 親プロパティが更新したとき、それは子プロパティに伝わり、その反対はありません。これは、あなたのアプリケーションのデータフローの説明を難しくしてしまうような、子コンポーネントが偶然親の状態を変化させることを防ぎます。
 
@@ -352,15 +350,31 @@ new Vue({
 
 prop を変更したくなる2つのケースがあります。
 
-1. prop は初期値を渡すためにのみ使われ、子コンポーネントは単にその値をローカルデータプロパティとして使用したい場合。
+1. prop は初期値を渡すためにのみ使われ、子コンポーネントは単にその値をローカルデータプロパティとして使用したい場合
 
-2. prop は変換が必要な生の値として渡される。
+2. prop は変換が必要な生の値として渡されます。
 
 これらのユースケースの適切な答えは:
 
-1. prop の初期値をその初期値とするようなローカルデータプロパティを定義する。
+1. prop の初期値をその初期値とするようなローカルデータプロパティを定義します。
 
-2. prop の値から計算される算出プロパティ (computed property) を定義する。
+  ``` js
+  props: ['initialCounter'],
+  data: function () {
+    return { counter: this.initialCounter }
+  }
+  ```
+
+2. prop の値から計算される算出プロパティ (computed property) を定義します。
+
+  ``` js
+  props: ['size'],
+  computed: {
+    normalizedSize: function () {
+      return this.size.trim().toLowerCase()
+    }
+  }
+  ```
 
 <p class="tip"> JavaScript のオブジェクトや配列は参照渡しのため、もし prop が配列やオブジェクトなら、子内部のオブジェクトまたは配列自身の変更は、親の状態に影響を**与えます**。</p>
 
@@ -415,19 +429,20 @@ Vue.component('example', {
 
 加えて、`type` はカスタムコンストラクタ関数とすることもでき、アサーションは `instanceof` チェックで作成できるでしょう。
 
-prop 検証が失敗すると、Vue はコンソールへの警告を提示します（もし、開発ビルドを使用している場合は）。
+prop 検証が失敗すると、Vue は(開発ビルドを使用している場合)コンソールへの警告を提示します。
 
 ## カスタムイベント
 
-わたしたちは、親が子に prop を使用してデータを伝達できることを学んできました。しかし、何かが起こったとき、どのように親へ通信するのでしょうか？そこでカスタムイベントの出番です。
+親が子に prop を使用してデータを伝達できることを学んできました。しかし、何かが起こったとき、どのように親へ通信するのでしょうか？そこで Vue のカスタムイベントの出番です。
 
 ### カスタムイベントとの `v-on`の使用
 
 すべての Vue インスタンスは [Events interface](/api/#Instance-Methods-Events) を実装しています。これは以下をできることを意味します:
 
 - `$on(eventName)`を使用してイベントを購読します。
-
 - `$emit(eventName)`を使用して自身にイベントをトリガーします。
+
+<p class="tip">Vue のカスタムイベントはブラウザの [EventTarget API](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) とは別ものであることに注意してください。同等に動作しますが、`$on` と `$emit` は `addEventListener` と `dispatchEvent` に対するエイリアスでは__ありません__。</p>
 
 それに加えて、親コンポーネントは、子コンポーネントが使われているテンプレート内で直接 `v-on` を使用することで、子コンポーネントからのイベントを購読することができます。
 
@@ -517,7 +532,7 @@ new Vue({
 
 ### カスタムイベントを使用したフォーム入力コンポーネント
 
-この戦略は、`v-model`とともに動く、カスタムフォーム入力を作成するためにも使用されます。以下を思い出しましょう:
+カスタムイベントは、`v-model`とともに動く、カスタムフォーム入力を作成するためにも使用されます。以下を思い出しましょう:
 
 ``` html
 <input v-model="something">
@@ -540,85 +555,84 @@ new Vue({
 - `value` prop を受け入れる
 - 新しい値と共に `input` イベントを送出する
 
-実行して見てみましょう:
+とても簡単な通貨入力で、実行して見てみましょう:
 
 ``` html
-<div id="v-model-example">
-  <p>{{ message }}</p>
-  <my-input
-    label="Message"
-    v-model="message"
-  ></my-input>
-</div>
+<currency-input v-model="price"></currency-input>
 ```
 
 ``` js
-Vue.component('my-input', {
+Vue.component('currency-input', {
   template: '\
-    <div class="form-group">\
-      <label v-bind:for="randomId">{{ label }}:</label>\
-      <input v-bind:id="randomId" v-bind:value="value" v-on:input="onInput">\
-    </div>\
+    <span>\
+      $\
+      <input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+      >\
+    </span>\
   ',
-  props: ['value', 'label'],
-  data: function () {
-    return {
-      randomId: 'input-' + Math.random()
-    }
-  },
+  props: ['value'],
   methods: {
-    onInput: function (event) {
-      this.$emit('input', event.target.value)
+    // 値を直接的に更新する代わりに、このメソッドは input の値において
+    // 制約における置き換えとフォーマットのために使用される
+    updateValue: function (value) {
+      var formattedValue = value
+        // 両端のスペースを削除
+        .trim()
+        // 小数点2桁以下まで短縮
+        .slice(0, value.indexOf('.') + 3)
+      // 値が既に正規化されていないならば、
+      // 手動で適合するように上書き
+      if (formattedValue !== value) {
+        this.$refs.input.value = formattedValue
+      }
+      // input イベントを通して数値を発行する
+      this.$emit('input', Number(formattedValue))
     }
-  },
-})
-
-new Vue({
-  el: '#v-model-example',
-  data: {
-    message: 'hello'
   }
 })
 ```
 
 {% raw %}
-<div id="v-model-example" class="demo">
-  <p>{{ message }}</p>
-  <my-input
-    label="Message"
-    v-model="message"
-  ></my-input>
+<div id="currency-input-example" class="demo">
+  <currency-input v-model="price"></currency-input>
 </div>
 <script>
-Vue.component('my-input', {
+Vue.component('currency-input', {
   template: '\
-    <div class="form-group">\
-      <label v-bind:for="randomId">{{ label }}:</label>\
-      <input v-bind:id="randomId" v-bind:value="value" v-on:input="onInput">\
-    </div>\
+    <span>\
+      $\
+      <input\
+        ref="input"\
+        v-bind:value="value"\
+        v-on:input="updateValue($event.target.value)"\
+      >\
+    </span>\
   ',
-  props: ['value', 'label'],
-  data: function () {
-    return {
-      randomId: 'input-' + Math.random()
-    }
-  },
+  props: ['value'],
   methods: {
-    onInput: function (event) {
-      this.$emit('input', event.target.value)
+    updateValue: function (value) {
+      var formattedValue = value
+        .trim()
+        .slice(0, value.indexOf('.') + 3)
+      if (formattedValue !== value) {
+        this.$refs.input.value = formattedValue
+      }
+      this.$emit('input', Number(formattedValue))
     }
-  },
-})
-new Vue({
-  el: '#v-model-example',
-  data: {
-    message: 'hello'
   }
 })
+new Vue({ el: '#currency-input-example' })
 </script>
 {% endraw %}
 
-このインタフェースはコンポーネント内のフォーム入力との接続だけでなく、あなた自身が作った入力タイプを簡単に統合するためにも使用することができます。これらの可能性を想像して下さい:
+上記の実装は、かなり素朴です。例えば、複数のピリオドや文字を入力することができます。うわっ！そこで、些細な例を見たい人は、より堅固な通貨フィルタが以下にあります:
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+イベントインターフェイスは、より珍しい入力を作成するために使用することもできます。例えば、次のような可能性を想像してみてください:
 
 ``` html
 <voice-recognizer v-model="question"></voice-recognizer>
@@ -996,6 +1010,14 @@ Vue.component('unique-name-of-my-component', {
   // ...
 })
 ```
+
+注意がない場合、再帰的なコンポーネントは無限ループにつながる可能性があります:
+
+``` js
+name: 'stack-overflow',
+template: '<div><stack-overflow></stack-overflow></div>'
+```
+
 上記のようなコンポーネントは、"max stack size exceeded" エラーに想定されるため、再帰呼び出しは条件付きになるようにしてください。(i.e. 最終的に `false` となる `v-if` を使用します)
 
 ### インラインテンプレート
@@ -1004,8 +1026,10 @@ Vue.component('unique-name-of-my-component', {
 
 ``` html
 <my-component inline-template>
-  <p>These are compiled as the component's own template.</p>
-  <p>Not parent's transclusion content.</p>
+  <div>
+    <p>These are compiled as the component's own template.</p>
+    <p>Not parent's transclusion content.</p>
+  </div>  
 </my-component>
 ```
 

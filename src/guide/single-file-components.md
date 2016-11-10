@@ -49,53 +49,8 @@ order: 19
 
 テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.github.io/) というモジュールバンドラーを使用します。 Webpack についてもっと学ぶには、 [このビデオ](https://www.youtube.com/watch?v=WQue1AN93YU) がとても良い導入となります。一度基本を終えてしまえば、[Egghead.io上の上級 Webpack コース](https://egghead.io/courses/using-webpack-for-production-javascript-applications)もチェックしたくなるでしょう。
 
-Webpack でバンドルの中に含まれる前にそれぞれのモジュールは "loader" により変換されます。また Vue では `.vue` 単一ファイルコンポーネントをコンパイルするために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](https://vue-loader.vuejs.org) を読むことも出来ます。
+Webpack で、各モジュールは、バンドルに含まれる前に "loader" により変換されます。また Vue では `.vue` 単一ファイルコンポーネントをコンパイルするために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、 [vue-loaderドキュメント](https://vue-loader.vuejs.org) を読むことも出来ます。
 
 ### 上級者ユーザー向け
 
 あなたが Webpack か Browserify のどちらが好みでも、私達はシンプルなものと、複雑なプロジェクトのテンプレート両方を用意しました。[github.com/vuejs-templates](https://github.com/vuejs-templates) を閲覧し、あなたに合ったテンプレートを選んでください。そしたら、 [vue-cli](https://github.com/vuejs/vue-cli) で新しいプロジェクトを生成するために README 内の手順に沿ってください。
-
-## 本番デプロイ
-
-縮小されたスタンドアローンビルド版 Vue ではファイルサイズを小さくするために全ての警告を取り除いていますが、 Webpack や Browserify のようなツールを利用している場合にこれを成し遂げるには多少の設定が必要です。
-
-### Webpack
-
-Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使用して本番環境を指定ください。そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下は設定例です:
-
-``` js
-var webpack = require('webpack')
-
-module.exports = {
-  // ...
-  plugins: [
-    // ...
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
-}
-```
-
-### Browserify
-
-- `NODE_ENV` に `"production"` をセットしてビルドコマンドを実行してください。これは `vueify` にホットリローディングと開発関連コードを含まないことを伝えます。
-- あなたのバンドルに [envify](https://github.com/hughsk/envify) グローバル変換を適用してください。 これは minifier で Vue ソースコード内で環境変数の条件上で囲われた箇所全てを取り除くことを許可します。
-
-
-``` bash
-NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
-```
-
-- 別の CSS ファイルに抽出するには、 vueify に含まれている CSS 抽出プラグインを使用してください。
-
-``` bash
-NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o build.css ] -e main.js | uglifyjs -c -m > build.js
-```

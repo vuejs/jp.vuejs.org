@@ -1,7 +1,7 @@
 ---
 title: Render 関数
 type: guide
-order: 14
+order: 15
 ---
 
 ## 基本
@@ -109,7 +109,7 @@ createElement(
   // {String | Array}
   // VNodes の子。任意です。
   [
-    createElement('h1', 'hello world')
+    createElement('h1', 'hello world'),
     createElement(MyComponent, {
       props: {
         someProp: 'foo'
@@ -161,6 +161,21 @@ createElement(
   nativeOn: {
     click: this.nativeClickHandler
   },
+  // カスタムディレクティブ。バインディングの古い値は、
+  // Vue はあなたのバインディングを追跡するため、設定できません。
+  directives: [
+    {
+      name: 'my-custom-directive',
+      value: '2'
+      expression: '1 + 1',
+      arg: 'foo',
+      modifiers: {
+        bar: true
+      }
+    }
+  ],
+  // コンポーネントの子があるならば、スロット名
+  slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
   key: 'myKey',
   ref: 'myRef'
@@ -229,7 +244,6 @@ render: function (createElement) {
 
 ``` js
 render: function (createElement) {
-  var myParagraph =
   return createElement('div',
     Array.apply(null, { length: 20 }).map(function () {
       return createElement('p', 'hi')
@@ -265,7 +279,22 @@ render: function (createElement) {
 
 ## JSX
 
-もしあなたが多くの render 関数を書いている場合は、よりシンプルでほぼ間違いなく読み易いテンプレート JSX の代わりに上記の 14 行を使っていることがつらいと感じるかもしれません。
+もしあなたが多くの render 関数を書いている場合は、このような書き方の方が良いと感じるかもしれません。
+
+``` js
+createElement(
+  'anchored-heading', {
+    props: {
+      level: 1
+    }
+  }, [
+    createElement('span', 'Hello'),
+    ' world!'
+  ]
+)
+```
+
+特にテンプレートが簡単なバージョンの場合は、次のようになります:
 
 ``` html
 <anchored-heading :level="1">

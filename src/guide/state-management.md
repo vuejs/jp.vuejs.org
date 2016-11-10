@@ -1,7 +1,7 @@
 ---
 title: 状態管理
 type: guide
-order: 21
+order: 22
 ---
 
 ## 公式 Flux ライクな実装

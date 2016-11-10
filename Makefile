@@ -1,5 +1,5 @@
 all: update
-	rm db.json
+	rm -rf public db.json
 	hexo generate
 
 deploy:	all

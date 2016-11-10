@@ -1,7 +1,7 @@
 ---
 title: Vue 1.xからの移行
 type: guide
-order: 24
+order: 25
 ---
 
 ## FAQ
@@ -12,7 +12,7 @@ order: 24
 
 > どこから移行をはじめるべきですか？
 
-1. 現在のプロジェクト上で、[移行ヘルパー](https://github.com/vuejs/vue-migration-helper)を実行します。私たちは以前の Vue 開発を単純なコマンドライン インターフェースに最小構成で注意深く詰め込みました。それは、非推奨のパターンを認識するたびに移行をサジェストし、その上で詳しい情報へのリンクを提供します。
+1. 現在のプロジェクト上で、[移行ヘルパー](https://github.com/vuejs/vue-migration-helper)を実行します。私たちは以前の Vue 開発を単純なコマンドライン インターフェースに最小構成で注意深く詰め込みました。それは、廃止された機能を認識するたびに移行をサジェストし、その上で詳しい情報へのリンクを提供します。
 
 2. その後、このページのサイドバーの目次より、あなたが影響を受ける可能性のあるトピックを参照してください。移行ヘルパーが何も検出していない場合、それは素晴らしいことです。
 
@@ -685,7 +685,7 @@ strings.map(function (str) {
 
 - ディレクティブはもはや、インスタンスを持ちません。これは、もはや `this` 内部にディレクティブのフックがないことを意味します。その代わり、それらは引数として必要なものを全て受け取ります。もし、あなたが本当にフック間で状態を保持する必要がある場合、 `el` 上にて行うことができます。
 - `acceptStatement`, `deep`, `priority` などのようなオプションは全て非推奨となりました。
-- 一部のフックが異なる振るまいをおこなっており、また、新たなフックと対になっているものもあります。
+- 一部のフックが異なる振るまいをおこなっており、また、新たなフックと対になっているものもあります。`twoWay` なディレクティブを置き換えるためには、[この example](#Two-Way-Filters-deprecated) を参照してください。
 
 新しいディレクティブははるかにシンプルなので、幸いにも、より簡単に習得することができます。より多くを学ぶには、新しい [カスタムディレクティブガイド](custom-directive.html) をお読みください。
 
@@ -696,6 +696,29 @@ strings.map(function (str) {
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 定義済みのディレクティブを見つけます。
     ヘルパーによって検出された箇所は、ほとんどの場合、将来的にコンポーネントにリファクタリングしたくなる部分となります。
   </p>
+</div>
+{% endraw %}
+
+### Directive `.literal` modifier <sup>deprecated</sup>
+
+The `.literal` modifier has been removed, as the same can be easily achieved by just providing a string literal as the value.
+
+For example, you can update:
+
+``` js
+<p v-my-directive.literal="foo bar baz"></p>
+```
+
+to just:
+
+``` html
+<p v-my-directive="'foo bar baz'"></p>
+```
+
+{% raw %}
+<div class="upgrade-path">
+  <h4>Upgrade Path</h4>
+  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the `.literal` modifier on a directive.</p>
 </div>
 {% endraw %}
 
@@ -714,7 +737,7 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 
 ### 再利用可能なトランジションへの `Vue.transition` <sup>非推奨</sup>
 
-新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](http://rc.vuejs.org/guide/transitions.html#Reusable-Transitions) によって実現することができます。
+新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](/guide/transitions.html#Reusable-Transitions) によって実現することができます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -739,6 +762,10 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 
 ## イベント
 
+### `events` option <sup>deprecated</sup>
+
+The `events` option has been deprecated. Event handlers should now be registered in the `created` hook instead. Check out the [`$dispatch` and `$broadcast` migration guide](#dispatch-and-broadcast-deprecated) for a detailed example.
+
 ### `Vue.directive('on').keyCodes` <sup>非推奨</sup>
 
 `keyCodes` を設定するための、より新しくかつ簡潔な方法は、`Vue.config.keyCodes` を介して行うことです。例えば、以下のようなものとなります:
@@ -760,7 +787,9 @@ Vue.config.keyCodes.f1 = 112
 
 これまでの問題として、コンポーネントツリーが肥大化した際、その動作を推論することが非常に困難となり、また、コンポーネントのツリー構造に依存する、非常に脆いイベントフローがありました。それは、単純にうまくスケールしませんし、後々に痛みを伴う変更となってはなりません。`$dispatch` および `$broadcast` に関しても、兄弟コンポーネント間の通信を解決するものではありません。
 
-`$dispatch` および `$broadcast` からの最も簡単なアップグレードの方法として、コンポーネントがそれぞれのツリー内の状態に関係なく、通信することを可能とする、集中型のイベントハブを使用することができます。Vue のインスタンスは Event Emitter のインターフェースを持っているため、実際に使用する場合、この目的のために空の Vue インスタンスを作成することになるでしょう。
+One of the most common uses for these methods is to communicate between a parent and its direct children. In these cases, you can actually [listen to an `$emit` from a child with `v-on`](http://vuejs.org/guide/components.html#Form-Input-Components-using-Custom-Events). This allows you to keep the convenience of events with added explicitness.
+
+However, when communicating between distant descendants/ancestors, `$emit` won't help you. Instead, the simplest possible upgrade would be to use a centralized event hub. This has the added benefit of allowing you to communicate between components no matter where they are in the component tree - even between siblings! Because Vue instances implement an event emitter interface, you can actually use an empty Vue instance for this purpose.
 
 例えば、このような ToDo アプリケーションがある場合:
 
@@ -917,8 +946,9 @@ JavaScript 組み込みの [`.filter` メソッド](https://developer.mozilla.or
 ``` js
 computed: {
   filteredUsers: function () {
-    return this.users.filter(function (user) {
-      return user.name.indexOf(this.searchQuery)
+    var self = this
+    return self.users.filter(function (user) {
+      return user.name.indexOf(self.searchQuery) !== -1
     })
   }
 }
@@ -927,8 +957,9 @@ computed: {
 算出プロパティに対しては、完全なるアクセス権があるため、 JavaScript 組み込みの `.filter` は、非常に複雑なフィルタリングの管理を行うことができます。例えば、もしあなたがすべてのアクティブユーザーを見つけるために、大文字小文字を区別せず、名前と E メールアドレスの両方を調べたい場合は、以下のようになります:
 
 ``` js
-this.users.filter(function (user) {
-  var searchRegex = new RegExp(this.searchQuery, 'i')
+var self = this
+self.users.filter(function (user) {
+  var searchRegex = new RegExp(self.searchQuery, 'i')
   return user.isActive && (
     searchRegex.test(user.name) ||
     searchRegex.test(user.email)
@@ -1051,7 +1082,7 @@ function pluralizeKnife (count) {
 '$' + price.toFixed(2)
 ```
 
-しかしながら、ほとんどの場合、これらは奇妙な動作をする場合があります(例えば、 0.035.toFixed(2) の丸め誤差が 0.4 として評価されるにも関わらず、 0.045 の丸め誤差が 0.4と評価されるなどです)。これらの問題を解消するためには、より確実な [通貨のフォーマット管理のライブラリ](http://openexchangerates.github.io/accounting.js/) などを使用します。
+しかしながら、ほとんどの場合、これらは奇妙な動作をする場合があります(例えば、 0.035.toFixed(2) の丸め誤差が 0.04 として評価されるにも関わらず、 0.045 の丸め誤差が 0.04と評価されるなどです)。これらの問題を解消するためには、より確実な [通貨のフォーマット管理のライブラリ](http://openexchangerates.github.io/accounting.js/) などを使用します。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1060,6 +1091,48 @@ function pluralizeKnife (count) {
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、非推奨のフィルタを見つけます。
     もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
   </p>
+</div>
+{% endraw %}
+
+### Two-Way Filters <sup>deprecated</sup>
+
+Some users have enjoyed using two-way filters with `v-model` to create interesting inputs with very little code. While _seemingly_ simple however, two-way filters can also hide a great deal of complexity - and even encourage poor UX by delaying state updates. Instead, components wrapping an input are recommended as a more explicit and feature-rich way of creating custom inputs.
+
+As an example, we'll now walk the migration of a two-way currency filter:
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/6744xnjk/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+It mostly works well, but the delayed state updates can cause strange behavior. For example, click on the `Result` tab and try entering `9.999` into one of those inputs. When the input loses focus, its value will update to `$10.00`. When looking at the calculated total however, you'll see that `9.999` is what's stored in our data. The version of reality that the user sees is out of sync!
+
+To start transitioning towards a more robust solution using Vue 2.0, let's first wrap this filter in a new `<currency-input>` component:
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/943zfbsh/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+This allows us add behavior that a filter alone couldn't encapsulate, such as selecting the content of an input on focus. Now the next step will be to extract the business logic from the filter. Below, we pull everything out into an external [`currencyValidator` object](https://gist.github.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e):
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/j4xtb20e/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+This increased modularity not only makes it easier to migrate to Vue 2, but also allows currency parsing and formatting to be:
+
+- unit tested in isolation from your Vue code
+- used by other parts of your application, such as to validate the payload to an API endpoint
+
+Having this validator extracted out, we've also more comfortably built it up into a more robust solution. The state quirks have been eliminated and it's actually impossible for users to enter anything wrong, similar to what the browser's native number input tries to do.
+
+We're still limited however, by filters and by Vue 1.0 in general, so let's complete the upgrade to Vue 2.0:
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+You may notice that:
+
+- Every aspect of our input is more explicit, using lifecycle hooks and DOM events in place of the hidden behavior of two-way filters.
+- We can now use `v-model` directly on our custom inputs, which is not only more consistent with normal inputs, but also means our component is Vuex-friendly.
+- Since we're no longer using filter options that require a value to be returned, our currency work could actually be done asynchronously. That means if we had a lot of apps that had to work with currencies, we could easily refactor this logic into a shared microservice.
+
+{% raw %}
+<div class="upgrade-path">
+  <h4>Upgrade Path</h4>
+  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of filters used in directives like <code>v-model</code>. If you miss any, you should also see <strong>console errors</strong>.</p>
 </div>
 {% endraw %}
 
@@ -1139,7 +1212,7 @@ function pluralizeKnife (count) {
 属性内での展開は、もはや有効ではありません。例えば、以下の場合:
 
 ``` html
-<button v-bind:class="btn btn-{{ size }}"></button>
+<button class="btn btn-{{ size }}"></button>
 ```
 
 いずれかのインライン式を使用するように更新する必要があります:
@@ -1555,7 +1628,11 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 
 ### `Vue.partial` <sup>非推奨</sup>
 
-代わりに、[関数型コンポーネント](render-function.html#関数型コンポーネント)を使用します。
+Partials have been deprecated in favor of more explicit data flow between components, using props. Unless you're using a partial in a performance-critical area, the recommendation is to simply use a [normal component](components.html) instead. If you were dynamically binding the `name` of a partial, you can use a [dynamic component](http://vuejs.org/guide/components.html#Dynamic-Components).
+
+If you happen to be using partials in a performance-critical part of your app, then you should upgrade to [functional components](render-function.html#Functional-Components). They must be in a plain JS/JSX file (rather than in a `.vue` file) and are stateless and instanceless, just like partials. This makes rendering extremely fast.
+
+A benefit of functional components over partials is that they can be much more dynamic, because they grant you access to the full power of JavaScript. There is a cost to this power however. If you've never used a component framework with render functions before, they may take a bit longer to learn.
 
 {% raw %}
 <div class="upgrade-path">
