@@ -127,7 +127,7 @@ var strategies = Vue.config.optionMergeStrategies
 strategies.myOption = strategies.methods
 ```
 
-より高度な例として [Vuex](https://github.com/vuejs/vuex) のマージストラテジがあります:
+より高度な例として [Vuex](https://github.com/vuejs/vuex) 1.x のマージストラテジがあります:
 
 ``` js
 const merge = Vue.config.optionMergeStrategies.computed
