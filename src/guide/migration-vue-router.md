@@ -267,6 +267,8 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 <router-link to="/about">About</router-link>
 ```
 
+`<router-link>` では `target="_blank"` はサポートされいないことに注意してください。新しいタブでリンクを開く必要がある場合は、`<a>` を代わりに使用しなければなりません。
+
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
