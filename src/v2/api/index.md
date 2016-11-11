@@ -1003,7 +1003,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **使用方法:**
 
-  Vue インスタンス上でのひとつの式または算出関数 (computed function) の変更を監視します。コールバックは新しい値と古い値とともに呼びだされます。引数の式には、単一の keypath か、任意の有効なバインディング式を入れることができます。
+  Vue インスタンス上でのひとつの式または算出関数 (computed function) の変更を監視します。コールバックは新しい値と古い値とともに呼びだされます。引数の式には、単純なドット区切りのパスのみを入れることができます。より複雑な表現の場合は、代わりに関数を使用します。
 
 <p class="tip">オブジェクトまたは配列を変更する(というよりむしろ置換する)とき、それらは同じオブジェクト/配列を参照するため、古い値は新しい値と同じになることに注意してください。Vue は変更前の値のコピーしません。</p>
 
@@ -1012,11 +1012,6 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ``` js
   // キーパス
   vm.$watch('a.b.c', function (newVal, oldVal) {
-    // 何かの処理
-  })
-
-  // 式
-  vm.$watch('a + b', function (newVal, oldVal) {
     // 何かの処理
   })
 
