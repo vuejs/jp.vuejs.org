@@ -228,7 +228,7 @@ Vue.js では、親子のコンポーネントの関係は、**props down, event
 
 全てのコンポーネントインスタンスは、各自の**隔離されたスコープ (isolated scope)** を持ちます。つまり、子コンポーネントのテンプレートで親データを直接参照できない(そしてすべきでない)ということです。データは **props** を使用して子コンポーネントに伝達できます。
 
-prop は親コンポーネントからの情報を伝えるためのカスタム属性です。子コンポーネントは、[`props` オプション](/api/#props)を利用して、伝達を想定する props を明示的に宣言する必要があります:
+prop は親コンポーネントからの情報を伝えるためのカスタム属性です。子コンポーネントは、[`props` オプション](../api/#props)を利用して、伝達を想定する props を明示的に宣言する必要があります:
 
 ``` js
 Vue.component('child', {
@@ -437,7 +437,7 @@ prop 検証が失敗すると、Vue は(開発ビルドを使用している場�
 
 ### カスタムイベントとの `v-on`の使用
 
-すべての Vue インスタンスは [Events interface](/api/#Instance-Methods-Events) を実装しています。これは以下をできることを意味します:
+すべての Vue インスタンスは [Events interface](../api/#Instance-Methods-Events) を実装しています。これは以下をできることを意味します:
 
 - `$on(eventName)`を使用してイベントを購読します。
 - `$emit(eventName)`を使用して自身にイベントをトリガーします。
@@ -658,7 +658,7 @@ bus.$on('id-selected', function (id) {
 })
 ```
 
-より複雑なケースでは、専用の [状態管理パターン](/guide/state-management.html) 採用することを考えるべきです。
+より複雑なケースでは、専用の [状態管理パターン](state-management.html) 採用することを考えるべきです。
 
 ## スロットによるコンテンツ配信
 
@@ -865,7 +865,7 @@ var vm = new Vue({
 </keep-alive>
 ```
 
-`<keep-alive>` のさらなる詳細については、[API リファレンス](/api/#keep-alive) を確認して下さい。
+`<keep-alive>` のさらなる詳細については、[API リファレンス](../api/#keep-alive) を確認して下さい。
 
 ## その他
 

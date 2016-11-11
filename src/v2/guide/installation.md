@@ -87,6 +87,8 @@ $ npm install
 $ npm run dev
 ```
 
+<p class="tip">The CLI assumes prior knowledge of Node.js and the associated build tools. If you are new to Vue or front-end build tools, we strongly suggest going through <a href="./">the guide</a> without any build tools before using the CLI.</p>
+
 ## 開発版のビルド
 
 **重要** GitHub 上の `/dist` フォルダに存在するビルドされたファイルは、リリース時にのみチェックインされます。 GitHub 上の最新のソースコードから Vue を使用するためには、あなた自身がそれをビルドしなければなりません！

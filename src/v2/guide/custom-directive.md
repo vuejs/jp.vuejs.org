@@ -82,7 +82,7 @@ directive definition object はいくつかのフック関数(全て任意)を�
   - **expression**: 文字列としてのバインディング式。例えば `v-my-directive="1 + 1"` では、expression は `"1 + 1"` です。
   - **arg**: もしあれば、ディレクティブに渡される引数。例えば `v-my-directive:foo` では、arg は `"foo"` です。
   - **modifiers**: もしあれば、修飾子 (modifier) を含んでいるオブジェクト。例えば `v-my-directive.foo.bar` では、modifiers オブジェクトは `{ foo: true, bar: true }` です。
-- **vnode**: Vue のコンパイラによって生成される仮想 Node。さらに詳しくは [VNode API](/api/#VNode-Interface) を参照してください。
+- **vnode**: Vue のコンパイラによって生成される仮想 Node。さらに詳しくは [VNode API](../api/#VNode-Interface) を参照してください。
 - **oldVnode**: `update` と `componentUpdated` フックにおいてのみ利用できる以前の仮想 Node。
 
 <p class="tip">`el` を除いて、これらの全てのプロパティは読み込みのみ (read-only) で変更しないものとして扱わなくてはいけません。フックを超えてデータを共有する必要がある場合は, 要素の [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) を通じて行うことが推奨されています。</p>

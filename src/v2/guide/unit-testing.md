@@ -113,7 +113,7 @@ describe('MyComponent', () => {
 
 ## 非同期な更新の検証
 
-Vue は [非同期に DOM の更新を行う](/guide/reactivity.html#Async-Update-Queue) ため、 state の変更に対する DOM の更新に関する検証は、 `Vue.nextTick` コールバックを用いて行う必要があります。
+Vue は [非同期に DOM の更新を行う](reactivity.html#Async-Update-Queue) ため、 state の変更に対する DOM の更新に関する検証は、 `Vue.nextTick` コールバックを用いて行う必要があります。
 
 ``` js
 // state の更新後、生成された HTML の検証を行う

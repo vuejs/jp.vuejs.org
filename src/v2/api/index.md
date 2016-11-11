@@ -44,7 +44,7 @@ type: api
 
   マージ戦略を親で定義されたオプションの値と子のインスタンスの値が、それぞれ第1引数、第2引数として受け取ります。Vue インスタンスのコンテキストは第3引数として渡されます。
 
-- **参照:** [カスタムオプションのマージストラテジ](/guide/mixins.html#カスタムオプションのマージストラテジ)
+- **参照:** [カスタムオプションのマージストラテジ](../guide/mixins.html#カスタムオプションのマージストラテジ)
 
 ### devtools
 
@@ -136,7 +136,7 @@ type: api
   <p>Walter White aka Heisenberg</p>
   ```
 
-- **参照:** [コンポーネント](/guide/components.html)
+- **参照:** [コンポーネント](../guide/components.html)
 
 <h3 id="Vue-nextTick">Vue.nextTick( callback, [context] )</h3>
 
@@ -157,7 +157,7 @@ type: api
   })
   ```
 
-- **参照:** [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
+- **参照:** [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
 <h3 id="Vue-set">Vue.set( object, key, value )</h3>
 
@@ -174,7 +174,7 @@ type: api
 
   **オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできないことに注意してください。**
 
-- **参照:** [リアクティブの探求](/guide/reactivity.html)
+- **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 
 <h3 id="Vue-delete">Vue.delete( object, key )</h3>
@@ -189,7 +189,7 @@ type: api
 
   **オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできないことに注意してください。**
 
-- **参照:** [リアクティブの探求](/guide/reactivity.html)
+- **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 <h3 id="Vue-directive">Vue.directive( id, [definition] )</h3>
 
@@ -220,7 +220,7 @@ type: api
   var myDirective = Vue.directive('my-directive')
   ```
 
-- **参照:** [カスタムディレクティブ](/guide/custom-directive.html)
+- **参照:** [カスタムディレクティブ](../guide/custom-directive.html)
 
 <h3 id="Vue-filter">Vue.filter( id, [definition] )</h3>
 
@@ -263,7 +263,7 @@ type: api
   var MyComponent = Vue.component('my-component')
   ```
 
-- **参照:** [コンポーネント](/guide/components.html)
+- **参照:** [コンポーネント](../guide/components.html)
 
 <h3 id="Vue-use">Vue.use( plugin )</h3>
 
@@ -276,7 +276,7 @@ type: api
 
   このメソッドが同じプラグインで複数呼ばれるとき、プラグインは一度だけインストールされます。
 
-- **参照:** [プラグイン](/guide/plugins.html)
+- **参照:** [プラグイン](../guide/plugins.html)
 
 <h3 id="Vue-mixin">Vue.mixin( mixin )</h3>
 
@@ -287,7 +287,7 @@ type: api
 
   全ての Vue インスタンスが作成された後に影響を及ぼす、ミックスイン (mixin) をグローバルに適用します。これは、コンポーネントにカスタム動作を注入するために、プラグイン作成者によって使用することができます。**アプリケーションコードでの使用は推奨されません。**
 
-- **参照:** [グローバルミックスイン](/guide/mixins.html#グローバルミックスイン)
+- **参照:** [グローバルミックスイン](../guide/mixins.html#グローバルミックスイン)
 
 <h3 id="Vue-compile">Vue.compile( template )</h3>
 
@@ -310,7 +310,7 @@ type: api
   })
   ```
 
-- **参照:** [Render 関数](/guide/render-function.html)
+- **参照:** [Render 関数](../guide/render-function.html)
 
 ## オプション / データ
 
@@ -356,7 +356,7 @@ type: api
 
   <p class="tip">Note that __you should not use an arrow function with the `data` property__ (e.g. `data: () => { return { a: this.myProp }}`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.myProp` will be undefined.</p>
 
-- **参照:** [リアクティブの探求](/guide/reactivity.html)
+- **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 ### props
 
@@ -392,7 +392,7 @@ type: api
   })
   ```
 
-- **参照:** [Props](/guide/components.html#Props)
+- **参照:** [Props](../guide/components.html#Props)
 
 ### propsData
 
@@ -459,7 +459,7 @@ type: api
   ```
 
 - **参照:**
-  - [算出プロパティ](/guide/computed.html)
+  - [算出プロパティ](../guide/computed.html)
 
 ### methods
 
@@ -486,7 +486,7 @@ type: api
   vm.a // 2
   ```
 
-- **参照:** [イベントの購読](/guide/events.html)
+- **参照:** [イベントの購読](../guide/events.html)
 
 ### watch
 
@@ -544,7 +544,7 @@ type: api
 
   <p class="tip">与えられた要素は単にマウントするポイントとして機能します。Vue 1.x とは異なり、マウントされた要素は、全てのケースで Vue によって生成された DOM に置き換えられます。従って、ルートインスタンスを `<html>` または `<body>` にマウントすることは推奨されません。</p>
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### template
 
@@ -559,8 +559,8 @@ type: api
   <p class="tip">セキュリティの観点から、信頼できる Vue のテンプレートだけ使用するべきです。決してユーザーによって生成されたコンテンツをテンプレートとして使用しないでください。</p>
 
 - **参照:**
-  - [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
-  - [コンテンツ配信](/guide/components.html#スロットによるコンテンツ配信)
+  - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
+  - [コンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
 
 ### render
 
@@ -573,7 +573,7 @@ type: api
   コンポーネントが関数型コンポーネントならば、render 関数は、関数型コンポーネントが状態を持たないため、コンテキストなデータにアクセスするために提供する `context` を追加の引数として受け取ります。
 
 - **参照:**
-  - [Render 関数](/guide/render-function)
+  - [Render 関数](../guide/render-function)
 
 ## オプション / ライフサイクルフック
 
@@ -587,7 +587,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   データの監視とイベント/ウォッチャのセットアップより前の、インスタンスが初期化されるときに同期的に呼ばれます。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### created
 
@@ -597,7 +597,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   インスタンスが作成された後に同期的に呼ばれます。この段階では、インスタンスは、データ監視、算出プロパティ、メソッド、watch/event コールバックらのオプションのセットアップ処理が完了したことを意味します。しかしながら、マウンティングの段階は未開始で、`$el` プロパティはまだ利用できません。
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### beforeMount
 
@@ -609,7 +609,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### mounted
 
@@ -621,7 +621,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### beforeUpdate
 
@@ -635,7 +635,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### updated
 
@@ -649,7 +649,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### activated
 
@@ -663,7 +663,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [組み込みコンポーネント - keep-alive](#keep-alive)
-  - [動的コンポーネント - keep-alive](/guide/components.html#keep-alive)
+  - [動的コンポーネント - keep-alive](../guide/components.html#keep-alive)
 
 ### deactivated
 
@@ -677,7 +677,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [組み込みコンポーネント - keep-alive](#keep-alive)
-  - [動的コンポーネント - keep-alive](/guide/components.html#keep-alive)
+  - [動的コンポーネント - keep-alive](../guide/components.html#keep-alive)
 
 ### beforeDestroy
 
@@ -689,7 +689,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ### destroyed
 
@@ -701,7 +701,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ## オプション / アセット
 
@@ -714,8 +714,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   Vue インスタンスで利用可能なディレクティブのハッシュです。
 
 - **参照:**
-  - [カスタムディレクティブ](/guide/custom-directive.html)
-  - [アセットの命名規則](/guide/components.html#アセットの命名規則)
+  - [カスタムディレクティブ](../guide/custom-directive.html)
+  - [アセットの命名規則](../guide/components.html#アセットの命名規則)
 
 ### filters
 
@@ -737,7 +737,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   Vue インスタンスで利用可能なコンポーネントのハッシュです。
 
 - **参照:**
-  - [コンポーネント](/guide/components.html)
+  - [コンポーネント](../guide/components.html)
 
 ## オプション / その他
 
@@ -775,7 +775,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   // -> 2
   ```
 
-- **参照:** [ミックスイン](/guide/mixins.html)
+- **参照:** [ミックスイン](../guide/mixins.html)
 
 ### name
 
@@ -839,7 +839,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   状態を持たない (`data` なし) そしてインスタンスを持たない (`this` コンテキストなし)コンポーネントにするかどうか設定します。描画するために仮想ノードを遥かに安価に作成しそれらを返す単純な`render` 関数を実装する必要があります。
 
-- **参照:** [関数型コンポーネント](/guide/render-function.html#関数型コンポーネント)
+- **参照:** [関数型コンポーネント](../guide/render-function.html#関数型コンポーネント)
 
 ## インスタンスプロパティ
 
@@ -959,8 +959,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [`<slot>` コンポーネント](#slot)
-  - [Slot によるコンテンツ配信](/guide/components.html#Slotsによるコンテンツ配信)
-  - [Render 関数](/guide/render-function.html)
+  - [Slot によるコンテンツ配信](../guide/components.html#Slotsによるコンテンツ配信)
+  - [Render 関数](../guide/render-function.html)
 
 ### vm.$refs
 
@@ -973,7 +973,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   `ref` によって登録された子コンポーネントを保持するオブジェクトです。
 
 - **参照:**
-  - [Child Component Refs](/guide/components.html#Child-Component-Refs)
+  - [Child Component Refs](../guide/components.html#Child-Component-Refs)
   - [ref](#ref)
 
 ### vm.$isServer
@@ -986,7 +986,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   現在の Vue インスタンスがサーバ上で動作しているかどうかを表します。
 
-- **参照:** [サーバサイドレンダリング](/guide/ssr.html)
+- **参照:** [サーバサイドレンダリング](../guide/ssr.html)
 
 ## インスタンスメソッド / データ
 
@@ -1182,8 +1182,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
-  - [サーバサイドレンダリング](/guide/ssr.html)
+  - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
+  - [サーバサイドレンダリング](../guide/ssr.html)
 
 <h3 id="vm-forceUpdate">vm.$forceUpdate()</h3>
 
@@ -1223,7 +1223,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [Vue.nextTick](#Vue-nextTick)
-  - [非同期更新キュー](/guide/reactivity.html#非同期更新キュー)
+  - [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
 <h3 id="vm-destroy">vm.$destroy()</h3>
 
@@ -1235,7 +1235,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   <p class="tip">通常のケースでは、このメソッドはあなた自身で呼ぶべきではありません。`v-if` と `v-for` を使用してデータ駆動による方法で子コンポーネントのライフサイクルを制御することを推奨します。</p>
 
-- **参照:** [ライフサイクルダイアグラム](/guide/instance.html#ライフサイクルダイアグラム)
+- **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
 
 ## ディレクティブ
 
@@ -1255,7 +1255,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   <span>{{msg}}</span>
   ```
 
-- **参照:** [データバインディング構文 - 展開](/guide/syntax.html#Text)
+- **参照:** [データバインディング構文 - 展開](../guide/syntax.html#Text)
 
 ### v-html
 
@@ -1273,7 +1273,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```html
   <div v-html="html"></div>
   ```
-- **参照:** [データバインディング構文 - 展開](/guide/syntax.html#生のHTML)
+- **参照:** [データバインディング構文 - 展開](../guide/syntax.html#生のHTML)
 
 ### v-if
 
@@ -1285,7 +1285,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   このディレクティブは条件が変更されたとき、トランジションをトリガーします。
 
-- **参照:** [条件付きレンダリング - v-if](/guide/conditional.html)
+- **参照:** [条件付きレンダリング - v-if](../guide/conditional.html)
 
 ### v-show
 
@@ -1297,7 +1297,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   このディレクティブは条件が変更されたとき、トランジションをトリガーします。
 
-- **参照:** [条件付きレンダリング - v-show](/guide/conditional.html#v-show)
+- **参照:** [条件付きレンダリング - v-show](../guide/conditional.html#v-show)
 
 ### v-else
 
@@ -1319,7 +1319,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [条件付きレンダリング - v-else](/guide/conditional.html#v-else)
+  - [条件付きレンダリング - v-else](../guide/conditional.html#v-else)
 
 ### v-for
 
@@ -1354,7 +1354,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   `v-for` の詳細な使用方法は下記にリンクしたガイドセクション内で説明しています。
 
 - **参照:**
-  - [リストレンダリング](/guide/list.html)
+  - [リストレンダリング](../guide/list.html)
   - [key](/guide/list.html#key)
 
 ### v-on
@@ -1425,8 +1425,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [メソッドとイベントハンドリング](/guide/events.html)
-  - [コンポーネント - カスタムイベント](/guide/components.html#カスタムイベント)
+  - [メソッドとイベントハンドリング](../guide/events.html)
+  - [コンポーネント - カスタムイベント](../guide/components.html#カスタムイベント)
 
 ### v-bind
 
@@ -1481,8 +1481,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [クラスとスタイルバインディング](/guide/class-and-style.html)
-  - [コンポーネント - コンポーネント Props](/guide/components.html#Props)
+  - [クラスとスタイルバインディング](../guide/class-and-style.html)
+  - [コンポーネント - コンポーネント Props](../guide/components.html#Props)
 
 ### v-model
 
@@ -1570,8 +1570,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [データバインディング構文 - 展開](/guide/syntax.html#Text)
-  - [コンポーネント - v-once による安価な静的コンポーネント](/guide/components.html#Cheap-Static-Components-with-v-once)
+  - [データバインディング構文 - 展開](../guide/syntax.html#Text)
+  - [コンポーネント - v-once による安価な静的コンポーネント](../guide/components.html#Cheap-Static-Components-with-v-once)
 
 ## 特別な属性
 
@@ -1624,7 +1624,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   ref の登録タイミングに関する重要な注意事項として、参照自体は、render 関数の結果として作成されているため、最初の描画においてそれらにアクセスすることができません。それらはまだ存在しておらず、`$refs` はリアクティブではなく、従ってデータバインディングのためにテンプレートでそれを使用すべきではありません。
 
-- **参照:** [Child Component Refs](/guide/components.html#Child-Component-Refs)
+- **参照:** [Child Component Refs](../guide/components.html#Child-Component-Refs)
 
 ### slot
 
@@ -1634,7 +1634,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   詳しい使い方については、以下のリンク先のガイドを参照してください。
 
-- **参照:** [名前付きSlot](/guide/components.html#名前付きSlot)
+- **参照:** [名前付きSlot](../guide/components.html#名前付きSlot)
 
 ## 組み込みコンポーネント
 
@@ -1656,7 +1656,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   <component :is="$options.components.child"></component>
   ```
 
-- **参照:** [動的コンポーネント](/guide/components.html#動的コンポーネント)
+- **参照:** [動的コンポーネント](../guide/components.html#動的コンポーネント)
 
 ### transition
 
@@ -1719,7 +1719,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   }).$mount('#transition-demo')
   ```
 
-- **参照:** [Transitions: Entering, Leaving, and Lists](/guide/transitions.html)
+- **参照:** [Transitions: Entering, Leaving, and Lists](../guide/transitions.html)
 
 ### transition-group
 
@@ -1747,7 +1747,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   </transition-group>
   ```
 
-- **参照:** [Transitions: Entering, Leaving, and Lists](/guide/transitions.html)
+- **参照:** [Transitions: Entering, Leaving, and Lists](../guide/transitions.html)
 
 ### keep-alive
 
@@ -1781,7 +1781,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   <p class="tip">`<keep-alive>` はキャッシュされるインスタンスを持っていないため、関数型コンポーネントで動作しません。</p>
 
-- **参照:** [動的コンポーネント - keep-alive](/guide/components.html#keep-alive)
+- **参照:** [動的コンポーネント - keep-alive](../guide/components.html#keep-alive)
 
 ### slot
 
@@ -1794,7 +1794,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   詳しい使い方については、以下のリンク先のガイドを参照してください。
 
-- **参照:** [Slot によるコンテンツ配信](/guide/components.html#Content-Distribution-with-Slots)
+- **参照:** [Slot によるコンテンツ配信](../guide/components.html#Content-Distribution-with-Slots)
 
 ## VNodeインターフェイス
 

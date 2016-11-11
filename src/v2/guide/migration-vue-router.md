@@ -463,7 +463,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 
 ### `deactivate` <sup>removed</sup>
 
-代わりに、コンポーネントにて [`beforeDestroy`](/api/#beforeDestroy) を使用するか [`destroyed`](/api/#destroyed) フックを使用するようにしてください。
+代わりに、コンポーネントにて [`beforeDestroy`](../api/#beforeDestroy) を使用するか [`destroyed`](../api/#destroyed) フックを使用するようにしてください。
 
 {% raw %}
 <div class="upgrade-path">

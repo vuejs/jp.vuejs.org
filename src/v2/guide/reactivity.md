@@ -51,7 +51,7 @@ this.$set(this.someObject, 'b', 2)
 this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
 ```
 
-[以前に リストレンダリング のセクションで議論した](/guide/list.html#注意事項) いくつかの配列に関連した注意事項があります。
+[以前に リストレンダリング のセクションで議論した](list.html#注意事項) いくつかの配列に関連した注意事項があります。
 
 ## リアクティブプロパティの宣言
 

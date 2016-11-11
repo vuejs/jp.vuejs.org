@@ -737,7 +737,7 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 
 ### 再利用可能なトランジションへの `Vue.transition` <sup>非推奨</sup>
 
-新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](/guide/transitions.html#Reusable-Transitions) によって実現することができます。
+新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](../guide/transitions.html#Reusable-Transitions) によって実現することができます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -787,7 +787,7 @@ Vue.config.keyCodes.f1 = 112
 
 これまでの問題として、コンポーネントツリーが肥大化した際、その動作を推論することが非常に困難となり、また、コンポーネントのツリー構造に依存する、非常に脆いイベントフローがありました。それは、単純にうまくスケールしませんし、後々に痛みを伴う変更となってはなりません。`$dispatch` および `$broadcast` に関しても、兄弟コンポーネント間の通信を解決するものではありません。
 
-One of the most common uses for these methods is to communicate between a parent and its direct children. In these cases, you can actually [listen to an `$emit` from a child with `v-on`](http://vuejs.org/guide/components.html#Form-Input-Components-using-Custom-Events). This allows you to keep the convenience of events with added explicitness.
+One of the most common uses for these methods is to communicate between a parent and its direct children. In these cases, you can actually [listen to an `$emit` from a child with `v-on`](components.html#Form-Input-Components-using-Custom-Events). This allows you to keep the convenience of events with added explicitness.
 
 However, when communicating between distant descendants/ancestors, `$emit` won't help you. Instead, the simplest possible upgrade would be to use a centralized event hub. This has the added benefit of allowing you to communicate between components no matter where they are in the component tree - even between siblings! Because Vue instances implement an event emitter interface, you can actually use an empty Vue instance for this purpose.
 
@@ -1244,7 +1244,7 @@ computed: {
 
 ### HTML の展開 <sup>非推奨</sup>
 
-新たな [`v-html` ディレクティブ](/api/#v-html) を支持することによって、 HTML の展開(`{% raw %}{{{ foo }}}{% endraw %}`) は非推奨となりました。
+新たな [`v-html` ディレクティブ](../api/#v-html) を支持することによって、 HTML の展開(`{% raw %}{{{ foo }}}{% endraw %}`) は非推奨となりました。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1255,7 +1255,7 @@ computed: {
 
 ### ワンタイムバインディング <sup>非推奨</sup>
 
-新たな [`v-once` ディレクティブ](/api/#v-once) を支持することによって、ワンタイムバインディング  (`{% raw %}{{* foo }}{% endraw %}`) は非推奨となりました。
+新たな [`v-once` ディレクティブ](../api/#v-once) を支持することによって、ワンタイムバインディング  (`{% raw %}{{* foo }}{% endraw %}`) は非推奨となりました。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1284,7 +1284,7 @@ computed: {
 
 ### `vm.$set`
 
-`vm.$set` は非推奨となっており、 [`Vue.set`](/api/#Vue-delete) という名称になっています。
+`vm.$set` は非推奨となっており、 [`Vue.set`](../api/#Vue-delete) という名称になっています。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1295,7 +1295,7 @@ computed: {
 
 ### `vm.$delete`
 
-`vm.$delete` は非推奨となっており、 [`Vue.delete`](/api/#Vue-delete) という名称になっています。
+`vm.$delete` は非推奨となっており、 [`Vue.delete`](../api/#Vue-delete) という名称になっています。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1579,7 +1579,7 @@ new Vue({
 
 ### `Vue.config.delimiters` <sup>非推奨</sup>
 
-[コンポーネントレベルのオプション](/api/#delimiters) として作り直されました。これは、サードパーティのコンポーネントを壊すことなく、アプリケーション内で代替のデリミタを使用することができます。
+[コンポーネントレベルのオプション](../api/#delimiters) として作り直されました。これは、サードパーティのコンポーネントを壊すことなく、アプリケーション内で代替のデリミタを使用することができます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1628,7 +1628,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 
 ### `Vue.partial` <sup>非推奨</sup>
 
-Partials have been deprecated in favor of more explicit data flow between components, using props. Unless you're using a partial in a performance-critical area, the recommendation is to simply use a [normal component](components.html) instead. If you were dynamically binding the `name` of a partial, you can use a [dynamic component](http://vuejs.org/guide/components.html#Dynamic-Components).
+Partials have been deprecated in favor of more explicit data flow between components, using props. Unless you're using a partial in a performance-critical area, the recommendation is to simply use a [normal component](components.html) instead. If you were dynamically binding the `name` of a partial, you can use a [dynamic component](components.html#Dynamic-Components).
 
 If you happen to be using partials in a performance-critical part of your app, then you should upgrade to [functional components](render-function.html#Functional-Components). They must be in a plain JS/JSX file (rather than in a `.vue` file) and are stateless and instanceless, just like partials. This makes rendering extremely fast.
 

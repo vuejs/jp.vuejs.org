@@ -217,7 +217,7 @@ methods: {
 - left
 - right
 
-グローバルな `config.keyCodes` オブジェクト経由でカスタムキー修飾子のエイリアスも定義できます:
+グローバルな `config.keyCodes` オブジェクト経由で[カスタムキー修飾子のエイリアス](../api/#keyCodes)も定義できます:
 
 ``` js
 // v-on:keyup.f1 を可能にします
