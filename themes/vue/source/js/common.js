@@ -1,6 +1,5 @@
 (function () {
 
-  initSearch()
   initMobileMenu()
   if (PAGE_TYPE) {
     initVersionSelect()
@@ -29,25 +28,6 @@
     function createSourceSearchPath (query) {
       return 'https://github.com/search?utf8=%E2%9C%93&q=repo%3Avuejs%2Fvue+extension%3Ajs+' + encodeURIComponent(query) + '+&type=Code'
     }
-  }
-
-  /**
-   * Swiftype search box
-   */
-
-  function initSearch () {
-    [
-      '#search-query-nav',
-      '#search-query-sidebar'
-    ].forEach(function (selector) {
-      if (!document.querySelector(selector)) return
-      docsearch({
-        //appId: 'BH4D9OD16A',
-        apiKey: '0a75952972806d9ad07e387d08e9cc4c',
-        indexName: 'vuejs_jp',
-        inputSelector: selector
-      })
-    })
   }
 
   /**
