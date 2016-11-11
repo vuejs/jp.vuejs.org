@@ -289,7 +289,7 @@ Vue は Angular 2 よりもずっとあなたのやり方には口出しする�
 
 Vue を始めるために、あなたは HTML と ES5 JavaScript（つまり、プレーンな JavaScript）をよく知るだけで良いです。これらの基本的なスキルがあれば、[ガイド](../guide)を読むのに一日もかからずに重要なアプリケーションの構築を始めることができます。
 
-Angular 2 の学習曲線はもっと急です。TypeScript 抜きにしても、その[クイックスタートガイド](https://angular.io/docs/js/latest/quickstart.html)は ES2015 JavaScript や 18 の NPM パッケージへの依存、4 つのファイル、そしてそのすべてを説明するのに 3,000 単語以上が使われるアプリから始まります - ただ Hello World と言わせるだけで。[Vue の Hello World](https://jsfiddle.net/chrisvfritz/50wL7mdz/) はもっと大幅に単純です、というのは控えめな表現でしょう。実際には、私たちはそれのためにガイドのすべてのページを読み込むことはしないので、それはとても些細な事です。
+Angular 2 の学習曲線はもっと急です。TypeScript 抜きにしても、その[クイックスタートガイド](https://angular.io/docs/js/latest/quickstart.html)は ES2015 JavaScript や 18 の NPM パッケージへの依存、4 つのファイル、そしてそのすべてを説明するのに 3,000 単語以上が使われるアプリから始まります - ただ Hello World と言わせるだけで。[Vue の Hello World](https://jsfiddle.net/chrisvfritz/50wL7mdz/) は少しシンプルです、というのは誇張ではないでしょう。たぶんそれのために、私たちはガイド内のページ全体を専用にする必要はありません。
 
 ## Ember
 
