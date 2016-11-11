@@ -47,6 +47,7 @@ $ hexo server
 - [KangYoosam](https://github.com/KangYoosam)
 - [kaorun343](https://github.com/kaorun343)
 - [kuy](https://github.com/kuy)
+- [kyanny](https://github.com/kyanny)
 - [kyuden](https://github.com/kyuden)
 - [massa142](https://github.com/massa142)
 - [maxiloc](https://github.com/maxiloc)
