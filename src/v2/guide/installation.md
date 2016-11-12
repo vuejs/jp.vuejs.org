@@ -31,13 +31,13 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 ### CDN
 
-推奨: [unpkg](https://unpkg.com/vue/dist/vue.min.js) は、npm に公開されるとすぐに最新バージョンが反映されます。  [unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
+推奨: [unpkg](https://unpkg.com/vue/dist/vue.min.js) は、npm に公開されるとすぐに最新バージョンが反映されます。[unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
 
-[jsdelivr](//cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](//cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
+[jsdelivr](https://cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
 
 ## NPM
 
-Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](application.html#Single-File-Components)を作成するための、付随するツールも提供しています。
+Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html)を作成するための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版
@@ -87,7 +87,7 @@ $ npm install
 $ npm run dev
 ```
 
-<p class="tip">The CLI assumes prior knowledge of Node.js and the associated build tools. If you are new to Vue or front-end build tools, we strongly suggest going through <a href="./">the guide</a> without any build tools before using the CLI.</p>
+<p class="tip">CLI は Node.js および関連するビルドツールに関する事前知識を前提としています。Vue またはフロントエンドビルドツールを初めて使用している場合、CLI を使用する前に、ビルドツールなしで[ガイド](./)を参照することを強くお勧めします。</p>
 
 ## 開発版のビルド
 
@@ -104,7 +104,7 @@ npm run build
 
 ``` bash
 # 最新の安定板
-$ bower install vue#next
+$ bower install vue
 ```
 
 ## AMD モジュールローダ
