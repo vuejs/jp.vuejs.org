@@ -4,13 +4,13 @@ type: guide
 order: 6
 ---
 
-データバインディングに対する共通の必要なことは、要素のクラスリストとインラインスタイルを操作していることです。それらは両方属性になるので、私達はそれらを `v-bind` を使用して処理することができます。私達は私達の式で最終的に文字列を計算する必要があります。しかしながら、文字列の連結に私達が関わることは、迷惑なエラーが発生しやすいです。この理由のため、Vue は `v-bind` が `class` と `style` と一緒に使われるとき、特別な拡張を提供します。文字列に加えて、式はオブジェクトまたは配列も評価することができます。
+データバインディングに対する共通の必要なことは、要素のクラスリストとインラインスタイルを操作していることです。それらは両方属性になるので、それらを `v-bind` を使用して処理することができます。私達の式で最終的に文字列を計算する必要があります。しかしながら、文字列の連結に関わることは、迷惑なエラーが発生しやすいです。この理由のため、Vue は `v-bind` が `class` と `style` と一緒に使われるとき、特別な拡張を提供します。文字列に加えて、式はオブジェクトまたは配列も評価することができます。
 
 ## バインディング HTML クラス
 
 ### オブジェクト構文
 
-私達は、`v-bind:class` に動的にクラスを切り替えるオブジェクトを渡すことが出来ます:
+`v-bind:class` に動的にクラスを切り替えるオブジェクトを渡すことができます:
 
 ``` html
 <div v-bind:class="{ active: isActive }"></div>
@@ -18,7 +18,7 @@ order: 6
 
 上記の構文は `active` クラスが存在するかどうかを、データプロパティの `isActive` が[ true と評価される値か](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)によって決まることを意味します。
 
-あなたはオブジェクトに複数の項目を持たせることで、複数のクラスを切り替えることが出来ます。加えて、`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できます。 次のようなテンプレートに:
+オブジェクトに複数の項目を持たせることで、複数のクラスを切り替えることができます。加えて、`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できます。 次のようなテンプレートに:
 
 ``` html
 <div class="static"
@@ -35,7 +35,7 @@ data: {
 }
 ```
 
-これは次のようにレンダリングされます:
+これは次のように描画されます:
 
 ``` html
 <div class="static active"></div>
@@ -43,7 +43,7 @@ data: {
 
 `isActive` と `hasError` が変化するとき、クラスリストはそれに応じて更新されます。例えば、`hasError` が `true` になった場合、クラスリストは `"static active text-danger"` になります。
 
-インラインでオブジェクトをバインドする必要はありません:
+インラインでオブジェクトを束縛する必要はありません:
 
 ``` html
 <div v-bind:class="classObject"></div>
@@ -57,7 +57,7 @@ data: {
 }
 ```
 
-これは同じ結果をレンダリングします。私たちはオブジェクトを返す[算出プロパティ](computed.html)をバインドすることもできます。これは一般的で強力なパターンです:
+これは同じ結果を描画します。オブジェクトを返す[算出プロパティ](computed.html)を束縛することもできます。これは一般的で強力なパターンです:
 
 ``` html
 <div v-bind:class="classObject"></div>
@@ -79,7 +79,7 @@ computed: {
 
 ### 配列構文
 
-私達は、`v-bind:class` にクラスのリストを適用する配列を渡すことができます:
+`v-bind:class` にクラスのリストを適用する配列を渡すことができます:
 
 ``` html
 <div v-bind:class="[activeClass, errorClass]">
@@ -91,7 +91,7 @@ data: {
 }
 ```
 
-このようにレンダリングされます:
+このように描画されます:
 
 ``` html
 <div class="active text-danger"></div>
@@ -111,13 +111,13 @@ data: {
 <div v-bind:class="[{ active: isActive }, errorClass]">
 ```
 
-### With Components
+### コンポーネントにおいて
 
-> This section assumes knowledge of [Vue Components](components.html). Feel free to skip it and come back later.
+> このセクションでは、[Vue のコンポーネント](components.html)の知識を前提としています。それをスキップして後で戻っても構いません。
 
-When you use the `class` attribute on a custom component, those classes will be added to the component's root element. Existing classes on this element will not be overwritten.
+カスタムコンポーネント上で `class` 属性を使用するとき、これらのクラスはコンポーネントの root 要素 に追加されます。この要素上に存在するクラスは、上書きされません。
 
-For example, if you declare this component:
+例えば、このコンポーネントに宣言する場合:
 
 ``` js
 Vue.component('my-component', {
@@ -125,25 +125,25 @@ Vue.component('my-component', {
 })
 ```
 
-Then add some classes when using it:
+それを使用するとき、それから、いくつかのクラスを追加します:
 
 ``` html
 <my-component class="baz boo"></my-component>
 ```
 
-The rendered HTML will be:
+以下の HTML が描画されます:
 
 ``` html
 <p class="foo bar baz boo">Hi</p>
 ```
 
-The same is true for class bindings:
+クラスバインディングに対しても同様です:
 
 ``` html
 <my-component v-bind:class="{ active: isActive }"></my-component>
 ```
 
-When `isActive` is truthy, the rendered HTML will be:
+`isActive` が真となりうるときは、以下の HTML が描画されます:
 
 ``` html
 <p class="foo bar active"></p>
@@ -165,7 +165,7 @@ data: {
 }
 ```
 
-テンプレートがクリーンになれるようにするために、直接 style オブジェクトにバインドするのは、よいアイディアです:
+テンプレートをクリーンにするために、直接 style オブジェクトに束縛するのは、よいアイディアです:
 
 ``` html
 <div v-bind:style="styleObject"></div>
