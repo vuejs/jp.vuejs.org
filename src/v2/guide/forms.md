@@ -10,7 +10,7 @@ form の input 要素 と textarea 要素で双方向 (two-way) データバイ�
 
 <p class="tip">`v-model` は、input または textarea に与えられた初期値を気にしません。input または textarea は常に、信頼できる情報源として Vue インスタンスを扱います。</p>
 
-### Text
+### テキスト
 
 ``` html
 <input v-model="message" placeholder="edit me">
@@ -32,7 +32,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Multiline text
+### 複数行テキスト
 
 ``` html
 <span>Multiline message is:</span>
@@ -63,7 +63,7 @@ new Vue({
 <p class="tip">textarea への挿入 (<code>&lt;textarea&gt;{{text}}&lt;/textarea&gt;</code>) は動きません。代わりに、<code>v-model</code>を使用して下さい。</p>
 {% endraw %}
 
-### Checkbox
+### チェックボックス
 
 単体のチェックボックスは、 boolean 値です:
 
@@ -86,7 +86,7 @@ new Vue({
 </script>
 {% endraw %}
 
-複数のチェックボックスは、同じ配列にバウンドします。:
+複数のチェックボックスは、同じ配列に束縛します。:
 
 ``` html
 <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
@@ -129,7 +129,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Radio
+### ラジオ
 
 
 ``` html
@@ -161,7 +161,7 @@ new Vue({
 </script>
 {% endraw %}
 
-### Select
+### 選択
 
 単体の選択:
 
@@ -192,7 +192,7 @@ new Vue({
 </script>
 {% endraw %}
 
-複数の選択（配列にバウンド）:
+複数の選択（配列に束縛）:
 
 ``` html
 <select v-model="selected" multiple>
@@ -223,7 +223,7 @@ new Vue({
 </script>
 {% endraw %}
 
-動的オプションは `v-for` でレンダリングできます:
+動的オプションは `v-for` で描画できます:
 
 ``` html
 <select v-model="selected">
@@ -287,9 +287,9 @@ radio 、 checkbox 、そして select オプションは、 `v-model` バイン
 </select>
 ```
 
-しかし、時どき、私達は、 Vue インスタンスで動的プロパティに値をバインドしたいかもしれません。私達はそれを達成するために `v-bind` を使用することができます。 ほかに、 `v-bind` の使用は、私達に文字列ではない値に input 値をバインドします。
+しかし、ときどき、Vue インスタンスで動的プロパティに値を束縛したいかもしれません。それを達成するために `v-bind` を使用することができます。 ほかに、`v-bind` の使用は、私達に文字列ではない値に input 値を束縛します。
 
-### Checkbox
+### チェックボックス
 
 ``` html
 <input
@@ -307,7 +307,7 @@ vm.toggle === vm.a
 vm.toggle === vm.b
 ```
 
-### Radio
+### ラジオ
 
 ``` html
 <input type="radio" v-model="pick" v-bind:value="a">
@@ -318,7 +318,7 @@ vm.toggle === vm.b
 vm.pick === vm.a
 ```
 
-### Select Options
+### 選択オプション
 
 ``` html
 <select v-model="selected">
