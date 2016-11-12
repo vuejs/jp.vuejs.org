@@ -6,7 +6,7 @@ order: 16
 
 ## 基本
 
-コアで出荷されたディレクティブのデフォルトセットに加えて (`v-model` と `v-show`)、カスタムディレクティブ (custom directive) を登録することができます。Vue 2.0 では、コードの再利用と抽象化における基本の形はコンポーネントです。しかしながら、通常の要素で低レベル DOM にアクセスしなければならないケースがあるかもしれません。こういった場面では、カスタムディレクティブが役立つでしょう。ひとつの例として、以下のような input 要素へのフォーカスが挙げられます:
+Vue.js 本体で出荷されたディレクティブの標準セットに加えて (`v-model` と `v-show`)、カスタムディレクティブ (custom directive) を登録することができます。Vue 2.0 では、コードの再利用と抽象化における基本の形はコンポーネントです。しかしながら、通常の要素で低レベル DOM にアクセスしなければならないケースがあるかもしれません。こういった場面では、カスタムディレクティブが役立つでしょう。ひとつの例として、以下のような input 要素へのフォーカスが挙げられます:
 
 {% raw %}
 <div id="simplest-directive-example" class="demo">
@@ -74,7 +74,7 @@ directive definition object はいくつかのフック関数(全て任意)を�
 
 ディレクティブフックには以下の引数が渡せます:
 
-- **el**: ディレクティブがひも付く要素。DOMを直接操作するために使用できます。
+- **el**: ディレクティブがひも付く要素。DOM を直接操作するために使用できます。
 - **binding**: 以下のプロパティを含んでいるオブジェクト。
   - **name**: `v-` 接頭辞 (prefix) 無しのディレクティブ名。
   - **value**: ディレクティブに渡される値。例えば `v-my-directive="1 + 1"` では、 value は `2` です.
@@ -82,8 +82,8 @@ directive definition object はいくつかのフック関数(全て任意)を�
   - **expression**: 文字列としてのバインディング式。例えば `v-my-directive="1 + 1"` では、expression は `"1 + 1"` です。
   - **arg**: もしあれば、ディレクティブに渡される引数。例えば `v-my-directive:foo` では、arg は `"foo"` です。
   - **modifiers**: もしあれば、修飾子 (modifier) を含んでいるオブジェクト。例えば `v-my-directive.foo.bar` では、modifiers オブジェクトは `{ foo: true, bar: true }` です。
-- **vnode**: Vue のコンパイラによって生成される仮想 Node。さらに詳しくは [VNode API](../api/#VNode-Interface) を参照してください。
-- **oldVnode**: `update` と `componentUpdated` フックにおいてのみ利用できる以前の仮想 Node。
+- **vnode**: Vue のコンパイラによって生成される仮想ノード。さらに詳しくは [VNode API](../api/#VNodeインターフェイス) を参照してください。
+- **oldVnode**: `update` と `componentUpdated` フックにおいてのみ利用できる以前の仮想ノード。
 
 <p class="tip">`el` を除いて、これらの全てのプロパティは読み込みのみ (read-only) で変更しないものとして扱わなくてはいけません。フックを超えてデータを共有する必要がある場合は, 要素の [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) を通じて行うことが推奨されています。</p>
 
@@ -139,7 +139,7 @@ new Vue({
 </script>
 {% endraw %}
 
-## 関数省略記法
+## 関数による省略記法
 
 多くの場合、`bind` と `update` には同じ振舞いが欲しいでしょうが、その他のフックに関しては気にかけません。例えば:
 
