@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: はじめに
 type: guide
 order: 2
 ---

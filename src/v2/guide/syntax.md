@@ -1,5 +1,5 @@
 ---
-title: Template Syntax
+title: テンプレート構文
 type: guide
 order: 4
 ---

@@ -1,5 +1,5 @@
 ---
-title: Render 関数
+title: 描画関数
 type: guide
 order: 15
 ---

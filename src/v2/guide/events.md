@@ -1,5 +1,5 @@
 ---
-title: Event Handling
+title: イベントハンドリング
 type: guide
 order: 9
 ---

@@ -1,5 +1,5 @@
 ---
-title: Components
+title: コンポーネント
 type: guide
 order: 11
 ---
