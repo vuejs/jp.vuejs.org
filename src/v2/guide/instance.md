@@ -73,9 +73,9 @@ vm.$watch('a', function (newVal, oldVal) {
 ```
 
 
-<p class="tip">インスタンスプロパティまたはコールバック(例: `vm.$watch('a', newval => this.myMethod())`) 上で[アロー関数](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) を使用しないで下さい。アロー関数は親コンテキストにバウンドされるため、`this` は期待どおりに Vue インスタンスにならず、そして `this.myMethod` は undefined になります。</p>
+<p class="tip">インスタンスプロパティまたはコールバック(例: `vm.$watch('a', newval => this.myMethod())`) 上で[アロー関数](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) を使用しないで下さい。アロー関数は親コンテキストに束縛されるため、`this` は期待どおりに Vue インスタンスにならず、そして `this.myMethod` は undefined になります。</p>
 
-インスタンスの全てのプロパティとメソッドのリストは、 [API referene](../api) を参照してください。
+インスタンスの全てのプロパティとメソッドのリストは、 [API リファレンス](../api) を参照してください。
 
 ## インスタンスライフサイクルフック
 
