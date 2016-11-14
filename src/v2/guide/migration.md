@@ -1,5 +1,5 @@
 ---
-title: Vue 1.xからの移行
+title: Vue 1.x からの移行
 type: guide
 order: 25
 ---
@@ -30,17 +30,17 @@ order: 25
 
 - 将来的に廃止される機能を使用している場合、大半は検索と置換でアップグレードできますが、一部は少し時間がかかるかもしれません。もしあなたが、現在のベスト・プラクティスを踏襲していない場合、 Vue 2.0 はあなたにそれを強制します。これは、長期的に見ると良いことですが、大幅(though possibly overdue)なリファクタリングを意味するかもしれません。
 
-> もし Vue 2 へアップグレードする場合、 Vuex および Vue-Router もアップグレードする必要がありますか？
+> もし Vue 2.0 へアップグレードする場合、 Vuex および Vue-Router もアップグレードする必要がありますか？
 
-Vue-Router 2は、 Vue 2のみに互換性があるため、アップグレードする必要があります。同様に、 [migration path for Vue-Router](migration-vue-router.html) に従う必要があります。
-幸いなことに、ほとんどのアプリケーションは、ルーターに関するコードが多くないため、この作業が1時間以上かかることはおそらくありません。
+Vue-Router 2 は、Vue 2.0 のみに互換性があるため、アップグレードする必要があります。同様に、[Vue-Router 向けの移行パス](migration-vue-router.html) に従う必要があります。
+幸いなことに、ほとんどのアプリケーションは、ルーターに関するコードが多くないため、この作業が 1 時間以上かかることはおそらくありません。
 
-Vuex については、バージョン 0.8 は Vue 2 との互換性があるため、アップグレードは強制ではありません。
-Vuex 2に導入された、新たな機能やボイラープレートを使用したい場合でないかぎり、直ちにアップグレードする必要はないでしょう。
+Vuex については、バージョン 0.8 は Vue 2.0 との互換性があるため、アップグレードは強制ではありません。
+Vuex 2 に導入された、新たな機能やボイラープレートを使用したい場合でないかぎり、直ちにアップグレードする必要はないでしょう。
 
 ## テンプレート
 
-### フラグメントインスタンス <sup>非推奨</sup>
+### フラグメントインスタンス <sup>削除</sup>
 
 すべてのコンポーネントは、1つのルート要素を持っている必要があります。フラグメントインスタンスは、もはや許されません。もし、あなたが以下のようなテンプレートを使用している場合:
 
@@ -68,7 +68,7 @@ Vuex 2に導入された、新たな機能やボイラープレートを使用�
 
 ## ライフサイクルフック
 
-### `beforeCompile` <sup>非推奨</sup>
+### `beforeCompile` <sup>削除</sup>
 
 代わりに、 `created` フックを使用します。
 
@@ -79,7 +79,7 @@ Vuex 2に導入された、新たな機能やボイラープレートを使用�
 </div>
 {% endraw %}
 
-### `compiled` <sup>非推奨</sup>
+### `compiled` <sup>置き換え</sup>
 
 代わりに、新たに `mounted` フックを使用します。
 
@@ -90,7 +90,7 @@ Vuex 2に導入された、新たな機能やボイラープレートを使用�
 </div>
 {% endraw %}
 
-### `attached` <sup>非推奨</sup>
+### `attached` <sup>削除</sup>
 
 他のフックで DOM チェックをカスタムして使用します。 例えば、以下の場合:
 
@@ -117,7 +117,7 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### `detached` <sup>非推奨</sup>
+### `detached` <sup>削除</sup>
 
 他のフックで DOM チェックをカスタムして使用します。 例えば、以下の場合:
 
@@ -144,7 +144,7 @@ destroyed: function () {
 </div>
 {% endraw %}
 
-### `init` <sup>非推奨</sup>
+### `init` <sup>置き換え</sup>
 
 代わりに新しい `beforeCreate` フックを使用します。これは本質的には同じものです。
 他のライフサイクルメソッドとの整合性のために改名されました。
@@ -156,7 +156,7 @@ destroyed: function () {
 </div>
 {% endraw %}
 
-### `ready` <sup>非推奨</sup>
+### `ready` <sup>置き換え</sup>
 
 かわりに、新しい mounted フックを使用します。ただし、マウントされたとしてもドキュメントに存在する保証はありません。 そのため、`Vue.nextTick/vm.$nextTick` で包む必要があります。 例えば、以下のようになります:
 
@@ -177,7 +177,7 @@ mounted: function () {
 
 ## `v-for`
 
-### 配列においての `v-for` の引数の順序
+### 配列においての `v-for` の引数の順序 <sup>変更</sup>
 
 `index` を含む場合、引数を `(index, value)` の順序で使用していました。それは今は、 `(value, index)` となり、 JavaScript ネイティブの `forEach` や `map` と一貫性を持つようになりました。
 
@@ -191,7 +191,7 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### オブジェクトにおいての `v-for` の引数の順序
+### オブジェクトにおいての `v-for` の引数の順序 <sup>変更</sup>
 
 `key` を含む場合、引数を `(key, value)` の順序で使用していました。それは今は、 `(value, key)` となり、 lodash などの一般的なオブジェクトのイテレータと一貫性を持つようになりました。
 
@@ -205,7 +205,7 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### `$index` および `$key` <sup>非推奨</sup>
+### `$index` および `$key` <sup>削除</sup>
 
 暗黙的に割り当てられていた `$index` および `$key` 変数が、 `v-for` にて明示的にそれらを定義するために廃止されました。
 これは、 Vue の経験が浅い開発者がネストされたループを扱う場合に、コードを読むことが容易になります。
@@ -217,10 +217,10 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### `track-by` <sup>非推奨</sup>
+### `track-by` <sup>置き換え</sup>
 
 `track-by` は `key` に置き換えられました。
-他の属性と同様に、 `v-bind` または `:` プリフィックスがない場合は文字列として処理されます。
+他の属性と同様に、 `v-bind` または `:` 接頭辞がない場合は文字列として処理されます。
 殆どの場合、式として動的なバインディングを行いたいでしょう。その場合、例えば、以下の代わりに
 
 
@@ -241,9 +241,9 @@ mounted: function () {
 </div>
 {% endraw %}
 
-### `v-for` の値の範囲
+### `v-for` の値の範囲 <sup>変更</sup>
 
-以前は、 `v-for="number in 10"` がもつ `number` は0ではじまり、9で終わっていましたが、1ではじまり、10で終わるようになりました。
+以前は、 `v-for="number in 10"` がもつ `number` は 0 ではじまり、9 で終わっていましたが、1 ではじまり、10 で終わるようになりました。
 
 {% raw %}
 <div class="upgrade-path">
@@ -255,11 +255,11 @@ mounted: function () {
 </div>
 {% endraw %}
 
-## Props
+## プロパティ
 
-### `coerce` Prop オプション <sup>非推奨</sup>
+### `coerce` プロパティオプション <sup>削除</sup>
 
-もしあなたが prop に対して `coerce` オプションを利用したい場合、その代わりとしてコンポーネント内の算出プロパティで算出された値で設定してください。例えば、以下の代わりに:
+もしあなたがプロパティに対して `coerce` オプションを利用したい場合、その代わりとしてコンポーネント内の算出プロパティで算出された値で設定してください。例えば、以下の代わりに:
 
 ``` js
 props: {
@@ -291,8 +291,8 @@ computed: {
 
 これには、いくつかの利点があります:
 
-- prop の元の値にアクセスし続けることができます。
-- 強制された値に別名をつけることによって、よりはっきりと prop で与えられた値とは違うことがわかるようになります。
+- プロパティの元の値にアクセスし続けることができます。
+- 強制された値に別名をつけることによって、よりはっきりとプロパティで与えられた値とは違うことがわかるようになります。
 
 {% raw %}
 <div class="upgrade-path">
@@ -301,14 +301,14 @@ computed: {
 </div>
 {% endraw %}
 
-### `twoWay` Prop オプション <sup>非推奨</sup>
+### `twoWay` プロパティオプション <sup>削除</sup>
 
-Prop は今や、全て単方向となりました。
+プロパティは今や、全て単方向となりました。
 親スコープ内への副作用を生成するために、コンポーネントは暗黙のバインディングの代わりに、明示的にイベントを発生させる必要があります。
 より詳細な情報については、以下を参照します:
 
 - [カスタムイベント](components.html#カスタムイベント)
-- [カスタム入力コンポーネント](components.html#カスタム入力コンポーネント) (コンポーネントイベントを使用)
+- [カスタム入力コンポーネント](components.html#カスタムイベントを使用したフォーム入力コンポーネント) (コンポーネントイベントを使用)
 - [状態管理](state-management.html)
 
 {% raw %}
@@ -318,14 +318,14 @@ Prop は今や、全て単方向となりました。
 </div>
 {% endraw %}
 
-### `v-bind` への `.once` と `.sync` 修飾子 <sup>非推奨</sup>
+### `v-bind` への `.once` と `.sync` 修飾子 <sup>削除</sup>
 
-Prop は今や、全て単方向となりました。
+プロパティは今や、全て単方向となりました。
 親スコープ内への副作用を生成するために、コンポーネントは暗黙のバインディングの代わりに、明示的にイベントを発生させる必要があります。
 より詳細な情報については、以下を参照します:
 
 - [カスタムイベント](components.html#カスタムイベント)
-- [カスタム入力コンポーネント](components.html#カスタム入力コンポーネント) (コンポーネントイベントを使用)
+- [カスタム入力コンポーネント](components.html#カスタムイベントを使用したフォーム入力コンポーネント) (コンポーネントイベントを使用)
 - [状態管理](state-management.html)
 
 {% raw %}
@@ -335,11 +335,11 @@ Prop は今や、全て単方向となりました。
 </div>
 {% endraw %}
 
-### Prop の変更 <sup>非推奨</sup>
+### プロパティの変更 <sup>非推奨</sup>
 
-ローカルでの prop の変更は、今はアンチパターンとみなされます。例えば、 prop を宣言した後に、コンポーネントに対して `this.myProp = 'someOtherValue'` 設定することなどです。新しいレンダリング機構によって、親コンポーネントを再描画するたびに、子コンポーネントのローカルな変更は上書きされます。
+ローカルでのプロパティの変更は、今はアンチパターンとみなされます。例えば、 プロパティを宣言した後に、コンポーネントに対して `this.myProp = 'someOtherValue'` 設定することなどです。新しいレンダリングシステムによって、親コンポーネントを再描画するたびに、子コンポーネントのローカルな変更は上書きされます。
 
-prop の変更のユースケースのほとんどの場合は、以下のオプションのいずれかで置き換えることができます:
+プロパティの変更のユースケースのほとんどの場合は、以下のオプションのいずれかで置き換えることができます:
 
 - デフォルト値を設定したデータプロパティ
 - 算出プロパティ
@@ -347,11 +347,11 @@ prop の変更のユースケースのほとんどの場合は、以下のオプ
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>アップグレード後に end-to-end のテストスイートや、それに準ずるアプリケーションを実行し、 Prop の変更に関するコンソールの警告を探します。</p>
+  <p>アップグレード後に end-to-end のテストスイートや、それに準ずるアプリケーションを実行し、プロパティの変更に関するコンソールの警告を探します。</p>
 </div>
 {% endraw %}
 
-### ルートインスタンス上での Props <sup>非推奨</sup>
+### ルートインスタンス上でのプロパティ<sup>置き換え</sup>
 
 ルートの Vue インスタンス(言い換えれば、 `new Vue({ ... })` によって作成されたインスタンス)においては、 `props` の代わりに `propsData` を使用します。
 
@@ -360,18 +360,18 @@ prop の変更のユースケースのほとんどの場合は、以下のオプ
   <h4>移行ガイド</h4>
   <p>
     もしあれば、 end-to-end のテストを走らせます。
-    失敗したテストについては、ルートインスタンスに渡された prop はもはや動かないということをあなたに警告します。
+    失敗したテストについては、ルートインスタンスに渡されたプロパティはもはや動かないということをあなたに警告します。
   </p>
 </div>
 {% endraw %}
 
 ## 組み込みディレクティブ
 
-### `v-bind` においての 真/偽
+### `v-bind` においての 真/偽 <sup>変更</sup>
 
-`v-bind` を使用する時、偽となりうる値は `null`, `undefined`, そして `false` のみとなります。これは、 `0` や空の文字列は、真となりうる値として描画されることを意味します。例として、 `v-bind:draggable="''"` は `draggable="true"` としてレンダリングされます。
+`v-bind` を使用する時、偽となりうる値は `null`, `undefined`, そして `false` のみとなります。これは、 `0` や空の文字列は、真となりうる値として描画されることを意味します。例として、 `v-bind:draggable="''"` は `draggable="true"` として描画されます。
 
-列挙された属性について、上記の偽となりうる値に加え、文字列の `"false"` は、 `atr="false"` としてレンダリングされます。
+列挙された属性について、上記の偽となりうる値に加え、文字列の `"false"` は、 `atr="false"` として描画されます。
 
 <p class="tip">その他のディレクティブ(たとえば、 `v-if` や `v-show` )は、 JavaScript の一般的な真がまだ適用されます。</p>
 
@@ -385,7 +385,7 @@ prop の変更のユースケースのほとんどの場合は、以下のオプ
 </div>
 {% endraw %}
 
-### コンポーネントにおける `v-on` を用いたネイティブイベントの購読
+### コンポーネントにおける `v-on` を用いたネイティブイベントの購読 <sup>変更</sup>
 
 コンポーネントを使用している時、 `v-on` は、そのコンポーネントに向けて発生したカスタムイベントのみを購読するようになりました。ルート要素上でネイティブの DOM イベントを購読したい時は、 `.native` 修飾子によって実現できます。以下がその例です:
 
@@ -403,7 +403,7 @@ prop の変更のユースケースのほとんどの場合は、以下のオプ
 </div>
 {% endraw %}
 
-### `v-model` の `debounce` <sup>非推奨</sup>
+### `v-model` の `debounce` <sup>削除</sup>
 
 デバウンスは、 Ajax リクエストやその他の高不可な処理の実装頻度を制限するために使用されます。Vue の `v-model` の `debounce` 属性パラメータは、非常に単純な用法を想定し、簡潔に作りましたが、それによって実際の状態の更新ではなく、自身をデバウンスする仕組みとなっています。これは、小さな違いではありますが、アプリケーションの規模が大きくなるに連れて、この手法には限界がきます。
 
@@ -515,7 +515,7 @@ new Vue({
 </div>
 {% endraw %}
 
-### `v-model` への `lazy` や `number` 属性 <sup>非推奨</sup>
+### `v-model` への `lazy` や `number` 属性 <sup>置き換え</sup>
 
 `lazy` と `number` の属性値は修飾子となりました。それは、以下のように置き換えることを意味します:
 
@@ -538,7 +538,7 @@ new Vue({
 </div>
 {% endraw %}
 
-### `v-model` においてのインライン `value` <sup>非推奨</sup>
+### `v-model` においてのインライン `value` <sup>削除</sup>
 
 `v-model` はもはや、 インラインの `value` 属性を尊重しません。予測可能性のため、それは代わりに、常に Vue インスタンスをデータをソースとして扱います。
 これは、以下のような要素を意味します:
@@ -555,7 +555,7 @@ data: {
 }
 ```
 
-"foo" の代わりに "bar" がレンダリングされます。これは、既に内容を持つ場合の `<textarea>` においても同じことが言えます。以下の場合:
+"foo" の代わりに "bar" が描画されます。これは、既に内容を持つ場合の `<textarea>` においても同じことが言えます。以下の場合:
 
 ``` html
 <textarea v-model="text">
@@ -572,7 +572,7 @@ data: {
 </div>
 {% endraw %}
 
-### `v-model` への `v-for` プリミティブ値の反復 <sup>非推奨</sup>
+### `v-model` への `v-for` プリミティブ値の反復 <sup>削除</sup>
 
 このようなケースは、もはや動作しません:
 
@@ -601,12 +601,12 @@ strings.map(function (str) {
   <h4>移行ガイド</h4>
   <p>
     もしあれば、テストスイートを走らせます。
-    失敗したテストについては、ルートインスタンスに渡された prop はもはや動かないということをあなたに警告します。
+    失敗したテストについては、ルートインスタンスに渡されたプロパティはもはや動かないということをあなたに警告します。
   </p>
 </div>
 {% endraw %}
 
-### `v-bind:style` においての オブジェクトおよび `!important` 構文 <sup>非推奨</sup>
+### `v-bind:style` においての オブジェクトおよび `!important` 構文 <sup>削除</sup>
 
 もはや、これは動かなくなります:
 
@@ -627,9 +627,9 @@ strings.map(function (str) {
 </div>
 {% endraw %}
 
-### `v-el` と `v-ref` <sup>非推奨</sup>
+### `v-el` と `v-ref` <sup>置き換え</sup>
 
-わかりやすくするために、 `v-el` と `v-ref` は コンポーネントのインスタンスよりアクセス可能な `$refs` として、 `ref` 属性に統合されました。これは、 `v-el:my-element` は `ref="myElement"` となり、 `v-ref:my-component` もまた `ref="myComponent"` となることを意味します。通常の要素で使用する場合、 `ref` は DOM Element となり、コンポーネント内で使用する場合、 `ref` はコンポーネントのインスタンスになります。
+わかりやすくするために、 `v-el` と `v-ref` は コンポーネントのインスタンスよりアクセス可能な `$refs` として、 `ref` 属性に統合されました。これは、 `v-el:my-element` は `ref="myElement"` となり、 `v-ref:my-component` もまた `ref="myComponent"` となることを意味します。通常の要素で使用する場合、 `ref` は DOM 要素となり、コンポーネント内で使用する場合、 `ref` はコンポーネントのインスタンスになります。
 
 `v-ref` は、もはやディレクティブではありません。しかし、特別な値で、動的な定義が可能となっています。これは、 `v-for` との組み合わせで使用する場合に、特に役にたちます。例えば、以下のような場合:
 
@@ -637,13 +637,13 @@ strings.map(function (str) {
 <p v-for="item in items" v-bind:ref="'item' + item.id"></p>
 ```
 
-以前は、 `v-el` や `v-ref` と組み合わせた `v-for` の各項目に対して、ユニークな名前をつけること方法はなかったため、要素やコンポーネントの配列を生成していたと思います。各項目に同じ参照が与えられることによって、現在でもその動作を実現することが可能です。
+以前は、 `v-el` や `v-ref` と組み合わせた `v-for` の各項目に対して、一意な名前をつけること方法はなかったため、要素やコンポーネントの配列を生成していたと思います。各項目に同じ参照が与えられることによって、現在でもその動作を実現することが可能です。
 
 ``` html
 <p v-for="item in items" ref="items"></p>
 ```
 
-1.x とは異なり、これらの `$refs` は、それら自身のレンダリングに登録および更新をおこなっているため、リアクティブではありません。それらを重複して反応させる際は、変更があるたびに描画します。
+1.x とは異なり、これらの `$refs` は、それら自身の描画に登録および更新をおこなっているため、リアクティブではありません。それらを重複して反応させる際は、変更があるたびに描画します。
 
 一方で、 `$refs` は JavaScript によるプログラム的なアクセスとして主に利用するために設計されているため、テンプレートでそれらに依存することは推奨しません。それは、インスタンス自体に属していない状態を指すこととなるので、 Vue のデータ駆動な ViewModel の設計に違反することとなります。
 
@@ -654,7 +654,7 @@ strings.map(function (str) {
 </div>
 {% endraw %}
 
-### `v-else` への `v-show` <sup>非推奨</sup>
+### `v-else` への `v-show` <sup>削除</sup>
 
 `v-else` はもはや、 `v-show` では動作しません。代わりに、 `v-if` の否定式を使用してください。例えば、このような場合代わりに:
 
@@ -677,7 +677,7 @@ strings.map(function (str) {
 </div>
 {% endraw %}
 
-## カスタムディレクティブ
+## カスタムディレクティブ <sup>単純化</sup>
 
 ディレクティブはその責任範囲を大幅に削減しました: ディレクティブは、今やローレベルの直接な DOM 操作を適用するためにのみ使用されます。ほとんどの場合、メインのコード再利用可能にし、抽象化したコンポーネントを使用するべきです。
 
@@ -699,17 +699,16 @@ strings.map(function (str) {
 </div>
 {% endraw %}
 
-### Directive `.literal` modifier <sup>deprecated</sup>
+### `.literal` ディレクティブの修飾子 <sup>削除</sup>
 
-The `.literal` modifier has been removed, as the same can be easily achieved by just providing a string literal as the value.
+`.literal` 修飾子は、値として文字列リテラルをを提供することによって、同じ事が容易に達成できるため、削除されました。
 
-For example, you can update:
+例えば、以下のように更新できます:
 
 ``` js
 <p v-my-directive.literal="foo bar baz"></p>
 ```
-
-to just:
+これは、以下のようにできます:
 
 ``` html
 <p v-my-directive="'foo bar baz'"></p>
@@ -717,14 +716,14 @@ to just:
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the `.literal` modifier on a directive.</p>
+  <h4>移行ガイド</h4>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、ディレクティブの<code>`.literal`</code> 修飾子を見つけます。</p>
 </div>
 {% endraw %}
 
 ## トランジション
 
-### `transition` 属性 <sup>非推奨</sup>
+### `transition` 属性 <sup>置き換え</sup>
 
 Vue のトランジション機構は大幅な変更を遂げました。`transition` 属性ではなく、 `<transition>` および `<transition-group>` ラッパー要素を使用します。より多くを学ぶためには、新しい[トランジションガイド](transitions.html)を読むことをおすすめします。
 
@@ -735,7 +734,7 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 </div>
 {% endraw %}
 
-### 再利用可能なトランジションへの `Vue.transition` <sup>非推奨</sup>
+### 再利用可能なトランジションへの `Vue.transition` <sup>置き換え</sup>
 
 新しいトランジション機構の [再利用可能なトランジションへのコンポーネントの使用](../guide/transitions.html#Reusable-Transitions) によって実現することができます。
 
@@ -746,7 +745,7 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
 </div>
 {% endraw %}
 
-### `stagger` トランジション属性 <sup>非推奨</sup>
+### `stagger` トランジション属性 <sup></sup>
 
 もしあなたがリストのトランジションを遅延させたい場合、その要素の設定やデータのインデックス(もしくは同様の属性)にアクセスすることによって、そのタイミングを制御することができます。詳しくは、[こちら](transitions.html#Staggering-List-Transitions)にあるサンプルを参照してください。
 
@@ -755,18 +754,18 @@ Vue のトランジション機構は大幅な変更を遂げました。`transi
   <h4>移行ガイド</h4>
   <p>
     あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>transition</code> 属性を見つけます。
-    アップデートの間に、(これはダジャレですが、)あなたは新たな、かつ __スタガリング__ な遷移手法へ置き換えることが可能です。
+    アップデートの間に、(これはダジャレですが、)新たなかつスタガリングな遷移手法へ置き換えることが可能です。
   </p>
 </div>
 {% endraw %}
 
 ## イベント
 
-### `events` option <sup>deprecated</sup>
+### `events` オプション<sup>削除</sup>
 
-The `events` option has been deprecated. Event handlers should now be registered in the `created` hook instead. Check out the [`$dispatch` and `$broadcast` migration guide](#dispatch-and-broadcast-deprecated) for a detailed example.
+`events` オプションは非推奨になりました。代わりに、イベントハンドラは `created` フックで登録すべきです。詳細な example 向けとして[`$dispatch` と `$broadcast` のマイグレーションガイド](#dispatch-および-broadcast-非推奨) を確認してください。
 
-### `Vue.directive('on').keyCodes` <sup>非推奨</sup>
+### `Vue.directive('on').keyCodes` <sup>置き換え</sup>
 
 `keyCodes` を設定するための、より新しくかつ簡潔な方法は、`Vue.config.keyCodes` を介して行うことです。例えば、以下のようなものとなります:
 
@@ -781,15 +780,15 @@ Vue.config.keyCodes.f1 = 112
 </div>
 {% endraw %}
 
-### `$dispatch` および `$broadcast` <sup>非推奨</sup>
+### `$dispatch` および `$broadcast` <sup>置き換え</sup>
 
 `$dispatch` および `$broadcast` については、 [Vuex](https://github.com/vuejs/vuex) などような、よりはっきりとしたコンポーネント間の通信及び状態管理のソリューションを支持するかたちで廃止となりました。
 
 これまでの問題として、コンポーネントツリーが肥大化した際、その動作を推論することが非常に困難となり、また、コンポーネントのツリー構造に依存する、非常に脆いイベントフローがありました。それは、単純にうまくスケールしませんし、後々に痛みを伴う変更となってはなりません。`$dispatch` および `$broadcast` に関しても、兄弟コンポーネント間の通信を解決するものではありません。
 
-One of the most common uses for these methods is to communicate between a parent and its direct children. In these cases, you can actually [listen to an `$emit` from a child with `v-on`](components.html#Form-Input-Components-using-Custom-Events). This allows you to keep the convenience of events with added explicitness.
+これらの方法の最も一般的な用途の 1 つは、親とその直接の子供との間の通信です。このような場合、実際に [`v-on`で子から `$emit` によって購読](components.html#カスタムイベントを使用したフォーム入力コンポーネント)できます。これにより、明示的に追加されたイベントの利便性を保つことができます。
 
-However, when communicating between distant descendants/ancestors, `$emit` won't help you. Instead, the simplest possible upgrade would be to use a centralized event hub. This has the added benefit of allowing you to communicate between components no matter where they are in the component tree - even between siblings! Because Vue instances implement an event emitter interface, you can actually use an empty Vue instance for this purpose.
+しかしながら、遠い子孫/祖先の間で通信するとき、`$emit` はあなたを助けないでしょう。代わりに、最も簡単なアップグレードは、集中型のイベントハブを使用することです。これはコンポーネントツリー内のどこにあっても（兄弟間であっても）、コンポーネント間で通信できるという利点があります。Vue インスタンスは event emitter インタフェースを実装しているため、実際にはこの目的で空の Vue インスタンス (`$mount` で DOM にマウントしない状態のこと)を使用できます。
 
 例えば、このような ToDo アプリケーションがある場合:
 
@@ -869,7 +868,7 @@ methods: {
 
 ## フィルタ
 
-### フィルタ外でのテキスト展開 <sup>非推奨</sup>
+### フィルタ外でのテキスト展開 <sup>削除</sup>
 
 フィルタは、今やテキスト内での補完(`{% raw %}{{ }}{% endraw %}` タグ)のみで使用することができます。今までの `v-model` や `v-on` ディレクティブ上でのフィルタリングは、それ自体の利便性よりも、コードの複雑化につながることのほうが多いことに気がつきました。`v-for` 上でのリストのフィルタリングについては、それをコンポーネント上で再利用可能とするために、算出プロパティとして JavaScript 上のそのロジックを移動させるようにしても良いでしょう。
 
@@ -905,7 +904,7 @@ methods: {
 }
 ```
 
-この方法に対するより詳細な利点は[the example here with `v-model`](#v-model-with-debounce-deprecated)を参照してください。
+この方法に対するより詳細な利点は[ここの `v-model` による example ](#v-model-の-debounce-非推奨)を参照してください。
 
 #### `limitBy` フィルタの置き換え
 
@@ -1005,7 +1004,7 @@ _.orderBy(this.users, ['name', 'last_login'], ['asc', 'desc'])
 </div>
 {% endraw %}
 
-### フィルタ引数の構文
+### フィルタ引数の構文 <sup>変更</sup>
 
 JavaScript の関数を呼び出す際、引数のフィルタがより良い構文となります。例えば、スペースで区切る形には以下のように置き換えることができます。
 
@@ -1029,9 +1028,9 @@ JavaScript の関数を呼び出す際、引数のフィルタがより良い構
 </div>
 {% endraw %}
 
-### 組み込みテキストフィルタ <sup>非推奨</sup>
+### 組み込みテキストフィルタ <sup>削除</sup>
 
-テキストを展開するためのフィルタは、現状はまだ利用できますが、すべてのフィルタが削除されました。それらの代わりに、（例えば日付のフォーマットには [`date-fns`](https://date-fns.org/)　、通貨処理には [`accounting`](http://openexchangerates.github.io/accounting.js/) と言った形で) より専門的なライブラリの使用を推奨します。
+テキストを展開するためのフィルタは、現状はまだ利用できますが、すべてのフィルタが削除されました。それらの代わりに、（例えば日付のフォーマットには [`date-fns`](https://date-fns.org/)、通貨処理には [`accounting`](http://openexchangerates.github.io/accounting.js/) と言った形で) より専門的なライブラリの使用を推奨します。
 
 Vue に組み込まれたテキストフィルタ群は、それぞれ以下のように置き換えることができます。これらの例には、カスタムヘルパーや関数、メソッドの他、算出プロパティなどが含まれます。
 
@@ -1094,53 +1093,56 @@ function pluralizeKnife (count) {
 </div>
 {% endraw %}
 
-### Two-Way Filters <sup>deprecated</sup>
+### Two-Way フィルタ <sup>置き換え</sup>
 
-Some users have enjoyed using two-way filters with `v-model` to create interesting inputs with very little code. While _seemingly_ simple however, two-way filters can also hide a great deal of complexity - and even encourage poor UX by delaying state updates. Instead, components wrapping an input are recommended as a more explicit and feature-rich way of creating custom inputs.
+あるユーザは、`v-model` で two-way フィルタを使い、非常に小さなコードで面白い入力を作成するのを楽しんでいます。しかしながら、_間違いなく_シンプルですが、two-way フィルタは複雑さを大幅に隠すことができ、状態の更新を遅らせることで不十分な UX を奨励します。代わりに、カスタム入力を作成するための、より明示的で機能豊富な方法として、入力をラップするコンポーネントが推奨されます。
 
-As an example, we'll now walk the migration of a two-way currency filter:
+例として、two-way 通貨フィルタの移行について説明します:
 
 <iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/6744xnjk/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-It mostly works well, but the delayed state updates can cause strange behavior. For example, click on the `Result` tab and try entering `9.999` into one of those inputs. When the input loses focus, its value will update to `$10.00`. When looking at the calculated total however, you'll see that `9.999` is what's stored in our data. The version of reality that the user sees is out of sync!
+ほとんどの場合うまく動作しますが、遅延状態の更新によって異常な動作が発生する可能性があります。例えば、`Result` タブをクリックし、それらの入力の 1 つに ` 9.999` を入力してみてください。入力のフォーカスを失うと、その値は `$ 10.00` に更新されます。計算された合計を見ると、`9.999` がデータに格納されていることがわかります。ユーザーに見える現実のバージョンは同期していません！
 
-To start transitioning towards a more robust solution using Vue 2.0, let's first wrap this filter in a new `<currency-input>` component:
+Vue 2.0 を使用してより堅牢なソリューションに移行するには、最初に新しい `<currency-input>` コンポーネントでこのフィルタをラップしましょう:
 
 <iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/943zfbsh/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-This allows us add behavior that a filter alone couldn't encapsulate, such as selecting the content of an input on focus. Now the next step will be to extract the business logic from the filter. Below, we pull everything out into an external [`currencyValidator` object](https://gist.github.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e):
+これにより、フォーカスのある入力の内容を選択するなど、フィルタだけでカプセル化できなかった動作を追加できます。次のステップは、フィルタからビジネスロジックを抽出することです。以下では、すべてを外部[`currencyValidator` オブジェクト](https://gist.github.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e) にします:
 
 <iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/j4xtb20e/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-This increased modularity not only makes it easier to migrate to Vue 2, but also allows currency parsing and formatting to be:
+このようにモジュール性が向上すると、Vue 2.0 への移行が容易になるだけでなく、通貨の解析と書式設定も可能になります:
 
-- unit tested in isolation from your Vue code
-- used by other parts of your application, such as to validate the payload to an API endpoint
+- Vue コードから単体でテストされたユニット
+- API エンドポイントへのペイロードの検証など、アプリケーションの他の部分で使用される
 
-Having this validator extracted out, we've also more comfortably built it up into a more robust solution. The state quirks have been eliminated and it's actually impossible for users to enter anything wrong, similar to what the browser's native number input tries to do.
+このバリデータを抽出することで、より堅牢なソリューションとしてより快適に構築できました。状態の不具合は解消されており、ユーザーが間違った入力を実際に行うことは不可能です。これは、ブラウザのネイティブ番号の入力と同様です。
 
-We're still limited however, by filters and by Vue 1.0 in general, so let's complete the upgrade to Vue 2.0:
+ただし、フィルタと Vue 1.0 の一般的な制限はありますので、Vue 2.0 へのアップグレードを完了しましょう:
 
 <iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-You may notice that:
+次のことに気付くかもしれません:
 
-- Every aspect of our input is more explicit, using lifecycle hooks and DOM events in place of the hidden behavior of two-way filters.
-- We can now use `v-model` directly on our custom inputs, which is not only more consistent with normal inputs, but also means our component is Vuex-friendly.
-- Since we're no longer using filter options that require a value to be returned, our currency work could actually be done asynchronously. That means if we had a lot of apps that had to work with currencies, we could easily refactor this logic into a shared microservice.
+- two-way フィルタの隠された動作の代わりに、ライフサイクルフックと DOM イベントを使用して、入力のあらゆる側面がより明示的になります。
+- 私たちはカスタム入力に `v-model` を直接使うことができます。これは通常の入力と一貫性があるだけでなく、私たちのコンポーネントが Vuex に優しいことを意味します。
+- 返される値を必要とするフィルタオプションを使用しなくなったため、実際には非同期で通貨作業を行うことができます。つまり、通貨を使用しなければならないアプリがたくさんある場合、このロジックを簡単に共有してマイクロサービスにすることができます。
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of filters used in directives like <code>v-model</code>. If you miss any, you should also see <strong>console errors</strong>.</p>
+  <h4>移行ガイド</h4>
+  <p>
+    あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、ディレクティブにおいて <code>v-model</code> のように使用されているフィルタの example を見つけます。
+    もし間違いがある場合、 <strong>consoleのエラー</strong>を参照してください。
+  </p>
 </div>
 {% endraw %}
 
 ## スロット
 
-### 重複したスロット <sup>非推奨</sup>
+### 重複したスロット <sup>削除</sup>
 
-もはや、同じテンプレート内に、同名のスロットを持つことはサポートされません。スロットがレンダリングされるとき、そのスロットは「使い果たされ」、同じレンダリングツリーの中で再度レンダリングすることはできません。もし、複数の場所で同一の内容を描画する必要がある場合は、 prop としてそのコンテンツを渡します。
+もはや、同じテンプレート内に、同名のスロットを持つことはサポートされません。スロットが描画されるとき、そのスロットは「使い果たされ」、同じレンダリングツリーの中で再度描画することはできません。もし、複数の場所で同一の内容を描画する必要がある場合は、プロパティとしてそのコンテンツを渡します。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1149,7 +1151,7 @@ You may notice that:
 </div>
 {% endraw %}
 
-### `slot` 属性のスタイリング <sup>非推奨</sup>
+### `slot` 属性のスタイリング <sup>削除</sup>
 
 名前付きスロットを経由して挿入されたコンテンツは、もはや `slot` 属性を保持しません。
 
@@ -1158,13 +1160,13 @@ You may notice that:
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 名前付き slot を対象としているCSSのセレクタ(例えば、 <code>slot="my-slot-name"]</code> など)を見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 名前付き slot を対象としているCSSのセレクタ(例えば、 <code>[slot="my-slot-name"]</code> など)を見つけます。</p>
 </div>
 {% endraw %}
 
 ## 特別な属性
 
-### `keep-alive` 属性 <sup>非推奨</sup>
+### `keep-alive` 属性 <sup>置き換え</sup>
 
 `keep-alive` はもはや、特別な属性ではなく、 `<transition>` と同様に、コンポーネントのラッパーではありません。例えば以下の場合:
 
@@ -1207,7 +1209,7 @@ You may notice that:
 
 ## 展開
 
-### 属性内での展開 <sup>非推奨</sup>
+### 属性内での展開 <sup>削除</sup>
 
 属性内での展開は、もはや有効ではありません。例えば、以下の場合:
 
@@ -1238,11 +1240,11 @@ computed: {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、属性内で使用されている interpolation を見つけます。</p>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、属性内で使用されている展開を見つけます。</p>
 </div>
 {% endraw %}
 
-### HTML の展開 <sup>非推奨</sup>
+### HTML の展開 <sup>削除</sup>
 
 新たな [`v-html` ディレクティブ](../api/#v-html) を支持することによって、 HTML の展開(`{% raw %}{{{ foo }}}{% endraw %}`) は非推奨となりました。
 
@@ -1253,7 +1255,7 @@ computed: {
 </div>
 {% endraw %}
 
-### ワンタイムバインディング <sup>非推奨</sup>
+### ワンタイムバインディング <sup>置き換え</sup>
 
 新たな [`v-once` ディレクティブ](../api/#v-once) を支持することによって、ワンタイムバインディング  (`{% raw %}{{* foo }}{% endraw %}`) は非推奨となりました。
 
@@ -1266,9 +1268,9 @@ computed: {
 
 ## リアクティブ
 
-### `vm.$watch`
+### `vm.$watch` <sup>変更</sup>
 
-`vm.$watch` を経由して作成されたウォッチャーは、関連するコンポーネントの描画の前に発火します。これは、不要な更新を避けることと、レンダリング前にコンポーネントの状態を更新する機会を与えてくれます。例えば、コンポーネントの prop や、それらの値の変更をウォッチすることができます。
+`vm.$watch` を経由して作成されたウォッチャーは、関連するコンポーネントの描画の前に発火します。これは、不要な更新を避けることと、描画前にコンポーネントの状態を更新する機会を与えてくれます。例えば、コンポーネントのプロパティや、それらの値の変更をウォッチすることができます。
 
 これまで、 `vm.$watch` を利用することでコンポーネントのアップデート後に　DOM に対して何らかの操作をしていた場合、それを `updated` ライフサイクルフックに置き換えることができます。
 
@@ -1282,7 +1284,7 @@ computed: {
 </div>
 {% endraw %}
 
-### `vm.$set`
+### `vm.$set` <sup>変更</sup>
 
 `vm.$set` は非推奨となっており、 [`Vue.set`](../api/#Vue-delete) という名称になっています。
 
@@ -1293,7 +1295,7 @@ computed: {
 </div>
 {% endraw %}
 
-### `vm.$delete`
+### `vm.$delete` <sup>変更</sup>
 
 `vm.$delete` は非推奨となっており、 [`Vue.delete`](../api/#Vue-delete) という名称になっています。
 
@@ -1304,7 +1306,7 @@ computed: {
 </div>
 {% endraw %}
 
-### `Array.prototype.$set`  <sup>非推奨</sup>
+### `Array.prototype.$set`  <sup>削除</sup>
 
 代わりに、 Vue.set を使用します。
 
@@ -1318,7 +1320,7 @@ computed: {
 </div>
 {% endraw %}
 
-### `Array.prototype.$remove` <sup>非推奨</sup>
+### `Array.prototype.$remove` <sup>削除</sup>
 
 例えば、代わりに `Array.prototype.splice` を使用します:
 
@@ -1351,7 +1353,7 @@ methods: {
 </div>
 {% endraw %}
 
-### Vue インスタンス上での `Vue.set` および `Vue.delete` <sup>非推奨</sup>
+### Vue インスタンス上での `Vue.set` および `Vue.delete` <sup>削除</sup>
 
 Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作することはできません。データオプション内で、全てのトップレベルのリアクティブなプロパティが必須となりました。もし、 Vue のインスタンス上で `$data` を削除したい場合、単に null を代入します。
 
@@ -1365,7 +1367,7 @@ Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作�
 </div>
 {% endraw %}
 
-### `vm.$data` の置き換え <sup>非推奨</sup>
+### `vm.$data` の置き換え <sup>削除</sup>
 
 現在では、コンポーネントのインスタンスのルートにある `$data` を書き換えることは禁止されています。これは、リアクティブなシステムの上での極端なケースを防ぎ、(特に型チェックシステム上での)コンポーネントの状態をより予測しやすくします。
 
@@ -1379,7 +1381,7 @@ Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作�
 </div>
 {% endraw %}
 
-### `vm.$get` <sup>非推奨</sup>
+### `vm.$get` <sup>削除</sup>
 
 リアクティブなデータを直接取得します。
 
@@ -1395,7 +1397,7 @@ Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作�
 
 ## DOM を中心としたインスタンスメソッド
 
-### `vm.$appendTo` <sup>非推奨</sup>
+### `vm.$appendTo` <sup>削除</sup>
 
 ネイティブの DOM API を使用します:
 
@@ -1413,7 +1415,7 @@ myElement.appendChild(vm.$el)
 </div>
 {% endraw %}
 
-### `vm.$before` <sup>非推奨</sup>
+### `vm.$before` <sup>削除</sup>
 
 ネイティブの DOM API を使用します:
 
@@ -1431,7 +1433,7 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 </div>
 {% endraw %}
 
-### `vm.$after` <sup>非推奨</sup>
+### `vm.$after` <sup>削除</sup>
 
 ネイティブの DOM API を使用します:
 
@@ -1455,7 +1457,7 @@ myElement.parentNode.appendChild(vm.$el)
 </div>
 {% endraw %}
 
-### `vm.$remove` <sup>非推奨</sup>
+### `vm.$remove` <sup>削除</sup>
 
 ネイティブの DOM API を使用します:
 
@@ -1475,7 +1477,7 @@ vm.$el.remove()
 
 ## メタインスタンスメソッド
 
-### `vm.$eval` <sup>非推奨</sup>
+### `vm.$eval` <sup>削除</sup>
 
 この機能が実際に使用されることはありません。もしあなたがこの機能を利用する機会があり、それを回避する方法が思いつかない場合は、[フォーラム](http://forum.vuejs.org/)にてアイデアを募ってください。
 
@@ -1489,7 +1491,7 @@ vm.$el.remove()
 </div>
 {% endraw %}
 
-### `vm.$interpolate` <sup>非推奨</sup>
+### `vm.$interpolate` <sup>削除</sup>
 
 この機能が実際に使用されることはありません。
 もしあなたがこの機能を利用する機会があり、それを回避する方法が思いつかない場合は、[フォーラム](http://forum.vuejs.org/)にてアイデアを募ってください。
@@ -1504,7 +1506,7 @@ vm.$el.remove()
 </div>
 {% endraw %}
 
-### `vm.$log` <sup>非推奨</sup>
+### `vm.$log` <sup>削除</sup>
 
 最適なデバッグのために、 [Vue Devtools](https://github.com/vuejs/vue-devtools) を利用してください。
 
@@ -1520,7 +1522,7 @@ vm.$el.remove()
 
 ## インスタンス DOM オプション
 
-### `replace: false` <sup>非推奨</sup>
+### `replace: false` <sup>削除</sup>
 
 コンポーネントは常に要素に紐付いて置き換えられます。 `replace:false` の挙動を再現するには、コンポーネントのルートを置き換えたい要素で囲みます。例えば、このような場合は:
 
@@ -1555,7 +1557,7 @@ new Vue({
 
 ## グローバル設定
 
-### `Vue.config.debug` <sup>非推奨</sup>
+### `Vue.config.debug` <sup>削除</sup>
 
 警告に対して、必要に応じてデフォルトでスタックトレースが付随しています。
 
@@ -1566,9 +1568,9 @@ new Vue({
 </div>
 {% endraw %}
 
-### `Vue.config.async` <sup>非推奨</sup>
+### `Vue.config.async` <sup>削除</sup>
 
-非同期処理は現在では、レンダリングパフォーマンスのために必要とされます。
+非同期処理は現在では、描画性能のために必要とされます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -1577,7 +1579,7 @@ new Vue({
 </div>
 {% endraw %}
 
-### `Vue.config.delimiters` <sup>非推奨</sup>
+### `Vue.config.delimiters` <sup>置き換え</sup>
 
 [コンポーネントレベルのオプション](../api/#delimiters) として作り直されました。これは、サードパーティのコンポーネントを壊すことなく、アプリケーション内で代替のデリミタを使用することができます。
 
@@ -1588,7 +1590,7 @@ new Vue({
 </div>
 {% endraw %}
 
-### `Vue.config.unsafeDelimiters` <sup>非推奨</sup>
+### `Vue.config.unsafeDelimiters` <sup>削除</sup>
 
 [`v-html` を支持すること](#HTML-Interpolation-deprecated) によって、 HTML の展開は非推奨となりました。
 
@@ -1604,7 +1606,7 @@ new Vue({
 
 ## グローバル API
 
-### `Vue.extend` への `el` <sup>非推奨</sup>
+### `Vue.extend` への `el` <sup>削除</sup>
 
 el オプションは、もはや `Vue.extend` で使用することはできません。これは、インスタンスの作成オプションとしてのみ有効です。
 
@@ -1615,7 +1617,7 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 </div>
 {% endraw %}
 
-### `Vue.elementDirective` <sup>非推奨</sup>
+### `Vue.elementDirective` <sup>削除</sup>
 
 代わりに components を使用します。
 
@@ -1626,13 +1628,13 @@ el オプションは、もはや `Vue.extend` で使用することはできま
 </div>
 {% endraw %}
 
-### `Vue.partial` <sup>非推奨</sup>
+### `Vue.partial` <sup>削除</sup>
 
-Partials have been deprecated in favor of more explicit data flow between components, using props. Unless you're using a partial in a performance-critical area, the recommendation is to simply use a [normal component](components.html) instead. If you were dynamically binding the `name` of a partial, you can use a [dynamic component](components.html#Dynamic-Components).
+パーシャルは、プロパティを使用して、コンポーネント間のより明示的なデータフローを優先するため非推奨になりました。性能が重要な領域で部分的なものを使用している場合を除いて、単に[通常のコンポーネント](components.html)を代わりに使用することを推奨します。部分的に `name` を動的に束縛する場合は、[動的コンポーネント](components.html#動的コンポーネント)を使用できます。
 
-If you happen to be using partials in a performance-critical part of your app, then you should upgrade to [functional components](render-function.html#Functional-Components). They must be in a plain JS/JSX file (rather than in a `.vue` file) and are stateless and instanceless, just like partials. This makes rendering extremely fast.
+アプリケーションの性能に重大な影響を及ぼす部分でパーシャルを使用する場合は、[関数型コンポーネント](render-function.html#関数型コンポーネント)にアップグレードする必要があります。それらはプレーンな JS / JSX ファイル (`.vue` ファイルではなく)になければならず、パーシャルと同様に、ステートレスでインスタンスレスです。これによりレンダリングが非常に高速になります。
 
-A benefit of functional components over partials is that they can be much more dynamic, because they grant you access to the full power of JavaScript. There is a cost to this power however. If you've never used a component framework with render functions before, they may take a bit longer to learn.
+パーシャル的なに関数型コンポーネントのメリットは、JavaScript のフルパワーにアクセスできるようになるため、より動的なものにできることです。しかし、この力にはコストがかかります。以前にレンダリング関数を使ったコンポーネントフレームワークを使ったことがない人は、学習に少し時間がかかるかもしれません。
 
 {% raw %}
 <div class="upgrade-path">
