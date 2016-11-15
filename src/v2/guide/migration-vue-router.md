@@ -1,16 +1,16 @@
 ---
-title: Vue ルーター 0.7.x からの移行
+title: Vue Router 0.7.x からの移行
 type: guide
 order: 26
 ---
 
-> Vue ルーター 2 は Vue 2 に対応する唯一のルーターなので、 Vue を更新する場合には Vue ルーター も同様に更新する必要があります。2のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Vue ルーター を用いた包括的なドキュメントは [Vue ルーター ドキュメント](http://router.vuejs.org/ja/)を確認してください。
+> Vue Router 2.0 は Vue 2.0 に対応する唯一のルータなので、 Vue を更新する場合には Vue Router も同様に更新する必要があります。2.0 のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Router を用いた包括的なドキュメントは [Vue Router キュメント](http://router.vuejs.org/ja/)を確認してください。
 
-## Router Initialization
+## ルータの初期化
 
-### `router.start` <sup>replaced</sup>
+### `router.start` <sup>置き換え</sup>
 
-There is no longer a special API to initialize an app with Vue Router. That means instead of:
+Vue Router でアプリケーションを初期化するための特別な API はなくなりました。以下の代わりに:
 
 ``` js
 router.start({
@@ -18,7 +18,7 @@ router.start({
 }, '#app')
 ```
 
-You'll just pass a router property to a Vue instance:
+Vue インスタンスに router プロパティを渡すだけです:
 
 ``` js
 new Vue({
@@ -27,8 +27,7 @@ new Vue({
   template: '<router-view></router-view>'
 })
 ```
-
-Or, if you're using the runtime-only build of Vue:
+または、Vue のランタイムのみのビルドを使用している場合は:
 
 ``` js
 new Vue({
@@ -40,14 +39,14 @@ new Vue({
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>router.start</code> being called.</p>
+  <h4>移行ガイド</h4>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.start</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
 ## ルートの定義
 
-### `router.map` <sup>replaced</sup>
+### `router.map` <sup>置き換え</sup>
 
 ルートは [`routes` オプション](http://router.vuejs.org/ja/essentials/getting-started.html#javascript) に配列として定義されるようになりました。例えばこのようなルートの記述は:
 
@@ -78,13 +77,13 @@ var router = new VueRouter({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.map</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.map</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `router.on` <sup>removed</sup>
+### `router.on` <sup>削除</sup>
 
-アプリケーションの開始時に、機械的にルートを生成する必要がある場合、ルートの配列に対し動的に定義を追加することが出来ます。例えば次の様な形です:
+アプリケーションの開始時に、機械的にルートを生成する必要がある場合、ルートの配列に対し動的に定義を追加することが出来ます。例えば次のような形です:
 
 ``` js
 // 通常のルート定義
@@ -110,7 +109,7 @@ var router = new Router({
 })
 ```
 
-ルーターが初期化された後に新しいルートを追加する必要がある場合、加筆された新しいルート機構で、既存のものを置き換えることができます。
+ルータが初期化された後に新しいルートを追加する必要がある場合、加筆された新しいルート機構で、既存のものを置き換えることができます。
 
 ``` js
 router.match = createMatcher(
@@ -124,22 +123,22 @@ router.match = createMatcher(
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.on</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.on</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `subRoutes` <sup>renamed</sup>
+### `subRoutes` <sup>名前変更</sup>
 
-Vue と他のルーターライブラリとの一貫性のために、[`children`に名前が変更されました。](http://router.vuejs.org/ja/essentials/nested-routes.html) 
+Vue と他のルータライブラリとの一貫性のために、[`children`に名前が変更されました。](http://router.vuejs.org/ja/essentials/nested-routes.html) 
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>subRoutes</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>subRoutes</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `router.redirect` <sup>replaced</sup>
+### `router.redirect` <sup>置き換え</sup>
 
 [ルート定義におけるオプション](http://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
 
@@ -161,11 +160,11 @@ router.redirect({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し<code>router.redirect</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し<code>router.redirect</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `router.alias` <sup>replaced</sup>
+### `router.alias` <sup>置き換え</sup>
 
 [ルート定義におけるオプション](http://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
 
@@ -194,13 +193,13 @@ alias: ['/manage', '/administer', '/administrate']
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.alias</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.alias</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### Arbitrary Route Properties <sup>replaced</sup>
+### 任意のルートプロパティ <sup>置き換え</sup>
 
-Arbitrary route properties must now be scoped under the new meta property, to avoid conflicts with future features. So for example, if you had defined:
+将来の機能との競合を避けるために、任意のルートプロパティのスコープを新しいメタプロパティの下に設定する必要があります。例えば、次のように定義したとします:
 
 ``` js
 '/admin': {
@@ -209,7 +208,7 @@ Arbitrary route properties must now be scoped under the new meta property, to av
 }
 ```
 
-Then you would now update it to:
+次に、それを次のように更新します:
 
 ``` js
 {
@@ -221,7 +220,7 @@ Then you would now update it to:
 }
 ```
 
-Then when later accessing this property on a route, you will still go through meta. For example:
+その後、ルート上でこのプロパティにアクセスすると、メタを通過します。例えば:
 
 ``` js
 if (route.meta.requiresAuth) {
@@ -231,12 +230,12 @@ if (route.meta.requiresAuth) {
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of arbitrary route properties not scoped under meta.</p>
+  <h4>移行ガイド</h4>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ガイド</a> を実行しメタの下でスコープされない任意のルートプロパティを利用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-## ルートのマッチング <sup>changed</sup>
+## ルートのマッチング <sup>変更</sup>
 
 より柔軟性を高めるために、ルートのマッチングの内部処理には、 [path-to-regexp](https://github.com/pillarjs/path-to-regexp) が利用されるようになりました。
 
@@ -247,15 +246,15 @@ if (route.meta.requiresAuth) {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ガイド</a> を実行し廃止された文法を利用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ガイド</a> を実行し廃止された文法を利用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
 ## リンク
 
-### `v-link` <sup>replaced</sup>
+### `v-link` <sup>置き換え</sup>
 
-Vue 2 におけるコンポーネントの機能の一環として、`v-link` ディレクティブは新しく [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) に置き換えられました。以下の様な形で記述されたリンクは:
+Vue 2.0 におけるコンポーネントの機能の一環として、`v-link` ディレクティブは新しく [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) に置き換えられました。以下のような形で記述されたリンクは:
 
 ``` html
 <a v-link="'/about'">About</a>
@@ -272,11 +271,11 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>v-link</code> ディレクティブが使用されている箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>v-link</code> ディレクティブが使用されている箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `v-link-active` <sup>replaced</sup>
+### `v-link-active` <sup>置き換え</sup>
 
 [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) でタグの指定が可能なため、 `v-link-active` ディレクティブは廃止されました。よって、例えば次のような例は:
 
@@ -299,37 +298,37 @@ Vue 2 におけるコンポーネントの機能の一環として、`v-link` �
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コード上で <a href="https://github.com/vuejs/vue-migration-helper">移行ガイド</a> を実行し <code>v-link-active</code> ディレクティブが使用されている箇所を検出して下さい。</p>
+  <p>コード上で <a href="https://github.com/vuejs/vue-migration-helper">移行ガイド</a> を実行し <code>v-link-active</code> ディレクティブが使用されている箇所を検出してください。</p>
 </div>
 {% endraw %}
 
 ## 動的なナビゲーション
 
-### `router.go` <sup>changed</sup>
+### `router.go` <sup>変更</sup>
 
-For consistency with the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API), `router.go` is now only used for [back/forward navigation](https://router.vuejs.org/en/essentials/navigation.html#routergon), while [`router.push`](http://router.vuejs.org/en/essentials/navigation.html#routerpushlocation) is used to navigate to a specific page.
+[HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) と一貫性を保つために、`router.go` は[戻る/進むナビゲーション](https://router.vuejs.org/ja/essentials/navigation.html#routergon)のために使用されます。[`router.push`](http://router.vuejs.org/en/essentials/navigation.html#routerpushlocation) は特定のページに移動するために使用されます。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.push</code> の代わりに使用される <code>router.go</code> がコールされる箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.push</code> の代わりに使用される <code>router.go</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-## Router Options: Modes
+## ルータオプション: モード
 
-### `hashbang: false` <sup>removed</sup>
+### `hashbang: false` <sup>削除</sup>
 
 Google にURL をクロールさせるために Hashbangs を用いる必要はもはやなくなりました。よってハッシュの方式としてデフォルトではなくなり、オプションとして利用できなくなりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper"> 移行ヘルパー </a> を実行し <code>hashbang: false</code> オプションが利用されている箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper"> 移行ヘルパー </a> を実行し <code>hashbang: false</code> オプションが利用されている箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `history: true` <sup>replaced</sup>
+### `history: true` <sup>置き換え</sup>
 
 ルーティングの動作に関するオプションは [`mode` オプション](http://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
 
@@ -350,11 +349,11 @@ var router = new VueRouter({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>history: true</code> オプションが使用されている箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>history: true</code> オプションが使用されている箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `abstract: true` <sup>replaced</sup>
+### `abstract: true` <sup>置き換え</sup>
 
 ルーティングの動作に関するオプションは [`mode` オプション](http://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
 
@@ -375,15 +374,15 @@ var router = new VueRouter({
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>abstract: true</code> オプションが使用されている箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>abstract: true</code> オプションが使用されている箇所を検出してください。</p>
 </div>
 {% endraw %}
 
 ## その他のルートオプション
 
-### `saveScrollPosition` <sup>replaced</sup>
+### `saveScrollPosition` <sup>置き換え</sup>
 
-関数を受け付ける [`scrollBehavior` オプション](http://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの可能性がひらかれましたが、単に以前の挙動を再現したい場合もあるでしょう。これまで、次の様に記述していた所は:
+関数を受け付ける [`scrollBehavior` オプション](http://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの可能性がひらかれましたが、単に以前の挙動を再現したい場合もあるでしょう。これまで、次のように記述していた所は:
 
 ``` js
 saveScrollPosition: true
@@ -400,92 +399,92 @@ scrollBehavior: function (to, from, savedPosition) {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>saveScrollPosition: true</code> オプションを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>saveScrollPosition: true</code> オプションを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `root` <sup>renamed</sup>
+### `root` <sup>名前変更</sup>
 
 [HTML の `<base>` 要素](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base)と合わせるため `base` に名称変更されました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>root</code> オプションを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>root</code> オプションを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `transitionOnLoad` <sup>removed</sup>
+### `transitionOnLoad` <sup>削除</sup>
 
 Vue のトランジション機能に、[`appear` トランジションの制御](transitions.html#Transitions-on-Initial-Render) が実装されたため、このオプションはもはや不要になりました。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>transitionOnLoad: true</code> オプションを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>transitionOnLoad: true</code> オプションを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `suppressTransitionError` <sup>removed</sup>
+### `suppressTransitionError` <sup>削除</sup>
 
-フックをよりシンプルにするために削除されました。どうしてもトランジションのエラーを抑制しなければならない場合 [`try`...`catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) 構文を代わりに使用して下さい。
+フックをよりシンプルにするために削除されました。どうしてもトランジションのエラーを抑制しなければならない場合 [`try`...`catch`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch) 構文を代わりに使用してください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>suppressTransitionError: true</code> オプションを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>suppressTransitionError: true</code> オプションを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-## Route Hooks
+## ルートフック
 
-### `activate` <sup>replaced</sup>
+### `activate` <sup>置き換え</sup>
 
 代わりにコンポーネントにて [`beforeRouteEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>beforeRouteEnter</code> フックを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>beforeRouteEnter</code> フックを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `canActivate` <sup>replaced</sup>
+### `canActivate` <sup>置き換え</sup>
 
-代わりに、ルート内で [`beforeEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#perroute-guard) を使用して下さい。
+代わりに、ルート内で [`beforeEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#perroute-guard) を使用してください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>canActivate</code> フックを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>canActivate</code> フックを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `deactivate` <sup>removed</sup>
+### `deactivate` <sup>削除</sup>
 
 代わりに、コンポーネントにて [`beforeDestroy`](../api/#beforeDestroy) を使用するか [`destroyed`](../api/#destroyed) フックを使用するようにしてください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>deactivate</code> フックを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>deactivate</code> フックを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `canDeactivate` <sup>removed</sup>
+### `canDeactivate` <sup>削除</sup>
 
-代わりに、コンポーネント内で [`beforeRouteLeave`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用して下さい。
+代わりに、コンポーネント内で [`beforeRouteLeave`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
 
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>canDeactivate</code> フックを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>canDeactivate</code> フックを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `canReuse: false` <sup>removed</sup>
+### `canReuse: false` <sup>削除</sup>
 
-新しい Vue ルーターではこれを使用する場面は無いでしょう。
+新しい Vue Router ではこれを使用する場面は無いでしょう。
 
 {% raw %}
 <div class="upgrade-path">
@@ -494,7 +493,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 </div>
 {% endraw %}
 
-### `data` <sup>replaced</sup>
+### `data` <sup>置き換え</sup>
 
 `$route` プロパティは常にリアクティブなため、ルートの変更は次のようにウォッチ機能を利用する事で検出できます:
 
@@ -512,14 +511,13 @@ methods: {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>data</code> フックを使用している箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>data</code> フックを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-### `$loadingRouteData` <sup>removed</sup>
+### `$loadingRouteData` <sup>削除</sup>
 
-Define your own property (e.g. `isLoading`), then update the loading state in a watcher on the route. For example, if fetching data with [axios](https://github.com/mzabriskie/axios):
-独自のプロパティを定義し (例えば `isLoading`), ルートのウォッチャーでローティングの状態を更新して下さい。例えば [axios](https://github.com/mzabriskie/axios)のデータを取り込む場合、次のような例になります:
+独自のプロパティを定義し (例えば `isLoading`), ルートのウォッチャーでローティングの状態を更新してください。例えば [axios](https://github.com/mzabriskie/axios)のデータを取り込む場合、次のような例になります:
 
 ``` js
 data: function () {
@@ -555,6 +553,6 @@ methods: {
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>$loadingRouteData</code> メタプロパティが使用されている箇所を検出して下さい。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>$loadingRouteData</code> メタプロパティが使用されている箇所を検出してください。</p>
 </div>
 {% endraw %}
