@@ -1490,17 +1490,17 @@ type: api
   - コンポーネント
 
 - **修飾子:**
-  - [`.lazy`](/guide/forms.html#lazy) - `input` の代わりに `change` イベントを購読します
-  - [`.number`](/guide/forms.html#number) - input の文字列を数値にキャストします
-  - [`.trim`](/guild/forms.html#trim) - input をトリムします
+  - [`.lazy`](../guide/forms.html#lazy) - `input` の代わりに `change` イベントを購読します
+  - [`.number`](../guide/forms.html#number) - input の文字列を数値にキャストします
+  - [`.trim`](../guide/forms.html#trim) - input をトリムします
 
 - **使用方法:**
 
   form input 要素またはコンポーネント上に双方向バインディングを作成します。詳細は下にリンクしたガイドセクションを参照してください。
 
 - **See also:**
-  - [フォーム入力バインディング](/guide/forms.html)
-  - [コンポーネント - カスタムイベントを使用してフォーム入力コンポーネント](/guide/components.html#カスタムイベントを使用したフォーム入力コンポーネント)
+  - [フォーム入力バインディング](../guide/forms.html)
+  - [コンポーネント - カスタムイベントを使用してフォーム入力コンポーネント](../guide/components.html#カスタムイベントを使用したフォーム入力コンポーネント)
 
 ### v-pre
 
