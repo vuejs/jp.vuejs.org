@@ -75,7 +75,7 @@ type: api
   }
   ```
 
-  コンポーネントのレンダリングとウォッチャいおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
+  コンポーネントの描画とウォッチャいおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
 
   > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
 
@@ -108,7 +108,7 @@ type: api
 
   Vue コンストラクタベースの "サブクラス" を作成します。引数はコンポーネントオプションを含むオブジェクトにする必要があります。
 
-  ここでの注意すべき特別なケースは、data` プションは、これらは `Vue.extend()` で使用されるとき、関数にしなければなりません。
+  ここでの注意すべき特別なケースは、`data` オプションは、これらは `Vue.extend()` で使用されるとき、関数にしなければなりません。
 
   ``` html
   <div id="mount-point"></div>
@@ -296,7 +296,7 @@ type: api
 
 - **使用方法:**
 
-  テンプレート文字列を render 関数にコンパイルします。**スタンダアロンビルドだけ利用できます。**
+  テンプレート文字列を描画関数にコンパイルします。**スタンダアロンビルドだけ利用できます。**
 
   ``` js
   var res = Vue.compile('<div><span>{{ msg }}</span></div>')
@@ -310,7 +310,7 @@ type: api
   })
   ```
 
-- **参照:** [Render 関数](../guide/render-function.html)
+- **参照:** [描画関数](../guide/render-function.html)
 
 ## オプション / データ
 
@@ -354,7 +354,7 @@ type: api
   })
   ```
 
-  <p class="tip">Note that __you should not use an arrow function with the `data` property__ (e.g. `data: () => { return { a: this.myProp }}`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.myProp` will be undefined.</p>
+  <p class="tip">__`data` プロパティ(例 `data: () => { return { a: this.myProp }}`) でアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.myProp` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
 
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
@@ -392,7 +392,7 @@ type: api
   })
   ```
 
-- **参照:** [Props](../guide/components.html#Props)
+- **参照:** [プロパティ](../guide/components.html#プロパティ)
 
 ### propsData
 
@@ -402,7 +402,7 @@ type: api
 
 - **詳細:**
 
-  インスタン作成中に props に値を渡します。これは、主に単体テストを簡単にするのを目的としています。
+  インスタンス作成中にプロパティに値を渡します。これは、主に単体テストを簡単にするのを目的としています。
 
 - **例:**
 
@@ -425,11 +425,11 @@ type: api
 
 - **詳細:**
 
-  Vue インスタンスに組み込まれる算出プロパティ (Computed property) です。すべての getter や setter は、自動的に Vue インスタンスにバインドされた `this` コンテキストを持ちます。
+  Vue インスタンスに組み込まれる算出プロパティ (Computed property) です。すべての getter や setter は、自動的に Vue インスタンスに束縛された `this` コンテキストを持ちます。
 
   算出プロパティはキャッシュされ、そしてリアクティブ依存が変更されたときにだけ再算出します。
 
-  <p class="tip">Note that __you should not use an arrow function to define a computed property__ (e.g. `aDouble: () => this.a * 2`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.a` will be undefined.</p>
+  <p class="tip">__算出プロパティ(例 `aDouble: () => this.a * 2`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.a` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
 
 - **例:**
 
@@ -467,9 +467,9 @@ type: api
 
 - **詳細:**
 
-  Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブの式で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的にバインドされた `this` コンテキストを持ちます。
+  Vue インスタンスに組み込まれるメソッドです。VM インスタンスでは、これらのメソッドに直接アクセスでき、ディレクティブの式で使用することもできます。すべてのメソッドは、Vue インスタンスに自動的に束縛された `this` コンテキストを持ちます。
 
-  <p class="tip">Note that __you should not use an arrow function to define a method__ (e.g. `plus: () => this.a++`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.a` will be undefined.</p>
+  <p class="tip">__メソッド(例 `plus: () => this.a++`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.a` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
 
 - **例:**
 
@@ -522,7 +522,7 @@ type: api
   vm.a = 2 // -> new: 2, old: 1
   ```
 
-  <p class="tip">Note that __you should not use an arrow function to define a watcher__ (e.g. `searchQuery: newValue => this.updateAutocomplete(newValue)`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.updateAutocomplete` will be undefined.</p>
+  <p class="tip">__ウォッチャ(例 `searchQuery: newValue => this.updateAutocomplete(newValue)`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.updateAutocomplete` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
 
 - **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
 
@@ -560,7 +560,7 @@ type: api
 
 - **参照:**
   - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
-  - [コンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
+  - [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
 
 ### render
 
@@ -573,11 +573,11 @@ type: api
   コンポーネントが関数型コンポーネントならば、render 関数は、関数型コンポーネントが状態を持たないため、コンテキストなデータにアクセスするために提供する `context` を追加の引数として受け取ります。
 
 - **参照:**
-  - [Render 関数](../guide/render-function)
+  - [描画関数](../guide/render-function.html)
 
 ## オプション / ライフサイクルフック
 
-All lifecycle hooks automatically have their `this` context bound to the instance, so that you can access data, computed properties, and methods. This means __you should not use an arrow function to define a lifecycle method__ (e.g. `created: () => this.fetchTodos()`). The reason is arrow functions bind the parent context, so `this` will not be the Vue instance as you expect and `this.fetchTodos` will be undefined.
+全てのライフサイクルフックは、データ、算出プロパティ、およびメソッドにアクセスできるようにするために、自動的にインスタンスに束縛する `this` コンテキストを持っています。これは、__ライフサイクルメソッド(例 `created: () => this.fetchTodos()`) を定義するためにアロー関数を使用すべきではないこと__を意味します。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.fetchTodos` が undefined になるため、親コンテキストに束縛できないことが理由です。
 
 ### beforeCreate
 
@@ -629,9 +629,9 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **詳細:**
 
-  データが変更されるとき、仮想DOM は再レンダリングそしてパッチを適用する前に呼ばれます。
+  データが変更されるとき、仮想DOM は再描画そしてパッチを適用する前に呼ばれます。
 
-  このフックでさらに状態を変更することができ、それらは追加で再レンダリングのトリガーになりません。
+  このフックでさらに状態を変更することができ、それらは追加で再描画のトリガーになりません。
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
@@ -643,7 +643,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **詳細:**
 
-  データが変更後、仮想 DOM が再レンダリングそしてパッチを適用によって呼ばれます。
+  データが変更後、仮想 DOM が再描画そしてパッチを適用によって呼ばれます。
 
   このフックが呼び出されるとき、コンポーネントの DOM は更新した状態になり、このフックで DOM に依存する操作を行うことができます。しかしがながら、ほとんどの場合、無限更新ループに陥る可能性があるため、このフックでは状態を変更するのを回避すべきです。
 
@@ -715,7 +715,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [カスタムディレクティブ](../guide/custom-directive.html)
-  - [アセットの命名規則](../guide/components.html#アセットの命名規則)
+  - [コンポーネントの命名の慣習](../guide/components.html#コンポーネントの命名の慣習)
 
 ### filters
 
@@ -920,9 +920,9 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **デフォルト:**
 
-  [slot よる配信された](/guide/components.html#Slotによるコンテンツ配信) コンテンツにアクセスするために使用されます。各[名前付き slot](/guide/components.html#名前付きSlot) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付き slot に含まれない任意のノードを含みます。
+  [スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](/guide/components.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付きスロットに含まれない任意のノードを含みます。
 
-  `vm.$slots` のアクセスは、[render 関数](/guide/render-function.html) によるコンポーネントを書くときに最も便利です。
+  `vm.$slots` のアクセスは、[描画関数](/guide/render-function.html) によるコンポーネントを書くときに最も便利です。
 
 - **例:**
 
@@ -959,8 +959,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [`<slot>` コンポーネント](#slot)
-  - [Slot によるコンテンツ配信](../guide/components.html#Slotsによるコンテンツ配信)
-  - [Render 関数](../guide/render-function.html)
+  - [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
+  - [描画関数](../guide/render-function.html)
 
 ### vm.$refs
 
@@ -973,7 +973,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   `ref` によって登録された子コンポーネントを保持するオブジェクトです。
 
 - **参照:**
-  - [Child Component Refs](../guide/components.html#Child-Component-Refs)
+  - [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
   - [ref](#ref)
 
 ### vm.$isServer
@@ -1193,7 +1193,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **使用方法:**
 
-  callback の実行を遅延し、DOM の更新サイクル後に実行します。DOM の更新を待ち受けるためにいくつかのデータを更新した直後に使用してください。callback の `this` コンテキストは自動的にこのメソッドを呼びだすインスタンスにバインドされることを除いて、グローバルな `Vue.nextTick` と同じです。
+  callback の実行を遅延し、DOM の更新サイクル後に実行します。DOM の更新を待ち受けるためにいくつかのデータを更新した直後に使用してください。callback の `this` コンテキストは自動的にこのメソッドを呼びだすインスタンスに束縛されることを除いて、グローバルな `Vue.nextTick` と同じです。
 
 - **例:**
 
@@ -1208,7 +1208,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
         // DOM はまだ更新されない
         this.$nextTick(function () {
           // DOM が更新された
-          // `this` は現在のインスタンスにバインドされる
+          // `this` は現在のインスタンスに束縛される
           this.doSomethingElse()
         })
       }
@@ -1224,7 +1224,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **使用方法:**
 
-  vm を完全に破棄します。既存の他の vm との接続を切り、そのすべてのディレクティブとのバインドを解消し、すべてのイベントリスナを開放します。
+  vm を完全に破棄します。既存の他の vm との接続を切り、そのすべてのディレクティブとの束縛を解消し、すべてのイベントリスナを開放します。
 
   `beforeDestroy` と `destroyed` フックをトリガします。
 
@@ -1250,7 +1250,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   <span>{{msg}}</span>
   ```
 
-- **参照:** [データバインディング構文 - 展開](../guide/syntax.html#Text)
+- **参照:** [テンプレート構文 - 展開](../guide/syntax.html#テキスト)
 
 ### v-html
 
@@ -1260,7 +1260,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   要素の `innerHTML` を更新します。**コンテンツはプレーンな HTML として挿入されることに注意してください。Vue テンプレートとしてコンパイルされません。** `v-html` を使用してテンプレートをあなた自身で構成するために試みるならば、コンポーネントを代わりとして使用することで解決するのを再考してみてください。
 
-  <p class="tip">任意の HTML をあなたの Web サイト上で動的にレンダリングすることは、 [XSS 攻撃](https://en.wikipedia.org/wiki/Cross-site_scripting)を招くため大変危険です。`v-html` は信頼済みコンテンツのみに利用し、 **絶対に** ユーザの提供するコンテンツには使わないで下さい。</p>
+  <p class="tip">任意の HTML をあなたの Web サイト上で動的に描画することは、 [XSS 攻撃](https://en.wikipedia.org/wiki/Cross-site_scripting)を招くため大変危険です。`v-html` は信頼済みコンテンツのみに利用し、 **絶対に** ユーザの提供するコンテンツには使わないでください。</p>
 
 
 - **例:**
@@ -1268,7 +1268,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```html
   <div v-html="html"></div>
   ```
-- **参照:** [データバインディング構文 - 展開](../guide/syntax.html#生のHTML)
+- **参照:** [テンプレート構文 - 展開](../guide/syntax.html#生の-HTML)
 
 ### v-if
 
@@ -1276,7 +1276,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **使用方法:**
 
-  バインディングの値の真偽値に基いて要素のレンダリングを行います。要素および、ディレクティブまたはコンポーネントを含むコンテンツは、トグルしている間に破壊され再構築されます。要素が `<template>` 要素ならば、その内容は状態ブロックとして抽出されます。
+  バインディングの値の真偽値に基いて要素の描画を行います。要素および、ディレクティブまたはコンポーネントを含むコンテンツは、トグルしている間に破壊され再構築されます。要素が `<template>` 要素ならば、その内容は状態ブロックとして抽出されます。
 
   このディレクティブは条件が変更されたとき、トランジションをトリガーします。
 
@@ -1420,7 +1420,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [メソッドとイベントハンドリング](../guide/events.html)
+  - [イベントハンドリング](../guide/events.html)
   - [コンポーネント - カスタムイベント](../guide/components.html#カスタムイベント)
 
 ### v-bind
@@ -1436,18 +1436,18 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **使用方法:**
 
-  1つ以上の属性またはコンポーネントのプロパティと式を動的にバインドします。
+  1つ以上の属性またはコンポーネントのプロパティと式を動的に束縛します。
 
-  `class` または `style` 属性とバインドする場合、配列やオブジェクトのような追加の値タイプをサポートします。詳細は下記にリンクしたガイドセクションを参照してください。
+  `class` または `style` 属性と束縛する場合、配列やオブジェクトのような追加の値タイプをサポートします。詳細は下記にリンクしたガイドセクションを参照してください。
 
   プロパティバインディングに使う場合、プロパティは子コンポーネント内で適切に宣言される必要があります。
 
-  引数なしで使用した場合、名前-値のペアの属性を含むオブジェクトをバインドするため使用することができます。このモードでは、`class` と `style` では配列とオブジェクトをサポートしないことに注意してください。
+  引数なしで使用した場合、名前-値のペアの属性を含むオブジェクトを束縛するため使用することができます。このモードでは、`class` と `style` では配列とオブジェクトをサポートしないことに注意してください。
 
 - **例:**
 
   ```html
-  <!-- 属性をバインド -->
+  <!-- 属性を束縛 -->
   <img v-bind:src="imageSrc">
 
   <!-- 省略記法 -->
@@ -1477,7 +1477,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **参照:**
   - [クラスとスタイルバインディング](../guide/class-and-style.html)
-  - [コンポーネント - コンポーネント Props](../guide/components.html#Props)
+  - [コンポーネント - プロパティ](../guide/components.html#プロパティ)
 
 ### v-model
 
@@ -1500,7 +1500,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **See also:**
   - [フォーム入力バインディング](/guide/forms.html)
-  - [コンポーネント - カスタムイベントを使用してフォーム入力コンポーネント](/guide/components.html#Form-Input-Components-using-Custom-Events)
+  - [コンポーネント - カスタムイベントを使用してフォーム入力コンポーネント](/guide/components.html#カスタムイベントを使用したフォーム入力コンポーネント)
 
 ### v-pre
 
@@ -1546,7 +1546,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **詳細:**
 
-  要素とコンポーネントを**一度**だけ描画します。その後再描画は、要素 / コンポーネントと全てのその子は、静的コンテンツとして扱われスキップされます。これは、更新パフォーマンスを最適化するために使用することができます。
+  要素とコンポーネントを**一度**だけ描画します。その後再描画は、要素 / コンポーネントと全てのその子は、静的コンテンツとして扱われスキップされます。これは、更新性能を最適化するために使用することができます。
 
   ```html
   <!-- 単一要素 -->
@@ -1565,8 +1565,8 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   ```
 
 - **参照:**
-  - [データバインディング構文 - 展開](../guide/syntax.html#Text)
-  - [コンポーネント - v-once による安価な静的コンポーネント](../guide/components.html#Cheap-Static-Components-with-v-once)
+  - [テンプレート構文 - 展開](../guide/syntax.html#テキスト)
+  - [コンポーネント - v-once による安価な静的コンポーネント](../guide/components.html#v-once-を使用した安価な静的コンポーネント)
 
 ## 特別な属性
 
@@ -1576,7 +1576,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   `key` 特別属性は、主に古いリストの代わりにノードの新しいリストを差分算出する VNode を識別するために Vue の仮想 DOM アルゴリズムに対するヒントとして使用されます。キーがない場合、Vue は要素の移動を最小限に抑えるアルゴリズムを使用し、可能な限りその場で同じタイプの要素にパッチ適用/再利用しようとします。キーがある場合は、キーの順序の変化に基づいて要素を並べ替え、そして、もはや存在しないキーを持つ要素は常に削除/破棄されます。
 
-  同じ共通の親を持つ子は、**ユニークなキー**を持っていなければなりません。重複するキーはエラーを描画する原因になります。
+  同じ共通の親を持つ子は、**一意なキー**を持っていなければなりません。重複するキーはエラーを描画する原因になります。
 
   最も一般的なユースケースは、`v-for` によって組合せられます:
 
@@ -1619,7 +1619,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   ref の登録タイミングに関する重要な注意事項として、参照自体は、render 関数の結果として作成されているため、最初の描画においてそれらにアクセスすることができません。それらはまだ存在しておらず、`$refs` はリアクティブではなく、従ってデータバインディングのためにテンプレートでそれを使用すべきではありません。
 
-- **参照:** [Child Component Refs](../guide/components.html#Child-Component-Refs)
+- **参照:** [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
 
 ### slot
 
@@ -1629,7 +1629,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   詳しい使い方については、以下のリンク先のガイドを参照してください。
 
-- **参照:** [名前付きSlot](../guide/components.html#名前付きSlot)
+- **参照:** [名前付きスロット](../guide/components.html#名前付きスロット)
 
 ## 組み込みコンポーネント
 
@@ -1641,7 +1641,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
 - **使用方法:**
 
-  動的コンポーネントのレンダリングに対する"メタコンポーネント"。描画する実際のコンポーネントは `is` プロパティによって決定されます:
+  動的コンポーネントの描画に対する"メタコンポーネント"。描画する実際のコンポーネントは `is` プロパティによって決定されます:
 
   ```html
   <!-- 動的コンポーネントは、vm 上の `componentId` プロパティ によって制御される -->
@@ -1656,7 +1656,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 ### transition
 
 - **プロパティ:**
-  - `name` - string、自動的に生成されるトランジション CSS クラス名で使用する。例: `name: 'fade' は `.fade-enter`、`.fade-enter-active`などに自動で展開する。デフォルトは`"v"`
+  - `name` - string、自動的に生成されるトランジション CSS クラス名で使用する。例: `name: 'fade'` は `.fade-enter`、`.fade-enter-active`などに自動で展開する。デフォルトは`"v"`
   - `appear` - boolean、初期描画でのトランジションを適用するかどうか。デフォルトは `false`
   - `css` - boolean、CSS トランジションクラスを提供するかどうか。デフォルトは `true`。`false` に設定する場合、コンポーネントイベント経由登録された JavaScript フックだけトリガーする
   - `type` - string、トランジションの終了タイミングを決定するためにトランジションイベントのタイプを指定する。利用可能な値は `"transition"`、`"animation"`。デフォルトでは自動的により長い時間を持つタイプを検出する
@@ -1714,7 +1714,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   }).$mount('#transition-demo')
   ```
 
-- **参照:** [Transitions: Entering, Leaving, and Lists](../guide/transitions.html)
+- **参照:** [トランジション効果](../guide/transitions.html)
 
 ### transition-group
 
@@ -1742,7 +1742,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
   </transition-group>
   ```
 
-- **参照:** [Transitions: Entering, Leaving, and Lists](../guide/transitions.html)
+- **参照:** [トランジション効果](../guide/transitions.html)
 
 ### keep-alive
 
@@ -1789,7 +1789,7 @@ All lifecycle hooks automatically have their `this` context bound to the instanc
 
   詳しい使い方については、以下のリンク先のガイドを参照してください。
 
-- **参照:** [Slot によるコンテンツ配信](../guide/components.html#Content-Distribution-with-Slots)
+- **参照:** [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
 
 ## VNodeインターフェイス
 
