@@ -4,90 +4,90 @@ type: guide
 order: 27
 ---
 
-> Vuex 2.0 is released, but this guide only covers the migration to 1.0? Is that a typo? Also, it looks like Vuex 1.0 and 2.0 were released simultaneously. What's going on? Which one should I use and what's compatible with Vue 2.0?
+> Vuex 2.0 はリリースされましたが、このガイドは 1.0 への移行だけをカバーしているのでしょうか？間違いでしょうか？Vuex 1.0 と2.0 が同時にリリースされたようですが、どういうことでしょうか？どっちを使用すると、Vue 2.0 と互換性があるでしょうか？
 
-Both Vuex 1.0 and 2.0:
+Vuex 1.0 と 2.0 の両方は:
 
-- fully support both Vue 1.0 and 2.0
-- will be maintained for the forseeable future
+- Vue 1.0 と 2.0 のバージョン両方をフルにサポートします
+- 近い将来までメンテされる予定です
 
-They have slightly different target users however.
+しかしながら、ターゲットユーザーはわずかに異なります。
 
-__Vuex 2.0__ is a radical redesign and simplification of the API, for those who are starting new projects or want to be on the cutting edge of client-side state management. __It is not covered by this migration guide__, so you should check out [the Vuex 2.0 docs](https://vuex.vuejs.org/en/index.html) if you'd like to learn more about it.
+__Vuex 2.0__ は、新しいプロジェクトを開始やクライアント側の状態管理の最先端を目指したりするための、API の根本的な再設計と単純化してものです。もし、それについてもっと学びたいならば、__これはこの移行ガイドではカバーされない__ため詳細については、[Vuex 2.0 ドキュメント](https://vuex.vuejs.org/en/index.html) を参照してください。
 
-__Vuex 1.0__ is mostly backwards-compatible, so requires very few changes to upgrade. It is recommended for those with large existing codebases or who just want the smoothest possible upgrade path to Vue 2.0. This guide is dedicated to facilitating that process, but only includes migration notes. For the complete usage guide, see [the Vuex 1.0 docs](https://github.com/vuejs/vuex/tree/1.0/docs/en).
+__Vuex 1.0__ はほとんど下位互換性があるため、アップグレードするための変更はほとんど必要ありません。既存の大規模なコードベースを持つ人、または Vue 2.0 への最もスムーズなアップグレードパスが必要な人にはおすすめです。このガイドは、そのプロセスを容易にすることを目的としていますが、移行に関する注意事項のみを含んでいます。完全な使い方については [Vuex 1.0 ドキュメント](https://github.com/vuejs/vuex/tree/1.0/docs/ja) を参照してください。
 
-## `store.watch` with String Property Path <sup>replaced</sup>
+## 文字列プロパティパスによる `store.watch` <sup>置き換え</sup>
 
-`store.watch` now only accept functions. So for example, you would have to replace:
+`store.watch` は関数を受け付けるようになりました。たとえば、次のように置き換える必要があります:
 
 ``` js
 store.watch('user.notifications', callback)
 ```
 
-with:
+は以下により:
 
 ``` js
 store.watch(
-  // When the returned result changes...
+  // 返された結果が変更されたとき...
   function (state) {
     return state.user.notifications
   },
-  // Run this callback
+  // このコールバックを動かす
   callback
 )
 ```
 
-This gives you more complete control over the reactive properties you'd like to watch.
+これにより、リアクティブをより完全に制御することができます。
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>store.watch</code> with a string as the first argument.</p>
+  <h4>移行ガイド</h4>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し 最初の引数として文字列による <code>store.watch</code> が呼び出される箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-## Store's Event Emitter <sup>removed</sup>
+## store のイベントエミッタ <sup>削除</sup>
 
-The store instance no longer exposes the event emitter interface (`on`, `off`, `emit`). If you were previously using the store as a global event bus, [see this section](migration.html#dispatch-and-broadcast-removed) for migration instructions.
+store インスタンスは、イベントエミッタインタフェース (`on`、` off`、`emit`) を公開しなくなりました。以前に store をグローバルイベントバスとして使用していた場合は、移行手順については、[こちらのセクション](migration.html#dispatch-および-broadcast-置き換え) を参照してください。
 
-Instead of using this interface to watch events emitted by the store itself (e.g. `store.on('mutation', callback)`), a new method `store.subscribe` is introduced. Typical usage inside a plugin would be:
+このインターフェイスを使用して store 自体が発行する監視イベント (例 `store.on ('mutation', callback)`) の代わりに、新しいメソッド `store.subscribe` が導入されています。プラグインの典型的な使い方は次のとおりです:
 
 ``` js
 var myPlugin = store => {
   store.subscribe(function (mutation, state) {
-    // Do something...
+    // 何かの処理 ...
   })
 }
 
 ```
 
-See example [the plugins docs](https://github.com/vuejs/vuex/blob/1.0/docs/en/plugins.md) for more info.
+より詳細については、[プラグインのドキュメント](https://github.com/vuejs/vuex/blob/1.0/docs/ja/plugins.md) の example を参照してください。
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of <code>store.on</code>, <code>store.off</code>, and <code>store.emit</code>.</p>
+  <h4>移行ガイド</h4>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し、<code>store.on</code>、<code>store.off</code>、<code>store.emit</code>が呼び出される箇所を検出してください。</p>
 </div>
 {% endraw %}
 
-## Middlewares <sup>replaced</sup>
+## ミドルウェア <sup>置き換え</sup>
 
-Middlewares are replaced by plugins. A plugin is simply a function that receives the store as the only argument, and can listen to the mutation event on the store:
+ミドルウェアはプラグインとして置き換えられました。プラグインは、単に引数として store を受け取る関数であり、store で mutation イベントを購読することができます:
 
 ``` js
 const myPlugins = store => {
   store.subscribe('mutation', (mutation, state) => {
-    // Do something...
+    // 何かの処理 ...
   })
 }
 ```
 
-For more details, see [the plugins docs](https://github.com/vuejs/vuex/blob/1.0/docs/en/plugins.md).
+より詳細については、[プラグインのドキュメント](https://github.com/vuejs/vuex/blob/1.0/docs/ja/plugins.md) の example を参照してください。
 
 {% raw %}
 <div class="upgrade-path">
-  <h4>Upgrade Path</h4>
-  <p>Run the <a href="https://github.com/vuejs/vue-migration-helper">migration helper</a> on your codebase to find examples of the <code>middlewares</code> option on a store.</p>
+  <h4>移行ガイド</h4>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し、store 上で<code>middlewares</code>を検出してください。</p>
 </div>
 {% endraw %}
