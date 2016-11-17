@@ -60,7 +60,7 @@ new Vue({
 
 
 {% raw %}
-<p class="tip">textarea への挿入 (<code>&lt;textarea&gt;{{text}}&lt;/textarea&gt;</code>) は動きません。代わりに、<code>v-model</code>を使用して下さい。</p>
+<p class="tip">textarea への挿入 (<code>&lt;textarea&gt;{{text}}&lt;/textarea&gt;</code>) は動きません。代わりに、<code>v-model</code>を使用してください。</p>
 {% endraw %}
 
 ### チェックボックス
@@ -287,7 +287,7 @@ radio 、 checkbox 、そして select オプションは、 `v-model` バイン
 </select>
 ```
 
-しかし、ときどき、Vue インスタンスで動的プロパティに値を束縛したいかもしれません。それを達成するために `v-bind` を使用することができます。 ほかに、`v-bind` の使用は、私達に文字列ではない値に input 値を束縛します。
+しかし、時どき、Vue インスタンスで動的プロパティに値を束縛したいかもしれません。それを達成するために `v-bind` を使用することができます。 ほかに、`v-bind` の使用は、私達に文字列ではない値に input 値を束縛します。
 
 ### チェックボックス
 

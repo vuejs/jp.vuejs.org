@@ -339,7 +339,6 @@ new Vue({
     }
   }
 })
-
 function valueToPoint (value, index, total) {
   var x     = 0
   var y     = -value * 0.9
@@ -350,7 +349,6 @@ function valueToPoint (value, index, total) {
   var ty    = x * sin + y * cos + 100
   return { x: tx, y: ty }
 }
-
 function generatePoints (stats) {
   var total = stats.length
   return stats.map(function (stat, index) {

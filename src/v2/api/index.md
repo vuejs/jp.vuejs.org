@@ -4,7 +4,7 @@ type: api
 
 ## グローバル設定
 
-`Vue.config` は Vue のグローバル設定を含んでいるオブジェクトです。あなたのアプリケーションが読み込まれる前に、下記のプロパティを変更することが出来ます:
+`Vue.config` は Vue のグローバル設定を含んでいるオブジェクトです。あなたのアプリケーションが読み込まれる前に、下記のプロパティを変更することができます:
 
 ### silent
 
@@ -1732,7 +1732,7 @@ type: api
 
   `<transition-group>` での全ての子は、アニメーションを正しく動作させるために**一意なキーで割り振れられて**なければならないことに注意してください。
 
-  `<transition-group>` は CSS transform 経由によるトランジション移動をサポートします。更新後、スクリーン上の子の位置が変更されたとき、CSS クラス (`name` 属性または `move-class` による設定か自動的に生成された) の移動を適用します。もし、クラスの移動が適用されるとき、CSS `transform` プロパティが"トランジション可能"である場合、要素は [FLIP 技術](https://aerotwist.com/blog/flip-your-animations/)を使用して宛先に滑らかにアニメーション化されます。
+  `<transition-group>` は CSS transform 経由によるトランジション移動をサポートします。更新後、スクリーン上の子の位置が変更されたとき、CSS クラス (`name` 属性または `move-class` による設定か自動的に生成された) の移動を適用します。もし、クラスの移動が適用されるとき、CSS `transform` プロパティが"トランジション可能"な場合、要素は [FLIP 技術](https://aerotwist.com/blog/flip-your-animations/)を使用して宛先に滑らかにアニメーション化されます。
 
   ```html
   <transition-group tag="ul" name="slide">
@@ -1791,7 +1791,7 @@ type: api
 
 - **参照:** [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
 
-## VNodeインターフェイス
+## VNode インターフェイス
 
 - [VNode クラスの宣言](https://github.com/vuejs/vue/blob/dev/src/core/vdom/vnode.js)を参照してください。
 

@@ -73,7 +73,7 @@ var myPlugin = store => {
 
 ## ミドルウェア <sup>置き換え</sup>
 
-ミドルウェアはプラグインとして置き換えられました。プラグインは、単に引数として store を受け取る関数であり、store で mutation イベントを購読することができます:
+ミドルウェアはプラグインとして置き換えられました。プラグインは、単に引数として store を受け取る関数で、store で mutation イベントを購読することができます:
 
 ``` js
 const myPlugins = store => {
