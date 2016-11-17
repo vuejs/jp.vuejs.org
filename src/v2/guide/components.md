@@ -1020,9 +1020,9 @@ template: '<div><stack-overflow></stack-overflow></div>'
 
 上記のようなコンポーネントは、"max stack size exceeded" エラーに想定されるため、再帰呼び出しは条件付きになるようにしてください。(i.e. 最終的に `false` となる `v-if` を使用します)
 
-### Circular References Between Components
+### コンポーネント間の循環参照
 
-Let's say you're building a file directory tree, like in Finder or File Explorer. You might have a `tree-folder` component with this template:
+Finder  や File Explorer のようなファイルディレクトリツリーを構築しているとしましょう。以下のようなテンプレートを持つ `tree-folder` コンポーネントがあるかもしれません：
 
 ``` html
 <p>
@@ -1031,7 +1031,7 @@ Let's say you're building a file directory tree, like in Finder or File Explorer
 </p>
 ```
 
-Then a `tree-folder-contents` component with this template:
+次に、以下のようなテンプレートを持つ `tree-folder-contents` コンポーネントがあるとき:
 
 ``` html
 <ul>
@@ -1041,18 +1041,17 @@ Then a `tree-folder-contents` component with this template:
   </li>
 </ul>
 ```
+よく見ると、これらのコンポーネントは実際にお互いの子孫であり、_かつ_レンダリングツリーの祖先であることがわかります。ああ、パラドックスですね！`Vue.component` でコンポーネントをグローバルに登録すると、このパラドックスは自動的に解決されます。それがあなたなら、ここで読むことをやめることができます。
 
-When you look closely, you'll see that these components will actually be each other's descendent _and_ ancestor in the render tree - a paradox! When registering components globally with `Vue.component`, this paradox is resolved for you automatically. If that's you, you can stop reading here.
-
-However, if you're requiring/importing components using a __module system__, e.g. via Webpack or Browserify, you'll get an error:
+しかしながら、__モジュールシステム__ を使用してコンポーネントを読み込む場合、例えば、Webpack または Browserify 経由では以下のようなエラーになるでしょう:
 
 ```
 Failed to mount component: template or render function not defined.
 ```
 
-To explain what's happening, I'll call our components A and B. The module system sees that it needs A, but first A needs B, but B needs A, but A needs B, etc, etc. It's stuck in a loop, not knowing how to fully resolve either component without first resolving the other. To fix this, we need to give the module system a point at which it can say, "A needs B _eventually_, but there's no need to resolve B first."
+何が起こっているのかを説明するために、あるコンポーネント A とコンポーネント B があるとします。モジュールシステムには、A が必要ですが、最初の A は B を必要とし、B は A を必要とし、A は B を必要とする場合は、最初に他のものを解決せずにいずれかのコンポーネントを完全に解決する方法を知らないためループになってしまいます。これを修正するには、モジュールシステムに "A は B が必要であるが、_最終的には_ B を最初に解決する必要はない" と言うことができるポイントを与える必要があります。
 
-In our case, I'll make that point the `tree-folder` component. We know the child that creates the paradox is the `tree-folder-contents` component, so we'll wait until the `beforeCreate` lifecycle hook to register it:
+先程のケースでは、`tree-folder` コンポーネントをポイントにします。パラドックスを作成する子は、`tree-folder-contents` コンポーネントであるため、`beforeCreate` ライフサイクルフックが登録されるまで待ちます:
 
 ``` js
 beforeCreate: function () {
@@ -1060,7 +1059,7 @@ beforeCreate: function () {
 }
 ```
 
-Problem solved!
+これで問題を解決できます！
 
 ### インラインテンプレート
 
