@@ -30,16 +30,27 @@
 <script>
 (function () {
   var avatar = {
-    template: '<div>' + 
-      '<h2>{{title}}</h2>' +
-      '<ul class="avatars">' + 
+    template: '<div>' +
+      '<h2 :id="scrollID">' +
+      '<a :href="href" class="headerlink" :title="title"></a>' +
+      '{{title}}' +
+      '</h2>' +
+      '<ul class="avatars">' +
       '<a v-for="item in list" class="avatar" :href="link(item)" target="_blank">' +
-      '<img class="avatar__img" :src="image(item)" />' + 
-      '<p style="margin: 0;">{{item}}</p>' + 
-      '</a>' + 
+      '<img class="avatar__img" :src="image(item)" />' +
+      '<p style="margin: 0;">{{item}}</p>' +
+      '</a>' +
       '</ul>' +
     '</div>',
     props: ['title', 'list'],
+    computed: {
+      scrollID: function () {
+        return this.title.replace(/[\s\.]/g, '-')
+      },
+      href: function () {
+        return '#' + this.scrollID
+      }
+    },
     methods: {
       link: function (id) {
         return 'https://github.com/' + id
@@ -129,7 +140,7 @@
       list: translators2
   }, {
       id: 'blog',
-      title: 'Vue.js 公式ブログ "The Vue Point" の翻訳者一覧',
+      title: 'Vue.js 公式ブログ “The Vue Point” の翻訳者一覧',
       list: blog
   }, {
       id: 'contributors2',
