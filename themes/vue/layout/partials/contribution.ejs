@@ -1,0 +1,150 @@
+<div id="sponsers">
+  <avatar :title="title" :list="list"></avatar>
+</div>
+<div id="translators2">
+  <avatar :title="title" :list="list"></avatar>
+</div>
+<div id="blog">
+  <avatar :title="title" :list="list"></avatar>
+</div>
+<div id="contributors2">
+  <avatar :title="title" :list="list"></avatar>
+</div>
+<div id="contributors1">
+  <avatar :title="title" :list="list"></avatar>
+</div>
+
+<style>
+.avatar {
+  display: inline-block;
+  margin: 10px 15px;
+  text-align: center;
+}
+.avatar__img {
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+}
+</style>
+
+<script>
+(function () {
+  var avatar = {
+    template: '<div>' + 
+      '<h2>{{title}}</h2>' +
+      '<ul class="avatars">' + 
+      '<a v-for="item in list" class="avatar" :href="link(item)" target="_blank">' +
+      '<img class="avatar__img" :src="image(item)" />' + 
+      '<p style="margin: 0;">{{item}}</p>' + 
+      '</a>' + 
+      '</ul>' +
+    '</div>',
+    props: ['title', 'list'],
+    methods: {
+      link: function (id) {
+        return 'https://github.com/' + id
+      },
+      image: function (id) {
+        return this.link(id) + '.png?size=64'
+      }
+    }
+  }
+  var sponsers = [
+    'hashrock',
+    'kazupon',
+    'kojimakazuto',
+    'positiveflat',
+    'tejitak',
+    'yasunobuigarashi'
+  ]
+  var translators2 = [
+    'satotakumi',
+    'edwardkenfox',
+    'kitak',
+    'nakajmg',
+    'noliaki',
+    'kdnk',
+    'toshilow',
+    'mono0x',
+    'tejitak',
+    'hypermkt',
+    'massa142',
+    'k2wanko',
+    'mikakane',
+    'potato4d',
+    'ktsn',
+    'sshono1210',
+    'kazupon'
+  ]
+  var blog = [
+    'chi-bd'
+  ]
+  var contributors2 = [
+    'inouetakuya'
+  ]
+  var contributors1 = [
+    'bouzuya',
+    'Bcrikko',
+    'BYODKM',
+    'ChangJoo-Park',
+    'chi-bd',
+    'chocoby',
+    'chrispecoraro',
+    'cocopon',
+    'edwardkenfox',
+    'haru01',
+    'hrysd',
+    'hypermkt',
+    'KangYoosam',
+    'kaorun343',
+    'kuy',
+    'kyanny',
+    'kyuden',
+    'massa142',
+    'maxiloc',
+    'mono0x',
+    'n0f',
+    'nakajmg',
+    'noliaki',
+    'pocke',
+    'poncot',
+    'ryonext',
+    'sapics',
+    'showwin',
+    'sunya9',
+    'syagawa',
+    'TakahiRoyte',
+    'u1-tkzw',
+    'y-yagi',
+    'ykzts',
+    'zakuro9715'
+  ]
+  var contents = [{
+      id: 'sponsers',
+      title: '翻訳プロジェクト発起人一覧',
+      list: sponsers
+  }, {
+      id: 'translators2',
+      title: 'Vue.js 2.0 日本語翻訳プロジェクト翻訳者一覧',
+      list: translators2
+  }, {
+      id: 'blog',
+      title: 'Vue.js 公式ブログ "The Vue Point" の翻訳者一覧',
+      list: blog
+  }, {
+      id: 'contributors2',
+      title: 'Vue.js 2.0 以降の貢献者一覧',
+      list: contributors2
+  }, {
+      id: 'contributors1',
+      title: 'Vue.js 2.0 以前の貢献者一覧',
+      list: contributors1
+  }]
+  contents.forEach(function (content) {
+    new Vue({
+      components: { avatar: avatar },
+      data: content
+    }).$mount('#' + content.id)
+  })
+})()
+</script>
