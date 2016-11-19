@@ -80,7 +80,6 @@ Vue と React は両者ともに、状態を持たず、インスタンス化で
       <td>343ms</td>
       <td>453ms</td>
     </tr>
-    </tr>
   </tbody>
 </table>
 {% endraw %}
