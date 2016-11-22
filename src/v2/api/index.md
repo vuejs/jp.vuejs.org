@@ -1765,6 +1765,10 @@ type: api
 
 ### keep-alive
 
+- **プロパティ:**
+  - `include` - 文字列または正規表現。これと一致するコンポーネントだけがキャッシュされます。
+  - `exclude` - 文字列または正規表現。これと一致するコンポーネントはキャッシュされません。
+
 - **使用方法:**
 
   動的コンポーネント周りでラップされるとき、`<keep-alive>` はそれらを破棄しないで非アクティブなコンポーネントのインスタンスをキャッシュします。`<trasition>` に似ていて、`<keep-alive>` はそれ自身 DOM 要素で描画されない抽象型コンポーネントです。`activated` と `deactivated` ライフサイクルフックはそれに応じて呼び出されます。
@@ -1792,6 +1796,26 @@ type: api
     </keep-alive>
   </transition>
   ```
+
+- **`include` と `exclude`**
+
+  > New in 2.1.0
+
+  `include` と `exclude` プロパティは、コンポーネントが条件付きでキャッシュされることを可能にします。両方のプロパティはコンマ区切りの文字列か正規表現のどちらかです:
+
+  ``` html
+  <!-- コンマで区切れた文字列 -->
+  <keep-alive include="a,b">
+    <component :is="view"></component>
+  </keep-alive>
+
+  <!-- 正規表現 (v-bind を使用する) -->
+  <keep-alive :include="/a|b/">
+    <component :is="view"></component>
+  </keep-alive>
+  ```
+
+  一致は、まず `name` オプションが利用できない場合、コンポーネント自身の `name` オプションでローカル登録名（親の `components` オプションのキー）をチェックします。匿名のコンポーネントは照合できません。
 
   <p class="tip">`<keep-alive>` はキャッシュされるインスタンスを持っていないため、関数型コンポーネントで動作しません。</p>
 
