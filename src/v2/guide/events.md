@@ -207,15 +207,15 @@ methods: {
 
 キー修飾子のエイリアスの全てのリストを示します:
 
-- enter
-- tab
-- delete ("Delete" と "Backspace" キー両方をキャプチャします)
-- esc
-- space
-- up
-- down
-- left
-- right
+- `.enter`
+- `.tab`
+- `.delete` ("Delete" と "Backspace" キー両方をキャプチャします)
+- `.esc`
+- `.space`
+- `.up`
+- `.down`
+- `.left`
+- `.right`
 
 グローバルな `config.keyCodes` オブジェクト経由で[カスタムキー修飾子のエイリアス](../api/#keyCodes)も定義できます:
 
@@ -223,6 +223,17 @@ methods: {
 // v-on:keyup.f1 を可能にします
 Vue.config.keyCodes.f1 = 112
 ```
+
+## マウスイベント修飾子
+
+> New in 2.1.0
+
+次の修飾子を使用すると、対応するキーが押されたときにのみマウスイベントリスナをトリガできます:
+
+- `.ctrl`
+- `.alt`
+- `.shift`
+- `.meta`
 
 ## なぜ HTML にリスナを記述するのですか
 
