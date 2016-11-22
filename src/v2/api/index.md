@@ -138,10 +138,10 @@ type: api
 
 - **参照:** [コンポーネント](../guide/components.html)
 
-<h3 id="Vue-nextTick">Vue.nextTick( callback, [context] )</h3>
+<h3 id="Vue-nextTick">Vue.nextTick( [callback, context] )</h3>
 
 - **引数:**
-  - `{Function} callback`
+  - `{Function} [callback]`
   - `{Object} [context]`
 
 - **使用方法:**
@@ -156,6 +156,8 @@ type: api
     // DOM が更新されています
   })
   ```
+
+  > New in 2.1.0: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。
 
 - **参照:** [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
@@ -1205,14 +1207,16 @@ type: api
 
   Vue インスタンスに再描画を強制します。インスタンス自身と slot コンテンツに挿入された子コンポーネントだけで、全ての子コンポーネントに影響しないことに注意してください。
 
-<h3 id="vm-nextTick">vm.$nextTick( callback )</h3>
+<h3 id="vm-nextTick">vm.$nextTick( [callback] )</h3>
 
 - **引数:**
-  - `{Function} callback`
+  - `{Function} [callback]`
 
 - **使用方法:**
 
   callback の実行を遅延し、DOM の更新サイクル後に実行します。DOM の更新を待ち受けるためにいくつかのデータを更新した直後に使用してください。callback の `this` コンテキストは自動的にこのメソッドを呼びだすインスタンスに束縛されることを除いて、グローバルな `Vue.nextTick` と同じです。
+
+  > New in 2.1.0: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。
 
 - **例:**
 
