@@ -31,7 +31,7 @@ order: 19
 
 <img src="/images/vue-component-with-preprocessors.png" style="display: block; margin: 30px auto">
 
-これらの特定の言語は単なる一例です。Bublé, TypeScript, SCSS, PostCSS などの生産的なプリプロセッサも簡単に使うことができます。
+これらの特定の言語は単なる一例です。Buble 、TypeScript 、SCSS 、PostCSS などの生産的なプリプロセッサも簡単に使うことができます。
 
 <!-- TODO: include CSS modules once it's supported in vue-loader 9.x -->
 
