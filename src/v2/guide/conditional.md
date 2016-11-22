@@ -53,7 +53,30 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 </div>
 ```
 
-`v-else` 要素は、`v-if` 要素の直後になければなりません。それ以外の場合は認識されません。
+`v-else` 要素は、`v-if` または `v-else-if` 要素の直後になければなりません。それ以外の場合は認識されません。
+
+### v-else-if
+
+> New in 2.1.0
+
+`v-else-if` は、名前が示唆するように、`v-if` の "else if block" として機能します。また、複数回連結することもできます:
+
+```html
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+```
+
+Similar to `v-else`, a `v-else-if` element must immediately follow a `v-if` or a `v-else-if` element.
 
 ## v-show
 
