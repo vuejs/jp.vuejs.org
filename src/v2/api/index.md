@@ -1480,7 +1480,8 @@ type: api
 - **引数:** `attrOrProp (任意)`
 
 - **修飾子:**
-  - `.prop` - DOM 属性のバインディングに対して使用されます。
+  - `.prop` - 属性の代わりに DOM プロパティとして束縛します。([違いは何？](http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))
+  - `.camel` - ケバブケースの属性名をキャメルケースにに変換します (2.1.0 からサポート)
 
 - **使用方法:**
 
@@ -1522,6 +1523,14 @@ type: api
   <!-- XLink -->
   <svg><a :xlink:special="foo"></a></svg>
   ```
+
+  `.camel` 修飾子はDOM 内のテンプレートを使用するときに、`v-bind` 属性名をキャメル化することを可能にします。e.g. SVG の `viewBox` 属性:
+
+  ``` html
+    <svg :view-box.camel="viewBox"></svg>
+  ```
+
+  文字列テンプレートを使用している場合や、`vue-loader` / `vueify` でコンパイルしている場合は `.camel` は必要ありません。
 
 - **参照:**
   - [クラスとスタイルバインディング](../guide/class-and-style.html)
