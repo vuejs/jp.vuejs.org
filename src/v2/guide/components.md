@@ -814,6 +814,67 @@ Vue.component('child-component', {
 
 コンテンツ配信 API は、組み合わせて使うことを意図したコンポーネントを設計する際に、非常に便利なメカニズムです。
 
+### スコープ付きスロット
+
+> New in 2.1.0
+
+スコープ付きスロット (scoped slot) 既に描画された要素の代わりに再利用可能なテンプレート(データを渡すことができる)として機能する特殊なタイプのスロットです。
+
+子コンポーネントでは、コンポーネントにプロパティを渡すかのように、単純にデータをスロットに渡します:
+
+``` html
+<div class="child">
+  <slot text="hello from child"></slot>
+</div>
+```
+
+親においては、特別な属性 `scope` を持つ `<template>` 要素はスコープ付きスロット用のテンプレートを示します。`scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前です:
+
+``` html
+<div class="parent">
+  <child>
+    <template scope="props">
+      <span>hello from parent</span>
+      <span>{{ props.text }}</span>
+    </template>
+  </child>
+</div>
+```
+
+上記のように描画すると、出力は次のようになります:
+
+``` html
+<div class="parent">
+  <div class="child">
+    <span>hello from parent</span>
+    <span>hello from child</span>
+  </div>
+</div>
+```
+
+スコープ付きスロットのより一般的なユースケースは、コンポーネント利用者がリスト内の各アイテムの描画方法をカスタマイズできるようにする、リストコンポーネントでしょう:
+
+``` html
+<my-awesome-list :items="items">
+  <!-- scoped slot can be named too -->
+  <template slot="item" scope="props">
+    <li class="my-fancy-item">{{ props.text }}</li>
+  </template>
+</my-awesome-list>
+```
+
+リストコンポーネントのテンプレートでは次のようになります:
+
+``` html
+<ul>
+  <slot name="item"
+    v-for="item in items"
+    :text="item.text">
+    <!-- フォールバックコンテンツはここへ -->
+  </slot>
+</ul>
+```
+
 ## 動的コンポーネント
 
 予約された `<component>` 要素と、その `is` 属性に動的に束縛することで、同じマウントポイントで複数のコンポーネントを動的に切り替えることができます:

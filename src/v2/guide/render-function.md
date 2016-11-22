@@ -173,6 +173,11 @@ createElement(
       }
     }
   ],
+  // { name: props => VNode | Array<VNode> }
+  // の 形式でのスコープ付きスロット
+  scopedSlots: {
+    default: props => h('span', props.text)
+  },
   // コンポーネントの子があるならば、スロット名
   slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
@@ -253,6 +258,8 @@ render: function (createElement) {
 
 ## 素の JavaScript を使ったテンプレート置換機能
 
+### `v-if` と `v-for`
+
 どんなところでも素の JavaScript で簡単に物事は成し遂げることができるので、Vue の render 関数は独自の代替手段を提供しません。例えば、`v-if` と `v-for` を使っているテンプレート内です。
 
 ``` html
@@ -273,6 +280,69 @@ render: function (createElement) {
   } else {
     return createElement('p', 'No items found.')
   }
+}
+```
+
+### `v-model`
+描画関数には直接的な `v-model` の対応はありません。 あなた自身でロジックを実装する必要があります:
+
+``` js
+render: function (createElement) {
+  var self = this
+  return createElement('input', {
+    domProps: {
+      value: self.value
+    },
+    on: {
+      input: function (e) {
+        self.value = e.target.value
+      }
+    }
+  })
+}
+```
+
+これは低レベルのコストですが、`v-model` と比較してインタラクションをより詳細に制御することもできます。
+
+### スロット
+
+[`this.$slots`](../api/#vm-slots) から VNode の配列として静的なスロットの内容にアクセスできます:
+
+``` js
+render: function (createElement) {
+  // <div><slot></slot></div>
+  return createElement('div', this.$slots.default)
+}
+```
+
+そして、[`this.$scopedSlots`](../api/#vm-scopedSlots) から VNode を返す関数としてスコープ付きスロットにアクセスできます:
+
+``` js
+render: function (createElement) {
+  // <div><slot :text="msg"></slot></div>
+  return createElement('div', [
+    this.$scopedSlots.default({
+      text: this.msg
+    })
+  ])
+}
+```
+
+スコープ付きスロットを描画関数を使って子コンポーネントに渡すには、VNode データの `scopedSlots` フィールドを使います:
+
+``` js
+render (createElement) {
+  return createElement('div', [
+    createElement('child', {
+      // { name: props => VNode | Array<VNode> } の形式で
+      // scopedSlots を データオブジェクトに渡す
+      scopedSlots: {
+        default: function (props) {
+          return h('span', props.text)
+        }
+      }
+    })
+  ])
 }
 ```
 

@@ -914,13 +914,13 @@ type: api
 
 ### vm.$slots
 
-- **型:** `Object`
+- **型:** `{ [name: string]: ?Array<VNode> }`
 
 - **読み込みのみ**
 
 - **デフォルト:**
 
-  [スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](/guide/components.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付きスロットに含まれない任意のノードを含みます。
+  プログラム的に[スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](/guide/components.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付きスロットに含まれない任意のノードを含みます。
 
   `vm.$slots` のアクセスは、[描画関数](/guide/render-function.html) によるコンポーネントを書くときに最も便利です。
 
@@ -960,7 +960,26 @@ type: api
 - **参照:**
   - [`<slot>` コンポーネント](#slot)
   - [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
-  - [描画関数](../guide/render-function.html)
+  - [描画関数: スロット](../guide/render-function.html#スロット)
+
+### vm.$scopedSlots
+
+> New in 2.1.0
+
+- **型:** `{ [name: string]: props => VNode | Array<VNode> }`
+
+- **読み込みのみ**
+
+- **詳細:**
+
+  [スコープ付きスロット (scoped slot)](../guide/components.html#スコープ付きスロット)にプログラムでアクセスするために使用されます。`default` を含む各スロットに対して、オブジェクトには VNode を返す対応する関数が含まれています。
+
+  `vm.$scopedSlots` にアクセスする際に、[描画関数](../guide/render-function.html) でコンポーネントを書くときに最も便利です。
+
+- **See also:**
+  - [`<slot>` コンポーネント](#slot-1)
+  - [スコープ付きスロット](../guide/components.html#スコープ付きスロット)
+  - [描画関数: スロット](../guide/render-function.html#スロット)
 
 ### vm.$refs
 
