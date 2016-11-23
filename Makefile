@@ -3,7 +3,7 @@ all: update
 	hexo generate
 	cp -R ./todomvc public/examples
 
-deploy:	all
+deploy:
 	hexo deploy
 
 test:
