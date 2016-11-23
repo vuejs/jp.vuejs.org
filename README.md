@@ -3,10 +3,10 @@
 [![Circle CI](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja.svg?style=svg&circle-token=833967ff387fa4a8d91a738086d5c166ea0a6f85)](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja)
 [![Slack Status](https://vuejs-jp-slackin.herokuapp.com/badge.svg)](https://vuejs-jp-slackin.herokuapp.com/)
 
-このリポジトリは Vue.js 最新バージョン向けのドキュメントを管理しているレポジトリです。
+このリポジトリは Vue.js 最新バージョン 2.x 向けのドキュメントを管理しているレポジトリです。
 
-- Vue.js 0.12 向けドキュメント管理リポジトリ: [こちら](https://github.com/vuejs-jp/012-jp.vuejs.org)
 - Vue.js 1.x 向けドキュメント管理リポジトリ: [こちら](https://github.com/vuejs/v1-jp.vuejs.org)
+- Vue.js 0.12 向けドキュメント管理リポジトリ: [こちら](https://github.com/vuejs-jp/012-jp.vuejs.org)
 
 このサイトは [hexo](https://hexo.io/) で構築されています。サイトコンテンツは `src` の位置に markdown フォーマットで書かれています。プルリクエスト、歓迎します！
 
