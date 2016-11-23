@@ -5,8 +5,8 @@ order: 1
 vue_version: 2.1.0
 dev_size: "205.39"
 min_size: "67.76"
-gz_size: "23.99"
-ro_gz_size: "16.81"
+gz_size: "24.83"
+ro_gz_size: "17.12"
 ---
 
 ### 互換性の注意
