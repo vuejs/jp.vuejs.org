@@ -1,15 +1,15 @@
-all: update
+update:
 	rm db.json
 	hexo generate
 	cp -R ./todomvc public/examples
 
-deploy:
+deploy: update
 	hexo deploy
 
 test:
 	npm test
 
-update:
+bump:
 	cd ../vue && \
 		git checkout -- dist && \
 		git checkout master && \
