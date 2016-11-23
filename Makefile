@@ -1,4 +1,4 @@
-all: update
+update: bump
 	rm -rf public db.json
 	hexo generate
 
@@ -8,7 +8,7 @@ deploy:	all
 test:
 	npm test
 
-update:
+bump:
 	cd ../vue && \
 		git checkout -- dist && \
 		git checkout dev && \
