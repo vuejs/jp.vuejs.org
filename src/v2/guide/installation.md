@@ -2,11 +2,11 @@
 title: インストール
 type: guide
 order: 1
-vue_version: 2.1.0
-dev_size: "205.39"
-min_size: "67.76"
-gz_size: "24.83"
-ro_gz_size: "17.12"
+vue_version: 2.1.1
+dev_size: "205.95"
+min_size: "67.85"
+gz_size: "24.87"
+ro_gz_size: "17.15"
 ---
 
 ### 互換性の注意
