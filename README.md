@@ -24,4 +24,4 @@ $ hexo server
 ```
 
 ## 貢献者
-貢献された方々は、[こちら](http://jp.vuejs.jp/contribution/) 
+貢献された方々は、[こちら](http://jp.vuejs.org/contribution/) 
