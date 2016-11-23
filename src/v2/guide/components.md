@@ -982,6 +982,7 @@ var child = parent.$refs.profile
 
 ``` js
 Vue.component('async-example', function (resolve, reject) {
+  // コンポーネント定義を resolve コールバックで渡す
   setTimeout(function () {
     resolve({
       template: '<div>I am async!</div>'
