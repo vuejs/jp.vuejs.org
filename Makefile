@@ -2,7 +2,7 @@ update: bump
 	rm -rf public db.json
 	hexo generate
 
-deploy:	all
+deploy:
 	hexo deploy
 
 test:
