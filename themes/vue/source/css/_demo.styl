@@ -9,13 +9,17 @@
     -moz-user-select: none
     -ms-user-select: none
     user-select: none
-    overflow-x scroll
+    overflow-x auto
     h1
         margin 0 0 .5em
         font-size 1.8em
-    ul
+    ul, ol
         padding-left 1.5em
-        margin 0
+        padding-bottom .2em !important
+        &:first-child
+            margin-top 0
+        &:last-child
+            margin-bottom 0
     li
         color $medium
         // !!TODO: Check to make sure this isn't here for a good reason.
@@ -26,6 +30,8 @@
             color $light
             text-decoration line-through
     p
+        margin 0 !important
+        padding 0 !important
         &:first-child
             margin-top 0
         &:last-child
