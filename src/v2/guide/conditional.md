@@ -4,7 +4,7 @@ type: guide
 order: 7
 ---
 
-## v-if
+## `v-if`
 
 文字列テンプレートでは、例えば Handlebars の例は、このような条件ブロックを記述します:
 
@@ -28,7 +28,7 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 <h1 v-else>No</h1>
 ```
 
-### テンプレートでの v-if
+### テンプレートでの `v-if` による条件グループ
 
 `v-if` はディレクティブなので、単一の要素に付加する必要があります。しかし、1 要素よりも多くの要素と切り替えたい場合はどうでしょうか？このケースでは、非表示ラッパー (wrapper) として提供される、`<template>` 要素で `v-if` を使用できます。最終的に描画される結果は、`<template>` 要素は含まれません。
 
@@ -40,7 +40,7 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 </template>
 ```
 
-### v-else
+### `v-else`
 
 `v-if` に対して "else block" を示すために、`v-else` ディレクティブを使用できます:
 
@@ -55,7 +55,7 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 
 `v-else` 要素は、`v-if` または `v-else-if` 要素の直後になければなりません。それ以外の場合は認識されません。
 
-### v-else-if
+### `v-else-if`
 
 > New in 2.1.0
 
@@ -78,7 +78,101 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 
 Similar to `v-else`, a `v-else-if` element must immediately follow a `v-if` or a `v-else-if` element.
 
-## v-show
+## `key` による再利用可能な要素の制御
+
+Vue は要素を可能な限り効率的に描画しようとしますが、スクラッチから描画する代わりにそれら要素を再利用することがよくあります。Vue を非常に速くするのに役立つ以外にも、これにはいくつかの便利な利点があります。たとえば、ユーザーが複数のログインタイプを切り替えることを許可する場合は、次のようにします:
+
+``` html
+<template v-if="loginType === 'username'">
+  <label>Username</label>
+  <input placeholder="Enter your username">
+</template>
+<template v-else>
+  <label>Email</label>
+  <input placeholder="Enter your email address">
+</template>
+```
+
+上記のコードで `loginType` を切り替えても、ユーザーが既に入力したものは消去されません。両方のテンプレートが同じ要素を使用するので、`<input>` は置き換えられません。単に `placeholder` です。
+
+input にテキストを入力して、トグルボタンを押して自分で確認してください：
+
+{% raw %}
+<div id="no-key-example" class="demo">
+  <div>
+    <template v-if="loginType === 'username'">
+      <label>Username</label>
+      <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address">
+    </template>
+  </div>
+  <button @click="toggleLoginType">Toggle login type</button>
+</div>
+<script>
+new Vue({
+  el: '#no-key-example',
+  data: {
+    loginType: 'username'
+  },
+  methods: {
+    toggleLoginType: function () {
+      return this.loginType = this.loginType === 'username' ? 'email' : 'username'
+    }
+  }
+})
+</script>
+{% endraw %}
+
+しかしこれは必ずしも望ましいことでないので、Vue はあなたに"この 2 つの要素は完全に別個のものであり、再利用しないでください" と伝える方法を提供します。それは、一意の値を持つ `key` 属性を追加するだけです:
+
+``` html
+<template v-if="loginType === 'username'">
+  <label>Username</label>
+  <input placeholder="Enter your username" key="username-input">
+</template>
+<template v-else>
+  <label>Email</label>
+  <input placeholder="Enter your email address" key="email-input">
+</template>
+```
+
+トグルするたびにこれらの input が最初から描画されます。自分で確認してみましょう:
+
+{% raw %}
+<div id="key-example" class="demo">
+  <div>
+    <template v-if="loginType === 'username'">
+      <label>Username</label>
+      <input placeholder="Enter your username" key="username-input">
+    </template>
+    <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address" key="email-input">
+    </template>
+  </div>
+  <button @click="toggleLoginType">Toggle login type</button>
+</div>
+<script>
+new Vue({
+  el: '#key-example',
+  data: {
+    loginType: 'username'
+  },
+  methods: {
+    toggleLoginType: function () {
+      return this.loginType = this.loginType === 'username' ? 'email' : 'username'
+    }
+  }
+})
+</script>
+{% endraw %}
+
+`<label>` 要素は、`key` 属性を持たないため、依然として効率的に再利用されていることに注意してください:
+
+## `v-show`
 
 条件的に要素を表示するための別のオプションは `v-show` です。使用方法はほとんど同じです:
 
@@ -90,7 +184,7 @@ Similar to `v-else`, a `v-else-if` element must immediately follow a `v-if` or a
 
 <p class="tip">`v-show` は `<template>` 構文をサポートせず、`v-else` とも連動しないということに注意してください。</p>
 
-## v-if vs v-show
+## `v-if` vs `v-show`
 
 `v-if` は、イベントリスナと子コンポーネント内部の条件ブロックが適切に破棄され、そして切り替えられるまでの間再作成されるため、”リアル”な条件レンダリングです。
 
