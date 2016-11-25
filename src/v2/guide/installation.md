@@ -62,7 +62,13 @@ resolve: {
 }
 ```
 
-Browserify に関しては、 [aliasify](https://github.com/benbria/aliasify) を使うことで同じ効果を発揮します。
+Browserify に関しては、package.json にエイリアスを追加することができます。
+
+``` js
+"browser": {
+  "vue": "vue/dist/vue.common"
+},
+```
 
 <p class="tip">`import Vue from 'vue/dist/vue'` をしないでください - いくつかのツールまたはサードパーティのライブラリもインポートしている可能性があります。これはアプリが同時にランタイムとスタンドアロンビルドをロードするとエラーを引き起こす恐れがあります。</p>
 
