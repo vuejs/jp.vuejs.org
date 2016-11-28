@@ -547,7 +547,7 @@ new Vue({
 コンポーネントと共に使用されるとき、これは簡単にできます:
 
 ``` html
-<input v-bind:value="something" v-on:input="something = arguments[0]">
+<custom-input v-bind:value="something" v-on:input="something = arguments[0]"></custom-input>
 ```
 
 そのため、コンポーネントを `v-model` と共に動かすためには、以下が必要です:
