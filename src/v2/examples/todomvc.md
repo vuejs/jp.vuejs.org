@@ -8,4 +8,4 @@ order: 9
 
 <p class="tip">あなたの Web ブラウザで 3rd-party データ/クッキーをブロックするよう設定している場合、`localeStorage` データは JSFiddle からの保存が失敗するため、以下の example は動作しない可能性があります。その場で結果を確認するためには、JSFiddle での Edit でクリックしなければなりません。</p>
 
-<iframe width="100%" height="500" src="https://jsfiddle.net/yyx990803/aump8a25/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="500" src="https://jsfiddle.net/yyx990803/4dr2fLb7/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
