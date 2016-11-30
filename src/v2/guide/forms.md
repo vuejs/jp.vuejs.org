@@ -10,6 +10,8 @@ form の input 要素 と textarea 要素で双方向 (two-way) データバイ�
 
 <p class="tip">`v-model` は、input または textarea に与えられた初期値を気にしません。input または textarea は常に、信頼できる情報源として Vue インスタンスを扱います。</p>
 
+<p class="tip" id="vmodel-ime-tip">[IME](https://en.wikipedia.org/wiki/Input_method) (中国語、日本語、韓国語、その他) が必須な言語に対しては、`v-model` は IME コンポジションの間は更新されないことに注意してください。これらの更新に対して対応したい場合は、`input` イベントを代わりに使用します。</p>
+
 ### テキスト
 
 ``` html
@@ -337,7 +339,7 @@ vm.selected.number // -> 123
 
 ### `.lazy`
 
-デフォルトでは、 `v-model` は各 `input` イベント後に、データと入力を同期します。 ``change` 、 イベント後に同期するように変更するために `lazy` 修飾子を追加することができます:
+デフォルトでは、 `v-model` は各 `input` イベント ([上記](#vmodel-ime-tip)の IME コンポジションを除いて) 後に、データと入力を同期します。 `change` 、 イベント後に同期するように変更するために `lazy` 修飾子を追加することができます:
 
 ``` html
 <!-- "input" の代わりに "change" 後に同期します -->
