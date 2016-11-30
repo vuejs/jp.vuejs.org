@@ -7,13 +7,5 @@
 <li><a href="/v2/api/" class="nav-link<%- page.path.match(/api/) ? ' current' : '' %>">API</a></li>
 <li><a href="/v2/examples/" class="nav-link<%- page.path.match(/examples/) ? ' current' : '' %>">例</a></li>
 <li><a href="/contribution/" class="nav-link<%- page.path.match(/contribution/) ? ' current' : '' %>">貢献</a></li>
-<li class="nav-dropdown-container">
-  <a class="nav-link">ブログ</a><span class="arrow"></span>
-  <ul class="nav-dropdown">
-    <li><a href="https://medium.com/the-vue-point" class="nav-link" target="_blank">英語</a></li>
-    <li><a href="/blog/" class="nav-link">日本語</a></li>
-  </ul>
-</li>
-<%- partial('partials/community_dropdown') %>
 <%- partial('partials/ecosystem_dropdown') %>
 <%- partial('partials/language_dropdown') %>
