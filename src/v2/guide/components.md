@@ -1012,7 +1012,7 @@ Vue.component(
 )
 ```
 
-<p class="tip">もしあなたが非同期コンポーネントを使いたい<strong>Browserify</strong> のユーザなら残念なことに不可能で、これからも使うことはできないでしょう。なぜなら、その開発者たちが[はっきりと](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224)非同期読み込みは Browserify は今後もサポートしないでしょう"とのべているからです。もしこれがあなたにとって大事な特徴であるなら、変わりに Webpack を使うことをおすすめします。</p>
+<p class="tip">もしあなたが非同期コンポーネントを使いたい<strong>Browserify</strong> のユーザなら残念なことに不可能で、これからも使うことはできないでしょう。公式には少なくとも、その開発者が[はっきりと](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224)非同期読み込みは Browserify は今後もサポートしない"と述べています。Browserify コミュニティは、既存のアプリケーションや複雑なアプリケーションに役立つ[いくつかの回避策](https://github.com/vuejs/vuejs.org/issues/620)があります。他のすべてのシナリオでは、ファーストクラスとして非同期サポートを組み込んで提供する Webpack を使用することをお勧めします。</p>
 
 ### コンポーネントの命名の慣習
 
