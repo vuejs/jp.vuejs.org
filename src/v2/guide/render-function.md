@@ -331,7 +331,7 @@ on: {
 | `.stop` | `event.stopPropagation()` |
 | `.prevent` | `event.preventDefault()` |
 | `.self` | `if (event.target !== event.currentTarget) return` |
-| キー:<br>`.enter`, `.13` | `if (event.keyCode !== 13) return` (他のキー修飾子に対して、`13` を[別のキーコード](keycode.info)に変更する) |
+| キー:<br>`.enter`, `.13` | `if (event.keyCode !== 13) return` (他のキー修飾子に対して、`13` を[別のキーコード](http://keycode.info/)に変更する) |
 | 修飾子キー:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return` (`ctrlKey` を `altKey`、`shiftKey`、または `metaKey`、それぞれ変更する) |
 
 以下に、これらの修飾子がすべて一緒に使用されている例を示します:
