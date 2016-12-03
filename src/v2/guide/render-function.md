@@ -294,8 +294,8 @@ render: function (createElement) {
       value: self.value
     },
     on: {
-      input: function (e) {
-        self.value = e.target.value
+      input: function (event) {
+        self.value = event.target.value
       }
     }
   })
@@ -303,6 +303,56 @@ render: function (createElement) {
 ```
 
 これは低レベルのコストですが、`v-model` と比較してインタラクションをより詳細に制御することもできます。
+
+### イベントとキー修飾子
+
+`.capture` と `.once` イベント修飾子に対して、Vue は `on` で使用できる接頭辞を提供しています:
+
+| 修飾子 | 接頭辞 |
+| ------ | ------ |
+| `.capture` | `!` |
+| `.once` | `~` |
+| `.capture.once` または <br>`.once.capture` | `~!` |
+
+例:
+
+```javascript
+on: {
+  '!click': this.doThisInCapturingMode,
+  '~keyup': this.doThisOnce,
+  '~!mouseover': this.doThisOnceInCapturingMode
+}
+```
+
+全ての他のイベントとキー修飾子に対しては、単にハンドラ内のイベントメソッドを使用できるため、独自の接頭辞は必要ありません:
+
+| 修飾子 | ハンドラに相当 |
+| ------ | ------ |
+| `.stop` | `event.stopPropagation()` |
+| `.prevent` | `event.preventDefault()` |
+| `.self` | `if (event.target !== event.currentTarget) return` |
+| キー:<br>`.enter`, `.13` | `if (event.keyCode !== 13) return` (他のキー修飾子に対して、`13` を[別のキーコード](keycode.info)に変更する) |
+| 修飾子キー:<br>`.ctrl`, `.alt`, `.shift`, `.meta` | `if (!event.ctrlKey) return` (`ctrlKey` を `altKey`、`shiftKey`、または `metaKey`、それぞれ変更する) |
+
+以下に、これらの修飾子がすべて一緒に使用されている例を示します:
+
+```javascript
+on: {
+  keyup: function (event) {
+    // イベントを発行している要素が、
+    // イベントが束縛されている要素でない場合は中止します。
+    if (event.target !== event.currentTarget) return
+    // up したキーが enter キー (13) でなく、
+    // shift キーが同時に押されていない場合は中止します。
+    if (!event.shiftKey || event.keyCode !== 13) return
+    // イベントの伝播を停止します。
+    event.stopPropagation()
+    // この要素に対する、デフォルトの keyup ハンドラを無効にします。
+    event.preventDefault()
+    // ...
+  }
+}
+```
 
 ### スロット
 
