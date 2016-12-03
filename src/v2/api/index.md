@@ -1507,6 +1507,9 @@ type: api
   <!-- 省略記法 -->
   <img :src="imageSrc">
 
+  <!-- インライン文字列連結 -->
+  <img :src="'/path/to/images/' + fileName">
+
   <!-- クラスバインディング -->
   <div :class="{ red: isRed }"></div>
   <div :class="[classA, classB]"></div>
