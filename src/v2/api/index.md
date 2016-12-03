@@ -81,7 +81,7 @@ type: api
 
 ### keyCodes
 
-- **型:** `{ [key: string]: number }`
+- **型:** `{ [key: string]: number | Array<number> }`
 
 - **デフォルト:** `{}`
 
@@ -91,7 +91,8 @@ type: api
   Vue.config.keyCodes = {
     v: 86,
     f1: 112,
-    mediaPlayPause: 179
+    mediaPlayPause: 179,
+    up: [38, 87]
   } 
   ```
 
