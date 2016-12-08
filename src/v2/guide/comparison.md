@@ -328,8 +328,7 @@ Polymer の Custom Elements は HTML ファイルの中に書くことになり�
 
 Riot 2.0 はよく似たコンポーネントベースの開発モデル（"タグ"と Riot では呼ばれています）を提供しており、必要最小限の美しく設計された API を持っています。Riot と Vue はおそらくその設計哲学の多くが共通しているのでしょう。しかしながら、Riot よりも少し重いにも関わらず、Vue はいくつか著しく優れた点を持っています：
 
-- 真の条件付きレンダリング。Riot はすべての if 分岐を描画し、そして単純にそれらを表示／非表示しています。
-- ずっと強力なルータ。Riot のルーティング API は極めて最小限です。
-- より熟成したツールのサポート。Vue は [Webpack](https://github.com/vuejs/vue-loader)、[Browserify](https://github.com/vuejs/vueify) の公式サポートを提供していますが、対して Riot はビルドシステムの統合についてはコミュニティのサポートに頼っています。
 - [トランジションエフェクトシステム](transitions.html)。Riot にはありません。
-- より優れた性能。仮想 DOM を使用しているという[宣伝をしているにも関わらず](https://github.com/vuejs/vuejs.org/issues/346)、Riot は実際には Dirty Checking を用いており、それにより Angular 1 と同じ性能問題に苦しめられています。
+- ずっと強力なルータ。Riot のルーティング API は極めて最小限です。
+- より優れた性能。Riot は 仮想 DOM を使用しているというよりむしろ[DOM ツリーをトラバース](http://riotjs.com/compare/#virtual-dom-vs-expressions-binding)しているため、Angular 1 と同じ性能問題に苦しめられています。
+- より熟成したツールのサポート。Vue は [Webpack](https://github.com/vuejs/vue-loader)、[Browserify](https://github.com/vuejs/vueify) の公式サポートを提供していますが、対して Riot はビルドシステムの統合についてはコミュニティのサポートに頼っています。
