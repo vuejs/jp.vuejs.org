@@ -274,7 +274,7 @@ Angular 2 は本当に完全に新しいフレームワークなので、私た�
 
 Angular 1 がより小さなアプリケーションのために使用することができたのに対して、Angular 2 は企業が作るような大きなアプリケーションに最適となるようにフォーカスが移っています。この一部として、それはほぼ TypeScript が必須となっています。TypeScript は Java や C# のような言語の型安全がほしい開発者にはとても役立つものです。
 
-Vue もまた、[企業での開発](https://github.com/vuejs/awesome-vue#enterprise-usage)によく適しており、また、特に私たちの[公式の型定義](https://github.com/vuejs/vue/tree/dev/types)や[ユーザーが貢献したデコレータ](https://github.com/itsFrank/vue-typescript)によって TypeScript で使用することができます。しかしながら、当然それは私たちの場合は当然オプションとなります。
+Vue もまた、[企業での開発](https://github.com/vuejs/awesome-vue#enterprise-usage)によく適しており、また、特に私たちの[公式の型定義](https://github.com/vuejs/vue/tree/dev/types)や[公式デコレータ](https://github.com/vuejs/vue-class-component)によって TypeScript で使用することができます。しかしながら、当然それは私たちの場合は当然オプションとなります。
 
 ### サイズと性能
 
