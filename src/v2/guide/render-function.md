@@ -176,7 +176,7 @@ createElement(
   // { name: props => VNode | Array<VNode> }
   // の 形式でのスコープ付きスロット
   scopedSlots: {
-    default: props => h('span', props.text)
+    default: props => createElement('span', props.text)
   },
   // コンポーネントの子があるならば、スロット名
   slot: 'name-of-slot',
@@ -388,7 +388,7 @@ render (createElement) {
       // scopedSlots を データオブジェクトに渡す
       scopedSlots: {
         default: function (props) {
-          return h('span', props.text)
+          return createElement('span', props.text)
         }
       }
     })
