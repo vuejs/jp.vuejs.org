@@ -1,30 +1,30 @@
 ---
-title: TypeScript Support
+title: TypeScript のサポート
 type: guide
 order: 25
 ---
 
-## Official Declaration Files
+## 公式宣言ファイル
 
-A static type system can help prevent many potential runtime errors, especially as applications grow. That's why Vue ships with [official type declarations](https://github.com/vuejs/vue/tree/dev/types) for [TypeScript](https://www.typescriptlang.org/) - not only in Vue core, but also [for Vue Router](https://github.com/vuejs/vue-router/tree/dev/types) and [for Vuex](https://github.com/vuejs/vuex/tree/dev/types) as well.
+静的型システムは、特にアプリケーションが成長するに伴い、多くの潜在的なランタイムエラーを防止するのに役立ちます。そのため、Vue は [TypeScript](https://www.typescriptlang.org/) 向けに[公式型宣言](https://github.com/vuejs/vue/tree/dev/types)を提供しており、Vue コアだけでなく [Vue Router](https://github.com/vuejs/vue-router/tree/dev/types) と [Vuex](https://github.com/vuejs/vuex/tree/dev/types) も同様に提供しています。
 
-Since these are [published on NPM](https://unpkg.com/vue/types/), you don't even need external tools like `Typings`, as declarations are automatically imported with Vue. That means all you need is a simple:
+これらは、[NPM で公開](https://unpkg.com/vue/types/)されているおり、Vue によって宣言が自動的にインポートされるので、`Typings` のような外部ツールは必要ありません。つまり、以下のように単純です:
 
 ``` ts
 import Vue = require('vue')
 ```
 
-Then all methods, properties, and parameters will be type checked. For example, if you misspell the `template` component option as `tempate` (missing the `l`), the TypeScript compiler will print an error message at compile time. If you're using an editor that can lint TypeScript, such as [Visual Studio Code](https://code.visualstudio.com/), you'll even be able to catch these errors before compilation:
+これにより、すべてのメソッド、プロパティ、およびパラメータが型チェックされます。例えば、`template` コンポーネントのオプションを `tempate` (`l` が欠けている)と間違えた場合、TypeScript コンパイラはコンパイル時にエラーメッセージを出力します。[Visual Studio Code](https://code.visualstudio.com/) のような、TypeScript を使用できるエディタを使用している場合、コンパイルする前にこれらのエラーをキャッチすることができます:
 
-![TypeScript Type Error in Visual Studio Code](/images/typescript-type-error.png)
+![Visual Studio Code での TypeScript による型エラー](/images/typescript-type-error.png)
 
-### Compilation Options
+### コンパイルオプション
 
-Vue's declaration files require the `--lib DOM,ES2015.Promise` [compiler option](https://www.typescriptlang.org/docs/handbook/compiler-options.html). You can pass this option to the `tsc` command or add the equivalent to a `tsconfig.json` file.
+Vue の宣言ファイルには `--lib DOM, ES2015.Promise` による[コンパイラオプション](https://www.typescriptlang.org/docs/handbook/compiler-options.html)が必要です。このオプションを `tsc` コマンドに渡すか、それと同等のものを `tsconfig.json` ファイルに追加することができます。
 
-### Accessing Vue's Type Declarations
+### Vue の型宣言へのアクセス
 
-If you want to annotate your own code with Vue's types, you can access them on Vue's exported object. For example, to annotate an exported component options object (e.g. in a `.vue` file):
+Vue の型で独自のコードにアノテート (annotate) したい場合は、Vue のエクスポートされたオブジェクトでそのコードにアクセスできます。例えば、以下は (`.vue` ファイルにおいて) エクスポートされたコンポーネントオプションオブジェクトにアノテートします:
 
 ``` ts
 import Vue = require('vue')
@@ -35,14 +35,14 @@ export default {
 } as Vue.ComponentOptions<Vue>
 ```
 
-## Class-Style Vue Components
+## クラススタイルの Vue コンポーネント
 
-Vue component options can easily be annotated with types:
+Vue のコンポーネントオプションは容易に型でアノテートできます:
 
 ``` ts
 import Vue = require('vue')
 
-// Declare the component's type
+// コンポーネントの型を宣言
 interface MyComponent extends Vue {
   message: string
   onClick (): void
@@ -57,42 +57,42 @@ export default {
   },
   methods: {
     onClick: function () {
-      // TypeScript knows that `this` is of type MyComponent
-      // and that `this.message` will be a string
+      // TypeScriptは `this` が MyComponent 型で、
+      // `this.message` が文字列であることを知っています
       window.alert(this.message)
     }
   }
-// We need to explicitly annotate the exported options object
-// with the MyComponent type
+// エクスポートされたオプションオブジェクトに
+// MyComponent 型を明示的にアノテートする必要があります
 } as Vue.ComponentOptions<MyComponent>
 ```
 
+残念ながら、ここではいくつかの制限があります:
 Unfortunately, there are a few limitations here:
 
-- __TypeScript can't infer all types from Vue's API.__ For example, it doesn't know that the `message` property returned in our `data` function will be added to the `MyComponent` instance. That means if we assigned a number or boolean value to `message`, linters and compilers wouldn't be able to raise an error, complaining that it should be a string.
+- __TypeScript は、Vue の API においてすべての型を推論することはできません。__ 例えば、`data` 関数で返された `message` プロパティが `MyComponent` インスタンスに追加されることはわかりません。これは、数値やブール値を `message` に代入すると、リンタとコンパイラは文字列でなければならないというエラーを出力することはできません。
+- この制限のため、__このようなアノテートする型は冗長になります。__ 文字列として `message` を手動で宣言しなければならない唯一の理由は、TypeScript がこの場合に型を推論することができないからです。
 
-- Because of the previous limitation, __annotating types like this can be verbose__. The only reason we have to manually declare `message` as a string is because TypeScript can't infer the type in this case.
-
-Fortunately, [vue-class-component](https://github.com/vuejs/vue-class-component) can solve both of these problems. It's an official companion library that allows you to declare components as native JavaScript classes, with a `@Component` decorator. As an example, let's rewrite the above component:
+幸いにも、[vue-class-component](https://github.com/vuejs/vue-class-component)は、これらの問題を両方解決できます。これは公式ライブラリで、`@Component` デコレータでコンポーネントをネイティブな JavaScript クラスとして宣言することができます。例として、上記のコンポーネントを書き直してみましょう:
 
 ``` ts
 import Vue = require('vue')
 import Component from 'vue-class-component'
 
-// The @Component decorator indicates the class is a Vue component
+// @Component デコレータはクラスが Vue コンポーネントであることを示します
 @Component({
-  // All component options are allowed in here
+  // ここではすべてのコンポーネントオプションが許可されています
   template: '<button @click="onClick">Click!</button>'
 })
 export default class MyComponent extends Vue {
-  // Initial data can be declared as instance properties
+  // 初期データはインスタンスプロパティとして宣言できます
   message: string = 'Hello!'
 
-  // Component methods can be declared as instance methods
+  // コンポーネントメソッドはインスタンスメソッドとして宣言できます
   onClick (): void {
     window.alert(this.message)
   }
 }
 ```
 
-With this syntax alternative, our component definition is not only shorter, but TypeScript can also infer the types of `message` and `onClick` without explicit interface declarations. This strategy even allows you to handle types for computed properties, lifecycle hooks, and render functions. For full usage details, see [the vue-class-component docs](https://github.com/vuejs/vue-class-component#vue-class-component).
+この構文では、コンポーネントの定義が短くなるだけでなく、明示的なインタフェース宣言がなくても `message` と `onClick` の型を推論することができます。この戦略では、算出プロパティ、ライフサイクルフック、描画関数の型を扱うこともできます。詳細な使用方法については、[vue-class-component のドキュメント](https://github.com/vuejs/vue-class-component#vue-class-component)を参照してください。
