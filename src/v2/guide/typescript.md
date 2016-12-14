@@ -8,7 +8,7 @@ order: 25
 
 静的型システムは、特にアプリケーションが成長するに伴い、多くの潜在的なランタイムエラーを防止するのに役立ちます。そのため、Vue は [TypeScript](https://www.typescriptlang.org/) 向けに[公式型宣言](https://github.com/vuejs/vue/tree/dev/types)を提供しており、Vue コアだけでなく [Vue Router](https://github.com/vuejs/vue-router/tree/dev/types) と [Vuex](https://github.com/vuejs/vuex/tree/dev/types) も同様に提供しています。
 
-これらは、[NPM で公開](https://unpkg.com/vue/types/)されているおり、Vue によって宣言が自動的にインポートされるので、`Typings` のような外部ツールは必要ありません。つまり、以下のように単純です:
+これらは、[NPM で公開](https://unpkg.com/vue/types/)されており、Vue によって宣言が自動的にインポートされるので、`Typings` のような外部ツールは必要ありません。つまり、以下のように単純です:
 
 ``` ts
 import Vue = require('vue')
