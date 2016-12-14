@@ -1,7 +1,7 @@
 ---
 title: Vue 1.x からの移行
 type: guide
-order: 25
+order: 26
 ---
 
 ## FAQ

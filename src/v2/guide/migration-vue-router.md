@@ -1,7 +1,7 @@
 ---
 title: Vue Router 0.7.x からの移行
 type: guide
-order: 26
+order: 27
 ---
 
 > Vue Router 2.0 は Vue 2.0 に対応する唯一のルータなので、 Vue を更新する場合には Vue Router も同様に更新する必要があります。2.0 のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Router を用いた包括的なドキュメントは [Vue Router キュメント](http://router.vuejs.org/ja/)を確認してください。
