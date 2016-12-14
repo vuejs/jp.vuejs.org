@@ -36,6 +36,7 @@ routing.md | ルーティング | [k2wanko](https://github.com/k2wanko)
 state-management.md | 状態管理 | [edwardkenfox](https://github.com/edwardkenfox)
 unit-testing.md | 単体テスト | [mikakane](https://github.com/mikakane)
 ssr.md | サーバサイドレンダリング | [mikakane](https://github.com/mikakane)
+typescript.md | TypeScript のサポート | [kazupon](https://github.com/kazupon)
 
 ### Migration - 移行
 ファイル | タイトル | 翻訳担当者
