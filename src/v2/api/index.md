@@ -79,6 +79,23 @@ type: api
 
   > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
 
+
+### ignoredElements
+
+- **型:** `Array<string>`
+
+- **デフォルト:** `[]`
+
+- **使用方法:**
+
+  ``` js
+  Vue.config.ignoredElements = [
+    'my-custom-web-component', 'another-web-component'
+  ]
+  ```
+
+  Vue の外部に定義されたカスタム要素を無視するようにします(例: Web Components の API を使用)。それ以外の場合は、グローバルコンポーネントを登録することを忘れたまたはコンポーネント名のスペルミスしたと仮定すると、`不明なカスタム要素`に関する警告がスローされます。
+
 ### keyCodes
 
 - **型:** `{ [key: string]: number | Array<number> }`
