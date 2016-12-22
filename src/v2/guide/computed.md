@@ -212,7 +212,7 @@ var watchExampleVM = new Vue({
     answer: 'I cannot give you an answer until you ask a question!'
   },
   watch: {
-    // この関数は questions が変わるごとに実行されます。
+    // この関数は question が変わるごとに実行されます。
     question: function (newQuestion) {
       this.answer = 'Waiting for you to stop typing...'
       this.getAnswer()
