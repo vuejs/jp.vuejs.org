@@ -1,5 +1,5 @@
 /*!
- * Vue.js v2.1.6
+ * Vue.js v2.1.7
  * (c) 2014-2016 Evan You
  * Released under the MIT License.
  */
@@ -219,13 +219,15 @@ function genStaticKeys (modules) {
  * if they are plain objects, do they have the same shape?
  */
 function looseEqual (a, b) {
-  /* eslint-disable eqeqeq */
-  return a == b || (
-    isObject(a) && isObject(b)
-      ? JSON.stringify(a) === JSON.stringify(b)
-      : false
-  )
-  /* eslint-enable eqeqeq */
+  var isObjectA = isObject(a);
+  var isObjectB = isObject(b);
+  if (isObjectA && isObjectB) {
+    return JSON.stringify(a) === JSON.stringify(b)
+  } else if (!isObjectA && !isObjectB) {
+    return String(a) === String(b)
+  } else {
+    return false
+  }
 }
 
 function looseIndexOf (arr, val) {
@@ -261,7 +263,7 @@ var config = {
   /**
    * Ignore certain custom elements
    */
-  ignoredElements: null,
+  ignoredElements: [],
 
   /**
    * Custom user key aliases for v-on
@@ -1219,10 +1221,10 @@ function validateProp (
   var absent = !hasOwn(propsData, key);
   var value = propsData[key];
   // handle boolean props
-  if (isBooleanType(prop.type)) {
+  if (isType(Boolean, prop.type)) {
     if (absent && !hasOwn(prop, 'default')) {
       value = false;
-    } else if (value === '' || value === hyphenate(key)) {
+    } else if (!isType(String, prop.type) && (value === '' || value === hyphenate(key))) {
       value = true;
     }
   }
@@ -1363,12 +1365,12 @@ function getType (fn) {
   return match && match[1]
 }
 
-function isBooleanType (fn) {
+function isType (type, fn) {
   if (!Array.isArray(fn)) {
-    return getType(fn) === 'Boolean'
+    return getType(fn) === getType(type)
   }
   for (var i = 0, len = fn.length; i < len; i++) {
-    if (getType(fn[i]) === 'Boolean') {
+    if (getType(fn[i]) === getType(type)) {
       return true
     }
   }
@@ -2223,6 +2225,31 @@ function fnInvoker (o) {
 
 /*  */
 
+// The template compiler attempts to minimize the need for normalization by
+// statically analyzing the template at compile time.
+//
+// For plain HTML markup, normalization can be completely skipped because the
+// generated render function is guaranteed to return Array<VNode>. There are
+// two cases where extra normalization is needed:
+
+// 1. When the children contains components - because a functional component
+// may return an Array instead of a single root. In this case, just a simple
+// nomralization is needed - if any child is an Array, we flatten the whole
+// thing with Array.prototype.concat. It is guaranteed to be only 1-level deep
+// because functional components already normalize their own children.
+function simpleNormalizeChildren (children) {
+  for (var i = 0; i < children.length; i++) {
+    if (Array.isArray(children[i])) {
+      return Array.prototype.concat.apply([], children)
+    }
+  }
+  return children
+}
+
+// 2. When the children contains constrcuts that always generated nested Arrays,
+// e.g. <template>, <slot>, v-for, or when the children is provided by user
+// with hand-written render functions / JSX. In such cases a full normalization
+// is needed to cater to all possible types of children values.
 function normalizeChildren (children) {
   return isPrimitive(children)
     ? [createTextVNode(children)]
@@ -2901,6 +2928,9 @@ function mergeHook$1 (one, two) {
 
 /*  */
 
+var SIMPLE_NORMALIZE = 1;
+var ALWAYS_NORMALIZE = 2;
+
 // wrapper function for providing a more flexible interface
 // without getting yelled at by flow
 function createElement (
@@ -2908,16 +2938,16 @@ function createElement (
   tag,
   data,
   children,
-  needNormalization,
+  normalizationType,
   alwaysNormalize
 ) {
   if (Array.isArray(data) || isPrimitive(data)) {
-    needNormalization = children;
+    normalizationType = children;
     children = data;
     data = undefined;
   }
-  if (alwaysNormalize) { needNormalization = true; }
-  return _createElement(context, tag, data, children, needNormalization)
+  if (alwaysNormalize) { normalizationType = ALWAYS_NORMALIZE; }
+  return _createElement(context, tag, data, children, normalizationType)
 }
 
 function _createElement (
@@ -2925,7 +2955,7 @@ function _createElement (
   tag,
   data,
   children,
-  needNormalization
+  normalizationType
 ) {
   if (data && data.__ob__) {
     "development" !== 'production' && warn(
@@ -2946,8 +2976,10 @@ function _createElement (
     data.scopedSlots = { default: children[0] };
     children.length = 0;
   }
-  if (needNormalization) {
+  if (normalizationType === ALWAYS_NORMALIZE) {
     children = normalizeChildren(children);
+  } else if (normalizationType === SIMPLE_NORMALIZE) {
+    children = simpleNormalizeChildren(children);
   }
   var vnode, ns;
   if (typeof tag === 'string') {
@@ -2966,7 +2998,6 @@ function _createElement (
       // unknown or unlisted namespaced elements
       // check at runtime because it may get assigned a namespace when its
       // parent normalizes children
-      ns = tag === 'foreignObject' ? 'xhtml' : ns;
       vnode = new VNode(
         tag, data, children,
         undefined, undefined, context
@@ -2986,6 +3017,10 @@ function _createElement (
 
 function applyNS (vnode, ns) {
   vnode.ns = ns;
+  if (vnode.tag === 'foreignObject') {
+    // use default namespace inside foreignObject
+    return
+  }
   if (vnode.children) {
     for (var i = 0, l = vnode.children.length; i < l; i++) {
       var child = vnode.children[i];
@@ -3008,7 +3043,7 @@ function initRender (vm) {
   vm.$scopedSlots = {};
   // bind the createElement fn to this instance
   // so that we get proper render context inside it.
-  // args order: tag, data, children, needNormalization, alwaysNormalize
+  // args order: tag, data, children, normalizationType, alwaysNormalize
   // internal version is used by render functions compiled from templates
   vm._c = function (a, b, c, d) { return createElement(vm, a, b, c, d, false); };
   // normalization is always applied for the public version, used in
@@ -3152,7 +3187,7 @@ function renderMixin (Vue) {
     render
   ) {
     var ret, i, l, keys, key;
-    if (Array.isArray(val)) {
+    if (Array.isArray(val) || typeof val === 'string') {
       ret = new Array(val.length);
       for (i = 0, l = val.length; i < l; i++) {
         ret[i] = render(val[i], i);
@@ -3177,11 +3212,16 @@ function renderMixin (Vue) {
   Vue.prototype._t = function (
     name,
     fallback,
-    props
+    props,
+    bindObject
   ) {
     var scopedSlotFn = this.$scopedSlots[name];
     if (scopedSlotFn) { // scoped slot
-      return scopedSlotFn(props || {}) || fallback
+      props = props || {};
+      if (bindObject) {
+        extend(props, bindObject);
+      }
+      return scopedSlotFn(props) || fallback
     } else {
       var slotNodes = this.$slots[name];
       // warn duplicate slot usage
@@ -3609,7 +3649,7 @@ Object.defineProperty(Vue$3.prototype, '$isServer', {
   get: isServerRendering
 });
 
-Vue$3.version = '2.1.6';
+Vue$3.version = '2.1.7';
 
 /*  */
 
@@ -3725,8 +3765,7 @@ function stringifyClass (value) {
 
 var namespaceMap = {
   svg: 'http://www.w3.org/2000/svg',
-  math: 'http://www.w3.org/1998/Math/MathML',
-  xhtml: 'http://www.w3.org/1999/xhtml'
+  math: 'http://www.w3.org/1998/Math/MathML'
 };
 
 var isHTMLTag = makeMap(
@@ -3996,16 +4035,16 @@ function createPatchFunction (backend) {
   function createRmCb (childElm, listeners) {
     function remove$$1 () {
       if (--remove$$1.listeners === 0) {
-        removeElement(childElm);
+        removeNode(childElm);
       }
     }
     remove$$1.listeners = listeners;
     return remove$$1
   }
 
-  function removeElement (el) {
+  function removeNode (el) {
     var parent = nodeOps.parentNode(el);
-    // element may have already been removed due to v-html
+    // element may have already been removed due to v-html / v-text
     if (parent) {
       nodeOps.removeChild(parent, el);
     }
@@ -4029,7 +4068,7 @@ function createPatchFunction (backend) {
         if (
           !inPre &&
           !vnode.ns &&
-          !(config.ignoredElements && config.ignoredElements.indexOf(tag) > -1) &&
+          !(config.ignoredElements.length && config.ignoredElements.indexOf(tag) > -1) &&
           config.isUnknownElement(tag)
         ) {
           warn(
@@ -4207,7 +4246,7 @@ function createPatchFunction (backend) {
           removeAndInvokeRemoveHook(ch);
           invokeDestroyHook(ch);
         } else { // Text node
-          nodeOps.removeChild(parentElm, ch.elm);
+          removeNode(ch.elm);
         }
       }
     }
@@ -4237,7 +4276,7 @@ function createPatchFunction (backend) {
         rm();
       }
     } else {
-      removeElement(vnode.elm);
+      removeNode(vnode.elm);
     }
   }
 
@@ -4498,7 +4537,6 @@ function createPatchFunction (backend) {
           // create an empty node and replace it
           oldVnode = emptyNodeAt(oldVnode);
         }
-
         // replacing existing element
         elm = oldVnode.elm;
         parent = nodeOps.parentNode(elm);
@@ -4550,6 +4588,7 @@ function updateDirectives (oldVnode, vnode) {
 
 function _update (oldVnode, vnode) {
   var isCreate = oldVnode === emptyNode;
+  var isDestroy = vnode === emptyNode;
   var oldDirs = normalizeDirectives$1(oldVnode.data.directives, oldVnode.context);
   var newDirs = normalizeDirectives$1(vnode.data.directives, vnode.context);
 
@@ -4601,7 +4640,7 @@ function _update (oldVnode, vnode) {
     for (key in oldDirs) {
       if (!newDirs[key]) {
         // no longer present, unbind
-        callHook$1(oldDirs[key], 'unbind', oldVnode);
+        callHook$1(oldDirs[key], 'unbind', oldVnode, oldVnode, isDestroy);
       }
     }
   }
@@ -4633,10 +4672,10 @@ function getRawDirName (dir) {
   return dir.rawName || ((dir.name) + "." + (Object.keys(dir.modifiers || {}).join('.')))
 }
 
-function callHook$1 (dir, hook, vnode, oldVnode) {
+function callHook$1 (dir, hook, vnode, oldVnode, isDestroy) {
   var fn = dir.def && dir.def[hook];
   if (fn) {
-    fn(vnode.elm, dir, vnode, oldVnode);
+    fn(vnode.elm, dir, vnode, oldVnode, isDestroy);
   }
 }
 
@@ -4810,16 +4849,20 @@ function updateDOMProps (oldVnode, vnode) {
       if (vnode.children) { vnode.children.length = 0; }
       if (cur === oldProps[key]) { continue }
     }
+    // #4521: if a click event triggers update before the change event is
+    // dispatched on a checkbox/radio input, the input's checked state will
+    // be reset and fail to trigger another update.
+    /* istanbul ignore next */
+    if (key === 'checked' && !isDirty(elm, cur)) {
+      continue
+    }
     if (key === 'value') {
       // store value as _value as well since
       // non-string values will be stringified
       elm._value = cur;
       // avoid resetting cursor position when value is the same
       var strCur = cur == null ? '' : String(cur);
-      if (!elm.composing && (
-        (document.activeElement !== elm && elm.value !== strCur) ||
-        isValueChanged(vnode, strCur)
-      )) {
+      if (shouldUpdateValue(elm, vnode, strCur)) {
         elm.value = strCur;
       }
     } else {
@@ -4828,7 +4871,29 @@ function updateDOMProps (oldVnode, vnode) {
   }
 }
 
-function isValueChanged (vnode, newVal) {
+// check platforms/web/util/attrs.js acceptValue
+
+
+function shouldUpdateValue (
+  elm,
+  vnode,
+  checkVal
+) {
+  if (!elm.composing && (
+    vnode.tag === 'option' ||
+    isDirty(elm, checkVal) ||
+    isInputChanged(vnode, checkVal)
+  )) {
+    return true
+  }
+  return false
+}
+
+function isDirty (elm, checkVal) {
+  return document.activeElement !== elm && elm.value !== checkVal
+}
+
+function isInputChanged (vnode, newVal) {
   var value = vnode.elm.value;
   var modifiers = vnode.elm._vModifiers; // injected by v-model runtime
   if ((modifiers && modifiers.number) || vnode.elm.type === 'number') {
@@ -5283,9 +5348,9 @@ function enter (vnode, toggleDisplay) {
   beforeEnterHook && beforeEnterHook(el);
   if (expectsCSS) {
     addTransitionClass(el, startClass);
-    addTransitionClass(el, activeClass);
     nextFrame(function () {
       removeTransitionClass(el, startClass);
+      addTransitionClass(el, activeClass);
       if (!cb.cancelled && !userWantsControl) {
         whenTransitionEnds(el, type, cb);
       }
@@ -5375,9 +5440,9 @@ function leave (vnode, rm) {
     beforeLeave && beforeLeave(el);
     if (expectsCSS) {
       addTransitionClass(el, leaveClass);
-      addTransitionClass(el, leaveActiveClass);
       nextFrame(function () {
         removeTransitionClass(el, leaveClass);
+        addTransitionClass(el, leaveActiveClass);
         if (!cb.cancelled && !userWantsControl) {
           whenTransitionEnds(el, type, cb);
         }
@@ -5623,6 +5688,7 @@ var show = {
       el.style.display = value ? originalDisplay : 'none';
     }
   },
+
   update: function update (el, ref, vnode) {
     var value = ref.value;
     var oldValue = ref.oldValue;
@@ -5644,6 +5710,18 @@ var show = {
       }
     } else {
       el.style.display = value ? el.__vOriginalDisplay : 'none';
+    }
+  },
+
+  unbind: function unbind (
+    el,
+    binding,
+    vnode,
+    oldVnode,
+    isDestroy
+  ) {
+    if (!isDestroy) {
+      el.style.display = el.__vOriginalDisplay;
     }
   }
 };
@@ -6780,7 +6858,7 @@ function parse (
         "development" !== 'production' && warn$1(
           'Templates should only be responsible for mapping the state to the ' +
           'UI. Avoid placing tags with side-effects in your templates, such as ' +
-          "<" + tag + ">."
+          "<" + tag + ">" + ', as they will not be parsed.'
         );
       }
 
@@ -6917,19 +6995,20 @@ function parse (
           currentParent.attrsMap.placeholder === text) {
         return
       }
+      var children = currentParent.children;
       text = inPre || text.trim()
         ? decodeHTMLCached(text)
         // only preserve whitespace if its not right after a starting tag
-        : preserveWhitespace && currentParent.children.length ? ' ' : '';
+        : preserveWhitespace && children.length ? ' ' : '';
       if (text) {
         var expression;
         if (!inVPre && text !== ' ' && (expression = parseText(text, delimiters))) {
-          currentParent.children.push({
+          children.push({
             type: 2,
             expression: expression,
             text: text
           });
-        } else {
+        } else if (text !== ' ' || children[children.length - 1].text !== ' ') {
           currentParent.children.push({
             type: 3,
             text: text
@@ -7040,6 +7119,23 @@ function processIfConditions (el, parent) {
   }
 }
 
+function findPrevElement (children) {
+  var i = children.length;
+  while (i--) {
+    if (children[i].type === 1) {
+      return children[i]
+    } else {
+      if ("development" !== 'production' && children[i].text !== ' ') {
+        warn$1(
+          "text \"" + (children[i].text.trim()) + "\" between v-if and v-else(-if) " +
+          "will be ignored."
+        );
+      }
+      children.pop();
+    }
+  }
+}
+
 function addIfCondition (el, condition) {
   if (!el.ifConditions) {
     el.ifConditions = [];
@@ -7147,6 +7243,15 @@ function processAttrs (el) {
         }
       }
       addAttr(el, name, JSON.stringify(value));
+      // #4530 also bind special attributes as props even if they are static
+      // so that patches between dynamic/static are consistent
+      if (platformMustUseProp(el.tag, name)) {
+        if (name === 'value') {
+          addProp(el, name, JSON.stringify(value));
+        } else {
+          addProp(el, name, 'true');
+        }
+      }
     }
   }
 }
@@ -7180,13 +7285,6 @@ function makeAttrsMap (attrs) {
     map[attrs[i].name] = attrs[i].value;
   }
   return map
-}
-
-function findPrevElement (children) {
-  var i = children.length;
-  while (i--) {
-    if (children[i].tag) { return children[i] }
-  }
 }
 
 function isForbiddenTag (el) {
@@ -7454,6 +7552,7 @@ var warn$2;
 var transforms$1;
 var dataGenFns;
 var platformDirectives$1;
+var isPlatformReservedTag$1;
 var staticRenderFns;
 var onceCount;
 var currentOptions;
@@ -7472,6 +7571,7 @@ function generate (
   transforms$1 = pluckModuleFunction(options.modules, 'transformCode');
   dataGenFns = pluckModuleFunction(options.modules, 'genData');
   platformDirectives$1 = options.directives || {};
+  isPlatformReservedTag$1 = options.isReservedTag || no;
   var code = ast ? genElement(ast) : '_c("div")';
   staticRenderFns = prevStaticRenderFns;
   onceCount = prevOnceCount;
@@ -7711,25 +7811,38 @@ function genChildren (el, checkSkip) {
         el$1.tag !== 'slot') {
       return genElement(el$1)
     }
+    var normalizationType = getNormalizationType(children);
     return ("[" + (children.map(genNode).join(',')) + "]" + (checkSkip
-        ? canSkipNormalization(children) ? '' : ',true'
+        ? normalizationType ? ("," + normalizationType) : ''
         : ''))
   }
 }
 
-function canSkipNormalization (children) {
+// determine the normalzation needed for the children array.
+// 0: no normalization needed
+// 1: simple normalization needed (possible 1-level deep nested array)
+// 2: full nomralization needed
+function getNormalizationType (children) {
   for (var i = 0; i < children.length; i++) {
     var el = children[i];
     if (needsNormalization(el) ||
         (el.if && el.ifConditions.some(function (c) { return needsNormalization(c.block); }))) {
-      return false
+      return 2
+    }
+    if (maybeComponent(el) ||
+        (el.if && el.ifConditions.some(function (c) { return maybeComponent(c.block); }))) {
+      return 1
     }
   }
-  return true
+  return 0
 }
 
 function needsNormalization (el) {
   return el.for || el.tag === 'template' || el.tag === 'slot'
+}
+
+function maybeComponent (el) {
+  return el.type === 1 && !isPlatformReservedTag$1(el.tag)
 }
 
 function genNode (node) {
@@ -7749,7 +7862,19 @@ function genText (text) {
 function genSlot (el) {
   var slotName = el.slotName || '"default"';
   var children = genChildren(el);
-  return ("_t(" + slotName + (children ? ("," + children) : '') + (el.attrs ? ((children ? '' : ',null') + ",{" + (el.attrs.map(function (a) { return ((camelize(a.name)) + ":" + (a.value)); }).join(',')) + "}") : '') + ")")
+  var res = "_t(" + slotName + (children ? ("," + children) : '');
+  var attrs = el.attrs && ("{" + (el.attrs.map(function (a) { return ((camelize(a.name)) + ":" + (a.value)); }).join(',')) + "}");
+  var bind$$1 = el.attrsMap['v-bind'];
+  if ((attrs || bind$$1) && !children) {
+    res += ",null";
+  }
+  if (attrs) {
+    res += "," + attrs;
+  }
+  if (bind$$1) {
+    res += (attrs ? '' : ',null') + "," + bind$$1;
+  }
+  return res + ')'
 }
 
 // componentName is el.component, take it as argument to shun flow's pessimistic refinement
