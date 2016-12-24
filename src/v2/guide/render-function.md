@@ -178,7 +178,7 @@ createElement(
   scopedSlots: {
     default: props => createElement('span', props.text)
   },
-  // コンポーネントの子があるならば、スロット名
+  // 他のコンポーネントの子があるならば、そのスロット名
   slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
   key: 'myKey',
