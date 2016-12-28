@@ -1,18 +1,26 @@
 ---
-title: 本番環境への配信
+title: プロダクション環境への配信のヒント
 type: guide
 order: 20
 ---
 
-## 警告の取り除き
+## プロダクションモードを有効にする
 
-縮小されたスタンドアローンビルド版 Vue ではファイルサイズを小さくするために全ての警告を取り除いていますが、 Webpack や Browserify のようなツールを利用している場合にこれを成し遂げるには多少の設定が必要です。
+開発中、Vue は一般的なエラーや落とし穴に役立つ多くの警告を表示します。しかし、これらの警告文字列は、プロダクション環境では役に立たなくなり、アプリケーションのペイロードサイズが大きくなります。さらに、これらの警告チェックの中には、運用モードで回避できるランタイムコストが小さいものがあります。
 
-### Webpack
+### ビルドツールなし
+
+スタンドアロンビルドを使用している場合、つまりビルドツールなしで直接スクリプトタグを使用して Vue を組み込む場合は、縮小バージョン (`vue.min.js`) をプロダクション用に使用してください。
+
+### ビルドツールあり
+
+Webpack や Browserify のようなビルドツールを使用する場合、プロダクションモードは Vue のソースコード内の `process.env.NODE_ENV` によって決定され、デフォルトで開発モードになります。どちらのビルドツールも、この変数を上書きして Vue のプロダクションモードを有効にする方法を提供します。ビルド中に警告が縮小ツール (minifier) によって取り除かれます。全ての `vue-cli` テンプレートにはあなたのためにあらかじめ設定されたテンプレートがありますが、それがどのように行われるかを知ることは有益でしょう:
+
+#### Webpack
 
 Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使用して本番環境を指定してください。そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下は設定例です:
 
-``` js
+```javascript
 var webpack = require('webpack')
 
 module.exports = {
@@ -23,19 +31,14 @@ module.exports = {
       'process.env': {
         NODE_ENV: '"production"'
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
     })
   ]
 }
 ```
 
-### Browserify
+#### Browserify
 
-- `NODE_ENV` に `"production"` をセットしてビルドコマンドを実行してください。これは `vueify` にホットリローディングと開発関連コードを含まないことを伝えます。
+- `"production"` に設定した `NODE_ENV` 環境変数を使ってバンドリングコマンドを実行してください。これは `vueify` にホットリロードと開発関連のコードを含まないように指示します。
 - あなたのバンドルに [envify](https://github.com/hughsk/envify) グローバル変換を適用してください。 これは minifier で Vue ソースコード内で環境変数の条件上で囲われた箇所全てを取り除くことを許可します。
 
 
@@ -43,18 +46,37 @@ module.exports = {
 NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 ```
 
-- 別の CSS ファイルに抽出するには、 vueify に含まれている CSS 抽出プラグインを使用してください。
+#### Rollup
 
-``` bash
-NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o build.css ] -e main.js | uglifyjs -c -m > build.js
+[rollup-plugin-replace](https://github.com/rollup/rollup-plugin-replace) を使用します:
+
+```javascript
+const replace = require('rollup-plugin-replace')
+
+rollup({
+  // ...
+  plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify( 'production' )
+    })
+  ]
+}).then(...)
 ```
+
+## テンプレートのプリコンパイル
+
+DOM 内のテンプレートまたは JavaScript 内のテンプレート文字列を使用する場合、テンプレートから描画関数へのコンパイルはその場 (on the fly) で実行されます。通常、ほとんどの場合、これは十分高速ですが、アプリケーションのパフォーマンスが重要な場合は避けるのが最善です。テンプレートをプリコンパイルする最も簡単な方法は、[単一ファイルコンポーネント](./single-file-components.html)を使用することです。関連するビルドのセットアップは自動的にプリコンパイルを実行するため、ビルドされたコードには生のテンプレート文字列ではなくすでにコンパイルされた描画関数が含まれています。
+
+## コンポーネント CSS の抽出
+
+単一ファイルコンポーネントを使用する場合、コンポーネント内の CSS は JavaScript を介して `<style>` タグとして動的に挿入されます。これは実行時のコストが低く、サーバー側のレンダリングを使用している場合は、"スタイルのないコンテンツのフラッシュ"が発生します。すべてのコンポーネントにわたって CSS を同じファイルに抽出し、これらの問題を回避するには、より良い CSS の縮小化 (minification) とキャッシングをするのがより良いです。
+
+それぞれのビルドツールのドキュメントを参照してください:
+
+- [Webpack + vue-loader](http://vue-loader.vuejs.org/en/configurations/extract-css.html) (`vue-cli` の webpack テンプレートは既に設定済み)
+- [Browserify + vueify](https://github.com/vuejs/vueify#css-extraction)
+- [Rollup + rollup-plugin-vue](https://github.com/znck/rollup-plugin-vue#options)
 
 ## ランタイムエラーの追跡
 
 コンポーネントの描画中にエラーが発生した場合、グローバルな `Vue.config.errorHandler` 関数に設定された関数にそれが渡されます。このフックを Vue 向けに[公式に統合された](https://sentry.io/for/vue/) [Sentry](https://sentry.io) のようなエラー追跡サービスと共に使用することは良いアイデアです。
-
-## CSS の抽出
-
-[単一ファイルコンポーネント](./single-file-components.html) を使用するとき、`<style>` タグは開発している間実行中に注入されます。プロダクション環境では、すべてのコンポーネントのスタイルを単一の CSS ファイルに抽出することができます。これを達成する方法の詳細については、[vue-loader](http://vue-loader.vuejs.org/en/configurations/extract-css.html) および [vueify](https://github.com/vuejs/vueify#css-extraction) を参照してください。
-
-`vue-cli` から 公式に利用する `webpack` テンプレートは、そのまま既に設定されています。
