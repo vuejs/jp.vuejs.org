@@ -31,7 +31,7 @@ custom-directive.md | カスタムディレクティブ | [massa142](https://git
 mixins.md | ミックスイン | [toshilow](https://github.com/toshilow) 
 plugins.md | プラグイン | [kdnk](https://github.com/kdnk)
 single-file-components.md | 単一ファイルコンポーネント | [hypermkt](https://github.com/hypermkt)
-deployment.md | 本番環境への配信 | [kazupon](https://github.com/kazupon)
+deployment.md | プロダクション環境への配信のヒント | [kazupon](https://github.com/kazupon)
 routing.md | ルーティング | [k2wanko](https://github.com/k2wanko)
 state-management.md | 状態管理 | [edwardkenfox](https://github.com/edwardkenfox)
 unit-testing.md | 単体テスト | [mikakane](https://github.com/mikakane)
