@@ -64,6 +64,7 @@ join.md | Vue.js コミュニティへ参加しましょう! | [sshono1210](http
 ----- |  ------------- | ---
 Retiring vue-resource | vue-resource の引退について | [chi-bd](https://github.com/chi-bd)
 Vue 2.0 is Here! | Vue.js 2.0 が来ました！ | [chi-bd](https://github.com/chi-bd)
+Vue in 2016 | 2016年の Vue | [chi-bd](https://github.com/chi-bd)
 
 ## Vue.js コアチームからの謝辞！
 日本語公式サイトの翻訳、レビュー、修正などに貢献された全ての方々に大変感謝いたします！
