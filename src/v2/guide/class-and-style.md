@@ -153,7 +153,7 @@ Vue.component('my-component', {
 
 ### オブジェクト構文
 
-`v-bind:style`向けのオブジェクト構文は非常に簡単です。それは、JavaScript オブジェクトを除いては、ほとんど CSS のように見えます。CSS プロパティ名に対して、キャメルケース (caml-case) またはケバブケース (kebab-case) のどちらでも使用することができます:
+`v-bind:style`向けのオブジェクト構文は非常に簡単です。それは、JavaScript オブジェクトを除いては、ほとんど CSS のように見えます。CSS プロパティ名に対して、キャメルケース (caml-case) またはケバブケース (kebab-case: クォート`'`された) のどちらでも使用することができます:
 
 ``` html
 <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
