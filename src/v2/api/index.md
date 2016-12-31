@@ -1333,7 +1333,7 @@ type: api
 
   このディレクティブは条件が変更されたとき、トランジションをトリガーします。
 
-  <p class="tip">When used together with v-if, v-for has a higher priority than v-if. See the <a href="../guide/list.html#v-for-with-v-if">list rendering guide</a> for details.</p>
+  <p class="tip">`v-if` といっしょに使用されるとき、`v-for` は `v-if` より優先度が高くなります。詳細については<a href="../guide/list.html#v-for-と-v-if">リストレンダリングのガイド</a>を参照してください。</p>
 
 - **参照:** [条件付きレンダリング - v-if](../guide/conditional.html)
 
@@ -1418,7 +1418,7 @@ type: api
   </div>
   ```
 
-  <p class="tip">When used together with v-if, v-for has a higher priority than v-if. See the <a href="../guide/list.html#v-for-with-v-if">list rendering guide</a> for details.</p>
+  <p class="tip">`v-if` といっしょに使用されるとき、`v-for` は `v-if` より優先度が高くなります。詳細については<a href="../guide/list.html#v-for-と-v-if">リストレンダリングのガイド</a>を参照してください。</p>
 
   `v-for` の詳細な使用方法は下記にリンクしたガイドセクション内で説明しています。
 
