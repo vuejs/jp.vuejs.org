@@ -329,6 +329,89 @@ new Vue({
 </script>
 {% endraw %}
 
+### V-for and v-if
+
+In Vue.js template, v-for has a higher priority than v-if when they exists in the same node.
+
+Suppose the example code bellow: 
+
+```html
+<div id="v-for-if"  class="demo">
+  <div v-for="item in list" v-if="item"><div>{{ item }}</div></div>
+  <div v-for="item2 in list2" v-else><div>{{ item2 }}</div></div>
+</div>
+```
+
+```js
+new Vue({
+  el: '#v-for-if',
+  data: {
+    list: [0, false, 1],
+    list2: [4, 5, 6]    
+  }
+})
+```
+
+
+Because v-for has higher priority than v-if, Vue.js will loop item in the list first. If item is true, it will output `item` value, else it will loop list2 and output the items of it.
+
+So the result of the above example code will be:
+ 
+{% raw %}
+<div id="v-for-if" class="demo">
+  <div v-for="item in list" v-if="item"><div>{{ item }}</div></div>
+  <div v-for="item2 in list2" v-else><div>{{ item2 }}</div></div>
+</div>
+<script>
+new Vue({
+  el: '#v-for-if',
+  data: {
+    list: [0, false, 1],
+    list2: [4, 5, 6]    
+  }
+})
+</script>
+{% endraw %} 
+
+Let's see a complicated example. This example shows the case that v-for, v-if, v-else-if and v-else used together.
+
+```html
+<div id="v-for-if-complicated" class="demo">
+  <div v-for="item in list" v-if="item"><div>{{ item }}</div></div>
+  <div v-for="item2 in list2" v-else-if="item === false"><div>{{ item2 }}</div></div>
+  <div v-else><div>else</div></div>
+</div>
+```
+
+```js
+new Vue({
+  el: '#v-for-if-complicated',
+  data: {
+    list: [0, false, 1],
+    list2: [4, 5, 6]    
+  }
+})
+```
+
+Result:
+ 
+{% raw %}
+<div id="v-for-if-complicated" class="demo">
+  <div v-for="item in list" v-if="item"><div>{{ item }}</div></div>
+  <div v-for="item2 in list2" v-else-if="item === false"><div>{{ item2 }}</div></div>
+  <div v-else><div>else</div></div>
+</div>
+<script>
+new Vue({
+  el: '#v-for-if-complicated',
+  data: {
+    list: [0, false, 1],
+    list2: [4, 5, 6]    
+  }
+})
+</script>
+{% endraw %} 
+
 ## key
 
 Vue が `v-for` で描画された要素のリストを更新する際、標準では "その場でパッチを適用する" (in-place patch) 戦略が用いられます。もしデータのアイテムの順番が変更されたら、代わりに DOM 要素を項目の順序と一致するように移動させます。Vue は各要素にその場でパッチを適用して、その特定のインデックスで描画される必要があるのかどうか、それを反映するのを確認します。これは Vue 1.x にあった機能の `track-by="$index"` に似たものです。

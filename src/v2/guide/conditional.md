@@ -193,3 +193,7 @@ new Vue({
 一方で、`v-show` はとてもシンプルです。要素は初期条件に関わらず常に描画され、シンプルな CSS ベースの切り替えとして保存されます。
 
 一般的に、`v-if` はより高い切り替えコストを持っているのに対して、 `v-show` はより高い初期描画コストを持っています。 そのため、とても頻繁に何かを切り替える必要があれば `v-show` を選び、条件が実行時に変更することがほとんどない場合は、`v-if` を選びます。
+
+## `v-if` with `v-for`
+ 
+When used together with `v-for`, `v-for` has a higher priority than `v-if`. See the <a href="../guide/list.html#V-for-and-v-if">list rendering guide</a> for details.
