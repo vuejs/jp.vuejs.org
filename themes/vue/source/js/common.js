@@ -26,8 +26,11 @@
       })
     }
 
-    function createSourceSearchPath (query) {
-      return 'https://github.com/search?utf8=%E2%9C%93&q=repo%3Avuejs%2Fvue+extension%3Ajs+' + encodeURIComponent(query) + '+&type=Code'
+    function createSourceSearchPath(query) {
+      query = query
+        .replace(/\([^\)]*?\)/g, '')
+        .replace(/vm\./g, 'Vue.prototype.')
+      return 'https://github.com/search?utf8=%E2%9C%93&q=repo%3Avuejs%2Fvue+extension%3Ajs+' + encodeURIComponent('"' + query + '"') + '&type=Code'
     }
   }
 
