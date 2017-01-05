@@ -327,3 +327,7 @@ Vue.component({
 
 - [vue-server-renderer ドキュメント](https://www.npmjs.com/package/vue-server-renderer#api): ここで触れた内容に関するより詳しい解説に加え、[複数リクエストによる汚染防止](https://www.npmjs.com/package/vue-server-renderer#why-use-bundlerenderer) や [サーバ向けのビルド手順](https://www.npmjs.com/package/vue-server-renderer#creating-the-server-bundle)といった応用的なトピックを紹介しています。
 - [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0): Vue のメジャーなライブラリと概念を1つのアプリケーションにまとめた信頼できるサンプルです。
+
+## Nuxt.js
+
+Properly configuring all the discussed aspects of a production-ready server-rendered app can be a daunting task. Luckily, there is an excellent community project that aims to make all of this easier: [Nuxt.js](https://nuxtjs.org/). Nuxt.js is a higher-level framework built on top of the Vue ecosystem which provides an extremely streamlined development experience for writing universal Vue applications. Better yet, you can even use it as a static site generator (with pages authored as single-file Vue components)! We highly recommend giving it a try.
