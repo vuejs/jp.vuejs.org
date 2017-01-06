@@ -50,7 +50,7 @@ new Vue({
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
-.fade-enter, .fade-leave-active {
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0
 }
 ```
@@ -76,7 +76,7 @@ new Vue({
 .demo-transition-enter-active, .demo-transition-leave-active {
   transition: opacity .5s
 }
-.demo-transition-enter, .demo-transition-leave-active {
+.demo-transition-enter, .demo-transition-leave-to {
   opacity: 0
 }
 </style>
@@ -92,12 +92,14 @@ new Vue({
 
 ### トランジションクラス
 
-これらは、enter/leave トランジションのために適用される4つのクラスです。
+これらは、enter/leave トランジションのために適用される 6 つのクラスです。
 
-1. `v-enter`: enter の開始状態。要素が挿入される前に適用され、1フレーム後に削除されます。
-2. `v-enter-active`: enter の活性と終了状態。要素が挿入される前に適用され、トランジション/アニメーションが終わる時に削除されます。
-3. `v-leave`: leave の開始状態。leave トランジションがトリガーされるときに適用され、1フレーム後に削除されます。
-4. `v-leave-active`: leave の活性と終了状態。leave トランジションがトリガーされるときに適用され、トランジション/アニメーションが終わる時に削除されます。
+1. `v-enter`: enter の開始状態。要素が挿入される前に適用され、要素が挿入後に 1 フレームが削除されます。
+2. `v-enter-active`: enter の活性状態。トランジションに入るフェーズ中に適用されます。要素が挿入される前に追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの開始に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
+3. `v-enter-to`: **バージョン 2.1.8 以降でのみ利用可能です。** enter の終了状態です。要素が挿入後 (同時に `v-enter` が削除されます) 1 フレームが追加されます。トランジション/アニメーションが終了すると削除されます。
+4. `v-leave`: leave の開始状態。トランジションの終了がトリガーされるとき、直ちに追加され、1フレーム後に削除されます。
+5. `v-leave-active`: leave の活性状態。トランジションが終わるフェーズ中に適用されます。leave トランジションがトリガーされるとき、直ちに追加され、トランジション/アニメーションが終了すると削除されます。このクラスは、トランジションの終了に対して、期間、遅延、およびイージングカーブを定義するために使用できます。
+6. `v-leave-to`: **バージョン 2.1.8 以降でのみ利用可能です。** leave の終了状態です。トランジションの終了がトリガーされた後 (同時に `v-leave` が削除されます) 1 フレームが追加されます。トランジション/アニメーションが終了すると削除されます。
 
 ![トランジションダイアグラム](/images/transition.png)
 
@@ -137,7 +139,8 @@ new Vue({
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.slide-fade-enter, .slide-fade-leave-active {
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for <2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
 }
@@ -167,7 +170,7 @@ new Vue({
 .slide-fade-leave-active {
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.slide-fade-enter, .slide-fade-leave-active {
+.slide-fade-enter, .slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
@@ -319,8 +322,10 @@ new Vue({
 
 - `enter-class`
 - `enter-active-class`
+- `enter-to-class` (2.1.8 以降だけ)
 - `leave-class`
 - `leave-active-class`
+- `leave-to-class` (2.1.8 以降だけ)
 
 これらは、クラス名の規約を上書きします。これは、Vue のトランジションシステムと [Animate.css](https://daneden.github.io/animate.css/) のような既存の CSS アニメーションライブラリを組み合わせたいときに特に便利です。
 
@@ -911,7 +916,8 @@ new Vue({
 .component-fade-enter-active, .component-fade-leave-active {
   transition: opacity .3s ease;
 }
-.component-fade-enter, .component-fade-leave-active {
+.component-fade-enter, .component-fade-leave-to
+/* .component-fade-leave-active for <2.1.8 */ {
   opacity: 0;
 }
 ```
@@ -928,7 +934,7 @@ new Vue({
 .component-fade-enter-active, .component-fade-leave-active {
   transition: opacity .3s ease;
 }
-.component-fade-enter, .component-fade-leave-active {
+.component-fade-enter, .component-fade-leave-to {
   opacity: 0;
 }
 </style>
@@ -1007,7 +1013,7 @@ new Vue({
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-active {
+.list-enter, .list-leave-to /* .list-leave-active for <2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -1051,7 +1057,7 @@ new Vue({
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-active {
+.list-enter, .list-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -1182,7 +1188,8 @@ new Vue({
   display: inline-block;
   margin-right: 10px;
 }
-.list-complete-enter, .list-complete-leave-active {
+.list-complete-enter, .list-complete-leave-to
+/* .list-complete-leave-active for <2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -1232,7 +1239,7 @@ new Vue({
   display: inline-block;
   margin-right: 10px;
 }
-.list-complete-enter, .list-complete-leave-active {
+.list-complete-enter, .list-complete-leave-to {
   opacity: 0;
   transform: translateY(30px);
 }
