@@ -330,4 +330,4 @@ Vue.component({
 
 ## Nuxt.js
 
-Properly configuring all the discussed aspects of a production-ready server-rendered app can be a daunting task. Luckily, there is an excellent community project that aims to make all of this easier: [Nuxt.js](https://nuxtjs.org/). Nuxt.js is a higher-level framework built on top of the Vue ecosystem which provides an extremely streamlined development experience for writing universal Vue applications. Better yet, you can even use it as a static site generator (with pages authored as single-file Vue components)! We highly recommend giving it a try.
+これまでに議論されたすべての側面を適切に構成するプロダクション向けのサーバーレンダリングに対応したアプリケーションの開発は難しい作業です。幸いにも、これをもっと簡単にすることを目指す優れたコミュニティプロジェクト [Nuxt.js](https://nuxtjs.org/) があります。Nuxt.js は、Vue エコシステムの上に構築された高レベルのフレームワークで、ユニバーサル Vue アプリケーションを作成するための非常に合理的な開発エクスペリエンスを提供します。さらに、静的なサイトジェネレータ (単一ファイルの Vue コンポーネントとして作成されたページ) としても使用できます！試してみることを強くお勧めします。
