@@ -1008,7 +1008,7 @@ Vue.component('async-webpack-example', function (resolve) {
 })
 ```
 
-resolve 関数の `Promise` を返すこともできます。Webpack 2 + ES2015 構文を使うと以下のようにできます:
+resolve 関数は `Promise` を返すこともできます。Webpack 2 + ES2015 構文を使うと以下のようにできます:
 
 ``` js
 Vue.component(
