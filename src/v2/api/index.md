@@ -1753,21 +1753,27 @@ type: api
   - `mode` - string、leaving/entering トランジションのタイミングシーケンスを制御する。利用可能なモードは、`"out-in"`、`"in-out"`。デフォルトは同時になる。
   - `enter-class` - string
   - `leave-class` - string
+  - `appear-class` - string
+  - `enter-to-class` - string
+  - `leave-to-class` - string
+  - `appear-to-class` - string
   - `enter-active-class` - string
   - `leave-active-class` - string
-  - `appear-class` - string
   - `appear-active-class` - string
 
 - **イベント:**
   - `before-enter`
-  - `enter`
-  - `after-enter`
   - `before-leave`
-  - `leave`
-  - `after-leave`
   - `before-appear`
+  - `enter`
+  - `leave`
   - `appear`
+  - `after-enter`
+  - `after-leave`
   - `after-appear`
+  - `enter-cancelled`
+  - `leave-cancelled` (`v-show` only)
+  - `appear-cancelled`
 
 - **使用方法:**
 
