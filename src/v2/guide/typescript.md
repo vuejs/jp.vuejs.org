@@ -20,7 +20,7 @@ import Vue = require('vue')
 
 ### コンパイルオプション
 
-Vue の宣言ファイルには `--lib DOM, ES2015.Promise` による[コンパイラオプション](https://www.typescriptlang.org/docs/handbook/compiler-options.html)が必要です。このオプションを `tsc` コマンドに渡すか、それと同等のものを `tsconfig.json` ファイルに追加することができます。
+Vue の宣言ファイルには `--lib DOM,ES5,ES2015.Promise` による[コンパイラオプション](https://www.typescriptlang.org/docs/handbook/compiler-options.html)が必要です。このオプションを `tsc` コマンドに渡すか、それと同等のものを `tsconfig.json` ファイルに追加することができます。
 
 ### Vue の型宣言へのアクセス
 
