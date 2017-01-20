@@ -64,7 +64,7 @@
         if (distanceA > distanceB) return 1
         return 0
       })
-      window.location.hash = possibleHashes[0]
+      window.location.hash = encodeURIComponent(possibleHashes[0])
     }
 
     function normalizeHash (rawHash) {
