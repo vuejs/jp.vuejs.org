@@ -75,7 +75,7 @@ console.log(vm.reversedMessage) // -> 'eybdooG'
 
 コンソールを開いて、vm で遊んでみてください。`vm.reversedMessage` の値は、常に `vm.message` の値に依存しています。
 
-通常のプロパティと同じように、テンプレート内の算出プロパティにデータバインドすることもできます。Vue は `vm.reversedMessage` が `vm.message` に依存していることを知っているので、`vm.message` が変わると `vm.reversedMessage` に依存する全てのバインディングを更新します。さらに、最も良いところは、この依存関係が宣言的に作成されていることです。算出 getter 関数は純粋で副作用がないので、テストや値の推論が容易になります。
+通常のプロパティと同じように、テンプレート内の算出プロパティにデータバインドすることもできます。Vue は `vm.reversedMessage` が `vm.message` に依存していることを知っているので、`vm.message` が変わると `vm.reversedMessage` に依存する全てのバインディングを更新します。さらに、最も良いところは、この依存関係が宣言的に作成されていることです。算出 getter 関数は副作用がないので、テストや値の推論が容易になります。
 
 ### 算出プロパティ vs メソッド
 
@@ -227,12 +227,12 @@ var watchExampleVM = new Vue({
     // https://lodash.com/docs#debounce を見てください。
     getAnswer: _.debounce(
       function () {
-        var vm = this
         if (this.question.indexOf('?') === -1) {
-          vm.answer = 'Questions usually contain a question mark. ;-)'
+          this.answer = 'Questions usually contain a question mark. ;-)'
           return
         }
-        vm.answer = 'Thinking...'
+        this.answer = 'Thinking...'
+        var vm = this
         axios.get('https://yesno.wtf/api')
           .then(function (response) {
             vm.answer = _.capitalize(response.data.answer)

@@ -67,7 +67,9 @@ var example2 = new Vue({
       // メソッド内の `this` は、 Vue インスタンスを参照します
       alert('Hello ' + this.name + '!')
       // `event` は、ネイティブ DOM イベントです
-      alert(event.target.tagName)
+      if (event) {
+        alert(event.target.tagName)
+      }
     }
   }
 })
@@ -91,7 +93,9 @@ var example2 = new Vue({
   methods: {
     greet: function (event) {
       alert('Hello ' + this.name + '!')
-      alert(event.target.tagName)
+      if (event) {
+        alert(event.target.tagName)
+      }
     }
   }
 })
