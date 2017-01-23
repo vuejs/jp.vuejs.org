@@ -146,7 +146,7 @@ Vue.component('my-component', {
 `isActive` が真となりうるときは、以下の HTML が描画されます:
 
 ``` html
-<p class="foo bar active"></p>
+<p class="foo bar active">Hi</p>
 ```
 
 ## バインディングインラインスタイル
