@@ -365,6 +365,44 @@ computed: {
 </div>
 {% endraw %}
 
+## 算出プロパティ
+
+### `cache: false` <sup>非推奨</sup>
+
+将来のメジャーバージョンの Vue では、算出プロパティのキャッシュ無効化が削除されます。キャッシュされていない算出プロパティを、同じ結果を持つメソッドに置き換えます。
+
+例:
+
+``` js
+template: '<p>message: {{ timeMessage }}</p>',
+computed: {
+  timeMessage: {
+    cache: false,
+    get: function () {
+      return Date.now() + this.message
+    }
+  }
+}
+```
+
+または、コンポーネントメソッドで:
+
+``` js
+template: '<p>message: {{ getTimeMessage }}</p>',
+methods: {
+  getTimeMessage: function () {
+    return Date.now() + this.message
+  }
+}
+```
+
+{% raw %}
+<div class="upgrade-path">
+  <h4>移行ガイド</h4>
+  <p>あなたのコード上で<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a>を実行し、 <code>cache: false</code>オプションを見つけます。</p>
+</div>
+{% endraw %}
+
 ## 組み込みディレクティブ
 
 ### `v-bind` においての 真/偽 <sup>変更</sup>
