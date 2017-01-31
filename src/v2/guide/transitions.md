@@ -975,7 +975,7 @@ new Vue({
 では、シンプルな例をみていきましょう。これまでに使っていたものと同じ CSS クラスを entering と leaving のトランジションで使います:
 
 ``` html
-<div id="list-demo" class="demo">
+<div id="list-demo">
   <button v-on:click="add">Add</button>
   <button v-on:click="remove">Remove</button>
   <transition-group name="list" tag="p">
