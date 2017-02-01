@@ -18,7 +18,7 @@ Webpack や Browserify のようなビルドツールを使用する場合、プ
 
 #### Webpack
 
-Webpack の [DefinePlugin](http://webpack.github.io/docs/list-of-plugins.html#defineplugin) を使用して本番環境を指定してください。そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下は設定例です:
+Webpack の [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を使用して本番環境を指定してください。そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下は設定例です:
 
 ```javascript
 var webpack = require('webpack')

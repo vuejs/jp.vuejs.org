@@ -37,7 +37,7 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 ## NPM
 
-Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](http://webpack.github.io/) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html)を作成するための、付随するツールも提供しています。
+Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](https://webpack.js.org) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html)を作成するための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版
