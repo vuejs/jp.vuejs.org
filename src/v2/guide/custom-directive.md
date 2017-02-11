@@ -90,7 +90,7 @@ directive definition object はいくつかのフック関数(全て任意)を�
 いくつかのプロパティを使用したカスタムディレクティブの例:
 
 ``` html
-<div id="hook-arguments-example" v-demo:hello.a.b="message"></div>
+<div id="hook-arguments-example" v-demo:foo.a.b="message"></div>
 ```
 
 ``` js
