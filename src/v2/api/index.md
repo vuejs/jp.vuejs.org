@@ -334,9 +334,9 @@ type: api
 
 <h3 id="Vue-version">Vue.version</h3>
 
-- **Details**: Provides the installed version of Vue as a string. This is especially useful for community plugins and components, where you might use different strategies for different versions.
+- **詳細:** インストールされているVueのバージョンを文字列として提供します。これはコミュニティのプラグインやコンポーネントで特に有益であり、異なるバージョンで違う戦略を使うことができます。
 
-- **Usage**:
+- **使用方法:**
 
   ```js
   var version = Number(Vue.version.split('.')[0])
@@ -346,7 +346,7 @@ type: api
   } else if (version === 1) {
     // Vue v1.x.x
   } else {
-    // Unsupported version of Vue
+    // サポートしていないバージョンの Vue
   }
   ```
 
