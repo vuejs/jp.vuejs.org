@@ -332,6 +332,24 @@ type: api
 
 - **参照:** [描画関数](../guide/render-function.html)
 
+<h3 id="Vue-version">Vue.version</h3>
+
+- **Details**: Provides the installed version of Vue as a string. This is especially useful for community plugins and components, where you might use different strategies for different versions.
+
+- **Usage**:
+
+  ```js
+  var version = Number(Vue.version.split('.')[0])
+  
+  if (version === 2) {
+    // Vue v2.x.x
+  } else if (version === 1) {
+    // Vue v1.x.x
+  } else {
+    // Unsupported version of Vue
+  }
+  ```
+
 ## オプション / データ
 
 ### data
