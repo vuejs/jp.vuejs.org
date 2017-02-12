@@ -332,6 +332,24 @@ type: api
 
 - **参照:** [描画関数](../guide/render-function.html)
 
+<h3 id="Vue-version">Vue.version</h3>
+
+- **詳細:** インストールされている Vue のバージョンを文字列として提供します。これはコミュニティのプラグインやコンポーネントで特に有益であり、異なるバージョンで違う戦略を使うことができます。
+
+- **使用方法:**
+
+  ```js
+  var version = Number(Vue.version.split('.')[0])
+  
+  if (version === 2) {
+    // Vue v2.x.x
+  } else if (version === 1) {
+    // Vue v1.x.x
+  } else {
+    // サポートしていないバージョンの Vue
+  }
+  ```
+
 ## オプション / データ
 
 ### data
