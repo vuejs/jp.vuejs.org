@@ -33,7 +33,7 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 推奨: [unpkg](https://unpkg.com/vue/dist/vue.min.js) は、npm に公開されるとすぐに最新バージョンが反映されます。[unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
 
-[jsDelivr](https://cdn.jsdelivr.net/vue/{{vue_version}}/vue.min.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
+[jsDelivr](https://cdn.jsdelivr.net/vue/latest/vue.min.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
 
 ## NPM
 
