@@ -238,7 +238,7 @@ methods: {
 Vue.config.keyCodes.f1 = 112
 ```
 
-## 修飾子キー
+## マウス修飾子キー
 
 > New in 2.1.0
 
@@ -253,15 +253,15 @@ Vue.config.keyCodes.f1 = 112
  
 例:
  
- ```html
- <!-- Alt + C -->
- <input @keyup.alt.67="clear">
- 
- <!-- Ctrl + Click -->
-  <div @click.ctrl="doSomething">Do something</div>
-  ```
+```html
+<!-- Alt + C -->
+<input @keyup.alt.67="clear">
 
-<p class="tip"></p>修飾子キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
+<!-- Ctrl + Click -->
+<div @click.ctrl="doSomething">Do something</div>
+```
+
+<p class="tip">修飾子キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
 
 ## なぜ HTML にリスナを記述するのですか
 
