@@ -249,6 +249,18 @@ Vue.config.keyCodes.f1 = 112
 - `.shift`
 - `.meta`
 
+> Note: Macintoshキーボードの場合、metaはコマンドキー（⌘）です。Windowsのキーボードでは、metaはウィンドウキー（⊞）です。Sun Microsystemsのキーボードでは、メタは実線のダイヤモンド（◆）とマークされています。特定のキーボードでは、特に MIT や Lisp マシンのキーボードと Knight キーボード、space-cadet キーボード、メタのような後継機には "META" と表示されます。 Symbolics のキーボードでは、 "META" または "Meta" というラベルが付いています。
+ 
+例:
+ 
+ ```html
+ <!-- Alt + C -->
+ <input @keyup.alt.67="clear">
+ 
+ <!-- Ctrl + Click -->
+  <div @click.ctrl="doSomething">Do something</div>
+  ```
+
 <p class="tip"></p>修飾キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
 
 ## なぜ HTML にリスナを記述するのですか
