@@ -238,7 +238,7 @@ methods: {
 Vue.config.keyCodes.f1 = 112
 ```
 
-## マウスイベント修飾子
+## 修飾子キー
 
 > New in 2.1.0
 
@@ -249,7 +249,7 @@ Vue.config.keyCodes.f1 = 112
 - `.shift`
 - `.meta`
 
-> Note: Macintoshキーボードの場合、metaはコマンドキー（⌘）です。Windowsのキーボードでは、metaはウィンドウキー（⊞）です。Sun Microsystemsのキーボードでは、メタは実線のダイヤモンド（◆）とマークされています。特定のキーボードでは、特に MIT や Lisp マシンのキーボードと Knight キーボード、space-cadet キーボード、メタのような後継機には "META" と表示されます。 Symbolics のキーボードでは、 "META" または "Meta" というラベルが付いています。
+> 注意: Macintosh キーボードの場合、meta はコマンドキー（⌘）です。Windows のキーボードでは、meta はウィンドウキー（⊞）です。Sun Microsystems のキーボードでは、メタは実線のダイヤモンド（◆）とマークされています。特定のキーボードでは、特に MIT や Lisp マシンのキーボードと Knight キーボード、space-cadet キーボード、メタのような後継機には "META" と表示されます。 Symbolics のキーボードでは、 "META" または "Meta" というラベルが付いています。
  
 例:
  
@@ -261,7 +261,7 @@ Vue.config.keyCodes.f1 = 112
   <div @click.ctrl="doSomething">Do something</div>
   ```
 
-<p class="tip"></p>修飾キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
+<p class="tip"></p>修飾子キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
 
 ## なぜ HTML にリスナを記述するのですか
 
