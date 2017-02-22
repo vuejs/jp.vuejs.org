@@ -3,9 +3,9 @@
     <input type="text" id="search-query-<%- context %>" class="search-query st-default-search-input">
   </form>
 </li>
-<li><a href="/v2/guide/" class="nav-link<%- page.path.match(/guide/) ? ' current' : '' %>">ガイド</a></li>
-<li><a href="/v2/api/" class="nav-link<%- page.path.match(/api/) ? ' current' : '' %>">API</a></li>
-<li><a href="/v2/examples/" class="nav-link<%- page.path.match(/examples/) ? ' current' : '' %>">例</a></li>
+<li><a href="<%- url_for("/v2/guide/") %>" class="nav-link<%- page.path.match(/guide/) ? ' current' : '' %>">ガイド</a></li>
+<li><a href="<%- url_for("/v2/api/") %>" class="nav-link<%- page.path.match(/api/) ? ' current' : '' %>">API</a></li>
+<li><a href="<%- url_for("/v2/examples/") %>" class="nav-link<%- page.path.match(/examples/) ? ' current' : '' %>">Examples</a></li>
 <li><a href="/contribution/" class="nav-link<%- page.path.match(/contribution/) ? ' current' : '' %>">貢献</a></li>
 <%- partial('partials/ecosystem_dropdown') %>
 <%- partial('partials/language_dropdown') %>
