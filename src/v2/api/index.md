@@ -65,17 +65,21 @@ type: api
 
 - **型:** `Function`
 
-- **デフォルト:** エラーが代わりにスローされます
+- **デフォルト:** `undefined`
 
 - **使用方法:**
 
   ``` js
-  Vue.config.errorHandler = function (err, vm) {
+  Vue.config.errorHandler = function (err, vm, type) {
     // エラー処理
+    // `type` は Vue 固有のエラー種別です。（例： どのライフサイクルフックかなど）
+    // このエラーを見つけることができるのは、 2.2.0 以降となります。
   }
   ```
 
-  コンポーネントの描画とウォッチャいおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
+  コンポーネントの描画関数とウォッチャにおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
+
+  > 2.2.0 では、このフックは、コンポーネントのライフサイクルフックに関するエラーも捉えます。また、このフックが `undefined` である場合、捕捉されたエラーは、アプリケーションをクラッシュさせずに、代わりに `console.error` として記録されます。
 
   > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
 
@@ -110,10 +114,35 @@ type: api
     f1: 112,
     mediaPlayPause: 179,
     up: [38, 87]
-  } 
+  }
   ```
 
   `v-on` 向けにカスタムキーエイリアスを定義します。
+
+## performance
+
+> 2.2.0 の新機能
+
+- **型:** `boolean`
+
+- **デフォルト:** `false`
+
+- **使用方法**:
+
+  これを `true` に設定することで、コンポーネントの初期化やコンパイル、レンダリングや、パッチのパフォーマンスなどを、ブラウザ上の開発者ツールにてトレースすることが可能となります。 この機能は、開発者モードおよび [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) APIをサポートするブラウザでのみ動作します。
+
+### productionTip
+
+> 2.2.0 の新機能
+
+- **型:** `boolean`
+
+- **デフォルト:** `true`
+
+- **使用方法**:
+
+  これを `false` に設定すると、 Vue の起動時のプロダクションのヒントが表示されなくなります。
+  Set this to `false` to prevent the production tip on Vue startup.
 
 ## グローバル API
 
@@ -340,7 +369,7 @@ type: api
 
   ```js
   var version = Number(Vue.version.split('.')[0])
-  
+
   if (version === 2) {
     // Vue v2.x.x
   } else if (version === 1) {
