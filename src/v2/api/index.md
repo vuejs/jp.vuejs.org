@@ -142,7 +142,6 @@ type: api
 - **使用方法**:
 
   これを `false` に設定すると、 Vue の起動時のプロダクションのヒントが表示されなくなります。
-  Set this to `false` to prevent the production tip on Vue startup.
 
 ## グローバル API
 
@@ -226,17 +225,19 @@ type: api
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 
-<h3 id="Vue-delete">Vue.delete( object, key )</h3>
+<h3 id="Vue-delete">Vue.delete( target, key )</h3>
 
 - **引数:**
-  - `{Object} object`
-  - `{string} key`
+  - `{Object | Array} target`
+  - `{string | number} key`
 
 - **使用方法:**
 
   オブジェクトのプロパティを削除します。オブジェクトがリアクティブの場合、削除がトリガし View が更新されることを保証します。これは主に Vue がプロパティの削除を検知できないという制約を回避するために使われますが、使う必要があることはまれです。
 
-  **オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできないことに注意してください。**
+  > 2.2.0 以降では、 Array とそのインデックスでも動作します。
+
+  <p class="tip">Vue インスタンスや Vue インスタンスのルートデータオブジェクトを対象とすることはできません。</p>
 
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
