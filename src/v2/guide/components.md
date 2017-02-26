@@ -543,13 +543,18 @@ new Vue({
 は、以下の糖衣構文です:
 
 ``` html
-<input v-bind:value="something" v-on:input="something = $event.target.value">
+<input
+  v-bind:value="something"
+  v-on:input="something = $event.target.value">
 ```
 
 コンポーネントと共に使用されるとき、これは簡単にできます:
 
 ``` html
-<custom-input v-bind:value="something" v-on:input="something = arguments[0]"></custom-input>
+<custom-input
+  :value="something"
+  @input="value => { something = value }">
+</custom-input>
 ```
 
 そのため、コンポーネントを `v-model` と共に動かすためには、以下が必要です:
@@ -565,16 +570,15 @@ new Vue({
 
 ``` js
 Vue.component('currency-input', {
-  template: '\
-    <span>\
-      $\
-      <input\
-        ref="input"\
-        v-bind:value="value"\
-        v-on:input="updateValue($event.target.value)"\
-      >\
-    </span>\
-  ',
+  template: `
+    <span>
+      $
+      <input
+        ref="input"
+        v-bind:value="value"
+        v-on:input="updateValue($event.target.value)">
+    </span>
+  `,
   props: ['value'],
   methods: {
     // 値を直接的に更新する代わりに、このメソッドを使用して input の
@@ -637,7 +641,39 @@ new Vue({
 
 <iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-イベントインターフェイスは、より特殊な入力フィールドを作成するために使用することもできます。例えば、次のような可能性を想像してみてください:
+### Customizing Component `v-model`
+
+> New in 2.2.0
+
+By default, `v-model` on a component uses `value` as the prop and `input` as the event, but some input types such as checkboxes and radio buttons may want to use the `value` prop for a different purpose. Using the `model` option can avoid the conflict in such cases:
+
+``` js
+Vue.component('my-checkbox', {
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
+  props: {
+    // this allows using the `value` prop for a different purpose
+    value: String
+  },
+  // ...
+})
+```
+
+``` html
+<my-checkbox v-model="foo" value="some value"></my-checkbox>
+```
+
+The above will be equivalent to:
+
+``` html
+<my-checkbox
+  :checked="foo"
+  @change="val => { foo = val }"
+  value="some value">
+</my-checkbox>
+```
 
 ``` html
 <voice-recognizer v-model="question"></voice-recognizer>
