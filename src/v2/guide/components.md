@@ -1053,6 +1053,17 @@ Vue.component(
 )
 ```
 
+[ローカル登録](https://vuejs.org/v2/guide/components.html#ローカル登録)を使用するとき、`Promise` を返す関数を直接提供することもできます:
+
+``` js
+new Vue({
+  // ...
+  components: {
+    'my-component': () => import('./my-async-component')
+  }
+})
+```
+
 <p class="tip">もしあなたが <strong>Browserify</strong> のユーザで非同期コンポーネントを使いたいとしたら、残念なことに開発者が[はっきりと](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224)非同期読み込みは Browserify では今後もサポートしない"と述べています。少なくとも公式には。 Browserify コミュニティは、既存のアプリケーションや複雑なアプリケーションに役立つ[いくつかの回避策](https://github.com/vuejs/vuejs.org/issues/620)があります。他のすべてのシナリオでは、ファーストクラスとして非同期サポートを組み込みで提供する Webpack を使用することをお勧めします。</p>
 
 ### コンポーネントの命名の慣習
