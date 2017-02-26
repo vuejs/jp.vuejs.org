@@ -632,7 +632,7 @@ type: api
 
 ### render
 
-- **型:** `Function`
+- **型:** `(createElement: () => VNode) => VNode`
 
 - **詳細:**
 
@@ -642,6 +642,34 @@ type: api
 
 - **参照:**
   - [描画関数](../guide/render-function.html)
+
+### renderError
+
+> 2.2.0 からの進行
+
+- **型:** `(createElement: () => VNode, error: Error) => VNode`
+
+- **詳細:**
+
+  **development モードでのみ動作します。**
+
+  デフォルトの `render` 関数にてエラーが発生した際に、代替となる描画結果を提供します。この際、エラー内容は `renderError` へ、第二引数として渡されます。この機能は、ホットリロードなどと併用する場合に重宝します。
+
+- **例:**
+
+  ``` js
+  new Vue({
+    render (h) {
+      throw new Error('oops')
+    },
+    renderError (h, err) {
+      return h('pre', { style: { color: 'red' }}, err.stack)
+    }
+  }).$mount('#app')
+  ```
+
+- **参照:**
+  - [描画関数](../guide/render-function)
 
 ## オプション / ライフサイクルフック
 
