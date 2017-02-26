@@ -641,11 +641,11 @@ new Vue({
 
 <iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-### Customizing Component `v-model`
+### コンポーネントの `v-model` のカスタマイズ
 
-> New in 2.2.0
+> 2.2.0 の新機能
 
-By default, `v-model` on a component uses `value` as the prop and `input` as the event, but some input types such as checkboxes and radio buttons may want to use the `value` prop for a different purpose. Using the `model` option can avoid the conflict in such cases:
+デフォルトでは、コンポーネントにおける `v-model` は、 `value` を prop として、 `input` をイベントして用います。しかし、チェックボックスやラジオボタンなどの入力タイプを利用する場合は、 `value` prop をその他の目的で利用することができます。その際、 `model` オプションを利用することで、値の競合を避けることが可能です:
 
 ``` js
 Vue.component('my-checkbox', {
@@ -654,7 +654,7 @@ Vue.component('my-checkbox', {
     event: 'change'
   },
   props: {
-    // this allows using the `value` prop for a different purpose
+    // これによって、 `value` prop を別の目的で利用することを許可します。
     value: String
   },
   // ...
