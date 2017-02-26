@@ -399,7 +399,7 @@ Vue はトランジションが終了したことを把握するためのイベ�
 <transition :duration="1000">...</transition>
 ```
 
-また、活性化時と終了時の期間を、別個に指定することも可能です:
+また、活性化時と終了時の期間を、個別に指定することも可能です:
 
 ``` html
 <transition :duration="{ enter: 500, leave: 800 }">...</transition>
