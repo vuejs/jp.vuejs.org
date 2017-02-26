@@ -387,6 +387,24 @@ Vue はトランジションが終了したことを把握するためのイベ�
 
 しかし、例えば、ホバーの CSS トランジション効果と Vue による CSS アニメーションのトリガの両方を持つ場合など、時には、同じ要素に両方を使うこともあるかもしれません。これらのケースでは、Vue に扱って欲しいタイプを `type` 属性で明示的に宣言するべきでしょう。この属性の値は、`animation` あるいは `transition` を取ります。
 
+### Explicit Transition Durations
+
+> New in 2.2.0
+
+In most cases, Vue can automatically figure out when the transition has finished. By default, Vue waits for the first `transitionend` or `animationend` event on the root transition element. However, this may not always be desired - for example, we may have a choreographed transition sequence where some nested inner elements have a delayed transition or a longer transition duration than the root transition element.
+
+In such cases you can specify an explicit transition duration (in milliseconds) using the `duration` prop on the `<transition>` component:
+
+``` html
+<transition :duration="1000">...</transition>
+```
+
+You can also specify separate values for enter and leave durations:
+
+``` html
+<transition :duration="{ enter: 500, leave: 800 }">...</transition>
+```
+
 ### JavaScript フック
 
 属性で JavaScript フックを定義することができます:
