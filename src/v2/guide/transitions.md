@@ -387,19 +387,19 @@ Vue はトランジションが終了したことを把握するためのイベ�
 
 しかし、例えば、ホバーの CSS トランジション効果と Vue による CSS アニメーションのトリガの両方を持つ場合など、時には、同じ要素に両方を使うこともあるかもしれません。これらのケースでは、Vue に扱って欲しいタイプを `type` 属性で明示的に宣言するべきでしょう。この属性の値は、`animation` あるいは `transition` を取ります。
 
-### Explicit Transition Durations
+### 明示的なトランジション期間の設定
 
-> New in 2.2.0
+> 2.2.0 からの新機能
 
-In most cases, Vue can automatically figure out when the transition has finished. By default, Vue waits for the first `transitionend` or `animationend` event on the root transition element. However, this may not always be desired - for example, we may have a choreographed transition sequence where some nested inner elements have a delayed transition or a longer transition duration than the root transition element.
+殆どの場合、 Vue は、自動的にトランジションが終了したことを見つけ出すことが可能です。デフォルトでは、 Vue はルート要素の初めの `transitionend` もしくは `animationend` イベントを待ちます。しかし、これが常に望む形であるとは限りません。例えば、幾つかの入れ子となっている内部要素にて、トランジションの遅延がある場合や、ルートのトランジション要素が、非常に長いトランジション期間を設けている場合などです。
 
-In such cases you can specify an explicit transition duration (in milliseconds) using the `duration` prop on the `<transition>` component:
+このような場合 `<transition>` コンポーネントがもつ `duration` prop を利用することで、明示的に遷移にかかる時間（ミリ秒単位）を指定することが可能です:
 
 ``` html
 <transition :duration="1000">...</transition>
 ```
 
-You can also specify separate values for enter and leave durations:
+また、活性化時と終了時の期間を、別個に指定することも可能です:
 
 ``` html
 <transition :duration="{ enter: 500, leave: 800 }">...</transition>
