@@ -21,12 +21,12 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。
 
-<p class="tip">開発中はプロダクションバージョンを使用しないでください。 警告や一般的な間違いを見逃す可能性があります!</p>
+<p class="tip">開発中は本番バージョンを使用しないでください。 警告や一般的な間違いを見逃す可能性があります!</p>
 
 <div id="downloads">
 <a class="button" href="/js/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり </span>
 
-<a class="button" href="/js/vue.min.js" download>プロダクションバージョン</a><span class="light info">警告出力なし、 {{gz_size}}kb min+gzip</span>
+<a class="button" href="/js/vue.min.js" download>本番バージョン</a><span class="light info">警告出力なし、 {{gz_size}}kb min+gzip</span>
 </div>
 
 ### CDN
@@ -46,7 +46,7 @@ $ npm install vue
 
 ## CLI
 
-Vue.js は意欲的なシングルページアプリケーションをすぐに足場固めするために、[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。それはモダンなフロントエンドのフレームワークのワークフローに対して、Battery-included なビルド手順を提供します。ホットリローディング、保存時のリント、そして本番可能なビルドを実行して準備するのは、わずか数分です。
+Vue.js は意欲的なシングルページアプリケーションをすぐに足場固めするために、[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。それはモダンなフロントエンドのフレームワークのワークフローのための、すぐに利用できるビルド環境のセットアップを提供します。ホットリローディング、保存時のリント、そして本番可能なビルドを実行して準備するのは、わずか数分です。
 
 ``` bash
 # vue-cli をインストール
@@ -61,9 +61,9 @@ $ npm run dev
 
 <p class="tip">CLI は Node.js および関連するビルドツールに関する事前知識を前提としています。Vue またはフロントエンドビルドツールを初めて使用している場合、CLI を使用する前に、ビルドツールなしで[ガイド](./)を参照することを強くお勧めします。</p>
 
-## 様々なビルドの説明
+## さまざまなビルドについて
 
-[NPM パッケージの `dist/` ディレクトリ](https://unpkg.com/vue@latest/dist/) では Vue.js の多くの様々なビルドが見つかります。それらの違いの概要は以下の通りです:
+[NPM パッケージの `dist/` ディレクトリ](https://unpkg.com/vue@latest/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
 
 | | UMD | CommonJS | ES Module |
 | --- | --- | --- | --- |
@@ -74,17 +74,17 @@ $ npm run dev
 
 ### 用語
 
-- **完全**: コンパイラとランタイムの両方が含まれたビルド。
+- **完全**: コンパイラとランタイムの両方が含まれたビルドです。
 
-- **コンパイラ**: テンプレート文字列を JavaScript レンダリング関数にコンパイルするためのコード。
+- **コンパイラ**: テンプレート文字列を JavaScript レンダリング関数にコンパイルするためのコードです。
 
-- **ランタイム**: Vue インスタンスの作成やレンダリング、仮想 DOM の変更などのためのコード。基本的にコンパイラを除く全てのもの。
+- **ランタイム**: Vue インスタンスの作成やレンダリング、仮想 DOM の変更などのためのコードです。基本的にコンパイラを除く全てのものです。
 
-- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用される。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) である。
+- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用される。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
 
-- **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図している。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) である。
+- **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図している。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
-- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](http://rollupjs.org/)のような最新のバンドラでの利用を意図している。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) である。
+- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](http://rollupjs.org/)のような最新のバンドラでの利用を意図している。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
 
 ### ランタイム + コンパイラとランタイム限定の違い
 
