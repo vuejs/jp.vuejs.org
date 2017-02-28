@@ -17,7 +17,7 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 各バージョンの詳細なリリースノートは、[GitHub](https://github.com/vuejs/vue/releases) で入手できます。
 
-## `<script>` 直接読み込み
+## `<script>` 直接組み込み
 
 ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。
 
@@ -63,7 +63,7 @@ $ npm run dev
 
 ## 様々なビルドの説明
 
-[NPM パッケージの `dist/` ディレクトリ](https://unpkg.com/vue@latest/dist/) では Vue.js の多くの様々なビルドが見つかります。それらの違いの概要ハコのとおりです:
+[NPM パッケージの `dist/` ディレクトリ](https://unpkg.com/vue@latest/dist/) では Vue.js の多くの様々なビルドが見つかります。それらの違いの概要は以下の通りです:
 
 | | UMD | CommonJS | ES Module |
 | --- | --- | --- | --- |
@@ -80,7 +80,7 @@ $ npm run dev
 
 - **ランタイム**: Vue インスタンスの作成やレンダリング、仮想 DOM の変更などのためのコード。基本的にコンパイラを除く全てのもの。
 
-- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用される。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD build (`vue.js`) である。
+- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用される。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) である。
 
 - **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図している。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) である。
 
@@ -107,7 +107,7 @@ new Vue({
 
 `vue-loader` や `vueify` を利用する場合、 `*.vue` ファイルに中のテンプレートはビルド時に JavaScript に事前コンパイルされます。最終成果物の中にコンパイラは本当に必要なく、したがってランタイム限定ビルドを利用することが出来ます。
 
-ランタイム限定ビルドは完全ビルドに比べおよそ 30% 軽量軽量なため、利用できるときにはこれを利用したほうが良いでしょう。それでもなお完全ビルドを利用したい場合は、バンドラでエイリアスを設定する必要があります。
+ランタイム限定ビルドは完全ビルドに比べおよそ 30% 軽量なため、利用できるときにはこれを利用したほうが良いでしょう。それでもなお完全ビルドを利用したい場合は、バンドラでエイリアスを設定する必要があります。
 
 
 #### Webpack
@@ -226,7 +226,7 @@ npm run build
 
 ## Bower
 
-Bowerでは UMD ビルドのみで利用できます。
+Bower では UMD ビルドのみで利用できます。
 
 ``` bash
 # 最新の安定板
