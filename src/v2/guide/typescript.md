@@ -4,35 +4,76 @@ type: guide
 order: 25
 ---
 
-## 公式宣言ファイル
+## TS と Webpack 2ユーザに向けた、2.2における重要な変更のお知らせ
+
+Vue 2.2 からは 配布ファイルを ES モジュール形式でエクスポートするようにしました。これは webpack 2 が標準で使用する形式です。残念ながら、この変更は意図しないところで破壊的変更をもたらしてしまいました。なぜなら TypeScript と webpack 2 を組み合わせた時、 `import Vue = require('vue')` は Vue そのものではなく総合的な ES モジュールのオブジェクトを返すからです。
+
+将来的には全ての公式で提供する型宣言を、ES モジュール形式でエクスポートするようにしようと考えています。将来性を考えた[推奨構成](#推奨構成) を以下に示しているのでご覧ください。
+
+## NPM パッケージ内の公式型宣言
 
 静的型システムは、特にアプリケーションが成長するに伴い、多くの潜在的なランタイムエラーを防止するのに役立ちます。そのため、Vue は [TypeScript](https://www.typescriptlang.org/) 向けに[公式型宣言](https://github.com/vuejs/vue/tree/dev/types)を提供しており、Vue コアだけでなく [Vue Router](https://github.com/vuejs/vue-router/tree/dev/types) と [Vuex](https://github.com/vuejs/vuex/tree/dev/types) も同様に提供しています。
 
-これらは、[NPM で公開](https://unpkg.com/vue/types/)されており、Vue によって宣言が自動的にインポートされるので、`Typings` のような外部ツールは必要ありません。つまり、以下のように単純です:
+これらは [NPM に公開](https://unpkg.com/vue/types/)されており、そして最新の TypeScript は NPM パッケージ内の型宣言を解決する方法を知っています。つまり、NPM でインストールした時、TypeScript を Vue と共に使うための追加のツールを必要としません。
 
-``` ts
+## 推奨構成
+
+``` js
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ... 他のオプションは除外しています
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.Promise"
+    ]
+  }
+}
+```
+
+`allowSyntheticDefaultImports` オプションにより以下の記述が可能となることに留意してください:
+
+``` js
+import Vue from 'vue'
+```
+
+これは以下の記述の代わりとなるものです:
+
+``` js
 import Vue = require('vue')
 ```
 
-これにより、すべてのメソッド、プロパティ、およびパラメータが型チェックされます。例えば、`template` コンポーネントのオプションを `tempate` (`l` が欠けている)と間違えた場合、TypeScript コンパイラはコンパイル時にエラーメッセージを出力します。[Visual Studio Code](https://code.visualstudio.com/) のような、TypeScript を使用できるエディタを使用している場合、コンパイルする前にこれらのエラーをキャッチすることができます:
+推奨しているのは前者（ES モジュール構文）です。なぜなら推奨している素のES モジュールのやり方と変わらず、そして将来的に全ての公式で提供する型宣言を ES モジュール形式とするように移行しようと考えているからです。
 
-![Visual Studio Code での TypeScript による型エラー](/images/typescript-type-error.png)
+加えて、もし webpack 2 と共に TypeScript を使用しているならば、以下の設定も推奨します:
 
-### コンパイルオプション
+``` js
+{
+  "compilerOptions": {
+    // ... 他のオプションは除外しています
+    "module": "es2015",
+    "moduleResolution": "node"
+  }
+}
+```
 
-Vue の宣言ファイルには `--lib DOM,ES5,ES2015.Promise` による[コンパイラオプション](https://www.typescriptlang.org/docs/handbook/compiler-options.html)が必要です。このオプションを `tsc` コマンドに渡すか、それと同等のものを `tsconfig.json` ファイルに追加することができます。
+このようにすることで TypeScript に対して ES モジュールの import 文をそのまま残すように伝えることができ、そうすると、webpack 2 は ES モジュール をベースとした tree-shaking を利用できます。
 
-### Vue の型宣言へのアクセス
+より詳細なことについては [TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を見てください。
 
-Vue の型で独自のコードにアノテート (annotate) したい場合は、Vue のエクスポートされたオブジェクトでそのコードにアクセスできます。例えば、以下は (`.vue` ファイルにおいて) エクスポートされたコンポーネントオプションオブジェクトにアノテートします:
+## Vue の型宣言の利用
+
+Vue の型定義はたくさんの便利な[型宣言](https://github.com/vuejs/vue/blob/dev/types/index.d.ts)をエクスポートしています。例えば、例えば、以下は (`.vue` ファイルにおいて) エクスポートされたコンポーネントオプションオブジェクトにアノテートします:
 
 ``` ts
-import Vue = require('vue')
+import Vue, { ComponentOptions } from 'vue'
 
 export default {
   props: ['message'],
   template: '<span>{{ message }}</span>'
-} as Vue.ComponentOptions<Vue>
+} as ComponentOptions<Vue>
 ```
 
 ## クラススタイルの Vue コンポーネント
@@ -40,7 +81,7 @@ export default {
 Vue のコンポーネントオプションは容易に型でアノテートできます:
 
 ``` ts
-import Vue = require('vue')
+import Vue, { ComponentOptions }  from 'vue'
 
 // コンポーネントの型を宣言
 interface MyComponent extends Vue {
@@ -64,7 +105,7 @@ export default {
   }
 // エクスポートされたオプションオブジェクトに
 // MyComponent 型を明示的にアノテートする必要があります
-} as Vue.ComponentOptions<MyComponent>
+} as ComponentOptions<MyComponent>
 ```
 
 残念ながら、ここではいくつかの制限があります:
@@ -75,7 +116,7 @@ export default {
 幸いにも、[vue-class-component](https://github.com/vuejs/vue-class-component)は、これらの問題を両方解決できます。これは公式ライブラリで、`@Component` デコレータでコンポーネントをネイティブな JavaScript クラスとして宣言することができます。例として、上記のコンポーネントを書き直してみましょう:
 
 ``` ts
-import Vue = require('vue')
+import Vue from 'vue'
 import Component from 'vue-class-component'
 
 // @Component デコレータはクラスが Vue コンポーネントであることを示します
