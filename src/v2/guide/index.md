@@ -17,7 +17,7 @@ Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインター
 Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。自由に他のタブを開いて、基本的な例を試してみましょう。もしくは、単純に `.html` を作成し、以下のように Vue を含むことができます:
 
 ``` html
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue"></script>
 ```
 
 [インストール](../guide/installation.html) ページは、Vue のインストールについてより多くのオプションを提供します。注意点として、特にまだ Node.js ベースのツールについて精通していない場合、初心者が `vue-cli` で始めることは推奨**しません**。
