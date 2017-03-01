@@ -835,7 +835,7 @@ type: api
 - **参照:**
   - [コンポーネント](../guide/components.html)
 
-## オプション / 組成
+## オプション / 構成
 
 ### parent
 
