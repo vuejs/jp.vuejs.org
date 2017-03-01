@@ -218,8 +218,10 @@ new Vue({ el: '#range' })
 普通の要素のように、カスタムコンポーネントで直接 `v-for` を使うことができます:
 
 ``` html
-<my-component v-for="item in items"></my-component>
+<my-component v-for="item in items" :key="item.id"></my-component>
 ```
+
+> 2.2.0 以降で、コンポーネントで `v-for` を使用するとき、[`key`](list.html#key) は必須です
 
 しかしながら、これはいかなるデータもコンポーネントへ自動的に渡すことはありません。なぜなら、コンポーネントはコンポーネント自身の隔離されたスコープを持っているからです。反復してデータをコンポーネントに渡すためには、プロパティを使うべきです:
 
