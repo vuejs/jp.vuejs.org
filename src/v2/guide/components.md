@@ -557,7 +557,7 @@ new Vue({
 </custom-input>
 ```
 
-そのため、コンポーネントを `v-model` と共に動かすためには、以下が必要です:
+そのため、コンポーネントを `v-model` と共に動かすためには、以下が必要です (これらは 2.2.0 以降で設定することができます):
 
 - `value` プロパティを受け入れる
 - 新しい値と共に `input` イベントを送出する
@@ -665,6 +665,7 @@ Vue.component('my-checkbox', {
 <my-checkbox v-model="foo" value="some value"></my-checkbox>
 ```
 
+上記は以下と同じです:
 The above will be equivalent to:
 
 ``` html
@@ -673,12 +674,6 @@ The above will be equivalent to:
   @change="val => { foo = val }"
   value="some value">
 </my-checkbox>
-```
-
-``` html
-<voice-recognizer v-model="question"></voice-recognizer>
-<webcam-gesture-reader v-model="gesture"></webcam-gesture-reader>
-<webcam-retinal-scanner v-model="retinalImage"></webcam-retinal-scanner>
 ```
 
 ### 親子間以外の通信
