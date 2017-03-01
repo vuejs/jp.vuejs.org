@@ -8,7 +8,7 @@ order: 25
 
 Vue 2.2 からは 配布ファイルを ES モジュール形式でエクスポートするようにしました。これは webpack 2 が標準で使用する形式です。残念ながら、この変更は意図しないところで破壊的変更をもたらしてしまいました。なぜなら TypeScript と webpack 2 を組み合わせた時、 `import Vue = require('vue')` は Vue そのものではなく総合的な ES モジュールのオブジェクトを返すからです。
 
-将来的には全ての公式で提供する型宣言を、ES モジュール形式でエクスポートするようにしようと考えています。将来性を考えた[推奨構成](#recommended-configuration) を以下に示しているのでご覧ください。
+将来的には全ての公式で提供する型宣言を、ES モジュール形式でエクスポートするようにしようと考えています。将来性を考えた[推奨構成](#推奨構成) を以下に示しているのでご覧ください。
 
 ## NPM パッケージ内の公式型宣言
 
@@ -33,7 +33,7 @@ Vue 2.2 からは 配布ファイルを ES モジュール形式でエクスポ�
 }
 ```
 
-ここで留意すべきは、`allowSyntheticDefaultImports` オプションにより以下の記述が可能になります。
+`allowSyntheticDefaultImports` オプションにより以下の記述が可能となることに留意してください:
 
 ``` js
 import Vue from 'vue'
@@ -59,7 +59,7 @@ import Vue = require('vue')
 }
 ```
 
-このようにすることで TypeScript に対して ES モジュールの import 文をそのまま残すように伝えることができ、すると webpack 2 が ES-module-based tree-shaking を利用できるようになります。
+このようにすることで TypeScript に対して ES モジュールの import 文をそのまま残すように伝えることができ、そうすると、webpack 2 は ES モジュール をベースとした tree-shaking を利用できます。
 
 より詳細なことについては [TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を見てください。
 
