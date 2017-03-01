@@ -1048,7 +1048,7 @@ Vue.component(
 )
 ```
 
-[ローカル登録](https://vuejs.org/v2/guide/components.html#ローカル登録)を使用するとき、`Promise` を返す関数を直接提供することもできます:
+[ローカル登録](components.html#ローカル登録)を使用するとき、`Promise` を返す関数を直接提供することもできます:
 
 ``` js
 new Vue({

@@ -205,7 +205,7 @@ rollup({
 NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 ```
 
-[プロダクション環境への配信のヒント](./deployment.html) も参考にしてください。
+[プロダクション環境への配信のヒント](deployment.html) も参考にしてください。
 
 ### CSP 環境
 
