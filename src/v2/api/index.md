@@ -811,7 +811,6 @@ type: api
 
 - **参照:**
   - [カスタムディレクティブ](../guide/custom-directive.html)
-  - [コンポーネントの命名の慣習](../guide/components.html#コンポーネントの命名の慣習)
 
 ### filters
 
