@@ -65,17 +65,21 @@ type: api
 
 - **型:** `Function`
 
-- **デフォルト:** エラーが代わりにスローされます
+- **デフォルト:** `undefined`
 
 - **使用方法:**
 
   ``` js
-  Vue.config.errorHandler = function (err, vm) {
+  Vue.config.errorHandler = function (err, vm, type) {
     // エラー処理
+    // `type` は Vue 固有のエラー種別です（例： どのライフサイクルフックでエラーが起きたかなど）。
+    // 2.2.0 以降で使用できます。
   }
   ```
 
-  コンポーネントの描画とウォッチャいおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
+  コンポーネントの描画関数とウォッチャにおいて未捕獲のエラーに対してハンドラを割り当てます。ハンドラはエラーと Vue インスタンスが引数に渡されて呼び出されます。
+
+  > 2.2.0 では、このフックは、コンポーネントのライフサイクルフック中のエラーも捉えます。また、このフックが `undefined` の場合、捕捉されたエラーは、アプリケーションをクラッシュさせずに、代わりに `console.error` を用いて記録されます。
 
   > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
 
@@ -110,10 +114,34 @@ type: api
     f1: 112,
     mediaPlayPause: 179,
     up: [38, 87]
-  } 
+  }
   ```
 
   `v-on` 向けにカスタムキーエイリアスを定義します。
+
+## performance
+
+> 2.2.0 の新機能
+
+- **型:** `boolean`
+
+- **デフォルト:** `false`
+
+- **使用方法**:
+
+  これを `true` に設定することで、ブラウザの開発者ツールのタイムライン機能で、コンポーネントの初期化やコンパイル、描画、パッチのパフォーマンス追跡することが可能になります。 この機能は、開発者モードおよび [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API をサポートするブラウザでのみ動作します。
+
+### productionTip
+
+> 2.2.0 の新機能
+
+- **型:** `boolean`
+
+- **デフォルト:** `true`
+
+- **使用方法**:
+
+  これを `false` に設定すると、 Vue の起動時のプロダクションのヒントが表示されなくなります。
 
 ## グローバル API
 
@@ -197,17 +225,19 @@ type: api
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 
-<h3 id="Vue-delete">Vue.delete( object, key )</h3>
+<h3 id="Vue-delete">Vue.delete( target, key )</h3>
 
 - **引数:**
-  - `{Object} object`
-  - `{string} key`
+  - `{Object | Array} target`
+  - `{string | number} key`
 
 - **使用方法:**
 
   オブジェクトのプロパティを削除します。オブジェクトがリアクティブの場合、削除がトリガし View が更新されることを保証します。これは主に Vue がプロパティの削除を検知できないという制約を回避するために使われますが、使う必要があることはまれです。
 
-  **オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできないことに注意してください。**
+  > 2.2.0 以降では、 Array とそのインデックスでも動作します。
+
+  <p class="tip">Vue インスタンスや Vue インスタンスのルートデータオブジェクトを対象とすることはできません。</p>
 
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
@@ -340,7 +370,7 @@ type: api
 
   ```js
   var version = Number(Vue.version.split('.')[0])
-  
+
   if (version === 2) {
     // Vue v2.x.x
   } else if (version === 1) {
@@ -602,7 +632,7 @@ type: api
 
 ### render
 
-- **型:** `Function`
+- **型:** `(createElement: () => VNode) => VNode`
 
 - **詳細:**
 
@@ -612,6 +642,34 @@ type: api
 
 - **参照:**
   - [描画関数](../guide/render-function.html)
+
+### renderError
+
+> 2.2.0 からの新機能
+
+- **型:** `(createElement: () => VNode, error: Error) => VNode`
+
+- **詳細:**
+
+  **development モードでのみ動作します。**
+
+  デフォルトの `render` 関数にてエラーが発生した際に、代替となる描画結果を提供します。この際、エラーは `renderError` へ、第二引数として渡されます。この機能は、特にホットリロードなどと併用する場合に重宝します。
+
+- **例:**
+
+  ``` js
+  new Vue({
+    render (h) {
+      throw new Error('oops')
+    },
+    renderError (h, err) {
+      return h('pre', { style: { color: 'red' }}, err.stack)
+    }
+  }).$mount('#app')
+  ```
+
+- **参照:**
+  - [描画関数](../guide/render-function)
 
 ## オプション / ライフサイクルフック
 
@@ -777,7 +835,7 @@ type: api
 - **参照:**
   - [コンポーネント](../guide/components.html)
 
-## オプション / その他
+## オプション / 組成
 
 ### parent
 
@@ -815,18 +873,6 @@ type: api
 
 - **参照:** [ミックスイン](../guide/mixins.html)
 
-### name
-
-- **型:** `string`
-
-- **制約:** コンポーネントのオプションで使われたときのみ、有効なので注意してください。
-
-- **詳細:**
-
-  テンプレート内でのコンポーネント自身の再帰呼び出しを許可します。コンポーネントは `Vue.component()` でグローバルに登録され、グローバル ID はその名前に自動的に設定される事に注意してください。
-
-  `name` オプションのもう1つの利点は、デバッギングです。名前付きコンポーネントはより便利な警告メッセージが表示されます。また、[vue-devtools](https://github.com/vuejs/vue-devtools) でアプリケーションを検査するとき、名前付きでないコンポーネントは `<AnonymousComponent>` として表示され、とても有益ではありません。`name` オプションの提供によって、はるかに有益なコンポーネントツリーを取得できるでしょう。
-
 ### extends
 
 - **型:** `Object | Function`
@@ -848,6 +894,80 @@ type: api
     ...
   }
   ```
+
+### provide / inject
+
+> 2.2.0 からの新機能
+
+- **型:**
+  - **provide:** `Object | () => Object`
+  - **inject:** `Array<string> | { [key: string]: string | Symbol }`
+
+- **詳細:**
+
+  <p class="tip">`provide` および `inject` は、主に高度なプラグインやコンポーネントのライブラリのために提供されています。一般的なアプリケーションのコードで利用することは推奨されません。</p>
+
+  この1組のオプションは、コンポーネントの階層がどれほど深いかにかかわらず、祖先コンポーネントが、自身の子孫コンポーネント全てに対する依存オブジェクトの注入役を務めることができるようにするために利用されます。
+  React に精通している人は、 React のコンテキストの特徴と非常によく似ていると捉えると良いでしょう。
+
+  `provide` オプションの値は、オブジェクトもしくはオブジェクトを返す関数でなくてはなりません。
+  このオブジェクトは自身の子孫に注入可能なプロパティを含みます。また、このオブジェクトのキーとして、 ES2015 の Symbol を利用することが可能です。
+
+  `inject` オプションの値は、文字列の配列か、オブジェクトのいずれかでなくてはなりません。オブジェクトの場合、キーがローカルのバインディング名を表し、バリューが利用可能な注入オブジェクトを探すときのキー（文字列または Symbol）となります。
+
+  プロバイダとなるコンポーネントは、提供されたプロパティを注入するコンポーネントの親チェーン内にある必要があります。
+
+- **例:**
+
+  ``` js
+  var Provider = {
+    provide: {
+      foo: 'bar'
+    },
+    // ...
+  }
+
+  var Child = {
+    inject: ['foo'],
+    created () {
+      console.log(this.foo) // -> "bar"
+    }
+    // ...
+  }
+  ```
+
+  ES2015のシンボルとともに `provide` 関数と `inject` オブジェクトを利用する場合:
+
+  ``` js
+  const s = Symbol()
+
+  const Provider = {
+    provide () {
+      return {
+        [s]: 'foo'
+      }
+    }
+  }
+
+  const Child = {
+    inject: { s },
+    // ...
+  }
+  ```
+
+## オプション / その他
+
+### name
+
+- **型:** `string`
+
+- **制約:** コンポーネントのオプションで使われたときのみ、有効なので注意してください。
+
+- **詳細:**
+
+  テンプレート内でのコンポーネント自身の再帰呼び出しを許可します。コンポーネントは `Vue.component()` でグローバルに登録され、グローバル ID はその名前に自動的に設定される事に注意してください。
+
+  `name` オプションのもう1つの利点は、デバッギングです。名前付きコンポーネントはより便利な警告メッセージが表示されます。また、[vue-devtools](https://github.com/vuejs/vue-devtools) でアプリケーションを検査するとき、名前付きでないコンポーネントは `<AnonymousComponent>` として表示され、とても有益ではありません。`name` オプションの提供によって、はるかに有益なコンポーネントツリーを取得できるでしょう。
 
 ### delimiters
 
@@ -879,6 +999,47 @@ type: api
 
 - **参照:** [関数型コンポーネント](../guide/render-function.html#関数型コンポーネント)
 
+### model
+
+> 2.2.0 からの新機能
+
+- **型:** `{ prop?: string, event?: string }`
+
+- **詳細:**
+
+  `v-model` が指定されたとき、カスタムコンポーネントが prop 及びイベントをカスタマイズすることを許可します。デフォルトでは、コンポーネントにおける `v-model` は、 `value` を prop として、 `input` をイベントして用います。しかし、チェックボックスやラジオボタンなどの入力タイプは、 `value` prop を他の目的で利用したいことがあるかもしれません。その際、 `model` オプションを利用することで、競合を避けることが可能です。
+
+- **例:**
+
+  ``` js
+  Vue.component('my-checkbox', {
+    model: {
+      prop: 'checked',
+      event: 'change'
+    },
+    props: {
+      // これによって、 `value` prop を別の目的で利用することを許可します。
+      value: String
+    },
+    // ...
+  })
+  ```
+
+  ``` html
+  <my-checkbox v-model="foo" value="some value"></my-checkbox>
+  ```
+
+  上の例の場合は、こうなります:
+
+  ``` html
+  <my-checkbox
+    :checked="foo"
+    @change="val => { foo = val }"
+    value="some value">
+  </my-checkbox>
+  ```
+
+
 ## インスタンスプロパティ
 
 ### vm.$data
@@ -890,6 +1051,17 @@ type: api
   Vue インスタンスが監視しているデータオブジェクトです。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
 
 - **参照:** [オプション - データ](#data)
+
+### vm.$props
+
+> 2.2.0 の新機能
+
+- **型** `Object`
+
+- **詳細**
+
+  コンポーネントが受け取った現在の props を表すオブジェクトです。
+  Vue インスタンスプロキシは props オブジェクトのプロパティにアクセスします。
 
 ### vm.$el
 
@@ -1146,7 +1318,7 @@ type: api
 <h3 id="vm-on">vm.$on( event, callback )</h3>
 
 - **引数:**
-  - `{string} event`
+  - `{string | Array<string>} event` (Array は 2.2.0 以降でのみサポートされます)
   - `{Function} callback`
 
 - **使用方法:**
@@ -1460,6 +1632,9 @@ type: api
   - `.{keyCode | keyAlias}` - 指定したキーが押された時のみトリガされるハンドラです。
   - `.native` - コンポーネントのルート要素上のネイティブイベントに対して購読します。
   - `.once` - 最大1回、ハンドラをトリガします。
+  - `.left` -（2.2.0以降）マウスの左ボタンが押された時のみトリガされるハンドラです。
+  - `.right` -（2.2.0以降）マウスの右ボタンが押された時のみトリガされるハンドラです。
+  - `.middle` -（2.2.0以降）マウスの中央ボタンが押された時のみトリガされるハンドラです。
 
 - **使用方法:**
 
@@ -1869,6 +2044,8 @@ type: api
   動的コンポーネント周りでラップされるとき、`<keep-alive>` はそれらを破棄しないで非アクティブなコンポーネントのインスタンスをキャッシュします。`<trasition>` に似ていて、`<keep-alive>` はそれ自身 DOM 要素で描画されない抽象型コンポーネントです。`activated` と `deactivated` ライフサイクルフックはそれに応じて呼び出されます。
 
   コンポーネントが `<keep-alive>` 内部でトグルされるとき、`activated` と `deactivated` ライフサイクルフックはそれに応じて呼び出されます。
+
+  > 2.2.0 以降では、`<keep-alive>`ツリーの中の全てのネストされたコンポーネントに対して、 `activated` および `deactived` が発火します。
 
   主に、コンポーネント状態を保存したり、再描画を避けるために使用されます。
 
