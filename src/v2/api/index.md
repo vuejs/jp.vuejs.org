@@ -70,9 +70,9 @@ type: api
 - **使用方法:**
 
   ``` js
-  Vue.config.errorHandler = function (err, vm, type) {
+  Vue.config.errorHandler = function (err, vm, info) {
     // エラー処理
-    // `type` は Vue 固有のエラー種別です（例： どのライフサイクルフックでエラーが起きたかなど）。
+    // `info` は Vue 固有のエラー情報です（例： どのライフサイクルフックでエラーが起きたかなど）。
     // 2.2.0 以降で使用できます。
   }
   ```
