@@ -80,11 +80,11 @@ $ npm run dev
 
 - **ランタイム**: Vue インスタンスの作成やレンダリング、仮想 DOM の変更などのためのコードです。基本的にコンパイラを除く全てのものです。
 
-- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用される。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
+- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用されます。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
 
-- **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図している。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
+- **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図しています。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
-- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](http://rollupjs.org/)のような最新のバンドラでの利用を意図している。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
+- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](http://rollupjs.org/)のような最新のバンドラでの利用を意図しています。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
 
 ### ランタイム + コンパイラとランタイム限定の違い
 
@@ -92,12 +92,12 @@ $ npm run dev
 
 
 ``` js
-// これはコンパイラが必要
+// これはコンパイラが必要です
 new Vue({
   template: `<div>{{ hi }}</div>`
 })
 
-// これは必要ない
+// これはコンパイラは必要ありません
 new Vue({
   render (h) {
     return h('div', this.hi)
@@ -121,7 +121,7 @@ module.exports = {
     }
   }
 }
-````
+```
 
 #### Rollup
 
@@ -162,7 +162,7 @@ CommonJS と ES Module ビルドはまた、実行モードを決めるために
 
 #### Webpack
 
-Webpack の [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を利用する:
+Webpack の [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) は以下のようにして利用します:
 
 ``` js
 var webpack = require('webpack')
@@ -182,7 +182,7 @@ module.exports = {
 
 #### Rollup
 
-[rollup-plugin-replace](https://github.com/rollup/rollup-plugin-replace) を利用する:
+[rollup-plugin-replace](https://github.com/rollup/rollup-plugin-replace) は以下のようにして利用します:
 
 ``` js
 const replace = require('rollup-plugin-replace')
@@ -199,7 +199,7 @@ rollup({
 
 #### Browserify
 
-グローバルな [envify](https://github.com/hughsk/envify) transform をバンドラに適用する:
+グローバルな [envify](https://github.com/hughsk/envify) transform は以下のようにしてバンドラに適用します:
 
 ``` bash
 NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
