@@ -666,7 +666,6 @@ Vue.component('my-checkbox', {
 ```
 
 上記は以下と同じです:
-The above will be equivalent to:
 
 ``` html
 <my-checkbox
