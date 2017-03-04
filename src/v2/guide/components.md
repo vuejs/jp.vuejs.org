@@ -506,7 +506,7 @@ Vue.component('button-counter', {
       this.counter += 1
       this.$emit('increment')
     }
-  },
+  }
 })
 new Vue({
   el: '#counter-event-example',
