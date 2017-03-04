@@ -612,11 +612,11 @@ type: api
 
   <p class="tip">与えられた要素は単にマウントするポイントとして機能します。Vue 1.x とは異なり、マウントされた要素は、全てのケースで Vue によって生成された DOM に置き換えられます。従って、ルートインスタンスを `<html>` または `<body>` にマウントすることは推奨されません。</p>
 
-  <p class="tip">If neither `render` function nor `template` option is present, the in-DOM HTML of the mounting DOM element will be extracted as the template. In this case, Runtime + Compiler build of Vue should be used.</p>
+  <p class="tip">`render` 関数または `template` オプションも存在しない場合、マウントしている DOM 要素にある HTML がテンプレートとして抽出されます。この場合、Vue のランタイムとコンパイラが同包された完全ビルドを使用する必要があります。</p>
 
 - **参照:**
   - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
-  - [Runtime + Compiler vs. Runtime-only](../guide/installation.html#Runtime-Compiler-vs-Runtime-only)
+  - [ランタイム + コンパイラとランタイム限定の違い](../guide/installation.html#ランタイム-コンパイラとランタイム限定の違い)
 
 ### template
 
@@ -630,7 +630,7 @@ type: api
 
   <p class="tip">セキュリティの観点から、信頼できる Vue のテンプレートだけ使用するべきです。決してユーザーによって生成されたコンテンツをテンプレートとして使用しないでください。</p>
 
-  <p class="tip">If render function is present in the Vue option, the template will be ignored.</p>
+  <p class="tip">Vue オプションに `render` 関数がある場合、テンプレートは無視されます。</p>
 
 - **参照:**
   - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
@@ -646,7 +646,7 @@ type: api
 
   コンポーネントが関数型コンポーネントならば、render 関数は、関数型コンポーネントが状態を持たないため、コンテキストなデータにアクセスするために提供する `context` を追加の引数として受け取ります。
 
-  <p class="tip">The `render` function has priority over the render function compiled from `template` option or in-DOM HTML template of the mounting element which is specified by the `el` option.</p>
+  <p class="tip">`render` 関数は、`el` オプションで指定されたマウント要素の `template` オプションまたは DOM にある HTML テンプレートからコンパイルされた描画関数より優先されます。</p>
 
 - **参照:**
   - [描画関数](../guide/render-function.html)
