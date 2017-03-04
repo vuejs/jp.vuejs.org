@@ -952,6 +952,34 @@ type: api
   }
   ```
 
+  > The next 2 examples only work with Vue > 2.2.1. Below that version, injected values were resolved after the `props` and the `data` initialization.
+
+  Using an injected value as the default for a prop:
+  ```js
+  const Child = {
+    inject: ['foo'],
+    props: {
+      bar: {
+        default () {
+          return this.foo
+        }
+      }
+    }
+  }
+  ```
+
+  Using an injected value as data entry:
+  ```js
+  const Child = {
+    inject: ['foo'],
+    data () {
+      return {
+        bar: this.foo
+      }
+    }
+  }
+  ```
+
 ## オプション / その他
 
 ### name
