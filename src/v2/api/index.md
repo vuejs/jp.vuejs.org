@@ -952,9 +952,9 @@ type: api
   }
   ```
 
-  > The next 2 examples only work with Vue > 2.2.1. Below that version, injected values were resolved after the `props` and the `data` initialization.
+  > 次の 2 つの例は、Vue の 2.2.1 以降のみだけ動作します。以下のバージョンでは、注入された値は、`props` と `data` による初期化後に解決されます。
 
-  Using an injected value as the default for a prop:
+  以下は、prop のデフォルト値として、注入された値を使用します:
   ```js
   const Child = {
     inject: ['foo'],
@@ -968,7 +968,7 @@ type: api
   }
   ```
 
-  Using an injected value as data entry:
+  以下は、注入された値をデータのエントリとして使用します:
   ```js
   const Child = {
     inject: ['foo'],
