@@ -249,6 +249,7 @@ new Vue({ el: '#range' })
     <li
       is="todo-item"
       v-for="(todo, index) in todos"
+      v-bind:key="todo"
       v-bind:title="todo"
       v-on:remove="todos.splice(index, 1)"
     ></li>
@@ -297,6 +298,7 @@ new Vue({
     <li
       is="todo-item"
       v-for="(todo, index) in todos"
+      v-bind:key="todo"
       v-bind:title="todo"
       v-on:remove="todos.splice(index, 1)"
     ></li>
