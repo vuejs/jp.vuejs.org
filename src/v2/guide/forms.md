@@ -8,7 +8,7 @@ order: 10
 
 form の input 要素 と textarea 要素で双方向 (two-way) データバインディングを作成するには、`v-model` ディレクティブを使用することができます。それは、自動的に入力されたタイプに基づいて要素を更新するための正しい方法を選択します。わずかな魔法とはいえ、`v-model` は本質的にユーザーの入力イベントにおいてデータを更新するための糖衣構文 (syntax sugar) で、そのうえ、いくつかのエッジケースに対して特別な配慮が必要です。
 
-<p class="tip">`v-model` は、input または textarea に与えられた初期値を気にしません。input または textarea は常に、信頼できる情報源として Vue インスタンスを扱います。</p>
+<p class="tip">`v-model` は任意の form 要素にある `value`、`checked` または `selected` 属性の初期値を無視します。input または textarea は常に、信頼できる情報源として Vue インスタンスを扱います。コンポーネントの `data` オプションの中で JavaScript 側で初期値を宣言する必要があります。</p>
 
 <p class="tip" id="vmodel-ime-tip">[IME](https://en.wikipedia.org/wiki/Input_method) (中国語、日本語、韓国語、その他) が必須な言語に対しては、`v-model` は IME コンポジションの間は更新されないことに注意してください。これらの更新に対して対応したい場合は、`input` イベントを代わりに使用します。</p>
 
@@ -169,15 +169,27 @@ new Vue({
 
 ``` html
 <select v-model="selected">
+  <option disabled value="">Please select one</option>
   <option>A</option>
   <option>B</option>
   <option>C</option>
 </select>
 <span>Selected: {{ selected }}</span>
 ```
+
+``` js
+new Vue({
+  el: '...',
+  data: {
+    selected: ''
+  }
+})
+```
+
 {% raw %}
 <div id="example-5" class="demo">
   <select v-model="selected">
+    <option disabled value="">Please select one</option>
     <option>A</option>
     <option>B</option>
     <option>C</option>
@@ -188,11 +200,13 @@ new Vue({
 new Vue({
   el: '#example-5',
   data: {
-    selected: null
+    selected: ''
   }
 })
 </script>
 {% endraw %}
+
+<p class="tip">`v-model` の式の初期値がオプションの一致しない場合、`<select>` 要素は "未選択" の状態で描画されます。iOS ではこの場合、iOS が change イベントを発生させないため、最初のアイテムを選択できなくなります。したがって、上記の例に示すように、空の値で無効なオプションを指定することを推奨します。</p>
 
 複数の選択（配列に束縛）:
 
