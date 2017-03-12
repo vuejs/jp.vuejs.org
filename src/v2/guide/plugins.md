@@ -9,7 +9,7 @@ order: 18
 
 プラグインは通常 Vue にグローバルレベルで機能を追加します。プラグインに対しては厳密に定義されたスコープはありません。書くことができるプラグインはいくつかのタイプがあります:
 
-1. 1つ、または複数のグローバル・メソッドを追加します。例: [vue-element](https://github.com/vuejs/vue-element)
+1. 1つ、または複数のグローバル・メソッドを追加します。例: [vue-custom-element](https://github.com/karol-f/vue-custom-element)
 
 2. 1つ、または複数のグローバル・アセットを追加します。ディレクティブ/フィルタ/トランジションなど。例: [vue-touch](https://github.com/vuejs/vue-touch)
 
