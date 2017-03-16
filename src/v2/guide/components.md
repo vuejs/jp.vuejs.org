@@ -1188,7 +1188,7 @@ beforeCreate: function () {
 
 ### x-template
 
-テンプテートを定義するもうひとつの方法は、`text/x-template` タイプとともに script 要素の中で定義するというものです。そのあと、id によってテンプレートを参照します。例:
+テンプレートを定義するもうひとつの方法は、`text/x-template` タイプとともに script 要素の中で定義するというものです。そのあと、id によってテンプレートを参照します。例:
 
 ``` html
 <script type="text/x-template" id="hello-world-template">
