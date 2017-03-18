@@ -253,7 +253,7 @@ export default {
 }
 ```
 
-## ルートのマッチング <sup>変更</sup>
+## ルートのマッチング
 
 より柔軟性を高めるために、ルートのマッチングの内部処理には、 [path-to-regexp](https://github.com/pillarjs/path-to-regexp) が利用されるようになりました。
 
