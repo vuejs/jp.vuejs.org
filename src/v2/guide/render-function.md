@@ -475,7 +475,9 @@ Vue.component('my-component', {
 `functional: true` を追加した後、私たちのアンカーヘッダコンポーネントの render 関数の更新として単に必要になるのは、
 `context` 引数の追加、`this.$slots.default` の `context.children` への更新、`this.level` の `context.props.level` への更新でしょう。
 
-関数型コンポーネントはただの関数なので、描画コストは少ないです。また、ラッパーコンポーネントとしてもとても便利です。例えば、以下が必要な時に。
+関数型コンポーネントはただの関数なので、描画コストは少ないです。However, this also mean that functional components don't show up in VueJS Chrome dev tools component tree.
+
+また、ラッパーコンポーネントとしてもとても便利です。例えば、以下が必要な時に。
 
 - いくつかの他のコンポーネントから 1 つ delegate するためのものをプログラムで選ぶ時
 - 子、プロパティ、または、データを子コンポーネントへ渡る前に操作したい時
