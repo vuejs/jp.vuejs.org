@@ -5,7 +5,7 @@ date: 2016-03-14 18:45:00
 
 ## コミュニティの成長
 
-この1年間における Vue の成長は素晴らしいです。今現在、GitHub では 15,000 を超えるスターがあり、npm から 500k を超えるダウンロード、そして Gitter チャンネルでは 2,000 ユーザーを超えています。何よりも、コミュニティによってロンドンで最初の[ミートアップ](http://www.meetup.com/London-Vue-js-Meetup/)とパリで最初の[ミートアップ](http://www.meetup.com/Vuejs-Paris/?scroll=true)がうまく開催されたのは、大変エキサイティングです！ミートアップの主催者である [Jack](https://twitter.com/JackBarham)、[James](https://twitter.com/onejamesbrowne/) そして [Eduardo](https://twitter.com/posva/) に大変感謝いたします。
+この1年間における Vue の成長は素晴らしいです。今現在、GitHub では 15,000 を超えるスターがあり、npm から 500k を超えるダウンロード、そして Gitter チャンネルでは 2,000 ユーザーを超えています。何よりも、コミュニティによってロンドンで最初の[ミートアップ](http://www.meetup.com/London-Vue-js-Meetup/)とパリで最初の[ミートアップ](http://www.meetup.com/Vuejs-Paris/?scroll=true)がうまく開催されたのは、大変エキサイティングです！ミートアップの主催者の [Jack](https://twitter.com/JackBarham)、[James](https://twitter.com/onejamesbrowne/) そして [Eduardo](https://twitter.com/posva/) に大変感謝いたします。
 
 <!-- more -->
 
