@@ -235,7 +235,7 @@ if (route.meta.requiresAuth) {
 </div>
 {% endraw %}
 
-### [] クエリ内配列のための構文 <sup>削除</sup>
+### []クエリ内配列のための構文 <sup>削除</sup>
 
 クエリパラメータに配列を渡すとき QueryString の構文はもはや `/foo?users[]=Tom&users[]=Jerry` ではなく、その代わり、新しい構文は `/foo?users=Tom&users=Jerry` となりました。 内部的には、 `$route.query.users` は以前として配列ですが、 もしクエリ内にパラメータが1個で: `/foo?users=Tom` 、このルートに直接アクセスしたとき、ルータは `users` を配列として期待しているかどうかを知る方法がありません。そのため、算出プロパティを追加し、 `$route.query.users` 
 の全ての参照をそれに置き換えることを検討してください:
