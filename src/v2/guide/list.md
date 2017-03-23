@@ -415,7 +415,7 @@ JavaScript の制限のため、Vue は配列で以下の変更を検出する�
 Vue.set(example1.items, indexOfItem, newValue)
 ```
 ``` js
-// Array.prototype.splice`
+// Array.prototype.splice
 example1.items.splice(indexOfItem, 1, newValue)
 ```
 
