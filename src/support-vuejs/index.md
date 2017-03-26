@@ -1,10 +1,10 @@
 # Vue.js の開発を支援する
 
-Vue.js は MIT ライセンスのオープンソース・プロジェクトで、どなたでも無料で利用できます。しかしながら、プロジェクトの維持と新機能の開発には一定の労力を要するので、適度な資本の後ろ盾なしには持続することができません。[Patreon での支援](https://www.patreon.com/evanyou) (定期契約, with perks for different tiers) または [PayPal での寄付](https://www.paypal.me/evanyou)（ワンタイム）によって Vue.js の開発を支援できます。
+Vue.js は MIT ライセンスのオープンソース・プロジェクトで、どなたでも無料で利用できます。しかしながら、プロジェクトの維持と新機能の開発には一定の労力を要するので、適度な資本の後ろ盾なしには持続することができません。[Patreon での支援](https://www.patreon.com/evanyou) (定期契約、異なる層で特典あり) または [PayPal での寄付](https://www.paypal.me/evanyou)（ワンタイム）によって Vue.js の開発を支援できます。
 
 ## 現在のプレミアムスポンサー:
 
-### Platinum ($2000/mo)
+### プラチナ ($2000/月)
 
 <p style="text-align: center;">
   <a href="https://stdlib.com">
@@ -12,7 +12,7 @@ Vue.js は MIT ライセンスのオープンソース・プロジェクトで�
   </a>
 </p>
 
-### Gold ($500/mo)
+### ゴールド ($500/月)
 
 <p style="text-align: center; margin-top: 0; margin-bottom: 60px" class="sponsors-page">
   <a href="https://jsfiddle.net">
