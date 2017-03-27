@@ -144,7 +144,7 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 <template>
   <div class="list-container">
     <ul v-if="items.length">
-      <li v-for="item in items">
+      <li v-for="item in items" :key="item.id">
         {{ item.name }}
       </li>
     </ul>
