@@ -37,7 +37,7 @@ Vue.js は MIT ライセンスのオープンソース・プロジェクトで�
     <img src="/images/tmvuejs2.png">
   </a><a href="https://fancygrid.com" target="_blank">
     <img src="https://fancygrid.com/logo/logo.png">
-  </a><a href="https://component.ui" target="_blank" style="width:150px">
+  </a><a href="https://component.io" target="_blank" style="width:150px">
     <img src="/images/component_io.png" style="width:150px">
   </a>
 </p>
