@@ -15,7 +15,9 @@ Vue.js は MIT ライセンスのオープンソース・プロジェクトで�
 ### ゴールド ($500/月)
 
 <p style="text-align: center; margin-top: 0; margin-bottom: 60px" class="sponsors-page">
-  <a href="https://jsfiddle.net">
+  <a href="https://deepstreamhub.com" target="_blank" style="width:130px;top:1px">
+    <img src="/images/deepstream.png" style="width:130px">
+  </a><a href="https://jsfiddle.net">
     <img src="/images/jsfiddle.png">
   </a><a href="https://laravel.com">
     <img src="/images/laravel.png">
