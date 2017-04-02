@@ -186,7 +186,7 @@ methods: {
 <form v-on:submit.prevent></form>
 
 <!-- イベントリスナーを追加するときにキャプチャモードで使います -->
-<!-- i.e. an event targeting an inner element is handled here before being handled by that element -->
+<!-- 言い換えれば、内部要素を対象とするイベントは、その要素によって処理される前にここで処理されます -->
 <div v-on:click.capture="doThis">...</div>
 
 <!-- event.target が要素自身のときだけ、ハンドラが呼び出されます -->
