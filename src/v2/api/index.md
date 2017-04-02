@@ -112,9 +112,16 @@ type: api
   Vue.config.keyCodes = {
     v: 86,
     f1: 112,
+    // キャメルケースは動作しません
     mediaPlayPause: 179,
+    // 代わりに、二重引用符でケブブケースを使用することができます
+    "media-play-pause": 179,
     up: [38, 87]
   }
+  ```
+
+  ```html
+  <input type="text" @keyup.media-play-pause="method">
   ```
 
   `v-on` 向けにカスタムキーエイリアスを定義します。
