@@ -1778,6 +1778,9 @@ type: api
   <!-- prop バインディング。"prop" は my-component 内で宣言される必要があります -->
   <my-component :prop="someThing"></my-component>
 
+  <!-- pass down parent props in common with a child component -->
+  <child-component v-bind.prop="$props"></child-component>
+
   <!-- XLink -->
   <svg><a :xlink:special="foo"></a></svg>
   ```
