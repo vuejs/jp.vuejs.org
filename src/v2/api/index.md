@@ -1051,8 +1051,13 @@ type: api
       event: 'change'
     },
     props: {
-      // これによって、 `value` プロパティを別の目的で利用することを許可します。
-      value: String
+      // これによって、 `value` プロパティを別の目的で利用することを許可します
+      value: String,
+      // `value` の代わりとなるプロパティとして `checked` を使います
+      checked: {
+        type: Number,
+        default: 0
+      }
     },
     // ...
   })
