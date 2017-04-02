@@ -76,4 +76,4 @@ var VueRouter = require('vue-router')
 Vue.use(VueRouter)
 ```
 
-コミュニティーの貢献による膨大なプラグインやライブラリは [awsome-vue](https://github.com/vuejs/awesome-vue#libraries--plugins) で確認できます。
+コミュニティの貢献による膨大なプラグインやライブラリは [awesome-vue](https://github.com/vuejs/awesome-vue#components--libraries) で確認できます。

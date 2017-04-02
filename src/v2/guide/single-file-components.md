@@ -23,7 +23,7 @@ order: 19
 
 さて次にこちらに入ります:
 
-- [完全版シンタックスハイライト](https://github.com/vuejs/awesome-vue#syntax-highlighting)
+- [完全版シンタックスハイライト](https://github.com/vuejs/awesome-vue#source-code-editing)
 - [CommonJS モジュール](https://webpack.js.org/concepts/modules/#what-is-a-webpack-module)
 - [コンポーネントスコープ CSS](https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md)
 
