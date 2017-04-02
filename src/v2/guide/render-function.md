@@ -121,7 +121,7 @@ createElement(
 
 ### データオブジェクト詳解
 
-1 つ注意点: `v-bind:class` と `v-bind:style` がテンプレート内で特殊な扱いをされているのと同じように、それらは VNode のデータオブジェクト内で自身のトップレベルフィールドを持ちます。
+1 つ注意点: `v-bind:class` と `v-bind:style` がテンプレート内で特殊な扱いをされているのと同じように、それらは VNode のデータオブジェクト内で自身のトップレベルフィールドを持ちます。This object also allows you to bind normal HTML attributes as well as DOM properties such as `innerHTML` (this would replace the `v-html` directive):
 
 ``` js
 {
