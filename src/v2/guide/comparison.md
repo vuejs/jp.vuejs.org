@@ -206,7 +206,7 @@ div.list-container
 
 最後に、Vue は [CLI によるプロジェクト生成ツール](https://github.com/vuejs/vue-cli)を提供しており、それによってあなたは好きなビルドシステムを使った新しいプロジェクトをとても簡単に始めることができます。ビルドシステムには、[Webpack](https://github.com/vuejs-templates/webpack)、[Browserify](https://github.com/vuejs-templates/browserify)、さらに[ビルドシステム無し](https://github.com/vuejs-templates/simple)などがあります。React も [create-react-app](https://github.com/facebookincubator/create-react-app) でこの領域に取り組んでいますが、現在いくつかの制限があります：
 
-- Vue のプロジェクトテンプレートが Yeoman ライクなカスタマイズ機能を持つ一方で、それはプロジェクトの生成においてどのような設定も許可していません。
+- Vue のプロジェクトテンプレートが [Yeoman](http://yeoman.io/) ライクなカスタマイズ機能を持つ一方で、それはプロジェクトの生成においてどのような設定も許可していません。
 - Vue が様々な目的やビルドシステムのために広い種類のテンプレートを提供している一方で、それはシングルページアプリケーションを構築することを仮定した 1 つのテンプレートしか提供していません。
 - ユーザーが作ったテンプレートからプロジェクトを生成することは、開発スタイルを決定する前の企業の環境では特に役立ちますが、そのようなことはできません。
 
