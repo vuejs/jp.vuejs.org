@@ -191,4 +191,4 @@ data: {
 
 ### 自動プリフィックス
 
-`v-bind:style` でベンダー接頭辞を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に検出し、適用されるスタイルに適切な接頭辞を追加します。
+`v-bind:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に検出し、適用されるスタイルに適切な接頭辞を追加します。
