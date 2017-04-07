@@ -1,9 +1,9 @@
 ---
-title: Realtime with deepstreamHub
+title: deepstreamHubを使用したリアルタイム機能
 type: examples
 order: 9
 ---
 
-> This example uses [deepstreamHub](https://deepstreamhub.com/) to synchronize realtime data, send events and make remote procedure calls between clients (you can try opening it in multiple browser windows).
+> この例では [deepstreamHub](https://deepstreamhub.com/) を使用して、データのリアルタイム同期、イベントの送信、クライアント間でのリモートプロシージャコールを行います(複数ブラウザを開いて確認することができます)。  
 
 <iframe width="100%" height="500" src="https://jsfiddle.net/yyx990803/ff0sp9hw/embedded/result,html,js,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
