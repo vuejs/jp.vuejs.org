@@ -1,7 +1,7 @@
 ---
 title: HackerNews クローン
 type: examples
-order: 10
+order: 12
 ---
 
 > これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、Vue 2.0 + vue-router + vuex 、そしてサーバサイドレンダリングが使用されています。
