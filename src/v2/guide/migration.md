@@ -942,7 +942,7 @@ methods: {
 }
 ```
 
-この方法に対するより詳細な利点は[ここの `v-model` による example ](#v-model-の-debounce-非推奨)を参照してください。
+この方法に対するより詳細な利点は[ここの `v-model` による example ](#v-model-の-debounce-削除)を参照してください。
 
 #### `limitBy` フィルタの置き換え
 
