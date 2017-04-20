@@ -6,7 +6,7 @@ order: 21
 
 ## 公式ルータ
 
-ほとんどのシングルページアプリケーション (SPA: single page application) を作成する場合、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router) を使うことをお勧めします。さらに詳しい内容は vue-router の[ドキュメント](http://vuejs.github.io/vue-router/)を参照してください。
+ほとんどのシングルページアプリケーション (SPA: single page application) を作成する場合、公式にサポートされている [vue-router ライブラリ](https://github.com/vuejs/vue-router) を使うことをお勧めします。さらに詳しい内容は vue-router の[ドキュメント](http://router.vuejs.org/)を参照してください。
 
 ## スクラッチからの単純なルーティング
 
