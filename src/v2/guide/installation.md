@@ -209,7 +209,7 @@ NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 
 ### CSP 環境
 
-Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、フルビルドに依存するため、これらの環境では使用できません。
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、完全ビルドに依存するため、これらの環境では使用できません。
 
 一方では、ランタイム限定ビルドでは CSP に準拠しています。 [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple) でランタイム限定ビルドを使用する場合は、テンプレートは CSP 環境でも完璧に動作する `render` 関数にプリコンパイルされます。
 
