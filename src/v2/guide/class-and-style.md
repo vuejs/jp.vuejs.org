@@ -193,11 +193,12 @@ data: {
 
 `v-bind:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に検出し、適用されるスタイルに適切な接頭辞を追加します。
 
-### Multiple Values
+### 複数の値
 
 > 2.3.0+
 
-Starting in 2.3 you can provide an array of multiple (prefixed) values to a style property, for example:
+2.3 から style プロパティに複数の (接頭辞付き) 値の配列を設定できます。例えば次のようになります:
 
 ``` html
 <div :style="{ display: ["-webkit-box", "-ms-flexbox", "flex"] }">
+```
