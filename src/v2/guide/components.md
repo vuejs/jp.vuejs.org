@@ -532,29 +532,29 @@ new Vue({
 <my-component v-on:click.native="doTheThing"></my-component>
 ```
 
-### `.sync` Modifier
+### `.sync` 修飾子
 
 > 2.3.0+
 
-In some cases we may need "two-way binding" for a prop - in fact, in Vue 1.x this is exactly what the `.sync` modifier provided. When a child component mutates a prop that has `.sync`, the value change will be reflected in the parent. This is convenient, however it leads to maintenance issues in the long run because it breaks the one-way data flow assumption: the code that mutates child props are implicitly affecting parent state.
+あるケースにおいては、プロパティに対して "双方向バインディング" が必要になるかもしれません。実際 Vue 1.x では、これは `.sync` 修飾子を提供したことで正にそうでした。子コンポーネントが `.sync` を持つプロパティを変更すると、値の変更は親に反映されます。これは便利ですが、単一方向のデータフローを破るため、長期的においてメンテナンスの問題につながります。子プロパティを変更するコードは暗黙的に親の状態に影響を及ぼします。
 
-This is why we removed the `.sync` modifier when 2.0 was released. However, we've found that there are indeed cases where it could be useful, especially when shipping reusable components. What we need to change is **making the code in the child that affects parent state more consistent and explicit.**
+これが、2.0 がリリースされたときに `.sync` 修飾子を削除した理由です。しかしながら、特に再利用可能なコンポーネントをリリースする場合には、それが実際に有用な場合があることが分かりました。私たちは、**親の状態に、より一貫性と明示性の影響を与える子のコードを作成する**変更が必要です。
 
-In 2.3 we re-introduced the `.sync` modifier for props, but this time it is just syntax sugar that automatically expands into an additional `v-on` listener:
+2.3 では、プロパティに対する `.sync` 修飾子を再導入しましたが、今回はさらに `v-on` リスナーに自動的に展開される、まさしく糖衣構文です:
 
-The following
+以下は
 
 ``` html
 <comp :foo.sync="bar"></comp>
 ```
 
-is expanded into:
+以下に展開されます:
 
 ``` html
 <comp :foo="bar" @update:foo="val => bar = val"></comp>
 ```
 
-For the child component to update `foo`'s value, it needs to explicitly emit an event instead of mutating the prop:
+子コンポーネントが `foo` の値を更新するためには、プロパティの変更の代わりに明示的にイベントを送出する必要があります:
 
 ``` js
 this.$emit('update:foo', newValue)
@@ -1088,29 +1088,29 @@ new Vue({
 
 <p class="tip">もしあなたが <strong>Browserify</strong> のユーザで非同期コンポーネントを使いたいとしたら、残念なことに開発者が[はっきりと](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224)非同期読み込みは Browserify では今後もサポートしない"と述べています。少なくとも公式には。 Browserify コミュニティは、既存のアプリケーションや複雑なアプリケーションに役立つ[いくつかの回避策](https://github.com/vuejs/vuejs.org/issues/620)があります。他のすべてのシナリオでは、ファーストクラスとして非同期サポートを組み込みで提供する Webpack を使用することをお勧めします。</p>
 
-### Advanced Async Components
+### 高度な非同期コンポーネント
 
 > New in 2.3.0
 
-Starting in 2.3 the async component factory can also return an object of the following format:
+2.3 から、非同期コンポーネントファクトリは、次の形式のオブジェクトも返すことができます:
 
 ``` js
 const AsyncComp = () => ({
-  // The component to load. Should be a Promise
+  // ロードするコンポーネント。Promise であるべき
   component: import('./MyComp.vue'),
-  // A component to use while the async component is loading
+  // 非同期コンポーネントのロード中に使用するコンポーネント
   loading: LoadingComp,
-  // A component to use if the load fails
+  // ロードが失敗した場合に使用するコンポーネント
   error: ErrorComp,
-  // Delay before showing the loading component. Default: 200ms.
+  // ローディングコンポーネントを表示する前に遅延する。デフォルト: 200 ms
   delay: 200,
-  // The error component will be displayed if a timeout is
-  // provided and exceeded. Default: Infinity.
+  // タイムアウトが設定され越えた場合、エラーコンポーネントが表示される。
+  // デフォルト: Infinity
   timeout: 3000
 })
 ```
 
-Note that when used as a route component in `vue-router`, these properties will be ignored because async components are resolved upfront before the route navigation happens. You also need to use `vue-router` 2.4.0+ if you wish to use the above syntax for route components.
+`vue-router` でルートコンポーネントとして使用された場合は、これらのプロパティは、ルートナビゲーションが起こる前に非同期コンポーネントが先に解決されるため、無視されます。ルートコンポーネントに対して上記の構文を使用したい場合は、`vue-router` 2.4.0 以降を使用する必要があります。
 
 ### コンポーネントの命名の慣習
 
