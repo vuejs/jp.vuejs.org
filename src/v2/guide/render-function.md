@@ -464,6 +464,8 @@ Vue.component('my-component', {
 })
 ```
 
+> Note: in versions <=2.3.0, the `props` option is required if you wish to accept props in a functional component. In 2.3.0+ you can omit the `props` option and all attributes found on the component node will be implicitly extracted as props.
+
 このコンポーネントが必要な全てのことは `context` を受け取ることです。それは次を含むオブジェクトです。
 
 - `props`: 提供されるプロパティのオブジェクト
@@ -471,6 +473,8 @@ Vue.component('my-component', {
 - `slots`: slots オブジェクトを返す関数
 - `data`: コンポーネントに渡される全体のデータオブジェクト
 - `parent`: 親コンポーネントへの参照
+- `listeners`: (2.3.0+) An object containing parent-registered event listeners. This is simply an alias to `data.on`
+- `injections`: (2.3.0+) if using the [`inject`](https://vuejs.org/v2/api/#provide-inject) option, this will contain resolved injections.
 
 `functional: true` を追加した後、私たちのアンカーヘッダコンポーネントの render 関数の更新として単に必要になるのは、
 `context` 引数の追加、`this.$slots.default` の `context.children` への更新、`this.level` の `context.props.level` への更新でしょう。
