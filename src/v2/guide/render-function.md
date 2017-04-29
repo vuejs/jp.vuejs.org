@@ -474,7 +474,7 @@ Vue.component('my-component', {
 - `data`: コンポーネントに渡される全体のデータオブジェクト
 - `parent`: 親コンポーネントへの参照
 - `listeners`: (2.3.0 以降) 親に登録されたイベントリスナーを含むオブジェクト。これは単純に `data.on` のエイリアスです
-- `injections`: (2.3.0 以降) [`inject`](https://vuejs.org/v2/api/#provide-inject) オプションで使用する場合、これは解決されたインジェクション(注入)が含まれます
+- `injections`: (2.3.0 以降) [`inject`](../api/#provide-inject) オプションで使用する場合、これは解決されたインジェクション(注入)が含まれます
 
 `functional: true` を追加した後、私たちのアンカーヘッダコンポーネントの render 関数の更新として単に必要になるのは、
 `context` 引数の追加、`this.$slots.default` の `context.children` への更新、`this.level` の `context.props.level` への更新でしょう。
