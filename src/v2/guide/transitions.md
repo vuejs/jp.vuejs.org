@@ -206,7 +206,7 @@ new Vue({
   animation: bounce-in .5s;
 }
 .bounce-leave-active {
-  animation: bounce-out .5s;
+  animation: bounce-out .5s reverse;
 }
 @keyframes bounce-in {
   0% {
@@ -217,17 +217,6 @@ new Vue({
   }
   100% {
     transform: scale(1);
-  }
-}
-@keyframes bounce-out {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(0);
   }
 }
 ```
@@ -247,7 +236,7 @@ new Vue({
   }
   .bounce-leave-active {
     -webkit-animation: bounce-out .5s;
-    animation: bounce-out .5s;
+    animation: bounce-in .5s reverse;
   }
   @keyframes bounce-in {
     0% {
@@ -263,20 +252,6 @@ new Vue({
       transform: scale(1);
     }
   }
-  @keyframes bounce-out {
-    0% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-    50% {
-      -webkit-transform: scale(1.5);
-      transform: scale(1.5);
-    }
-    100% {
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    }
-  }
   @-webkit-keyframes bounce-in {
     0% {
       -webkit-transform: scale(0);
@@ -289,20 +264,6 @@ new Vue({
     100% {
       -webkit-transform: scale(1);
       transform: scale(1);
-    }
-  }
-  @-webkit-keyframes bounce-out {
-    0% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-    50% {
-      -webkit-transform: scale(1.5);
-      transform: scale(1.5);
-    }
-    100% {
-      -webkit-transform: scale(0);
-      transform: scale(0);
     }
   }
 </style>
