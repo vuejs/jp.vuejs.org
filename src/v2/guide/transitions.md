@@ -206,7 +206,7 @@ new Vue({
   animation: bounce-in .5s;
 }
 .bounce-leave-active {
-  animation: bounce-out .5s reverse;
+  animation: bounce-in .5s reverse;
 }
 @keyframes bounce-in {
   0% {
@@ -235,7 +235,7 @@ new Vue({
     animation: bounce-in .5s;
   }
   .bounce-leave-active {
-    -webkit-animation: bounce-out .5s;
+    -webkit-animation: bounce-in .5s reverse;
     animation: bounce-in .5s reverse;
   }
   @keyframes bounce-in {
