@@ -616,7 +616,12 @@ Vue.component('currency-input', {
         // 両端のスペースを削除
         .trim()
         // 小数点2桁以下まで短縮
-        .slice(0, value.indexOf('.') + 3)
+        .slice(
+          0,
+          value.indexOf('.') === -1
+            ? value.length
+            : value.indexOf('.') + 3
+        )
       // 値が既に正規化されていないならば、
       // 手動で適合するように上書き
       if (formattedValue !== value) {
@@ -650,7 +655,12 @@ Vue.component('currency-input', {
     updateValue: function (value) {
       var formattedValue = value
         .trim()
-        .slice(0, value.indexOf('.') + 3)
+        .slice(
+          0,
+          value.indexOf('.') === -1
+            ? value.length
+            : value.indexOf('.') + 3
+        )
       if (formattedValue !== value) {
         this.$refs.input.value = formattedValue
       }
