@@ -426,6 +426,7 @@ Vue.component('example', {
 - Function
 - Object
 - Array
+- Symbol
 
 加えて、`type` はカスタムコンストラクタ関数とすることもでき、アサーションは `instanceof` チェックで作成できるでしょう。
 
