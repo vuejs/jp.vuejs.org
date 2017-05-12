@@ -24,153 +24,41 @@ React と Vue には多くの類似点があります。それらは両方とも
 
 React のコミュニティは、私たちがこのバランスを達成するのを[手助けしてくださいました](https://github.com/vuejs/vuejs.org/issues/364)。React チームの Dan Abramov 氏には心から感謝いたします。彼にはとても寛容に時間を費やしていただき、私たちが[お互いに最終結果に満足するまで](https://github.com/vuejs/vuejs.org/issues/364#issuecomment-244575740)このドキュメントを改善するための数多くの助言をいただきました。
 
-下記で私たちがこれらの 2 つのライブラリの違いを探求したように、あなたが確かに公平な考察だと感じることができるのを願います。
+### Performance
 
-### 性能分析
+Both React and Vue offer comparable performance in most commonly seen use cases, with Vue usually slightly head due to its lighter-weight Virtual DOM implementation. If you are interested in numbers, you can check out this [3rd party benchmark](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts/table.html) which focuses on raw rendering/updating performance. Note that this does not take complex component structures into account, so should only be considered a reference rather than a verdict.
 
-私たちがこれまでにテストした現実世界と同様のシナリオのすべてにおいて、Vue は React よりもかなり優れた性能を発揮しました。あなたが直ちに驚きたい場合は、ぜひ読んでください。私たちは (React チームと協力して開発されたベンチマークも含めて) ブレークダウンしています。
+#### Optimization Efforts
 
-#### 描画性能
+In React, when a component's state changes, it triggers the re-render of the entire component sub-tree, starting at that component as root. To avoid unnecessary re-renders of child components, you need to either use `PureComponent` or implement `shouldComponentUpdate` whenever you can. You may also need to use immutable data structures to make your state changes more optimization-friendly. However, in certain cases you may not be able to rely on such optimizations because `PureComponent/shouldComponentUpdate` assumes the entire sub tree's render output is determined by the props of the current component. If that is not the case, then such optimizations may lead to inconsistent DOM state.
 
-UI を描画する時、DOM 操作は通常最も高いコストのかかる操作になり、また、残念ながら、そういった低レベルの操作をより速くするライブラリは存在しません。私たちができる最良の方法は：
-
-1. 必要な DOM 操作の回数を最小にします。React と Vue は両者ともこれを果たすために仮想 DOM による抽象化を用いており、どちらの実装もほぼ同様によく動いています。
-2. これらの DOM 操作の上に乗るオーバーヘッド(純粋な JavaScript 評価)をできる限り小さくします。これが Vue と React で異なる点です。
-
-JavaScript オーバーヘッドは、必要な DOM 操作を計算するメカニズムに直接関係しています。Vue と React の両方が Virtual DOM を利用していますが、Vue の仮想 DOM 実装([snabbdom](https://github.com/snabbdom/snabbdom) の fork) は、はるかに軽量なため、React よりもオーバーヘッドが少なくなります。
-
-これが意味するのは、コンポーネントよりも DOM 要素がより多く描画されるような通常のアプリケーションにおいて、Vue は React よりも大きく優れた性能を発揮するということです。しかしながら、1 つの普通のコンポーネントがそれぞれの要素を描画するような極端なケースでは、Vue は大抵もっと遅くなってしまうでしょう。しかし、これでこの話は終わりではありません。
-
-Vue と React は両者ともに、状態を持たず、インスタンス化できない関数型コンポーネントを提供しています - そしてこれにより、オーバーヘッドはより少なくなります。これが性能が重要な状況で使用された時、Vue は再び React よりも速くなります。これをデモするために、私たちは 10,000 個のリスト要素を 100 回描画するだけのシンプルな[ベンチマークプロジェクト](https://github.com/chrisvfritz/vue-render-performance-comparisons)を構築しました。このベンチマークの結果はハードウェアやブラウザ - 特に実行している JavaScript エンジンの性質によっても異なりますので、あなた自身で試してみることをおすすめします。
-
-しかし、もしあなたが面倒に感じるのなら、以下に 2014 MacBook Air 上の Chrome 52 で実行した時の結果を載せます。恣意的な結果の選択を避けるために、2 つのベンチマークは実際に独立して 20 回実行され、最も良い結果を採用しています。
-
-{% raw %}
-<table class="benchmark-table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Vue</th>
-      <th>React</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>最速値</th>
-      <td>23ms</td>
-      <td>63ms</td>
-    </tr>
-    <tr>
-      <th>中央値</th>
-      <td>42ms</td>
-      <td>81ms</td>
-    </tr>
-    <tr>
-      <th>平均値</th>
-      <td>51ms</td>
-      <td>94ms</td>
-    </tr>
-    <tr>
-      <th>95 パーセンタイル</th>
-      <td>73ms</td>
-      <td>164ms</td>
-    </tr>
-    <tr>
-      <th>最遅値</th>
-      <td>343ms</td>
-      <td>453ms</td>
-    </tr>
-  </tbody>
-</table>
-{% endraw %}
-
-#### 更新性能
-
-React では、コンポーネントの状態が変化するとそのコンポーネントをルートとしてコンポーネントのサブツリー全体を再描画します。完全に最適化された再描画を実現するために、あなたは `shouldComponentUpdate` をすべての場所で実装し、イミュータブルなデータ構造を使用する必要があります。Vue では、描画中にシステムは実際に再描画する必要があるコンポーネントを正確に認識します。
-
-これが意味するのは、最適化されていない Vue の更新処理は、最適化されていない React よりもとても速く、特に Vue の改善された描画性能によって、完全に最適化された React ですらも大抵の場合は最適化されていない Vue よりも遅いです。
-
-#### 開発時
-
-本番環境での性能は、エンドユーザーエクスペリエンスに直接関係しているためより重要な指標ですが、開発時における性能は開発者の経験に関連付けられているため、依然として重要です。
-
-Vue と React の両方は、ほとんどの通常のアプリケーションの開発には十分に速いです。しかし、フレームレートの高いデータの視覚化やアニメーションのプロトタイプを作成する場合、React は 1 fps に処理が落ちている間に、開発時に Vue の処理が 10 fps のケースを確認しています。
-
-これは開発モードにおいて React の多くの厳密な不変条件のチェックによるもので、多くの素晴らしい警告やエラーメッセージを提供するのに役立っています。私たちはこれが Vue においてまた重要なことは同意できますが、これらのチェックを実装する一方で、性能に関しても注意深く気にすることに努めています。
+In Vue, a component's dependencies are automatically tracked during its render, so the system knows precisely which components actually need to re-render when state changes. Each component can be considered to have `shouldComponentUpdate` automatically implemented for you, without the nested component caveats.
 
 ### HTML & CSS
 
-React では、すべてのものは単なる JavaScript で、これはとてもシンプルで洗練されているように聞こえます - それを深く知るまでは。悲しいことに、HTML や CSS を JavaScript の中で再発明することは伝統的なモデルのいくつかの問題を解決しながら、それ自身の痛みを引き起こす可能性もあります。Vue はそうではなく、Web の技術を利用し、また Web の技術の上に構築されています。これが意味することをあなたに見せるために、いくつかの例をお見せしましょう。
+React では、すべてのものは単なる JavaScript で、これはとてもシンプルで洗練されているように聞こえます。Not only are HTML structures expressed via JSX, the recent trends also tend to put CSS management inside JavaScript as well. This approach has its own benefits, but also comes with various trade-offs that may not seem worthwhile for every developer.
+
+Vue embraces classic web technologies and builds on top of them. To show you what that means, we'll dive into some examples.
 
 #### JSX vs Templates
 
-React では、すべてのコンポーネントは JSX を用いた 描画関数 (render) の中でそれらの UI を表現します。JSX とは JavaScript の中で用いることのできる、宣言的で XML のような構文です。ここに [React のコミュニティによって吟味された](https://github.com/vuejs/vuejs.org/issues/364#issuecomment-244582684)例があります：
-
-``` jsx
-render () {
-  let { items } = this.props
-
-  let children
-  if (items.length > 0) {
-    children = (
-      <ul>
-        {items.map(item =>
-          <li key={item.id}>{item.name}</li>
-        )}
-      </ul>
-    )
-  } else {
-    children = <p>No items found.</p>
-  }
-
-  return (
-    <div className='list-container'>
-      {children}
-    </div>
-  )
-}
-```
+React では、すべてのコンポーネントは JSX を用いた 描画関数 (render) の中でそれらの UI を表現します。JSX とは JavaScript の中で用いることのできる、宣言的で XML のような構文です。
 
 JSX を伴う 描画関数にはいくつかの優位な点があります：
 
-- あなたはビューを構築するために完全なプログラミング言語（JavaScript）の力を使うことができます。
+- You can leverage the power of a full programming language (JavaScript) to build your view. This includes temporary variables, flow controls, and directly referencing JavaScript values in scope.
 - JSX のためのツールのサポート（例えば、Lint、型チェック、エディタのオートコンプリート）は現在 Vue のテンプレートで利用可能なものよりもいくつかの点で優れています。
 
-Vue は、[描画関数](render-function.html)と、さらに [JSX のサポート](render-function.html#JSX)を備えています、なぜなら、あなたは時折その力を必要とするためです。しかしながら、デフォルトのエクスペリエンスとして、より単純な代替手段としてテンプレートを提供しています:
+Vue は、[描画関数](render-function.html)と、さらに [JSX のサポート](render-function.html#JSX)を備えています、なぜなら、あなたは時折その力を必要とするためです。しかしながら、デフォルトのエクスペリエンスとして、より単純な代替手段としてテンプレートを提供しており、Any valid HTML is also a valid Vue template, and this leads to a few advantages of its own:
 
-その代わりに、私たちはテンプレートをより単純な代替方法として提供しています：
+- For many developers who have been working with HTML, templates simply feel more natural to read and write. The preference itself can be somewhat subjective, but if it makes the developer more productive then the benefit is objective.
+-  HTML-based templates make it much easier to progressively migrate existing applications to take advantage of Vue's reactivity features.
+- It also makes it much easier for designers and less experienced developers to parse and contribute to the codebase.
+- You can even use pre-processors such as Pug (formerly known as Jade) to author your Vue templates.
 
-``` html
-<template>
-  <div class="list-container">
-    <ul v-if="items.length">
-      <li v-for="item in items" :key="item.id">
-        {{ item.name }}
-      </li>
-    </ul>
-    <p v-else>項目は見つかりませんでした。</p>
-  </div>
-</template>
-```
+Some argue that you'd need to learn an extra DSL (Domain-Specific Language) to be able to write templates - we believe this difference is superficial at best. First, JSX doesn't mean the user don't need to learn anything - it's additional syntax on top of plain JavaScript, so it's easy for anyone familar with JavaScript to learn, but saying it's essentially free is misleading. Similarly, template is just additional syntax on top of plain HTML and thus has very low learning cost for those who are already familiar with HTML. With the DSL we are also able to help the user get more done with less code (e.g. `v-on` modifiers). The same task can involve a lot more code when using plain JSX or render functions.
 
-ここにいくつかの優位な点を示します：
-
-- テンプレートを書く上で必要となる実装やコーディングスタイルの決定は少ないです
-- テンプレートは常に宣言的になります
-- すべての正しい HTML はテンプレートとしても正しくなります
-- それはより英語らしく読めます（例えば、for each item in items - 訳注：items の中のそれぞれの item）
-- より読みやすくするための上位版の JavaScript は必要としません
-
-これは、それを書いている開発者がもっと簡単にできるというだけではなく、デザイナーや経験の浅い開発者がもっと簡単に理解することができ、コードに貢献することができることでしょう。
-
-HTML 準拠したテンプレートのもう 1 つの利点は、Pug (以前は Jade として知られていた) のようなプリプロセッサを使って Vue テンプレートを作成できることです:
-
-``` pug
-div.list-container
-  ul(v-if="items.length")
-    li(v-for="item in items") {{ item.name }}
-  p(v-else) No items found.
-```
+On a higher level, we can divide components into two categories: presentational ones and logical ones. We recommend using templates for presentational components and render function / JSX for logical ones. The percentage of these components depends on the type of app you are building, but in general we find presentational ones to be much more common.
 
 #### コンポーネントスコープ CSS（Scoped CSS）
 
@@ -236,7 +124,7 @@ React Native によって同じ React コンポーネントモデルを使って
 
 MobX は React コミュニティ内でとても人気になってきており、実はそれは Vue のリアクティブシステムとほぼ同じものを使っています。限られた範囲内では、React + MobX の流れはより冗長な Vue として考えることができるので、もしあなたがその組み合わせを使って、それを楽しんでいるのならば、Vue を使ってみるのは、おそらく次のステップとして理にかなっているでしょう。
 
-## Angular 1
+## AngularJS (Angular 1)
 
 いくつかの Vue の構文は Angular と非常に良く似ているように見えることでしょう（例えば、`v-if` と `ng-if`）。これは Angular が解決した多くのものがあるのと、最初期の Vue の開発の際にインスピレーションを受けているためです。しかしながら、Angular から導入された多くの痛みもあり、それらは Vue が大きな改善を提供しようと試みた点でもあります。
 
@@ -266,21 +154,23 @@ Vue では、非同期キューイングを用いた透過的な依存追跡監�
 
 興味深いことに、これらの Angular 1 の問題点に Angular 2 と Vue がどのように対処しているかという点について、いくつかとてもよく似ている点があります。
 
-## Angular 2
+## Angular (Formerly known as Angular 2)
 
-Angular 2 は本当に完全に新しいフレームワークなので、私たちは Angular 2 のために分割した節を設けています。例えば、それは第一級のコンポーネントシステムを特徴として持っており、多くの詳細な実装は完全に書き換えられており、そして、API もまた抜本的に変更されています。
+Angular 2 は本当に Angular 1 から完全に異なるフレームワークなので、私たちは新しい Angular のために分割した節を設けています。例えば、それは第一級のコンポーネントシステムを特徴として持っており、多くの詳細な実装は完全に書き換えられており、そして、API もまた抜本的に変更されています。
 
 ### TypeScript
 
-Angular 1 がより小さなアプリケーションのために使用することができたのに対して、Angular 2 は企業が作るような大きなアプリケーションに最適となるようにフォーカスが移っています。この一部として、それはほぼ TypeScript が必須となっています。TypeScript は Java や C# のような言語の型安全がほしい開発者にはとても役立つものです。
+Angular essentially requires using TypeScript, given that almost all its documentation and learning resources are TypeScript-based. TypeScript has its obvious benefits - static type checking can be very useful for large-scale applications, and can be a big productivity boost for developers which backgrounds in Java and C#.
 
-Vue もまた、[企業での開発](https://github.com/vuejs/awesome-vue#enterprise-usage)によく適しており、また、特に私たちの[公式の型定義](https://github.com/vuejs/vue/tree/dev/types)や[公式デコレータ](https://github.com/vuejs/vue-class-component)によって TypeScript で使用することができます。しかしながら、当然それは私たちの場合は当然オプションとなります。
+However, not everyone wants to use TypeScript. In many smaller-scale use cases, introducing a type system may result in more overhead than productivity gain. In those cases you'd be better off going with Vue instead, since using Angular without TypeScript can be challenging.
+
+Finally, although not as deeply integrated with TypeScript as Angular is, Vue also offers [official typings](https://github.com/vuejs/vue/tree/dev/types) and [official decorator](https://github.com/vuejs/vue-class-component) for those who wish to use TypeScript with Vue. We are also actively collaborating with the TypeScript and VSCode teams at Microsoft to improve the TS/IDE experience for Vue + TS users.
 
 ### サイズと性能
 
 性能面では、2 つのフレームワークは非常に速く、判決するための現実世界のユースケースでの十分なデータはありません。しかしながら、もしあなたがいくつかの数字を見ることを決意したのなら、この[サードパーティのベンチマーク](http://stefankrause.net/js-frameworks-benchmark4/webdriver-ts/table.html)から Vue 2.0 は Angular 2 よりも優位なようです。
 
-サイズの面では、Angular 2 にその公式のコンパイルと Tree-shaking を適用したものは大幅にそのサイズを削減することができますが、コンパイラを含むフル機能の Vue 2.0（23kb）はまだ Tree-shaking をした必要最小限の Angular 2 のコード例（50kb）よりも軽いです。そしてここで留意すべきなのは、Angular 2 のアプリのサイズは、使用されていない機能のコードを削除する Tree-shaking のために小さいということです。あなたがフレームワークの機能をインポートして使うにつれて、最終的にはその実際のサイズに向かって再度大きくなっていくでしょう。
+Recent versions of Angular, with AOT compilation and tree-shaking, have been able to get its size down considerably. However, a full-featured Vue 2 project with Vuex + vue-router included (~30kb gzipped) is still significantly lighter than an out-of-the-box, AOT-compiled application generated by `angular-cli` (~130kb gzipped).
 
 ### 柔軟性
 
@@ -290,7 +180,7 @@ Vue は Angular 2 よりもずっとあなたのやり方には口出しする�
 
 Vue を始めるために、あなたは HTML と ES5 JavaScript（つまり、プレーンな JavaScript）をよく知るだけで良いです。これらの基本的なスキルがあれば、[ガイド](../guide)を読むのに一日もかからずに重要なアプリケーションの構築を始めることができます。
 
-Angular 2 の学習曲線はもっと急です。TypeScript 抜きにしても、その[クイックスタートガイド](https://angular.io/docs/js/latest/quickstart.html)は ES2015 JavaScript や 18 の NPM パッケージへの依存、4 つのファイル、そしてそのすべてを説明するのに 3,000 単語以上が使われるアプリから始まります - ただ Hello World と言わせるだけで。[Vue の Hello World](https://jsfiddle.net/chrisvfritz/50wL7mdz/) は少しシンプルです、というのは誇張ではないでしょう。たぶんそれのために、私たちはガイド内のページ全体を専用にする必要はありません。
+Angular の学習曲線はもっと急です。The API surface of the framework is simply huge and the user will need to familiarize yourself with a lot more concepts before getting productive. Obviously, the complexity of Angular is largely due to its design goal of targeting only large, complex applications - but that does make the framework a lot more difficult for less-experienced developers to pick up.
 
 ## Ember
 
