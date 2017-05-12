@@ -1793,7 +1793,7 @@ type: api
   <my-component :prop="someThing"></my-component>
 
   <!-- 親のプロパティの子コンポーネントに渡す --->
-  <child-component v-bind.prop="$props"></child-component>
+  <child-component v-bind="$props"></child-component>
 
   <!-- XLink -->
   <svg><a :xlink:special="foo"></a></svg>
