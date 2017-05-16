@@ -200,5 +200,5 @@ data: {
 2.3 から style プロパティに複数の (接頭辞付き) 値の配列を設定できます。例えば次のようになります:
 
 ``` html
-<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+<div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
 ```
