@@ -220,5 +220,5 @@ Riot 2.0 はよく似たコンポーネントベースの開発モデル（"タ�
 
 - [トランジションエフェクトシステム](transitions.html)。Riot にはありません。
 - ずっと強力なルータ。Riot のルーティング API は極めて最小限です。
-- より優れた性能。Riot は 仮想 DOM を使用しているというよりむしろ[DOM ツリーをトラバース](http://riotjs.com/compare/#virtual-dom-vs-expressions-binding)しているため、Angular 1 と同じ性能問題に苦しめられています。
+- より優れた性能。Riot は 仮想 DOM を使用しているというよりむしろ[DOM ツリーをトラバース](http://riotjs.com/compare/#virtual-dom-vs-expressions-binding)しているため、AngularJS と同じ性能問題に苦しめられています。
 - より熟成したツールのサポート。Vue は [webpack](https://github.com/vuejs/vue-loader)、[Browserify](https://github.com/vuejs/vueify) の公式サポートを提供していますが、対して Riot はビルドシステムの統合についてはコミュニティのサポートに頼っています。
