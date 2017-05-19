@@ -192,7 +192,7 @@ Ember はフル機能のフレームワークでとても強い思想（highly o
 
 - Vue のテンプレート構文は JavaScript の式の完全な力を利用しているのに対し、Handlebars の式とヘルパの構文は意図的にかなり制限されています。
 
-- 性能面では、Vue は大きく差をつけて Ember よりも優れています、Ember 2.0 で最新の Glimmer エンジンのアップデートがされた後でもです。Ember では性能が重要な状況において、手動でランループ（run loop）を管理する必要がある一方で、Vue は自動的にバッチ更新を行います。
+- 性能面では、Vue は大きく差をつけて Ember よりも[優れています](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts/table.html)、Ember 2.0 で最新の Glimmer エンジンのアップデートがされた後でもです。Ember では性能が重要な状況において、手動でランループ（run loop）を管理する必要がある一方で、Vue は自動的にバッチ更新を行います。
 
 ## Knockout
 
