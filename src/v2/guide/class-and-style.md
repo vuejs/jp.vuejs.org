@@ -203,4 +203,4 @@ data: {
 <div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
 ```
 
-This will only render the last value in the array which the browser supports. In this example, it will render `display: flex` for browsers that support the unprefixed version of flexbox.
+これはブラウザがサポートしている配列の最後の値だけを描画します。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは、 `display: flex` を描画します。
