@@ -65,7 +65,7 @@ import Vue = require('vue')
 
 ## Vue の型宣言の利用
 
-Vue の型定義はたくさんの便利な[型宣言](https://github.com/vuejs/vue/blob/dev/types/index.d.ts)をエクスポートしています。例えば、例えば、以下は (`.vue` ファイルにおいて) エクスポートされたコンポーネントオプションオブジェクトにアノテートします:
+Vue の型定義はたくさんの便利な[型宣言](https://github.com/vuejs/vue/blob/dev/types/index.d.ts)をエクスポートしています。例えば、以下は (`.vue` ファイルにおいて) エクスポートされたコンポーネントオプションオブジェクトにアノテートします:
 
 ``` ts
 import Vue, { ComponentOptions } from 'vue'

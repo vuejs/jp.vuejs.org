@@ -2,11 +2,11 @@
 title: インストール
 type: guide
 order: 1
-vue_version: 2.2.0
-dev_size: "234.29"
-min_size: "74.23"
-gz_size: "26.87"
-ro_gz_size: "18.71"
+vue_version: 2.3.0
+dev_size: "247.36"
+min_size: "76.89"
+gz_size: "27.94"
+ro_gz_size: "19.63"
 ---
 
 ### 互換性の注意
@@ -209,7 +209,7 @@ NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 
 ### CSP 環境
 
-Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、スタンドアロンビルドに依存するため、これらの環境では使用できません。
+Google Chrome アプリのようなある環境では、Content Security Policy (CSP) を強制し、そして式を評価するために `new Function()` の使用を禁止しています。テンプレートのコンパイルは、完全ビルドに依存するため、これらの環境では使用できません。
 
 一方では、ランタイム限定ビルドでは CSP に準拠しています。 [Webpack + vue-loader](https://github.com/vuejs-templates/webpack-simple) または [Browserify + vueify](https://github.com/vuejs-templates/browserify-simple) でランタイム限定ビルドを使用する場合は、テンプレートは CSP 環境でも完璧に動作する `render` 関数にプリコンパイルされます。
 

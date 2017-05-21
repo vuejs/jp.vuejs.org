@@ -293,7 +293,11 @@ Vue.component('todo-item', {
 ``` html
 <div id="app-7">
   <ol>
-    <!-- todo オブジェクトによって各 todo-item を提供します。それは、内容を動的にできるように表します。-->
+    <!-- 
+      todo オブジェクトによって各 todo-item を提供します。
+      それは、内容を動的にできるように表します。
+      また後述する "key" で各コンポーネントに提供する必要があります。
+    -->
     <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
   </ol>
 </div>
@@ -308,9 +312,9 @@ var app7 = new Vue({
   el: '#app-7',
   data: {
     groceryList: [
-      { text: 'Vegetables' },
-      { text: 'Cheese' },
-      { text: 'Whatever else humans are supposed to eat' }
+      { id: 0, text: 'Vegetables' },
+      { id: 1, text: 'Cheese' },
+      { id: 2, text: 'Whatever else humans are supposed to eat' }
     ]
   }
 })
@@ -318,7 +322,7 @@ var app7 = new Vue({
 {% raw %}
 <div id="app-7" class="demo">
   <ol>
-    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    <todo-item v-for="item in groceryList" v-bind:todo="item" :key="item.id"></todo-item>
   </ol>
 </div>
 <script>
@@ -330,9 +334,9 @@ var app7 = new Vue({
   el: '#app-7',
   data: {
     groceryList: [
-      { text: 'Vegetables' },
-      { text: 'Cheese' },
-      { text: 'Whatever else humans are supposed to eat' }
+      { id: 0, text: 'Vegetables' },
+      { id: 1, text: 'Cheese' },
+      { id: 2, text: 'Whatever else humans are supposed to eat' }
     ]
   }
 })

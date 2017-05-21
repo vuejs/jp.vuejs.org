@@ -426,6 +426,7 @@ Vue.component('example', {
 - Function
 - Object
 - Array
+- Symbol
 
 加えて、`type` はカスタムコンストラクタ関数とすることもでき、アサーションは `instanceof` チェックで作成できるでしょう。
 
@@ -532,6 +533,34 @@ new Vue({
 <my-component v-on:click.native="doTheThing"></my-component>
 ```
 
+### `.sync` 修飾子
+
+> 2.3.0+
+
+あるケースにおいては、プロパティに対して "双方向バインディング" が必要になるかもしれません。実際 Vue 1.x では、これは `.sync` 修飾子を提供したことで正にそうでした。子コンポーネントが `.sync` を持つプロパティを変更すると、値の変更は親に反映されます。これは便利ですが、単一方向のデータフローを破るため、長期的においてメンテナンスの問題につながります。子プロパティを変更するコードは暗黙的に親の状態に影響を及ぼします。
+
+これが、2.0 がリリースされたときに `.sync` 修飾子を削除した理由です。しかしながら、特に再利用可能なコンポーネントをリリースする場合には、それが実際に有用な場合があることが分かりました。私たちは、**親の状態に、より一貫性と明示性の影響を与える子のコードを作成する**変更が必要です。
+
+2.3 では、プロパティに対する `.sync` 修飾子を再導入しましたが、今回はさらに `v-on` リスナーに自動的に展開される、まさしく糖衣構文です:
+
+以下は
+
+``` html
+<comp :foo.sync="bar"></comp>
+```
+
+以下に展開されます:
+
+``` html
+<comp :foo="bar" @update:foo="val => bar = val"></comp>
+```
+
+子コンポーネントが `foo` の値を更新するためには、プロパティの変更の代わりに明示的にイベントを送出する必要があります:
+
+``` js
+this.$emit('update:foo', newValue)
+```
+
 ### カスタムイベントを使用したフォーム入力コンポーネント
 
 カスタムイベントは、`v-model`とともに動く、カスタムフォーム入力を作成するためにも使用されます。以下を思い出しましょう:
@@ -588,7 +617,12 @@ Vue.component('currency-input', {
         // 両端のスペースを削除
         .trim()
         // 小数点2桁以下まで短縮
-        .slice(0, value.indexOf('.') + 3)
+        .slice(
+          0,
+          value.indexOf('.') === -1
+            ? value.length
+            : value.indexOf('.') + 3
+        )
       // 値が既に正規化されていないならば、
       // 手動で適合するように上書き
       if (formattedValue !== value) {
@@ -622,7 +656,12 @@ Vue.component('currency-input', {
     updateValue: function (value) {
       var formattedValue = value
         .trim()
-        .slice(0, value.indexOf('.') + 3)
+        .slice(
+          0,
+          value.indexOf('.') === -1
+            ? value.length
+            : value.indexOf('.') + 3
+        )
       if (formattedValue !== value) {
         this.$refs.input.value = formattedValue
       }
@@ -1060,9 +1099,33 @@ new Vue({
 
 <p class="tip">もしあなたが <strong>Browserify</strong> のユーザで非同期コンポーネントを使いたいとしたら、残念なことに開発者が[はっきりと](https://github.com/substack/node-browserify/issues/58#issuecomment-21978224)非同期読み込みは Browserify では今後もサポートしない"と述べています。少なくとも公式には。 Browserify コミュニティは、既存のアプリケーションや複雑なアプリケーションに役立つ[いくつかの回避策](https://github.com/vuejs/vuejs.org/issues/620)があります。他のすべてのシナリオでは、ファーストクラスとして非同期サポートを組み込みで提供する Webpack を使用することをお勧めします。</p>
 
+### 高度な非同期コンポーネント
+
+> New in 2.3.0
+
+2.3 から、非同期コンポーネントファクトリは、次の形式のオブジェクトも返すことができます:
+
+``` js
+const AsyncComp = () => ({
+  // ロードするコンポーネント。Promise であるべき
+  component: import('./MyComp.vue'),
+  // 非同期コンポーネントのロード中に使用するコンポーネント
+  loading: LoadingComp,
+  // ロードが失敗した場合に使用するコンポーネント
+  error: ErrorComp,
+  // ローディングコンポーネントを表示する前に遅延する。デフォルト: 200 ms
+  delay: 200,
+  // タイムアウトが設定され越えた場合、エラーコンポーネントが表示される。
+  // デフォルト: Infinity
+  timeout: 3000
+})
+```
+
+`vue-router` でルートコンポーネントとして使用された場合は、これらのプロパティは、ルートナビゲーションが起こる前に非同期コンポーネントが先に解決されるため、無視されます。ルートコンポーネントに対して上記の構文を使用したい場合は、`vue-router` 2.4.0 以降を使用する必要があります。
+
 ### コンポーネントの命名の慣習
 
-コンポーネント(またはプロパティ)を登録する時、ケバブケース、キャメルケース、タイトルケースを使うことができます。Vue は気にしません。
+コンポーネント(またはプロパティ)を登録する時、ケバブケース、キャメルケース、タイトルケースを使うことができます。
 
 ``` js
 //コンポーネント内での定義
@@ -1079,24 +1142,40 @@ components: {
 しかし、HTML テンプレートの中では、ケバブケースを使用する必要があります。
 
 ``` html
-<!-- alway use kebab-case in HTML templates -->
 <!-- HTMLテンプレートの中では、常にケバブケースを使用する -->
 <kebab-cased-component></kebab-cased-component>
 <camel-cased-component></camel-cased-component>
 <title-cased-component></title-cased-component>
 ```
 
-しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しない HTML の制約に縛られません。このことは、テンプレートの中でも、キャメルケース、タイトルケースまたは、ケバブケースを使用してコンポーネントとプロパティを参照できるということを意味します。
+しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しない HTML の制約に縛られません。このことは、テンプレートの中でも、以下を使用してコンポーネントとプロパティを参照できるということを意味します:
 
-``` html
-<!-- 文字列テンプレートの中では使用したいケースをなんでも使用できます！ -->
-<my-component></my-component>
-<myComponent></myComponent>
-<MyComponent></MyComponent>
+- ケバブケース
+- コンポーネントがキャメルケースを使用して定義されている場合はキャメルケースまたはケバブケース
+- タイトルケースを使用して定義されている場合は、ケバブケース、キャメルケースまたはタイトルケース
+
+``` js
+components: {
+  'kebab-cased-component': { /* ... */ },
+  camelCasedComponent: { /* ... */ },
+  TitleCasedComponent: { /* ... */ }
+}
 ```
 
-もしコンポーネントが `slot` を介してコンテンツを伝えない場合は、名前のあとに `/` をつけることによって自己終了( self-closing )タグにすることもできます。
+``` html
+<kebab-cased-component></kebab-cased-component>
 
+<camel-cased-component></camel-cased-component>
+<camelCasedComponent></camelCasedComponent>
+
+<title-cased-component></title-cased-component>
+<titleCasedComponent></titleCasedComponent>
+<TitleCasedComponent></TitleCasedComponent>
+```
+
+これは、タイトルケースが最も万能の_宣言規約_であり、ケバブケースが最も万能な_慣習規約_であることを意味します。
+
+もしコンポーネントが `slot` を介してコンテンツを伝えない場合は、名前のあとに `/` をつけることによって自己終了( self-closing )タグにすることもできます。
 
 ``` html
 <my-component/>

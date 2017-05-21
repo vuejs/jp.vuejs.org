@@ -153,7 +153,7 @@ Vue.component('my-component', {
 
 ### オブジェクト構文
 
-`v-bind:style`向けのオブジェクト構文は非常に簡単です。それは、JavaScript オブジェクトを除いては、ほとんど CSS のように見えます。CSS プロパティ名に対して、キャメルケース (caml-case) またはケバブケース (kebab-case: クォート`'`された) のどちらでも使用することができます:
+`v-bind:style`向けのオブジェクト構文は非常に簡単です。それは、JavaScript オブジェクトを除いては、ほとんど CSS のように見えます。CSS プロパティ名に対して、キャメルケース (camelCase) またはケバブケース (kebab-case: クォート`'`された) のどちらでも使用することができます:
 
 ``` html
 <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
@@ -192,3 +192,15 @@ data: {
 ### 自動プリフィックス
 
 `v-bind:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に検出し、適用されるスタイルに適切な接頭辞を追加します。
+
+### 複数の値
+
+> 2.3.0+
+
+2.3 から style プロパティに複数の (接頭辞付き) 値の配列を設定できます。例えば次のようになります:
+
+``` html
+<div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+```
+
+これはブラウザがサポートしている配列の最後の値だけを描画します。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは、 `display: flex` を描画します。
