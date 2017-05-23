@@ -1966,28 +1966,27 @@ type: api
 
 ### is
 
-- **Expects:** `string`
+- **容器事項:** `string`
 
-  Used for [dynamic components](../guide/components.html#Dynamic-Components) and to work around [limitations of in-DOM templates](../guide/components.html#DOM-Template-Parsing-Caveats).
+  [動的コンポーネント](../guide/components.html#動的コンポーネント)と [DOM テンプレートの制限](../guide/components.html#DOM-テンプレート解析の注意事項)を回避するために使用します。
 
-  For example:
+  例:
 
   ``` html
-  <!-- component changes when currentView changes -->
+  <!-- currentView が変化するとコンポーネントも変化する -->
   <component v-bind:is="currentView"></component>
 
-  <!-- necessary because <my-row> would be invalid inside -->
-  <!-- a <table> element and so would be hoisted out      -->
+  <!-- <my-row> は <table> 要素内では無効なため必要で、それゆえ巻き上げらます -->
   <table>
     <tr is="my-row"></tr>
   </table>
   ```
 
-  For detailed usage, follow the links in the description above.
+  詳しい使用方法については、上記のリンクを参照してください。
 
 - **See also:**
-  - [Dynamic Components](../guide/components.html#Dynamic-Components)
-  - [DOM Template Parsing Caveats](../guide/components.html#DOM-Template-Parsing-Caveats)
+  - [動的コンポーネント](../guide/components.html#動的コンポーネント)
+  - [DOM-テンプレート解析の注意事項](../guide/components.html#DOM-テンプレート解析の注意事項)
 
 ## 組み込みコンポーネント
 
