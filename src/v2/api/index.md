@@ -1964,6 +1964,31 @@ type: api
 
 - **参照:** [名前付きスロット](../guide/components.html#名前付きスロット)
 
+### is
+
+- **Expects:** `string`
+
+  Used for [dynamic components](../guide/components.html#Dynamic-Components) and to work around [limitations of in-DOM templates](../guide/components.html#DOM-Template-Parsing-Caveats).
+
+  For example:
+
+  ``` html
+  <!-- component changes when currentView changes -->
+  <component v-bind:is="currentView"></component>
+
+  <!-- necessary because <my-row> would be invalid inside -->
+  <!-- a <table> element and so would be hoisted out      -->
+  <table>
+    <tr is="my-row"></tr>
+  </table>
+  ```
+
+  For detailed usage, follow the links in the description above.
+
+- **See also:**
+  - [Dynamic Components](../guide/components.html#Dynamic-Components)
+  - [DOM Template Parsing Caveats](../guide/components.html#DOM-Template-Parsing-Caveats)
+
 ## 組み込みコンポーネント
 
 ### component
