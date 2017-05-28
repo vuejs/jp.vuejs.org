@@ -1964,6 +1964,30 @@ type: api
 
 - **参照:** [名前付きスロット](../guide/components.html#名前付きスロット)
 
+### is
+
+- **容器事項:** `string`
+
+  [動的コンポーネント](../guide/components.html#動的コンポーネント)と [DOM テンプレートの制限](../guide/components.html#DOM-テンプレート解析の注意事項)を回避するために使用します。
+
+  例:
+
+  ``` html
+  <!-- currentView が変化するとコンポーネントも変化する -->
+  <component v-bind:is="currentView"></component>
+
+  <!-- <my-row> は <table> 要素内では無効なため必要で、それゆえ巻き上げらます -->
+  <table>
+    <tr is="my-row"></tr>
+  </table>
+  ```
+
+  詳しい使用方法については、上記のリンクを参照してください。
+
+- **See also:**
+  - [動的コンポーネント](../guide/components.html#動的コンポーネント)
+  - [DOM-テンプレート解析の注意事項](../guide/components.html#DOM-テンプレート解析の注意事項)
+
 ## 組み込みコンポーネント
 
 ### component
