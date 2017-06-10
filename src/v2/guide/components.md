@@ -715,7 +715,7 @@ Vue.component('my-checkbox', {
 </my-checkbox>
 ```
 
-<p class="tip">Note that you still have to declare the `checked` prop explicitly.</p>
+<p class="tip">`checked` プロパティを明示的に宣言しなければならないことに注意してください。</p>
 
 ### 親子間以外の通信
 
