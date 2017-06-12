@@ -693,6 +693,7 @@ Vue.component('my-checkbox', {
     event: 'change'
   },
   props: {
+    checked: Boolean,
     // これによって、 `value` プロパティを別の目的で利用することを許可します。
     value: String
   },
@@ -713,6 +714,8 @@ Vue.component('my-checkbox', {
   value="some value">
 </my-checkbox>
 ```
+
+<p class="tip">`checked` プロパティを明示的に宣言しなければならないことに注意してください。</p>
 
 ### 親子間以外の通信
 
