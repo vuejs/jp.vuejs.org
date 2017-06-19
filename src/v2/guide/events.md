@@ -194,7 +194,7 @@ methods: {
 <div v-on:click.self="doThat">...</div>
 ```
 
-<p class="tip">Order matters when using modifiers because the relevant code is generated in the same order. Therefore using `@click.prevent.self` will prevent **all clicks** while `@click.self.prevent` will only prevent clicks on the element itself.</p>
+<p class="tip">修飾子を使用するとき、関連するコードが同じ順序で生成されるため注意してください。それゆえ、`@click.prevent.self` を使用すると**全てのクリックイベント**を防ぐことはできますが、`@click.self.prevent` は要素自身におけるクリックイベントを防ぐだけです。</p>
 
 > New in 2.1.4
 
