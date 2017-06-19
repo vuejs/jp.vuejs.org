@@ -106,15 +106,16 @@ createElement(
   },
 
   // {String | Array}
-  // VNodes の子。任意です。
+  // VNodes の子、createElement() を使用して構築する、
+  // または単純にテキスト VNode を得るために文字列を使用します。任意です。
   [
-    createElement('h1', 'hello world'),
+    'Some text comes first.',
+    createElement('h1', 'A headline'),
     createElement(MyComponent, {
       props: {
-        someProp: 'foo'
+        someProp: 'foobar'
       }
-    }),
-    'bar'
+    })
   ]
 )
 ```
@@ -165,7 +166,7 @@ createElement(
   directives: [
     {
       name: 'my-custom-directive',
-      value: '2'
+      value: '2',
       expression: '1 + 1',
       arg: 'foo',
       modifiers: {
