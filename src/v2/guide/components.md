@@ -1128,7 +1128,7 @@ const AsyncComp = () => ({
 
 ### コンポーネントの命名の慣習
 
-コンポーネント(またはプロパティ)を登録する時、ケバブケース、キャメルケース、タイトルケースを使うことができます。
+コンポーネント(またはプロパティ)を登録する時、ケバブケース、キャメルケース、パスカルケースを使うことができます。
 
 ``` js
 //コンポーネント内での定義
@@ -1137,8 +1137,8 @@ components: {
   'kebab-cased-component': { /* ... */ },
   // キャメルケースを使った登録
   'camelCasedComponent': { /* ... */ },
-  // タイトルケースを使った登録
-  'TitleCasedComponent': { /* ... */ }
+  // パスカルケースを使った登録
+  'PascalCasedComponent': { /* ... */ }
 }
 ```
 
@@ -1148,7 +1148,7 @@ components: {
 <!-- HTMLテンプレートの中では、常にケバブケースを使用する -->
 <kebab-cased-component></kebab-cased-component>
 <camel-cased-component></camel-cased-component>
-<title-cased-component></title-cased-component>
+<pascal-cased-component></pascal-cased-component>
 ```
 
 しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しない HTML の制約に縛られません。このことは、テンプレートの中でも、以下を使用してコンポーネントとプロパティを参照できるということを意味します:
@@ -1161,7 +1161,7 @@ components: {
 components: {
   'kebab-cased-component': { /* ... */ },
   camelCasedComponent: { /* ... */ },
-  TitleCasedComponent: { /* ... */ }
+  PascalCasedComponent: { /* ... */ }
 }
 ```
 
@@ -1171,12 +1171,12 @@ components: {
 <camel-cased-component></camel-cased-component>
 <camelCasedComponent></camelCasedComponent>
 
-<title-cased-component></title-cased-component>
-<titleCasedComponent></titleCasedComponent>
-<TitleCasedComponent></TitleCasedComponent>
+<pascal-cased-component></pascal-cased-component>
+<pascalCasedComponent></pascalCasedComponent>
+<PascalCasedComponent></PascalCasedComponent>
 ```
 
-これは、タイトルケースが最も万能の_宣言規約_であり、ケバブケースが最も万能な_慣習規約_であることを意味します。
+これは、パスカルケースが最も万能の_宣言規約_であり、ケバブケースが最も万能な_慣習規約_であることを意味します。
 
 もしコンポーネントが `slot` を介してコンテンツを伝えない場合は、名前のあとに `/` をつけることによって自己終了( self-closing )タグにすることもできます。
 
