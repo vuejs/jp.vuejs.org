@@ -1748,7 +1748,7 @@ type: api
 - **引数:** `attrOrProp (任意)`
 
 - **修飾子:**
-  - `.prop` - 属性の代わりに DOM プロパティとして束縛します。([違いは何？](http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))
+  - `.prop` - 属性の代わりに DOM プロパティとして束縛します([違いは何？](http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))。If the tag is a component then `.prop` will set the property on the component's `$el`.
   - `.camel` - (2.1.0 以降) ケバブケースの属性名をキャメルケースに変換します。
   - `.sync` - (2.3.0 以降) 束縛された値を更新するための、 `v-on` ハンドラに展開する糖衣構文。
 
