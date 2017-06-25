@@ -2143,7 +2143,7 @@ type: api
   </transition>
   ```
 
-  Note, `<keep-alive>` is designed for the case where it has one direct child component that is being toggled. It does not work if you have `v-for` inside it. When there are multiple conditional children, as above, `<keep-alive>` requires that only one child is rendered at a time.
+  `<keep-alive>` は、直接 1 つの子コンポーネントがトグルされているケースに対して設計されていることに注意してください。それが、 `v-for` 内部にある場合は動作しません。上記のように複数の条件付きで子がある場合は、`<keep-alive>` では一度に 1 つの子だけ描画されます。
 
 
 - **`include` と `exclude`**
