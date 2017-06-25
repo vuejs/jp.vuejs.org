@@ -10,8 +10,9 @@
 2. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
 3. 変更をコミットします: `git commit -am 'Fix some files'`
 4. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
-5. 翻訳が終わったら、翻訳スタイルにそっているかどうかチェックします: `npm run lint`
-6. 問題がなければ、プルリクエストを `vuejs/jp.vuejs.org` の `lang-ja` ブランチに送ります
+5. 翻訳が終わったら、翻訳した `.md` の `updated` 属性を修正した日時に変更します: `update: 2017-06-25 00:00:00`
+6. 翻訳スタイルにそっているかどうかチェックします: `npm run lint`
+7. 問題がなければ、プルリクエストを `vuejs/jp.vuejs.org` の `lang-ja` ブランチに送ります
 
 
 ## 翻訳スタイル
