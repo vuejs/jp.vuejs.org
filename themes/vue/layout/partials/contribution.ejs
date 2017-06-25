@@ -1,6 +1,9 @@
 <div id="sponsers">
   <avatar :title="title" :list="list"></avatar>
 </div>
+<div id="mainteners">
+  <avatar :title="title" :list="list"></avatar>
+</div>
 <div id="translators2">
   <avatar :title="title" :list="list"></avatar>
 </div>
@@ -67,6 +70,16 @@
     'positiveflat',
     'tejitak',
     'yasunobuigarashi'
+  ]
+  var mainteners = [
+    'chi-bd',
+    'ikazoy',
+    'inouetakuya',
+    'kazupon',
+    'kitak',
+    'potato4d',
+    're-fort',
+    'tadyjp'
   ]
   var translators2 = [
     'satotakumi',
@@ -159,6 +172,10 @@
       id: 'sponsers',
       title: '翻訳プロジェクト発起人一覧',
       list: sponsers
+  }, {
+      id: 'mainteners',
+      title: 'Vue.js 日本語公式ドキュメントメンテナ一覧',
+      list: mainteners
   }, {
       id: 'translators2',
       title: 'Vue.js 2.0 日本語翻訳プロジェクト翻訳者一覧',
