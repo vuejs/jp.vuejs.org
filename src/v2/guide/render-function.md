@@ -309,10 +309,11 @@ render: function (createElement) {
 
 ### イベントとキー修飾子
 
-`.capture` と `.once` イベント修飾子に対して、Vue は `on` で使用できる接頭辞を提供しています:
+`.passive`、`.capture` と `.once` イベント修飾子に対して、Vue は `on` で使用できる接頭辞を提供しています:
 
 | 修飾子 | 接頭辞 |
 | ------ | ------ |
+| `.passive` | `&` |
 | `.capture` | `!` |
 | `.once` | `~` |
 | `.capture.once` または <br>`.once.capture` | `~!` |
