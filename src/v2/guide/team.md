@@ -252,7 +252,7 @@ order: 31
     },
     {
       name: 'Blake Newman',
-      title: 'Core Synergy Specialist & Code Deleter',
+      title: 'Experiential Specialist & Code Deleter',
       work: {
         role: 'Software Engineer',
         org: 'Attest',
@@ -280,7 +280,7 @@ order: 31
       ]
     },
     {
-      name: 'Thorsten',
+      name: 'Thorsten (Linusborg)',
       title: 'Hive-Mind Community Wrangler (Probably a Bot)',
       github: 'LinusBorg',
       twitter: 'Linus_Borg',
@@ -406,6 +406,20 @@ order: 31
       ],
       links: [
         'https://vuejsfeed.com/', 'https://vueschool.io/'
+      ]
+    },
+    {
+      name: 'Pooya Parsa',
+      title: 'Nuxtification Modularizer',
+      github: 'pi0',
+      twitter: '_pi0_',
+      work: {
+        role: 'Technical Advisor',
+        org: 'Fandogh (AUT University)',
+        orgUrl: 'https://fandogh.org'
+      },
+      reposPersonal: [
+        'nuxt/nuxt.js', 'nuxt-community/modules', 'bootstrap-vue/bootstrap-vue'
       ]
     }
   ]
