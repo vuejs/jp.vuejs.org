@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-07-08 00:00:00
+updated: 2017-07-11 00:00:00
 type: guide
 order: 11
 ---
@@ -906,7 +906,7 @@ Vue.component('child-component', {
 </div>
 ```
 
-親においては、特別な属性 `scope` を持つ `<template>` 要素はスコープ付きスロット用のテンプレートを示します。`scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前です:
+親においては、特別な属性 `scope` を持つ `<template>` 要素が存在しなければならず、これはスコープ付きスロット用のテンプレートを示します。`scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前です:
 
 ``` html
 <div class="parent">
