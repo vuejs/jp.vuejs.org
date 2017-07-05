@@ -217,7 +217,7 @@ new Vue({
 
 コンポーネントは、一緒に使われることを意図されています。もっとも一般的なのは、親子関係です: コンポーネント A は自分自身のテンプレートとして、コンポーネント B を使用します。それらは必ずお互いに通信する必要があります。親は子にデータを伝える必要があるかもしれませんし、子は子で何が起こったかを、親に伝える必要があるかもしれません。しかし、はっきりと定義されたインタフェースを経由して、親と子を可能な限り分離されたものとしておくこともまた、とても大切です。これにより、各々のコンポーネントのコードは比較的独立した状態で書かれ判断されることが保証されます。それゆえ、コンポーネントを、よりメンテナンス可能で潜在的に再利用可能にできます。
 
-Vue.js では、親子のコンポーネントの関係は、**props down, events up** というように要約することができます。親は、 **プロパティ**を経由して、データを子に伝え、子は**イベント**を経由して、親にメッセージを送ります。以下でどのように動くか見てみましょう。
+Vue では、親子のコンポーネントの関係は、**props down, events up** というように要約することができます。親は、 **プロパティ**を経由して、データを子に伝え、子は**イベント**を経由して、親にメッセージを送ります。以下でどのように動くか見てみましょう。
 
 <p style="text-align: center">
   <img style="width:300px" src="/images/props-events.png" alt="props down, events up">
@@ -432,6 +432,44 @@ Vue.component('example', {
 加えて、`type` はカスタムコンストラクタ関数とすることもでき、アサーションは `instanceof` チェックで作成できるでしょう。
 
 プロパティ検証が失敗すると、Vue は(開発ビルドを使用している場合)コンソールへの警告を提示します。コンポーネントインスタンスが作成される __前__ にプロパティが検証されるため、`default` や `validator` 関数内では、`data`、 `computed`、 `methods` などのインスタンスプロパティは利用できないことに注意してください。
+
+## Non-Prop Attributes
+
+A non-prop attribute is an attribute that is passed to a component, but does not have a corresponding prop defined.
+
+While explicitly defined props are preferred for passing information to a child component, authors of component libraries can't always foresee the contexts in which their components might be used. That's why components can accept arbitrary attributes, which are added to the component's root element.
+
+For example, imagine we're using a 3rd-party `bs-date-input` component with a Bootstrap plugin that requires a `data-3d-date-picker` attribute on the `input`. We can add this attribute to our component instance:
+
+``` html
+<bs-date-input data-3d-date-picker="true"></bs-date-input>
+```
+
+And the `data-3d-date-picker="true"` attribute will automatically be added to the root element of `bs-date-input`.
+
+### Replacing/Merging with Existing Attributes
+
+Imagine this is the template for `bs-date-input`:
+
+``` html
+<input type="date" class="form-control">
+```
+
+To add specify a theme for our date picker plugin, we might need to add a specific class, like this:
+
+``` html
+<bs-date-input
+  data-3d-date-picker="true"
+  class="date-picker-theme-dark"
+></bs-date-input>
+```
+
+In this case, two different values for `class` are defined:
+
+- `form-control`, which is set by the component in its template
+- `date-picker-theme-dark`, which is passed to the component by its parent
+
+For most attributes, the value provided to the component will replace the value set by the component. So for example, passing `type="large"` will replace `type="date"` and probably break it! Fortunately, the `class` and `style` attributes are a little smarter, so both values are merged, making the final value: `form-control date-picker-theme-dark`.
 
 ## カスタムイベント
 
