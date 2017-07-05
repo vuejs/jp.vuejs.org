@@ -37,22 +37,21 @@ new Vue({
   watch: {
     number: function(newValue, oldValue) {
       var vm = this
-      var animationFrame
-      function animate (time) {
-        TWEEN.update(time)
-        animationFrame = requestAnimationFrame(animate)
+      function animate () {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
       }
+
       new TWEEN.Tween({ tweeningNumber: oldValue })
         .easing(TWEEN.Easing.Quadratic.Out)
         .to({ tweeningNumber: newValue }, 500)
         .onUpdate(function () {
           vm.animatedNumber = this.tweeningNumber.toFixed(0)
         })
-        .onComplete(function () {
-          cancelAnimationFrame(animationFrame)
-        })
         .start()
-      animationFrame = requestAnimationFrame(animate)
+
+      animate()
     }
   }
 })
@@ -74,22 +73,21 @@ new Vue({
   watch: {
     number: function(newValue, oldValue) {
       var vm = this
-      var animationFrame
-      function animate (time) {
-        TWEEN.update(time)
-        animationFrame = requestAnimationFrame(animate)
+      function animate () {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
       }
+
       new TWEEN.Tween({ tweeningNumber: oldValue })
         .easing(TWEEN.Easing.Quadratic.Out)
         .to({ tweeningNumber: newValue }, 500)
         .onUpdate(function () {
           vm.animatedNumber = this.tweeningNumber.toFixed(0)
         })
-        .onComplete(function () {
-          cancelAnimationFrame(animationFrame)
-        })
         .start()
-      animationFrame = requestAnimationFrame(animate)
+
+      animate()
     }
   }
 })
