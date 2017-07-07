@@ -136,18 +136,17 @@ new Vue({
   },
   watch: {
     color: function () {
-      var animationFrame
-      function animate (time) {
-        TWEEN.update(time)
-        animationFrame = requestAnimationFrame(animate)
+      function animate () {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
       }
+      
       new TWEEN.Tween(this.tweenedColor)
         .to(this.color, 750)
-        .onComplete(function () {
-          cancelAnimationFrame(animationFrame)
-        })
         .start()
-      animationFrame = requestAnimationFrame(animate)
+      
+      animate()
     }
   },
   computed: {
@@ -213,18 +212,17 @@ new Vue({
   },
   watch: {
     color: function () {
-      var animationFrame
-      function animate (time) {
-        TWEEN.update(time)
-        animationFrame = requestAnimationFrame(animate)
+      function animate () {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
       }
+      
       new TWEEN.Tween(this.tweenedColor)
         .to(this.color, 750)
-        .onComplete(function () {
-          cancelAnimationFrame(animationFrame)
-        })
         .start()
-      animationFrame = requestAnimationFrame(animate)
+      
+      animate()
     }
   },
   computed: {
@@ -437,21 +435,20 @@ Vue.component('animated-integer', {
   methods: {
     tween: function (startValue, endValue) {
       var vm = this
-      var animationFrame
-      function animate (time) {
-        TWEEN.update(time)
-        animationFrame = requestAnimationFrame(animate)
+      function animate () {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
       }
+      
       new TWEEN.Tween({ tweeningValue: startValue })
         .to({ tweeningValue: endValue }, 500)
         .onUpdate(function () {
           vm.tweeningValue = this.tweeningValue.toFixed(0)
         })
-        .onComplete(function () {
-          cancelAnimationFrame(animationFrame)
-        })
         .start()
-      animationFrame = requestAnimationFrame(animate)
+      
+      animate()
     }
   }
 })
@@ -508,21 +505,20 @@ Vue.component('animated-integer', {
   methods: {
     tween: function (startValue, endValue) {
       var vm = this
-      var animationFrame
-      function animate (time) {
-        TWEEN.update(time)
-        animationFrame = requestAnimationFrame(animate)
+      function animate () {
+        if (TWEEN.update()) {
+          requestAnimationFrame(animate)
+        }
       }
+      
       new TWEEN.Tween({ tweeningValue: startValue })
         .to({ tweeningValue: endValue }, 500)
         .onUpdate(function () {
           vm.tweeningValue = this.tweeningValue.toFixed(0)
         })
-        .onComplete(function () {
-          cancelAnimationFrame(animationFrame)
-        })
         .start()
-      animationFrame = requestAnimationFrame(animate)
+      
+      animate()
     }
   }
 })
