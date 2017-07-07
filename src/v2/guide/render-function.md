@@ -29,26 +29,24 @@ Vue ではほとんどの場合 HTML をビルドするためにテンプレー�
 
 ``` html
 <script type="text/x-template" id="anchored-heading-template">
-  <div>
-    <h1 v-if="level === 1">
-      <slot></slot>
-    </h1>
-    <h2 v-if="level === 2">
-      <slot></slot>
-    </h2>
-    <h3 v-if="level === 3">
-      <slot></slot>
-    </h3>
-    <h4 v-if="level === 4">
-      <slot></slot>
-    </h4>
-    <h5 v-if="level === 5">
-      <slot></slot>
-    </h5>
-    <h6 v-if="level === 6">
-      <slot></slot>
-    </h6>
-  </div>
+  <h1 v-if="level === 1">
+    <slot></slot>
+  </h1>
+  <h2 v-else-if="level === 2">
+    <slot></slot>
+  </h2>
+  <h3 v-else-if="level === 3">
+    <slot></slot>
+  </h3>
+  <h4 v-else-if="level === 4">
+    <slot></slot>
+  </h4>
+  <h5 v-else-if="level === 5">
+    <slot></slot>
+  </h5>
+  <h6 v-else-if="level === 6">
+    <slot></slot>
+  </h6>
 </script>
 ```
 
@@ -64,7 +62,7 @@ Vue.component('anchored-heading', {
 })
 ```
 
-このテンプレートは良い気がしません。冗長なだけでなく、全てのヘッダレベルで `<slot></slot>` を重複させており、アンカー要素を追加したい時に同じことをする必要があります。コンポーネントは 1 つの root ノードのみ含めることができるので、全体もまた無駄な `div` で囲まれています。
+このテンプレートは良い気がしません。冗長なだけでなく、全てのヘッダレベルで `<slot></slot>` を重複させており、アンカー要素を追加したい時に同じことをする必要があります。
 
 テンプレートはほとんどのコンポーネントでうまく動作しますが、この例はそうではないことが明確です。では、 `render` 関数を使ってこれを書き直してみましょう。
 
