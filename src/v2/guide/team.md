@@ -55,7 +55,7 @@ order: 31
             About {{ textDistance }} away in {{ profile.city }}
           </dd>
         </span>
-        <template v-else>
+        <template v-else-if="profile.city">
           <dt>
             <i class="fa fa-map-marker"></i>
             <span class="sr-only">City</span>
@@ -63,6 +63,13 @@ order: 31
           <dd>
             {{ profile.city }}
           </dd>
+        </template>
+        <template v-if="profile.languages">
+          <dt>
+            <i class="fa fa-globe"></i>
+            <span class="sr-only">Languages</span>
+          </dt>
+          <dd v-html="languageListHtml" class="language-list"></dd>
         </template>
         <template v-if="profile.links">
           <dt>
@@ -195,11 +202,26 @@ order: 31
     'Tehran, Iran': [35.689197, 51.388974],
     'Shanghai, China': [31.230390, 121.473702]
   }
+  var languageNameFor = {
+    en: 'English',
+    zh: '中文',
+    vi: 'Tiếng Việt',
+    pl: 'Polski',
+    ru: 'Русский',
+    jp: '日本語',
+    fr: 'Français',
+    de: 'Deutsch',
+    el: 'ελληνικά',
+    es: 'Español',
+    hi: 'हिंदी',
+    fa: 'فارسی'
+  }
 
   var team = [{
     name: 'Evan You',
     title: 'Benevolent Dictator For Life',
     city: 'Jersey City, NJ, USA',
+    languages: ['zh', 'en'],
     github: 'yyx990803',
     twitter: 'youyuxi',
     work: {
@@ -219,6 +241,7 @@ order: 31
       name: 'Chris Fritz',
       title: 'Good Word Putter-Togetherer',
       city: 'Lansing, MI, USA',
+      languages: ['en', 'de'],
       github: 'chrisvfritz',
       twitter: 'chrisvfritz',
       work: {
@@ -235,6 +258,7 @@ order: 31
       name: 'Eduardo',
       title: 'Real-Time Rerouter',
       city: 'Paris, France',
+      languages: ['es', 'fr', 'en'],
       github: 'posva',
       twitter: 'posva',
       work: {
@@ -256,6 +280,7 @@ order: 31
       name: 'Jinjiang',
       title: 'Mobile Extrapolator',
       city: 'Hangzhou, China',
+      languages: ['zh', 'en'],
       github: 'jinjiang',
       twitter: 'zhaojinjiang',
       work: {
@@ -273,6 +298,7 @@ order: 31
       name: 'EGOIST',
       title: 'Build Tool Simplificator',
       city: 'Chengdu, China',
+      languages: ['zh', 'en'],
       github: 'egoist',
       twitter: 'rem_rin_rin',
       reposOfficial: [
@@ -286,6 +312,7 @@ order: 31
       name: 'Katashin',
       title: 'One of a Type State Manager',
       city: 'Tokyo, Japan',
+      languages: ['jp', 'en'],
       work: {
         org: 'oRo Co., Ltd.',
         orgUrl: 'https://www.oro.com'
@@ -300,6 +327,7 @@ order: 31
       name: 'Kazupon',
       title: 'Validated Internationalizing Missionary',
       city: 'Tokyo, Japan',
+      languages: ['jp', 'en'],
       github: 'kazupon',
       twitter: 'kazu_pon',
       work: {
@@ -319,6 +347,7 @@ order: 31
       name: 'Rahul Kadyan',
       title: 'Ecosystem Glue Chemist',
       city: 'Bangalore, India',
+      languages: ['hi', 'en'],
       work: {
         role: 'Software Engineer',
         org: 'Myntra',
@@ -340,6 +369,7 @@ order: 31
       name: 'Alan Song',
       title: 'Regent of Routing',
       city: 'Hangzhou, China',
+      languages: ['zh', 'en'],
       work: {
         role: 'Cofounder',
         org: 'Futurenda',
@@ -354,6 +384,7 @@ order: 31
       name: 'Blake Newman',
       title: 'Performance Specializer & Code Deleter',
       city: 'London, UK',
+      languages: ['en'],
       work: {
         role: 'Software Engineer',
         org: 'Attest',
@@ -369,6 +400,7 @@ order: 31
       name: 'Phan An',
       title: 'Backend Designer & Process Poet',
       city: 'London, UK',
+      languages: ['vi', 'en'],
       github: 'phanan',
       twitter: 'notphanan',
       reposOfficial: [
@@ -385,6 +417,7 @@ order: 31
       name: 'Linusborg',
       title: 'Hive-Mind Community Wrangler (Probably a Bot)',
       city: 'Mannheim, Germany',
+      languages: ['de', 'en'],
       github: 'LinusBorg',
       twitter: 'Linus_Borg',
       reposOfficial: [
@@ -401,6 +434,7 @@ order: 31
       name: 'Denis Karabaza',
       title: 'Director of Directives (Emoji-Human Hybrid)',
       city: 'Dubna, Russia',
+      languages: ['ru', 'en'],
       github: 'simplesmiler',
       twitter: 'simplesmiler',
       work: {
@@ -419,6 +453,7 @@ order: 31
       name: 'Guillaume Chau',
       title: 'Client-Server Astronaut',
       city: 'Lyon, France',
+      languages: ['fr', 'en'],
       github: 'Akryum',
       twitter: 'Akryum',
       reposOfficial: [
@@ -432,6 +467,7 @@ order: 31
       name: 'Edd Yerburgh',
       title: 'Testatron Alpha 9000',
       city: 'London, UK',
+      languages: ['en'],
       github: 'eddyerburgh',
       twitter: 'EddYerburgh',
       work: {
@@ -451,6 +487,7 @@ order: 31
       name: 'defcc',
       title: 'Details Deity & Bug Surgeon',
       city: 'Chongqing, China',
+      languages: ['zh', 'en'],
       github: 'defcc',
       work: {
         org: 'zbj.com',
@@ -470,6 +507,7 @@ order: 31
       name: 'Sebastien Chopin',
       title: '#1 Nuxt Brother',
       city: 'Paris, France',
+      languages: ['fr', 'en'],
       github: 'Atinux',
       twitter: 'Atinux',
       work: {
@@ -484,6 +522,7 @@ order: 31
       name: 'Alexandre Chopin',
       title: '#1 Nuxt Brother',
       city: 'Paris, France',
+      languages: ['fr', 'en'],
       github: 'alexchopin',
       twitter: 'ChopinAlexandre',
       work: {
@@ -498,6 +537,7 @@ order: 31
       name: 'Khary Sharpe',
       title: 'Viral Newscaster',
       city: 'Kingston, Jamaica',
+      languages: ['en'],
       github: 'kharysharpe',
       twitter: 'kharysharpe',
       links: [
@@ -509,6 +549,7 @@ order: 31
       name: 'Damian Dulisz',
       title: 'Dark Mage of Plugins, News, and Confs',
       city: 'Wrocław, Poland',
+      languages: ['pl', 'en'],
       github: 'shentao',
       twitter: 'DamianDulisz',
       work: {
@@ -523,6 +564,7 @@ order: 31
       name: 'Alex Kyriakidis',
       title: 'Vueducator Extraordinaire',
       city: 'Thessaloniki, Greece',
+      languages: ['el', 'en'],
       github: 'hootlex',
       twitter: 'hootlex',
       work: {
@@ -539,6 +581,7 @@ order: 31
       name: 'Pooya Parsa',
       title: 'Nuxtification Modularizer',
       city: 'Tehran, Iran',
+      languages: ['fa', 'en'],
       github: 'pi0',
       twitter: '_pi0_',
       work: {
@@ -554,6 +597,7 @@ order: 31
       name: 'Yi Yang',
       city: 'Shanghai, China',
       title: 'Interface Elementologist',
+      languages: ['zh', 'en'],
       github: 'Leopoldthecoder',
       work: {
         org: 'ele.me',
@@ -601,6 +645,30 @@ order: 31
         } else {
           return roundDistance(distanceInKm) + ' km'
         }
+      },
+      languageListHtml: function () {
+        var vm = this
+        if (!vm.profile.languages) return ''
+        var userLanguageCode = window.navigator.language.slice(0, 2)
+        return (
+          '<ul><li>' +
+          vm.profile.languages.map(function (languageCode, index) {
+            var language = languageNameFor[languageCode]
+            if (languageCode === userLanguageCode) {
+              return (
+                '<span ' +
+                  'class="user-language-match" ' +
+                  'title="' +
+                    vm.profile.name +
+                    ' can give technical talks in your preferred language!' +
+                  '"' +
+                '\>' + language + '</span>'
+              )
+            }
+            return language
+          }).join('</li><li>') +
+          '</li></ul>'
+        )
       }
     },
     methods: {
