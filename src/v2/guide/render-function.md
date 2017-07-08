@@ -1,6 +1,6 @@
 ---
 title: 描画関数
-updated: 2017-06-26 00:00:00
+updated: 2017-07-08 00:00:00
 type: guide
 order: 15
 ---
@@ -309,10 +309,11 @@ render: function (createElement) {
 
 ### イベントとキー修飾子
 
-`.capture` と `.once` イベント修飾子に対して、Vue は `on` で使用できる接頭辞を提供しています:
+`.passive`、`.capture` と `.once` イベント修飾子に対して、Vue は `on` で使用できる接頭辞を提供しています:
 
 | 修飾子 | 接頭辞 |
 | ------ | ------ |
+| `.passive` | `&` |
 | `.capture` | `!` |
 | `.once` | `~` |
 | `.capture.once` または <br>`.once.capture` | `~!` |
