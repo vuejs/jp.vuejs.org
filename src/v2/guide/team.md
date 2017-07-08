@@ -1,5 +1,6 @@
 ---
 title: チーム紹介
+updated: 2017-07-08
 type: guide
 order: 31
 ---
