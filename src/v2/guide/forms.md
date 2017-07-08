@@ -1,6 +1,6 @@
 ---
 title: フォーム入力バインディング
-updated: 2017-06-26 00:00:00
+updated: 2017-07-08 00:00:00
 type: guide
 order: 10
 ---
@@ -47,7 +47,7 @@ new Vue({
 {% raw %}
 <div id="example-textarea" class="demo">
   <span>Multiline message is:</span>
-  <p style="white-space: pre">{{ message }}</p>
+  <p style="white-space: pre-line">{{ message }}</p>
   <br>
   <textarea v-model="message" placeholder="add multiple lines"></textarea>
 </div>
