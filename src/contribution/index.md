@@ -52,7 +52,7 @@ migration-vuex.md | Vuex 0.6.x から 1.0 への移行 | [kazupon](https://githu
 ----- |  ------------- | ---
 comparison.md | 他のフレームワークとの比較 | [ktsn](https://github.com/ktsn)
 join.md | Vue.js コミュニティへ参加しましょう! | [sshono1210](https://github.com/sshono1210)
-team.md | チームに合おう | [chi-bd](https://github.com/chi-bd)
+team.md | チームに会おう | [chi-bd](https://github.com/chi-bd)
 
 ### API
 翻訳担当者: [kazupon](https://github.com/kazupon)
