@@ -1,6 +1,6 @@
 ---
 title: トランジション効果
-updated: 2017-06-26 00:00:00
+updated: 2017-07-08 00:00:00
 type: guide
 order: 13
 ---
@@ -644,7 +644,7 @@ new Vue({
 // ...
 computed: {
   buttonMessage: function () {
-    switch (docState) {
+    switch (this.docState) {
       case 'saved': return 'Edit'
       case 'edited': return 'Save'
       case 'editing': return 'Cancel'
