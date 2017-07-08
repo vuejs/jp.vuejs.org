@@ -1,5 +1,5 @@
 ---
-title: Meet the Team
+title: チーム紹介
 type: guide
 order: 31
 ---
@@ -148,23 +148,21 @@ order: 31
 
 <div id="team-members">
   <div class="team">
-    <h2 id="the-core-team">The Core Team</h2>
+    <h2 id="the-core-team">コアチーム</h2>
 
     <p>
-      The development of Vue and its ecosystem is guided by an international team, 
-      some of whom have chosen to be featured below.
+      Vue とそのエコシステムの開発は国際的なチームによって導かれていますが、そのうちの数名については以下で紹介されることを選択しています。
     </p>
 
     <member v-for="profile in team" :key="profile.github" :profile="profile"></member>
   </div>
 
   <div class="team">
-    <h2 id="community-partners">Community Partners</h2>
+    <h2 id="community-partners">コミュニティパートナー</h2>
 
     <p>
-      Some members of the Vue community have so enriched it, that they deserve special mention. 
-      We've developed a more intimate relationship with these key partners, often coordinating 
-      with them on upcoming news and features.
+      Vue コミュニティのメンバーは非常に豊かで、特別な言及が必要なものもあります。
+      私たちはこれら重要なパートナーとより親密な関係を築いており、しばしば今後のニュースや機能について調整しています。
     </p>
 
     <partner v-for="profile in partners" :key="profile.github" :profile="profile"></partner>
