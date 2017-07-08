@@ -1,6 +1,6 @@
 ---
 title: 貢献
-updated: 2017-06-26 00:00:00
+updated: 2017-07-08 00:00:00
 type: contribution
 ---
 
@@ -52,6 +52,7 @@ migration-vuex.md | Vuex 0.6.x から 1.0 への移行 | [kazupon](https://githu
 ----- |  ------------- | ---
 comparison.md | 他のフレームワークとの比較 | [ktsn](https://github.com/ktsn)
 join.md | Vue.js コミュニティへ参加しましょう! | [sshono1210](https://github.com/sshono1210)
+team.md | チームに会おう | [chi-bd](https://github.com/chi-bd)
 
 ### API
 翻訳担当者: [kazupon](https://github.com/kazupon)
