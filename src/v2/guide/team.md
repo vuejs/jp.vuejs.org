@@ -1,5 +1,5 @@
 ---
-title: チーム紹介
+title: チームに会おう
 updated: 2017-07-08
 type: guide
 order: 31
