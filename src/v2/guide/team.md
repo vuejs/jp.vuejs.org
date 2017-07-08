@@ -152,7 +152,7 @@ order: 31
     <h2 id="the-core-team">コアチーム</h2>
 
     <p>
-      Vue とそのエコシステムの開発は国際的なチームによって導かれていますが、そのうちの数名については以下で紹介されることを選択しています。
+      Vue とそのエコシステムの開発は国際的なチームによって導かれていますが、そのうちの数名については以下で紹介されることを希望しています。
     </p>
 
     <member v-for="profile in team" :key="profile.github" :profile="profile"></member>
