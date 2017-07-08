@@ -1,5 +1,6 @@
 ---
 type: api
+updated: 2017-06-26 00:00:00
 ---
 
 ## グローバル設定
@@ -1748,7 +1749,7 @@ type: api
 - **引数:** `attrOrProp (任意)`
 
 - **修飾子:**
-  - `.prop` - 属性の代わりに DOM プロパティとして束縛します。([違いは何？](http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))
+  - `.prop` - 属性の代わりに DOM プロパティとして束縛します([違いは何？](http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))。もしタグがコンポーネントの場合、`.prop`  はコンポーネントの `$el` にプロパティを設定します。
   - `.camel` - (2.1.0 以降) ケバブケースの属性名をキャメルケースに変換します。
   - `.sync` - (2.3.0 以降) 束縛された値を更新するための、 `v-on` ハンドラに展開する糖衣構文。
 
@@ -2142,6 +2143,9 @@ type: api
     </keep-alive>
   </transition>
   ```
+
+  `<keep-alive>` は、直接 1 つの子コンポーネントがトグルされているケースに対して設計されていることに注意してください。それが、 `v-for` 内部にある場合は動作しません。上記のように複数の条件付きで子がある場合は、`<keep-alive>` では一度に 1 つの子だけ描画されます。
+
 
 - **`include` と `exclude`**
 

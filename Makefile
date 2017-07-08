@@ -1,5 +1,6 @@
 update: bump
 	rm -rf public db.json
+	node install.js
 	hexo generate
 
 deploy:

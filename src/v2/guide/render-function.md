@@ -1,5 +1,6 @@
 ---
 title: 描画関数
+updated: 2017-06-26 00:00:00
 type: guide
 order: 15
 ---
@@ -106,15 +107,16 @@ createElement(
   },
 
   // {String | Array}
-  // VNodes の子。任意です。
+  // VNodes の子、`createElement()` を使用して構築する、
+  // または単純にテキスト VNode を得るために文字列を使用します。任意です。
   [
-    createElement('h1', 'hello world'),
+    'Some text comes first.',
+    createElement('h1', 'A headline'),
     createElement(MyComponent, {
       props: {
-        someProp: 'foo'
+        someProp: 'foobar'
       }
-    }),
-    'bar'
+    })
   ]
 )
 ```
@@ -147,15 +149,15 @@ createElement(
   domProps: {
     innerHTML: 'baz'
   },
-  // v-on:keyup.enter などの修飾詞はサポートされませんが、
-  // "on" の配下にイベントハンドラはネストされます。
+  // `v-on:keyup.enter` などの修飾詞はサポートされませんが、
+  // `on` の配下にイベントハンドラはネストされます。
   // その代わり、手動で keyCode をハンドラの中で
   // 確認することが可能です。
   on: {
     click: this.clickHandler
   },
   // コンポーネントに限って、
-  // vm.$emit を使っているコンポーネントから emit されるイベントではなく
+  // `vm.$emit` を使っているコンポーネントから emit されるイベントではなく
   // ネイティブのイベントを listen することができます。
   nativeOn: {
     click: this.nativeClickHandler
@@ -165,7 +167,7 @@ createElement(
   directives: [
     {
       name: 'my-custom-directive',
-      value: '2'
+      value: '2',
       expression: '1 + 1',
       arg: 'foo',
       modifiers: {
@@ -361,7 +363,7 @@ on: {
 
 ``` js
 render: function (createElement) {
-  // <div><slot></slot></div>
+  // `<div><slot></slot></div>`
   return createElement('div', this.$slots.default)
 }
 ```
@@ -370,7 +372,7 @@ render: function (createElement) {
 
 ``` js
 render: function (createElement) {
-  // <div><slot :text="msg"></slot></div>
+  // `<div><slot :text="msg"></slot></div>`
   return createElement('div', [
     this.$scopedSlots.default({
       text: this.msg
@@ -386,7 +388,7 @@ render (createElement) {
   return createElement('div', [
     createElement('child', {
       // { name: props => VNode | Array<VNode> } の形式で
-      // scopedSlots を データオブジェクトに渡す
+      // `scopedSlots` を データオブジェクトに渡す
       scopedSlots: {
         default: function (props) {
           return createElement('span', props.text)

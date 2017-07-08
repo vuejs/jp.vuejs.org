@@ -21,6 +21,7 @@
     <% if (page.title.trim()) { %>
       <h1><%- page.title %><%- page.type === 'examples' ? ' の例' : '' %></h1>
     <% } %>
+    <p class="updated">最終更新日: <%- date(page.updated, 'YYYY年M月D日') %></p>
     <% if (page.type === 'contribution') { %>
       <%- partial('partials/contribution') %>
     <% } %>

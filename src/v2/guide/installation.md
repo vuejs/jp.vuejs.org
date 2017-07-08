@@ -1,5 +1,6 @@
 ---
 title: インストール
+updated: 2017-06-26 00:00:00
 type: guide
 order: 1
 vue_version: 2.3.0

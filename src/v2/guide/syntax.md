@@ -1,5 +1,6 @@
 ---
 title: テンプレート構文
+updated: 2017-06-29
 type: guide
 order: 4
 ---
@@ -49,7 +50,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 また、真偽値属性も使用できます。式を評価し、偽とみなせる値のとき、属性を削除します。
 
 ``` html
-<button v-bind:disabled="someDynamicCondition">Button</button>
+<button v-bind:disabled="isButtonDisabled">Button</button>
 ```
 
 ### JavaScript 式の使用

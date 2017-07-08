@@ -1,5 +1,6 @@
 ---
 title: 条件付きレンダリング
+updated: 2017-06-26 00:00:00
 type: guide
 order: 7
 ---
@@ -196,4 +197,4 @@ new Vue({
 
 ## `v-if` と `v-for`
  
-`v-for` といっしょに使用されるとき、`v-for` は `v-if` より優先度が高くなります。詳細については<a href="../guide/list.html#v-for-と-v-if">リストレンダリングのガイド</a>を参照してください。
+`v-if` といっしょに使用されるとき、`v-for` は `v-if` より優先度が高くなります。詳細については<a href="../guide/list.html#v-for-と-v-if">リストレンダリングのガイド</a>を参照してください。

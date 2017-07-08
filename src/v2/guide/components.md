@@ -1,5 +1,6 @@
 ---
 title: コンポーネント
+updated: 2017-06-26 00:00:00
 type: guide
 order: 11
 ---
@@ -693,6 +694,7 @@ Vue.component('my-checkbox', {
     event: 'change'
   },
   props: {
+    checked: Boolean,
     // これによって、 `value` プロパティを別の目的で利用することを許可します。
     value: String
   },
@@ -713,6 +715,8 @@ Vue.component('my-checkbox', {
   value="some value">
 </my-checkbox>
 ```
+
+<p class="tip">`checked` プロパティを明示的に宣言しなければならないことに注意してください。</p>
 
 ### 親子間以外の通信
 
@@ -745,9 +749,9 @@ bus.$on('id-selected', function (id) {
 </app>
 ```
 
-ここに言及すべきことが2つあります:
+ここに言及すべきことが 2 つあります:
 
-1. `<app>` コンポーネントはどのコンテンツがそのマウント対象内部に存在しているか分かりません。`<app>` を使用している親コンポーネントが何であれ、親コンポーネントが内部コンテンツを決定します。
+1. `<app>` コンポーネントはどのコンテンツを受け取るのか分かりません。そのコンポーネントが `<app>` を使用することによって決定されます。
 
 2. `<app>` コンポーネントはほぼ必ず独自のテンプレートを持っています。
 
@@ -1125,7 +1129,7 @@ const AsyncComp = () => ({
 
 ### コンポーネントの命名の慣習
 
-コンポーネント(またはプロパティ)を登録する時、ケバブケース、キャメルケース、タイトルケースを使うことができます。
+コンポーネント(またはプロパティ)を登録する時、ケバブケース、キャメルケース、パスカルケースを使うことができます。
 
 ``` js
 //コンポーネント内での定義
@@ -1134,8 +1138,8 @@ components: {
   'kebab-cased-component': { /* ... */ },
   // キャメルケースを使った登録
   'camelCasedComponent': { /* ... */ },
-  // タイトルケースを使った登録
-  'TitleCasedComponent': { /* ... */ }
+  // パスカルケースを使った登録
+  'PascalCasedComponent': { /* ... */ }
 }
 ```
 
@@ -1145,20 +1149,20 @@ components: {
 <!-- HTMLテンプレートの中では、常にケバブケースを使用する -->
 <kebab-cased-component></kebab-cased-component>
 <camel-cased-component></camel-cased-component>
-<title-cased-component></title-cased-component>
+<pascal-cased-component></pascal-cased-component>
 ```
 
 しかし _文字列_ テンプレートを使用するときは、大文字と小文字を区別しない HTML の制約に縛られません。このことは、テンプレートの中でも、以下を使用してコンポーネントとプロパティを参照できるということを意味します:
 
 - ケバブケース
 - コンポーネントがキャメルケースを使用して定義されている場合はキャメルケースまたはケバブケース
-- タイトルケースを使用して定義されている場合は、ケバブケース、キャメルケースまたはタイトルケース
+- パスカルケースを使用して定義されている場合は、ケバブケース、キャメルケースまたはパスカルケース
 
 ``` js
 components: {
   'kebab-cased-component': { /* ... */ },
   camelCasedComponent: { /* ... */ },
-  TitleCasedComponent: { /* ... */ }
+  PascalCasedComponent: { /* ... */ }
 }
 ```
 
@@ -1168,12 +1172,12 @@ components: {
 <camel-cased-component></camel-cased-component>
 <camelCasedComponent></camelCasedComponent>
 
-<title-cased-component></title-cased-component>
-<titleCasedComponent></titleCasedComponent>
-<TitleCasedComponent></TitleCasedComponent>
+<pascal-cased-component></pascal-cased-component>
+<pascalCasedComponent></pascalCasedComponent>
+<PascalCasedComponent></PascalCasedComponent>
 ```
 
-これは、タイトルケースが最も万能の_宣言規約_であり、ケバブケースが最も万能な_慣習規約_であることを意味します。
+これは、パスカルケースが最も万能の_宣言規約_であり、ケバブケースが最も万能な_慣習規約_であることを意味します。
 
 もしコンポーネントが `slot` を介してコンテンツを伝えない場合は、名前のあとに `/` をつけることによって自己終了( self-closing )タグにすることもできます。
 
