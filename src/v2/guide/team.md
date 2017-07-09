@@ -137,7 +137,7 @@ order: 31
     </p>
 
     <p v-if="userPosition" class="success">
-      コアチームは貴方からの距離でソートされています。
+      コアチームはあなたからの距離でソートされています。
     </p>
 
     <vuer-profile
@@ -177,7 +177,7 @@ order: 31
     </p>
 
     <p v-if="userPosition" class="success">
-      コミュニティパートナーは貴方からの距離でソートされています。
+      コミュニティパートナーはあなたからの距離でソートされています。
     </p>
 
     <vuer-profile
