@@ -1,6 +1,6 @@
 ---
 title: チームに会おう
-updated: 2017-07-08
+updated: 2017-07-09
 type: guide
 order: 31
 ---
@@ -123,7 +123,7 @@ order: 31
         ></i>
         <template v-else>
           <i class="fa fa-map-marker"></i>
-          <span>find near me</span>
+          <span>近くのメンバーを探す</span>
         </template>
       </button>
     </h2>
@@ -137,7 +137,7 @@ order: 31
     </p>
 
     <p v-if="userPosition" class="success">
-      The core team has been sorted by their distance from you.
+      コアチームは貴方からの距離でソートされています。
     </p>
 
     <vuer-profile
@@ -162,7 +162,7 @@ order: 31
         ></i>
         <template v-else>
           <i class="fa fa-map-marker"></i>
-          <span>find near me</span>
+          <span>近くのメンバーを探す</span>
         </template>
       </button>
     </h2>
@@ -177,7 +177,7 @@ order: 31
     </p>
 
     <p v-if="userPosition" class="success">
-      The community partners have been sorted by their distance from you.
+      コミュニティパートナーは貴方からの距離でソートされています。
     </p>
 
     <vuer-profile
