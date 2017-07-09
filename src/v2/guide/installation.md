@@ -95,7 +95,7 @@ $ npm run dev
 ``` js
 // これはコンパイラが必要です
 new Vue({
-  template: `<div>{{ hi }}</div>`
+  template: '<div>{{ hi }}</div>'
 })
 
 // これはコンパイラは必要ありません
