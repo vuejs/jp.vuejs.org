@@ -60,6 +60,29 @@ team.md | チームに会おう | [chi-bd](https://github.com/chi-bd)
 ### Examples - 例
 翻訳担当者: [kazupon](https://github.com/kazupon)
 
+## Vue.js サーバサイドレンダリングガイド 翻訳プロジェクト
+
+- [GitHub repo](https://github.com/open-source-translators/vue-ssr-docs)
+- [GitLocalize repo](https://gitlocalize.com/repo/62)
+
+ファイル | タイトル | 翻訳担当者
+----- | ------------- | --- 
+README.md | introduction | [doutori](https://github.com/doutori)
+SUMMARY.md | 目次 | [inouetakuya](https://github.com/inouetakuya)
+basic.md | 基本的な使い方 | [satotakumi](https://github.com/satotakumi)
+universal.md | ユニバーサルなコードを書く | [kitak](https://github.com/kitak)
+structure.md | ソースコードの構造 | [nasum](https://github.com/nasum)
+routing.md | ルーティングとコード分割 | [re-fort](https://github.com/re-fort)
+data.md | データのプリフェッチと状態 | [inouetakuya](https://github.com/inouetakuya)
+hydration.md | クライアントサイドでのハイドレーション | [hikimon](https://github.com/hikimon)
+bundle-renderer.md | バンドルレンダラの紹介 | [doutori](https://github.com/doutori)
+build-config.md | ビルド設定 | [hisako135](https://github.com/hisako135)
+css.md | CSS の管理 | [suige](https://github.com/suige)
+head.md | ヘッドの管理 | [inouetakuya](https://github.com/inouetakuya)
+caching.md | キャッシュ | [re-fort](https://github.com/re-fort)
+streaming.md | ストリーミング | [sotayamashita](https://github.com/sotayamashita)
+api.md | API リファレンス | [hikimon](https://github.com/hikimon)
+
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
 英語タイトル | 翻訳タイトル | 翻訳担当者
