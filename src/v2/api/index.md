@@ -1,6 +1,6 @@
 ---
 type: api
-updated: 2017-07-08 00:00:00
+updated: 2017-07-13 00:00:00
 ---
 
 ## グローバル設定
@@ -82,8 +82,27 @@ updated: 2017-07-08 00:00:00
 
   > 2.2.0 では、このフックは、コンポーネントのライフサイクルフック中のエラーも捉えます。また、このフックが `undefined` の場合、捕捉されたエラーは、アプリケーションをクラッシュさせずに、代わりに `console.error` を用いて記録されます。
 
+  > In 2.4.0 this hook also captures errors thrown inside Vue custom event handlers.
+
   > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
 
+### warnHandler
+
+> New in 2.4.0
+
+- **Type:** `Function`
+
+- **Default:** `undefined`
+
+- **Usage:**
+
+  ``` js
+  Vue.config.warnHandler = function (msg, vm, trace) {
+    // trace is the component hierarchy trace
+  }
+  ```
+
+  Assign a custom handler for runtime Vue warnings. Note this only works during development and is ignored in production.
 
 ### ignoredElements
 
@@ -1085,6 +1104,29 @@ updated: 2017-07-08 00:00:00
   </my-checkbox>
   ```
 
+### inheritAttrs
+
+> New in 2.4.0
+
+- **Type:** `boolean`
+
+- **Default:** `true`
+
+- **Details:**
+
+  By default, parent scope attribute bindings that are not recognized as props will "fallthrough" and be applied to the root element of the child component as normal HTML attributes. When authoring a component that wraps a target element or another component, this may not always be the desired behavior. By setting `inheritAttrs` to `false`, this default behavior can be disabled. The attributes are available via the `$attrs` instance property (also new in 2.4) and can be explicitly bound to a non-root element using `v-bind`.
+
+### comments
+
+> New in 2.4.0
+
+- **Type:** `boolean`
+
+- **Default:** `false`
+
+- **Details:**
+
+  When set to `true`, will preserve and render HTML comments found in templates. The default behavior is discarding them.
 
 ## インスタンスプロパティ
 
@@ -1262,13 +1304,33 @@ updated: 2017-07-08 00:00:00
 
 - **参照:** [サーバサイドレンダリング](../guide/ssr.html)
 
+### vm.$attrs
+
+- **Type:** `{ [key: string]: string }`
+
+- **Read only**
+
+- **Details:**
+
+  Contains parent-scope attribute bindings that are not recognized (and extracted) as props. When a component doesn't have any declared props, this essentially contains all parent-scope bindings except for `class` and `style`, and can be passed down to an inner component via `v-bind="$attrs"` - useful when creating higher-order components.
+
+### vm.$listeners
+
+- **Type:** `{ [key: string]: Function | Array<Function> }`
+
+- **Read only**
+
+- **Details:**
+
+  Contains parent-scope `v-on` event listeners (without `.native` modifiers). This can be passed down to an inner component via `v-on="$listeners"` - useful when creating higher-order components.
+
 ## インスタンスメソッド / データ
 
 <h3 id="vm-watch">vm.$watch( expOrFn, callback, [options] )</h3>
 
 - **引数:**
   - `{string | Function} expOrFn`
-  - `{Function} callback`
+  - `{Function | Object} callback`
   - `{Object} [options]`
     - `{boolean} deep`
     - `{boolean} immediate`
@@ -1665,9 +1727,9 @@ updated: 2017-07-08 00:00:00
 
 - **省略記法:** `@`
 
-- **要求事項:** `Function | Inline Statement`
+- **要求事項:** `Function | Inline Statement | Object`
 
-- **引数:** `event (必須)`
+- **引数:** `event`
 
 - **修飾子:**
   - `.stop` - `event.stopPropagation()` を呼びます。
@@ -1686,6 +1748,8 @@ updated: 2017-07-08 00:00:00
 
   要素にイベントリスナをアタッチします。イベント種別は引数で示されます。式はメソッド名またはインラインステートメントのいずれかを指定することができ、または修飾子 (modifier) が存在するときは、単純に省略されます。
 
+  Starting in `2.4.0`, `v-on` also supports binding to an object of event/listener pairs without an argument. Note when using the object syntax, it does not support any modifiers.
+
   通常の要素上で利用した場合、**ネイティブ DOM イベント** だけ購読します。カスタム要素コンポーネント上で利用した場合、子コンポーネント上での **カスタムイベント** の発行も購読します。
 
   ネイティブな DOM イベントを購読しているとき、メソッドはネイティブなイベントを引数としてだけ受信します。インラインステートメントで使用する場合、ステートメントでは特別な `$event` プロパティに `v-on:click="handle('ok', $event)"` のようにしてアクセスすることができます。
@@ -1695,6 +1759,9 @@ updated: 2017-07-08 00:00:00
   ```html
   <!-- メソッドハンドラ -->
   <button v-on:click="doThis"></button>
+
+  <!-- object syntax (2.4.0+) -->
+  <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
 
   <!-- インラインステートメント -->
   <button v-on:click="doThat('hello', $event)"></button>
