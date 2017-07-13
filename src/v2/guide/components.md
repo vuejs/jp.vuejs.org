@@ -433,29 +433,29 @@ Vue.component('example', {
 
 プロパティ検証が失敗すると、Vue は(開発ビルドを使用している場合)コンソールへの警告を提示します。コンポーネントインスタンスが作成される __前__ にプロパティが検証されるため、`default` や `validator` 関数内では、`data`、 `computed`、 `methods` などのインスタンスプロパティは利用できないことに注意してください。
 
-## Non-Prop Attributes
+## プロパティではない属性
 
-A non-prop attribute is an attribute that is passed to a component, but does not have a corresponding prop defined.
+プロパティではない属性は、コンポーネントに渡される属性ですが、対応するプロパティは定義されていません。
 
-While explicitly defined props are preferred for passing information to a child component, authors of component libraries can't always foresee the contexts in which their components might be used. That's why components can accept arbitrary attributes, which are added to the component's root element.
+子コンポーネントに情報を渡すために明示的に定義されたプロパティが好まれる一方で、コンポーネントライブラリの作成者は、そのコンポーネントが使用される可能性のあるコンテキストを常に予期することはできません。そのため、コンポーネントはコンポーネントのルート要素に追加される任意の属性を受け入れることができます。
 
-For example, imagine we're using a 3rd-party `bs-date-input` component with a Bootstrap plugin that requires a `data-3d-date-picker` attribute on the `input`. We can add this attribute to our component instance:
+例えば、`input` 上の `data-3d-date-picker` 属性を必要とする Bootstrap プラグインでサードパーティの `bs-date-input` コンポーネントを使用しているとします。この属性をコンポーネントインスタンスに追加することができます:
 
 ``` html
 <bs-date-input data-3d-date-picker="true"></bs-date-input>
 ```
 
-And the `data-3d-date-picker="true"` attribute will automatically be added to the root element of `bs-date-input`.
+そして、`data-3d-date-picker="true"` 属性は自動的に `bs-date-input` のルート要素に追加されます。
 
-### Replacing/Merging with Existing Attributes
+### 既存属性による置換/マージ
 
-Imagine this is the template for `bs-date-input`:
+これが `bs-date-input` のテンプレートとしましょう:
 
 ``` html
 <input type="date" class="form-control">
 ```
 
-To add specify a theme for our date picker plugin, we might need to add a specific class, like this:
+date picker プラグインにテーマを追加するためには、次のような特定のクラスを追加する必要があります:
 
 ``` html
 <bs-date-input
@@ -464,12 +464,12 @@ To add specify a theme for our date picker plugin, we might need to add a specif
 ></bs-date-input>
 ```
 
-In this case, two different values for `class` are defined:
+このケースでは、 `class` の 2 つの異なる値が定義されます:
 
-- `form-control`, which is set by the component in its template
-- `date-picker-theme-dark`, which is passed to the component by its parent
+- テンプレート内のコンポーネントによって設定される `form-control`
+- 親によってコンポーネントに渡される `date-picker-theme-dark`
 
-For most attributes, the value provided to the component will replace the value set by the component. So for example, passing `type="large"` will replace `type="date"` and probably break it! Fortunately, the `class` and `style` attributes are a little smarter, so both values are merged, making the final value: `form-control date-picker-theme-dark`.
+ほとんどの属性では、コンポーネントに設定されている値が、コンポーネントに提供された値に置き換えられます。例えば、`type="large"` を渡すと、`type="date"` が置換され、恐らく壊れるでしょう！幸いにも、`class` と `style` 属性は少し賢いので、両方の値がマージされ最終的な値は `form-control date-picker-theme-dark`です:
 
 ## カスタムイベント
 
