@@ -82,7 +82,7 @@ updated: 2017-07-13 00:00:00
 
   > 2.2.0 では、このフックは、コンポーネントのライフサイクルフック中のエラーも捉えます。また、このフックが `undefined` の場合、捕捉されたエラーは、アプリケーションをクラッシュさせずに、代わりに `console.error` を用いて記録されます。
 
-  > In 2.4.0 this hook also captures errors thrown inside Vue custom event handlers.
+  > 2.4.0 では、このフックは Vue のカスタムイベントハンドラ内部で投げられたエラーもキャプチャします。
 
   > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
 
@@ -90,19 +90,19 @@ updated: 2017-07-13 00:00:00
 
 > New in 2.4.0
 
-- **Type:** `Function`
+- **型:** `Function`
 
-- **Default:** `undefined`
+- **デフォルト:** `undefined`
 
-- **Usage:**
+- **使用方法:**
 
   ``` js
   Vue.config.warnHandler = function (msg, vm, trace) {
-    // trace is the component hierarchy trace
+    // トレースはコンポーネント階層のトレースです
   }
   ```
 
-  Assign a custom handler for runtime Vue warnings. Note this only works during development and is ignored in production.
+  Vue 実行時の警告に対してカスタムハンドラを割り当てます。これは、開発中のみ動作し、プロダクションでは無視されるので注意してください。
 
 ### ignoredElements
 
@@ -1108,25 +1108,25 @@ updated: 2017-07-13 00:00:00
 
 > New in 2.4.0
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `true`
+- **デフォルト:** `true`
 
-- **Details:**
+- **詳細:**
 
-  By default, parent scope attribute bindings that are not recognized as props will "fallthrough" and be applied to the root element of the child component as normal HTML attributes. When authoring a component that wraps a target element or another component, this may not always be the desired behavior. By setting `inheritAttrs` to `false`, this default behavior can be disabled. The attributes are available via the `$attrs` instance property (also new in 2.4) and can be explicitly bound to a non-root element using `v-bind`.
+  デフォルトでは、親スコープのバインディングはプロパティとして認識されず"フォールスロー"され、子コンポーネントのルート要素に通常の HTML 属性として適用されます。ターゲット要素または別のコンポーネントをラップ (wrap) するコンポーネントを著作する場合は、これは常に望ましい動作ではないかもしれません。`inheritAttrs` に `false` を設定することで、このデフォルトの動作を無効にできます。属性は、`$attrs` インスタンスプロパティ (2.4 での新規) を介して利用でき、`v-bind` を使用してルートではない要素に明示的にバインドできます。
 
 ### comments
 
 > New in 2.4.0
 
-- **Type:** `boolean`
+- **型:** `boolean`
 
-- **Default:** `false`
+- **デフォルト:** `false`
 
-- **Details:**
+- **詳細:**
 
-  When set to `true`, will preserve and render HTML comments found in templates. The default behavior is discarding them.
+  `true` に設定すると、テンプレートにある HTML コメントが維持され描画されます。デフォルトの動作はそれらを破棄します。
 
 ## インスタンスプロパティ
 
@@ -1306,23 +1306,23 @@ updated: 2017-07-13 00:00:00
 
 ### vm.$attrs
 
-- **Type:** `{ [key: string]: string }`
+- **型:** `{ [key: string]: string }`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  Contains parent-scope attribute bindings that are not recognized (and extracted) as props. When a component doesn't have any declared props, this essentially contains all parent-scope bindings except for `class` and `style`, and can be passed down to an inner component via `v-bind="$attrs"` - useful when creating higher-order components.
+  プロパティとして認識(および抽出)されない親スコープの属性バインディングが含まれています。コンポーネントに宣言されたプロパティがない場合、`class` と `style` 以外の全ての親スコープのバインディングが基本的に含まれ、`v-bind="$attrs"` 経由で内部コンポーネントに渡すことができます。高次 (higher-order) コンポーネントを作成するときに便利です。
 
 ### vm.$listeners
 
-- **Type:** `{ [key: string]: Function | Array<Function> }`
+- **型:** `{ [key: string]: Function | Array<Function> }`
 
-- **Read only**
+- **読み込みのみ**
 
-- **Details:**
+- **詳細:**
 
-  Contains parent-scope `v-on` event listeners (without `.native` modifiers). This can be passed down to an inner component via `v-on="$listeners"` - useful when creating higher-order components.
+  親スコープの (`.native` 修飾子なしの) `v-on` イベントリスナーを含みます。これは、`v-on="$listeners"` を介して内部コンポーネントに渡すことができます。高次コンポーネントを作成するときに便利です。
 
 ## インスタンスメソッド / データ
 
@@ -1748,7 +1748,7 @@ updated: 2017-07-13 00:00:00
 
   要素にイベントリスナをアタッチします。イベント種別は引数で示されます。式はメソッド名またはインラインステートメントのいずれかを指定することができ、または修飾子 (modifier) が存在するときは、単純に省略されます。
 
-  Starting in `2.4.0`, `v-on` also supports binding to an object of event/listener pairs without an argument. Note when using the object syntax, it does not support any modifiers.
+  `2.4.0` からは、`v-on` は引数なしてイベント/リスナーのペアのオブエジェクトへのバインディングもサポートしています。オブジェクト構文を使用する場合は修飾子はサポートされません。
 
   通常の要素上で利用した場合、**ネイティブ DOM イベント** だけ購読します。カスタム要素コンポーネント上で利用した場合、子コンポーネント上での **カスタムイベント** の発行も購読します。
 
@@ -1760,7 +1760,7 @@ updated: 2017-07-13 00:00:00
   <!-- メソッドハンドラ -->
   <button v-on:click="doThis"></button>
 
-  <!-- object syntax (2.4.0+) -->
+  <!-- オブジェクト構文 (2.4.0+) -->
   <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
 
   <!-- インラインステートメント -->
