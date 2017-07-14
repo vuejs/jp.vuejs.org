@@ -866,7 +866,7 @@ order: 31
     },
     beforeDestroy: function () {
       document.removeEventListener('keydown', this.konamiKeydown)
-    }
+    },
     methods: {
       getUserPosition: function () {
         var vm = this
