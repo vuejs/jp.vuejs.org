@@ -16,6 +16,7 @@ order: 31
     <div class="profile">
       <h3 :data-official-title="profile.title">
         {{ profile.name }}
+        <sup v-if="profile.title && titleVisible" v-html="profile.title"></sup>
       </h3>
       <dl>
         <template v-if="profile.reposOfficial">
@@ -143,6 +144,7 @@ order: 31
       v-for="profile in sortedTeam"
       :key="profile.github"
       :profile="profile"
+      :title-visible="titleVisible"
     ></vuer-profile>
   </div>
 
@@ -183,6 +185,7 @@ order: 31
       v-for="profile in sortedPartners"
       :key="profile.github"
       :profile="profile"
+      :title-visible="titleVisible"
     ></vuer-profile>
   </div>
 </div>
@@ -726,7 +729,8 @@ order: 31
   Vue.component('vuer-profile', {
     template: '#vuer-profile-template',
     props: {
-      profile: Object
+      profile: Object,
+      titleVisible: Boolean
     },
     computed: {
       workHtml: function () {
@@ -830,7 +834,11 @@ order: 31
       isSorting: false,
       errorGettingLocation: false,
       userPosition: null,
-      useMiles: false
+      useMiles: false,
+      konami: {
+        position: 0,
+        code: [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
+      }
     },
     computed: {
       sortedTeam: function () {
@@ -838,6 +846,9 @@ order: 31
       },
       sortedPartners: function () {
         return this.sortVuersByDistance(this.partners)
+      },
+      titleVisible: function () {
+        return this.konami.code.length === this.konami.position
       }
     },
     created: function () {
@@ -851,7 +862,11 @@ order: 31
           this.useMiles = true
         }
       }
+      document.addEventListener('keydown', this.konamiKeydown)
     },
+    beforeDestroy: function () {
+      document.removeEventListener('keydown', this.konamiKeydown)
+    }
     methods: {
       getUserPosition: function () {
         var vm = this
@@ -892,6 +907,15 @@ order: 31
           )
         })
         return vuersWithDistances
+      },
+      konamiKeydown: function (event) {
+        if (this.titleVisible) {
+          return
+        }
+
+        if (event.keyCode !== this.konami.code[this.konami.position++]) {
+          this.konami.position = 0
+        }
       }
     }
   })
