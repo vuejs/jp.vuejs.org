@@ -1,6 +1,6 @@
 ---
 title: チームに会おう
-updated: 2017-07-14
+updated: 2017-07-15
 type: guide
 order: 31
 ---
