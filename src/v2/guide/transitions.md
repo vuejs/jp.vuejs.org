@@ -1,6 +1,6 @@
 ---
 title: トランジション効果
-updated: 2017-07-08 00:00:00
+updated: 2017-07-21
 type: guide
 order: 13
 ---
@@ -51,7 +51,7 @@ new Vue({
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0
 }
 ```
@@ -141,7 +141,7 @@ new Vue({
   transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for <2.1.8 */ {
+/* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
 }
@@ -284,10 +284,10 @@ new Vue({
 
 - `enter-class`
 - `enter-active-class`
-- `enter-to-class` (2.1.8 以降だけ)
+- `enter-to-class` (2.1.8 以降のみ)
 - `leave-class`
 - `leave-active-class`
-- `leave-to-class` (2.1.8 以降だけ)
+- `leave-to-class` (2.1.8 以降のみ)
 
 これらは、クラス名の規約を上書きします。これは、Vue のトランジションシステムと [Animate.css](https://daneden.github.io/animate.css/) のような既存の CSS アニメーションライブラリを組み合わせたいときに特に便利です。
 
@@ -351,7 +351,7 @@ Vue はトランジションが終了したことを把握するためのイベ�
 
 ### 明示的なトランジション期間の設定
 
-> 2.2.0 からの新機能
+> 2.2.0 から新規
 
 ほとんどの場合、 Vue は、自動的にトランジションが終了したことを見つけ出すことは可能です。デフォルトでは、 Vue はルート要素の初めの `transitionend` もしくは `animationend` イベントを待ちます。しかし、これが常に望む形とは限りません。例えば、幾つかの入れ子となっている内部要素にてトランジションの遅延がある場合や、ルートのトランジション要素よりも非常に長いトランジション期間を設けている場合の、一連のトランジションのまとまりなどです。
 
@@ -553,7 +553,7 @@ new Vue({
 <transition
   appear
   appear-class="custom-appear-class"
-  appear-to-class="custom-appear-to-class" (>= 2.1.8 only)
+  appear-to-class="custom-appear-to-class" (2.1.8 以降から)
   appear-active-class="custom-appear-active-class"
 >
   <!-- ... -->
@@ -899,7 +899,7 @@ new Vue({
   transition: opacity .3s ease;
 }
 .component-fade-enter, .component-fade-leave-to
-/* .component-fade-leave-active for <2.1.8 */ {
+/* .component-fade-leave-active for below version 2.1.8 */ {
   opacity: 0;
 }
 ```
@@ -995,7 +995,7 @@ new Vue({
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-to /* .list-leave-active for <2.1.8 */ {
+.list-enter, .list-leave-to /* .list-leave-active for below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -1171,7 +1171,7 @@ new Vue({
   margin-right: 10px;
 }
 .list-complete-enter, .list-complete-leave-to
-/* .list-complete-leave-active for <2.1.8 */ {
+/* .list-complete-leave-active for below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
