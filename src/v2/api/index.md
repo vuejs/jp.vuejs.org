@@ -1035,9 +1035,11 @@ updated: 2017-07-21
 
 - **デフォルト:** `{% raw %}["{{", "}}"]{% endraw %}`
 
+- **Restrictions:** This option is only available in the full build, with in-browser compilation.
+
 - **詳細:**
 
-  プレーンテキスト展開デリミタを変更します。**このオプションは完全ビルドでのみ利用可能です。**
+  プレーンテキスト展開デリミタを変更します。
 
 - **例:**
 
@@ -1123,6 +1125,8 @@ updated: 2017-07-21
 - **型:** `boolean`
 
 - **デフォルト:** `false`
+
+- **Restrictions:** This option is only available in the full build, with in-browser compilation.
 
 - **詳細:**
 
