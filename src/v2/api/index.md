@@ -1035,7 +1035,7 @@ updated: 2017-07-21
 
 - **デフォルト:** `{% raw %}["{{", "}}"]{% endraw %}`
 
-- **Restrictions:** This option is only available in the full build, with in-browser compilation.
+- **制限事項:** このオプションは完全ビルドでのみ利用可能で、ブラウザ内でのコンパイルが可能です。
 
 - **詳細:**
 
@@ -1126,7 +1126,7 @@ updated: 2017-07-21
 
 - **デフォルト:** `false`
 
-- **Restrictions:** This option is only available in the full build, with in-browser compilation.
+- **制限事項:** このオプションは完全ビルドでのみ利用可能で、ブラウザ内でのコンパイルが可能です。
 
 - **詳細:**
 
