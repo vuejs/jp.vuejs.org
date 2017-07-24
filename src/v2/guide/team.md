@@ -866,7 +866,9 @@ order: 31
               // The system language in IE
               nav.userLanguage ||
               // The language in the current page
-              nav.language
+              nav.language ||
+              // Default to English if none found
+              'en'
             )
         return (
           '<ul><li>' +
