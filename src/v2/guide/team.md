@@ -1,6 +1,6 @@
 ---
 title: チームに会おう
-updated: 2017-07-18
+updated: 2017-07-29
 type: guide
 order: 31
 ---
@@ -874,6 +874,7 @@ order: 31
             var language = languageNameFor[languageCode]
             if (
               languageCode !== 'en' &&
+              preferredLanguageCode &&
               languageCode === preferredLanguageCode.slice(0, 2)
             ) {
               return (
