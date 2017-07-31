@@ -231,8 +231,8 @@ new Vue({ el: '#range' })
   v-for="(item, index) in items"
   v-bind:item="item"
   v-bind:index="index"
-  v-bind:key="item.id">
-</my-component>
+  v-bind:key="item.id"
+></my-component>
 ```
 
 自動的に `item` をコンポーネントに渡さない理由は、それが `v-for` の動作と密結合になってしまうからです。どこからデータが来たのかを明確にすることが、他の場面でコンポーネントを再利用できるようにします。
