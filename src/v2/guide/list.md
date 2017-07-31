@@ -302,7 +302,7 @@ new Vue({
 ```
 
 {% raw %}
-<div id="todo-list-example">
+<div id="todo-list-example" class="demo">
   <input
     v-model="newTodoText"
     v-on:keyup.enter="addNewTodo"
