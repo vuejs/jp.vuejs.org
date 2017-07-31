@@ -539,14 +539,14 @@ new Vue({
 
 子コンポーネントの中では、Vue の [組み込みのトランジションシステム](transitions.html)によるものと同時に、このページで取り扱ったあらゆるトランジション戦略の組み合わせを利用できます。同時に、達成できることにはごくわずかの制限があります。
 
-## Bringing Designs to Life
+## デザインに命を吹き込む
 
-To animate, by one definition, means to bring to life. Unfortunately, when designers create icons, logos, and mascots, they're usually delivered as images or static SVGs. So although GitHub's octocat, Twitter's bird, and many other logos resemble living creatures, they don't really seem alive.
+1 つの定義によってアニメーションすること、それは命を吹き込むことを意味します。残念なことに、デザイナーがアイコン、ロゴ、そしてマスコットを作成するとき、それらは一般的に画像や静的 SVG として配布されます。なので GitHub のオクトキャットや Twitter の青い鳥、そして多くのその他ロゴは生き物に似ていますが、本当に生きているようにはみえません。
 
-Vue can help. Since SVGs are just data, we only need examples of what these creatures look like when excited, thinking, or alarmed. Then Vue can help transition between these states, making your welcome pages, loading indicators, and notifications more emotionally compelling.
+Vue はそれを手助けできます。 SVG は単なるデータなので、これらの生き物が興奮したり、考えたり、または驚いたりしたときにどう見えるかの例が必要なだけです。そして Vue はこれらの状態間のトランジションを支援して、あなたのウェルカムページ、ローディングインジケータ、そして通知をより感情的で魅力的にします。
 
-Sarah Drasner demonstrates this in the demo below, using a combination of timed and interactivity-driven state changes:
+Sarah Drasner は以下のデモでタイマーとインタラクティブ駆動での状態変更の組合せを用いてこれを示しています: 
 
-<p data-height="265" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/YZBGNp/">Vue-controlled Wall-E</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="265" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">Pen を見る <a href="https://codepen.io/sdras/pen/YZBGNp/">Vue-controlled Wall-E</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
