@@ -704,7 +704,7 @@ updated: 2017-07-22
   ```
 
 - **参照:**
-  - [描画関数](../guide/render-function)
+  - [描画関数](../guide/render-function.html)
 
 ## オプション / ライフサイクルフック
 
