@@ -1,6 +1,6 @@
 ---
 title: 状態のトランジション
-updated: 2017-07-13 00:00:00
+updated: 2017-07-31
 type: guide
 order: 14
 ---
@@ -538,3 +538,15 @@ new Vue({
 {% endraw %}
 
 子コンポーネントの中では、Vue の [組み込みのトランジションシステム](transitions.html)によるものと同時に、このページで取り扱ったあらゆるトランジション戦略の組み合わせを利用できます。同時に、達成できることにはごくわずかの制限があります。
+
+## デザインに命を吹き込む
+
+1 つの定義によってアニメーションすること、それは命を吹き込むことを意味します。残念なことに、デザイナーがアイコン、ロゴ、そしてマスコットを作成するとき、それらは一般的に画像や静的 SVG として配布されます。なので GitHub のオクトキャットや Twitter の青い鳥、そして多くのその他ロゴは生き物に似ていますが、本当に生きているようにはみえません。
+
+Vue はそれを手助けできます。 SVG は単なるデータなので、これらの生き物が興奮したり、考えたり、または驚いたりしたときにどう見えるかの例が必要なだけです。そして Vue はこれらの状態間のトランジションを支援して、あなたのウェルカムページ、ローディングインジケータ、そして通知をより感情的で魅力的にします。
+
+Sarah Drasner は以下のデモでタイマーとインタラクティブ駆動での状態変更の組合せを用いてこれを示しています: 
+
+<p data-height="265" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">Pen を見る <a href="https://codepen.io/sdras/pen/YZBGNp/">Vue-controlled Wall-E</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
