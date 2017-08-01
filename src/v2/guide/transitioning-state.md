@@ -141,11 +141,11 @@ new Vue({
           requestAnimationFrame(animate)
         }
       }
-
+      
       new TWEEN.Tween(this.tweenedColor)
         .to(this.color, 750)
         .start()
-
+      
       animate()
     }
   },
@@ -217,11 +217,11 @@ new Vue({
           requestAnimationFrame(animate)
         }
       }
-
+      
       new TWEEN.Tween(this.tweenedColor)
         .to(this.color, 750)
         .start()
-
+      
       animate()
     }
   },
@@ -440,14 +440,14 @@ Vue.component('animated-integer', {
           requestAnimationFrame(animate)
         }
       }
-
+      
       new TWEEN.Tween({ tweeningValue: startValue })
         .to({ tweeningValue: endValue }, 500)
         .onUpdate(function () {
           vm.tweeningValue = this.tweeningValue.toFixed(0)
         })
         .start()
-
+      
       animate()
     }
   }
@@ -510,14 +510,14 @@ Vue.component('animated-integer', {
           requestAnimationFrame(animate)
         }
       }
-
+      
       new TWEEN.Tween({ tweeningValue: startValue })
         .to({ tweeningValue: endValue }, 500)
         .onUpdate(function () {
           vm.tweeningValue = this.tweeningValue.toFixed(0)
         })
         .start()
-
+      
       animate()
     }
   }
