@@ -1,6 +1,6 @@
 ---
 title: 描画関数
-updated: 2017-07-15
+updated: 2017-08-02
 type: guide
 order: 15
 ---
@@ -93,20 +93,20 @@ Vue.component('anchored-heading', {
 // @returns {VNode}
 createElement(
   // {String | Object | Function}
-  // HTML タグ名、コンポーネントオプションもしくは関数
-  // これらの一つを返します。必須です。
+  // HTML タグ名、コンポーネントオプション、もしくは
+  // そのどちらかを返す関数です。必須です。
   'div',
 
   // {Object}
-  // テンプレート内で使うであろう属性と一致する
+  // テンプレート内で使うであろう属性に対応する
   // データオブジェクト。任意です。
   {
     // (詳細は下の次のセクションをご参照ください)
   },
 
   // {String | Array}
-  // VNodes の子、`createElement()` を使用して構築する、
-  // または単純にテキスト VNode を得るために文字列を使用します。任意です。
+  // 子のVNode。`createElement()` を使用して構築するか、
+  // テキスト VNode の場合は単に文字列を使用します。任意です。
   [
     'Some text comes first.',
     createElement('h1', 'A headline'),
@@ -147,21 +147,21 @@ createElement(
   domProps: {
     innerHTML: 'baz'
   },
-  // `v-on:keyup.enter` などの修飾詞はサポートされませんが、
-  // `on` の配下にイベントハンドラはネストされます。
+  // イベントハンドラは `on` の配下に置かれます。
+  // ただし、 `v-on:keyup.enter` などの修飾詞はサポートされません。
   // その代わり、手動で keyCode をハンドラの中で
-  // 確認することが可能です。
+  // 確認する必要があります。
   on: {
     click: this.clickHandler
   },
-  // コンポーネントに限って、
-  // `vm.$emit` を使っているコンポーネントから emit されるイベントではなく
+  // コンポーネントの場合のみ。
+  // `vm.$emit` を使ってコンポーネントから emit されるイベントではなく
   // ネイティブのイベントを listen することができます。
   nativeOn: {
     click: this.nativeClickHandler
   },
-  // カスタムディレクティブ。バインディングの古い値は、
-  // Vue はあなたのバインディングを追跡するため、設定できません。
+  // カスタムディレクティブ。バインディングのoldValueは、
+  // Vue があなたのために値を追跡しているため、設定できません。
   directives: [
     {
       name: 'my-custom-directive',
@@ -178,7 +178,7 @@ createElement(
   scopedSlots: {
     default: props => createElement('span', props.text)
   },
-  // 他のコンポーネントの子があるならば、そのスロット名
+  // このコンポーネントが他のコンポーネントの子の場合は、そのスロット名
   slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
   key: 'myKey',
@@ -256,11 +256,11 @@ render: function (createElement) {
 }
 ```
 
-## 素の JavaScript を使ったテンプレート置換機能
+## 素の JavaScript によるテンプレートの書き換え
 
 ### `v-if` と `v-for`
 
-どんなところでも素の JavaScript で簡単に物事は成し遂げることができるので、Vue の render 関数は独自の代替手段を提供しません。例えば、`v-if` と `v-for` を使っているテンプレート内です。
+どんなところでも素の JavaScript で簡単に物事は成し遂げることができるので、Vue の render 関数は独自の代替手段を提供しません。例えば、以下の `v-if` と `v-for` を使ったテンプレート：
 
 ``` html
 <ul v-if="items.length">
@@ -269,7 +269,7 @@ render: function (createElement) {
 <p v-else>No items found.</p>
 ```
 
-これは render 関数の中で JavaScript の `if` / `else` と `map` を使って書き換えることができます。
+これは render 関数では JavaScript の `if` / `else` と `map` を使って書き換えることができます。
 
 ``` js
 render: function (createElement) {
@@ -448,7 +448,7 @@ new Vue({
 
 先ほど作成したアンカーヘッダコンポーネントは比較的シンプルです。状態の管理や渡された状態の watch をしておらず、また、何もライフサイクルメソッドを持ちません。実際、これはいくつかのプロパティを持つただの関数です。
 
-このようなケースにおいて、私たちは `関数型` としてのコンポーネントと特徴づけることができます。それは状態を持たない ( `data` が無い) でインスタンスを持たない ( `this` のコンテキストが無い) ことを意味します。**関数型コンポーネント** は次のような形式をしています。
+このようなケースにおいて、私たちは `関数型` としてコンポーネントをマークすることができます。それは状態を持たない ( `data` が無い) でインスタンスを持たない ( `this` のコンテキストが無い) ことを意味します。**関数型コンポーネント** は次のような形式をしています。
 
 ``` js
 Vue.component('my-component', {
@@ -467,7 +467,7 @@ Vue.component('my-component', {
 
 > 注意: 2.3.0 以前のバージョンでは、`props` オプションは、関数型コンポーネントでプロパティを受け入れたい場合必須です。2.3.0 以降では、`props` オプションを省略することができ、そしてコンポーネントのノード上にある全ての属性は、暗黙的にプロパティとして抽出されます。
 
-このコンポーネントが必要な全てのことは `context` を受け取ることです。それは次を含むオブジェクトです。
+コンポーネントが必要とする全てのものは `context` を通して渡されます。それは次を含むオブジェクトです。
 
 - `props`: 提供されるプロパティのオブジェクト
 - `children`: 子 VNode の配列
