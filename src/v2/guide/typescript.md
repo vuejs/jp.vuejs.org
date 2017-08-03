@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-07-21
+updated: 2017-08-03
 type: guide
 order: 25
 ---
@@ -137,3 +137,63 @@ export default class MyComponent extends Vue {
 ```
 
 この構文では、コンポーネントの定義が短くなるだけでなく、明示的なインタフェース宣言がなくても `message` と `onClick` の型を推論することができます。この戦略では、算出プロパティ、ライフサイクルフック、描画関数の型を扱うこともできます。詳細な使用方法については、[vue-class-component のドキュメント](https://github.com/vuejs/vue-class-component#vue-class-component)を参照してください。
+
+## Vue プラグインの型定義
+
+プラグインは Vue のグローバル/インスタンスプロパティやコンポーネントオプションを追加することがあります。このような場合、TypeScript でそのプラグインを使用したコードをコンパイルするためには型定義が必要になります。幸い、TypeScript には[モジュール拡張（Module Argumentation）](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)と呼ばれる、すでに存在する型を拡張する機能があります。
+
+例えば、`string` 型をもつ `$myProperty` インスタンスプロパティを定義するには:
+
+``` ts
+// 1. 拡張した型を定義する前に必ず 'vue' をインポートするようにしてください
+import Vue from 'vue'
+
+// 2. 拡張したい型が含まれるファイルを指定してください
+//    Vue のコンストラクタの型は types/vue.d.ts に入っています
+declare module 'vue/types/vue' {
+  // 3. 拡張した Vue を定義します
+  interface Vue {
+    $myProperty: string
+  }
+}
+```
+
+上記のコードを（`my-property.d.ts` のような）型定義ファイルとしてあなたのプロジェクトに含めると、Vue インスタンス上で `$myProperty` が使用できるようになります。
+
+```ts
+var vm = new Vue()
+console.log(vm.$myProperty) // これはうまくコンパイルされるでしょう
+```
+
+追加でグローバルプロパティやコンポーネントオプションも定義することもできます:
+
+```ts
+import Vue from 'vue'
+
+declare module 'vue/types/vue' {
+  // `interface` ではなく `namespace` を使うことで
+  // グローバルプロパティを定義できます
+  namespace Vue {
+    const $myGlobal: string
+  }
+}
+
+// ComponentOptions は types/options.d.ts に定義されています
+declare module 'vue/types/options' {
+  interface ComponentOptions<V extends Vue> {
+    myOption?: string
+  }
+}
+```
+
+上記の型定義は次のコードをコンパイルできるようにします:
+
+```ts
+// グローバルプロパティ
+console.log(Vue.$myGlobal)
+
+// 追加のコンポーネントオプション
+var vm = new Vue({
+  myOption: 'Hello'
+})
+```
