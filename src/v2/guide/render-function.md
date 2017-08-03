@@ -1,6 +1,6 @@
 ---
 title: 描画関数
-updated: 2017-08-02
+updated: 2017-08-03
 type: guide
 order: 15
 ---
@@ -160,8 +160,8 @@ createElement(
   nativeOn: {
     click: this.nativeClickHandler
   },
-  // カスタムディレクティブ。バインディングのoldValueは、
-  // Vue があなたのために値を追跡しているため、設定できません。
+  // カスタムディレクティブ。バインディングの oldValue については
+  // あなたの代わりに Vue が面倒を見るので、設定することはできません。
   directives: [
     {
       name: 'my-custom-directive',
@@ -269,7 +269,7 @@ render: function (createElement) {
 <p v-else>No items found.</p>
 ```
 
-これは render 関数では JavaScript の `if` / `else` と `map` を使って書き換えることができます。
+これは render 関数においては JavaScript の `if` / `else` と `map` を使って書き換えることができます。
 
 ``` js
 render: function (createElement) {
