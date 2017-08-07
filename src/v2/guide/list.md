@@ -1,6 +1,6 @@
 ---
 title: リストレンダリング
-updated: 2017-08-05
+updated: 2017-08-06
 type: guide
 order: 8
 ---
@@ -302,7 +302,7 @@ new Vue({
 ```
 
 {% raw %}
-<div id="todo-list-example">
+<div id="todo-list-example" class="demo">
   <input
     v-model="newTodoText"
     v-on:keyup.enter="addNewTodo"
