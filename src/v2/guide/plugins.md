@@ -1,6 +1,6 @@
 ---
 title: プラグイン
-updated: 2017-06-26 00:00:00
+updated: 2017-08-06
 type: guide
 order: 18
 ---
@@ -14,7 +14,7 @@ order: 18
 
 2. 1つ、または複数のグローバル・アセットを追加します。ディレクティブ/フィルタ/トランジションなど。例: [vue-touch](https://github.com/vuejs/vue-touch)
 
-3. グローバル・ミックスインにより、1つ、または複数のコンポーネントオプションを追加します。例: [vuex](https://github.com/vuejs/vuex)
+3. グローバル・ミックスインにより、1つ、または複数のコンポーネントオプションを追加します。例: [vue-router](https://github.com/vuejs/vue-router)
 
 4. Vue.prototype に記述することにより、1つまたは、複数の Vue インスタンスメソッドを追加します。
 
