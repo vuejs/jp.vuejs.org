@@ -553,8 +553,7 @@ updated: 2017-07-31
   vm.aDouble // -> 4
   ```
 
-- **参照:**
-  - [算出プロパティ](../guide/computed.html)
+- **参照:** [算出プロパティ](../guide/computed.html)
 
 ### methods
 
@@ -619,7 +618,7 @@ updated: 2017-07-31
 
   <p class="tip">__ウォッチャ(例 `searchQuery: newValue => this.updateAutocomplete(newValue)`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.updateAutocomplete` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
 
-- **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
+- **参照:** [インスタンスメソッド / データ - vm.$watch](#vm-watch)
 
 ## オプション / DOM
 
@@ -675,8 +674,7 @@ updated: 2017-07-31
 
   <p class="tip">`render` 関数は、`el` オプションで指定されたマウント要素の `template` オプションまたは DOM にある HTML テンプレートからコンパイルされた描画関数より優先されます。</p>
 
-- **参照:**
-  - [描画関数](../guide/render-function.html)
+- **参照:** [描画関数](../guide/render-function.html)
 
 ### renderError
 
@@ -703,8 +701,7 @@ updated: 2017-07-31
   }).$mount('#app')
   ```
 
-- **参照:**
-  - [描画関数](../guide/render-function.html)
+- **参照:** [描画関数](../guide/render-function.html)
 
 ## オプション / ライフサイクルフック
 
@@ -844,8 +841,7 @@ updated: 2017-07-31
 
   Vue インスタンスで利用可能なディレクティブのハッシュです。
 
-- **参照:**
-  - [カスタムディレクティブ](../guide/custom-directive.html)
+- **参照:** [カスタムディレクティブ](../guide/custom-directive.html)
 
 ### filters
 
@@ -855,8 +851,7 @@ updated: 2017-07-31
 
   Vue インスタンスで利用可能なフィルタのハッシュです。
 
-- **参照:**
-  - [`Vue.filter`](#Vue-filter)
+- **参照:** [`Vue.filter`](#Vue-filter)
 
 ### components
 
@@ -866,8 +861,7 @@ updated: 2017-07-31
 
   Vue インスタンスで利用可能なコンポーネントのハッシュです。
 
-- **参照:**
-  - [コンポーネント](../guide/components.html)
+- **参照:** [コンポーネント](../guide/components.html)
 
 ## オプション / 構成
 
@@ -1144,7 +1138,7 @@ updated: 2017-07-31
 
   Vue インスタンスが監視しているデータオブジェクトです。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
 
-- **参照:** [オプション - データ](#data)
+- **参照:** [オプション / データ - data](#data)
 
 ### vm.$props
 
@@ -1263,7 +1257,7 @@ updated: 2017-07-31
 - **参照:**
   - [`<slot>` コンポーネント](#slot)
   - [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
-  - [描画関数: スロット](../guide/render-function.html#スロット)
+  - [描画関数 - スロット](../guide/render-function.html#スロット)
 
 ### vm.$scopedSlots
 
@@ -1282,7 +1276,7 @@ updated: 2017-07-31
 - **See also:**
   - [`<slot>` コンポーネント](#slot-1)
   - [スコープ付きスロット](../guide/components.html#スコープ付きスロット)
-  - [描画関数: スロット](../guide/render-function.html#スロット)
+  - [描画関数 - スロット](../guide/render-function.html#スロット)
 
 ### vm.$refs
 
@@ -1296,7 +1290,7 @@ updated: 2017-07-31
 
 - **参照:**
   - [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
-  - [ref](#ref)
+  - [特別な属性 - ref](#ref)
 
 ### vm.$isServer
 
@@ -1659,8 +1653,7 @@ updated: 2017-07-31
   </div>
   ```
 
-- **参照:**
-  - [条件付きレンダリング - v-else](../guide/conditional.html#v-else)
+- **参照:** [条件付きレンダリング - v-else](../guide/conditional.html#v-else)
 
 ### v-else-if
 
@@ -1973,7 +1966,7 @@ updated: 2017-07-31
 
 - **参照:**
   - [テンプレート構文 - 展開](../guide/syntax.html#テキスト)
-  - [コンポーネント - v-once による安価な静的コンポーネント](../guide/components.html#v-once-を使用した安価な静的コンポーネント)
+  - [コンポーネント - `v-once` による安価な静的コンポーネント](../guide/components.html#v-once-を使用した安価な静的コンポーネント)
 
 ## 特別な属性
 
