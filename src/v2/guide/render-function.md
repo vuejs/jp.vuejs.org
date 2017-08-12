@@ -1,6 +1,6 @@
 ---
 title: 描画関数
-updated: 2017-08-03
+updated: 2017-08-13
 type: guide
 order: 15
 ---
