@@ -1,6 +1,6 @@
 ---
 title: チームに会おう
-updated: 2017-07-29
+updated: 2017-08-13
 type: guide
 order: 31
 ---
@@ -324,7 +324,7 @@ order: 31
       city: 'Chengdu, China',
       languages: ['zh', 'en'],
       github: 'egoist',
-      twitter: 'rem_rin_rin',
+      twitter: '_egoistlily',
       reposOfficial: [
         'vue-cli'
       ],
@@ -415,7 +415,7 @@ order: 31
         orgUrl: 'https://www.askattest.com/'
       },
       github: 'blake-newman',
-      twitter: 'blake-newman',
+      twitter: 'blakenewman',
       reposOfficial: [
         'vuex', 'vue-router', 'vue-loader'
       ]
