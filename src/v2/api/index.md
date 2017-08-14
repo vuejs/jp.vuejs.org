@@ -98,7 +98,7 @@ updated: 2017-07-31
 
   ``` js
   Vue.config.warnHandler = function (msg, vm, trace) {
-    // トレースはコンポーネント階層のトレースです
+    // `トレース`はコンポーネント階層のトレースです
   }
   ```
 
@@ -916,7 +916,7 @@ updated: 2017-07-31
   ``` js
   var CompA = { ... }
 
-  // CompA を Vue.extend の呼び出しなしで拡張する
+  // CompA を `Vue.extend` の呼び出しなしで拡張する
   var CompB = {
     extends: CompA,
     ...
@@ -1390,7 +1390,7 @@ updated: 2017-07-31
   vm.$watch('a', callback, {
     immediate: true
   })
-  // その時の `a` の値でコールバックがただちに発火します
+  // その時の `a` の値で`コールバック`がただちに発火します
   ```
 
 <h3 id="vm-set">vm.$set( target, key, value )</h3>
@@ -1606,6 +1606,7 @@ updated: 2017-07-31
   ```html
   <div v-html="html"></div>
   ```
+
 - **参照:** [テンプレート構文 - 展開](../guide/syntax.html#生の-HTML)
 
 ### v-show
@@ -1958,7 +1959,7 @@ updated: 2017-07-31
   </div>
   <!-- コンポーネント -->
   <my-component v-once :comment="msg"></my-component>
-  <!-- v-for ディレクティブ -->
+  <!-- `v-for` ディレクティブ -->
   <ul>
     <li v-for="i in list" v-once>{{i}}</li>
   </ul>
@@ -2043,7 +2044,7 @@ updated: 2017-07-31
   <!-- currentView が変化するとコンポーネントも変化する -->
   <component v-bind:is="currentView"></component>
 
-  <!-- <my-row> は <table> 要素内では無効なため必要で、それゆえ巻き上げられます -->
+  <!-- `<my-row>` は `<table>` 要素内では無効なため必要で、それゆえ巻き上げられます -->
   <table>
     <tr is="my-row"></tr>
   </table>
@@ -2202,7 +2203,7 @@ updated: 2017-07-31
     <comp-b v-else></comp-b>
   </keep-alive>
 
-  <!-- <transition> といっしょに使用する -->
+  <!-- `<transition>` といっしょに使用する -->
   <transition>
     <keep-alive>
       <component :is="view"></component>
@@ -2211,7 +2212,6 @@ updated: 2017-07-31
   ```
 
   `<keep-alive>` は、直接 1 つの子コンポーネントがトグルされているケースに対して設計されていることに注意してください。それが、 `v-for` 内部にある場合は動作しません。上記のように複数の条件付きで子がある場合は、`<keep-alive>` では一度に 1 つの子だけ描画されます。
-
 
 - **`include` と `exclude`**
 
@@ -2225,12 +2225,12 @@ updated: 2017-07-31
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- 正規表現 (v-bind を使用する) -->
+  <!-- 正規表現 (`v-bind` を使用する) -->
   <keep-alive :include="/a|b/">
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- Array (v-bind を使用する) -->
+  <!-- Array (`v-bind` を使用する) -->
   <keep-alive :include="['a', 'b']">
     <component :is="view"></component>
   </keep-alive>
