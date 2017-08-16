@@ -1455,7 +1455,7 @@ updated: 2017-08-13
 <h3 id="vm-off">vm.$off( [event, callback] )</h3>
 
 - **引数:**
-  - `{string} [event]`
+  - `{string | Array<string>} [event]` (Array は 2.2.2 以降でのみサポートされます)
   - `{Function} [callback]`
 
 - **使用方法:**
