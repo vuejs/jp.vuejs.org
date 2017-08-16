@@ -19,7 +19,7 @@ Vue のトランジションシステムは entering、leaving、およびリス
 ウォッチャは、任意の数値プロパティの変化によって他のプロパティをアニメーションさせることができるようにします。それは理論的には複雑に聞こえるかもしれませんが、[Tween.js](https://github.com/tweenjs/tween.js) を使った例に没頭してみましょう:
 
 ``` html
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
 
 <div id="animated-number-demo">
   <input v-model.number="number" type="number" step="20">
@@ -58,7 +58,7 @@ new Vue({
 ```
 
 {% raw %}
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
 <div id="animated-number-demo" class="demo">
   <input v-model.number="number" type="number" step="20">
   <p>{{ animatedNumber }}</p>
@@ -97,8 +97,8 @@ new Vue({
 数値を更新すると、その変更が入力の下でアニメーションします。これはよいデモですが、例えば有効な CSS の色のように、直接的に数値として保持されていないものの場合はどうでしょうか？こちらのように、[Color.js](https://github.com/brehaut/color-js) を加えることによってそれを成し遂げられます:
 
 ``` html
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
-<script src="https://unpkg.com/color-js@1.0.3/color.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
 
 <div id="example-7">
   <input
@@ -177,8 +177,8 @@ new Vue({
 ```
 
 {% raw %}
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
-<script src="https://unpkg.com/color-js@1.0.3/color.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
 <div id="example-7" class="demo">
   <input
     v-model="colorQuery"
@@ -392,7 +392,7 @@ function generatePoints (stats) {
 多くの状態のトランジションを管理することで、素早く Vue インスタンスやコンポーネントの複雑さを増加させることができます。幸いにも、多くのアニメーションは専用の子コンポーネントに抽出できます。前の例のアニメーションする数値でこれをやってみましょう:
 
 ``` html
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
 
 <div id="example-8">
   <input v-model.number="firstNumber" type="number" step="20"> +
@@ -469,7 +469,7 @@ new Vue({
 ```
 
 {% raw %}
-<script src="https://unpkg.com/tween.js@16.3.4"></script>
+<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
 <div id="example-8" class="demo">
   <input v-model.number="firstNumber" type="number" step="20"> +
   <input v-model.number="secondNumber" type="number" step="20"> =
