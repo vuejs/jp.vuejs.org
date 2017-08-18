@@ -1,6 +1,6 @@
 ---
 title: 描画関数
-updated: 2017-08-13
+updated: 2017-08-18
 type: guide
 order: 15
 ---
@@ -400,7 +400,7 @@ render (createElement) {
 
 ## JSX
 
-もしあなたが多くの render 関数を書いている場合は、このような書き方の方が良いと感じるかもしれません。
+もしあなたが多くの render 関数を書いている場合は、このような書き方はつらいと感じるかもしれません。
 
 ``` js
 createElement(
@@ -415,7 +415,7 @@ createElement(
 )
 ```
 
-特にテンプレートが簡単なバージョンの場合は、次のようになります:
+特に、テンプレートならそれにくらべてこんなに簡単に書けるという場合は:
 
 ``` html
 <anchored-heading :level="1">
