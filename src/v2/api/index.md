@@ -1,6 +1,6 @@
 ---
 type: api
-updated: 2017-08-13
+updated: 2017-08-21
 ---
 
 ## グローバル設定
@@ -98,7 +98,7 @@ updated: 2017-08-13
 
   ``` js
   Vue.config.warnHandler = function (msg, vm, trace) {
-    // トレースはコンポーネント階層のトレースです
+    // `トレース`はコンポーネント階層のトレースです
   }
   ```
 
@@ -553,8 +553,7 @@ updated: 2017-08-13
   vm.aDouble // -> 4
   ```
 
-- **参照:**
-  - [算出プロパティ](../guide/computed.html)
+- **参照:** [算出プロパティ](../guide/computed.html)
 
 ### methods
 
@@ -619,7 +618,7 @@ updated: 2017-08-13
 
   <p class="tip">__ウォッチャ(例 `searchQuery: newValue => this.updateAutocomplete(newValue)`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.updateAutocomplete` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
 
-- **参照:** [インスタンスメソッド - vm.$watch](#vm-watch)
+- **参照:** [インスタンスメソッド / データ - vm.$watch](#vm-watch)
 
 ## オプション / DOM
 
@@ -675,8 +674,7 @@ updated: 2017-08-13
 
   <p class="tip">`render` 関数は、`el` オプションで指定されたマウント要素の `template` オプションまたは DOM にある HTML テンプレートからコンパイルされた描画関数より優先されます。</p>
 
-- **参照:**
-  - [描画関数](../guide/render-function.html)
+- **参照:** [描画関数](../guide/render-function.html)
 
 ### renderError
 
@@ -703,8 +701,7 @@ updated: 2017-08-13
   }).$mount('#app')
   ```
 
-- **参照:**
-  - [描画関数](../guide/render-function.html)
+- **参照:** [描画関数](../guide/render-function.html)
 
 ## オプション / ライフサイクルフック
 
@@ -844,8 +841,7 @@ updated: 2017-08-13
 
   Vue インスタンスで利用可能なディレクティブのハッシュです。
 
-- **参照:**
-  - [カスタムディレクティブ](../guide/custom-directive.html)
+- **参照:** [カスタムディレクティブ](../guide/custom-directive.html)
 
 ### filters
 
@@ -855,8 +851,7 @@ updated: 2017-08-13
 
   Vue インスタンスで利用可能なフィルタのハッシュです。
 
-- **参照:**
-  - [`Vue.filter`](#Vue-filter)
+- **参照:** [`Vue.filter`](#Vue-filter)
 
 ### components
 
@@ -866,8 +861,7 @@ updated: 2017-08-13
 
   Vue インスタンスで利用可能なコンポーネントのハッシュです。
 
-- **参照:**
-  - [コンポーネント](../guide/components.html)
+- **参照:** [コンポーネント](../guide/components.html)
 
 ## オプション / 構成
 
@@ -922,7 +916,7 @@ updated: 2017-08-13
   ``` js
   var CompA = { ... }
 
-  // CompA を Vue.extend の呼び出しなしで拡張する
+  // CompA を `Vue.extend` の呼び出しなしで拡張する
   var CompB = {
     extends: CompA,
     ...
@@ -1144,7 +1138,7 @@ updated: 2017-08-13
 
   Vue インスタンスが監視しているデータオブジェクトです。Vue インスタンスプロキシはデータオブジェクトのプロパティにアクセスします。
 
-- **参照:** [オプション - データ](#data)
+- **参照:** [オプション / データ - data](#data)
 
 ### vm.$props
 
@@ -1263,7 +1257,7 @@ updated: 2017-08-13
 - **参照:**
   - [`<slot>` コンポーネント](#slot)
   - [スロットによるコンテンツ配信](../guide/components.html#スロットによるコンテンツ配信)
-  - [描画関数: スロット](../guide/render-function.html#スロット)
+  - [描画関数 - スロット](../guide/render-function.html#スロット)
 
 ### vm.$scopedSlots
 
@@ -1282,7 +1276,7 @@ updated: 2017-08-13
 - **See also:**
   - [`<slot>` コンポーネント](#slot-1)
   - [スコープ付きスロット](../guide/components.html#スコープ付きスロット)
-  - [描画関数: スロット](../guide/render-function.html#スロット)
+  - [描画関数 - スロット](../guide/render-function.html#スロット)
 
 ### vm.$refs
 
@@ -1296,7 +1290,7 @@ updated: 2017-08-13
 
 - **参照:**
   - [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
-  - [ref](#ref)
+  - [特別な属性 - ref](#ref)
 
 ### vm.$isServer
 
@@ -1396,7 +1390,7 @@ updated: 2017-08-13
   vm.$watch('a', callback, {
     immediate: true
   })
-  // その時の `a` の値でコールバックがただちに発火します
+  // その時の `a` の値で`コールバック`がただちに発火します
   ```
 
 <h3 id="vm-set">vm.$set( target, key, value )</h3>
@@ -1612,6 +1606,7 @@ updated: 2017-08-13
   ```html
   <div v-html="html"></div>
   ```
+
 - **参照:** [テンプレート構文 - 展開](../guide/syntax.html#生の-HTML)
 
 ### v-show
@@ -1659,8 +1654,7 @@ updated: 2017-08-13
   </div>
   ```
 
-- **参照:**
-  - [条件付きレンダリング - v-else](../guide/conditional.html#v-else)
+- **参照:** [条件付きレンダリング - v-else](../guide/conditional.html#v-else)
 
 ### v-else-if
 
@@ -1965,7 +1959,7 @@ updated: 2017-08-13
   </div>
   <!-- コンポーネント -->
   <my-component v-once :comment="msg"></my-component>
-  <!-- v-for ディレクティブ -->
+  <!-- `v-for` ディレクティブ -->
   <ul>
     <li v-for="i in list" v-once>{{i}}</li>
   </ul>
@@ -1973,7 +1967,7 @@ updated: 2017-08-13
 
 - **参照:**
   - [テンプレート構文 - 展開](../guide/syntax.html#テキスト)
-  - [コンポーネント - v-once による安価な静的コンポーネント](../guide/components.html#v-once-を使用した安価な静的コンポーネント)
+  - [コンポーネント - `v-once` による安価な静的コンポーネント](../guide/components.html#v-once-を使用した安価な静的コンポーネント)
 
 ## 特別な属性
 
@@ -2050,7 +2044,7 @@ updated: 2017-08-13
   <!-- currentView が変化するとコンポーネントも変化する -->
   <component v-bind:is="currentView"></component>
 
-  <!-- <my-row> は <table> 要素内では無効なため必要で、それゆえ巻き上げられます -->
+  <!-- `<my-row>` は `<table>` 要素内では無効なため必要で、それゆえ巻き上げられます -->
   <table>
     <tr is="my-row"></tr>
   </table>
@@ -2209,7 +2203,7 @@ updated: 2017-08-13
     <comp-b v-else></comp-b>
   </keep-alive>
 
-  <!-- <transition> といっしょに使用する -->
+  <!-- `<transition>` といっしょに使用する -->
   <transition>
     <keep-alive>
       <component :is="view"></component>
@@ -2218,7 +2212,6 @@ updated: 2017-08-13
   ```
 
   `<keep-alive>` は、直接 1 つの子コンポーネントがトグルされているケースに対して設計されていることに注意してください。それが、 `v-for` 内部にある場合は動作しません。上記のように複数の条件付きで子がある場合は、`<keep-alive>` では一度に 1 つの子だけ描画されます。
-
 
 - **`include` と `exclude`**
 
@@ -2232,12 +2225,12 @@ updated: 2017-08-13
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- 正規表現 (v-bind を使用する) -->
+  <!-- 正規表現 (`v-bind` を使用する) -->
   <keep-alive :include="/a|b/">
     <component :is="view"></component>
   </keep-alive>
 
-  <!-- Array (v-bind を使用する) -->
+  <!-- Array (`v-bind` を使用する) -->
   <keep-alive :include="['a', 'b']">
     <component :is="view"></component>
   </keep-alive>
