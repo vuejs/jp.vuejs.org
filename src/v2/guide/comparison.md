@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2017-06-26 00:00:00
+updated: 2017-08-21
 type: guide
 order: 29
 ---
@@ -108,7 +108,7 @@ React はその急な学習曲線で有名です。あなたが本当に始め�
 React ほどではないかもしれませんが、Vue は単にうまく規模を大きくできますし、一方で、jQuery のように規模を小さくすることもできます。そうです - あなたはページの中に 1 つの script タグを放り込むだけで良いのです：
 
 ``` html
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue"></script>
 ```
 
 これであなたは Vue のコードを書き始めることができますし、後ろめたい思いをしたり性能問題について心配したりすることなく、ミニファイ（minify）版をプロダクション環境へ設置することもできます。

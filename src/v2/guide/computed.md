@@ -1,6 +1,6 @@
 ---
 title: 算出プロパティとウォッチャ
-updated: 2017-06-26 00:00:00
+updated: 2017-08-21
 type: guide
 order: 5
 ---
@@ -203,8 +203,8 @@ computed: {
 <!-- メソッドがたくさんあるので、Vue のコアはそれらを再発明せずに		-->
 <!-- 小さく保たれています。この結果として、慣れ親しんでいるものだけを	-->
 <!-- 使えるような自由さを Vue は持ち合わせています。			-->
-<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
-<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 <script>
 var watchExampleVM = new Vue({
   el: '#watch-example',
@@ -260,8 +260,8 @@ var watchExampleVM = new Vue({
   </p>
   <p>{{ answer }}</p>
 </div>
-<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
-<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 <script>
 var watchExampleVM = new Vue({
   el: '#watch-example',

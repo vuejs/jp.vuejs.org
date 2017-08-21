@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2017-08-05
+updated: 2017-08-21
 type: guide
 order: 1
 vue_version: 2.4.1
@@ -34,7 +34,7 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 推奨: [https://unpkg.com/vue](https://unpkg.com/vue) は、npm に公開されるとすぐに最新バージョンが反映されます。[https://unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
 
-[jsDelivr](https://cdn.jsdelivr.net/vue/latest/vue.min.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.min.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
+[jsDelivr](https://cdn.jsdelivr.net/npm/vue/dist/vue.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
 
 ## NPM
 

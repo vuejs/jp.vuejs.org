@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2017-06-26 00:00:00
+updated: 2017-08-21
 type: guide
 order: 2
 ---
@@ -70,7 +70,7 @@ var app = new Vue({
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    message: 'You loaded this page on ' + new Date()
+    message: 'You loaded this page on ' + new Date().toLocaleString()
   }
 })
 ```
@@ -84,7 +84,7 @@ var app2 = new Vue({
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    message: 'You loaded this page on ' + new Date()
+    message: 'You loaded this page on ' + new Date().toLocaleString()
   }
 })
 </script>
