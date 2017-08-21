@@ -1,6 +1,6 @@
 ---
 title: トランジション効果
-updated: 2017-08-05
+updated: 2017-08-21
 type: guide
 order: 13
 ---
