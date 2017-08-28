@@ -83,7 +83,7 @@ computed: {
 `v-bind:class` にクラスのリストを適用する配列を渡すことができます:
 
 ``` html
-<div v-bind:class="[activeClass, errorClass]">
+<div v-bind:class="[activeClass, errorClass]"></div>
 ```
 ``` js
 data: {
@@ -101,7 +101,7 @@ data: {
 条件付きリストでクラスを切り替えたい場合、三項演算子式でそれを行うことができます:
 
 ``` html
-<div v-bind:class="[isActive ? activeClass : '', errorClass]">
+<div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
 ```
 
 これは常に `errorClass` が適用されますが、`isActive` が `true` のときにだけ `activeClass` クラスが適用されます。
@@ -109,7 +109,7 @@ data: {
 しかしながら、これは複数条件のクラスがある場合は少し冗長です。なので配列構文内部ではオブジェクト構文も使えます:
 
 ``` html
-<div v-bind:class="[{ active: isActive }, errorClass]">
+<div v-bind:class="[{ active: isActive }, errorClass]"></div>
 ```
 
 ### コンポーネントにおいて
@@ -187,7 +187,7 @@ data: {
 `v-bind:style` 向けの配列構文は、同じ要素に複数のスタイルオブジェクトを適用することができます:
 
 ``` html
-<div v-bind:style="[baseStyles, overridingStyles]">
+<div v-bind:style="[baseStyles, overridingStyles]"></div>
 ```
 
 ### 自動プリフィックス
@@ -201,7 +201,7 @@ data: {
 2.3 から style プロパティに複数の (接頭辞付き) 値の配列を設定できます。例えば次のようになります:
 
 ``` html
-<div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+<div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
 ```
 
 これはブラウザがサポートしている配列の最後の値だけを描画します。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは、 `display: flex` を描画します。
