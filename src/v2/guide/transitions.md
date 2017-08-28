@@ -1,8 +1,8 @@
 ---
-title: トランジション効果
+title: Enter/Leave とトランジション一覧
 updated: 2017-08-21
 type: guide
-order: 13
+order: 201
 ---
 
 # 概要

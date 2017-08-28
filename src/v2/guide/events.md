@@ -76,7 +76,7 @@ var example2 = new Vue({
 })
 
 // JavaScript からメソッドを呼び出すこともできます
-example2.greet() // -> 'Hello Vue.js!'
+example2.greet() // => 'Hello Vue.js!'
 ```
 
 結果:

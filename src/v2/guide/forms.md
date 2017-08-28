@@ -344,8 +344,8 @@ vm.pick === vm.a
 
 ``` js
 // 選択したとき:
-typeof vm.selected // -> 'object'
-vm.selected.number // -> 123
+typeof vm.selected // => 'object'
+vm.selected.number // => 123
 ```
 
 ## 修飾子

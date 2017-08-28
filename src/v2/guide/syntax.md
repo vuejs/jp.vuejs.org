@@ -117,50 +117,6 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 この後、`v-on` や `v-model` を詳しく見ていく中で、さらに多くの修飾子が登場します。
 
-## フィルタ
-
-Vue.js では、一般的なテキストフォーマットを適用するために使用できるフィルタを定義できます。フィルタは、**mustache 展開と `v-bind` 式**、2 つの場所で使用できます。フィルタは JavaScript 式の末尾に追加する必要があります。これは "パイプ('|')" 記号で表されます。
-
-``` html
-{{ message | capitalize }}
-
-<!-- in v-bind -->
-<div v-bind:id="rawId | formatId"></div>
-```
-
-<p class="tip">Vue 2.x フィルタは、mustache バインディングと `v-bind` 式 (2.1.0 以降のサポート)でだけ使用できます。同じ振る舞いをディレクティブのバインディング内部で実現するには、代わりに[算出プロパティ](computed.html)を使用すべきです。</p>
-
-フィルタ関数は常に式の値(前のチェーンの結果)を第一引数として受け取ります。この例では、 `capitalize` フィルタ関数は引数として `message` の値を受け取ります。
-
-``` js
-new Vue({
-  // ...
-  filters: {
-    capitalize: function (value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
-  }
-})
-```
-
-フィルタは連結できます:
-
-``` html
-{{ message | filterA | filterB }}
-```
-
-この場合、単一の引数で定義された `filterA` は `message` の値を受け取り、`filterB`の単一引数に `filterA` の結果を渡して `filterB` 関数が呼び出されます。
-
-フィルタは JavaScript 関数なので、引数を取ります:
-
-``` html
-{{ message | filterA('arg1', arg2) }}
-```
-
-ここで `filterA` は3つの引数をとる関数として定義されています。`message` の値は最初の引数に渡されます。プレーン文字列 `'arg1'` は、第2引数として `filterA` に渡されます。そして、式 `arg2` の値が評価され、第3引数としてフィルタに渡されます。
-
 ## 省略記法
 
 `v-` 接頭子は、テンプレート内の Vue 独自の属性を識別するための目印となっています。これは既存のマークアップに対して、 Vue.js を利用して動的な振る舞いを適用する場合に便利ですが、頻繁に利用されるディレクティブに対しては冗長に感じることがあるでしょう。同時に[シングルページアプリケーション](https://en.wikipedia.org/wiki/Single-page_application)を作成するにあたり、全てのテンプレートを Vue.js で管理しているとき、`v-` 接頭子を付ける必要性は低いものになるでしょう。したがって、 Vue.js は 2 つの最もよく使われるディレクティブ `v-bind` と `v-on` に対して特別な省略記法を提供しています:
@@ -174,7 +130,6 @@ new Vue({
 <!-- 省略記法 -->
 <a :href="url"></a>
 ```
-
 
 ### `v-on` 省略記法
 

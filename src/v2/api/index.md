@@ -438,8 +438,8 @@ updated: 2017-08-21
   var vm = new Vue({
     data: data
   })
-  vm.a // -> 1
-  vm.$data === data // -> true
+  vm.a // => 1
+  vm.$data === data // => true
 
   // Vue.extend() 内では、関数を使わなければいけない
   var Component = Vue.extend({
@@ -547,10 +547,10 @@ updated: 2017-08-21
       }
     }
   })
-  vm.aPlus   // -> 2
+  vm.aPlus   // => 2
   vm.aPlus = 3
-  vm.a       // -> 2
-  vm.aDouble // -> 4
+  vm.a       // => 2
+  vm.aDouble // => 4
   ```
 
 - **参照:** [算出プロパティ](../guide/computed.html)
@@ -613,7 +613,7 @@ updated: 2017-08-21
       }
     }
   })
-  vm.a = 2 // -> new: 2, old: 1
+  vm.a = 2 // => new: 2, old: 1
   ```
 
   <p class="tip">__ウォッチャ(例 `searchQuery: newValue => this.updateAutocomplete(newValue)`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.updateAutocomplete` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
@@ -747,6 +747,16 @@ updated: 2017-08-21
 
   新たに作成される `vm.$el` によって置き換えられる `el` に対して、インスタンスがマウントされたちょうど後に呼ばれます。ルートインスタンスがドキュメントの中の要素にマウントされる場合、`vm.$el` も `mounted` が呼び出されるときにドキュメントの中に入ります。
 
+  `mounted` は 全ての子コンポーネントもマウントされていることを保証**しない**ことに注意してください。ビュー全体がレンダリングされるまで待つ場合は、 `mounted` の代わりに [vm.$nextTick](#vm-nextTick) を使うことができます。
+
+  ``` js
+  mounted: function () {
+    this.$nextTick(function () {
+      // ビュー全体がレンダリングされた後にのみ実行されるコード
+    })
+  }
+  ```
+
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
 - **参照:** [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
@@ -774,6 +784,16 @@ updated: 2017-08-21
   データが変更後、仮想 DOM が再描画そしてパッチを適用によって呼ばれます。
 
   このフックが呼び出されるとき、コンポーネントの DOM は更新した状態になり、このフックで DOM に依存する操作を行うことができます。しかしがながら、ほとんどの場合、無限更新ループに陥る可能性があるため、このフックでは状態を変更するのを回避すべきです。
+
+  `updated` は 全ての子コンポーネントも再レンダリングされていることを保証**しない**ことに注意してください。ビュー全体が再レンダリングされるまで待つ場合は、 `updated` の代わりに [vm.$nextTick](#vm-nextTick) を使うことができます。
+
+  ``` js
+  updated: function () {
+    this.$nextTick(function () {
+      // ビュー全体が再レンダリングされた後にのみ実行されるコード
+    })
+  }
+  ```
 
   **このフックはサーバサイドレンダリングでは呼ばれません。**
 
@@ -895,8 +915,8 @@ updated: 2017-08-21
     created: function () { console.log(2) },
     mixins: [mixin]
   })
-  // -> 1
-  // -> 2
+  // => 1
+  // => 2
   ```
 
 - **参照:** [ミックスイン](../guide/mixins.html)
@@ -956,7 +976,7 @@ updated: 2017-08-21
   var Child = {
     inject: ['foo'],
     created () {
-      console.log(this.foo) // -> "bar"
+      console.log(this.foo) // => "bar"
     }
     // ...
   }
@@ -1174,7 +1194,7 @@ updated: 2017-08-21
   new Vue({
     customOption: 'foo',
     created: function () {
-      console.log(this.$options.customOption) // -> 'foo'
+      console.log(this.$options.customOption) // => 'foo'
     }
   })
   ```
@@ -1439,7 +1459,7 @@ updated: 2017-08-21
     console.log(msg)
   })
   vm.$emit('test', 'hi')
-  // -> "hi"
+  // => "hi"
   ```
 
 <h3 id="vm-once">vm.$once( event, callback )</h3>

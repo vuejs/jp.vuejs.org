@@ -18,6 +18,10 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 
 各バージョンの詳細なリリースノートは、[GitHub](https://github.com/vuejs/vue/releases) で入手できます。
 
+## Vue Devtools
+
+Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをお勧めします。これにより、 Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
+
 ## `<script>` 直接組み込み
 
 ダウンロードし script タグで読み込んでください。`Vue` はグローバル変数として登録されます。

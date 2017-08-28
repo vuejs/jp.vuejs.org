@@ -2,7 +2,7 @@
 title: 状態管理
 updated: 2017-06-26 00:00:00
 type: guide
-order: 22
+order: 502
 ---
 
 ## 公式 Flux ライクな実装

@@ -2,7 +2,7 @@
 title: TypeScript のサポート
 updated: 2017-08-03
 type: guide
-order: 25
+order: 404
 ---
 
 ## TS と Webpack 2ユーザに向けた、2.2 以降における重要な変更のお知らせ

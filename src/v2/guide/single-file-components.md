@@ -2,7 +2,7 @@
 title: 単一ファイルコンポーネント
 updated: 2017-06-26 00:00:00
 type: guide
-order: 19
+order: 402
 ---
 
 ## 前書き
