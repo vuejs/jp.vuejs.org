@@ -61,7 +61,6 @@ new Vue({
 </script>
 {% endraw %}
 
-
 {% raw %}
 <p class="tip">textarea への挿入 (<code>&lt;textarea&gt;{{text}}&lt;/textarea&gt;</code>) は動きません。代わりに、<code>v-model</code>を使用してください。</p>
 {% endraw %}
@@ -133,7 +132,6 @@ new Vue({
 {% endraw %}
 
 ### ラジオ
-
 
 ``` html
 <input type="radio" id="one" value="One" v-model="picked">
