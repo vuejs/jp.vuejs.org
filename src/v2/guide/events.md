@@ -1,6 +1,6 @@
 ---
 title: イベントハンドリング
-updated: 2017-07-21
+updated: 2017-09-03
 type: guide
 order: 9
 ---
@@ -76,7 +76,7 @@ var example2 = new Vue({
 })
 
 // JavaScript からメソッドを呼び出すこともできます
-example2.greet() // -> 'Hello Vue.js!'
+example2.greet() // => 'Hello Vue.js!'
 ```
 
 結果:

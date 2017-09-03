@@ -1,8 +1,8 @@
 ---
 title: Vue Router 0.7.x からの移行
-updated: 2017-08-11 00:00:00
+updated: 2017-09-03
 type: guide
-order: 27
+order: 602
 ---
 
 > Vue Router 2.0 は Vue 2.0 に対応する唯一のルータなので、 Vue を更新する場合には Vue Router も同様に更新する必要があります。2.0 のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Router を用いた包括的なドキュメントは [Vue Router ドキュメント](http://router.vuejs.org/ja/)を確認してください。
@@ -127,6 +127,30 @@ router.match = createMatcher(
   <p>コードに対し<a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>router.on</code> がコールされる箇所を検出してください。</p>
 </div>
 {% endraw %}
+
+### `router.beforeEach` <sup>変更</sup>
+
+`router.beforeEach` は現在非同期に動作し、3番目の引数として `next` 関数を取ります。
+
+``` js
+router.beforeEach(function (transition) {
+  if (transition.to.path === '/forbidden') {
+    transition.abort()
+  } else {
+    transition.next()
+  }
+})
+```
+
+``` js
+router.beforeEach(function (to, from, next) {
+  if (to.path === '/forbidden') {
+    next(false)
+  } else {
+    next()
+  }
+})
+```
 
 ### `subRoutes` <sup>名前変更</sup>
 

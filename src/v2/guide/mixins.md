@@ -1,8 +1,8 @@
 ---
 title: ミックスイン
-updated: 2017-06-26 00:00:00
+updated: 2017-09-03
 type: guide
-order: 17
+order: 301
 ---
 
 ## 基本
@@ -29,7 +29,7 @@ var Component = Vue.extend({
   mixins: [myMixin]
 })
 
-var component = new Component() // -> "hello from mixin!"
+var component = new Component() // => "hello from mixin!"
 ```
 
 ## オプションのマージ
@@ -51,8 +51,8 @@ new Vue({
   }
 })
 
-// -> "mixin hook called"
-// -> "component hook called"
+// => "mixin hook called"
+// => "component hook called"
 ```
 
 オブジェクトの値を期待するオプションは、例えば、`methods`、`components`、そして `directives` らは同じオブジェクトにマージされます。コンポーネントオプションはこれらのオブジェクトでキーのコンフリクトがあるとき、優先されます:
@@ -81,9 +81,9 @@ var vm = new Vue({
   }
 })
 
-vm.foo() // -> "foo"
-vm.bar() // -> "bar"
-vm.conflicting() // -> "from self"
+vm.foo() // => "foo"
+vm.bar() // => "bar"
+vm.conflicting() // => "from self"
 ```
 
 同じマージストラテジが `Vue.extend()` で使用されることに注意してください。
@@ -106,7 +106,7 @@ Vue.mixin({
 new Vue({
   myOption: 'hello!'
 })
-// -> "hello!"
+// => "hello!"
 ```
 
 <p class="tip">サードパーティのコンポーネントを含んでいる、すべての単一の作成された Vue インスタンスに影響があるため、グローバルミックスインは多用せずかつ慎重に使用してください。多くのケースでは、上記の例のような、カスタムオプションを処理するようなものに使用すべきです。また、重複適用を避けるため [プラグイン](../guide/plugins.html) としてそれらを作成することをお勧めします。</p>

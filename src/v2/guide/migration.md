@@ -1,8 +1,8 @@
 ---
 title: Vue 1.x からの移行
-updated: 2017-06-26 00:00:00
+updated: 2017-09-03
 type: guide
-order: 26
+order: 601
 ---
 
 ## FAQ

@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2017-08-21
+updated: 2017-09-03
 type: guide
 order: 1
 vue_version: 2.4.1
@@ -17,6 +17,10 @@ Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するた
 ### リリースノート
 
 各バージョンの詳細なリリースノートは、[GitHub](https://github.com/vuejs/vue/releases) で入手できます。
+
+## Vue Devtools
+
+Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com/vuejs/vue-devtools#vue-devtools) をインストールすることをお勧めします。これにより、 Vue アプリケーションをよりユーザーフレンドリーなインターフェースで調査、デバッグすることが可能になります。
 
 ## `<script>` 直接組み込み
 

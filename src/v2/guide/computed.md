@@ -1,6 +1,6 @@
 ---
 title: 算出プロパティとウォッチャ
-updated: 2017-08-21
+updated: 2017-09-03
 type: guide
 order: 5
 ---
@@ -69,9 +69,9 @@ var vm = new Vue({
 ここでは、算出プロパティ `reversedMessage` を宣言しました。私たちが提供した機能は、プロパティ `vm.reversedMessage` に対する getter 関数として利用されます:
 
 ``` js
-console.log(vm.reversedMessage) // -> 'olleH'
+console.log(vm.reversedMessage) // => 'olleH'
 vm.message = 'Goodbye'
-console.log(vm.reversedMessage) // -> 'eybdooG'
+console.log(vm.reversedMessage) // => 'eybdooG'
 ```
 
 コンソールを開いて、vm で遊んでみてください。`vm.reversedMessage` の値は、常に `vm.message` の値に依存しています。
