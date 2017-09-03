@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2017-08-21
+updated: 2017-09-03
 type: guide
 order: 1
 vue_version: 2.4.1

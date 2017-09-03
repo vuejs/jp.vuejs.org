@@ -1,6 +1,6 @@
 ---
 title: Vuex 0.6.x から 1.0 への移行
-updated: 2017-06-26 00:00:00
+updated: 2017-09-03
 type: guide
 order: 603
 ---

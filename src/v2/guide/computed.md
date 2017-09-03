@@ -1,6 +1,6 @@
 ---
 title: 算出プロパティとウォッチャ
-updated: 2017-08-21
+updated: 2017-09-03
 type: guide
 order: 5
 ---
