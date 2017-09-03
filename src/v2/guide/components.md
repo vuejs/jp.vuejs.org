@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-08-13
+updated: 2017-09-03
 type: guide
 order: 11
 ---
@@ -455,7 +455,7 @@ Vue.component('example', {
 <input type="date" class="form-control">
 ```
 
-date picker プラグインにテーマを追加するためには、次のような特定のクラスを追加する必要があります:
+date picker プラグインのテーマを指定するには、次のような特定のクラスを追加する必要があります:
 
 ``` html
 <bs-date-input
