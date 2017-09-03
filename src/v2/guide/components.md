@@ -455,7 +455,7 @@ Vue.component('example', {
 <input type="date" class="form-control">
 ```
 
-date picker プラグインにテーマを追加するためには、次のような特定のクラスを追加する必要があります:
+date picker プラグインのテーマを指定するには、次のような特定のクラスを追加する必要があります:
 
 ``` html
 <bs-date-input
