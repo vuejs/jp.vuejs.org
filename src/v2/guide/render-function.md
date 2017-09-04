@@ -119,7 +119,7 @@ render: function (createElement) {
 }
 ```
 
-どちらの場合であっても、`blogTitle`が変更されても、Vue はページを自動的に更新します。
+どちらの場合でも、`blogTitle`が変更されるときでさえ、Vue はページを自動的に更新します。
 
 ### 仮想 DOM
 
