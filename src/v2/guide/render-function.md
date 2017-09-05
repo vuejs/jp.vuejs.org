@@ -123,7 +123,7 @@ render: function (createElement) {
 
 ### 仮想 DOM
 
-Vue は**実際の DOM に加える必要がある変更を追跡する**仮想DOM **を構築することでこれを達成します。この行を詳しく見てみましょう:
+Vue は、実際の DOM に加える必要がある変更を追跡する**仮想 DOM** を構築することで、これを達成します。
 
 ``` js
 return createElement('h1', this.blogTitle)
