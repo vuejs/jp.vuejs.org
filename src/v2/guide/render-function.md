@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2017-09-03
+updated: 2017-09-04
 type: guide
 order: 303
 ---
@@ -85,9 +85,55 @@ Vue.component('anchored-heading', {
 
 少しシンプルになりましたね！コードは短くなりましたが、これもまた Vue インスタンスプロパティの豊富な知識を必要とします。このケースでは、 `slot` 属性無しでコンポーネントに子を渡した時に ( `anchored-heading` の内側の `Hello world!` のような) 、それらの子がコンポーネントインスタンス上の  `$slots.default` にストアされているかを知っている必要があります。**もしあなたがまだ知らないなら、render 関数に進む前に、 [インスタンスプロパティAPI](../api/#インスタンスプロパティ) を読むことをオススメします。**
 
+## ノード、ツリー、および仮想 DOM
+
+render 関数を説明する前に、ブラウザの仕組みについて少し知っておくことが重要です。例えば、次のように HTML を入力します。
+
+```html
+<div>
+  <h1>My title</h1>
+  Some text content
+  <!-- TODO: Add tagline  -->
+</div>
+```
+
+ブラウザはこのコードを読み込むと、血縁関係を追跡するために家系図を構築するのと同じように、全てを追跡する ["DOM ノード"ツリー](https://javascript.info/dom-nodes)を構築します。
+
+上記の HTML の DOM ノードのツリーは次のようになります。
+
+![DOM Tree Visualization](/images/dom-tree.png)
+
+全ての要素はノードです。全てのテキストはノードです。コメントさえもノードです！ノードはページの一部に過ぎません。 そして、家系図のように、各ノードは子供を持つことができます(つまり、各部分には他の部分を含めることができます)。
+
+これらのノードを全て効率的に更新するのは難しいかもしれませんが、ありがたいことに、手動で行う必要はありません。テンプレート内のどの HTML をページに表示するかを Vue に伝えるだけです。
+
+```html
+<h1>{{ blogTitle }}</h1>
+```
+
+または render 関数の場合:
+
+``` js
+render: function (createElement) {
+  return createElement('h1', this.blogTitle)
+}
+```
+
+どちらの場合でも、`blogTitle`が変更されるときでさえ、Vue はページを自動的に更新します。
+
+### 仮想 DOM
+
+Vue は、実際の DOM に加える必要がある変更を追跡する**仮想 DOM** を構築することで、これを達成します。
+
+``` js
+return createElement('h1', this.blogTitle)
+```
+
+`createElement` は実際に何を返しているのでしょうか？_正確には_実際の DOM 要素ではありません。どのノードを描画するかを記述した情報が子ノードの記述を含んで Vue に含まれているため、より正確には `createNodeDescription` という名前になります。このノード記述は"仮想ノード"と呼ばれ、通常は **VNode** と略されます。"仮想 DOM" は、Vue コンポーネントのツリーで構築された VNode のツリー全体と呼んでいるものです。
+
 ## `createElement` 引数
 
-あなたが精通する必要がある 2 つ目のことは `createElement` 関数の中でテンプレートの機能をどのように使うかについてです。こちらが `createElement` の受け付ける引数です。
+あなたが精通する必要がある次のことは `createElement` 関数の中でテンプレートの機能をどのように使うかについてです。こちらが `createElement` の受け付ける引数です。
 
 ``` js
 // @returns {VNode}
