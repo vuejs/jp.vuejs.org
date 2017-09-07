@@ -21,6 +21,7 @@
     "hexo-server": "^0.2.0"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "shelljs": "^0.7.8",
     "textlint": "^5.5.0",
     "textlint-checker-for-vuejs-jp-docs": "git@github.com:vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
@@ -28,7 +29,8 @@
     "textlint-rule-preset-jtf-style": "^2.1.2"
   },
   "scripts": {
+    "precommit": "npm test",
     "test": "npm run lint",
-    "lint": "node -e \"var shell=require('shelljs');var files=shell.find(['./src/v2/guide/*.md','./src/v2/api/*.md','./src/v2/examples/*.md','./src/_posts/*.md']).filter(function(file){return !file.endsWith('/guide/team.md')}).join(' ');shell.exec('textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error '+files);\""
+    "lint": "node -e \"var shell=require('shelljs');var files=shell.find(['./src/v2/guide/*.md','./src/v2/api/*.md','./src/v2/examples/*.md','./src/_posts/*.md']).filter(function(file){return !file.endsWith('/guide/team.md')}).join(' ');if(shell.exec('textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error '+files).code!==0){shell.exit(1)};\""
   }
 }
