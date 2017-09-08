@@ -63,11 +63,11 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 #### コンポーネントスコープ CSS（Scoped CSS）
 
-あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション経由でしばし行われます。そこには競合するソリューションが多数あり、それぞれ独自に注意事項があります。
+あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション (e.g. [styled-components](https://github.com/styled-components/styled-components), [glamorous](https://github.com/paypal/glamorous), and [emotion](https://github.com/emotion-js/emotion)) 経由でしばし行われます。This introduces a new component-oriented styling paradigm that is different from the normal CSS authoring process. Additionally, although there is support for extracting CSS into a single stylesheet at build time, it is still common that a runtime will need to be included in the bundle for styling to work properly. While you gain acess to the dynamism of JavaScript while constructing your styles, the tradeoff is often increased bundle size and runtime cost.
 
-共通の問題は、hover 状態、メディアクエリや、疑似セレクタのようなより複雑な機能はすべて、CSS がすでに行っていることを再発明するために多くの依存を必要とするか、またはそれらは単にサポートされていません。 CSS-in-JS では慎重に最適化されていないと、実行時の性能にはほとんど影響を与えません。最も重要なのは、通常の CSS を作成した経験から逸脱していることです。
+If you are a fan of CSS-in-JSS, many of the popular CSS-in-JS libraries support Vue (e.g. [styled-components-vue](https://github.com/styled-components/vue-styled-components) and [vue-emotion](https://github.com/egoist/vue-emotion)). The main difference between React and Vue here is that the default method of styling in Vue is through more familiar `style` tags in [single-file components](single-file-components.html).
 
-その一方で Vue は、[単一ファイルコンポーネント](single-file-components.html)の中で CSS のすべての機能を使用できるようにしています：
+[Single-file components](single-file-components.html) give you full access to CSS in the same file as the rest of your component code.
 
 ``` html
 <style scoped>
@@ -81,9 +81,7 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 任意に付与できる `scoped` 属性は、要素に一意な属性（`data-v-21e5b78` のようなもの）を付与し、`.list-container:hover` を `.list-container[data-v-21e5b78]:hover` のようなものにコンパイルすることで、この CSS のスコープをあなたのコンポーネントに限定します。
 
-すでに CSS モジュールに精通している場合、Vue の単一ファイルコンポーネントには[ファーストクラスのサポート](http://vue-loader.vuejs.org/en/features/css-modules.html)もあります。
-
-最後に、ちょうど HTML のように、あなたには任意の好きなプリプロセッサ（または、ポストプロセッサ）を使って CSS を書くという選択肢、それらのエコシステムの既存のライブラリを活用できます。あなたがビルドサイズやアプリケーションの複雑さの増加を引き起こす特殊なライブラリをインポートするのではなく、ビルド時に色の操作を行うようなデザイン中心の運用を行う事ができるようにしています。
+Lastly, the styling in Vue's single-file component's is very flexible. Through [vue-loader](https://github.com/vuejs/vue-loader), you can use any preprocessor, post-processor, and even deep integration with [CSS Modules](http://vue-loader.vuejs.org/en/features/css-modules.html) -- all within the `<style>` element.
 
 ### 規模
 
