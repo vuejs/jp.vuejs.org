@@ -1,26 +1,15 @@
 ---
 title: リアクティブの探求
-updated: 2017-06-26 00:00:00
+updated: 2017-09-08
 type: guide
-order: -1
+order: 601
 ---
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! NOTE FOR TRANSLATORS !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!! Don't bother translating changes to this page yet, !!
-!! as it's not visible on the frontend and will     !!
-!! eventually be adapted into a page - or perhaps   !!
-!! a completely separate guide - for potential      !!
-!! contributors to Vue.                             !!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-注:上記内容が書かれていたため、このページの翻訳を止めています。このページの内容を公開する際、再度最新のコンテンツを参照して翻訳をする必要があります。
-
-私達は基本のほとんどをカバーしてきました。これからは深いダイビングをするための時間です！Vue の最も明確な特徴の1つは、控えめなリアクティブシステムです。モデルは単なるプレーンな JavaScript オブジェクトです。それらを変更する時、View を更新します。状態管理を非常にシンプルかつ直感的にしますが、いくつかの一般的な落とし穴を避けるためにそれがどのように動作するか理解することも重要です。このセクションで、Vue のリアクティブシステムの低レベルの詳細の一部について掘り下げていきます。
+私達は基本のほとんどをカバーしてきました。これからは掘り下げて見るための時間です！Vue の最も明確な特徴の1つは、控えめなリアクティブシステムです。モデルは単なるプレーンな JavaScript オブジェクトです。それらを変更する時、ビューを更新します。状態管理を非常にシンプルかつ直感的にしますが、いくつかの一般的な落とし穴を避けるためにそれがどのように動作するか理解することも重要です。このセクションで、Vue のリアクティブシステムの低レベルの詳細の一部について掘り下げていきます。
 
 ## 変更の追跡方法
 
-プレーンな JavaScript オブジェクトを `data` オプションとして Vue インスタンスに渡すとき、Vue.js はその全てのプロパティを渡り歩いて、それらを [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) を使用して、getter/setter に変換します。これは ES5 だけのシム (shim) ができない機能で、Vue.js が IE8 以下をサポートしない理由です。
+プレーンな JavaScript オブジェクトを `data` オプションとして Vue インスタンスに渡すとき、Vue はその全てのプロパティを渡り歩いて、それらを [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) を使用して、getter/setter に変換します。これは ES5 だけのシム (shim) ができない機能で、Vue が IE8 以下をサポートしない理由です。
 
 getter/setter はユーザーには見えませんが、内部ではそれらは Vue.js で依存関係の追跡を実行したり、プロパティがアクセスされたまたは変更されたときは、変更通知します。注意事項の1つは、データオブジェクトが記録されたとき、getter/setter のブラウザコンソールのフォーマットが異なるので、よりフレンドリな閲覧インターフェイスのため、[vue-devtools](https://github.com/vuejs/vue-devtools) をインストールするといいでしょう。
 
