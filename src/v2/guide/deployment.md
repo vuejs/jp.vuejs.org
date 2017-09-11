@@ -78,7 +78,7 @@ Webpack を使用している場合、JavaScript と テンプレートの分離
 
 それぞれのビルドツールのドキュメントを参照してください:
 
-- [Webpack + vue-loader](https://vue-loader.vuejs.org/en/configurations/extract-css.html) (`vue-cli` の webpack テンプレートは既に設定済み)
+- [Webpack + vue-loader](https://vue-loader.vuejs.org/ja/configurations/extract-css.html) (`vue-cli` の webpack テンプレートは既に設定済み)
 - [Browserify + vueify](https://github.com/vuejs/vueify#css-extraction)
 - [Rollup + rollup-plugin-vue](https://vuejs.github.io/rollup-plugin-vue/#/en/2.3/?id=custom-handler)
 
