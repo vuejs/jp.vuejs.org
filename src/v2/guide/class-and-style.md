@@ -1,6 +1,6 @@
 ---
 title: クラスとスタイルのバインディング
-updated: 2017-07-21
+updated: 2017-09-08
 type: guide
 order: 6
 ---
@@ -72,7 +72,7 @@ computed: {
   classObject: function () {
     return {
       active: this.isActive && !this.error,
-      'text-danger': this.error && this.error.type === 'fatal',
+      'text-danger': this.error && this.error.type === 'fatal'
     }
   }
 }

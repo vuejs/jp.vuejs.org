@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-09-03
+updated: 2017-09-08
 type: guide
 order: 11
 ---
@@ -616,7 +616,7 @@ this.$emit('update:foo', newValue)
   v-on:input="something = $event.target.value">
 ```
 
-コンポーネントと共に使用されるとき、これは簡単にできます:
+コンポーネントと共に使用されるとき、代わりにこのように簡単にできます:
 
 ``` html
 <custom-input
