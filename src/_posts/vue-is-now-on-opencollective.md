@@ -3,6 +3,8 @@ title: Vue は OpenCollective を始めました !
 date: 2017-9-12
 ---
 
+このブログは[こちら](https://medium.com/the-vue-point/vue-is-now-on-opencollective-1ef89ca1334b)の翻訳ブログです。
+
 ## Vue は OpenCollective を始めました !
 本日私たちは Vue プロジェクトへの財政的支援を [OpenCollective](https://opencollective.com/vuejs) を通じて受け入れ始めたことを喜びをもってお知らせします。
 
