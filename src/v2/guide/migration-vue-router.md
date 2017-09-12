@@ -5,7 +5,7 @@ type: guide
 order: 702
 ---
 
-> Vue Router 2.0 は Vue 2.0 に対応する唯一のルータなので、 Vue を更新する場合には Vue Router も同様に更新する必要があります。2.0 のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Router を用いた包括的なドキュメントは [Vue Router ドキュメント](http://router.vuejs.org/ja/)を確認してください。
+> Vue Router 2.0 は Vue 2.0 に対応する唯一のルータなので、 Vue を更新する場合には Vue Router も同様に更新する必要があります。2.0 のドキュメントに移行ガイドが用意されているのもそういう理由からです。新しい Vue Router を用いた包括的なドキュメントは [Vue Router ドキュメント](https://router.vuejs.org/ja/)を確認してください。
 
 ## ルータの初期化
 
@@ -49,7 +49,7 @@ new Vue({
 
 ### `router.map` <sup>置き換え</sup>
 
-ルートは [`routes` オプション](http://router.vuejs.org/ja/essentials/getting-started.html#javascript) に配列として定義されるようになりました。例えばこのようなルートの記述は:
+ルートは [`routes` オプション](httpa://router.vuejs.org/ja/essentials/getting-started.html#javascript) に配列として定義されるようになりました。例えばこのようなルートの記述は:
 
 ``` js
 router.map({
@@ -154,7 +154,7 @@ router.beforeEach(function (to, from, next) {
 
 ### `subRoutes` <sup>名前変更</sup>
 
-Vue と他のルータライブラリとの一貫性のために、[`children`に名前が変更されました。](http://router.vuejs.org/ja/essentials/nested-routes.html) 
+Vue と他のルータライブラリとの一貫性のために、[`children`に名前が変更されました。](https://router.vuejs.org/ja/essentials/nested-routes.html) 
 
 {% raw %}
 <div class="upgrade-path">
@@ -165,7 +165,7 @@ Vue と他のルータライブラリとの一貫性のために、[`children`�
 
 ### `router.redirect` <sup>置き換え</sup>
 
-[ルート定義におけるオプション](http://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
+[ルート定義におけるオプション](https://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
 
 ``` js
 router.redirect({
@@ -191,7 +191,7 @@ router.redirect({
 
 ### `router.alias` <sup>置き換え</sup>
 
-[ルート定義におけるオプション](http://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
+[ルート定義におけるオプション](https://router.vuejs.org/ja/essentials/redirect-and-alias.html) として記述するようになりました。よって、例えば次のような例は:
 
 ``` js
 router.alias({
@@ -297,7 +297,7 @@ export default {
 
 ### `v-link` <sup>置き換え</sup>
 
-Vue 2.0 におけるコンポーネントの機能の一環として、`v-link` ディレクティブは新しく [`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) に置き換えられました。以下のような形で記述されたリンクは:
+Vue 2.0 におけるコンポーネントの機能の一環として、`v-link` ディレクティブは新しく [`<router-link>` コンポーネント](https://router.vuejs.org/ja/api/router-link.html) に置き換えられました。以下のような形で記述されたリンクは:
 
 ``` html
 <a v-link="'/about'">About</a>
@@ -320,7 +320,7 @@ Vue 2.0 におけるコンポーネントの機能の一環として、`v-link` 
 
 ### `v-link-active` <sup>置き換え</sup>
 
-[`<router-link>` コンポーネント](http://router.vuejs.org/ja/api/router-link.html) でタグの指定が可能なため、 `v-link-active` ディレクティブは廃止されました。よって、例えば次のような例は:
+[`<router-link>` コンポーネント](https://router.vuejs.org/ja/api/router-link.html) でタグの指定が可能なため、 `v-link-active` ディレクティブは廃止されました。よって、例えば次のような例は:
 
 ``` html
 <li v-link-active>
@@ -349,7 +349,7 @@ Vue 2.0 におけるコンポーネントの機能の一環として、`v-link` 
 
 ### `router.go` <sup>変更</sup>
 
-[HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) と一貫性を保つために、`router.go` は[戻る/進むナビゲーション](https://router.vuejs.org/ja/essentials/navigation.html#routergon)のために使用されます。[`router.push`](http://router.vuejs.org/en/essentials/navigation.html#routerpushlocation) は特定のページに移動するために使用されます。
+[HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) と一貫性を保つために、`router.go` は[戻る/進むナビゲーション](https://router.vuejs.org/ja/essentials/navigation.html#routergon)のために使用されます。[`router.push`](https://router.vuejs.org/en/essentials/navigation.html#routerpushlocation) は特定のページに移動するために使用されます。
 
 {% raw %}
 <div class="upgrade-path">
@@ -373,7 +373,7 @@ Google にURL をクロールさせるために Hashbangs を用いる必要は�
 
 ### `history: true` <sup>置き換え</sup>
 
-ルーティングの動作に関するオプションは [`mode` オプション](http://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
+ルーティングの動作に関するオプションは [`mode` オプション](https://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
 
 ``` js
 var router = new VueRouter({
@@ -398,7 +398,7 @@ var router = new VueRouter({
 
 ### `abstract: true` <sup>置き換え</sup>
 
-ルーティングの動作に関するオプションは [`mode` オプション](http://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
+ルーティングの動作に関するオプションは [`mode` オプション](https://router.vuejs.org/ja/api/options.html#mode) にまとめられました。このような記述は:
 
 ``` js
 var router = new VueRouter({
@@ -425,7 +425,7 @@ var router = new VueRouter({
 
 ### `saveScrollPosition` <sup>置き換え</sup>
 
-関数を受け付ける [`scrollBehavior` オプション](http://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの可能性がひらかれましたが、単に以前の挙動を再現したい場合もあるでしょう。これまで、次のように記述していた所は:
+関数を受け付ける [`scrollBehavior` オプション](https://router.vuejs.org/ja/advanced/scroll-behavior.html) に変更されました。スクロールの挙動は、ルートごとに完全にカスタマイズ可能になりました。これによってより多くの可能性がひらかれましたが、単に以前の挙動を再現したい場合もあるでしょう。これまで、次のように記述していた所は:
 
 ``` js
 saveScrollPosition: true
@@ -483,7 +483,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 
 ### `activate` <sup>置き換え</sup>
 
-代わりにコンポーネントにて [`beforeRouteEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
+代わりにコンポーネントにて [`beforeRouteEnter`](https://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
 
 {% raw %}
 <div class="upgrade-path">
@@ -494,7 +494,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 
 ### `canActivate` <sup>置き換え</sup>
 
-代わりに、ルート内で [`beforeEnter`](http://router.vuejs.org/ja/advanced/navigation-guards.html#perroute-guard) を使用してください。
+代わりに、ルート内で [`beforeEnter`](https://router.vuejs.org/ja/advanced/navigation-guards.html#perroute-guard) を使用してください。
 
 {% raw %}
 <div class="upgrade-path">
@@ -516,7 +516,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 
 ### `canDeactivate` <sup>削除</sup>
 
-代わりに、コンポーネント内で [`beforeRouteLeave`](http://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
+代わりに、コンポーネント内で [`beforeRouteLeave`](https://router.vuejs.org/ja/advanced/navigation-guards.html#incomponent-guards) を使用してください。
 
 {% raw %}
 <div class="upgrade-path">

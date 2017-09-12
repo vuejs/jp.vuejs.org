@@ -81,7 +81,7 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 任意に付与できる `scoped` 属性は、要素に一意な属性（`data-v-21e5b78` のようなもの）を付与し、`.list-container:hover` を `.list-container[data-v-21e5b78]:hover` のようなものにコンパイルすることで、この CSS のスコープをあなたのコンポーネントに限定します。
 
-最後に、 Vue の単一ファイルコンポーネントのスタイリングは非常に柔軟です。 [vue-loader](https://github.com/vuejs/vue-loader) 経由で、どのようなプリプロセッサ、ポストプロセッサ、そして [CSS Modules](http://vue-loader.vuejs.org/ja/features/css-modules.html) との深い統合でさえも使うことができます -- すべてが `<style>` 要素内で。
+最後に、 Vue の単一ファイルコンポーネントのスタイリングは非常に柔軟です。 [vue-loader](https://github.com/vuejs/vue-loader) 経由で、どのようなプリプロセッサ、ポストプロセッサ、そして [CSS Modules](https://vue-loader.vuejs.org/ja/features/css-modules.html) との深い統合でさえも使うことができます -- すべてが `<style>` 要素内で。
 
 ### 規模
 
