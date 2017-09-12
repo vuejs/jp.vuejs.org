@@ -1,24 +1,25 @@
 ---
-title: Vue is now on OpenCollective!
+title: Vue は OpenCollective を始めました !
 date: 2017-9-12
 ---
 
-## Vue is now on OpenCollective!
-Today we are happy to announce that we have started to accept financial contributions to the Vue project via [OpenCollective](https://opencollective.com/vuejs).
+## Vue は OpenCollective を始めました !
+本日私たちは Vue プロジェクトへの財政的支援を [OpenCollective](https://opencollective.com/vuejs) を通じて受け入れ始めたことを喜びをもってお知らせします。
 
 ![](https://cdn-images-1.medium.com/max/1600/1*WT87J0dX9D8kyQgxGPx5Vw.png)
 
-## Why OpenCollective?
-The question many will ask is probably “why OpenCollective when you already have a [successful Patreon campaign](https://www.patreon.com/evanyou)?” — there are a few reasons:
-- When I started the Patreon campaign, the primary goal was providing myself with enough income so that I can work on Vue full-time. Today, as the Vue community grows, there are more and more contributions from the community, and OpenCollective’s transparent expense model could help us scale the financial contributions beyond a single developer.
-- OpenCollective is also a platform built with open source projects in mind. It has done a really great job engaging with the open source community, so sponsors also benefit from better community exposure. It’s very encouraging to see projects like [webpack](https://opencollective.com/webpack) thriving on OpenCollective.
-- It also provides nice technical features such GitHub integration, automating backers listing, and invoice generation.
+## なぜ OpenCollective なのですか ?
+多くの質問はおそらく「[成功した Patreon キャンペーン](https://www.patreon.com/evanyou) が既にあるのに、なぜ OpenCollective なのですか ?」でしょう－いくつかの理由があります:
+- 私が Patreon キャンペーンを始めたとき、その主たる目的は私が Vue をフルタイムで作業できるようにするための十分な収入を得ることでした。今日、 Vue のコミュニティは成長し、コミュニティからますます多くの貢献があり、そして OpenCollective の透明な経費モデルは、私たちが一人の開発者を超えて財政的貢献を拡大するのに役立ちます。
+- OpenCollective はオープンソースプロジェクトを念頭に構築されたプラットフォームでもあります。それはオープンソースのコミュニティとの関わりで本当に素晴らしい仕事をしたので、スポンサーはより良いコミュニティの恩恵を受けることもできます。 [webpack](https://opencollective.com/webpack) のようなプロジェクトが OpenCollective で繁栄しているのを見ることは、非常に励みになります。
+- また GitHub 統合、後援者リストの自動化、そして請求書生成などの優れた技術的機能も提供します。
 
-## What About Patreon?
-The primary difference between our [Patreon](https://www.patreon.com/evanyou) and [OpenCollective](https://opencollective.com/vuejs) campaigns are that the funds donated via Patreon goes directly to support my full-time effort on Vue — so it is still critically important. The Patreon campaign will continue to accept donations and all current backer/sponsor perks will remain the same.
+## Patreon についてはどうですか ?
+私たちの [Patreon](https://www.patreon.com/evanyou)  と  [OpenCollective](https://opencollective.com/vuejs) キャンペーンの主な違いは、 Patreon から寄付された資金は私が Vue をフルタイムで取り組めるようサポートするのに直接使われていることです－そしてそれはまだ極めて重要です。
+Patreon キャンペーンは引き続き寄付を受け付けており、すべての後援者/スポンサーの特典は従来通りです。
 
-In comparison, funds donated to OpenCollective will be managed with transparent expenses — this allows us to use these funds to support major undertakings by core contributors, and sponsor community events such as meetups or even conferences.
+一方、 OpenCollective に寄付された資金は透明な経費で管理されます－このことは、これらの資金を使ってコア貢献者による主要な取り組みを支援したり、ミーティングやカンファレンスのようなコミュニティイベントを後援するのを可能にします。
 
-No matter whether you are a freelancer or a company building core products using Vue, no matter which platform you choose, one thing is certain: your contributions will help keep Vue sustainable and make it better in the future.
-- [Support Vue on OpenCollective](https://opencollective.com/vuejs)
-- [Support Vue on Patreon](https://www.patreon.com/evanyou)
+あなたがフリーランスか、 Vue を使用したコアプロダクトを構築している会社かにかかわらず、どちらのプラットフォームを選択してもひとつ確実なことは: あなたの貢献は Vue を持続可能にし、将来的により良いものにするのに役立ちます。
+- [OpenCollective で Vue を支援する](https://opencollective.com/vuejs)
+- [Patreon で Vue を支援する](https://www.patreon.com/evanyou)
