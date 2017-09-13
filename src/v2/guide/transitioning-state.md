@@ -352,6 +352,7 @@ new Vue({
     }
   }
 })
+
 function valueToPoint (value, index, total) {
   var x     = 0
   var y     = -value * 0.9
@@ -362,6 +363,7 @@ function valueToPoint (value, index, total) {
   var ty    = x * sin + y * cos + 100
   return { x: tx, y: ty }
 }
+
 function generatePoints (stats) {
   var total = stats.length
   return stats.map(function (stat, index) {
@@ -549,4 +551,3 @@ Sarah Drasner は以下のデモでタイマーとインタラクティブ駆動
 
 <p data-height="265" data-theme-id="light" data-slug-hash="YZBGNp" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Vue-controlled Wall-E" class="codepen">Pen を見る <a href="https://codepen.io/sdras/pen/YZBGNp/">Vue-controlled Wall-E</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-
