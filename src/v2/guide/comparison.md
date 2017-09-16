@@ -63,11 +63,11 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 #### コンポーネントスコープ CSS（Scoped CSS）
 
-あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション (e.g. [styled-components](https://github.com/styled-components/styled-components), [glamorous](https://github.com/paypal/glamorous), and [emotion](https://github.com/emotion-js/emotion)) 経由でしばし行われます。This introduces a new component-oriented styling paradigm that is different from the normal CSS authoring process. Additionally, although there is support for extracting CSS into a single stylesheet at build time, it is still common that a runtime will need to be included in the bundle for styling to work properly. While you gain acess to the dynamism of JavaScript while constructing your styles, the tradeoff is often increased bundle size and runtime cost.
+あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション (例えば [styled-components](https://github.com/styled-components/styled-components) 、 [glamorous](https://github.com/paypal/glamorous)、 [emotion](https://github.com/emotion-js/emotion)) 経由でしばし行われます。これは通常の CSS 作成プロセスとは異なる新しいコンポーネント志向のスタイルパラダイムを導入します。加えて、これらにはビルド時に単一のスタイルシートに CSS を抽出するためのサポートがありますが、スタイルが正しく機能するためにはランタイムをバンドルに含める必要があることがいまだ一般的です。スタイルを構成する際に Javascript のダイナミズムにアクセスできる一方で、トレードオフは多くの場合バンドルサイズとランタイムのコストが増加することです。
 
-If you are a fan of CSS-in-JSS, many of the popular CSS-in-JS libraries support Vue (e.g. [styled-components-vue](https://github.com/styled-components/vue-styled-components) and [vue-emotion](https://github.com/egoist/vue-emotion)). The main difference between React and Vue here is that the default method of styling in Vue is through more familiar `style` tags in [single-file components](single-file-components.html).
+もしあなたが CSS-in-JS のファンなら、著名な CSS-in-JS ライブラリの多くは Vue をサポートしています (例えば [styled-components-vue](https://github.com/styled-components/vue-styled-components) や [vue-emotion](https://github.com/egoist/vue-emotion))。ここでの React と Vue の主な違いは、 Vue でのスタイリングのデフォルトの方法は [単一ファイルコンポーネント](single-file-components.html) でのより身近な `style` タグによるものだということです。
 
-[Single-file components](single-file-components.html) give you full access to CSS in the same file as the rest of your component code.
+[単一ファイルコンポーネント](single-file-components.html) は コンポーネントコードの残りの部分と同じファイル内の CSS にフルアクセスできます。
 
 ``` html
 <style scoped>
@@ -81,7 +81,7 @@ If you are a fan of CSS-in-JSS, many of the popular CSS-in-JS libraries support 
 
 任意に付与できる `scoped` 属性は、要素に一意な属性（`data-v-21e5b78` のようなもの）を付与し、`.list-container:hover` を `.list-container[data-v-21e5b78]:hover` のようなものにコンパイルすることで、この CSS のスコープをあなたのコンポーネントに限定します。
 
-Lastly, the styling in Vue's single-file component's is very flexible. Through [vue-loader](https://github.com/vuejs/vue-loader), you can use any preprocessor, post-processor, and even deep integration with [CSS Modules](http://vue-loader.vuejs.org/en/features/css-modules.html) -- all within the `<style>` element.
+最後に、 Vue の単一ファイルコンポーネントのスタイリングは非常に柔軟です。 [vue-loader](https://github.com/vuejs/vue-loader) 経由で、どのようなプリプロセッサ、ポストプロセッサ、そして [CSS Modules](http://vue-loader.vuejs.org/en/features/css-modules.html) との深い統合でさえも使うことができます -- すべてが `<style>` 要素中で。
 
 ### 規模
 
