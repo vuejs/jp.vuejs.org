@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-09-08
+updated: 2017-09-16
 type: guide
 order: 11
 ---
@@ -326,6 +326,30 @@ new Vue({
 })
 </script>
 {% endraw %}
+
+もしオブジェクト内のすべてのプロパティを props として渡したいのであれば、 `v-bind` を引数なしで使う（ `v-bind:プロパティ名` の代わりに `v-bind` ）ことができます。例えば、 `todo` オブジェクトを与えるには:
+
+``` js
+todo: {
+  text: 'Learn Vue',
+  isComplete: false
+}
+```
+
+そして:
+
+``` html
+<todo-item v-bind="todo"></todo-item>
+```
+
+これは以下と等価です:
+
+``` html
+<todo-item
+  v-bind:text="todo.text"
+  v-bind:is-complete="todo.isComplete"
+></todo-item>
+```
 
 ### リテラル vs 動的
 
