@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2017-09-08
+updated: 2017-09-16
 type: guide
 order: 801
 ---
@@ -63,11 +63,11 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 #### コンポーネントスコープ CSS（Scoped CSS）
 
-あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション経由でしばし行われます。そこには競合するソリューションが多数あり、それぞれ独自に注意事項があります。
+あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション (例えば [styled-components](https://github.com/styled-components/styled-components) 、 [glamorous](https://github.com/paypal/glamorous)、 [emotion](https://github.com/emotion-js/emotion)) 経由でしばしば行われます。これは通常の CSS 作成プロセスとは異なる新しいコンポーネント志向のスタイルパラダイムを導入します。加えて、これらにはビルド時に単一のスタイルシートに CSS を抽出するためのサポートがありますが、スタイルが正しく機能するためにはランタイムをバンドルに含める必要があることがいまだ一般的です。スタイルを構成する際に Javascript のダイナミズムにアクセスできる一方で、トレードオフは多くの場合バンドルサイズとランタイムのコストが増加することです。
 
-共通の問題は、hover 状態、メディアクエリや、疑似セレクタのようなより複雑な機能はすべて、CSS がすでに行っていることを再発明するために多くの依存を必要とするか、またはそれらは単にサポートされていません。 CSS-in-JS では慎重に最適化されていないと、実行時の性能にはほとんど影響を与えません。最も重要なのは、通常の CSS を作成した経験から逸脱していることです。
+もしあなたが CSS-in-JS のファンなら、著名な CSS-in-JS ライブラリの多くは Vue をサポートしています (例えば [styled-components-vue](https://github.com/styled-components/vue-styled-components) や [vue-emotion](https://github.com/egoist/vue-emotion))。ここでの React と Vue の主な違いは、 Vue でのスタイリングのデフォルトの方法は [単一ファイルコンポーネント](single-file-components.html) でのより身近な `style` タグによるものだということです。
 
-その一方で Vue は、[単一ファイルコンポーネント](single-file-components.html)の中で CSS のすべての機能を使用できるようにしています：
+[単一ファイルコンポーネント](single-file-components.html) は コンポーネントコードの残りの部分と同じファイル内の CSS にフルアクセスできます。
 
 ``` html
 <style scoped>
@@ -81,9 +81,7 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 任意に付与できる `scoped` 属性は、要素に一意な属性（`data-v-21e5b78` のようなもの）を付与し、`.list-container:hover` を `.list-container[data-v-21e5b78]:hover` のようなものにコンパイルすることで、この CSS のスコープをあなたのコンポーネントに限定します。
 
-すでに CSS モジュールに精通している場合、Vue の単一ファイルコンポーネントには[ファーストクラスのサポート](http://vue-loader.vuejs.org/en/features/css-modules.html)もあります。
-
-最後に、ちょうど HTML のように、あなたには任意の好きなプリプロセッサ（または、ポストプロセッサ）を使って CSS を書くという選択肢、それらのエコシステムの既存のライブラリを活用できます。あなたがビルドサイズやアプリケーションの複雑さの増加を引き起こす特殊なライブラリをインポートするのではなく、ビルド時に色の操作を行うようなデザイン中心の運用を行う事ができるようにしています。
+最後に、 Vue の単一ファイルコンポーネントのスタイリングは非常に柔軟です。 [vue-loader](https://github.com/vuejs/vue-loader) 経由で、どのようなプリプロセッサ、ポストプロセッサ、そして [CSS Modules](http://vue-loader.vuejs.org/ja/features/css-modules.html) との深い統合でさえも使うことができます -- すべてが `<style>` 要素内で。
 
 ### 規模
 
