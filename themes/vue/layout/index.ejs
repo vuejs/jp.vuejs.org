@@ -33,8 +33,7 @@
 
     <div class="point">
       <h2>融通が効く</h2>
-      <p>シンプルで、どんなスケールのアプリケーションでも作成できる、<br>
-      徐々に採用可能なスタックを備えた最小のコアを持っています。</p>
+      <p>ライブラリと完全な機能を備えたフレームワークの間で拡張できる徐々に採用可能なエコシステム</p>
     </div>
 
     <div class="point">
@@ -51,10 +50,7 @@
 
 <div id="sponsors">
   <div class="inner">
-    <h3>PROUDLY SPONSORED BY</h3>
     <%- partial('partials/sponsors') %>
-    <br>
-    <a class="become-sponsor button white" href="<%- url_for("/support-vuejs/") %>">Vue.js へ支援する</a>
   </div>
 </div>
 
@@ -67,14 +63,35 @@
 </div>
 
 <script>
-var topScrolled = false
-window.addEventListener('scroll', function () {
-  if (window.pageYOffset > 165 && !topScrolled) {
-    topScrolled = true
-    document.getElementById('mobile-bar').classList.remove('top')
-  } else if (window.pageYOffset <= 165 && topScrolled) {
-    topScrolled = false
-    document.getElementById('mobile-bar').classList.add('top')
-  }
-})
+(function () {
+  var topScrolled = false
+  var sponsors = document.getElementById('sponsors')
+  var sponsorTop = sponsors.offsetTop
+  var sponsorActive = false
+
+  window.addEventListener('resize', function () {
+    sponsorTop = sponsors.offsetTop
+  })
+
+  window.addEventListener('scroll', function () {
+    if (window.pageYOffset > 165 && !topScrolled) {
+      topScrolled = true
+      document.getElementById('mobile-bar').classList.remove('top')
+    } else if (window.pageYOffset <= 165 && topScrolled) {
+      topScrolled = false
+      document.getElementById('mobile-bar').classList.add('top')
+    }
+    if (window.pageYOffset > sponsorTop - 100) {
+      if (!sponsorActive) {
+        sponsorActive = true
+        sponsors.classList.add('active')
+      }
+    } else {
+      if (sponsorActive) {
+        sponsorActive = false
+        sponsors.classList.remove('active')
+      }
+    }
+  })
+})()
 </script>
