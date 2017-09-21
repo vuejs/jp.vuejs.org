@@ -219,8 +219,8 @@ new Vue({
 
 Vue では、親子のコンポーネントの関係は、**props down, events up** というように要約することができます。親は、 **プロパティ**を経由して、データを子に伝え、子は**イベント**を経由して、親にメッセージを送ります。以下でどのように動くか見てみましょう。
 
-<p style="text-align: center">
-  <img style="width:300px" src="/images/props-events.png" alt="props down, events up">
+<p style="text-align: center;">
+  <img style="width: 300px;" src="/images/props-events.png" alt="props down, events up">
 </p>
 
 ## プロパティ

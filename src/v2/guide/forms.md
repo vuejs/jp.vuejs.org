@@ -39,7 +39,7 @@ new Vue({
 
 ``` html
 <span>Multiline message is:</span>
-<p style="white-space: pre-line">{{ message }}</p>
+<p style="white-space: pre-line;">{{ message }}</p>
 <br>
 <textarea v-model="message" placeholder="add multiple lines"></textarea>
 ```
@@ -47,7 +47,7 @@ new Vue({
 {% raw %}
 <div id="example-textarea" class="demo">
   <span>Multiline message is:</span>
-  <p style="white-space: pre-line">{{ message }}</p>
+  <p style="white-space: pre-line;">{{ message }}</p>
   <br>
   <textarea v-model="message" placeholder="add multiple lines"></textarea>
 </div>
@@ -222,7 +222,7 @@ new Vue({
 ```
 {% raw %}
 <div id="example-6" class="demo">
-  <select v-model="selected" multiple style="width: 50px">
+  <select v-model="selected" multiple style="width: 50px;">
     <option>A</option>
     <option>B</option>
     <option>C</option>
