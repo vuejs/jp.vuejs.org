@@ -100,7 +100,7 @@ new Vue({
   <label for="mike">Mike</label>
   <br>
   <span>Checked names: {{ checkedNames }}</span>
-<div>
+</div>
 ```
 
 ``` js
