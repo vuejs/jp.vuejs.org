@@ -1,6 +1,6 @@
 ---
 title: フォーム入力バインディング
-updated: 2017-09-03
+updated: 2017-09-22
 type: guide
 order: 10
 ---

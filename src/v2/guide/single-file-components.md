@@ -1,6 +1,6 @@
 ---
 title: 単一ファイルコンポーネント
-updated: 2017-09-03
+updated: 2017-09-22
 type: guide
 order: 402
 ---
