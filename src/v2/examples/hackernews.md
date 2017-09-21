@@ -1,6 +1,6 @@
 ---
 title: HackerNews クローン
-updated: 2017-06-26 00:00:00
+updated: 2017-09-22
 type: examples
 order: 12
 ---
@@ -8,10 +8,10 @@ order: 12
 > これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、Vue 2.0 + vue-router + vuex 、そしてサーバサイドレンダリングが使用されています。
 
 {% raw %}
-<div style="max-width:600px">
+<div style="max-width: 600px;">
   <a href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">
-    <img style="width:100%" src="/images/hn.png">
- </a>
+    <img style="width: 100%;" src="/images/hn.png">
+  </a>
 </div>
 {% endraw %}
  
