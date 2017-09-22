@@ -1,6 +1,6 @@
 ---
 title: Vue Router 0.7.x からの移行
-updated: 2017-09-08
+updated: 2017-09-23
 type: guide
 order: 702
 ---

@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2017-08-21
+updated: 2017-09-23
 type: guide
 order: 2
 ---
