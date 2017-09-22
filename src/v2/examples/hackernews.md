@@ -5,7 +5,7 @@ type: examples
 order: 12
 ---
 
-> これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、Vue 2.0 + vue-router + vuex 、そしてサーバサイドレンダリングが使用されています。
+> これは Hackernews のオフィシャル Firebase API に基づいた Hackernews クローンで、Vue 2.0 + Vue Router + Vuex 、そしてサーバサイドレンダリングが使用されています。
 
 {% raw %}
 <div style="max-width: 600px;">
@@ -23,7 +23,7 @@ order: 12
 
 ## 機能
 - サーバサイドレンダリング
-  - Vue + vue-router + vuex と一緒に使用
+  - Vue + Vue Router + Vuex と一緒に使用
   - サーバサイドのデータのプリフェッチ
   - クライアントサイドの状態 & DOM ハイドレーション
 - 単一ファイル Vue コンポーネント
