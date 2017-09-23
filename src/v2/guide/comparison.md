@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2017-09-16
+updated: 2017-09-23
 type: guide
 order: 801
 ---
@@ -81,7 +81,7 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 任意に付与できる `scoped` 属性は、要素に一意な属性（`data-v-21e5b78` のようなもの）を付与し、`.list-container:hover` を `.list-container[data-v-21e5b78]:hover` のようなものにコンパイルすることで、この CSS のスコープをあなたのコンポーネントに限定します。
 
-最後に、 Vue の単一ファイルコンポーネントのスタイリングは非常に柔軟です。 [vue-loader](https://github.com/vuejs/vue-loader) 経由で、どのようなプリプロセッサ、ポストプロセッサ、そして [CSS Modules](http://vue-loader.vuejs.org/ja/features/css-modules.html) との深い統合でさえも使うことができます -- すべてが `<style>` 要素内で。
+最後に、 Vue の単一ファイルコンポーネントのスタイリングは非常に柔軟です。 [vue-loader](https://github.com/vuejs/vue-loader) 経由で、どのようなプリプロセッサ、ポストプロセッサ、そして [CSS Modules](https://vue-loader.vuejs.org/ja/features/css-modules.html) との深い統合でさえも使うことができます -- すべてが `<style>` 要素内で。
 
 ### 規模
 
@@ -171,7 +171,7 @@ Angular は本当に AngularJS から完全に異なるフレームワークな�
 
 性能面では、2 つのフレームワークは非常に速く、判決するための現実世界のユースケースでの十分なデータはありません。しかしながら、もしあなたがいくつかの数字を見ることを決意したのなら、この[サードパーティのベンチマーク](http://stefankrause.net/js-frameworks-benchmark4/webdriver-ts/table.html)から Vue 2.0 は Angular よりも優位なようです。
 
-Angular の最近のバージョンは、AOT コンパイルと tree-shaking によって、サイズを大幅に縮小することができました。しかしながら、Vuex + vue-router (〜 30 kb gzipped) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (〜 130 kb gzipped) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
+Angular の最近のバージョンは、AOT コンパイルと tree-shaking によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (〜 30 kb gzipped) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (〜 130 kb gzipped) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
 
 ### 柔軟性
 

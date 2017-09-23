@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2017-09-03
+updated: 2017-09-23
 type: guide
 order: 1
 vue_version: 2.4.1
@@ -89,7 +89,7 @@ $ npm run dev
 
 - **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図しています。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
-- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](http://rollupjs.org/)のような最新のバンドラでの利用を意図しています。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
+- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](https://rollupjs.org/)のような最新のバンドラでの利用を意図しています。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
 
 ### ランタイム + コンパイラとランタイム限定の違い
 
