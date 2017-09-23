@@ -15,9 +15,8 @@ date: 2017-9-23
 - コンポーネントの props オプションに基づく `this` の props の型推論。
 - 最も重要なのは、<b>これらの改善点が素の JavaScript ユーザーにとっても有益だということです！</b> VSCode を素晴らしい [Vetur](https://github.com/vuejs/vetur) 拡張機能とともに使用している場合、 Vue コンポーネントで素の JavaScript を使用すると、自動補完候補が大幅に改善され、ヒントも入力されるようになります！これは [`vue-language-server`](https://www.npmjs.com/package/vue-language-server) のおかげで、 Vue コンポーネントの分析を担当する内部パッケージが、 TypeScript コンパイラを利用してコードに関する詳細情報を抽出できるからです。さらに、言語サーバプロトコルをサポートするどんなエディタも同様の機能を提供するために　[`vue-language-server`](https://www.npmjs.com/package/vue-language-server) を活用することができます。
 
-![VSCode + Vetur + New Type Declarations in Action](https://cdn-images-1.medium.com/max/2000/1*ftKUpzYGIzn1eS87JcBS8Q.gif)
+![Action 中の VSCode + Vetur + 新しい型宣言](https://cdn-images-1.medium.com/max/2000/1*ftKUpzYGIzn1eS87JcBS8Q.gif)
 <figcaption style="font-size:14px;text-align:center;">Action 中の VSCode + Vetur + 新しい型宣言</figcaption>
-
 
 興味のある方は、[この実験プロジェクト](https://github.com/octref/veturpack/tree/new-types) を clone して（ `new-types` ブランチをチェックアウトしてください） VSCode + Vetur で開くことで今すぐ試すことができます！
 
