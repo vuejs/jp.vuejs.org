@@ -8,7 +8,7 @@ date: 2017-9-23
 ## 型宣言の改善
 私たちは Vue 2.0 のリリース以来、よりよい TypeScript 統合を求められています。リリース以来、私たちはほとんどのコアライブラリ (`vue`, `vue-router`, `vuex`) のための公式の Typescript の型宣言を含めました。しかし、箱から出したままの Vue API を使用するとき、現在の統合は幾分不足しています。たとえば、 TypeScript は Vue が使用するデフォルトのオブジェクトベースの API 内部の `this` の型を簡単には推論できません。 Vue のコードを TypeScript でうまく操るためには、 [`vue-class-component`](https://github.com/vuejs/vue-class-component) デコレータを使用する必要があり、これによってクラスベースの構文を使用して Vue コンポーネントを作成することができます。
 
-クラスベースの API を好むユーザーの場合はこれで十分でしょうが、タイプ推論のために異なる API を使用しなければならないというのはちょっと残念です。このことはまた既存の Vue コードベースを TypeScript に移行することをより困難にしています。
+クラスベースの API を好むユーザーの場合はこれで十分でしょうが、型推論のために異なる API を使用しなければならないというのはちょっと残念です。このことはまた既存の Vue コードベースを TypeScript に移行することをより困難にしています。
 
 今年初め、 TypeScript は多くの[新機能](https://github.com/Microsoft/TypeScript/pull/14141)を導入し、 Vue の型宣言を改善して TypeScript がオブジェクトリテラルベースの API をよりよく理解できるようにしました。 TypeScript チームの [Daniel Rosenwasser](https://github.com/DanielRosenwasser) は[野心的な PR](https://github.com/vuejs/vue/pull/5887)（今は[ここ](https://github.com/vuejs/vue/pull/6391)でコアチームメンバーの [HerringtonDarkholme](https://github.com/HerringtonDarkholme) によってメンテされています）を開始しました。いったんマージされると、以下が提供されます：
 - デフォルトの Vue API を使用する際の `this` の適切な型推論。これは単一ファイルのコンポーネントの中でも動作します！
