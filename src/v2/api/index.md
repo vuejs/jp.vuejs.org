@@ -1,6 +1,6 @@
 ---
 type: api
-updated: 2017-09-15
+updated: 2017-09-23
 ---
 
 ## グローバル設定
@@ -1836,7 +1836,7 @@ updated: 2017-09-15
 - **引数:** `attrOrProp (任意)`
 
 - **修飾子:**
-  - `.prop` - 属性の代わりに DOM プロパティとして束縛します([違いは何？](http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))。もしタグがコンポーネントの場合、`.prop`  はコンポーネントの `$el` にプロパティを設定します。
+  - `.prop` - 属性の代わりに DOM プロパティとして束縛します([違いは何？](https://stackoverflow.com/questions/6003819/properties-and-attributes-in-html#answer-6004028))。もしタグがコンポーネントの場合、`.prop`  はコンポーネントの `$el` にプロパティを設定します。
   - `.camel` - (2.1.0 以降) ケバブケースの属性名をキャメルケースに変換します。
   - `.sync` - (2.3.0 以降) 束縛された値を更新するための、 `v-on` ハンドラに展開する糖衣構文。
 
