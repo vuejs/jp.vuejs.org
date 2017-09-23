@@ -1,6 +1,6 @@
 ---
 title: 状態のトランジション
-updated: 2017-09-03
+updated: 2017-09-23
 type: guide
 order: 202
 ---
