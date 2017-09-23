@@ -1,42 +1,43 @@
 ---
-title: Upcoming TypeScript Changes in Vue 2.5
-date: 2017-9-22
+title: Vue 2.5 での来る TypeScript の変更
+date: 2017-9-23
 ---
 
-https://medium.com/the-vue-point/upcoming-typescript-changes-in-vue-2-5-e9bd7e2ecf08
+このブログは[こちら](https://medium.com/the-vue-point/upcoming-typescript-changes-in-vue-2-5-e9bd7e2ecf08)の翻訳ブログです。
 
-## Typing Improvements
-We have been receiving requests for better TypeScript integration ever since the release of Vue 2.0. Since the release, we have included official TypeScript type declarations for most of the core libraries (`vue`, `vue-router`, `vuex`). However, the current integration is somewhat lacking when using the out-of-the-box Vue API. For example, TypeScript cannot easily infer the type of `this` inside the default object-based API that Vue uses. To make our Vue code play nicely with TypeScript, we have to use the [`vue-class-component`](https://github.com/vuejs/vue-class-component) decorator, which allows us to author Vue components using a class-based syntax.
+## 型宣言の改善
+私たちは Vue 2.0 のリリース以来、よりよい TypeScript 統合を求められています。リリース以来、私たちはほとんどのコアライブラリ (`vue`, `vue-router`, `vuex`) のための公式の Typescript の型宣言を含めました。しかし、箱から出したままの Vue API を使用するとき、現在の統合は幾分不足しています。たとえば、 TypeScript は Vue が使用するデフォルトのオブジェクトベースの API 内部の `this` の型を簡単には推論できません。 Vue のコードを TypeScript でうまく操るためには、 [`vue-class-component`](https://github.com/vuejs/vue-class-component) デコレータを使用する必要があり、これによってクラスベースの構文を使用して Vue コンポーネントを作成することができます。
 
-For users that preferred a class-based API, this was probably good enough, but it was a bit unfortunate that users had to use a different API just for the sake of type inference. This also made migrating existing Vue codebases to TypeScript more challenging.
+クラスベースの API を好むユーザーの場合はこれで十分でしょうが、タイプ推論のために異なる API を使用しなければならないというのはちょっと残念です。このことはまた既存の Vue コードベースを TypeScript に移行することをより困難にしています。
 
-Earlier this year, TypeScript introduced a number of [new features](https://github.com/Microsoft/TypeScript/pull/14141) that makes it possible to improve Vue’s type declarations so that TypeScript can better understand the object literal based API. [Daniel Rosenwasser](https://github.com/DanielRosenwasser) from the TypeScript team started an [ambitious PR](https://github.com/vuejs/vue/pull/5887) (now being maintained [here](https://github.com/vuejs/vue/pull/6391) by core team member [HerringtonDarkholme](https://github.com/HerringtonDarkholme)) which, once merged, will provide:
-- Proper type inference for `this` when using the default Vue API. It also works inside single-file components!
-- Type inference for props on `this` based on the component’s `props` option.
-- Most importantly, <b>these improvements also benefit plain JavaScript users!</b> If you are using VSCode with the awesome [Vetur](https://github.com/vuejs/vetur) extension, you will get greatly improved autocompletion suggestions and even type hints when using plain JavaScript in Vue components! This is because [`vue-language-server`](https://www.npmjs.com/package/vue-language-server), the internal package that is responsible for analyzing Vue components, can take advantage of the TypeScript compiler to extract more information about your code. Moreover, any editor that supports the language server protocol can leverage [`vue-language-server`](https://www.npmjs.com/package/vue-language-server) to provide similar features.
+今年初め、 TypeScript は多くの[新機能](https://github.com/Microsoft/TypeScript/pull/14141)を導入し、 Vue の型宣言を改善して TypeScript がオブジェクトリテラルベースの API をよりよく理解できるようにしました。 TypeScript チームの [Daniel Rosenwasser](https://github.com/DanielRosenwasser) は[野心的な PR](https://github.com/vuejs/vue/pull/5887)（今は[ここ](https://github.com/vuejs/vue/pull/6391)でコアチームメンバーの [HerringtonDarkholme](https://github.com/HerringtonDarkholme) によってメンテされています）を開始しました。いったんマージされると、以下が提供されます：
+- デフォルトの Vue API を使用する際の `this` の適切な型推論。これは単一ファイルのコンポーネントの中でも動作します！
+- コンポーネントの props オプションに基づく `this` の props の型推論。
+- 最も重要なのは、<b>これらの改善点が素の JavaScript ユーザーにとっても有益だということです！</b> VSCode を素晴らしい [Vetur](https://github.com/vuejs/vetur) 拡張機能とともに使用している場合、 Vue コンポーネントで素の JavaScript を使用すると、自動補完候補が大幅に改善され、ヒントも入力されるようになります！これは [`vue-language-server`](https://www.npmjs.com/package/vue-language-server) のおかげで、 Vue コンポーネントの分析を担当する内部パッケージが、 TypeScript コンパイラを利用してコードに関する詳細情報を抽出できるからです。さらに、言語サーバプロトコルをサポートするどんなエディタも同様の機能を提供するため　[`vue-language-server`](https://www.npmjs.com/package/vue-language-server) を活用することができます。
 
 ![VSCode + Vetur + New Type Declarations in Action](https://cdn-images-1.medium.com/max/2000/1*ftKUpzYGIzn1eS87JcBS8Q.gif)
-<figcaption style="font-size:14px;text-align:center;">VSCode + Vetur + New Type Declarations in Action</figcaption>
+<figcaption style="font-size:14px;text-align:center;">Action 中の VSCode + Vetur + 新しい型宣言</figcaption>
 
 
-For those who are curious, you can try it out today by cloning [this playground project](https://github.com/octref/veturpack/tree/new-types) (make sure to checkout the `new-types` branch) and opening it with VSCode + Vetur!
+興味のある方は、[この実験プロジェクト](https://github.com/octref/veturpack/tree/new-types) を clone して（ `new-types` ブランチをチェックアウトしてください） VSCode + Vetur で開くことで今すぐ試すことができます！
 
-## Potential Required Actions for TypeScript Users
-The typing upgrade will be shipped in Vue 2.5, currently planned to be released around early October. We are releasing it in a minor release because the JavaScript public API is not getting any breaking changes, however, the upgrade does potentially require some actions for existing TypeScript+Vue users. This is why we are announcing the changes now so that you can have enough time to plan for the upgrade.
-- The new typings require a minimum of TypeScript 2.4, and it’s recommended to upgrade to the latest version of TypeScript along with Vue 2.5.
-- Previously, we already recommend using ES-style imports (`import Vue from ‘vue’`) everywhere with `“allowSyntheticDefaultImports”: true` in `tsconfig.json`. The new typings will officially move to ES-style import/export syntax, so that config is no longer necessary, and users are required to use ES-style imports in all cases.
-- To accompany the export syntax change, the following core libraries that have typings relying on Vue core typing will receive new major versions, and should be upgraded along with Vue core 2.5: `vuex`, `vue-router`, `vuex-router-sync`, `vue-class-component`.
-- When performing custom module augmentations, the user should now use `interface VueConstructor` instead of `namespace Vue`. ([example diff](https://github.com/vuejs/vue/pull/6391/files#diff-1c3e3e4cf681d5fde88941717da1058aL11))
-- ThisType of `computed`, `watch`, `render` and lifecycle hooks will need manual type annotations if you annotate your component options with `as ComponentOptions<Something>`
+## TypeScript ユーザーが潜在的に求められる対応
+型宣言のアップグレードは今のところ 10 月上旬にリリースされる予定の Vue 2.5で出荷される予定です。 JavaScript の公開 API に破壊的な変更がないためマイナーリリースでリリースしていきますが、このアップグレードは既存の TypeScript + Vue ユーザーにいくつかの対応を潜在的に要求します。これが今の段階で変更を発表する理由で、アップグレードの計画に十分な時間を確保できるようにするためです。
+- 新しいタイピングには最低でも TypeScript 2.4 が必要です。 Vue 2.5 とともに TypeScript の最新バージョンにアップグレードすることをお勧めします。
+- 以前は、`tsconfig.json` に `“allowSyntheticDefaultImports”: true` を指定することでどこでも ES 形式のインポート(`import Vue from ‘vue’`)を使用することをお勧めしていました。新しいタイピングは正式に ES スタイルの import/export 構文に移行するため、 はもはや不要となり全てのケースでは ES スタイルのインポートを使用する必要があります。
+- export 構文の変更を伴うため、 Vue のコアタイピングに頼るタイピングを持つ次のコアライブラリ群は、新しいメジャーバージョンを受け取り、Vue コア 2.5と一緒にアップグレードする必要があります：`vuex`, `vue-router`, `vuex-router-sync`, `vue-class-component`。
+- カスタムモジュール拡張を行うとき、ユーザーは今や `namespace Vue` の代わりに `interface VueConstructor` を使用する必要があります。([diff の例](https://github.com/vuejs/vue/pull/6391/files#diff-1c3e3e4cf681d5fde88941717da1058aL11))
+- `as ComponentOptions<Something>`でコンポーネントオプションに注釈を付ける場合、`computed`, `watch`, `render` の ThisType とライフサイクルのフックは手作業で型の注釈を付ける必要があります。
 
-We have tried our best to minimize required upgrading efforts and these type improvements are compatible with the class-based API used in `vue-class-component`. For most users, simply upgrading the dependencies and switching to ES-style imports should be all it takes. In the meanwhile, we also recommend locking your Vue version to `2.4.x` until you are ready to upgrade.
+私たちは必要なアップグレード作業を最小限に抑えるためベストを尽くし、これらの型宣言の改善は `vue-class-component` で使用されるクラスベースの API と互換性があります。ほとんどのユーザーは、単に依存関係を更新して ES スタイルのインポートに切り替えるだけです。その間、貴方がアップグレードする準備が整うまで Vue のバージョンを 2.4.x に固定することも私たちはお勧めします。
 
-## On the Roadmap: TypeScript Support in vue-cli
-After 2.5, we are planning to introduce official support for TypeScript in the next version of vue-cli in order to make it easier for TS+Vue users to kick off new projects. Stay tuned!
+## ロードマップ： vue-cli での TypeScript のサポート
+2.5 以降は、私たちは TS + Vue ユーザーが新しいプロジェクトを簡単に開始できるようにするため vue-cli の次のバージョンで TypeScript の公式サポートを導入する予定です。ご期待ください！
 
-## For non-TypeScript users
-These changes do not affect non-TypeScript Vue users in any negative way; per semver, 2.5 will be fully backwards compatible in terms of public JavaScript API, and the TypeScript CLI integration will be completely opt-in. But as mentioned above, you will likely notice better auto-completion suggestions if you are using a [`vue-language-server`](https://github.com/vuejs/vetur/tree/master/server) powered editor extension.
+## 非 TypeScript ユーザーの場合
+これらの変更は非 TypeScript の Vue ユーザーに悪影響を及ぼすことはありません；セマンティックバージョンにより、 2.5 は公開 JavaScript API に関しては完全に後方互換性があり、 TypeScript CLI 統合は完全にオプトインになります。しかし上記で述べたように、 [`vue-language-server`](https://github.com/vuejs/vetur/tree/master/server) でのエディタ拡張機能を使用している場合はオートコンプリート提案が気に入るはずです。
 
 —
 
-Thanks to [Daniel Rosenwasser](https://github.com/danielrosenwasser), [HerringtonDarkholme](https://github.com/HerringtonDarkholme), [Katashin](https://github.com/ktsn) and [Pine Wu](https://github.com/octref) for working on these features and reviewing this post.
+[Daniel Rosenwasser](https://github.com/danielrosenwasser)、 [HerringtonDarkholme](https://github.com/HerringtonDarkholme)、 [Katashin](https://github.com/ktsn) 、 [Pine Wu](https://github.com/octref)
+の方々にはこれらの機能への取り組みとこの記事（訳注：原文のほう）のレビューについて感謝します。
