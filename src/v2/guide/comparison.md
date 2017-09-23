@@ -171,7 +171,7 @@ Angular は本当に AngularJS から完全に異なるフレームワークな�
 
 性能面では、2 つのフレームワークは非常に速く、判決するための現実世界のユースケースでの十分なデータはありません。しかしながら、もしあなたがいくつかの数字を見ることを決意したのなら、この[サードパーティのベンチマーク](http://stefankrause.net/js-frameworks-benchmark4/webdriver-ts/table.html)から Vue 2.0 は Angular よりも優位なようです。
 
-Angular の最近のバージョンは、AOT コンパイルと tree-shaking によって、サイズを大幅に縮小することができました。しかしながら、Vuex + vue-router (〜 30 kb gzipped) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (〜 130 kb gzipped) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
+Angular の最近のバージョンは、AOT コンパイルと tree-shaking によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (〜 30 kb gzipped) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (〜 130 kb gzipped) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
 
 ### 柔軟性
 
