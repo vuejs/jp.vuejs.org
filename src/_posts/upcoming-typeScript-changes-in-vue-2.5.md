@@ -13,7 +13,7 @@ date: 2017-9-23
 今年初め、 TypeScript は多くの[新機能](https://github.com/Microsoft/TypeScript/pull/14141)を導入し、 Vue の型宣言を改善して TypeScript がオブジェクトリテラルベースの API をよりよく理解できるようにしました。 TypeScript チームの [Daniel Rosenwasser](https://github.com/DanielRosenwasser) は[野心的な PR](https://github.com/vuejs/vue/pull/5887)（今は[ここ](https://github.com/vuejs/vue/pull/6391)でコアチームメンバーの [HerringtonDarkholme](https://github.com/HerringtonDarkholme) によってメンテされています）を開始しました。いったんマージされると、以下が提供されます：
 - デフォルトの Vue API を使用する際の `this` の適切な型推論。これは単一ファイルのコンポーネントの中でも動作します！
 - コンポーネントの props オプションに基づく `this` の props の型推論。
-- 最も重要なのは、<b>これらの改善点が素の JavaScript ユーザーにとっても有益だということです！</b> VSCode を素晴らしい [Vetur](https://github.com/vuejs/vetur) 拡張機能とともに使用している場合、 Vue コンポーネントで素の JavaScript を使用すると、自動補完候補が大幅に改善され、ヒントも入力されるようになります！これは [`vue-language-server`](https://www.npmjs.com/package/vue-language-server) のおかげで、 Vue コンポーネントの分析を担当する内部パッケージが、 TypeScript コンパイラを利用してコードに関する詳細情報を抽出できるからです。さらに、言語サーバプロトコルをサポートするどんなエディタも同様の機能を提供するため　[`vue-language-server`](https://www.npmjs.com/package/vue-language-server) を活用することができます。
+- 最も重要なのは、<b>これらの改善点が素の JavaScript ユーザーにとっても有益だということです！</b> VSCode を素晴らしい [Vetur](https://github.com/vuejs/vetur) 拡張機能とともに使用している場合、 Vue コンポーネントで素の JavaScript を使用すると、自動補完候補が大幅に改善され、ヒントも入力されるようになります！これは [`vue-language-server`](https://www.npmjs.com/package/vue-language-server) のおかげで、 Vue コンポーネントの分析を担当する内部パッケージが、 TypeScript コンパイラを利用してコードに関する詳細情報を抽出できるからです。さらに、言語サーバプロトコルをサポートするどんなエディタも同様の機能を提供するために　[`vue-language-server`](https://www.npmjs.com/package/vue-language-server) を活用することができます。
 
 ![VSCode + Vetur + New Type Declarations in Action](https://cdn-images-1.medium.com/max/2000/1*ftKUpzYGIzn1eS87JcBS8Q.gif)
 <figcaption style="font-size:14px;text-align:center;">Action 中の VSCode + Vetur + 新しい型宣言</figcaption>
@@ -24,8 +24,8 @@ date: 2017-9-23
 ## TypeScript ユーザーが潜在的に求められる対応
 型宣言のアップグレードは今のところ 10 月上旬にリリースされる予定の Vue 2.5で出荷される予定です。 JavaScript の公開 API に破壊的な変更がないためマイナーリリースでリリースしていきますが、このアップグレードは既存の TypeScript + Vue ユーザーにいくつかの対応を潜在的に要求します。これが今の段階で変更を発表する理由で、アップグレードの計画に十分な時間を確保できるようにするためです。
 - 新しいタイピングには最低でも TypeScript 2.4 が必要です。 Vue 2.5 とともに TypeScript の最新バージョンにアップグレードすることをお勧めします。
-- 以前は、`tsconfig.json` に `“allowSyntheticDefaultImports”: true` を指定することでどこでも ES 形式のインポート(`import Vue from ‘vue’`)を使用することをお勧めしていました。新しいタイピングは正式に ES スタイルの import/export 構文に移行するため、 はもはや不要となり全てのケースでは ES スタイルのインポートを使用する必要があります。
-- export 構文の変更を伴うため、 Vue のコアタイピングに頼るタイピングを持つ次のコアライブラリ群は、新しいメジャーバージョンを受け取り、Vue コア 2.5と一緒にアップグレードする必要があります：`vuex`, `vue-router`, `vuex-router-sync`, `vue-class-component`。
+- 以前は、`tsconfig.json` に `“allowSyntheticDefaultImports”: true` を指定することでどこでも ES 形式のインポート(`import Vue from ‘vue’`)を使用することをお勧めしていました。新しいタイピングは正式に ES スタイルの import/export 構文に移行するため、 config はもはや不要となり全てのケースで ES スタイルのインポートを使用する必要があります。
+- export 構文の変更を伴うため、 Vue のコアタイピングに頼るタイピングを持つ次のコアライブラリ群は、新しいメジャーバージョンを受け取り、Vue コア 2.5 と一緒にアップグレードする必要があります：`vuex`, `vue-router`, `vuex-router-sync`, `vue-class-component`。
 - カスタムモジュール拡張を行うとき、ユーザーは今や `namespace Vue` の代わりに `interface VueConstructor` を使用する必要があります。([diff の例](https://github.com/vuejs/vue/pull/6391/files#diff-1c3e3e4cf681d5fde88941717da1058aL11))
 - `as ComponentOptions<Something>`でコンポーネントオプションに注釈を付ける場合、`computed`, `watch`, `render` の ThisType とライフサイクルのフックは手作業で型の注釈を付ける必要があります。
 
