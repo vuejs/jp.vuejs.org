@@ -100,7 +100,7 @@ var app2 = new Vue({
 
 ``` html
 <div id="app-3">
-  <p v-if="seen">Now you see me</p>
+  <span v-if="seen">Now you see me</span>
 </div>
 ```
 
