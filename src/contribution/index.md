@@ -91,7 +91,7 @@ Retiring vue-resource | vue-resource の引退について | [chi-bd](https://gi
 Vue 2.0 is Here! | Vue.js 2.0 が来ました！ | [chi-bd](https://github.com/chi-bd)
 Vue in 2016 | 2016年の Vue | [chi-bd](https://github.com/chi-bd)
 Vue is now on OpenCollective! | Vue は OpenCollective を始めました！ | [chi-bd](https://github.com/chi-bd)
-Upcoming TypeScript Changes in Vue 2.5 | Vue 2.5 での来る TypeScript の変更 | [chi-bd](https://github.com/chi-bd)
+Upcoming TypeScript Changes in Vue 2.5 | やって来る Vue 2.5 での TypeScript の変更 | [chi-bd](https://github.com/chi-bd)
 
 ## Vue.js コアチームからの謝辞！
 日本語公式サイトの翻訳、レビュー、修正などに貢献された全ての方々に大変感謝いたします！
