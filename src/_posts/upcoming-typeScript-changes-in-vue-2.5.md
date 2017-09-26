@@ -18,7 +18,7 @@ date: 2017-9-23
 ![動作中の VSCode + Vetur + 新しい型定義](https://cdn-images-1.medium.com/max/2000/1*ftKUpzYGIzn1eS87JcBS8Q.gif)
 <figcaption style="font-size:14px;text-align:center;">動作中の VSCode + Vetur + 新しい型定義</figcaption>
 
-興味のある方は、[この遊び場プロジェクト](https://github.com/octref/veturpack/tree/new-types) を clone して（ `new-types` ブランチをチェックアウトしてください） VSCode + Vetur で開くことで今すぐ試すことができます！
+興味のある方は、[この遊び場プロジェクト](https://github.com/octref/veturpack/tree/new-types)を clone して（`new-types` ブランチをチェックアウトしてください）VSCode + Vetur で開くことで今すぐ試すことができます！
 
 ## TypeScript ユーザーが潜在的に求められる対応
 型定義のアップグレードは今のところ 10 月上旬にリリースされる予定の Vue 2.5で出荷される予定です。 JavaScript の公開 API に破壊的な変更がないためマイナーリリースでリリースしていきますが、このアップグレードは既存の TypeScript + Vue ユーザーにいくつかの対応を潜在的に要求します。これが今の段階で変更を発表する理由で、アップグレードの計画に十分な時間を確保できるようにするためです。
