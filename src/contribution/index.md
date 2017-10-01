@@ -1,13 +1,13 @@
 ---
 title: 貢献
-updated: 2017-07-08 00:00:00
+updated: 2017-10-02
 type: contribution
 ---
 
 ## Vue.js 2.0 日本語翻訳プロジェクト
 
 ### Essentials - 基本的な使い方
-ファイル | タイトル | 翻訳担当者
+ファイル | タイトル | 貢献者
 ----- | ------------- | --- 
 installation.md | インストール | [satotakumi](https://github.com/satotakumi)
 index.md | はじめに | [edwardkenfox](https://github.com/edwardkenfox)
@@ -22,7 +22,7 @@ forms.md  | フォーム入力バインディング | [kdnk](https://github.com/
 components.md | コンポーネント | [kdnk](https://github.com/kdnk)
 
 ### Advanced - 高度な使い方
-ファイル | タイトル | 翻訳担当者
+ファイル | タイトル | 貢献者
 ----- | ------------- | --- 
 reactivity.md | リアクティブの探求 | [toshilow](https://github.com/toshilow)
 transitions.md | トランジション効果 | [kitak](https://github.com/kitak)
@@ -40,7 +40,7 @@ ssr.md | サーバサイドレンダリング | [mikakane](https://github.com/mi
 typescript.md | TypeScript のサポート | [kazupon](https://github.com/kazupon)
 
 ### Migration - 移行
-ファイル | タイトル | 翻訳担当者
+ファイル | タイトル | 貢献者
 ----- |  ------------- | ---
 migration.md | Vue 1.x からの移行 | [potato4d](https://github.com/potato4d)
 migration-vue-router.md | Vue Router 0.7.x からの移行 | [mikakane](https://github.com/mikakane) 
@@ -48,24 +48,39 @@ migration-vuex.md | Vuex 0.6.x から 1.0 への移行 | [kazupon](https://githu
 
 ### Meta - その他
 
-ファイル | タイトル | 翻訳担当者
+ファイル | タイトル | 貢献者
 ----- |  ------------- | ---
 comparison.md | 他のフレームワークとの比較 | [ktsn](https://github.com/ktsn)
 join.md | Vue.js コミュニティへ参加しましょう! | [sshono1210](https://github.com/sshono1210)
 team.md | チームに会おう | [chi-bd](https://github.com/chi-bd)
 
 ### API
-翻訳担当者: [kazupon](https://github.com/kazupon)
+ファイル | タイトル | 貢献者
+----- |  ------------- | ---
+index.md | API | [kazupon](https://github.com/kazupon)
 
 ### Examples - 例
-翻訳担当者: [kazupon](https://github.com/kazupon)
+ファイル | タイトル | 貢献者
+----- |  ------------- | ---
+index.md | Markdown エディタ | [kazupon](https://github.com/kazupon)
+commits.md | GitHub コミット | [kazupon](https://github.com/kazupon)
+grid-component.md | グリットコンポーネント | [kazupon](https://github.com/kazupon)
+tree-view.md | ツリー表示 | [kazupon](https://github.com/kazupon)
+svg.md | SVG グラフ | [kazupon](https://github.com/kazupon)
+modal.md | モーダルコンポーネント | [kazupon](https://github.com/kazupon)
+elastic-header.md | 弾力のあるヘッダ | [kazupon](https://github.com/kazupon)
+select2.md | ラッパーコンポーネント | [kazupon](https://github.com/kazupon)
+deepstream.md | deepstreamHubを使用したリアルタイム機能 | [kazupon](https://github.com/kazupon)
+firebase.md | Firebase + バリデーション | [kazupon](https://github.com/kazupon)
+todomvc.md | TodoMVC | [kazupon](https://github.com/kazupon)
+hackernews.md | HackerNews クローン | [kazupon](https://github.com/kazupon)
 
 ## Vue.js サーバサイドレンダリングガイド 翻訳プロジェクト
 
 - [GitHub repo](https://github.com/open-source-translators/vue-ssr-docs)
 - [GitLocalize repo](https://gitlocalize.com/repo/62)
 
-ファイル | タイトル | 翻訳担当者
+ファイル | タイトル | 貢献者
 ----- | ------------- | --- 
 README.md | introduction | [doutori](https://github.com/doutori)
 SUMMARY.md | 目次 | [inouetakuya](https://github.com/inouetakuya)
@@ -85,7 +100,7 @@ api.md | API リファレンス | [hikimon](https://github.com/hikimon)
 
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
-英語タイトル | 翻訳タイトル | 翻訳担当者
+英語タイトル | 翻訳タイトル | 貢献者
 ----- |  ------------- | ---
 Retiring vue-resource | vue-resource の引退について | [chi-bd](https://github.com/chi-bd)
 Vue 2.0 is Here! | Vue.js 2.0 が来ました！ | [chi-bd](https://github.com/chi-bd)
