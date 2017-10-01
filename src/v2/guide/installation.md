@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2017-09-23
+updated: 2017-10-01
 type: guide
 order: 1
 vue_version: 2.4.1
@@ -36,9 +36,9 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ### CDN
 
-推奨: [https://unpkg.com/vue](https://unpkg.com/vue) は、npm に公開されるとすぐに最新バージョンが反映されます。[https://unpkg.com/vue/](https://unpkg.com/vue/) では npm パッケージのソースも確認することができます。
+推奨: [https://cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue) は、npm に公開されるとすぐに最新バージョンが反映されます。[https://cdn.jsdelivr.net/npm/vue/](https://cdn.jsdelivr.net/npm/vue/) では npm パッケージのソースも確認することができます。
 
-[jsDelivr](https://cdn.jsdelivr.net/npm/vue/dist/vue.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js) 上でも利用可能です。(同期に少し時間がかかるため、最新版ではない可能性があります)。
+[unpkg](https://unpkg.com/vue) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js) 上でも利用可能です。(cdnjs は同期に少し時間がかかるため、最新版ではない可能性があります)。
 
 ## NPM
 
@@ -68,7 +68,7 @@ $ npm run dev
 
 ## さまざまなビルドについて
 
-[NPM パッケージの `dist/` ディレクトリ](https://unpkg.com/vue@latest/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
+[NPM パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
 
 | | UMD | CommonJS | ES Module |
 | --- | --- | --- | --- |
@@ -85,7 +85,7 @@ $ npm run dev
 
 - **ランタイム**: Vue インスタンスの作成やレンダリング、仮想 DOM の変更などのためのコードです。基本的にコンパイラを除く全てのものです。
 
-- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用されます。[https://unpkg.com/vue](https://unpkg.com/vue) の Unpkg CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
+- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用されます。[https://cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue) の jsDelivr CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
 
 - **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図しています。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
