@@ -1,8 +1,12 @@
 ---
 type: style-guide
+updated: 2017-10-02
 ---
 
-# Style Guide <sup class="beta">beta</sup>
+# スタイルガイド <sup class="beta">beta</sup>
+
+> 注意⚠️ : このドキュメントはまだ翻訳されていません。翻訳募集中です🙏 ！
+> 翻訳に興味がある方は GitHub の[こちら](https://github.com/vuejs/jp.vuejs.org/issues/368)で募集中(先着順)です。
 
 This is the official style guide for Vue-specific code. If you use Vue in a project, it's a great reference to avoid errors, bikeshedding, and anti-patterns. However, we don't believe that any style guide is ideal for all teams or projects, so mindful deviations are encouraged based on past experience, the surrounding tech stack, and personal values.
 
