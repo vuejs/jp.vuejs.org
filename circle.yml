@@ -2,7 +2,7 @@ machine:
   timezone:
     UTC
   node:
-    version: 6.9.1
+    version: 8.6
 deployment:
   production:
     branch: lang-ja
