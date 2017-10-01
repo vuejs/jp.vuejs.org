@@ -31,7 +31,7 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 <div id="downloads">
 <a class="button" href="/js/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり </span>
 
-<a class="button" href="/js/vue.min.js" download>本番バージョン</a><span class="light info">警告出力なし、 {{gz_size}}kb min+gzip</span>
+<a class="button" href="/js/vue.min.js" download>本番バージョン</a><span class="light info">警告出力なし、 {{gz_size}} KB min+gzip</span>
 </div>
 
 ### CDN
