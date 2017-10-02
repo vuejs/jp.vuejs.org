@@ -1310,7 +1310,7 @@ Failed to mount component: template or render function not defined.
 
 ``` js
 beforeCreate: function () {
-  this.$options.components.TreeFolderContents = require('./tree-folder-contents.vue').default
+  this.$options.components.TreeFolderContents = require('./tree-folder-contents.vue')
 }
 ```
 
