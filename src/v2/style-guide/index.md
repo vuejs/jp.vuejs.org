@@ -225,7 +225,7 @@ props: {
   status: {
     type: String,
     required: true,
-    validate: function (value) {
+    validator: function (value) {
       return [
         'syncing',
         'synced',
