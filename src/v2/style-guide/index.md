@@ -24,9 +24,12 @@ Finally, we've split rules into four categories:
 
 These rules help prevent errors, so learn and abide by them at all costs. Exceptions may exist, but should be very rare and only be made by those with expert knowledge of both JavaScript and Vue.
 
-### Priority B: Strongly Recommended
+### 優先度 B: 強く推奨
 
+<!--
 These rules have been found to improve readability and/or developer experience in most projects. Your code will still run if you violate them, but violations should be rare and well-justified.
+-->
+これらのルールは、ほとんどのプロジェクトで読みやすさや開発者の体験をよりよくするために見いだされました。これらに違反してもあなたのコードは動きますが、ごくまれなケースで、かつちゃんと正当を示した上でのみ違反するようにすべきです。
 
 ### Priority C: Recommended
 
@@ -493,18 +496,23 @@ var myGreatMixin = {
 
 
 
-## Priority B Rules: Strongly Recommended (Improving Readability)
+## 優先度Bのルール: 強く推奨 (読みやすさの向上)
 
 
 
-### Component files <sup data-p="b">strongly recommended</sup>
+### コンポーネントのファイル <sup data-p="b">強く推奨</sup>
 
+<!--
 **Whenever a build system is available to concatenate files, each component should be in its own file.**
 
 This helps you to more quickly find a component when you need to edit it or review how to use it.
+-->
+**ファイルを結合してくれるビルドシステムがあったとしても、各コンポーネントはそれぞれ別のファイルに書くべきです。**
+
+そうすれば、コンポーネントを編集したり使い方を確認するときにより素早く見つけることができます。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('TodoList', {
@@ -518,7 +526,7 @@ Vue.component('TodoItem', {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -535,14 +543,20 @@ components/
 
 
 
-### Single-file component filename casing <sup data-p="b">strongly recommended</sup>
+### シングルファイルコンポーネントのファイル名の形式 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Filenames of [single-file components](single-file-components.html) should either be always PascalCase or always kebab-case.**
 
 PascalCase works best with autocompletion in code editors, as it's consistent with how we reference components in JS(X) and templates, wherever possible. However, mixed case filenames can sometimes create issues on case-insensitive filesystems, which is why kebab-case is also perfectly acceptable.
+-->
+**[シングルファイルコンポーネント](single-file-components.html) のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
+
+パスカルケースは、JS(X) やテンプレートの中でコンポーネントを参照する方法と一致しているので、コードエディタ上でオートコンプリートが可能な場合はとてもうまく働きます。
+しかし、大文字と小文字が混ざったファイル名は、大文字と小文字を区別しないファイルシステム上で時々問題を起こす可能性があります。そのため、ケバブケースもまた完全に受け入れられています。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ```
 components/
@@ -556,7 +570,7 @@ components/
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -571,17 +585,22 @@ components/
 
 
 
-### Base component names <sup data-p="b">strongly recommended</sup>
+### 基本コンポーネントの名前 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Base components (a.k.a. presentational, dumb, or pure components) that apply app-specific styling and conventions should all begin with a specific prefix, such as `Base`, `App`, or `V`.**
+-->
+
+**アプリケーション特有のスタイルやルールを適用する基本コンポーネント (またはプレゼンテーションコンポーネント、ダムコンポーネント、純粋コンポーネントとも) は、すべて `Base` 、 `App` 、`V` などの固有のプレフィックスで始まるべきです。**
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
+<!--
 These components lay the foundation for consistent styling and behavior in your application. They may **only** contain:
 
 - HTML elements,
@@ -592,6 +611,17 @@ But they'll **never** contain global state (e.g. from a Vuex store).
 
 Their names often include the name of an element they wrap (e.g. `BaseButton`, `BaseTable`), unless no element exists for their specific purpose (e.g. `BaseIcon`). If you build similar components for a more specific context, they will almost always consume these components (e.g. `BaseButton` may be used in `ButtonSubmit`).
 
+-->
+これらのコンポーネントは、あなたのアプリケーションに一貫したスタイルやふるまいをもたせる基礎として位置づけられます。これらは、おそらく以下のもの **だけ** を含むでしょう:
+
+- HTML要素、
+- `Base` で始まる別のコンポーネント、そして
+- サードパーティ製のUIコンポーネント
+
+これらのコンポーネントの名前は、しばしばラップしている要素の名前を含みます(例えば `BaseButton` 、 `BaseTable`)。それ特有の目的のための要素がない場合は別ですが(例えば `BaseIcon`)。
+もっと特定の用途に向けた同じようなコンポーネントを作る時は、ほとんどすべての場合にこれらのコンポーネントを使うことになるでしょう。(例えば `BaseButton` を `ButtonSubmit` で使うなど)
+
+<!--
 Some advantages of this convention:
 
 - When organized alphabetically in editors, your app's base components are all listed together, making them easier to identify.
@@ -599,6 +629,14 @@ Some advantages of this convention:
 - Since component names should always be multi-word, this convention prevents you from having to choose an arbitrary prefix for simple component wrappers (e.g. `MyButton`, `VueButton`).
 
 - Since these components are so frequently used, you may want to simply make them global instead of importing them everywhere. A prefix makes this possible with Webpack:
+-->
+このルールの長所:
+
+- エディタ上でアルファベット順に並べられた時に、アプリケーションの基本コンポーネントはすべて一緒にリストされ、識別しやすくなります。
+
+- コンポーネントの名前は常に複数単語にするべきなので、このルールによってシンプルなコンポーネントラッパーに勝手なプレフィックスを選ばなければならない(例えば `MyButton` 、 `VueButton`)ということがなくなります。
+
+- これらのコンポーネントはとても頻繁に使われるので、あらゆる場所でimportするよりも単純にグローバルにしてしまいたいと思うかもしれません。プレフィックスによって、それをWebpackでできるようになります。
 
   ``` js
   var requireComponent = require.context("./src", true, /^Base[A-Z]/)
@@ -617,7 +655,7 @@ Some advantages of this convention:
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ```
 components/
@@ -628,7 +666,7 @@ components/
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -654,14 +692,22 @@ components/
 
 
 
-### Single-instance component names <sup data-p="b">strongly recommended</sup>
+### 単一インスタンスのコンポーネント名 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Components that should only ever have a single active instance should begin with the `The` prefix, to denote that there can be only one.**
 
 This does not mean the component is only used in a single page, but it will only be used once _per page_. These components never accept any props, since they are specific to your app, not their context within your app. If you find the need to add props, it's a good indication that this is actually a reusable component that is only used once per page _for now_.
+-->
+**常に一つのアクティブなインスタンスしか持たないコンポーネントは、一つしか存在しえないことを示すために `The` というプレフィックスで始めるべきです。**
+
+これはそのコンポーネントが一つのページでしか使われないということを意味するのではなく、 _ページごとに_ 一回しか使われないという意味です。
+これらのコンポーネントは、アプリケーション内のコンテキストではなく、アプリケーションに対して固有のため、決してpropsを受け入れることはありません。
+もしpropsを追加する必要があることに気づいたのなら、それは _現時点で_ ページごとに一回しか使われていないだけで実際には再利用可能なコンポーネントであることを示すよい目印です。
+
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ```
 components/
@@ -671,7 +717,7 @@ components/
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -682,14 +728,20 @@ components/
 
 
 
-### Tightly coupled component names <sup data-p="b">strongly recommended</sup>
+### 強い関連性を持つコンポーネントどうしの名前 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Child components that are tightly coupled with their parent should include the parent component name as a prefix.**
 
 If a component only makes sense in the context of a single parent component, that relationship should be evident in its name. Since editors typically organize files alphabetically, this also keeps these related files next to each other.
+-->
+**親コンポーネントと強い関係をもつ子コンポーネントには、親コンポーネントの名前をプレフィックスとして含むべきです。**
+
+もし、コンポーネントが単一の親コンポーネントの中でだけ意味をもつものなら、その関連性は名前からはっきりわかるようにするべきです。
+一般的にエディタはファイルをアルファベット順に並べるので、関連をもつものどうしが常に隣り合って並ぶことにもなります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ```
 components/
@@ -706,7 +758,7 @@ components/
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -724,17 +776,21 @@ components/
 
 
 
-### Order of words in component names <sup data-p="b">strongly recommended</sup>
+### コンポーネント名における単語の順番 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Component names should start with the highest-level (often most general) words and end with descriptive modifying words.**
+-->
+**コンポーネント名は、最高レベルの(たいていは最も一般的な)単語から始めて、説明的な修飾語で終わるべきです。**
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
+<!--
 You may be wondering:
 
 > "Why would we force component names to use less natural language?"
@@ -747,7 +803,26 @@ In natural English, adjectives and other descriptors do typically appear before 
 
 You can definitely include these connector words in component names if you'd like, but the order is still important.
 
+-->
+あなたは疑問に思うかもしれません:
+
+> "なぜコンポーネント名に自然な言語でないものを使うように強制するのですか？"
+
+自然な英語では、形容詞やその他の記述子は一般的に名詞の前に置かれ、そうでない場合には接続詞が必要になります。例えば:
+
+- Coffee _with_ milk
+- Soup _of the_ day
+- Visitor _to the_ museum
+
+もちろん、あなたがそうしたいのであればこれらの接続詞をコンポーネント名に含めても構いませんが、それでも順番は重要です。
+
+<!--
+XXX: 強調部分自信なし
 Also note that **what's considered "highest-level" will be contextual to your app**. For example, imagine an app with a search form. It may include components like this one:
+-->
+また、 **「最高レベル」として尊重されるものは、アプリケーションの文脈になる** ことに注意してください。
+例えば、検索フォームを持ったアプリケーションを想像してください。こんなコンポーネントがあるかもしれません:
+
 
 ```
 components/
@@ -759,7 +834,10 @@ components/
 |- TermsCheckbox.vue
 ```
 
+<!--
 As you might notice, it's quite difficult to see which components are specific to the search. Now let's rename the components according to the rule:
+-->
+あなたも気づいたと思いますが、これではどのコンポーネントが検索に特有のものなのかとても分かりづらいです。では、このルールに従ってコンポーネントの名前を変えてみましょう。
 
 ```
 components/
@@ -771,18 +849,24 @@ components/
 |- SettingsCheckboxTerms.vue
 ```
 
+<!--
 Since editors typically organize files alphabetically, all the important relationships between components are now evident at a glance.
 
 You might be tempted to solve this problem differently, nesting all the search components under a "search" directory, then all the settings components under a "settings" directory. We only recommend considering this approach in very large apps (e.g. 100+ components), for these reasons:
 
 - It generally takes more time to navigate through nested sub-directories, than scrolling through a single `components` directory.
-- Name conflicts (e.g. multiple `ButtonDelete.vue` components) make it more difficult to quickly navigate to a specific component in a code editor.
-- Refactoring becomes more difficult, because find-and-replace often isn't sufficient to update relative references to a moved component.
+-->
+一般的にエディタではファイルはアルファベット順に並ぶので、コンポーネント間のあらゆる重要な関連性は一目ではっきりと分かります。
+
+あなたは、これを別の方法で解決したいと思うかもしれません。つまり、すべての検索コンポーネントを search ディレクトリの下にネストし、すべての設定コンポーネントを settings ディレクトリに置くという方法です。
+私たちは、以下の理由から、とても大規模なアプリケーション(例えば100以上のコンポーネントがあるような)の場合に限ってこのアプローチを考慮することを推奨します:
+
+- 一般的に、入れ子のサブディレクトリの中を移動するのは、単一の components ディレクトリをスクロールするのと比べて余分に時間がかかります。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ```
 components/
@@ -796,7 +880,7 @@ components/
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -811,16 +895,28 @@ components/
 
 
 
-### Self-closing components <sup data-p="b">strongly recommended</sup>
+### セルフクロージング形式のコンポーネント <sup data-p="b">強く推奨</sup>
 
+<!--
 **Components with no content should be self-closing in [single-file components](single-file-components.html), string templates, and [JSX](render-function.html#JSX) - but never in DOM templates.**
 
 Components that self-close communicate that they not only have no content, but are **meant** to have no content. It's the difference between a blank page in a book and one labeled "This page intentionally left blank." Your code is also cleaner without the unnecessary closing tag.
+-->
+**中身を持たないコンポーネントは、 [シングルファイルコンポーネント](single-file-components.html) 、文字列テンプレート、および [JSX](render-function.html#JSX) の中ではセルフクロージング形式で書くべきです。ただし、DOMテンプレート内ではそうしてはいけません。**
 
+セルフクローズ形式のコンポーネントは、単に中身を持たないというだけでなく、中身を持たないことを **意図したものだ** ということをはっきりと表現します。
+本の中にある白紙のページと、「このページは意図的に白紙のままにしています」と書かれたページとは違うということです。また、不要な閉じタグがなくなることによってあなたのコードはより読みやすくなります。
+
+
+<!--
 Unfortunately, HTML doesn't allow custom elements to be self-closing - only [official "void" elements](https://www.w3.org/TR/html/syntax.html#void-elements). That's why the strategy is only possible when Vue's template compiler can reach the template before the DOM, then serve the DOM spec-compliant HTML.
+-->
+残念ながら、HTML はカスタム要素のセルフクロージング形式を許していません。 - [公式の「空」要素](https://www.w3.org/TR/html/syntax.html#void-elements) だけです。
+これが、Vue のテンプレートコンパイラが DOM よりも先にテンプレートにアクセスして、その後 DOM の仕様に準拠した HTML を出力することができる場合にだけこの方策を使うことができる理由です。 
+
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <!-- In single-file components, string templates, and JSX -->
@@ -834,7 +930,7 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <!-- In single-file components, string templates, and JSX -->
