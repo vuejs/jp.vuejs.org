@@ -496,7 +496,7 @@ var myGreatMixin = {
 
 
 
-## 優先度Bのルール: 強く推奨 (読みやすさの向上)
+## 優先度B のルール: 強く推奨 (読みやすさの向上)
 
 
 
@@ -543,14 +543,14 @@ components/
 
 
 
-### シングルファイルコンポーネントのファイル名の形式 <sup data-p="b">強く推奨</sup>
+### 単一ファイルコンポーネントのファイル名の形式 <sup data-p="b">強く推奨</sup>
 
 <!--
 **Filenames of [single-file components](../guide/single-file-components.html) should either be always PascalCase or always kebab-case.**
 
 PascalCase works best with autocompletion in code editors, as it's consistent with how we reference components in JS(X) and templates, wherever possible. However, mixed case filenames can sometimes create issues on case-insensitive filesystems, which is why kebab-case is also perfectly acceptable.
 -->
-**[シングルファイルコンポーネント](../guide/single-file-components.html) のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
+**[単一ファイルコンポーネント](../guide/single-file-components.html) のファイル名は、すべてパスカルケース (PascalCase) にするか、すべてケバブケース (kebab-case) にするべきです。**
 
 パスカルケースは、JS(X) やテンプレートの中でコンポーネントを参照する方法と一致しているので、コードエディタ上でオートコンプリートが可能な場合はとてもうまく働きます。
 しかし、大文字と小文字が混ざったファイル名は、大文字と小文字を区別しないファイルシステム上で時々問題を起こす可能性があります。そのため、ケバブケースもまた完全に受け入れられています。
@@ -585,13 +585,13 @@ components/
 
 
 
-### 基本コンポーネントの名前 <sup data-p="b">強く推奨</sup>
+### 基底コンポーネントの名前 <sup data-p="b">強く推奨</sup>
 
 <!--
 **Base components (a.k.a. presentational, dumb, or pure components) that apply app-specific styling and conventions should all begin with a specific prefix, such as `Base`, `App`, or `V`.**
 -->
 
-**アプリケーション特有のスタイルやルールを適用する基本コンポーネント (またはプレゼンテーションコンポーネント、ダムコンポーネント、純粋コンポーネントとも) は、すべて `Base` 、 `App` 、`V` などの固有のプレフィックスで始まるべきです。**
+**アプリケーション特有のスタイルやルールを適用する基底コンポーネント (またはプレゼンテーションコンポーネント、ダムコンポーネント、純粋コンポーネントとも) は、すべて `Base` 、 `App` 、`V` などの固有のプレフィックスで始まるべきです。**
 
 {% raw %}
 <details>
@@ -614,9 +614,9 @@ Their names often include the name of an element they wrap (e.g. `BaseButton`, `
 -->
 これらのコンポーネントは、あなたのアプリケーションに一貫したスタイルやふるまいをもたせる基礎として位置づけられます。これらは、おそらく以下のもの **だけ** を含むでしょう:
 
-- HTML要素、
+- HTML 要素、
 - `Base` で始まる別のコンポーネント、そして
-- サードパーティ製のUIコンポーネント
+- サードパーティ製の UI コンポーネント
 
 これらのコンポーネントの名前は、しばしばラップしている要素の名前を含みます(例えば `BaseButton` 、 `BaseTable`)。それ特有の目的のための要素がない場合は別ですが(例えば `BaseIcon`)。
 もっと特定の用途に向けた同じようなコンポーネントを作る時は、ほとんどすべての場合にこれらのコンポーネントを使うことになるでしょう。(例えば `BaseButton` を `ButtonSubmit` で使うなど)
@@ -632,11 +632,11 @@ Some advantages of this convention:
 -->
 このルールの長所:
 
-- エディタ上でアルファベット順に並べられた時に、アプリケーションの基本コンポーネントはすべて一緒にリストされ、識別しやすくなります。
+- エディタ上でアルファベット順に並べられた時に、アプリケーションの基底コンポーネントはすべて一緒にリストされ、識別しやすくなります。
 
 - コンポーネントの名前は常に複数単語にするべきなので、このルールによってシンプルなコンポーネントラッパーに勝手なプレフィックスを選ばなければならない(例えば `MyButton` 、 `VueButton`)ということがなくなります。
 
-- これらのコンポーネントはとても頻繁に使われるので、あらゆる場所でimportするよりも単純にグローバルにしてしまいたいと思うかもしれません。プレフィックスによって、それをWebpackでできるようになります。
+- これらのコンポーネントはとても頻繁に使われるので、あらゆる場所で import するよりも単純にグローバルにしてしまいたいと思うかもしれません。プレフィックスによって、それを Webpack でできるようになります。
 
   ``` js
   var requireComponent = require.context("./src", true, /^Base[A-Z]/)
@@ -702,8 +702,8 @@ This does not mean the component is only used in a single page, but it will only
 **常に一つのアクティブなインスタンスしか持たないコンポーネントは、一つしか存在しえないことを示すために `The` というプレフィックスで始めるべきです。**
 
 これはそのコンポーネントが一つのページでしか使われないということを意味するのではなく、 _ページごとに_ 一回しか使われないという意味です。
-これらのコンポーネントは、アプリケーション内のコンテキストではなく、アプリケーションに対して固有のため、決してpropsを受け入れることはありません。
-もしpropsを追加する必要があることに気づいたのなら、それは _現時点で_ ページごとに一回しか使われていないだけで実際には再利用可能なコンポーネントであることを示すよい目印です。
+これらのコンポーネントは、アプリケーション内のコンテキストではなく、アプリケーションに対して固有のため、決してプロパティを受け入れることはありません。
+もしプロパティを追加する必要があることに気づいたのなら、それは _現時点で_ ページごとに一回しか使われていないだけで、実際には再利用可能なコンポーネントであることを示すよい目印です。
 
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
@@ -728,14 +728,14 @@ components/
 
 
 
-### 強い関連性を持つコンポーネントどうしの名前 <sup data-p="b">強く推奨</sup>
+### 密結合コンポーネントの名前 <sup data-p="b">強く推奨</sup>
 
 <!--
 **Child components that are tightly coupled with their parent should include the parent component name as a prefix.**
 
 If a component only makes sense in the context of a single parent component, that relationship should be evident in its name. Since editors typically organize files alphabetically, this also keeps these related files next to each other.
 -->
-**親コンポーネントと強い関係をもつ子コンポーネントには、親コンポーネントの名前をプレフィックスとして含むべきです。**
+**親コンポーネントと密結合した子コンポーネントには、親コンポーネントの名前をプレフィックスとして含むべきです。**
 
 もし、コンポーネントが単一の親コンポーネントの中でだけ意味をもつものなら、その関連性は名前からはっきりわかるようにするべきです。
 一般的にエディタはファイルをアルファベット順に並べるので、関連をもつものどうしが常に隣り合って並ぶことにもなります。
@@ -817,10 +817,9 @@ You can definitely include these connector words in component names if you'd lik
 もちろん、あなたがそうしたいのであればこれらの接続詞をコンポーネント名に含めても構いませんが、それでも順番は重要です。
 
 <!--
-XXX: 強調部分自信なし
 Also note that **what's considered "highest-level" will be contextual to your app**. For example, imagine an app with a search form. It may include components like this one:
 -->
-また、 **「最高レベル」として尊重されるものは、アプリケーションの文脈になる** ことに注意してください。
+また、 **何を「最高レベル」として尊重するかがアプリケーションの文脈になる** ことに注意してください。
 例えば、検索フォームを持ったアプリケーションを想像してください。こんなコンポーネントがあるかもしれません:
 
 
@@ -858,7 +857,7 @@ You might be tempted to solve this problem differently, nesting all the search c
 -->
 一般的にエディタではファイルはアルファベット順に並ぶので、コンポーネント間のあらゆる重要な関連性は一目ではっきりと分かります。
 
-あなたは、これを別の方法で解決したいと思うかもしれません。つまり、すべての検索コンポーネントを search ディレクトリの下にネストし、すべての設定コンポーネントを settings ディレクトリに置くという方法です。
+あなたは、これを別の方法で解決したいと思うかもしれません。つまり、すべての検索コンポーネントは search ディレクトリの下に、すべての設定コンポーネントは settings ディレクトリの下にネストするという方法です。
 私たちは、以下の理由から、とても大規模なアプリケーション(例えば100以上のコンポーネントがあるような)の場合に限ってこのアプローチを考慮することを推奨します:
 
 - 一般的に、入れ子のサブディレクトリの中を移動するのは、単一の components ディレクトリをスクロールするのと比べて余分に時間がかかります。
@@ -895,14 +894,14 @@ components/
 
 
 
-### セルフクロージング形式のコンポーネント <sup data-p="b">強く推奨</sup>
+### 自己終了形式のコンポーネント <sup data-p="b">強く推奨</sup>
 
 <!--
 **Components with no content should be self-closing in [single-file components](../guide/single-file-components.html), string templates, and [JSX](../guide/render-function.html#JSX) - but never in DOM templates.**
 
 Components that self-close communicate that they not only have no content, but are **meant** to have no content. It's the difference between a blank page in a book and one labeled "This page intentionally left blank." Your code is also cleaner without the unnecessary closing tag.
 -->
-**中身を持たないコンポーネントは、 [シングルファイルコンポーネント](../guide/single-file-components.html) 、文字列テンプレート、および [JSX](render-function.html#JSX) の中ではセルフクロージング形式で書くべきです。ただし、DOMテンプレート内ではそうしてはいけません。**
+**中身を持たないコンポーネントは、 [単一ファイルコンポーネント](../guide/single-file-components.html) 、文字列テンプレート、および [JSX](render-function.html#JSX) の中では自己終了形式で書くべきです。ただし、DOM テンプレート内ではそうしてはいけません。**
 
 セルフクローズ形式のコンポーネントは、単に中身を持たないというだけでなく、中身を持たないことを **意図したものだ** ということをはっきりと表現します。
 本の中にある白紙のページと、「このページは意図的に白紙のままにしています」と書かれたページとは違うということです。また、不要な閉じタグがなくなることによってあなたのコードはより読みやすくなります。
@@ -911,7 +910,7 @@ Components that self-close communicate that they not only have no content, but a
 <!--
 Unfortunately, HTML doesn't allow custom elements to be self-closing - only [official "void" elements](https://www.w3.org/TR/html/syntax.html#void-elements). That's why the strategy is only possible when Vue's template compiler can reach the template before the DOM, then serve the DOM spec-compliant HTML.
 -->
-残念ながら、HTML はカスタム要素のセルフクロージング形式を許していません。 - [公式の「空」要素](https://www.w3.org/TR/html/syntax.html#void-elements) だけです。
+残念ながら、HTML はカスタム要素の自己終了形式を許していません。 - [公式の「空」要素](https://www.w3.org/TR/html/syntax.html#void-elements) だけです。
 これが、Vue のテンプレートコンパイラが DOM よりも先にテンプレートにアクセスして、その後 DOM の仕様に準拠した HTML を出力することができる場合にだけこの方策を使うことができる理由です。 
 
 
@@ -919,12 +918,12 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 #### 悪い例
 
 ``` html
-<!-- In single-file components, string templates, and JSX -->
+<!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent></MyComponent>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <my-component/>
 ```
 {% raw %}</div>{% endraw %}
@@ -933,12 +932,12 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 #### 良い例
 
 ``` html
-<!-- In single-file components, string templates, and JSX -->
+<!-- 単一ファイルコンポーネント、文字列テンプレート、JSX の中 -->
 <MyComponent/>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
 {% raw %}</div>{% endraw %}
