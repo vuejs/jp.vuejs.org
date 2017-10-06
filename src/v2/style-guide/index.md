@@ -944,10 +944,14 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 
 
 
-### Component name casing in templates <sup data-p="b">strongly recommended</sup>
+### テンプレート内でのコンポーネント名の形式<sup data-p="b">強く推奨</sup>
 
+<!--
 **Component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
+-->
+**コンポーネント名は [単一ファイルコンポーネント](../guide/single-file-components.html) と文字列テンプレートの中では常にパスカルケース(PascalCase)であるべきです。 - しかし、 DOM テンプレートの中ではケバブケース(kebab-case)です。**
 
+<!--
 PascalCase has a few advantages over kebab-case:
 
 - Editors can autocomplete component names in templates, because PascalCase is also used in JavaScript.
@@ -955,68 +959,95 @@ PascalCase has a few advantages over kebab-case:
 - If you use any non-Vue custom elements in your templates, such as a web component, PascalCase ensures that your Vue components remain distinctly visible.
 
 Unfortunately, due to HTML's case insensitivity, DOM templates must still use kebab-case.
+-->
+パスカルケースには、ケバブケースよりも優れた点がいくつかあります:
+
+- パスカルケースは JavaScrip でも使われるので、エディタがテンプレート内のコンポーネント名を自動補完できます。
+- `<MyComponent>` は `<my-component>` よりも一単語の HTML 要素との見分けがつきやすいです。なぜなら、ハイフン1文字だけの違いではなく2文字(2つの大文字)の違いがあるからです。
+- もし、テンプレート内で、例えば Web コンポーネントのような Vue 以外のカスタム要素を使っていたとしても、パスカルケースは Vue コンポーネントがはっきりと目立ったせることを保証します。
+
+残念ですが、HTML は大文字と小文字を区別しないので、DOM テンプレートの中ではまだケバブケースを使う必要があります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <mycomponent/>
 ```
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <my-component/>
 ```
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <myComponent/>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <MyComponent></MyComponent>
 ```
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
-<!-- In single-file components and string templates -->
+<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <MyComponent/>
 ```
 
 ``` html
-<!-- In DOM templates -->
+<!-- DOM テンプレートの中 -->
 <my-component></my-component>
 ```
 {% raw %}</div>{% endraw %}
 
 
 
-### Component name casing in JS/JSX <sup data-p="b">strongly recommended</sup>
+### JS/JSX 内でのコンポーネント名の形式 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Component names in JS/[JSX](../guide/render-function.html#JSX) should always be PascalCase, though may be kebab-case inside strings for simpler applications that only use global component registration through `Vue.component`.**
+-->
+**JS/[JSX](../guide/render-function.html#JSX) 内でのコンポーネント名はつねにパスカルケース(PascalCase)にするべきです。
+ただし、 `Vue.component` で登録したグローバルコンポーネントしか使わないような単純なアプリケーションでは、ケバブケース(kebab-case)を含む文字列になるかもしれません。**
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
+<!--
 In JavaScript, PascalCase is the convention for classes and prototype constructors - essentially, anything that can have distinct instances. Vue components also have instances, so it makes sense to also use PascalCase. As an added benefit, using PascalCase within JSX (and templates) allows readers of the code to more easily distinguish between components and HTML elements.
 
 However, for applications that use **only** global component definitions via `Vue.component`, we recommend kebab-case instead. The reasons are:
 
 - It's rare that global components are ever referenced in JavaScript, so following a convention for JavaScript makes less sense.
 - These applications always include many in-DOM components, where kebab-case [**must** be used](#Component-name-casing-in-templates).
+
+XXX:
+    in-DOM components は in-DOM templates の間違いではないかと思われる
+    #Component-name-casing-in-templates は正しいリンクになっていない。正しくは #Component-name-casing-in-templates-strongly-recommended
+-->
+JavaScript では、クラスやプロトタイプのコンストラクタは - 原則として異なるインスタンスを持ちうるものはすべて - パスカルケースにするのがしきたりです。
+Vue コンポーネントもインスタンスをもつので、同じようにパスカルケースにするのが理にかなっています。
+さらなる利点として、JSX(とテンプレート)の中でパスカルケースを使うことによって、コードを読む人がコンポーネントと HTML 要素をより簡単に見分けられるようになります。
+
+しかし、`Vue.component` によるグローバルコンポーネント定義 **だけ** を使うアプリケーションでは、代わりにケバブケースを使うことを推奨します。理由は以下の通りです:
+
+- グローバルコンポーネントを JavaScript から参照することはほとんどないので、 JavaScript の原則に従う意味もほとんどありません。
+- そのようなアプリケーションはたくさんの DOM 内コンポーネント をもつのが常ですが、 そこでは ケバブケースを [**必ず** 使う必要があります](#テンプレート内でのコンポーネント名の形式-強く推奨)
+
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('myComponent', {
@@ -1044,7 +1075,7 @@ export default {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 Vue.component('MyComponent', {
@@ -1072,14 +1103,19 @@ export default {
 
 
 
-### Full-word component names <sup data-p="b">strongly recommended</sup>
+### 完全な単語によるコンポーネント名 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Component names should prefer full words over abbreviations.**
 
 The autocompletion in editors make the cost of writing longer names very low, while the clarity they provide is invaluable. Uncommon abbreviations, in particular, should always be avoided.
+-->
+**コンポーネント名には、略語よりも完全な単語を使うべきです。**
+
+長い名前によってもたらされる明快さは非常に貴重ですが、それをタイプする労力はエディタの自動補完によってとても小さくなります。特に、一般的でない略語は常に避けるべきです。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ```
 components/
@@ -1089,7 +1125,7 @@ components/
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ```
 components/
@@ -1100,14 +1136,19 @@ components/
 
 
 
-### Prop name casing <sup data-p="b">strongly recommended</sup>
+### プロパティ名の型式 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Prop names should always use camelCase during declaration, but kebab-case in templates and [JSX](../guide/render-function.html#JSX).**
 
 We're simply following the conventions of each language. Within JavaScript, camelCase is more natural. Within HTML, kebab-case is.
+-->
+**プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#JSX) ではケバブケース(kebab-case)にするべきです。**
+
+私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然であり、HTML の中ではケバブケースが自然です。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 props: {
@@ -1121,7 +1162,7 @@ props: {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 props: {
@@ -1136,14 +1177,20 @@ props: {
 
 
 
-### Multi-attribute elements <sup data-p="b">strongly recommended</sup>
+### 複数の属性をもつ要素 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Elements with multiple attributes should span multiple lines, with one attribute per line.**
 
 In JavaScript, splitting objects with multiple properties over multiple lines is widely considered a good convention, because it's much easier to read. Our templates and [JSX](../guide/render-function.html#JSX) deserve the same consideration.
+-->
+**複数の属性をもつ要素は、１行に１要素ずつ、複数の行にわたって書くべきです。**
+
+JavaScript では、複数のプロパティをもつ要素を複数の行に分けて書くことはよい慣習だと広く考えられています。なぜなら、その方がより読みやすいからです。
+Vue のテンプレートや [JSX](../guide/render-function.html#JSX) も同じように考えることがふさわしいです。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <img src="https://vuejs.org/images/logo.png" alt="Vue Logo">
@@ -1155,7 +1202,7 @@ In JavaScript, splitting objects with multiple properties over multiple lines is
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <img
@@ -1175,14 +1222,20 @@ In JavaScript, splitting objects with multiple properties over multiple lines is
 
 
 
-### Complex expressions in templates <sup data-p="b">strongly recommended</sup>
+### テンプレート内での複雑な式 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.**
 
 Complex expressions in your templates make them less declarative. We should strive to describe _what_ should appear, not _how_ we're computing that value. Computed properties and methods also allow the code to be reused.
+-->
+**複雑な式は算出プロパティかメソッドにリファクタリングして、コンポーネントのテンプレートには単純な式だけを含むようにするべきです。
+
+テンプレート内に複雑な式があると、テンプレートが宣言的ではなくなります。私たちは、 __どのように__ その値を算出るかではなく、 __何が__ 表示されるべき記述するように努力するべきです。
+また、算出プロパティやメソッドによってコードが再利用できるようになります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 {{
@@ -1194,10 +1247,10 @@ Complex expressions in your templates make them less declarative. We should stri
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
-<!-- In a template -->
+<!-- テンプレート内 -->
 {{ normalizedFullName }}
 ```
 
@@ -1215,17 +1268,21 @@ computed: {
 
 
 
-### Complex computed properties <sup data-p="b">strongly recommended</sup>
+### 複雑な算出プロパティ <sup data-p="b">強く推奨</sup>
 
+<!--
 **Complex computed properties should be split into as many simpler properties as possible.**
+-->
+**複雑な算出プロパティは、できる限りたくさんの単純なプロパティに分割するべきです。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
+<!--
 Simpler, well-named computed properties are:
 
 - __Easier to test__
@@ -1241,11 +1298,25 @@ Simpler, well-named computed properties are:
   Any value that can be named might be useful to the view. For example, we might decide to display a message telling the user how much money they saved. We might also decide to calculate sales tax, but perhaps display it separately, rather than as part of the final price.
 
   Small, focused computed properties make fewer assumptions about how information will be used, so require less refactoring as requirements change.
+-->
+単純な、よい名前を持つ算出プロパティは:
+
+- __テストしやすい__
+
+  算出プロパティを単純にするということは、たとえそれが再利用可能ではなかったとしても、それぞれに分かりやすい名前をつけることになります。
+  それによって、他の開発者(そして未来のあなた)が、注意を払うべきコードに集中し、何が起きているかを把握することがより簡単になります。
+
+- __要求の変更を受け入れやすい__
+
+  名前をつけることができる値は何でも、ビューでも役に立つ可能性があります。
+  例えば、いくら割引になっているかをユーザに知らせるメッセージを表示することに決めたとします。 また、消費税も計算して、最終的な価格の一部としてではなく、別々に表示することにします。
+
+  小さくフォーカスした算出プロパティは、どのように情報が使われるかについての決めつけをより少なくし、少しのリファクタリングで要求の変更を受け入れられるようになります。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 computed: {
@@ -1261,7 +1332,7 @@ computed: {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 computed: {
@@ -1280,14 +1351,19 @@ computed: {
 
 
 
-### Quoted attribute values <sup data-p="b">strongly recommended</sup>
+### 引用符つきの属性値 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Non-empty HTML attribute values should always be inside quotes (single or double, whichever is not used in JS).**
 
 While attribute values without any spaces are not required to have quotes in HTML, this practice often leads to _avoiding_ spaces, making attribute values less readable.
+-->
+**空ではない HTML 属性の値は常に引用符(シングルコーテーションかダブルコーテーション、 JS の中で使われていない方)でくくるべきです。**
+
+HTML では、空白を含まない属性値は引用符でくくらなくてもよいことになっていますが、そのせいで空白の使用を _避けてしまい_ 属性値が読みづらくなることをしばしばもたらします。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <input type=text>
@@ -1299,7 +1375,7 @@ While attribute values without any spaces are not required to have quotes in HTM
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <input type="text">
@@ -1312,12 +1388,15 @@ While attribute values without any spaces are not required to have quotes in HTM
 
 
 
-### Directive shorthands <sup data-p="b">strongly recommended</sup>
+### ディレクティブの短縮記法 <sup data-p="b">強く推奨</sup>
 
+<!--
 **Directive shorthands (`:` for `v-bind:` and `@` for `v-on:`) should be used always or never.**
+-->
+**ディレクティブの短縮記法 (`v-bind:` に対する `:` 、 `v-on:` に対する `@`)は、常に使うか、まったく使わないかのどちらかにするべきです。**
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <input
@@ -1335,7 +1414,7 @@ While attribute values without any spaces are not required to have quotes in HTM
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <input
