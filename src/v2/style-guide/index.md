@@ -962,7 +962,7 @@ Unfortunately, due to HTML's case insensitivity, DOM templates must still use ke
 -->
 パスカルケースには、ケバブケースよりも優れた点がいくつかあります:
 
-- パスカルケースは JavaScrip でも使われるので、エディタがテンプレート内のコンポーネント名を自動補完できます。
+- パスカルケースは JavaScript でも使われるので、エディタがテンプレート内のコンポーネント名を自動補完できます。
 - `<MyComponent>` は `<my-component>` よりも一単語の HTML 要素との見分けがつきやすいです。なぜなら、ハイフン1文字だけの違いではなく2文字(2つの大文字)の違いがあるからです。
 - もし、テンプレート内で、例えば Web コンポーネントのような Vue 以外のカスタム要素を使っていたとしても、パスカルケースは Vue コンポーネントがはっきりと目立ったせることを保証します。
 
@@ -1229,9 +1229,9 @@ Vue のテンプレートや [JSX](../guide/render-function.html#JSX) も同じ�
 
 Complex expressions in your templates make them less declarative. We should strive to describe _what_ should appear, not _how_ we're computing that value. Computed properties and methods also allow the code to be reused.
 -->
-**複雑な式は算出プロパティかメソッドにリファクタリングして、コンポーネントのテンプレートには単純な式だけを含むようにするべきです。
+**複雑な式は算出プロパティかメソッドにリファクタリングして、コンポーネントのテンプレートには単純な式だけを含むようにするべきです。**
 
-テンプレート内に複雑な式があると、テンプレートが宣言的ではなくなります。私たちは、 __どのように__ その値を算出るかではなく、 __何が__ 表示されるべき記述するように努力するべきです。
+テンプレート内に複雑な式があると、テンプレートが宣言的ではなくなります。私たちは、 __どのように__ その値を算出するかではなく、 __何が__ 表示されるべきかを記述するように努力するべきです。
 また、算出プロパティやメソッドによってコードが再利用できるようになります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
@@ -1273,7 +1273,7 @@ computed: {
 <!--
 **Complex computed properties should be split into as many simpler properties as possible.**
 -->
-**複雑な算出プロパティは、できる限りたくさんの単純なプロパティに分割するべきです。
+**複雑な算出プロパティは、できる限りたくさんの単純なプロパティに分割するべきです。**
 
 {% raw %}
 <details>
