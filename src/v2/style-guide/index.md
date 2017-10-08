@@ -37,7 +37,7 @@ Where multiple, equally good options exist, an arbitrary choice can be made to e
 
 1. train your brain to more easily parse most of the community code you encounter
 2. be able to copy and paste most community code examples without modification
-2. often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
+3. often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
 
 ### Priority D: Use with Caution
 
@@ -359,7 +359,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button class="button button-close">X</button>
 </template>
 
-<!-- Using the scoped attribute -->
+<!-- Using the `scoped` attribute -->
 <style scoped>
 .button {
   border: none;
@@ -740,6 +740,42 @@ If a component only makes sense in the context of a single parent component, tha
 もし、コンポーネントが単一の親コンポーネントの中でだけ意味をもつものなら、その関連性は名前からはっきりわかるようにするべきです。
 一般的にエディタはファイルをアルファベット順に並べるので、関連をもつものどうしが常に隣り合って並ぶことにもなります。
 
+{% raw %}
+<details>
+<summary>
+  <h4>Detailed Explanation</h4>
+</summary>
+{% endraw %}
+
+You might be tempted to solve this problem by nesting child components in directories named after their parent. For example:
+
+```
+components/
+|- TodoList/
+   |- Item/
+      |- index.vue
+      |- Button.vue
+   |- index.vue
+```
+
+or:
+
+```
+components/
+|- TodoList/
+   |- Item/
+      |- Button.vue
+   |- Item.vue
+|- TodoList.vue
+```
+
+This isn't recommended, as it results in:
+
+- Many files with similar names, making rapid file switching in code editors more difficult.
+- Many nested sub-directories, which increases the time it takes to browse components in an editor's sidebar.
+
+{% raw %}</details>{% endraw %}
+
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
 
@@ -947,7 +983,7 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 ### テンプレート内でのコンポーネント名の形式<sup data-p="b">強く推奨</sup>
 
 <!--
-**Component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
+**In most projects, component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
 -->
 **コンポーネント名は [単一ファイルコンポーネント](../guide/single-file-components.html) と文字列テンプレートの中では常にパスカルケース(PascalCase)であるべきです。 - しかし、 DOM テンプレートの中ではケバブケース(kebab-case)です。**
 
@@ -968,17 +1004,14 @@ Unfortunately, due to HTML's case insensitivity, DOM templates must still use ke
 
 残念ですが、HTML は大文字と小文字を区別しないので、DOM テンプレートの中ではまだケバブケースを使う必要があります。
 
+Also note that if you've already invested heavily in kebab-case, consistency with HTML conventions and being able to use the same casing across all your projects may be more important than the advantages listed above. In those cases, **using kebab-case everywhere is also acceptable.**
+
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
 
 ``` html
 <!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
 <mycomponent/>
-```
-
-``` html
-<!-- 単一ファイルコンポーネント、文字列テンプレートの中 -->
-<my-component/>
 ```
 
 ``` html
@@ -1002,6 +1035,13 @@ Unfortunately, due to HTML's case insensitivity, DOM templates must still use ke
 
 ``` html
 <!-- DOM テンプレートの中 -->
+<my-component></my-component>
+```
+
+OR
+
+``` html
+<!-- Everywhere -->
 <my-component></my-component>
 ```
 {% raw %}</div>{% endraw %}
@@ -1029,7 +1069,7 @@ In JavaScript, PascalCase is the convention for classes and prototype constructo
 However, for applications that use **only** global component definitions via `Vue.component`, we recommend kebab-case instead. The reasons are:
 
 - It's rare that global components are ever referenced in JavaScript, so following a convention for JavaScript makes less sense.
-- These applications always include many in-DOM components, where kebab-case [**must** be used](#Component-name-casing-in-templates).
+- These applications always include many in-DOM templates, where [kebab-case **must** be used](#Component-name-casing-in-templates-strongly-recommended).
 
 XXX:
     in-DOM components は in-DOM templates の間違いではないかと思われる
@@ -1222,7 +1262,7 @@ Vue のテンプレートや [JSX](../guide/render-function.html#JSX) も同じ�
 
 
 
-### テンプレート内での複雑な式 <sup data-p="b">強く推奨</sup>
+### テンプレート内での単純な式 <sup data-p="b">強く推奨</sup>
 
 <!--
 **Component templates should only include simple expressions, with more complex expressions refactored into computed properties or methods.**
@@ -1268,7 +1308,7 @@ computed: {
 
 
 
-### 複雑な算出プロパティ <sup data-p="b">強く推奨</sup>
+### 単純な算出プロパティ <sup data-p="b">強く推奨</sup>
 
 <!--
 **Complex computed properties should be split into as many simpler properties as possible.**
