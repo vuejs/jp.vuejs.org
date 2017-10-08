@@ -743,11 +743,15 @@ If a component only makes sense in the context of a single parent component, tha
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
+<!--
 You might be tempted to solve this problem by nesting child components in directories named after their parent. For example:
+-->
+この問題を、子コンポーネントを親コンポーネントの名前を元に命名したディレクトリの中に入れることで解決したいと思うかもしれません。
+例えば:
 
 ```
 components/
@@ -758,7 +762,7 @@ components/
    |- index.vue
 ```
 
-or:
+もしくは:
 
 ```
 components/
@@ -769,10 +773,16 @@ components/
 |- TodoList.vue
 ```
 
+<!--
 This isn't recommended, as it results in:
 
 - Many files with similar names, making rapid file switching in code editors more difficult.
 - Many nested sub-directories, which increases the time it takes to browse components in an editor's sidebar.
+-->
+これは推奨されません。以下のような結果を生むからです:
+
+- 同じような名前のファイルがたくさんできてしまい、コードエディタ上で素早くファイルを切り替えるのが難しくなります。
+- ネストしたサブディレクトリがたくさんできてしまい、エディタのサイドバーでコンポーネントを参照するのに時間がかかるようになります。
 
 {% raw %}</details>{% endraw %}
 
@@ -985,7 +995,7 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 <!--
 **In most projects, component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
 -->
-**コンポーネント名は [単一ファイルコンポーネント](../guide/single-file-components.html) と文字列テンプレートの中では常にパスカルケース(PascalCase)であるべきです。 - しかし、 DOM テンプレートの中ではケバブケース(kebab-case)です。**
+**ほとんどのプロジェクトでは、コンポーネント名は [単一ファイルコンポーネント](../guide/single-file-components.html) と文字列テンプレートの中では常にパスカルケース(PascalCase)であるべきです。 - しかし、 DOM テンプレートの中ではケバブケース(kebab-case)です。**
 
 <!--
 PascalCase has a few advantages over kebab-case:
@@ -995,6 +1005,8 @@ PascalCase has a few advantages over kebab-case:
 - If you use any non-Vue custom elements in your templates, such as a web component, PascalCase ensures that your Vue components remain distinctly visible.
 
 Unfortunately, due to HTML's case insensitivity, DOM templates must still use kebab-case.
+
+Also note that if you've already invested heavily in kebab-case, consistency with HTML conventions and being able to use the same casing across all your projects may be more important than the advantages listed above. In those cases, **using kebab-case everywhere is also acceptable.**
 -->
 パスカルケースには、ケバブケースよりも優れた点がいくつかあります:
 
@@ -1004,7 +1016,8 @@ Unfortunately, due to HTML's case insensitivity, DOM templates must still use ke
 
 残念ですが、HTML は大文字と小文字を区別しないので、DOM テンプレートの中ではまだケバブケースを使う必要があります。
 
-Also note that if you've already invested heavily in kebab-case, consistency with HTML conventions and being able to use the same casing across all your projects may be more important than the advantages listed above. In those cases, **using kebab-case everywhere is also acceptable.**
+ただし、もしあなたが既にケバブケースを大量に使っているのなら、HTML の慣習との一貫性を保ちすべてのあなたのプロジェクトで同じ型式を使えるようにすることはおそらく上にあげた利点よりも重要です。
+このような状況では、 **どこでもケバブケースを使うのもアリです。**
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
@@ -1038,10 +1051,10 @@ Also note that if you've already invested heavily in kebab-case, consistency wit
 <my-component></my-component>
 ```
 
-OR
+または
 
 ``` html
-<!-- Everywhere -->
+<!-- どこでも -->
 <my-component></my-component>
 ```
 {% raw %}</div>{% endraw %}
@@ -1082,7 +1095,7 @@ Vue コンポーネントもインスタンスをもつので、同じように�
 しかし、`Vue.component` によるグローバルコンポーネント定義 **だけ** を使うアプリケーションでは、代わりにケバブケースを使うことを推奨します。理由は以下の通りです:
 
 - グローバルコンポーネントを JavaScript から参照することはほとんどないので、 JavaScript の原則に従う意味もほとんどありません。
-- そのようなアプリケーションはたくさんの DOM 内コンポーネント をもつのが常ですが、 そこでは ケバブケースを [**必ず** 使う必要があります](#テンプレート内でのコンポーネント名の形式-強く推奨)
+- そのようなアプリケーションはたくさんの DOM 内テンプレート をもつのが常ですが、 そこでは ケバブケースを [**必ず** 使う必要があります](#テンプレート内でのコンポーネント名の形式-強く推奨)
 
 {% raw %}</details>{% endraw %}
 
