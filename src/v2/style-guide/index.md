@@ -851,7 +851,7 @@ Unfortunately, HTML doesn't allow custom elements to be self-closing - only [off
 
 ### Component name casing in templates <sup data-p="b">strongly recommended</sup>
 
-**Component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
+**In most projects, component names should always be PascalCase in [single-file components](../guide/single-file-components.html) and string templates - but kebab-case in DOM templates.**
 
 PascalCase has a few advantages over kebab-case:
 
@@ -861,17 +861,14 @@ PascalCase has a few advantages over kebab-case:
 
 Unfortunately, due to HTML's case insensitivity, DOM templates must still use kebab-case.
 
+Also note that if you've already invested heavily in kebab-case, consistency with HTML conventions and being able to use the same casing across all your projects may be more important than the advantages listed above. In those cases, **using kebab-case everywhere is also acceptable.**
+
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### Bad
 
 ``` html
 <!-- In single-file components and string templates -->
 <mycomponent/>
-```
-
-``` html
-<!-- In single-file components and string templates -->
-<my-component/>
 ```
 
 ``` html
@@ -895,6 +892,13 @@ Unfortunately, due to HTML's case insensitivity, DOM templates must still use ke
 
 ``` html
 <!-- In DOM templates -->
+<my-component></my-component>
+```
+
+OR
+
+``` html
+<!-- Everywhere -->
 <my-component></my-component>
 ```
 {% raw %}</div>{% endraw %}
