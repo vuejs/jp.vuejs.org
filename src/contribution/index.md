@@ -98,6 +98,18 @@ caching.md | キャッシュ | [re-fort](https://github.com/re-fort)
 streaming.md | ストリーミング | [sotayamashita](https://github.com/sotayamashita)
 api.md | API リファレンス | [hikimon](https://github.com/hikimon)
 
+## Vue.js スタイルガイド 翻訳プロジェクト
+
+- 対象ファイル: index.md
+- [GitHub Projects](https://github.com/vuejs/jp.vuejs.org/projects/2)
+
+ファイル | ルール | 貢献者
+----- | ------------- | --- 
+index.md | Priority A Rules | WIP
+index.md | Priority B Rules | [wonderful-panda](https://github.com/wonderful-panda)
+index.md | Priority C Rules | WIP
+index.md | Priority D Rules | WIP
+
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
 英語タイトル | 翻訳タイトル | 貢献者
