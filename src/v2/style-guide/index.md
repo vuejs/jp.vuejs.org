@@ -701,9 +701,9 @@ This does not mean the component is only used in a single page, but it will only
 -->
 **常に一つのアクティブなインスタンスしか持たないコンポーネントは、一つしか存在しえないことを示すために `The` というプレフィックスで始めるべきです。**
 
-これはそのコンポーネントが一つのページでしか使われないということを意味するのではなく、 _ページごとに_ 一回しか使われないという意味です。
+これはそのコンポーネントが 1 つのページでしか使われないということを意味するのではなく、 _ページごとに_  1 回しか使われないという意味です。
 これらのコンポーネントは、アプリケーション内のコンテキストではなく、アプリケーションに対して固有のため、決してプロパティを受け入れることはありません。
-もしプロパティを追加する必要があることに気づいたのなら、それは _現時点で_ ページごとに一回しか使われていないだけで、実際には再利用可能なコンポーネントであることを示すよい目印です。
+もしプロパティを追加する必要があることに気づいたのなら、それは _現時点で_ ページごとに 1 回しか使われていないだけで、実際には再利用可能なコンポーネントだということを示すよい目印です。
 
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
@@ -860,7 +860,7 @@ You can definitely include these connector words in component names if you'd lik
 - Soup _of the_ day
 - Visitor _to the_ museum
 
-もちろん、あなたがそうしたいのであればこれらの接続詞をコンポーネント名に含めても構いませんが、それでも順番は重要です。
+もちろん、あなたがそうしたいのならば、これらの接続詞をコンポーネント名に含めても構いませんが、それでも順番は重要です。
 
 <!--
 Also note that **what's considered "highest-level" will be contextual to your app**. For example, imagine an app with a search form. It may include components like this one:
@@ -1198,7 +1198,7 @@ We're simply following the conventions of each language. Within JavaScript, came
 -->
 **プロパティ名は、定義の時は常にキャメルケース(camelCase)にするべきですが、テンプレートや [JSX](../guide/render-function.html#JSX) ではケバブケース(kebab-case)にするべきです。**
 
-私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然であり、HTML の中ではケバブケースが自然です。
+私たちは単純にこの慣習に従っています。JavaScript の中ではキャメルケースがより自然で、HTML の中ではケバブケースが自然です。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
