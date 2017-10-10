@@ -1502,56 +1502,56 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 
 
-## Priority C Rules: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
+## 優先度 C のルール: 推奨 (任意の選択肢と認知上のオーバーヘッドの最小化)
 
 
 
-### Component/instance options order <sup data-p="c">recommended</sup>
+### コンポーネント/インスタンス オプション順序 <sup data-p="c">推奨</sup>
 
-**Component/instance options should be ordered consistently.**
+**コンポーネント/インスタンス オプションは､一貫した順序であるべきです｡**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add new properties from plugins.
+これは推奨するコンポーネントオプションのデフォルト順序です｡それらはカテゴリーわけされており､プラグインからどこに新たなプロパティを追加するか知ることができます｡
 
-1. **Side Effects** (triggers effects outside the component)
+1. **副作用** (コンポーネント外への影響)
   - `el`
 
-2. **Global Awareness** (requires knowledge beyond the component)
+2. **グローバルな認識** (コンポーネントを超えた知識が必要)
   - `name`
   - `parent`
 
-3. **Component Type** (changes the type of the component)
+3. **コンポーネントの型** (コンポーネントの型を変更)
   - `functional`
 
-4. **Template Modifiers** (changes the way templates are compiled)
+4. **テンプレートの修飾子** (テンプレートのコンパイル方法を変更)
   - `delimiters`
   - `comments`
 
-5. **Template Dependencies** (assets used in the template)
+5. **テンプレートの依存関係** (テンプレートで使用されるアセット)
   - `components`
   - `directives`
   - `filters`
 
-6. **Composition** (merges properties into the options)
+6. **合成** (プロパティをオプションにマージ)
   - `extends`
   - `mixins`
 
-7. **Interface** (the interface to the component)
+7. **インタフェース** (コンポーネントへのインタフェース)
   - `inheritAttrs`
   - `model`
   - `props`/`propsData`
 
-8. **Local State** (local reactive properties)
+8. **ローカルの状態** (ローカル リアクティブ プロパティ)
   - `data`
   - `computed`
 
-9. **Events** (callbacks triggered by reactive events)
+9. **イベント** (リアクティブなイベントによって引き起こされたコールバック)
   - `watch`
-  - Lifecycle Events (in the order they are called)
+  - ライフサイクルイベント (呼び出される順)
 
-10. **Non-Reactive Properties** (instance properties independent of the reactivity system)
+10. **リアクティブではないプロパティ** (リアクティブシステムから独立したインスタンス プロパティ)
   - `methods`
 
-11. **Rendering** (the declarative description of the component output)
+11. **レンダリング** (コンポーネント出力の宣言的な記述)
   - `template`/`render`
   - `renderError`
 
