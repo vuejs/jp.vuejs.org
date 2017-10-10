@@ -1557,46 +1557,46 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 
 
-### Element attribute order <sup data-p="c">recommended</sup>
+### 要素の属性の順序 <sup data-p="c">推奨</sup>
 
-**The attributes of elements (including components) should be ordered consistently.**
+**要素の属性 (コンポーネントを含む) は､一貫した順序であるべきです｡**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add custom attributes and directives.
+これは推奨するコンポーネントオプションのデフォルト順序です｡それらはカテゴリーわけされており､カスタム属性とディレクティブをどこに追加するか知ることができます｡
 
-1. **Definition** (provides the component options)
+1. **定義** (コンポーネントオプションを提供)
   - `is`
 
-2. **List Rendering** (creates multiple variations of the same element)
+2. **リスト描画** (同じ要素の複数のバリエーションを作成する)
   - `v-for`
 
-2. **Conditionals** (whether the element is rendered/shown)
+2. **条件** (要素が描画/表示されているかどうか)
   - `v-if`
   - `v-else-if`
   - `v-else`
   - `v-show`
   - `v-cloak`
 
-3. **Render Modifiers** (changes the way the element renders)
+3. **描画修飾子** (要素の描画方法を変更)
   - `v-pre`
   - `v-once`
 
-4. **Global Awareness** (requires knowledge beyond the component)
+4. **グローバルな認識** (コンポーネントを超えた知識が必要)
   - `id`
 
-5. **Unique Attributes** (attributes that require unique values)
+5. **一意の属性** (一意の値を必要とする属性)
   - `ref`
   - `key`
   - `slot`
 
-6. **Two-Way Binding** (combining binding and events)
+6. **双方向バインディング** (バインディングとイベントの結合)
   - `v-model`
 
-7. **Other Attributes** (all unspecified bound & unbound attributes)
+7. **その他の属性** (すべての指定されていないバインドされた属性とバインドされていない属性)
 
-8. **Events** (component event listeners)
+8. **イベント** (コンポーネントのイベントリスナー)
   - `v-on`
 
-9. **Content** (overrides the content of the element)
+9. **コンテンツ** (要素のコンテンツを上書きする)
   - `v-html`
   - `v-text`
 
