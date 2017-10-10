@@ -51,9 +51,8 @@ Some features of Vue exist to accommodate rare edge cases or smoother migrations
 
 ### 複数単語コンポーネント名 <sup data-p="a">不可欠</sup>
 
-**ルートの `App` コンポーネントを除き、コンポーネント名は常に服数単語であるべきです。**
+**ルートの `App` コンポーネントを除き、コンポーネント名は常に複数単語であるべきです。**
 
-<!-- This [prevents conflicts](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word. -->
 これは、すでに存在する、あるいは未来の HTML 要素との[コンフリクトを防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。なぜなら、全ての HTML 要素は一単語だからです。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
