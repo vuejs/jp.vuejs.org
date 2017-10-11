@@ -27,13 +27,13 @@ These rules help prevent errors, so learn and abide by them at all costs. Except
 
 これらのルールは、ほとんどのプロジェクトで読みやすさや開発者の体験をよりよくするために見いだされました。これらに違反してもあなたのコードは動きますが、ごくまれなケースで、かつちゃんと正当を示した上でのみ違反するようにすべきです。
 
-### Priority C: Recommended
+### 優先度 C: 推奨
 
-Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
+同じくらい良いオプションが複数ある場合､一貫性を確保するために任意の選択をすることができます｡これらのルールでは､それぞれ許容可能なオプションを説明し､既定の選択を提案します｡つまり､一貫性があり､良い理由を持ち続ける限り､独自のコードベースで自由に異なる選択肢を作ることができます｡ですが､良い理由はあるのでしょうか!コミュニティの標準に合わせることで､あなたは:
 
-1. train your brain to more easily parse most of the community code you encounter
-2. be able to copy and paste most community code examples without modification
-3. often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
+1. 直面するコミュニティのコードを容易に理解できるように脳を慣れさせます｡
+2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます｡
+3. 少なくとも Vue に関しては､ほとんどの場合､新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます｡
 
 ### Priority D: Use with Caution
 
@@ -1313,114 +1313,114 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 
 
-## Priority C Rules: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
+## 優先度 C のルール: 推奨 (任意の選択肢と認知上のオーバーヘッドの最小化)
 
 
 
-### Component/instance options order <sup data-p="c">recommended</sup>
+### コンポーネント/インスタンス オプション順序 <sup data-p="c">推奨</sup>
 
-**Component/instance options should be ordered consistently.**
+**コンポーネント/インスタンス オプションは､一貫した順序であるべきです｡**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add new properties from plugins.
+これは推奨するコンポーネントオプションの既定の順序です｡それらは種類分けされており､プラグインからどこに新たなプロパティを追加するか知ることができます｡
 
-1. **Side Effects** (triggers effects outside the component)
+1. **副作用** (コンポーネント外への影響)
   - `el`
 
-2. **Global Awareness** (requires knowledge beyond the component)
+2. **グローバルな認識** (コンポーネントを超えた知識が必要)
   - `name`
   - `parent`
 
-3. **Component Type** (changes the type of the component)
+3. **コンポーネントの種類** (コンポーネントの種類を変更)
   - `functional`
 
-4. **Template Modifiers** (changes the way templates are compiled)
+4. **テンプレートの修飾子** (テンプレートのコンパイル方法を変更)
   - `delimiters`
   - `comments`
 
-5. **Template Dependencies** (assets used in the template)
+5. **テンプレートの依存関係** (テンプレートで使用されるアセット)
   - `components`
   - `directives`
   - `filters`
 
-6. **Composition** (merges properties into the options)
+6. **合成** (プロパティをオプションにマージ)
   - `extends`
   - `mixins`
 
-7. **Interface** (the interface to the component)
+7. **インタフェース** (コンポーネントへのインタフェース)
   - `inheritAttrs`
   - `model`
   - `props`/`propsData`
 
-8. **Local State** (local reactive properties)
+8. **ローカルの状態** (ローカル リアクティブ プロパティ)
   - `data`
   - `computed`
 
-9. **Events** (callbacks triggered by reactive events)
+9. **イベント** (リアクティブなイベントによって引き起こされたコールバック)
   - `watch`
-  - Lifecycle Events (in the order they are called)
+  - ライフサイクルイベント (呼び出される順)
 
-10. **Non-Reactive Properties** (instance properties independent of the reactivity system)
+10. **リアクティブではないプロパティ** (リアクティブシステムから独立したインスタンス プロパティ)
   - `methods`
 
-11. **Rendering** (the declarative description of the component output)
+11. **レンダリング** (コンポーネント出力の宣言的な記述)
   - `template`/`render`
   - `renderError`
 
 
 
-### Element attribute order <sup data-p="c">recommended</sup>
+### 要素の属性の順序 <sup data-p="c">推奨</sup>
 
-**The attributes of elements (including components) should be ordered consistently.**
+**要素の属性 (コンポーネントを含む) は､一貫した順序であるべきです｡**
 
-This is the default order we recommend for component options. They're split into categories, so you'll know where to add custom attributes and directives.
+これは推奨するコンポーネントオプションの既定の順序です｡それらは種類分けされており､カスタム属性とディレクティブをどこに追加するか知ることができます｡
 
-1. **Definition** (provides the component options)
+1. **定義** (コンポーネントオプションを提供)
   - `is`
 
-2. **List Rendering** (creates multiple variations of the same element)
+2. **リスト描画** (同じ要素の複数のバリエーションを作成する)
   - `v-for`
 
-2. **Conditionals** (whether the element is rendered/shown)
+2. **条件** (要素が描画/表示されているかどうか)
   - `v-if`
   - `v-else-if`
   - `v-else`
   - `v-show`
   - `v-cloak`
 
-3. **Render Modifiers** (changes the way the element renders)
+3. **描画修飾子** (要素の描画方法を変更)
   - `v-pre`
   - `v-once`
 
-4. **Global Awareness** (requires knowledge beyond the component)
+4. **グローバルな認識** (コンポーネントを超えた知識が必要)
   - `id`
 
-5. **Unique Attributes** (attributes that require unique values)
+5. **一意の属性** (一意の値を必要とする属性)
   - `ref`
   - `key`
   - `slot`
 
-6. **Two-Way Binding** (combining binding and events)
+6. **双方向バインディング** (バインディングとイベントの結合)
   - `v-model`
 
-7. **Other Attributes** (all unspecified bound & unbound attributes)
+7. **その他の属性** (すべての指定されていないバインドされた属性とバインドされていない属性)
 
-8. **Events** (component event listeners)
+8. **イベント** (コンポーネントのイベントリスナ)
   - `v-on`
 
-9. **Content** (overrides the content of the element)
+9. **コンテンツ** (要素のコンテンツを上書きする)
   - `v-html`
   - `v-text`
 
 
 
-### Empty lines in component/instance options <sup data-p="c">recommended</sup>
+### コンポーネント/インスタンス オプションの空行 <sup data-p="c">推奨</sup>
 
-**You may want to add one empty line between multi-line properties, particularly if the options can no longer fit on your screen without scrolling.**
+**特にオプションがスクロールなしでは画面に収まらなくなった場合､複数行に渡るプロバティの間に空行を追加してみてください｡**
 
-When components begin to feel cramped or difficult to read, adding spaces between multi-line properties can make them easier to skim again. In some editors, such as Vim, formatting options like this can also make them easier to navigate with the keyboard.
+コンポーネントに窮屈さや読みづらさを感じたら､複数行に渡るプロバティの間に空行を追加する事でそれらを簡単に読み流すことができるようになります｡ Vim など､一部のエディタでは、このような書式を使用するとキーボードで簡単に移動することができます。
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 props: {
@@ -1450,8 +1450,8 @@ computed: {
 ```
 
 ``` js
-// No spaces are also fine, as long as the component
-// is still easy to read and navigate.
+// コンポーネントの読み取りや移動が容易であれば、
+// 空行がなくても大丈夫です｡
 props: {
   value: {
     type: String,
@@ -1477,12 +1477,12 @@ computed: {
 
 
 
-### Single-file component top-level element order <sup data-p="c">recommended</sup>
+### 単一ファイルコンポーネントのトップレベルの属性の順序 <sup data-p="c">推奨</sup>
 
-**[Single-file components](../guide/single-file-components.html) should always order `template`, `script`, and `style` tags consistently, with `<style>` last, because at least one of the other two is always necessary.**
+**[単一ファイルコンポーネント](../guide/single-file-components.html)では､ `template` ､ `script` ､ `style` タグを一貫した順序にするべきです､ `<style>` は最後です､それは他の2つのうち少なくとも1つが常に必要であるからです。**
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <style>/* ... */</style>
@@ -1504,7 +1504,7 @@ computed: {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <!-- ComponentA.vue -->
