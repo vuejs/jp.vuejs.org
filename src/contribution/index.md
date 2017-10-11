@@ -107,7 +107,7 @@ api.md | API リファレンス | [hikimon](https://github.com/hikimon)
 ----- | ------------- | --- 
 index.md | Priority A Rules | WIP
 index.md | Priority B Rules | [wonderful-panda](https://github.com/wonderful-panda)
-index.md | Priority C Rules | WIP
+index.md | Priority C Rules | [shika358](https://github.com/shika358)
 index.md | Priority D Rules | WIP
 
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
