@@ -33,7 +33,6 @@ These rules have been found to improve readability and/or developer experience i
 
 ### 優先度 C: 推奨
 
-Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
 同じくらい良いオプションが複数ある場合､一貫性を確保するために任意の選択をすることができます｡これらのルールでは､それぞれ許容可能なオプションを説明し､既定の選択を提案します｡つまり､一貫性があり､良い理由を持ち続ける限り､独自のコードベースで自由に異なる選択肢を作ることができます｡ですが､良い理由はあるのでしょうか!コミュニティの標準に合わせることで､あなたは:
 
 1. 直面するコミュニティのコードを容易に理解できるように脳を慣れさせます｡
