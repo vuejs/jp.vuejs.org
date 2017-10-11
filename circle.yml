@@ -16,7 +16,3 @@ deployment:
       - ./node_modules/.bin/hexo generate
       - cp -R ./todomvc public/examples
       - ./node_modules/.bin/hexo deploy
-general:
-  branches:
-    only:
-      - lang-ja
