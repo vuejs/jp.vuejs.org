@@ -1667,12 +1667,12 @@ computed: {
 
 
 
-### Single-file component top-level element order <sup data-p="c">recommended</sup>
+### 単一ファイルコンポーネントのトップレベルの属性の順序 <sup data-p="c">推奨</sup>
 
-**[Single-file components](../guide/single-file-components.html) should always order `template`, `script`, and `style` tags consistently, with `<style>` last, because at least one of the other two is always necessary.**
+**[単一ファイルコンポーネント](../guide/single-file-components.html)では､ `template` ､ `script` ､ `style` タグを一貫した順序にするべきです､ `<style>` は最後です､それは他の2つのうち少なくとも1つが常に必要であるからです。**
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <style>/* ... */</style>
@@ -1694,7 +1694,7 @@ computed: {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <!-- ComponentA.vue -->
