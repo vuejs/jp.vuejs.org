@@ -1603,14 +1603,14 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 
 
-### Empty lines in component/instance options <sup data-p="c">recommended</sup>
+### コンポーネント/インスタンス オプションの空行 <sup data-p="c">推奨</sup>
 
-**You may want to add one empty line between multi-line properties, particularly if the options can no longer fit on your screen without scrolling.**
+**特にオプションがスクロールなしでは画面に収まらなくなった場合､複数行に渡るプロバティの間に空行を追加してみてください｡**
 
-When components begin to feel cramped or difficult to read, adding spaces between multi-line properties can make them easier to skim again. In some editors, such as Vim, formatting options like this can also make them easier to navigate with the keyboard.
+コンポーネントに窮屈さや読みづらさを感じたら､複数行に渡るプロバティの間に空行を追加する事でそれらを簡単に読み流すことができるようになります｡ Vim など､一部のエディタでは、このような書式を使用するとキーボードで簡単に移動することができます。
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 props: {
@@ -1640,8 +1640,8 @@ computed: {
 ```
 
 ``` js
-// No spaces are also fine, as long as the component
-// is still easy to read and navigate.
+// コンポーネントの読み取りや移動が容易であれば、
+// 空行がなくても大丈夫です｡
 props: {
   value: {
     type: String,
