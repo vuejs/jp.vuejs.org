@@ -31,13 +31,14 @@ These rules have been found to improve readability and/or developer experience i
 -->
 これらのルールは、ほとんどのプロジェクトで読みやすさや開発者の体験をよりよくするために見いだされました。これらに違反してもあなたのコードは動きますが、ごくまれなケースで、かつちゃんと正当を示した上でのみ違反するようにすべきです。
 
-### Priority C: Recommended
+### 優先度 C: 推奨
 
 Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
+同じくらい良いオプションが複数ある場合､一貫性を確保するために任意の選択をすることができます｡これらのルールでは､それぞれ許容可能なオプションを説明し､既定の選択を提案します｡つまり､一貫性があり､良い理由を持ち続ける限り､独自のコードベースで自由に異なる選択肢を作ることができます｡ですが､良い理由はあるのでしょうか!コミュニティの標準に合わせることで､あなたは:
 
-1. train your brain to more easily parse most of the community code you encounter
-2. be able to copy and paste most community code examples without modification
-3. often find new hires are already accustomed to your preferred coding style, at least in regards to Vue
+1. 直面するコミュニティのコードを容易に理解できるように脳を慣れさせます｡
+2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます｡
+3. 少なくとも Vue に関しては､ほとんどの場合､新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます｡
 
 ### Priority D: Use with Caution
 
