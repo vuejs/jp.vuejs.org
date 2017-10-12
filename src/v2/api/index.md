@@ -598,7 +598,8 @@ updated: 2017-09-23
     data: {
       a: 1,
       b: 2,
-      c: 3
+      c: 3,
+      d: 4
     },
     watch: {
       a: function (val, oldVal) {
@@ -610,6 +611,11 @@ updated: 2017-09-23
       c: {
         handler: function (val, oldVal) { /* ... */ },
         deep: true
+      },
+      // the callback will be called immediately after the start of the observation
+      d: {
+        handler: function (val, oldVal) { /* ... */ },
+        immediate: true
       }
     }
   })
