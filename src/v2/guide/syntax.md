@@ -115,7 +115,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 <form v-on:submit.prevent="onSubmit"></form>
 ```
 
-これらの機能を調べるとき、この後、[`v-on`](https://jp.vuejs.org/v2/guide/events.html#イベント修飾子) や [`v-model`](https://jp.vuejs.org/v2/guide/forms.html#修飾子)については、修飾子の他の例を見るでしょう。
+これらの機能を調べるとき、この後、[`v-on`](events.html#イベント修飾子) や [`v-model`](forms.html#修飾子)については、修飾子の他の例を見るでしょう。
 
 ## 省略記法
 
