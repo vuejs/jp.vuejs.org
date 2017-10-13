@@ -217,9 +217,7 @@ Polymer の Custom Elements は HTML ファイルの中に書くことになり�
 
 ## Riot
 
-Riot 2.0 はよく似たコンポーネントベースの開発モデル（"タグ"と Riot では呼ばれています）を提供しており、必要最小限の美しく設計された API を持っています。Riot と Vue はおそらくその設計哲学の多くが共通しているのでしょう。しかしながら、Riot よりも少し重いにも関わらず、Vue はいくつか著しく優れた点を持っています：
+Riot 3.0 はよく似たコンポーネントベースの開発モデル（"タグ"と Riot では呼ばれています）を提供しており、必要最小限の美しく設計された API を持っています。Riot と Vue はおそらくその設計哲学の多くが共通しているのでしょう。しかしながら、Riot よりも少し重いにも関わらず、Vue はいくつか著しく優れた点を持っています：
 
-- [トランジションエフェクトシステム](transitions.html)。Riot にはありません。
-- ずっと強力なルータ。Riot のルーティング API は極めて最小限です。
 - より優れた性能。Riot は 仮想 DOM を使用しているというよりむしろ[DOM ツリーをトラバース](http://riotjs.com/compare/#virtual-dom-vs-expressions-binding)しているため、AngularJS と同じ性能問題に苦しめられています。
 - より熟成したツールのサポート。Vue は [webpack](https://github.com/vuejs/vue-loader)、[Browserify](https://github.com/vuejs/vueify) の公式サポートを提供していますが、対して Riot はビルドシステムの統合についてはコミュニティのサポートに頼っています。
