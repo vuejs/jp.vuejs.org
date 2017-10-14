@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2017-10-10
+updated: 2017-10-14
 type: guide
 order: 801
 ---
@@ -171,7 +171,7 @@ Angular は本当に AngularJS から完全に異なるフレームワークな�
 
 性能面では、2 つのフレームワークは非常に速く、判決するための現実世界のユースケースでの十分なデータはありません。しかしながら、もしあなたがいくつかの数字を見ることを決意したのなら、この[サードパーティのベンチマーク](http://stefankrause.net/js-frameworks-benchmark4/webdriver-ts/table.html)から Vue 2.0 は Angular よりも優位なようです。
 
-Angular の最近のバージョンは、AOT コンパイルと tree-shaking によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (圧縮済みで 〜 30 KB) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (圧縮済みで 〜 130 KB) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
+Angular の最近のバージョンは、[AOT コンパイル](https://ja.wikipedia.org/wiki/%E4%BA%8B%E5%89%8D%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9)と [tree-shaking](https://en.wikipedia.org/wiki/Tree_shaking) によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (圧縮済みで 〜 30 KB) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (圧縮済みで 〜 130 KB) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
 
 ### 柔軟性
 
@@ -217,9 +217,7 @@ Polymer の Custom Elements は HTML ファイルの中に書くことになり�
 
 ## Riot
 
-Riot 2.0 はよく似たコンポーネントベースの開発モデル（"タグ"と Riot では呼ばれています）を提供しており、必要最小限の美しく設計された API を持っています。Riot と Vue はおそらくその設計哲学の多くが共通しているのでしょう。しかしながら、Riot よりも少し重いにも関わらず、Vue はいくつか著しく優れた点を持っています：
+Riot 3.0 はよく似たコンポーネントベースの開発モデル（"タグ"と Riot では呼ばれています）を提供しており、必要最小限の美しく設計された API を持っています。Riot と Vue はおそらくその設計哲学の多くが共通しているのでしょう。しかしながら、Riot よりも少し重いにも関わらず、Vue はいくつか著しく優れた点を持っています：
 
-- [トランジションエフェクトシステム](transitions.html)。Riot にはありません。
-- ずっと強力なルータ。Riot のルーティング API は極めて最小限です。
 - より優れた性能。Riot は 仮想 DOM を使用しているというよりむしろ[DOM ツリーをトラバース](http://riotjs.com/compare/#virtual-dom-vs-expressions-binding)しているため、AngularJS と同じ性能問題に苦しめられています。
 - より熟成したツールのサポート。Vue は [webpack](https://github.com/vuejs/vue-loader)、[Browserify](https://github.com/vuejs/vueify) の公式サポートを提供していますが、対して Riot はビルドシステムの統合についてはコミュニティのサポートに頼っています。
