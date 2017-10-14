@@ -598,7 +598,8 @@ updated: 2017-09-23
     data: {
       a: 1,
       b: 2,
-      c: 3
+      c: 3,
+      d: 4
     },
     watch: {
       a: function (val, oldVal) {
@@ -610,6 +611,11 @@ updated: 2017-09-23
       c: {
         handler: function (val, oldVal) { /* ... */ },
         deep: true
+      },
+      // コールバックは監視の開始後、直ちに呼ばれる
+      d: {
+        handler: function (val, oldVal) { /* ... */ },
+        immediate: true
       }
     }
   })
