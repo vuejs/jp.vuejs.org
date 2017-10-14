@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-09-23
+updated: 2017-10-15
 type: guide
 order: 11
 ---
@@ -1148,6 +1148,7 @@ Vue.component('async-webpack-example', function (resolve) {
 ``` js
 Vue.component(
   'async-webpack-example',
+  // `import` 関数は `Promise` を返します
   () => import('./my-async-component')
 )
 ```
