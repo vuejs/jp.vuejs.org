@@ -612,7 +612,7 @@ updated: 2017-09-23
         handler: function (val, oldVal) { /* ... */ },
         deep: true
       },
-      // the callback will be called immediately after the start of the observation
+      // コールバックは監視の開始後、直ちに呼ばれる
       d: {
         handler: function (val, oldVal) { /* ... */ },
         immediate: true
