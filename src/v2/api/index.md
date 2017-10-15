@@ -230,7 +230,7 @@ updated: 2017-09-23
   })
   ```
 
-  > 2.1.0 から新規: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。Please note that Vue does not come with a Promise polyfill, so if you target browsers that don't support Promises natively (looking at you, IE), you will have to provide a polyfill yourself.
+  > 2.1.0 から新規: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。Vue には Promise ポリフィルが付属していないため、Promise をネイティブにサポートしていないブラウザ (IE かどうか確認して) をターゲットにしている場合は、自分でポリフィルを提供する必要があるという点に注意してください。
 
 - **参照:** [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
@@ -1557,7 +1557,7 @@ updated: 2017-09-23
 
   callback の実行を遅延し、DOM の更新サイクル後に実行します。DOM の更新を待ち受けるためにいくつかのデータを更新した直後に使用してください。callback の `this` コンテキストは自動的にこのメソッドを呼びだすインスタンスに束縛されることを除いて、グローバルな `Vue.nextTick` と同じです。
 
-  > 2.1.0 から新規: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。Please note that Vue does not come with a Promise polyfill, so if you target browsers that don't support Promises natively (looking at you, IE), you will have to provide a polyfill yourself.
+  > 2.1.0 から新規: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。Vue には Promise ポリフィルが付属していないため、Promise をネイティブにサポートしていないブラウザ (IE かどうか確認して) をターゲットにしている場合は、自分でポリフィルを提供する必要があるという点に注意してください。
 
 - **例:**
 
