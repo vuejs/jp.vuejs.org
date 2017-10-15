@@ -1,6 +1,6 @@
 ---
 title: クラスとスタイルのバインディング
-updated: 2017-09-08
+updated: 2017-10-15
 type: guide
 order: 6
 ---
