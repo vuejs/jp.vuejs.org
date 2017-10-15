@@ -106,7 +106,7 @@ updated: 2017-10-15
 
 ### ignoredElements
 
-- **型:** `Array<string>`
+- **型:** `Array<string | RegExp>`
 
 - **デフォルト:** `[]`
 
@@ -114,7 +114,11 @@ updated: 2017-10-15
 
   ``` js
   Vue.config.ignoredElements = [
-    'my-custom-web-component', 'another-web-component'
+    'my-custom-web-component',
+    'another-web-component',
+    // Use a RegExp to ignore all elements that start with "ion-"
+    // 2.5+ only
+    /^ion-/
   ]
   ```
 
