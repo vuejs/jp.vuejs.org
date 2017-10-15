@@ -1,6 +1,6 @@
 ---
 title: 単一ファイルコンポーネント
-updated: 2017-09-22
+updated: 2017-10-15
 type: guide
 order: 402
 ---
@@ -26,7 +26,7 @@ order: 402
 
 - [完全版シンタックスハイライト](https://github.com/vuejs/awesome-vue#source-code-editing)
 - [CommonJS モジュール](https://webpack.js.org/concepts/modules/#what-is-a-webpack-module)
-- [コンポーネントスコープ CSS](https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md)
+- [コンポーネントスコープ CSS](https://vue-loader.vuejs.org/ja/features/scoped-css.html)
 
 約束したとおり、 Pug、 Babel(ES2015 モジュールと一緒に）や Stylus などより美しくかつ機能が豊富なコンポーネントもプリプロセッサとして利用できます。
 
