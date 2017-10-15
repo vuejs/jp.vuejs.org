@@ -5,11 +5,7 @@ type: guide
 order: 404
 ---
 
-## TS と Webpack 2ユーザに向けた、2.2 以降における重要な変更のお知らせ
-
-Vue 2.2 からは 配布ファイルを ES モジュール形式でエクスポートするようにしました。これは webpack 2 が標準で使用する形式です。残念ながら、この変更は意図しないところで破壊的変更をもたらしてしまいました。なぜなら TypeScript と webpack 2 を組み合わせた時、 `import Vue = require('vue')` は Vue そのものではなく総合的な ES モジュールのオブジェクトを返すからです。
-
-将来的には全ての公式で提供する型宣言を、ES モジュール形式でエクスポートするようにしようと考えています。将来性を考えた[推奨構成](#推奨構成) を以下に示しているのでご覧ください。
+> In Vue 2.5.0 we have greatly improved our type declarations to work with the default object-based API. At the same time it introduces a few changes that require upgrade actions. Read [this blog post](https://medium.com/the-vue-point/upcoming-typescript-changes-in-vue-2-5-e9bd7e2ecf08) for more details.
 
 ## NPM パッケージ内の公式型宣言
 
@@ -17,105 +13,66 @@ Vue 2.2 からは 配布ファイルを ES モジュール形式でエクスポ�
 
 これらは [NPM に公開](https://cdn.jsdelivr.net/npm/vue/types/)されており、そして最新の TypeScript は NPM パッケージ内の型宣言を解決する方法を知っています。つまり、NPM でインストールした時、TypeScript を Vue と共に使うための追加のツールを必要としません。
 
+We also plan to provide an option to scaffold a ready-to-go Vue + TypeScript project in `vue-cli` in the near future.
+
 ## 推奨構成
 
 ``` js
-// tsconfig.json
 {
   "compilerOptions": {
-    // ... 他のオプションは除外しています
-    "allowSyntheticDefaultImports": true,
-    "lib": [
-      "dom",
-      "es5",
-      "es2015.promise"
-    ]
-  }
-}
-```
-
-`allowSyntheticDefaultImports` オプションにより以下の記述が可能となることに留意してください:
-
-``` js
-import Vue from 'vue'
-```
-
-これは以下の記述の代わりとなるものです:
-
-``` js
-import Vue = require('vue')
-```
-
-推奨しているのは前者（ES モジュール構文）です。なぜなら推奨している素のES モジュールのやり方と変わらず、そして将来的に全ての公式で提供する型宣言を ES モジュール形式とするように移行しようと考えているからです。
-
-加えて、もし webpack 2 と共に TypeScript を使用しているならば、以下の設定も推奨します:
-
-``` js
-{
-  "compilerOptions": {
-    // ... 他のオプションは除外しています
+    // this aligns with Vue's browser support
+    "target": "es5",
+    // this enables stricter inference for data properties on `this`
+    "strict": true,
+    // if using webpack 2+ or rollup, to leverage tree shaking:
     "module": "es2015",
     "moduleResolution": "node"
   }
 }
 ```
 
-このようにすることで TypeScript に対して ES モジュールの import 文をそのまま残すように伝えることができ、そうすると、webpack 2 は ES モジュール をベースとした tree-shaking を利用できます。
-
 より詳細なことについては [TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を見てください。
 
-## Vue の型宣言の利用
+## Development Tooling
 
-Vue の型定義はたくさんの便利な[型宣言](https://github.com/vuejs/vue/blob/dev/types/index.d.ts)をエクスポートしています。例えば、以下は (`.vue` ファイルにおいて) エクスポートされたコンポーネントオプションオブジェクトにアノテートします:
+For developing Vue applications with TypeScript, we strongly recommend using [Visual Studio Code](https://code.visualstudio.com/), which provides great out-of-the-box support for TypeScript.
 
-``` ts
-import Vue, { ComponentOptions } from 'vue'
+If you are using [single-file components](./single-file-components.html) (SFCs), get the awesome [Vetur extension](https://github.com/vuejs/vetur), which provides TypeScript inference inside SFCs and many other great features.
+  
+## Basic Usage
 
-export default {
-  props: ['message'],
-  template: '<span>{{ message }}</span>'
-} as ComponentOptions<Vue>
-```
+To let TypeScript properly infer types inside Vue component options, you need to define components with `Vue.component` or `Vue.extend`:
 
-## クラススタイルの Vue コンポーネント
+```ts
+import Vue from 'vue'
 
-Vue のコンポーネントオプションは容易に型でアノテートできます:
-
-``` ts
-import Vue, { ComponentOptions }  from 'vue'
-
-// コンポーネントの型を宣言
-interface MyComponent extends Vue {
-  message: string
-  onClick (): void
+const Component = Vue.extend({
+  // type inference enabled
+})
+  
+const Component = {
+  // this will NOT have type inference,
+  // because TypeScript can't tell this is options for a Vue component.
 }
-
-export default {
-  template: '<button @click="onClick">Click!</button>',
-  data: function () {
-    return {
-      message: 'Hello!'
-    }
-  },
-  methods: {
-    onClick: function () {
-      // TypeScriptは `this` が MyComponent 型で、
-      // `this.message` が文字列であることを知っています
-      window.alert(this.message)
-    }
-  }
-// エクスポートされたオプションオブジェクトに
-// MyComponent 型を明示的にアノテートする必要があります
-} as ComponentOptions<MyComponent>
 ```
 
-残念ながら、ここではいくつかの制限があります:
+Note that when using Vetur with SFCs, type inference will be automatically applied to the default export, so there's no need to wrap it in `Vue.extend`:
 
-- __TypeScript は、Vue の API においてすべての型を推論することはできません。__ 例えば、`data` 関数で返された `message` プロパティが `MyComponent` インスタンスに追加されることはわかりません。これは、数値やブール値を `message` に代入すると、リンタとコンパイラは文字列でなければならないというエラーを出力することはできません。
-- この制限のため、__このようなアノテートする型は冗長になります。__ 文字列として `message` を手動で宣言しなければならない唯一の理由は、TypeScript がこの場合に型を推論することができないからです。
+``` html
+<template>
+  ...
+</template>
 
-幸いにも、[vue-class-component](https://github.com/vuejs/vue-class-component)は、これらの問題を両方解決できます。これは公式ライブラリで、`@Component` デコレータでコンポーネントをネイティブな JavaScript クラスとして宣言することができます。例として、上記のコンポーネントを書き直してみましょう:
-
+<script lang="ts">
+export default {
+  // type inference enabled
+}
+</script>
+```
+## Class-Style Vue Components
+  
+If you prefer a class-based API when declaring components, you can use the officially maintained [vue-class-component](https://github.com/vuejs/vue-class-componen) decorator:
+  
 ``` ts
 import Vue from 'vue'
 import Component from 'vue-class-component'
@@ -136,9 +93,7 @@ export default class MyComponent extends Vue {
 }
 ```
 
-この構文では、コンポーネントの定義が短くなるだけでなく、明示的なインタフェース宣言がなくても `message` と `onClick` の型を推論することができます。この戦略では、算出プロパティ、ライフサイクルフック、描画関数の型を扱うこともできます。詳細な使用方法については、[vue-class-component のドキュメント](https://github.com/vuejs/vue-class-component#vue-class-component)を参照してください。
-
-## Vue プラグインの型定義
+## Augmenting Types for Use with Plugins
 
 プラグインは Vue のグローバル/インスタンスプロパティやコンポーネントオプションを追加することがあります。このような場合、TypeScript でそのプラグインを使用したコードをコンパイルするためには型定義が必要になります。幸い、TypeScript には[モジュール拡張（Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)と呼ばれる、すでに存在する型を拡張する機能があります。
 
@@ -162,7 +117,7 @@ declare module 'vue/types/vue' {
 
 ```ts
 var vm = new Vue()
-console.log(vm.$myProperty) // これはうまくコンパイルされるでしょう
+console.log(vm.$myProperty) // これはうまくコンパイルされる
 ```
 
 追加でグローバルプロパティやコンポーネントオプションも定義することもできます:
@@ -171,10 +126,10 @@ console.log(vm.$myProperty) // これはうまくコンパイルされるでし�
 import Vue from 'vue'
 
 declare module 'vue/types/vue' {
-  // `interface` ではなく `namespace` を使うことで
   // グローバルプロパティを定義できます
-  namespace Vue {
-    const $myGlobal: string
+  // on the VueConstructor interface
+  interface VueConstructor {
+    $myGlobal: string
   }
 }
 
