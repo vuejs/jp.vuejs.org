@@ -977,7 +977,7 @@ updated: 2017-10-15
 
 - **型:**
   - **provide:** `Object | () => Object`
-  - **inject:** `Array<string> | { [key: string]: string | Symbol }`
+  - **inject:** `Array<string> | { [key: string]: string | Symbol | Object }`
 
 - **詳細:**
 
@@ -1052,6 +1052,42 @@ updated: 2017-10-15
     data () {
       return {
         bar: this.foo
+      }
+    }
+  }
+  ```
+
+  > In 2.5.0+ injections can be optional with default value:
+
+  ``` js
+  const Child = {
+    inject: {
+      foo: { default: 'foo' }
+    }
+  }
+  ```
+
+  If it needs to be injected from a property with a different name, use `from` to denote the source property:
+
+  ``` js
+  const Child = {
+    inject: {
+      foo: {
+        from: 'bar',
+        default: 'foo'
+      }
+    }
+  }
+  ```
+
+  Similar to prop defaults, you need to use a factory function for non primitive values:
+
+  ``` js
+  const Child = {
+    inject: {
+      foo: {
+        from: 'bar',
+        default: () => [1, 2, 3]
       }
     }
   }
