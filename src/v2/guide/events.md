@@ -244,7 +244,21 @@ methods: {
 Vue.config.keyCodes.f1 = 112
 ```
 
-## 修飾子キー
+### Automatic Key Modifers
+
+> New in 2.5.0+
+
+You can also directly use any valid key names exposed via [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) as modifiers by converting them to kebab-case:
+
+``` html
+<input @keyup.page-down="onPageDown">
+```
+
+In the above example, the handler will only be called if `$event.key === 'PageDown'`.
+
+<p class="tip">A few keys (`.esc` and all arrow keys) have inconsistent `key` values in IE9, their built-in aliases should be preferred if you need to support IE9.</p>
+
+## System Modifier Keys
 
 > 2.1.0 から新規
 
@@ -268,6 +282,20 @@ Vue.config.keyCodes.f1 = 112
 ```
 
 <p class="tip">修飾子キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
+
+### `.exact` Modifier
+
+> New in 2.5.0
+
+The `.exact` modifier should be used in combination with other system modifiers to indicate that the exact combination of modifiers must be pressed for the handler to fire.
+
+``` html
+<!-- this will fire even if Alt or Shift is also pressed -->
+<button @click.ctrl="onClick">A</button>
+
+<!-- this will only fire when only Ctrl is pressed -->
+<button @click.ctrl.exact="onCtrlClick">A</button>
+```
 
 ### マウスボタンの修飾子
 
