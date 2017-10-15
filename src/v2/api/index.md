@@ -2120,6 +2120,18 @@ updated: 2017-10-15
 
 - **参照:** [名前付きスロット](../guide/components.html#名前付きスロット)
 
+### slot-scope
+
+- **Expects:** `function argument expression`
+
+- **Usage:**
+
+  Use to denote an element or component as a scoped slot. The attribute's value should be a valid JavaScript expression that can appear in the argument position of a function signature. This means in supported environments you can also use ES2015 destructuring in the expression.
+
+  This attribute does not support dynamic binding.
+
+- **See also:** [Scoped Slots](../guide/components.html#Scoped-Slots)
+
 ### is
 
 - **要求事項:** `string`

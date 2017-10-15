@@ -968,12 +968,12 @@ Vue.component('child-component', {
 </div>
 ```
 
-親においては、特別な属性 `scope` を持つ `<template>` 要素が存在しなければならず、これはスコープ付きスロット用のテンプレートを示します。`scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前です:
+親においては、特別な属性 `slot-scope` を持つ `<template>` 要素が存在しなければならず、これはスコープ付きスロット用のテンプレートを示します。`slot-scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前として使用されます:
 
 ``` html
 <div class="parent">
   <child>
-    <template scope="props">
+    <template slot-scope="props">
       <span>hello from parent</span>
       <span>{{ props.text }}</span>
     </template>
@@ -992,14 +992,20 @@ Vue.component('child-component', {
 </div>
 ```
 
+> In 2.5.0+, `slot-scope` is no longer limited to `<template>` and can be used on any element or component.
+
 スコープ付きスロットのより一般的なユースケースは、コンポーネント利用者がリスト内の各アイテムの描画方法をカスタマイズできるようにする、リストコンポーネントでしょう:
 
 ``` html
 <my-awesome-list :items="items">
   <!-- scoped slot can be named too -->
-  <template slot="item" scope="props">
-    <li class="my-fancy-item">{{ props.text }}</li>
-  </template>
+  <li
+    slot="item"
+    slot-scope="props"
+    class="my-fancy-item">
+    {{ props.text }}
+  </li>
+
 </my-awesome-list>
 ```
 
@@ -1013,6 +1019,16 @@ Vue.component('child-component', {
     <!-- フォールバックコンテンツはここへ -->
   </slot>
 </ul>
+```
+
+#### Destructuring
+
+`scope-slot`'s value is in fact a valid JavaScript expression that can appear in the argument position of a function signature. This means in supported environments (in single-file components or in modern browsers) you can also use ES2015 destructuring in the expression:
+
+``` html
+<child>
+  <span slot-scope="{ text }">{{ text }}</span>
+</child>
 ```
 
 ## 動的コンポーネント
