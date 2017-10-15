@@ -1,6 +1,6 @@
 ---
 title: Vue インスタンス
-updated: 2017-09-03
+updated: 2017-10-15
 type: guide
 order: 3
 ---
@@ -118,7 +118,7 @@ new Vue({
 
 この他にもインスタンスのライフサイクルの様々な段階で呼ばれるフックがあります。例えば、[`mounted`](../api/#mounted)、 [`updated`](../api/#updated)、そして [`destroyed`](../api/#destroyed) などがあります。全てのライフサイクルフックは、`this` が Vue インスタンスを指す形で実行されます。
 
-<p class="tip">インスタンスプロパティまたはコールバックで[アロー関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions) を使用しないでください。例えば、 `created: () => console.log(this.a)` や `vm.$watch('a', newValue => this.myMethod())` です。アロー関数は親コンテキストに束縛されるため、`this` は期待どおりに Vue インスタンスにならず、そして `this.a` や `this.myMethod` は undefined になります。</p>
+<p class="tip">インスタンスプロパティまたはコールバックで[アロー関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions) を使用しないでください。例えば、 `created: () => console.log(this.a)` や `vm.$watch('a', newValue => this.myMethod())` です。アロー関数は親コンテキストに束縛されるため、`this` は期待どおりに Vue インスタンスにならず、そしてしばしば、`Uncaught TypeError: Cannot read property of undefined` または `Uncaught TypeError: this.myMethod is not a function` のようなエラーが発生します。</p>
 
 ## ライフサイクルダイアグラム
 

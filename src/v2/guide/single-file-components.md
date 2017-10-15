@@ -1,6 +1,6 @@
 ---
 title: 単一ファイルコンポーネント
-updated: 2017-09-22
+updated: 2017-10-15
 type: guide
 order: 402
 ---
@@ -26,7 +26,7 @@ order: 402
 
 - [完全版シンタックスハイライト](https://github.com/vuejs/awesome-vue#source-code-editing)
 - [CommonJS モジュール](https://webpack.js.org/concepts/modules/#what-is-a-webpack-module)
-- [コンポーネントスコープ CSS](https://github.com/vuejs/vue-loader/blob/master/docs/en/features/scoped-css.md)
+- [コンポーネントスコープ CSS](https://vue-loader.vuejs.org/ja/features/scoped-css.html)
 
 約束したとおり、 Pug、 Babel(ES2015 モジュールと一緒に）や Stylus などより美しくかつ機能が豊富なコンポーネントもプリプロセッサとして利用できます。
 
@@ -49,7 +49,11 @@ order: 402
 <style src="./my-component.css"></style>
 ```
 
-## 始める
+## はじめる
+
+### サンドボックスの例
+
+すぐに触ってそして単一ファイルコンポーネントを試したい場合は、CodeSandbox 上の[この単純な todo アプリケーション](https://codesandbox.io/s/o29j95wx9) をチェックしてください。
 
 ### JavaScript でモジュールビルドシステムが初めてなユーザー向け
 
@@ -59,11 +63,9 @@ order: 402
 
 - **Modern JavaScript with ES2015/16**: Babel の [Learn ES2015 guide](https://babeljs.io/docs/learn-es2015/) を読んでください。現状では全ての機能を暗記する必要はないですが、参考として戻れるようにしておいてください。
 
-これらのリソースに没頭した後は、 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートを確認することをお勧めします。手順に沿って学習することで、あっという間に ES2015 とホットリローディングで動作した `.vue` コンポーネントの Vue プロジェクトを持っているはずです！
+これらのリソースに没頭した後は、 [webpack](https://github.com/vuejs-templates/webpack) テンプレートを確認することをお勧めします。手順に沿って学習することで、あっという間に ES2015 とホットリローディングで動作した `.vue` コンポーネントの Vue プロジェクトを持っているはずです！
 
-テンプレートでは、多数の"モジュール"を取りまとめ最終的なアプリケーションに束ねてくれる [Webpack](https://webpack.js.org/) というモジュールバンドラーを使用します。 Webpack についてもっと学ぶには、[それらの公式なドキュメント](https://webpack.js.org/configuration/)や [Webpack Academy](https://webpack.academy/p/the-core-concepts) を参照すると良いでしょう。
-
-Webpack で、各モジュールは、バンドルに含まれる前に "loader" により変換されます。また Vue では `.vue` 単一ファイルコンポーネントをコンパイルするために [vue-loader](https://github.com/vuejs/vue-loader) を推奨しています。 [webpack-simple](https://github.com/vuejs-templates/webpack-simple) テンプレートはあなたのために全てセットアップ済みの状態で用意してありますが、もし Webpack と `.vue` コンポーネントについてもっと学びたい場合は、[vue-loader ドキュメント](https://vue-loader.vuejs.org) を読むこともできます。
+Webpack 自体の詳細については、[公式ドキュメント](https://webpack.js.org/configuration/)や [Webpack Academy](https://webpack.academy/p/the-core-concepts) を参照してください。Webpack では、各ファイルはバンドルに含まれる前に"ローダ (loader)" によって変換され、Vue は単一ファイル(`.vue`)コンポーネントを変換するための [vue-loader](https://vue-loader.vuejs.org) プラグインを提供します。
 
 ### 上級者ユーザー向け
 

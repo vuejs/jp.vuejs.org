@@ -1,6 +1,6 @@
 ---
 title: クラスとスタイルのバインディング
-updated: 2017-09-08
+updated: 2017-10-15
 type: guide
 order: 6
 ---
@@ -104,7 +104,7 @@ data: {
 <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
 ```
 
-これは常に `errorClass` が適用されますが、`isActive` が `true` のときにだけ `activeClass` クラスが適用されます。
+これは常に `errorClass` が適用されますが、`isActive` が truthy (`true` になりうる)な値のときにだけ `activeClass` クラスが適用されます。
 
 しかしながら、これは複数条件のクラスがある場合は少し冗長です。なので配列構文内部ではオブジェクト構文も使えます:
 

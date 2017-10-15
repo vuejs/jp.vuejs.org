@@ -1,6 +1,6 @@
 ---
 title: 条件付きレンダリング
-updated: 2017-07-21
+updated: 2017-10-15
 type: guide
 order: 7
 ---
@@ -22,7 +22,7 @@ Vue.js では、同じことを達成するために、`v-if` ディレクティ
 <h1 v-if="ok">Yes</h1>
 ```
 
-これは、`v-else` で "else" ブロックを追加することも可能です:
+これは、`v-else` で "else ブロック" を追加することも可能です:
 
 ``` html
 <h1 v-if="ok">Yes</h1>
