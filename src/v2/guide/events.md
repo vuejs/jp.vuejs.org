@@ -1,6 +1,6 @@
 ---
 title: イベントハンドリング
-updated: 2017-09-03
+updated: 2017-10-17
 type: guide
 order: 9
 ---
@@ -244,21 +244,21 @@ methods: {
 Vue.config.keyCodes.f1 = 112
 ```
 
-### Automatic Key Modifers
+### 自動キー修飾子
 
-> New in 2.5.0+
+>  2.5.0 で新規追加
 
-You can also directly use any valid key names exposed via [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) as modifiers by converting them to kebab-case:
+直接、任意の有効なキー名をそれらをケバブケースに変換することによって修飾子として [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) 経由でエクスポーズできます。
 
 ``` html
 <input @keyup.page-down="onPageDown">
 ```
 
-In the above example, the handler will only be called if `$event.key === 'PageDown'`.
+上記例では、ハンドラは `$event.key === 'PageDown'` の場合だけ呼ばれます。
 
-<p class="tip">A few keys (`.esc` and all arrow keys) have inconsistent `key` values in IE9, their built-in aliases should be preferred if you need to support IE9.</p>
+<p class="tip">いくつかのキー (`.esc`、そして全てのアローキー) は IE9 で一貫性のない `key` 値を持っています。IE9 をサポートする必要がある場合、組み込みのエイリアスが優先されます。</p>
 
-## System Modifier Keys
+## システム修飾子キー
 
 > 2.1.0 から新規
 
@@ -283,17 +283,17 @@ In the above example, the handler will only be called if `$event.key === 'PageDo
 
 <p class="tip">修飾子キーは通常のキーとは異なり、`keyup` イベントと一緒に使用するときは、イベントが発生したときに押さなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながらキーを離したときにのみ、トリガーされます。`ctrl` キーだけを離すと、トリガーされません。</p>
 
-### `.exact` Modifier
+### `.exact` 修飾子
 
-> New in 2.5.0+
+> 2.5.0 で新規追加
 
-The `.exact` modifier should be used in combination with other system modifiers to indicate that the exact combination of modifiers must be pressed for the handler to fire.
+`.exact` 修飾子は他のシステム修飾子と組み合わせて使用して、ハンドラが起動するために、修飾子の厳密な組み合わせを押す必要があるということ示します。
 
 ``` html
-<!-- this will fire even if Alt or Shift is also pressed -->
+<!-- これは Alt キー または Shift キーを押された場合でも、発行されます -->
 <button @click.ctrl="onClick">A</button>
 
-<!-- this will only fire when only Ctrl is pressed -->
+<!-- これは Ctrl キーが押されたときだけ発行されます -->
 <button @click.ctrl.exact="onCtrlClick">A</button>
 ```
 

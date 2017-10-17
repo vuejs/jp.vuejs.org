@@ -1,11 +1,11 @@
 ---
 title: TypeScript のサポート
-updated: 2017-10-01
+updated: 2017-10-17
 type: guide
 order: 404
 ---
 
-> In Vue 2.5.0+ we have greatly improved our type declarations to work with the default object-based API. At the same time it introduces a few changes that require upgrade actions. Read [this blog post](https://medium.com/the-vue-point/upcoming-typescript-changes-in-vue-2-5-e9bd7e2ecf08) for more details.
+> Vue 2.5.0 以降で、デフォルトのオブジェクトベースの API を使用するため型宣言が大幅に改善されました。同時に、アップグレード操作を必須とするいくつかの変更が導入されています。より詳細は[このブログ記事](https://medium.com/the-vue-point/upcoming-typescript-changes-in-vue-2-5-e9bd7e2ecf08)を読んで下さい。
 
 ## NPM パッケージ内の公式型宣言
 
@@ -13,18 +13,18 @@ order: 404
 
 これらは [NPM に公開](https://cdn.jsdelivr.net/npm/vue/types/)されており、そして最新の TypeScript は NPM パッケージ内の型宣言を解決する方法を知っています。つまり、NPM でインストールした時、TypeScript を Vue と共に使うための追加のツールを必要としません。
 
-We also plan to provide an option to scaffold a ready-to-go Vue + TypeScript project in `vue-cli` in the near future.
+近い将来、`vue-cli` で準備が整った  Vue + TypeScript プロジェクトで scaffold するためのオプションも提供する予定です。
 
 ## 推奨構成
 
 ``` js
 {
   "compilerOptions": {
-    // this aligns with Vue's browser support
+    // これは Vue のブラウザサポートに合わせます
     "target": "es5",
-    // this enables stricter inference for data properties on `this`
+    // これは `this` におけるデータプロパティに対して厳密な推論を可能にします
     "strict": true,
-    // if using webpack 2+ or rollup, to leverage tree shaking:
+    // webpack 2 以降 または rollup を使用している場合、ツリーシェイキングを活用するために
     "module": "es2015",
     "moduleResolution": "node"
   }
@@ -33,30 +33,30 @@ We also plan to provide an option to scaffold a ready-to-go Vue + TypeScript pro
 
 より詳細なことについては [TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を見てください。
 
-## Development Tooling
+## 開発ツール
 
-For developing Vue applications with TypeScript, we strongly recommend using [Visual Studio Code](https://code.visualstudio.com/), which provides great out-of-the-box support for TypeScript.
+TypeScript による Vue アプリケーションを開発するために、すぐに利用できる TypeScript のサポートを提供する [Visual Studio Code](https://code.visualstudio.com/) を使用することを強く勧めます。
 
-If you are using [single-file components](./single-file-components.html) (SFCs), get the awesome [Vetur extension](https://github.com/vuejs/vetur), which provides TypeScript inference inside SFCs and many other great features.
+[単一ファイルコンポーネント](./single-file-components.html) (SFC) を使用している場合、SFC 内部で TypeScript インターフェイスと他の多くの優れた機能を提供する素晴らしい [Vetur 拡張](https://github.com/vuejs/vetur) を入手してください。
   
-## Basic Usage
+## 基本的な使い方
 
-To let TypeScript properly infer types inside Vue component options, you need to define components with `Vue.component` or `Vue.extend`:
+Vue コンポーネントオプション内部で TypeScript が型を適切に推測できるようにするには、`Vue.component` または `Vue.extend` でコンポーネントを定義する必要があります:
 
 ```ts
 import Vue from 'vue'
 
 const Component = Vue.extend({
-  // type inference enabled
+  // 型推論を有効にする
 })
   
 const Component = {
-  // this will NOT have type inference,
-  // because TypeScript can't tell this is options for a Vue component.
+  // これは型推論を持っていません、
+  // なぜなら、これは Vue コンポーネントのオプションであるということを伝えることができないためです。
 }
 ```
 
-Note that when using Vetur with SFCs, type inference will be automatically applied to the default export, so there's no need to wrap it in `Vue.extend`:
+Vetur と SFC を使用すると、型推論は自動的にデフォルトでエクスポートに適用されるため `Vue.extend` でラップする必要はない、ということに注意してください:
 
 ``` html
 <template>
@@ -65,13 +65,14 @@ Note that when using Vetur with SFCs, type inference will be automatically appli
 
 <script lang="ts">
 export default {
-  // type inference enabled
+  // 型推論を有効にする
 }
 </script>
 ```
-## Class-Style Vue Components
+
+## クラススタイル Vue コンポーネント
   
-If you prefer a class-based API when declaring components, you can use the officially maintained [vue-class-component](https://github.com/vuejs/vue-class-componen) decorator:
+コンポーネントを宣言するときにクラスベース API を使用する場合は、公式にメンテナンスされている [vue-class-component](https://github.com/vuejs/vue-class-component) のデコレータを使用できます:
   
 ``` ts
 import Vue from 'vue'
@@ -93,9 +94,9 @@ export default class MyComponent extends Vue {
 }
 ```
 
-## Augmenting Types for Use with Plugins
+## プラグインで使用するための型拡張
 
-プラグインは Vue のグローバル/インスタンスプロパティやコンポーネントオプションを追加することがあります。このような場合、TypeScript でそのプラグインを使用したコードをコンパイルするためには型定義が必要になります。幸い、TypeScript には[モジュール拡張（Module Augmentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)と呼ばれる、すでに存在する型を拡張する機能があります。
+プラグインは Vue のグローバル/インスタンスプロパティやコンポーネントオプションを追加することがあります。このような場合、TypeScript でそのプラグインを使用したコードをコンパイルするためには型定義が必要になります。幸い、TypeScript には[モジュール拡張 (Module Augmentation)](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) と呼ばれる、すでに存在する型を拡張する機能があります。
 
 例えば、`string` 型をもつ `$myProperty` インスタンスプロパティを定義するには:
 
@@ -126,8 +127,8 @@ console.log(vm.$myProperty) // これはうまくコンパイルされる
 import Vue from 'vue'
 
 declare module 'vue/types/vue' {
+  // `VueConstructor` インターフェイスにおいて
   // グローバルプロパティを定義できます
-  // on the `VueConstructor` interface
   interface VueConstructor {
     $myGlobal: string
   }

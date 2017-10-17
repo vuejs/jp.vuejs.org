@@ -1,6 +1,6 @@
 ---
 type: api
-updated: 2017-10-15
+updated: 2017-10-17
 ---
 
 ## グローバル設定
@@ -116,8 +116,8 @@ updated: 2017-10-15
   Vue.config.ignoredElements = [
     'my-custom-web-component',
     'another-web-component',
-    // Use a `RegExp` to ignore all elements that start with "ion-"
-    // 2.5+ only
+    // "ion-" で始まる全ての要素を無視するために `RegExp` を使用する
+    // 2.5 以降だけ
     /^ion-/
   ]
   ```
@@ -863,25 +863,25 @@ updated: 2017-10-15
 
 ### errorCaptured
 
-> New in 2.5.0+
+> 2.5.0 から新規
 
-- **Type:** `(err: Error, vm: Component, info: string) => ?boolean`
+- **型:** `(err: Error, vm: Component, info: string) => ?boolean`
 
-- **Details:**
+- **詳細:**
 
-  Called when an error from any desendent component is captured. The hook receives three arguments: the error, the component instance that triggered the error, and a string containing information on where the error was captured. The hook can return `false` to stop the error from propagating further.
+  任意の子孫コンポーネントからエラーが捕捉されるときに呼び出されます。フックは、エラー、エラーをトリガするコンポーネントインスタンス、そしてどこでエラーが捕捉されたかの文字列情報、これら 3 つの引数を受け取ります。フックはエラーがさらにもっと伝播するのを防ぐために、`false` を返すことができます。
 
-  <p class="tip">You can modify component state in this hook. However, it is important to have conditionals in your template or render function that short circuits other content when an error has been captured; otherwise the component will be thrown into an infinite render loop.</p>
+  <p class="tip">このフックでコンポーネントの状態を変更できます。ただし、エラーが捕捉されたときに他のコンテンツを手短に迂回させる、テンプレートにおける条件または描画関数を含めるのが重要です。それ以外の場合、コンポーネントは無限描画ループに投げられます。</p>
 
-  **Error Propagation Rules**
+  **エラー伝播ルール**
 
-  - By default, all errors are still sent to the global `config.errorHandler` if it is defined, so that these errors can still be reported to an analytics service in a single place.
+  - 標準で、これらのエラーは 1 箇所で分析サービスにレポートすることができるため、全てのエラーはグローバルな `config.errorHandler` (それが定義されている場合)に送信されます。
 
-  - If multiple `errorCaptured` hooks exist on a component's inheritance chain or parent chain, all of them will be invoked on the same error.
+  - 複数の `errorCaptured` フックがコンポーネントの継承チェーンまたは親チェーンに存在する場合は、それらの全ては、同じエラーで呼び出されます。
 
-  - If the `errorCaptured` hook itself throws an error, both this error and the original captured error are sent to the global `config.errorHandler`.
+  - `errorCaptured` フック自身がエラーを投げる場合、このエラーと元の捕捉されたエラー両方は、グローバルな `config.errorHandler` に送られます。
 
-  - An `errorCaptured` hook can return `false` to prevent the error from propagating further. This is essentially syaing "this error has been handled and should be ignored." It will prevent any additional `errorCaptured` hooks or the global `config.errorHandler` from being invoked for this error.
+  - `errorCaptured` フックはエラーがさらに伝播するのを防ぐために `false` を返すことができます。これは本質的に「このエラーは処理されてかつ無視する必要がある」と言っているに等しいです。任意に追加する `errorCaptured` フックまたはグローバルな `config.errorHandler` がこのエラーのために呼び出されないように防ぐ必要があります。
 
 ## オプション / アセット
 
@@ -1061,7 +1061,7 @@ updated: 2017-10-15
   }
   ```
 
-  > In 2.5.0+ injections can be optional with default value:
+  > 2.5.0 以降では、注入はデフォルト値で任意にできます:
 
   ``` js
   const Child = {
@@ -1071,7 +1071,7 @@ updated: 2017-10-15
   }
   ```
 
-  If it needs to be injected from a property with a different name, use `from` to denote the source property:
+  別の名前のプロパティから注入する必要がある場合は、`from` を使用して元のプロパティを指定します:
 
   ``` js
   const Child = {
@@ -1084,7 +1084,7 @@ updated: 2017-10-15
   }
   ```
 
-  Similar to prop defaults, you need to use a factory function for non primitive values:
+  プロパティのでデフォルトと同様に、プリミティブ値以外に対してはファクトリ関数を使用する必要があります:
 
   ``` js
   const Child = {
@@ -2122,15 +2122,15 @@ updated: 2017-10-15
 
 ### slot-scope
 
-- **Expects:** `function argument expression`
+- **要求事項:** `function argument expression`
 
-- **Usage:**
+- **使用方法:**
 
-  Use to denote an element or component as a scoped slot. The attribute's value should be a valid JavaScript expression that can appear in the argument position of a function signature. This means in supported environments you can also use ES2015 destructuring in the expression.
+  要素またはコンポーネントをスコープ付きスロットとして示すときに使用します。属性の値は、関数シグネチャの引数位置に表示できる有効な JavaScript 式が必要です。これは、式で ES2015 destructuring を使用できる環境をサポートすることを意味します。
 
-  This attribute does not support dynamic binding.
+  この属性は動的なバインディングはサポートしません。
 
-- **See also:** [Scoped Slots](../guide/components.html#Scoped-Slots)
+- **See also:** [スコープ付きスロット](../guide/components.html#スコープ付きスロット)
 
 ### is
 

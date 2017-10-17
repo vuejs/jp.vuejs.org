@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-10-15
+updated: 2017-10-17
 type: guide
 order: 11
 ---
@@ -992,13 +992,13 @@ Vue.component('child-component', {
 </div>
 ```
 
-> In 2.5.0+, `slot-scope` is no longer limited to `<template>` and can be used on any element or component.
+> 2.5.0 以降では、`slot-scope` はもはや`<template>` に限定されず、どの要素やコンポーネントでも使用できます。
 
 スコープ付きスロットのより一般的なユースケースは、コンポーネント利用者がリスト内の各アイテムの描画方法をカスタマイズできるようにする、リストコンポーネントでしょう:
 
 ``` html
 <my-awesome-list :items="items">
-  <!-- scoped slot can be named too -->
+  <!-- スコープ付きスロットにも名前をつけることができます -->
   <li
     slot="item"
     slot-scope="props"
@@ -1023,7 +1023,7 @@ Vue.component('child-component', {
 
 #### Destructuring
 
-`scope-slot`'s value is in fact a valid JavaScript expression that can appear in the argument position of a function signature. This means in supported environments (in single-file components or in modern browsers) you can also use ES2015 destructuring in the expression:
+`scope-slot` の値は実際には関数シグネチャの引数位置に表示できる有効な JavaScript 式です。これは、式で ES2015 destructuring を使用できる環境(単一ファイルコンポーネントまたはモダンなブラウザ)をサポートすることを意味します:
 
 ``` html
 <child>
