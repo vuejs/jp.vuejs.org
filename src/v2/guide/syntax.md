@@ -1,6 +1,6 @@
 ---
 title: テンプレート構文
-updated: 2017-10-14
+updated: 2017-10-17
 type: guide
 order: 4
 ---
@@ -109,7 +109,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 ### 修飾子
 
-修飾子 (Modifier) は、ドットで表記された特別な接尾語で、ディレクティブが特別な方法で束縛されるべきということを示します。例えば、`.prevent` 修飾子は `v-on` ディレクティブに、イベントがトリガーされた際 `event.preventDefault()` を呼ぶように伝えます:
+修飾子 (Modifier) は、ドットで表記された特別な接尾語で、ディレクティブが特別な方法で束縛されるべきということを示します。例えば、`.prevent` 修飾子は `v-on` ディレクティブに、イベントがトリガされた際 `event.preventDefault()` を呼ぶように伝えます:
 
 ``` html
 <form v-on:submit.prevent="onSubmit"></form>
