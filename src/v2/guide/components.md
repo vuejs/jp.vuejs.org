@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-10-15
+updated: 2017-10-17
 type: guide
 order: 11
 ---
@@ -504,7 +504,7 @@ date picker プラグインのテーマを指定するには、次のような�
 すべての Vue インスタンスは [イベントインターフェイス](../api/#インスタンスメソッド-イベント) を実装しています。これは以下をできることを意味します:
 
 - `$on(eventName)`を使用してイベントを購読します。
-- `$emit(eventName)`を使用して自身にイベントをトリガーします。
+- `$emit(eventName)`を使用して自身にイベントをトリガします。
 
 <p class="tip">Vue のカスタムイベントはブラウザの [EventTarget API](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) とは別ものであることに注意してください。同等に動作しますが、`$on` と `$emit` は `addEventListener` と `dispatchEvent` に対するエイリアスでは__ありません__。</p>
 
@@ -968,12 +968,12 @@ Vue.component('child-component', {
 </div>
 ```
 
-親においては、特別な属性 `scope` を持つ `<template>` 要素が存在しなければならず、これはスコープ付きスロット用のテンプレートを示します。`scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前です:
+親においては、特別な属性 `slot-scope` を持つ `<template>` 要素が存在しなければならず、これはスコープ付きスロット用のテンプレートを示します。`slot-scope` の値は、子から渡された props オブジェクトを保持する一時変数の名前として使用されます:
 
 ``` html
 <div class="parent">
   <child>
-    <template scope="props">
+    <template slot-scope="props">
       <span>hello from parent</span>
       <span>{{ props.text }}</span>
     </template>
@@ -992,14 +992,20 @@ Vue.component('child-component', {
 </div>
 ```
 
+> 2.5.0 以降では、`slot-scope` はもはや`<template>` に限定されず、どの要素やコンポーネントでも使用できます。
+
 スコープ付きスロットのより一般的なユースケースは、コンポーネント利用者がリスト内の各アイテムの描画方法をカスタマイズできるようにする、リストコンポーネントでしょう:
 
 ``` html
 <my-awesome-list :items="items">
-  <!-- scoped slot can be named too -->
-  <template slot="item" scope="props">
-    <li class="my-fancy-item">{{ props.text }}</li>
-  </template>
+  <!-- スコープ付きスロットにも名前をつけることができます -->
+  <li
+    slot="item"
+    slot-scope="props"
+    class="my-fancy-item">
+    {{ props.text }}
+  </li>
+
 </my-awesome-list>
 ```
 
@@ -1013,6 +1019,16 @@ Vue.component('child-component', {
     <!-- フォールバックコンテンツはここへ -->
   </slot>
 </ul>
+```
+
+#### 分割代入
+
+`scope-slot` の値は実際には関数シグネチャの引数位置に表示できる有効な JavaScript 式です。これは、式で ES2015 destructuring を使用できる環境(単一ファイルコンポーネントまたはモダンなブラウザ)をサポートすることを意味します:
+
+``` html
+<child>
+  <span slot-scope="{ text }">{{ text }}</span>
+</child>
 ```
 
 ## 動的コンポーネント
@@ -1078,7 +1094,7 @@ Vue コンポーネントのための API は、本質的に、プロパティ�
 
 - **プロパティ** 外部環境がコンポーネントにデータを渡すことを可能にします。
 
-- **イベント** コンポーネントが外部環境の副作用をトリガーすることを可能にします。
+- **イベント** コンポーネントが外部環境の副作用をトリガすることを可能にします。
 
 - **スロット** 外部によって追加されるコンテンツとともにコンポーネントを構成することを可能にします。
 
