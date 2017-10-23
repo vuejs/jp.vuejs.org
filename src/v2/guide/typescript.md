@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-10-17
+updated: 2017-10-23
 type: guide
 order: 404
 ---
@@ -54,20 +54,6 @@ const Component = {
   // これは型推論を持っていません、
   // なぜなら、これは Vue コンポーネントのオプションであるということを伝えることができないためです。
 }
-```
-
-Vetur と SFC を使用すると、型推論は自動的にデフォルトでエクスポートに適用されるため `Vue.extend` でラップする必要はない、ということに注意してください:
-
-``` html
-<template>
-  ...
-</template>
-
-<script lang="ts">
-export default {
-  // 型推論を有効にする
-}
-</script>
 ```
 
 ## クラススタイル Vue コンポーネント

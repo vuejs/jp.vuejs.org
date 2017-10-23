@@ -1,6 +1,6 @@
 ---
 title: コンポーネント
-updated: 2017-10-17
+updated: 2017-10-23
 type: guide
 order: 11
 ---
@@ -1023,7 +1023,7 @@ Vue.component('child-component', {
 
 #### 分割代入
 
-`scope-slot` の値は実際には関数シグネチャの引数位置に表示できる有効な JavaScript 式です。これは、式で ES2015 destructuring を使用できる環境(単一ファイルコンポーネントまたはモダンなブラウザ)をサポートすることを意味します:
+`slot-scope` の値は実際には関数シグネチャの引数位置に表示できる有効な JavaScript 式です。これは、式で ES2015 destructuring を使用できる環境(単一ファイルコンポーネントまたはモダンなブラウザ)をサポートすることを意味します:
 
 ``` html
 <child>
