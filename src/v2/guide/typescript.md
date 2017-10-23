@@ -56,20 +56,6 @@ const Component = {
 }
 ```
 
-Vetur と SFC を使用すると、型推論は自動的にデフォルトでエクスポートに適用されるため `Vue.extend` でラップする必要はない、ということに注意してください:
-
-``` html
-<template>
-  ...
-</template>
-
-<script lang="ts">
-export default {
-  // 型推論を有効にする
-}
-</script>
-```
-
 ## クラススタイル Vue コンポーネント
   
 コンポーネントを宣言するときにクラスベース API を使用する場合は、公式にメンテナンスされている [vue-class-component](https://github.com/vuejs/vue-class-component) のデコレータを使用できます:
