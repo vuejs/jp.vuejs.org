@@ -183,7 +183,7 @@ new Vue({
 
 違いは `v-show` による要素は常に描画されて DOM に維持するということです。`v-show` はシンプルに要素の `display` CSS プロパティを切り替えます。
 
-<p class="tip">`v-show` は `<template>` 構文をサポートせず、`v-else` とも連動しないということに注意してください。</p>
+<p class="tip">`v-show` は `<template>` 要素をサポートせず、`v-else` とも連動しないということに注意してください。</p>
 
 ## `v-if` vs `v-show`
 
