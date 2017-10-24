@@ -244,20 +244,20 @@ props: {
 
 
 
-### Keyed `v-for` <sup data-p="a">必須</sup>
+### キー付き `v-for` <sup data-p="a">必須</sup>
 
-**Always use `key` with `v-for`.**
+**常に `v-for` では `key` を使用してください.**
 
-`key` with `v-for` is _always_ required on components, in order to maintain internal component state down the subtree. Even for elements though, it's a good practice to maintain predictable behavior, such as [object constancy](https://bost.ocks.org/mike/constancy/) in animations.
+サブツリー下に内部コンポーネントの状態を維持するために `v-for` に `key` は _常に_ コンポーネントに必要です。しかし要素であっても、 アニメーションにおける [オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/) のような予測可能な振る舞いを維持するための良い練習です。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-Let's say you have a list of todos:
+TODO リストを持っているとしましょう:
 
 ``` js
 data: function () {
@@ -276,16 +276,16 @@ data: function () {
 }
 ```
 
-Then you sort them alphabetically. When updating the DOM, Vue will optimize rendering to perform the cheapest DOM mutations possible. That might mean deleting the first todo element, then adding it again at the end of the list.
+アルファベット順に並べ替えます。 DOM を更新する時、 Vue はできる限りコストをかけずに DOM 変化を実行するために描画を最適化します。それは、最初の todo 要素を削除してから、それを再びリストの最後に加えることを意味します。
 
-The problem is, there are cases where it's important not to delete elements that will remain in the DOM. For example, you may want to use `<transition-group>` to animate list sorting, or maintain focus if the rendered element is an `<input>`. In these cases, adding a unique key for each item (e.g. `:key="todo.id"`) will tell Vue how to behave more predictably.
+問題は、 DOM に残る要素を削除しないことが重要な場合があることです。例えば、リストの並び替えに `<transition-group>` を使いたいかもしれないですし、描画された要素が `<input>` であればフォーカスを維持したいかもしれません。このような場合には、各アイテムに対して一意のキー (つまり `:key="todo.id"` ) を与えることによって、 Vue により予測可能な振る舞いを伝えることができます。
 
-In our experience, it's better to _always_ add a unique key, so that you and your team simply never have to worry about these edge cases. Then in the rare, performance-critical scenarios where object constancy isn't necessary, you can make a conscious exception.
+私たちの経験では、 _常に_ 一意のキーを与える方が良いので、あなたやあなたのチームはこれらのエッジケースについて心配する必要はありません。稀に、オブジェクトの一貫性が必要とされないパフォーマンスが重要なシナリオにおいては、意識的に例外を作ることはできます。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <ul>
@@ -297,7 +297,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <ul>
