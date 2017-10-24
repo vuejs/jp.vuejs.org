@@ -22,7 +22,7 @@ Finally, we've split rules into four categories:
 
 ### 優先度 A: 不可欠
 
-これらのルールは、エラー防止に役立ちます。ぜひとも学び、遵守してください。例外は存在するかもしれませんが、それらは極めて稀で、かつ JavaScript と Vue の両方の専門知識を持った人によってのみ作られるべきです。
+これらのルールは、エラー防止に役立ちます。ですので、学び、遵守してください。例外は存在するかもしれませんが、それらは極めて稀で、かつ JavaScript と Vue の両方の専門知識を持った人によってのみ作られるべきです。
 
 ### 優先度 B: 強く推奨
 
@@ -49,11 +49,11 @@ Some features of Vue exist to accommodate rare edge cases or smoother migrations
 
 
 
-### 複数単語コンポーネント名 <sup data-p="a">不可欠</sup>
+### 複数単語コンポーネント名 <sup data-p="a">必須</sup>
 
 **ルートの `App` コンポーネントを除き、コンポーネント名は常に複数単語であるべきです。**
 
-これは、すでに存在する、あるいは未来の HTML 要素との[コンフリクトを防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。なぜなら、全ての HTML 要素は一単語だからです。
+これは、全ての HTML 要素は 1 単語であるというこれまでの経緯から、既に存在する、そして将来定義される HTML 要素との[衝突を防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
@@ -91,7 +91,7 @@ export default {
 
 
 
-### コンポーネントのデータ <sup data-p="a">不可欠</sup>
+### コンポーネントのデータ <sup data-p="a">必須</sup>
 
 **コンポーネントの `data` は関数でなければなりません。**
 
@@ -114,9 +114,9 @@ data: {
 }
 ```
 
-私たちは、ユーザーが複数のリスト(例えば 買い物、ウィッシュリスト、毎日の仕事、など)を管理できるように、このコンポーネントを再利用したいかもしれません。しかし問題があります。コンポーネントの全てのインスタンスが同じデータオブジェクトを参照しているので、1つのリストのタイトルを変えることは、他の全てのリストのタイトルを変えることになるでしょう。1つの todo を追加/編集/削除する場合も同様です。
+私たちは、ユーザーが複数のリスト(例えば 買い物、ウィッシュリスト、毎日の仕事など)を管理できるように、このコンポーネントを再利用したいかもしれません。しかし問題があります。コンポーネントの全てのインスタンスが同じデータオブジェクトを参照しているので、1つのリストのタイトルを変えることは、他の全てのリストのタイトルを変えることになるでしょう。1つの todo を追加/編集/削除する場合も同様です。
 
-それよりも、各コンポーネントのインスタンスにはそれ自身のデータだけを管理してもらいたいです。そのためには、各インスタンスは一意のデータオブジェクトを生成しなければなりません。 JavaScript において、それは関数内でオブジェクトを返すことにより達成されます。
+代わりに、各コンポーネントのインスタンスにはそれ自身のデータだけを管理してもらいたいです。そのためには、各インスタンスは一意のデータオブジェクトを生成しなければなりません。 JavaScript において、それは関数内でオブジェクトを返すことにより達成されます。
 
 
 ``` js
@@ -185,7 +185,7 @@ new Vue({
 
 
 
-### プロパティの定義 <sup data-p="a">不可欠</sup>
+### プロパティの定義 <sup data-p="a">必須</sup>
 
 **プロパティの定義はできる限り詳細であるべきです。**
 
@@ -244,7 +244,7 @@ props: {
 
 
 
-### Keyed `v-for` <sup data-p="a">不可欠</sup>
+### Keyed `v-for` <sup data-p="a">必須</sup>
 
 **Always use `key` with `v-for`.**
 
@@ -313,7 +313,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 
 
 
-### Component style scoping <sup data-p="a">不可欠</sup>
+### Component style scoping <sup data-p="a">必須</sup>
 
 **For applications, styles in a top-level `App` component and in layout components may be global, but all other components should always be scoped.**
 
@@ -412,7 +412,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 
 
 
-### Private property names <sup data-p="a">不可欠</sup>
+### Private property names <sup data-p="a">必須</sup>
 
 **Always use the `$_` prefix for custom private properties in a plugin, mixin, etc. Then to avoid conflicts with code by other authors, also include a named scope (e.g. `$_yourPluginName_`).**
 
