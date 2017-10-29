@@ -140,10 +140,10 @@ var vm = new Vue({
 })
 ```
 
-## Annotating Return Types
+## 戻り値の型にアノテーションをつける
 
-Because of the circular nature of Vue's declaration files, TypeScript may have difficulties inferring the types of certain methods.
-For this reason, you may need to annotate the return type on methods like `render` and those in `computed`.
+Vue の宣言ファイルは循環的な性質を持つため、TypeScript は特定のメソッドの型を推論するのが困難な場合があります。
+この理由のため、`render` や `computed` のメソッドに戻り値の型のアノテーションを付ける必要があるかもしれません。
 
 ```ts
 import Vue, { VNode } from 'vue'
@@ -155,23 +155,23 @@ const Component = Vue.extend({
     }
   },
   methods: {
-    // need annotation due to `this` in return type
+    // 戻り値の型の `this` のために、アノテーションが必要です
     greet(): string {
       return this.msg + ' world'
     }
   },
   computed: {
-    // need annotation
+    // アノテーションが必要です
     greeting(): string {
       return this.greet() + '!'
     }
   },
-  // `createElement` is inferred, but `render` needs return type
+  // `createElement` は推論されますが、`render` は戻り値の方が必要です
   render(createElement): VNode {
     return createElement('div', this.greeting)
   }
 })
 ```
 
-If you find type inference or member completion isn't working, annotating certain methods may help address these problems.
-Using the `--noImplicitAny` option will help find many of these unannotated methods.
+型推論やメンバの補完が機能していない場合、特定のメソッドにアノテーションを付けるとこれらの問題に対処できます。
+`--noImplicitAny` オプションを使用すると、これらのアノテーションが付けられていないメソッドの多くを見つけるのに役立ちます。
