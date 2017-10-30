@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-10-23
+updated: 2017-10-29
 type: guide
 order: 404
 ---
@@ -139,3 +139,39 @@ var vm = new Vue({
   myOption: 'Hello'
 })
 ```
+
+## 戻り値の型にアノテーションをつける
+
+Vue の宣言ファイルは循環的な性質を持つため、TypeScript は特定のメソッドの型を推論するのが困難な場合があります。
+この理由のため、`render` や `computed` のメソッドに戻り値の型のアノテーションを付ける必要があるかもしれません。
+
+```ts
+import Vue, { VNode } from 'vue'
+
+const Component = Vue.extend({
+  data() {
+    return {
+      msg: 'Hello'
+    }
+  },
+  methods: {
+    // 戻り値の型の `this` のために、アノテーションが必要です
+    greet(): string {
+      return this.msg + ' world'
+    }
+  },
+  computed: {
+    // アノテーションが必要です
+    greeting(): string {
+      return this.greet() + '!'
+    }
+  },
+  // `createElement` は推論されますが、`render` は戻り値の方が必要です
+  render(createElement): VNode {
+    return createElement('div', this.greeting)
+  }
+})
+```
+
+型推論やメンバの補完が機能していない場合、特定のメソッドにアノテーションを付けるとこれらの問題に対処できます。
+`--noImplicitAny` オプションを使用すると、これらのアノテーションが付けられていないメソッドの多くを見つけるのに役立ちます。
