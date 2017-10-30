@@ -313,31 +313,31 @@ data: function () {
 
 
 
-### Component style scoping <sup data-p="a">必須</sup>
+### コンポーネントスタイルのスコープ <sup data-p="a">必須</sup>
 
-**For applications, styles in a top-level `App` component and in layout components may be global, but all other components should always be scoped.**
+**アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネント内のスタイルはグローバルかもしれませんが、他のすべてのコンポーネントは常にスコープされているべきです。**
 
-This is only relevant for [single-file components](../guide/single-file-components.html). It does _not_ require that the [`scoped` attribute](https://vue-loader.vuejs.org/en/features/scoped-css.html) be used. Scoping could be through [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html), a class-based strategy such as [BEM](http://getbem.com/), or another library/convention.
+これは[単一ファイルコンポーネント](../guide/single-file-components.html)にのみ関係します。 [`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html)の使用は必須_ではありません_。スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) 、 [BEM](http://getbem.com/) のようなクラスに基づいた戦略、あるいは他のライブラリや慣例を介して行うことができます。
 
-**Component libraries, however, should prefer a class-based strategy instead of using the `scoped` attribute.**
+**しかしながら、コンポーネントライブラリでは `scoped` 属性を使用する代わりに、クラスに基づいた戦略の方がむしろ好ましいです。**
 
-This makes overriding internal styles easier, with human-readable class names that don't have too high specificity, but are still very unlikely to result in a conflict.
+これは内部スタイルの上書きを容易にし、人間が読みやすいクラス名は高い詳細度を持ちませんが、しかし依然として衝突する可能性はほとんどありません。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-If you are developing a large project, working with other developers, or sometimes include 3rd-party HTML/CSS (e.g. from Auth0), consistent scoping will ensure that your styles only apply to the components they are meant for.
+もしあなたが、他の開発者と一緒に、あるいは時々サードパーティ(例えば Auth0 から)の HTML/CSS を含んだりする大きなプロジェクトを開発しているのなら、一貫したスコープは意図されたコンポーネントだけにあなたのスタイルを適用することを保証します。
 
-Beyond the `scoped` attribute, using unique class names can help ensure that 3rd-party CSS does not apply to your own HTML. For example, many projects use the `button`, `btn`, or `icon` class names, so even if not using a strategy such as BEM, adding an app-specific and/or component-specific prefix (e.g. `ButtonClose-icon`) can provide some protection.
+`scoped` 属性を超えて、一意のクラス名を使うことはサードパーティの CSS があなたの HTML に適用されないことを保証するのに役立ちます。 例えば、多くのプロジェクトは `button` 、 `btn` 、 や `icon` のようなクラス名を使っているので、たとえ BEM のような戦略を使わなくても、アプリケーション固有 かつ/あるいは コンポーネント固有のプレフィックス(例 `ButtonClose-icon` )を付与することはいくらかの防御になります。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <template>
@@ -353,14 +353,14 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <template>
   <button class="button button-close">X</button>
 </template>
 
-<!-- Using the `scoped` attribute -->
+<!-- `scoped` を使用 -->
 <style scoped>
 .button {
   border: none;
@@ -378,7 +378,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button :class="[$style.button, $style.buttonClose]">X</button>
 </template>
 
-<!-- Using CSS modules -->
+<!-- CSS modules を使用 -->
 <style module>
 .button {
   border: none;
@@ -396,7 +396,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button class="c-Button c-Button--close">X</button>
 </template>
 
-<!-- Using the BEM convention -->
+<!-- BEM の慣例を使用 -->
 <style>
 .c-Button {
   border: none;
@@ -412,27 +412,29 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 
 
 
-### Private property names <sup data-p="a">必須</sup>
+### プライベートなプロパティ名 <sup data-p="a">必須</sup>
 
-**Always use the `$_` prefix for custom private properties in a plugin, mixin, etc. Then to avoid conflicts with code by other authors, also include a named scope (e.g. `$_yourPluginName_`).**
+**プラグインやミックスイン、その他におけるプライベートなカスタムプロパティには常に `$_` プレフィックスを使用してください。そうすることにより名前付きのスコープを含み (例 `$_yourPluginName_` )、他の著者によるコードとの衝突を避けることができます。**
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-Vue uses the `_` prefix to define its own private properties, so using the same prefix (e.g. `_update`) risks overwriting an instance property. Even if you check and Vue is not currently using a particular property name, there is no guarantee a conflict won't arise in a later version.
+Vue は、それ自体のプライベートなプロパティを定義するために `_` プレフィックスを使用しているので、同じプレフィックス(例 `_update` )を使用することはインスタンスのプロパティを上書きする危険があります。たとえ Vue が現在特定のプロパティ名を使用していないことを確認するとしても、後のバージョンで衝突が起きないという保証はありません。
 
-As for the `$` prefix, it's purpose within the Vue ecosystem is special instance properties that are exposed to the user, so using it for _private_ properties would not be appropriate.
+`$` プレフィックスについて、 Vue のエコシステム間でのその目的はユーザーに公開される特別なインスタンスのプロパティなので、それを _プライベートな_プロパティに対して使用するのは適切ではありません。
 
-Instead, we recommend combining the two prefixes into `$_`, as a convention for user-defined private properties that guarantee no conflicts with Vue.
+代わりに、 Vue と衝突しないユーザー定義されたプライベートなプロパティの慣例として、2つのプレフィックスを組み合わせて `$_` にすることを推奨します。
+
+
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 var myGreatMixin = {
@@ -481,7 +483,7 @@ var myGreatMixin = {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 var myGreatMixin = {
