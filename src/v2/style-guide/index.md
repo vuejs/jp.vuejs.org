@@ -1541,7 +1541,7 @@ computed: {
 
 **それらが同じ種類の要素の場合、通常は `v-if` + `v-else` と一緒に `key` を使用するのが最善です(例: どちらも `<div>` 要素).**
 
-デフォルトでは、Vue は可能な限り効率的に DOM を更新します。これは、同じ種類の要素間を切り替えるときに、既存の要素を取り除いてそこに新しい要素を作成するのではなく、単純に既存の要素を修正することを意味します。これらの要素が、実際には同じであるとみなされるべきでない場合、[予期せぬ副作用](https://jsfiddle.net/chrisvfritz/bh8fLeds/)を起こすことがあります。
+デフォルトでは、Vue は可能な限り効率的に DOM を更新します。これは、同じ種類の要素間を切り替えるときに、既存の要素を取り除いてそこに新しい要素を作成するのではなく、単純に既存の要素を修正することを意味します。これらの要素が、実際には同一とみなされないほうが良い場合、[予期せぬ副作用](https://jsfiddle.net/chrisvfritz/bh8fLeds/)を起こすことがあります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### Bad
@@ -1595,7 +1595,7 @@ computed: {
 
 スコープスタイルのために、Vue は `data-v-f3f3eg9` のような一意な属性をコンポーネントの要素に追加します。そして、この属性をもったマッチする要素のみが選択されるように、セレクタが変更されます（例: `button[data-v-f3f3eg9]`）。
 
-問題は、たくさんの[要素-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `button[data-v-f3f3eg9]`）は、[クラス-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) （例: `.btn-close[data-v-f3f3eg9]`）よりもかなり遅くなることであり、よって可能であればクラスセレクタが推奨されます。
+問題は、たくさんの[要素-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `button[data-v-f3f3eg9]`）は、[クラス-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `.btn-close[data-v-f3f3eg9]`）よりもかなり遅くなることです。よって可能ならクラスセレクタが推奨されます。
 
 {% raw %}</details>{% endraw %}
 
@@ -1637,7 +1637,7 @@ button {
 
 **親子間のコミュニケーションは、`this.$parent` や変化するプロパティよりも、プロパティとイベントが推奨されます。**
 
-理想的な Vue アプリケーションでは、プロパティは下がり、イベントは上がります。この習慣に従えば、コンポーネントの理解が簡単になります。ですが、プロパティの変化や `this.$parent` が、深く結合している２つのコンポーネントを単純化できるようなエッジケースも存在します。
+理想的な Vue アプリケーションでは、プロパティは下がり、イベントは上がります。この習慣に従えば、コンポーネントの理解が簡単になります。ですが、プロパティの変化や `this.$parent` が、深く結合している2つのコンポーネントを単純化できるようなエッジケースも存在します。
 
 問題は、これらのパターンが便利になるような、_シンプルな_ ケースも多く存在することです。注意: 短期間の利便性（少ないコードを書くこと）のための、取引のシンプルさ(状態の流れを理解出来るようになる)に誘惑されないでください。
 
@@ -1730,7 +1730,7 @@ Vue.component('TodoItem', {
 
 ** グローバル状態管理には、`this.$root` やグローバルイベントバスよりも、[Vuex](https://github.com/vuejs/vuex) が推奨されます **
 
-`this.$root` や [グローバルイベントバス](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません. Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
+`this.$root` や [グローバルイベントバス](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
 
 {% raw %}</details>{% endraw %}
 
