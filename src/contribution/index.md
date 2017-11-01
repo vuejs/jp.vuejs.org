@@ -105,7 +105,7 @@ api.md | API リファレンス | [hikimon](https://github.com/hikimon)
 
 ファイル | ルール | 貢献者
 ----- | ------------- | --- 
-index.md | Priority A Rules | WIP
+index.md | Priority A Rules | [hisako135](https://github.com/hisako135)
 index.md | Priority B Rules | [wonderful-panda](https://github.com/wonderful-panda)
 index.md | Priority C Rules | [shika358](https://github.com/shika358)
 index.md | Priority D Rules | WIP
