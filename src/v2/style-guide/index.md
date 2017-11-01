@@ -19,9 +19,9 @@ Finally, we've split rules into four categories:
 
 ## Rule Categories
 
-### Priority A: Essential
+### 優先度 A: 不可欠
 
-These rules help prevent errors, so learn and abide by them at all costs. Exceptions may exist, but should be very rare and only be made by those with expert knowledge of both JavaScript and Vue.
+これらのルールは、エラー防止に役立ちます。ですので、学び、遵守してください。例外は存在するかもしれませんが、それらは極めて稀で、かつ JavaScript と Vue の両方の専門知識を持った人によってのみ作られるべきです。
 
 ### 優先度 B: 強く推奨
 
@@ -41,18 +41,18 @@ Some features of Vue exist to accommodate rare edge cases or smoother migrations
 
 
 
-## Priority A Rules: Essential (Error Prevention)
+## 優先度 A ルール: 不可欠 (エラー防止)
 
 
 
-### Multi-word component names <sup data-p="a">essential</sup>
+### 複数単語コンポーネント名 <sup data-p="a">必須</sup>
 
-**Component names should always be multi-word, except for root `App` components.**
+**ルートの `App` コンポーネントを除き、コンポーネント名は常に複数単語であるべきです。**
 
-This [prevents conflicts](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name) with existing and future HTML elements, since all HTML elements are a single word.
+これは、全ての HTML 要素は 1 単語であるというこれまでの経緯から、既に存在する、そして将来定義される HTML 要素との[衝突を防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('todo', {
@@ -69,7 +69,7 @@ export default {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 Vue.component('todo-item', {
@@ -87,20 +87,21 @@ export default {
 
 
 
-### Component data <sup data-p="a">essential</sup>
+### コンポーネントのデータ <sup data-p="a">必須</sup>
 
-**Component `data` must be a function.**
+**コンポーネントの `data` は関数でなければなりません。**
 
-When using the `data` property on a component (i.e. anywhere except on `new Vue`), the value must be a function that returns an object.
+コンポーネントで `data` プロパティを使用する際 (つまり `new Vue` 以外のどこでも)、その値はオブジェクトを返す関数でなければなりません。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-When the value of `data` is an object, it's shared across all instances of a component. Imagine, for example, a `TodoList` component with this data:
+`data` の値がオブジェクトの時、それはコンポーネントの全てのインスタンスで共有されます。例として、このデータを持つ `TodoList` コンポーネントを想像してみましょう:
+
 
 ``` js
 data: {
@@ -109,9 +110,10 @@ data: {
 }
 ```
 
-We might want to reuse this component, allowing users to maintain multiple lists (e.g. for shopping, wishlists, daily chores, etc). There's a problem though. Since every instance of the component references the same data object, changing the title of one list will also change the title of every other list. The same is true for adding/editing/deleting a todo.
+私たちは、ユーザーが複数のリスト(例えば 買い物、ウィッシュリスト、毎日の仕事など)を管理できるように、このコンポーネントを再利用したいかもしれません。しかし問題があります。コンポーネントの全てのインスタンスが同じデータオブジェクトを参照しているので、1つのリストのタイトルを変えることは、他の全てのリストのタイトルを変えることになるでしょう。1つの todo を追加/編集/削除する場合も同様です。
 
-Instead, we want each component instance to only manage its own data. For that to happen, each instance must generate a unique data object. In JavaScript, this can be accomplished by returning the object in a function:
+代わりに、各コンポーネントのインスタンスにはそれ自身のデータだけを管理してもらいたいです。そのためには、各インスタンスは一意のデータオブジェクトを生成しなければなりません。 JavaScript において、それは関数内でオブジェクトを返すことにより達成されます。
+
 
 ``` js
 data: function () {
@@ -124,7 +126,7 @@ data: function () {
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('some-comp', {
@@ -144,7 +146,7 @@ export default {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 ``` js
 Vue.component('some-comp', {
   data: function () {
@@ -156,7 +158,7 @@ Vue.component('some-comp', {
 ```
 
 ``` js
-// In a .vue file
+// .vue ファイル内
 export default {
   data () {
     return {
@@ -167,9 +169,8 @@ export default {
 ```
 
 ``` js
-// It's OK to use an object directly in a root
-// Vue instance, since only a single instance
-// will ever exist.
+// ルートで直接オブジェクトを使うのは OK です
+// なぜなら Vue インスタンスはずっと存在する唯一のインスタンスだからです
 new Vue({
   data: {
     foo: 'bar'
@@ -180,37 +181,37 @@ new Vue({
 
 
 
-### Prop definitions <sup data-p="a">essential</sup>
+### プロパティの定義 <sup data-p="a">必須</sup>
 
-**Prop definitions should be as detailed as possible.**
+**プロパティの定義はできる限り詳細であるべきです。**
 
-In committed code, prop definitions should always be as detailed as possible, specifying at least type(s).
+コミットされたコード内で、プロパティの定義は常に少なくとも1つのタイプを指定し、できる限り詳細であるべきです。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-Detailed [prop definitions](https://vuejs.org/v2/guide/components.html#Prop-Validation) have two advantages:
+詳細な [プロパティの定義](https://vuejs.org/v2/guide/components.html#Prop-Validation) には2つの利点があります:
 
-- They document the API of the component, so that it's easy to see how the component is meant to be used.
-- In development, Vue will warn you if a component is ever provided incorrectly formatted props, helping you catch potential sources of error.
+- それらはコンポーネントの API を記録するため、そのコンポーネントの使用方法が簡単に分かります。
+- 開発中にもしコンポーネントに対して誤った設定のプロパティが提供されたら、 Vue はあなたに警告します。それは潜在的なエラー原因の検知に役立ちます。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
-// This is only OK when prototyping
+// プロトタイピングの時だけ OK
 props: ['status']
 ```
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 props: {
@@ -219,7 +220,7 @@ props: {
 ```
 
 ``` js
-// Even better!
+// さらに良いです!
 props: {
   status: {
     type: String,
@@ -239,20 +240,20 @@ props: {
 
 
 
-### Keyed `v-for` <sup data-p="a">essential</sup>
+### キー付き `v-for` <sup data-p="a">必須</sup>
 
-**Always use `key` with `v-for`.**
+**常に `v-for` では `key` を使用してください.**
 
-`key` with `v-for` is _always_ required on components, in order to maintain internal component state down the subtree. Even for elements though, it's a good practice to maintain predictable behavior, such as [object constancy](https://bost.ocks.org/mike/constancy/) in animations.
+サブツリー下に内部コンポーネントの状態を維持するために `v-for` に `key` は _常に_ コンポーネントに必要です。しかし要素であっても、 アニメーションにおける [オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/) のような予測可能な振る舞いを維持するための良い手法です。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-Let's say you have a list of todos:
+TODO リストを持っているとしましょう:
 
 ``` js
 data: function () {
@@ -271,16 +272,16 @@ data: function () {
 }
 ```
 
-Then you sort them alphabetically. When updating the DOM, Vue will optimize rendering to perform the cheapest DOM mutations possible. That might mean deleting the first todo element, then adding it again at the end of the list.
+アルファベット順に並べ替えます。 DOM を更新する時、 Vue はできる限りコストをかけずに DOM 変化を実行するために描画を最適化します。それは、最初の todo 要素を削除してから、それを再びリストの最後に加えることを意味します。
 
-The problem is, there are cases where it's important not to delete elements that will remain in the DOM. For example, you may want to use `<transition-group>` to animate list sorting, or maintain focus if the rendered element is an `<input>`. In these cases, adding a unique key for each item (e.g. `:key="todo.id"`) will tell Vue how to behave more predictably.
+問題は、 DOM に残る要素を削除しないことが重要な場合があることです。例えば、リストの並び替えに `<transition-group>` を使いたいかもしれないですし、描画された要素が `<input>` であればフォーカスを維持したいかもしれません。このような場合には、各アイテムに対して一意のキー (つまり `:key="todo.id"` ) を与えることによって、 Vue により予測可能な振る舞いを伝えることができます。
 
-In our experience, it's better to _always_ add a unique key, so that you and your team simply never have to worry about these edge cases. Then in the rare, performance-critical scenarios where object constancy isn't necessary, you can make a conscious exception.
+私たちの経験では、 _常に_ 一意のキーを与える方が良いので、あなたやあなたのチームはこれらのエッジケースについて心配する必要はありません。稀に、オブジェクトの一貫性が必要とされないパフォーマンスが重要なシナリオにおいては、意識的に例外を作ることはできます。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <ul>
@@ -292,7 +293,7 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <ul>
@@ -308,31 +309,31 @@ In our experience, it's better to _always_ add a unique key, so that you and you
 
 
 
-### Component style scoping <sup data-p="a">essential</sup>
+### コンポーネントスタイルのスコープ <sup data-p="a">必須</sup>
 
-**For applications, styles in a top-level `App` component and in layout components may be global, but all other components should always be scoped.**
+**アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネント内のスタイルはグローバルかもしれませんが、他のすべてのコンポーネントは常にスコープされているべきです。**
 
-This is only relevant for [single-file components](../guide/single-file-components.html). It does _not_ require that the [`scoped` attribute](https://vue-loader.vuejs.org/en/features/scoped-css.html) be used. Scoping could be through [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html), a class-based strategy such as [BEM](http://getbem.com/), or another library/convention.
+これは[単一ファイルコンポーネント](../guide/single-file-components.html)にのみ関係します。 [`scoped` 属性](https://vue-loader.vuejs.org/en/features/scoped-css.html)の使用は必須_ではありません_。スコープは [CSS modules](https://vue-loader.vuejs.org/en/features/css-modules.html) 、 [BEM](http://getbem.com/) のようなクラスに基づいた戦略、あるいは他のライブラリや慣例を介して行うことができます。
 
-**Component libraries, however, should prefer a class-based strategy instead of using the `scoped` attribute.**
+**しかしながら、コンポーネントライブラリでは `scoped` 属性を使用する代わりに、クラスに基づいた戦略の方がむしろ好ましいです。**
 
-This makes overriding internal styles easier, with human-readable class names that don't have too high specificity, but are still very unlikely to result in a conflict.
+これは内部スタイルの上書きを容易にし、人間が読みやすいクラス名は高い詳細度を持ちませんが、しかし依然として衝突する可能性はほとんどありません。
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-If you are developing a large project, working with other developers, or sometimes include 3rd-party HTML/CSS (e.g. from Auth0), consistent scoping will ensure that your styles only apply to the components they are meant for.
+もしあなたが、他の開発者と一緒に、あるいは時々サードパーティ(例えば Auth0 から)の HTML/CSS を含んだりする大きなプロジェクトを開発しているのなら、一貫したスコープは意図されたコンポーネントだけにあなたのスタイルを適用することを保証します。
 
-Beyond the `scoped` attribute, using unique class names can help ensure that 3rd-party CSS does not apply to your own HTML. For example, many projects use the `button`, `btn`, or `icon` class names, so even if not using a strategy such as BEM, adding an app-specific and/or component-specific prefix (e.g. `ButtonClose-icon`) can provide some protection.
+`scoped` 属性を超えて、一意のクラス名を使うことはサードパーティの CSS があなたの HTML に適用されないことを保証するのに役立ちます。 例えば、多くのプロジェクトは `button` 、 `btn` 、 や `icon` のようなクラス名を使っているので、たとえ BEM のような戦略を使わなくても、アプリケーション固有 かつ/あるいは コンポーネント固有のプレフィックス(例 `ButtonClose-icon` )を付与することはいくらかの防御になります。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <template>
@@ -348,14 +349,14 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <template>
   <button class="button button-close">X</button>
 </template>
 
-<!-- Using the `scoped` attribute -->
+<!-- `scoped` を使用 -->
 <style scoped>
 .button {
   border: none;
@@ -373,7 +374,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button :class="[$style.button, $style.buttonClose]">X</button>
 </template>
 
-<!-- Using CSS modules -->
+<!-- CSS modules を使用 -->
 <style module>
 .button {
   border: none;
@@ -391,7 +392,7 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
   <button class="c-Button c-Button--close">X</button>
 </template>
 
-<!-- Using the BEM convention -->
+<!-- BEM の慣例を使用 -->
 <style>
 .c-Button {
   border: none;
@@ -407,27 +408,29 @@ Beyond the `scoped` attribute, using unique class names can help ensure that 3rd
 
 
 
-### Private property names <sup data-p="a">essential</sup>
+### プライベートなプロパティ名 <sup data-p="a">必須</sup>
 
-**Always use the `$_` prefix for custom private properties in a plugin, mixin, etc. Then to avoid conflicts with code by other authors, also include a named scope (e.g. `$_yourPluginName_`).**
+**プラグインやミックスイン、その他におけるプライベートなカスタムプロパティには常に `$_` プレフィックスを使用してください。そうすることにより名前付きのスコープを含み (例 `$_yourPluginName_` )、他の著者によるコードとの衝突を避けることができます。**
 
 {% raw %}
 <details>
 <summary>
-  <h4>Detailed Explanation</h4>
+  <h4>詳細な説明</h4>
 </summary>
 {% endraw %}
 
-Vue uses the `_` prefix to define its own private properties, so using the same prefix (e.g. `_update`) risks overwriting an instance property. Even if you check and Vue is not currently using a particular property name, there is no guarantee a conflict won't arise in a later version.
+Vue は、それ自体のプライベートなプロパティを定義するために `_` プレフィックスを使用しているので、同じプレフィックス(例 `_update` )を使用することはインスタンスのプロパティを上書きする危険があります。たとえ Vue が現在特定のプロパティ名を使用していないことを確認するとしても、後のバージョンで衝突が起きないという保証はありません。
 
-As for the `$` prefix, it's purpose within the Vue ecosystem is special instance properties that are exposed to the user, so using it for _private_ properties would not be appropriate.
+`$` プレフィックスについて、 Vue のエコシステム間でのその目的はユーザーに公開される特別なインスタンスのプロパティなので、それを _プライベートな_プロパティに対して使用するのは適切ではありません。
 
-Instead, we recommend combining the two prefixes into `$_`, as a convention for user-defined private properties that guarantee no conflicts with Vue.
+代わりに、 Vue と衝突しないユーザー定義されたプライベートなプロパティの慣例として、2つのプレフィックスを組み合わせて `$_` にすることを推奨します。
+
+
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 var myGreatMixin = {
@@ -476,7 +479,7 @@ var myGreatMixin = {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 var myGreatMixin = {
