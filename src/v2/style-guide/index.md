@@ -7,13 +7,13 @@ updated: 2017-10-09
 
 > 注意⚠️ : このドキュメントはまだ完全に翻訳されていません。このページは[随時翻訳作業](https://github.com/vuejs/jp.vuejs.org/projects/2)につき更新されていきます🙏 ！
 
-This is the official style guide for Vue-specific code. If you use Vue in a project, it's a great reference to avoid errors, bikeshedding, and anti-patterns. However, we don't believe that any style guide is ideal for all teams or projects, so mindful deviations are encouraged based on past experience, the surrounding tech stack, and personal values.
+このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
 
-For the most part, we also avoid suggestions about JavaScript or HTML in general. We don't mind whether you use semicolons or trailing commas. We don't mind whether your HTML uses single-quotes or double-quotes for attribute values. Some exceptions will exist however, where we've found that a particular pattern is helpful in the context of Vue.
+殆どのパートにおいて、基本的に JavaScript や HTML に対する提案はさけています。セミコロンやカンマの使用の是非はどちらでも良いです。 HTML の属性に対してシングルクォートかダブルクォートどちらかを利用するかもどちらでも良いです。しかし、特定のパターンにおいて Vue のコンテキストが役立つと判明した場合については、その限りではありません。
 
-> **Soon, we'll also provide tips for enforcement.** Sometimes you'll simply have to be disciplined, but wherever possible, we'll try to show you how to use ESLint and other automated processes to make enforcement simpler.
+> **近々、実施のヒントを提供予定です** スタイルガイドについて、必要に応じて自身で実施しなければならない場所もありますが、可能な限り ESLint やその他自動化されたプロセスを用いて、より簡単に行う方法を明示します。
 
-Finally, we've split rules into four categories:
+最後に、私たちはルール群を 4 つのカテゴリに分割しました:
 
 
 
