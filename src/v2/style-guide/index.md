@@ -1536,18 +1536,18 @@ computed: {
 
 
 
-## Priority D Rules: Use with Caution (Potentially Dangerous Patterns)
+## 優先度 D のルール: 使用注意（潜在的に危険なパターン）
 
 
 
-### `v-if`/`v-if-else`/`v-else` without `key` <sup data-p="d">use with caution</sup>
+### `key` を使わない `v-if`/`v-if-else`/`v-else` <sup data-p="d">使用注意</sup>
 
-**It's usually best to use `key` with `v-if` + `v-else`, if they are the same element type (e.g. both `<div>` elements).**
+**それらが同じ種類の要素の場合、通常は `v-if` + `v-else` と一緒に `key` を使用するのが最善です(例: どちらも `<div>` 要素).**
 
-By default, Vue updates the DOM as efficiently as possible. That means when switching between elements of the same type, it simply patches the existing element, rather than removing it and adding a new one in its place. This can have [unintended side effects](https://jsfiddle.net/chrisvfritz/bh8fLeds/) if these elements should not actually be considered the same.
+デフォルトでは、Vue は可能な限り効率的に DOM を更新します。これは、同じ種類の要素間を切り替えるときに、既存の要素を取り除いてそこに新しい要素を作成するのではなく、単純に既存の要素を修正することを意味します。これらの要素が、実際には同一とみなされないほうが良い場合、[予期せぬ副作用](https://jsfiddle.net/chrisvfritz/bh8fLeds/)を起こすことがあります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <div v-if="error">
@@ -1560,7 +1560,7 @@ By default, Vue updates the DOM as efficiently as possible. That means when swit
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <div v-if="error" key="search-status">
@@ -1583,11 +1583,11 @@ By default, Vue updates the DOM as efficiently as possible. That means when swit
 
 
 
-### Element selectors with `scoped` <sup data-p="d">use with caution</sup>
+### `scoped` 付きの要素セレクタ <sup data-p="d">使用注意</sup>
 
-**Element selectors should be avoided with `scoped`.**
+**`scoped` 付きの要素セレクタは避けるべきです。**
 
-Prefer class selectors over element selectors in `scoped` styles, because large numbers of element selectors are slow.
+たくさんの要素セレクタは低速なため、`scoped` 付きの要素セレクタよりも、クラスセレクタを使用します。
 
 {% raw %}
 <details>
@@ -1596,14 +1596,14 @@ Prefer class selectors over element selectors in `scoped` styles, because large 
 </summary>
 {% endraw %}
 
-To scope styles, Vue adds a unique attribute to component elements, such as `data-v-f3f3eg9`. Then selectors are modified so that only matching elements with this attribute are selected (e.g. `button[data-v-f3f3eg9]`).
+スコープスタイルのために、Vue は `data-v-f3f3eg9` のような一意な属性をコンポーネントの要素に追加します。そして、この属性をもったマッチする要素のみが選択されるように、セレクタが変更されます（例: `button[data-v-f3f3eg9]`）。
 
-The problem is that large numbers of [element-attribute selectors](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (e.g. `button[data-v-f3f3eg9]`) will be considerably slower than [class-attribute selectors](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (e.g. `.btn-close[data-v-f3f3eg9]`), so class selectors should be preferred whenever possible.
+問題は、たくさんの[要素-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `button[data-v-f3f3eg9]`）は、[クラス-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `.btn-close[data-v-f3f3eg9]`）よりもかなり遅くなることです。よって可能ならクラスセレクタが推奨されます。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <template>
@@ -1619,7 +1619,7 @@ button {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <template>
@@ -1636,16 +1636,16 @@ button {
 
 
 
-### Implicit parent-child communication <sup data-p="d">use with caution</sup>
+### 暗黙的な親子間のやりとり <sup data-p="d">使用注意</sup>
 
-**Props and events should be preferred for parent-child component communication, instead of `this.$parent` or mutating props.**
+**親子間のやりとりは、`this.$parent` や変化するプロパティよりも、プロパティとイベントが推奨されます。**
 
-An ideal Vue application is props down, events up. Sticking to this convention makes your components much easier to understand. However, there are edge cases where prop mutation or `this.$parent` can simplify two components that are already deeply coupled.
+理想的な Vue アプリケーションでは、props down, events up となります。この習慣に従えば、コンポーネントの理解が簡単になります。ですが、プロパティの変化や `this.$parent` が、深く結合している2つのコンポーネントを単純化できるようなエッジケースも存在します。
 
-The problem is, there are also many _simple_ cases where these patterns may offer convenience. Beware: do not be seduced into trading simplicity (being able to understand the flow of your state) for short-term convenience (writing less code).
+問題は、これらのパターンが便利になるような、_シンプルな_ ケースも多く存在することです。注意: 短期間の利便性（少ないコードを書くこと）のための、取引のシンプルさ(状態の流れを理解出来るようになる)に誘惑されないでください。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('TodoItem', {
@@ -1688,7 +1688,7 @@ Vue.component('TodoItem', {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 Vue.component('TodoItem', {
@@ -1729,16 +1729,16 @@ Vue.component('TodoItem', {
 
 
 
-### Non-flux state management <sup data-p="d">use with caution</sup>
+### Flux 以外の状態管理 <sup data-p="d">使用注意</sup>
 
-**[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
+** グローバル状態管理には、`this.$root` やグローバルイベントバスよりも、[Vuex](https://github.com/vuejs/vuex) が推奨されます **
 
-Managing state on `this.$root` and/or using a [global event bus](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) can be convenient for very simple cases, but are not appropriate for most applications. Vuex offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes.
+`this.$root` や [グローバルイベントバス](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 // main.js
@@ -1762,7 +1762,7 @@ new Vue({
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 // store/modules/todos.js
