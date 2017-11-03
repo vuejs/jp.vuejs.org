@@ -1533,18 +1533,18 @@ computed: {
 
 
 
-## 優先度 D のルール: 慎重に使用（危険をはらんだパターン）
+## 優先度 D のルール: 使用注意（潜在的に危険なパターン）
 
 
 
-### `key` を使わない `v-if`/`v-if-else`/`v-else` <sup data-p="d">慎重に使用</sup>
+### `key` を使わない `v-if`/`v-if-else`/`v-else` <sup data-p="d">使用注意</sup>
 
 **それらが同じ種類の要素の場合、通常は `v-if` + `v-else` と一緒に `key` を使用するのが最善です(例: どちらも `<div>` 要素).**
 
 デフォルトでは、Vue は可能な限り効率的に DOM を更新します。これは、同じ種類の要素間を切り替えるときに、既存の要素を取り除いてそこに新しい要素を作成するのではなく、単純に既存の要素を修正することを意味します。これらの要素が、実際には同一とみなされないほうが良い場合、[予期せぬ副作用](https://jsfiddle.net/chrisvfritz/bh8fLeds/)を起こすことがあります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <div v-if="error">
@@ -1557,7 +1557,7 @@ computed: {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <div v-if="error" key="search-status">
@@ -1580,7 +1580,7 @@ computed: {
 
 
 
-### `scoped` 付きの要素セレクタ <sup data-p="d">慎重に使用</sup>
+### `scoped` 付きの要素セレクタ <sup data-p="d">使用注意</sup>
 
 **`scoped` 付きの要素セレクタは避けるべきです。**
 
@@ -1600,7 +1600,7 @@ computed: {
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <template>
@@ -1616,7 +1616,7 @@ button {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <template>
@@ -1633,16 +1633,16 @@ button {
 
 
 
-### 暗黙的な親子間のコミュニケーション <sup data-p="d">慎重に使用</sup>
+### 暗黙的な親子間のやりとり <sup data-p="d">使用注意</sup>
 
-**親子間のコミュニケーションは、`this.$parent` や変化するプロパティよりも、プロパティとイベントが推奨されます。**
+**親子間のやりとりは、`this.$parent` や変化するプロパティよりも、プロパティとイベントが推奨されます。**
 
-理想的な Vue アプリケーションでは、プロパティは下がり、イベントは上がります。この習慣に従えば、コンポーネントの理解が簡単になります。ですが、プロパティの変化や `this.$parent` が、深く結合している2つのコンポーネントを単純化できるようなエッジケースも存在します。
+理想的な Vue アプリケーションでは、props down, events up となります。この習慣に従えば、コンポーネントの理解が簡単になります。ですが、プロパティの変化や `this.$parent` が、深く結合している2つのコンポーネントを単純化できるようなエッジケースも存在します。
 
 問題は、これらのパターンが便利になるような、_シンプルな_ ケースも多く存在することです。注意: 短期間の利便性（少ないコードを書くこと）のための、取引のシンプルさ(状態の流れを理解出来るようになる)に誘惑されないでください。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('TodoItem', {
@@ -1685,7 +1685,7 @@ Vue.component('TodoItem', {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 Vue.component('TodoItem', {
@@ -1726,7 +1726,7 @@ Vue.component('TodoItem', {
 
 
 
-### Flux 以外の状態管理 <sup data-p="d">慎重に使用</sup>
+### Flux 以外の状態管理 <sup data-p="d">使用注意</sup>
 
 ** グローバル状態管理には、`this.$root` やグローバルイベントバスよりも、[Vuex](https://github.com/vuejs/vuex) が推奨されます **
 
@@ -1735,7 +1735,7 @@ Vue.component('TodoItem', {
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 // main.js
@@ -1759,7 +1759,7 @@ new Vue({
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 // store/modules/todos.js
