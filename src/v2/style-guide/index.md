@@ -7,13 +7,13 @@ updated: 2017-10-09
 
 > 注意⚠️ : このドキュメントはまだ完全に翻訳されていません。このページは[随時翻訳作業](https://github.com/vuejs/jp.vuejs.org/projects/2)につき更新されていきます🙏 ！
 
-This is the official style guide for Vue-specific code. If you use Vue in a project, it's a great reference to avoid errors, bikeshedding, and anti-patterns. However, we don't believe that any style guide is ideal for all teams or projects, so mindful deviations are encouraged based on past experience, the surrounding tech stack, and personal values.
+このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
 
-For the most part, we also avoid suggestions about JavaScript or HTML in general. We don't mind whether you use semicolons or trailing commas. We don't mind whether your HTML uses single-quotes or double-quotes for attribute values. Some exceptions will exist however, where we've found that a particular pattern is helpful in the context of Vue.
+殆どのパートにおいて、基本的に JavaScript や HTML に対する提案はさけています。セミコロンやカンマの使用の是非はどちらでも良いです。 HTML の属性に対してシングルクォートかダブルクォートどちらかを利用するかもどちらでも良いです。しかし、特定のパターンにおいて Vue のコンテキストが役立つと判明した場合については、その限りではありません。
 
-> **Soon, we'll also provide tips for enforcement.** Sometimes you'll simply have to be disciplined, but wherever possible, we'll try to show you how to use ESLint and other automated processes to make enforcement simpler.
+> **近々、実施のヒントを提供予定です** スタイルガイドについて、必要に応じて自身で実施しなければならない場所もありますが、可能な限り ESLint やその他自動化されたプロセスを用いて、より簡単に行う方法を明示します。
 
-Finally, we've split rules into four categories:
+最後に、私たちはルール群を 4 つのカテゴリに分割しました:
 
 
 
@@ -47,9 +47,9 @@ Some features of Vue exist to accommodate rare edge cases or smoother migrations
 
 ### 複数単語コンポーネント名 <sup data-p="a">必須</sup>
 
-**ルートの `App` コンポーネントを除き、コンポーネント名は常に複数単語であるべきです。**
+**ルートの `App` コンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-これは、全ての HTML 要素は 1 単語であるというこれまでの経緯から、既に存在する、そして将来定義される HTML 要素との[衝突を防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
+これは、全ての HTML 要素は 1 単語となっているというこれまでの経緯から、既に存在する、そして将来定義される HTML 要素との[衝突を防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
@@ -183,9 +183,9 @@ new Vue({
 
 ### プロパティの定義 <sup data-p="a">必須</sup>
 
-**プロパティの定義はできる限り詳細であるべきです。**
+**プロパティの定義はできる限り詳細とするべきです。**
 
-コミットされたコード内で、プロパティの定義は常に少なくとも1つのタイプを指定し、できる限り詳細であるべきです。
+コミットされたコード内で、プロパティの定義は常に少なくとも1つのタイプを指定し、できる限り詳細とするべきです。
 
 {% raw %}
 <details>
@@ -242,9 +242,9 @@ props: {
 
 ### キー付き `v-for` <sup data-p="a">必須</sup>
 
-**常に `v-for` では `key` を使用してください.**
+**常に `v-for` に対しては `key` を使用してください。**
 
-サブツリー下に内部コンポーネントの状態を維持するために `v-for` に `key` は _常に_ コンポーネントに必要です。しかし要素であっても、 アニメーションにおける [オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/) のような予測可能な振る舞いを維持するための良い手法です。
+サブツリー下に内部コンポーネントの状態を維持するために `v-for` に `key` は _常に_ コンポーネントに必要です。それが要素の場合においても、 アニメーションにおける [オブジェクトの一貫性](https://bost.ocks.org/mike/constancy/) のような予測可能な振る舞いを維持するためには良い手法でしょう。
 
 {% raw %}
 <details>
@@ -274,7 +274,7 @@ data: function () {
 
 アルファベット順に並べ替えます。 DOM を更新する時、 Vue はできる限りコストをかけずに DOM 変化を実行するために描画を最適化します。それは、最初の todo 要素を削除してから、それを再びリストの最後に加えることを意味します。
 
-問題は、 DOM に残る要素を削除しないことが重要な場合があることです。例えば、リストの並び替えに `<transition-group>` を使いたいかもしれないですし、描画された要素が `<input>` であればフォーカスを維持したいかもしれません。このような場合には、各アイテムに対して一意のキー (つまり `:key="todo.id"` ) を与えることによって、 Vue により予測可能な振る舞いを伝えることができます。
+問題は、 DOM に残る要素を削除しないことが重要な場合があることです。例えば、リストの並び替えに `<transition-group>` を使いたいかもしれないですし、描画された要素が `<input>` の場合は、フォーカスを維持したいかもしれません。このような場合には、各アイテムに対して一意のキー (つまり `:key="todo.id"` ) を与えることによって、 Vue により予測可能な振る舞いを伝えることができます。
 
 私たちの経験では、 _常に_ 一意のキーを与える方が良いので、あなたやあなたのチームはこれらのエッジケースについて心配する必要はありません。稀に、オブジェクトの一貫性が必要とされないパフォーマンスが重要なシナリオにおいては、意識的に例外を作ることはできます。
 
@@ -856,7 +856,7 @@ components/
 自己終了形式のコンポーネントは、単に中身を持たないというだけでなく、中身を持たないことを **意図したものだ** ということをはっきりと表現します。本の中にある白紙のページと、「このページは意図的に白紙のままにしています」と書かれたページとは違うということです。また、不要な閉じタグがなくなることによってあなたのコードはより読みやすくなります。
 
 
-残念ながら、HTML はカスタム要素の自己終了形式を許していません。[公式の「空」要素](https://www.w3.org/TR/html/syntax.html#void-elements) だけです。これが、Vue のテンプレートコンパイラが DOM よりも先にテンプレートにアクセスして、その後 DOM の仕様に準拠した HTML を出力することができる場合にだけこの方策を使うことができる理由です。 
+残念ながら、HTML はカスタム要素の自己終了形式を許していません。[公式の「空」要素](https://www.w3.org/TR/html/syntax.html#void-elements) だけです。これが、Vue のテンプレートコンパイラが DOM よりも先にテンプレートにアクセスして、その後 DOM の仕様に準拠した HTML を出力することができる場合にだけこの方策を使うことができる理由です。
 
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
@@ -1536,18 +1536,18 @@ computed: {
 
 
 
-## Priority D Rules: Use with Caution (Potentially Dangerous Patterns)
+## 優先度 D のルール: 使用注意（潜在的に危険なパターン）
 
 
 
-### `v-if`/`v-if-else`/`v-else` without `key` <sup data-p="d">use with caution</sup>
+### `key` を使わない `v-if`/`v-if-else`/`v-else` <sup data-p="d">使用注意</sup>
 
-**It's usually best to use `key` with `v-if` + `v-else`, if they are the same element type (e.g. both `<div>` elements).**
+**それらが同じ種類の要素の場合、通常は `v-if` + `v-else` と一緒に `key` を使用するのが最善です(例: どちらも `<div>` 要素).**
 
-By default, Vue updates the DOM as efficiently as possible. That means when switching between elements of the same type, it simply patches the existing element, rather than removing it and adding a new one in its place. This can have [unintended side effects](https://jsfiddle.net/chrisvfritz/bh8fLeds/) if these elements should not actually be considered the same.
+デフォルトでは、Vue は可能な限り効率的に DOM を更新します。これは、同じ種類の要素間を切り替えるときに、既存の要素を取り除いてそこに新しい要素を作成するのではなく、単純に既存の要素を修正することを意味します。これらの要素が、実際には同一とみなされないほうが良い場合、[予期せぬ副作用](https://jsfiddle.net/chrisvfritz/bh8fLeds/)を起こすことがあります。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <div v-if="error">
@@ -1560,7 +1560,7 @@ By default, Vue updates the DOM as efficiently as possible. That means when swit
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <div v-if="error" key="search-status">
@@ -1583,11 +1583,11 @@ By default, Vue updates the DOM as efficiently as possible. That means when swit
 
 
 
-### Element selectors with `scoped` <sup data-p="d">use with caution</sup>
+### `scoped` 付きの要素セレクタ <sup data-p="d">使用注意</sup>
 
-**Element selectors should be avoided with `scoped`.**
+**`scoped` 付きの要素セレクタは避けるべきです。**
 
-Prefer class selectors over element selectors in `scoped` styles, because large numbers of element selectors are slow.
+たくさんの要素セレクタは低速なため、`scoped` 付きの要素セレクタよりも、クラスセレクタを使用します。
 
 {% raw %}
 <details>
@@ -1596,14 +1596,14 @@ Prefer class selectors over element selectors in `scoped` styles, because large 
 </summary>
 {% endraw %}
 
-To scope styles, Vue adds a unique attribute to component elements, such as `data-v-f3f3eg9`. Then selectors are modified so that only matching elements with this attribute are selected (e.g. `button[data-v-f3f3eg9]`).
+スコープスタイルのために、Vue は `data-v-f3f3eg9` のような一意な属性をコンポーネントの要素に追加します。そして、この属性をもったマッチする要素のみが選択されるように、セレクタが変更されます（例: `button[data-v-f3f3eg9]`）。
 
-The problem is that large numbers of [element-attribute selectors](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (e.g. `button[data-v-f3f3eg9]`) will be considerably slower than [class-attribute selectors](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000) (e.g. `.btn-close[data-v-f3f3eg9]`), so class selectors should be preferred whenever possible.
+問題は、たくさんの[要素-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=a%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `button[data-v-f3f3eg9]`）は、[クラス-属性 セレクタ](http://stevesouders.com/efws/css-selectors/csscreate.php?n=1000&sel=.class%5Bhref%5D&body=background%3A+%23CFD&ne=1000)（例: `.btn-close[data-v-f3f3eg9]`）よりもかなり遅くなることです。よって可能ならクラスセレクタが推奨されます。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` html
 <template>
@@ -1619,7 +1619,7 @@ button {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` html
 <template>
@@ -1636,16 +1636,16 @@ button {
 
 
 
-### Implicit parent-child communication <sup data-p="d">use with caution</sup>
+### 暗黙的な親子間のやりとり <sup data-p="d">使用注意</sup>
 
-**Props and events should be preferred for parent-child component communication, instead of `this.$parent` or mutating props.**
+**親子間のやりとりは、`this.$parent` や変化するプロパティよりも、プロパティとイベントが推奨されます。**
 
-An ideal Vue application is props down, events up. Sticking to this convention makes your components much easier to understand. However, there are edge cases where prop mutation or `this.$parent` can simplify two components that are already deeply coupled.
+理想的な Vue アプリケーションでは、props down, events up となります。この習慣に従えば、コンポーネントの理解が簡単になります。ですが、プロパティの変化や `this.$parent` が、深く結合している2つのコンポーネントを単純化できるようなエッジケースも存在します。
 
-The problem is, there are also many _simple_ cases where these patterns may offer convenience. Beware: do not be seduced into trading simplicity (being able to understand the flow of your state) for short-term convenience (writing less code).
+問題は、これらのパターンが便利になるような、_シンプルな_ ケースも多く存在することです。注意: 短期間の利便性（少ないコードを書くこと）のための、取引のシンプルさ(状態の流れを理解出来るようになる)に誘惑されないでください。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 Vue.component('TodoItem', {
@@ -1688,7 +1688,7 @@ Vue.component('TodoItem', {
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 Vue.component('TodoItem', {
@@ -1729,16 +1729,16 @@ Vue.component('TodoItem', {
 
 
 
-### Non-flux state management <sup data-p="d">use with caution</sup>
+### Flux 以外の状態管理 <sup data-p="d">使用注意</sup>
 
-**[Vuex](https://github.com/vuejs/vuex) should be preferred for global state management, instead of `this.$root` or a global event bus.**
+** グローバル状態管理には、`this.$root` やグローバルイベントバスよりも、[Vuex](https://github.com/vuejs/vuex) が推奨されます **
 
-Managing state on `this.$root` and/or using a [global event bus](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) can be convenient for very simple cases, but are not appropriate for most applications. Vuex offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes.
+`this.$root` や [グローバルイベントバス](https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
 
 {% raw %}</details>{% endraw %}
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
-#### Bad
+#### 悪い例
 
 ``` js
 // main.js
@@ -1762,7 +1762,7 @@ new Vue({
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
-#### Good
+#### 良い例
 
 ``` js
 // store/modules/todos.js
