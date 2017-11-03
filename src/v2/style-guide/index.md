@@ -33,9 +33,9 @@ updated: 2017-11-04
 2. ほとんどのコミュニティのコードサンプルを変更なしにコピーして貼り付ける事ができます｡
 3. 少なくとも Vue に関しては､ほとんどの場合､新たな人材はあなたのコーディングスタイルよりも既に慣れ親しんだものを好みます｡
 
-### Priority D: Use with Caution
+### 優先度 D: 使用注意
 
-Some features of Vue exist to accommodate rare edge cases or smoother migrations from a legacy code base. When overused however, they can make your code more difficult to maintain or even become a source of bugs. These rules shine a light on potentially risky features, describing when and why they should be avoided.
+Vue のいくつかの機能は、レアケースまたは従来のコードベースからスムーズな移行に対応するために存在します。しかしながら、これを使いすぎると、コードを保守することが難しくなり、またバグの原因になることさえあります。これらのルールは潜在的な危険な機能を照らし、いつ、なぜ避けなかればならないのかを説明しています。
 
 
 
