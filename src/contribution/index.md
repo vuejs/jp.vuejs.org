@@ -103,12 +103,13 @@ api.md | API リファレンス | [hikimon](https://github.com/hikimon)
 - 対象ファイル: index.md
 - [GitHub Projects](https://github.com/vuejs/jp.vuejs.org/projects/2)
 
-ファイル | ルール | 貢献者
+英語カテゴリ | 翻訳カテゴリ | 貢献者
 ----- | ------------- | --- 
-index.md | Priority A Rules | [hisako135](https://github.com/hisako135)
-index.md | Priority B Rules | [wonderful-panda](https://github.com/wonderful-panda)
-index.md | Priority C Rules | [shika358](https://github.com/shika358)
-index.md | Priority D Rules | WIP
+Introduction | - | [potato4d](https://github.com/potato4d)
+Priority A Rules | 優先度 A ルール | [hisako135](https://github.com/hisako135)
+Priority B Rules | 優先度 B ルール | [wonderful-panda](https://github.com/wonderful-panda)
+Priority C Rules | 優先度 C ルール | [shika358](https://github.com/shika358)
+Priority D Rules | 優先度 D ルール | [zakuro9715](https://github.com/zakuro9715)
 
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
