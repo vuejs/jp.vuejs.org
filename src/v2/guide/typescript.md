@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-10-29
+updated: 2017-11-08
 type: guide
 order: 404
 ---
@@ -30,6 +30,8 @@ order: 404
   }
 }
 ```
+
+コンポーネントメソッド内で `this` の型をチェックするには `strict: true` (もしくは最低でも `strict` フラグの一部の `noImplicitThis: true`) を含める必要があることに注意してください。
 
 より詳細なことについては [TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を見てください。
 
@@ -142,8 +144,7 @@ var vm = new Vue({
 
 ## 戻り値の型にアノテーションをつける
 
-Vue の宣言ファイルは循環的な性質を持つため、TypeScript は特定のメソッドの型を推論するのが困難な場合があります。
-この理由のため、`render` や `computed` のメソッドに戻り値の型のアノテーションを付ける必要があるかもしれません。
+Vue の宣言ファイルは循環的な性質を持つため、TypeScript は特定のメソッドの型を推論するのが困難な場合があります。この理由のため、`render` や `computed` のメソッドに戻り値の型のアノテーションを付ける必要があるかもしれません。
 
 ```ts
 import Vue, { VNode } from 'vue'
@@ -173,5 +174,4 @@ const Component = Vue.extend({
 })
 ```
 
-型推論やメンバの補完が機能していない場合、特定のメソッドにアノテーションを付けるとこれらの問題に対処できます。
-`--noImplicitAny` オプションを使用すると、これらのアノテーションが付けられていないメソッドの多くを見つけるのに役立ちます。
+型推論やメンバの補完が機能していない場合、特定のメソッドにアノテーションを付けるとこれらの問題に対処できます。`--noImplicitAny` オプションを使用すると、これらのアノテーションが付けられていないメソッドの多くを見つけるのに役立ちます。
