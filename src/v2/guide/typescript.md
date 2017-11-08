@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-10-29
+updated: 2017-11-08
 type: guide
 order: 404
 ---
@@ -30,6 +30,8 @@ order: 404
   }
 }
 ```
+
+コンポーネントメソッド内で `this` の型をチェックするには `strict: true` (もしくは最低でも `strict` フラグの一部の `noImplicitThis: true`) を含める必要があることに注意してください。
 
 より詳細なことについては [TypeScript compiler options docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) を見てください。
 
