@@ -1,6 +1,6 @@
 ---
 type: style-guide
-updated: 2017-11-04
+updated: 2017-11-08
 ---
 
 # スタイルガイド <sup class="beta">beta</sup>
