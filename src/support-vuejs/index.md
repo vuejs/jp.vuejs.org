@@ -50,8 +50,6 @@ Vue.js は MIT ライセンスのオープンソース・プロジェクトで�
     <img src="/images/tmvuejs2.png">
   </a><a href="https://component.io" target="_blank" style="width: 140px;">
     <img src="/images/component_io.png" style="width: 140px;">
-  </a><a href="https://www.v2ex.com/t/379389" target="_blank" style="width: 120px;">
-    <img src="/images/v2exer.png" style="width: 120px;">
   </a><a href="https://www.xfive.co/" target="_blank" style="width: 80px;">
     <img src="/images/xfive.png" style="width: 80px;">
   </a><a href="http://www.frontenddevelopermeetups.com/" target="_blank" style="width: 120px;">
