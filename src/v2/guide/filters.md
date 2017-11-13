@@ -15,20 +15,29 @@ Vue.js では、一般的なテキストフォーマットを適用するため�
 <div v-bind:id="rawId | formatId"></div>
 ```
 
-フィルタ関数は常に式の値(前のチェーンの結果)を第一引数として受け取ります。この例では、 `capitalize` フィルタ関数は引数として `message` の値を受け取ります。
+コンポーネントのオプション内でローカルフィルタを定義できます:
 
 ``` js
-new Vue({
-  // ...
-  filters: {
-    capitalize: function (value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toUpperCase() + value.slice(1)
-    }
+filters: {
+  capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
   }
+}
+```
+
+もしくはグローバルでフィルタを定義することもできます:
+
+``` js
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
 })
 ```
+
+フィルタ関数は常に式の値(前のチェーンの結果)を第一引数として受け取ります。この例では、 `capitalize` フィルタ関数は引数として `message` の値を受け取ります。
 
 フィルタは連結できます:
 
