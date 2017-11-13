@@ -15,7 +15,10 @@ Vue.js は MIT ライセンスのオープンソース・プロジェクトで�
 
 <p style="text-align: center;">
   <a href="https://stdlib.com">
-    <img style="width: 300px;" src="/images/stdlib.png">
+    <img src="/images/stdlib.png" style="width: 300px;">
+  </a>
+  <a href="http://tooltwist.com/" target="_blank">
+    <img src="/images/tooltwist.png" style="width: 300px;">
   </a>
 </p>
 
