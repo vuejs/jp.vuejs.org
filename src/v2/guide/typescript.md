@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-11-08
+updated: 2017-11-17
 type: guide
 order: 404
 ---
@@ -150,14 +150,14 @@ Vue の宣言ファイルは循環的な性質を持つため、TypeScript は�
 import Vue, { VNode } from 'vue'
 
 const Component = Vue.extend({
-  data() {
+  data () {
     return {
       msg: 'Hello'
     }
   },
   methods: {
     // 戻り値の型の `this` のために、アノテーションが必要です
-    greet(): string {
+    greet (): string {
       return this.msg + ' world'
     }
   },
@@ -168,7 +168,7 @@ const Component = Vue.extend({
     }
   },
   // `createElement` は推論されますが、`render` は戻り値の方が必要です
-  render(createElement): VNode {
+  render (createElement): VNode {
     return createElement('div', this.greeting)
   }
 })
