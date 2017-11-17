@@ -1,6 +1,6 @@
 ---
 type: api
-updated: 2017-10-17
+updated: 2017-11-17
 ---
 
 ## グローバル設定
@@ -1688,6 +1688,7 @@ updated: 2017-10-17
 
   <p class="tip">任意の HTML をあなたの Web サイト上で動的に描画することは、 [XSS 攻撃](https://en.wikipedia.org/wiki/Cross-site_scripting)を招くため大変危険です。`v-html` は信頼済みコンテンツのみに利用し、 **絶対に** ユーザの提供するコンテンツには使わないでください。</p>
 
+  <p class="tip">[単一ファイルコンポーネント](../guide/single-file-components.html)では、`scoped` スタイルは `v-html` 内のコンテンツには適用されません。なぜなら、その HTML は Vue のテンプレートコンパイラによって処理されないからです。スコープ付き CSS を使用した `v-html` のコンテンツを対象とする場合、代わりに [CSS モジュール](https://vue-loader.vuejs.org/ja/features/css-modules.html)やグローバルな `<style>` 要素を BEM などの手動スコープ戦略を用いて使用することができます。</p>
 
 - **例:**
 
