@@ -6,13 +6,25 @@
 
 ## 貢献方法
 
-1. このレポジトリをフォークします!
-2. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
-3. 変更をコミットします: `git commit -am 'Fix some files'`
-4. lint で引っかかる場合は再度修正を行いコミットします
-5. 翻訳した `.md` の `updated` 属性を修正した日に変更してコミットします: `git commit -am 'Update date'`
-6. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
-7. 問題がなければ、プルリクエストを `vuejs/jp.vuejs.org` の `lang-ja` ブランチに送ります
+### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
+
+1. [GitHub Issues](https://github.com/vuejs/jp.vuejs.org/issues)から、[このクエリ](https://github.com/vuejs/jp.vuejs.org/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation+sort%3Acreated-asc) でソート&フィルタして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
+2. 選択した issue で、「翻訳やります！」的なコメントで宣言します :raising_hand:
+3. このレポジトリ`vuejs/jp.vuejs.org`のメンテナから同 issue でコメントで承認されたら、正式に自分が選んだ issue の翻訳担当者としてアサインされたことになります
+4. このレポジトリをフォークします!
+5. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
+6. 変更をコミットします: `git commit -am 'Fix some files'`
+7. lint で引っかかる場合は再度修正を行いコミットします
+8. 翻訳した `.md` の `updated` 属性を修正した日に変更してコミットします: `git commit -am 'Update date'`
+9. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
+10. 問題がなければ、プルリクエストを `vuejs/jp.vuejs.org` の `lang-ja` ブランチに送ります
+11. レビュー :eyes: で指摘事項があったら修正し、再度 Push します :pencil:
+12. レビュー :eyes: で OK :ok_womain: ならば、マージされて内容がデプロイされてドキュメントに反映されます! :tada:
+13. ドキュメント反映後、[貢献者一覧](https://jp.vuejs.org/contribution/)に**貢献者**としてあなたの GitHub アカウントが登録されます！ :tada:
+
+### GitHub Issues とは別のものについて貢献する
+
+手順は上記の `4.`以降と同じです。
 
 
 ## 翻訳スタイル
