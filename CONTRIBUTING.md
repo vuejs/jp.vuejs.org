@@ -9,7 +9,7 @@
 ### GitHub Issues にある本家ドキュメントの差分更新内容を翻訳して貢献する
 
 1. [GitHub Issues](https://github.com/vuejs/jp.vuejs.org/issues)から、[このクエリ](https://github.com/vuejs/jp.vuejs.org/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation+sort%3Acreated-asc) でソート&フィルタして、アサインされていない issues 一覧からできるだけ古いものからやりたい issue を選択します
-2. 選択した issue で、「翻訳やります！」的なコメントで宣言します :raising_hand:
+2. 選択した issue で、「翻訳やります！」的なコメントで宣言します :raising_hand: (`vuejs/jp.vuejs.org`のメンテナの方々は、GitHub の assign 機能で self assign で OK です)
 3. このレポジトリ`vuejs/jp.vuejs.org`のメンテナから同 issue でコメントで承認されたら、正式に自分が選んだ issue の翻訳担当者としてアサインされたことになります
 4. このレポジトリをフォークします!
 5. `lang-ja` ブランチからトピックブランチを作成します: `git branch my-topic-branch lang-ja`
@@ -19,7 +19,7 @@
 9. フォークした自分のレポジトリに Push します: `git push origin my-topic-branch`
 10. 問題がなければ、プルリクエストを `vuejs/jp.vuejs.org` の `lang-ja` ブランチに送ります
 11. レビュー :eyes: で指摘事項があったら修正し、再度 Push します :pencil:
-12. レビュー :eyes: で OK :ok_womain: ならば、マージされて内容がデプロイされてドキュメントに反映されます! :tada:
+12. レビュー :eyes: で OK :ok_woman: ならば、マージされて内容がデプロイされてドキュメントに反映されます! :tada:
 13. ドキュメント反映後、[貢献者一覧](https://jp.vuejs.org/contribution/)に**貢献者**としてあなたの GitHub アカウントが登録されます！ :tada:
 
 ### GitHub Issues とは別のものについて貢献する
