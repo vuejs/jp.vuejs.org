@@ -28,7 +28,7 @@ new Vue({
 ページを読み込むと、この要素はフォーカスを手に入れます。実際、このページに訪れてから他のところをクリックしていなければ、この input にフォーカス(注意:モバイル Safari では自動でフォーカスしません)が当たっているでしょう。さあ、これを実現させるディレクティブを作りましょう。
 
 ``` js
-// v-focus というグローバルカスタムディレクティブを登録します
+// `v-focus` というグローバルカスタムディレクティブを登録します
 Vue.directive('focus', {
   // ひも付いている要素が DOM に挿入される時...
   inserted: function (el) {
@@ -78,16 +78,16 @@ directive definition object はいくつかのフック関数(全て任意)を�
 
 ディレクティブフックには以下の引数が渡せます:
 
-- **el**: ディレクティブがひも付く要素。DOM を直接操作するために使用できます。
-- **binding**: 以下のプロパティを含んでいるオブジェクト。
-  - **name**: `v-` 接頭辞 (prefix) 無しのディレクティブ名。
-  - **value**: ディレクティブに渡される値。例えば `v-my-directive="1 + 1"` では、value は `2` です。
-  - **oldValue**: `update` と `componentUpdated` においてのみ利用できる以前の値。値が変化したかどうかに関わらず利用できます。
-  - **expression**: 文字列としてのバインディング式。例えば `v-my-directive="1 + 1"` では、式は `"1 + 1"` です。
-  - **arg**: もしあれば、ディレクティブに渡される引数。例えば `v-my-directive:foo` では、arg は `"foo"` です。
-  - **modifiers**: もしあれば、修飾子 (modifier) を含んでいるオブジェクト。例えば `v-my-directive.foo.bar` では、modifiers オブジェクトは `{ foo: true, bar: true }` です。
-- **vnode**: Vue のコンパイラによって生成される仮想ノード。さらに詳しくは [VNode API](../api/#VNodeインターフェイス) を参照してください。
-- **oldVnode**: `update` と `componentUpdated` フックにおいてのみ利用できる以前の仮想ノード。
+- `el`: ディレクティブがひも付く要素。DOM を直接操作するために使用できます。
+- `binding`: 以下のプロパティを含んでいるオブジェクト。
+  - `name`: `v-` 接頭辞 (prefix) 無しのディレクティブ名。
+  - `value`: ディレクティブに渡される値。例えば `v-my-directive="1 + 1"` では、value は `2` です。
+  - `oldValue`: `update` と `componentUpdated` においてのみ利用できる以前の値。値が変化したかどうかに関わらず利用できます。
+  - `expression`: 文字列としてのバインディング式。例えば `v-my-directive="1 + 1"` では、式は `"1 + 1"` です。
+  - `arg`: もしあれば、ディレクティブに渡される引数。例えば `v-my-directive:foo` では、arg は `"foo"` です。
+  - `modifiers`: もしあれば、修飾子 (modifier) を含んでいるオブジェクト。例えば `v-my-directive.foo.bar` では、modifiers オブジェクトは `{ foo: true, bar: true }` です。
+- `vnode`: Vue のコンパイラによって生成される仮想ノード。さらに詳しくは [VNode API](../api/#VNodeインターフェイス) を参照してください。
+- `oldVnode`: `update` と `componentUpdated` フックにおいてのみ利用できる以前の仮想ノード。
 
 <p class="tip">`el` を除いて、これらの全てのプロパティは読み込みのみ (read-only) で変更しないものとして扱わなくてはいけません。フックを超えてデータを共有する必要がある場合は, 要素の [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) を通じて行うことが推奨されています。</p>
 
