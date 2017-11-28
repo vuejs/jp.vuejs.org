@@ -248,7 +248,7 @@ Vue.config.keyCodes.f1 = 112
 
 >  2.5.0 で新規追加
 
-直接、任意の有効なキー名をそれらをケバブケースに変換することによって修飾子として [`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)で公表されている任意の有効なキー名をケバブケースに変換することによって、修飾子として直接使用できます。
+[`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)で公表されている任意の有効なキー名をケバブケースに変換することによって、修飾子として直接使用できます。
 
 ``` html
 <input @keyup.page-down="onPageDown">
