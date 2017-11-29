@@ -232,6 +232,12 @@ updated: 2017-11-26
   Vue.nextTick(function () {
     // DOM が更新されています
   })
+  
+  // usage as a promise (2.1.0+, see note below)
+  Vue.nextTick()
+    .then(function () {
+      // DOM updated
+    })
   ```
 
   > 2.1.0 から新規: コールバックが提供されず、実行環境で Promise がサポートされている場合は Promise を返します。Vue には Promise ポリフィルが付属していないため、Promise をネイティブにサポートしていないブラウザ (IE かどうか確認して) をターゲットにしている場合は、自分でポリフィルを提供する必要があるという点に注意してください。
