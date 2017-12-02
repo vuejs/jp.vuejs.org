@@ -63,8 +63,8 @@ describe('MyComponent', () => {
 
   // マウントされたコンポーネントインスタンスを描画して検証します。
   it('renders the correct message', () => {
-    const Ctor = Vue.extend(MyComponent)
-    const vm = new Ctor().$mount()
+    const Constructor = Vue.extend(MyComponent)
+    const vm = new Constructor().$mount()
     expect(vm.$el.textContent).toBe('bye!')
   })
 })
@@ -94,8 +94,8 @@ import MyComponent from './MyComponent.vue'
 
 // コンポーネントをマウントし描画結果を返すヘルパー関数
 function getRenderedText (Component, propsData) {
-  const Ctor = Vue.extend(Component)
-  const vm = new Ctor({ propsData: propsData }).$mount()
+  const Constructor = Vue.extend(Component)
+  const vm = new Constructor({ propsData: propsData }).$mount()
   return vm.$el.textContent
 }
 
