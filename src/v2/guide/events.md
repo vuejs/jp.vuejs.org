@@ -211,7 +211,7 @@ methods: {
 キーボードイベントを購読するにあたって、時にはキーコードのチェックが共通で必要になります。Vue は、`v-on` に対してキー修飾子を追加することで、キーコードのチェックを可能にします:
 
 ``` html
-<!-- keyCode が13のときだけ、vm.submit() が呼ばれます  -->
+<!-- `keyCode` が13のときだけ、`vm.submit()` が呼ばれます  -->
 <input v-on:keyup.13="submit">
 ```
 
@@ -240,7 +240,7 @@ methods: {
 グローバルな `config.keyCodes` オブジェクト経由で[カスタムキー修飾子のエイリアス](../api/#keyCodes)も定義できます:
 
 ``` js
-// v-on:keyup.f1 を可能にします
+// `v-on:keyup.f1` を可能にします
 Vue.config.keyCodes.f1 = 112
 ```
 
