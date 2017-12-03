@@ -233,7 +233,7 @@ updated: 2017-11-26
     // DOM が更新されています
   })
   
-  // usage as a promise (2.1.0+, see note below)
+  // promise での使用法 (2.1.0 以上、下記の注記を参照してください)
   Vue.nextTick()
     .then(function () {
       // DOM updated
