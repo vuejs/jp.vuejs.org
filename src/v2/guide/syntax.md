@@ -49,11 +49,13 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 <div v-bind:id="dynamicId"></div>
 ```
 
-また、真偽値属性も使用できます。式を評価し、偽とみなせる値のとき、属性を削除します。
+属性が単に存在していることを `true` と示すといった真偽値属性の場合、`v-bind` は少し異なった働きをします。この例では：
 
 ``` html
 <button v-bind:disabled="isButtonDisabled">Button</button>
 ```
+
+`isButtonDisabled` が `null`、`undefined`、または `false` の値を持つ場合、`disabled` 属性はレンダリングされた `<button>` 要素に含められません。
 
 ### JavaScript 式の使用
 
