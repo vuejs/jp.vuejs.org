@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-11-17
+updated: 2017-12-03
 type: guide
 order: 404
 ---
@@ -40,6 +40,8 @@ order: 404
 TypeScript による Vue アプリケーションを開発するために、すぐに利用できる TypeScript のサポートを提供する [Visual Studio Code](https://code.visualstudio.com/) を使用することを強く勧めます。
 
 [単一ファイルコンポーネント](./single-file-components.html) (SFC) を使用している場合、SFC 内部で TypeScript インターフェイスと他の多くの優れた機能を提供する素晴らしい [Vetur 拡張](https://github.com/vuejs/vetur) を入手してください。
+
+[WebStorm](https://www.jetbrains.com/webstorm/) も TypeScript と Vue.js の両方に対してすぐに利用できるサポートを提供しています。
   
 ## 基本的な使い方
 
