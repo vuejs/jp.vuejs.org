@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2017-10-14
+updated: 2017-12-03
 type: guide
 order: 801
 ---
@@ -25,9 +25,9 @@ React と Vue には多くの類似点があります。それらは両方とも
 
 React のコミュニティは、私たちがこのバランスを達成するのを[手助けしてくださいました](https://github.com/vuejs/vuejs.org/issues/364)。React チームの Dan Abramov 氏には心から感謝いたします。彼にはとても寛容に時間を費やしていただき、私たちが[お互いに最終結果に満足するまで](https://github.com/vuejs/vuejs.org/issues/364#issuecomment-244575740)このドキュメントを改善するための数多くの助言をいただきました。
 
-### 性能
+### 実行時性能
 
-React と Vue の両方は、最もよく見られるケースでは同等の性能を提供しますが、軽量の Virtual DOM 実装によって一般には Vue がわずかに良いです。数字に興味があるのならば、生のレンダリング / 更新のパフォーマンスに重点をおいた、この[サードパーティのベンチマーク](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts/table.html)をチェックすることができます。これは、複雑なコンポーネント構造を考慮しないので、判断よりむしろ参考のみにすべきです。
+React と Vue の両方は、どちらも非常に早いので、速度はどちらを選ぶかの決定要因になりそうにありません。ですが、具体的なメトリクスについては、この[サードパーティのベンチマーク](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)を確認してください。これは、シンプルなコンポーネントツリーでの生のレンダリング / 更新のパフォーマンスに重点をおいています。
 
 #### 最適化の取り組み
 
@@ -147,7 +147,7 @@ AngularJS がスコープ間による双方向バインディングを使用し�
 
 Vue はディレクティブとコンポーネントの間に明確な線引きをしています。ディレクティブは DOM の操作のみをカプセル化するように意図されている一方で、コンポーネントは自身のビューとデータロジックを持つ独立した構成単位です。AngularJS では、それらの間には多くの混乱があります。
 
-### 性能
+### 実行時性能
 
 Vue は Dirty Checking を使用していないため、より良い性能を発揮し、さらに、もっともっと簡単に最適化できます。AngularJS はスコープ内の何かが変更されると、毎回すべてのウォッチャがもう一度再評価される必要があるため、たくさんのウォッチャが存在する時は遅くなってしまいます。さらに、ダイジェストサイクルは、もしいくつかのウォッチャが追加の更新をトリガしたら、"安定"のために複数回の実行が必要となる場合もあります。Angular のユーザーはダイジェストサイクルを回避するために難解なテクニックによく頼る必要がありますし、いくつかの状況では、多くのウォッチャが存在する状況でスコープを最適化する単純な方法がない場合もあります。
 
@@ -167,9 +167,11 @@ Angular は本当に AngularJS から完全に異なるフレームワークな�
 
 最後に、Vue は Angular のように TypeScript と深くは統合されていませんが、Vue で TypeScript を使用したいと望む人に対して、Vue も[公式の typings](https://github.com/vuejs/vue/tree/dev/types)と[公式 decorator](https://github.com/vuejs/vue-class-component) を提供します。また、私たちは Vue + TS ユーザーの TS / IDE エクスペリエンスを改善するために、Microsoft の TypeScript および VSCode チームと積極的に協力しています。
 
-### サイズと性能
+### 実行時性能
 
-性能面では、2 つのフレームワークは非常に速く、判決するための現実世界のユースケースでの十分なデータはありません。しかしながら、もしあなたがいくつかの数字を見ることを決意したのなら、この[サードパーティのベンチマーク](http://stefankrause.net/js-frameworks-benchmark4/webdriver-ts/table.html)から Vue 2.0 は Angular よりも優位なようです。
+両方のフレームワークは非常に高速で、ベンチマークでも似たようなメトリクスがあります。より詳細な比較のために、[具体的なメトリクスを参照](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)することもできますが、速度は決定要因にはなりそうにありません。
+
+### サイズ
 
 Angular の最近のバージョンは、[AOT コンパイル](https://ja.wikipedia.org/wiki/%E4%BA%8B%E5%89%8D%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9)と [tree-shaking](https://en.wikipedia.org/wiki/Tree_shaking) によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (圧縮済みで 〜 30 KB) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (圧縮済みで 〜 130 KB) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
 
@@ -193,7 +195,7 @@ Ember はフル機能のフレームワークでとても強い思想（highly o
 
 - Vue のテンプレート構文は JavaScript の式の完全な力を利用しているのに対し、Handlebars の式とヘルパの構文は意図的にかなり制限されています。
 
-- 性能面では、Ember 2.0 で最新の Glimmer エンジンのアップデートがされた後にも関わらず、Vue は大きく差をつけて Ember よりも[優れています](https://rawgit.com/krausest/js-framework-benchmark/master/webdriver-ts/table.html)。Ember では性能が重要な状況において、手動でランループ（run loop）を管理する必要がある一方で、Vue は自動的にバッチ更新を行います。
+- 性能面では、Ember 2.0 で最新の Glimmer エンジンのアップデートがされた後にも関わらず、Vue は大きく差をつけて Ember よりも[優れています](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)。Ember では性能が重要な状況において、手動でランループ（run loop）を管理する必要がある一方で、Vue は自動的にバッチ更新を行います。
 
 ## Knockout
 
