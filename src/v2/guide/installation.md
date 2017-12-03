@@ -3,11 +3,8 @@ title: インストール
 updated: 2017-10-11
 type: guide
 order: 1
-vue_version: 2.5.2
-dev_size: "272.26"
-min_size: "83.31"
-gz_size: "30.38"
-ro_gz_size: "21.10"
+vue_version: 2.5.9
+gz_size: "30.95"
 ---
 
 ### 互換性の注意
@@ -15,6 +12,8 @@ ro_gz_size: "21.10"
 Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
 
 ### リリースノート
+
+最新の安定バージョン: {{vue_version}}
 
 各バージョンの詳細なリリースノートは、[GitHub](https://github.com/vuejs/vue/releases) で入手できます。
 
