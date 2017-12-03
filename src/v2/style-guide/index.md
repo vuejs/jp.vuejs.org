@@ -1,6 +1,6 @@
 ---
 type: style-guide
-updated: 2017-11-08
+updated: 2017-12-03
 ---
 
 # スタイルガイド <sup class="beta">beta</sup>
@@ -1480,15 +1480,15 @@ computed: {
 
 ### 単一ファイルコンポーネントのトップレベルの属性の順序 <sup data-p="c">推奨</sup>
 
-**[単一ファイルコンポーネント](../guide/single-file-components.html)では､ `<template>` ､ `<script>` ､ `<style>` タグを一貫した順序にするべきです､ `<style>` は最後です､それは他の2つのうち少なくとも1つが常に必要だからです。**
+**[単一ファイルコンポーネント](../guide/single-file-components.html)では､ `<script>` ､ `<template>` ､ `<style>` タグを一貫した順序にするべきです､ `<style>` は最後です､それは他の2つのうち少なくとも1つが常に必要だからです。**
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
 
 ``` html
 <style>/* ... */</style>
-<template>...</template>
 <script>/* ... */</script>
+<template>...</template>
 ```
 
 ``` html
@@ -1509,25 +1509,25 @@ computed: {
 
 ``` html
 <!-- ComponentA.vue -->
-<template>...</template>
 <script>/* ... */</script>
+<template>...</template>
 <style>/* ... */</style>
 
 <!-- ComponentB.vue -->
-<template>...</template>
 <script>/* ... */</script>
+<template>...</template>
 <style>/* ... */</style>
 ```
 
 ``` html
 <!-- ComponentA.vue -->
-<script>/* ... */</script>
 <template>...</template>
+<script>/* ... */</script>
 <style>/* ... */</style>
 
 <!-- ComponentB.vue -->
-<script>/* ... */</script>
 <template>...</template>
+<script>/* ... */</script>
 <style>/* ... */</style>
 ```
 {% raw %}</div>{% endraw %}
