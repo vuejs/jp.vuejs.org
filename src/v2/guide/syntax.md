@@ -32,10 +32,28 @@ mustache タグは、対応するオブジェクトの `msg` プロパティの�
 2重中括弧の mustaches は、データを HTML ではなく、プレーンなテキストとして扱います。実際の HTML として出力するためには、`v-html` ディレクティブを使用する必要があります:
 
 ``` html
-<div v-html="rawHtml"></div>
+<p>Using mustaches: {{ rawHtml }}</p>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>
 ```
 
-この `div` のコンテンツは `rawHtml` プロパティの値に置き換えられ、プレーンな HTML として解釈されます。Vue は、文字列ベースのテンプレートエンジンではないので、`v-html` をテンプレート部品を構成して使用できないことに注意しましょう。代わりに、 UI の再利用や組み合わせのための基礎として、コンポーネントを利用することが好ましいです。
+{% raw %}
+<div id="example1" class="demo">
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+</div>
+<script>
+new Vue({
+  el: '#example1',
+  data: function () {
+  	return {
+  	  rawHtml: '<span style="color: red">This should be red.</span>'
+  	}
+  }
+})
+</script>
+{% endraw %}
+
+この `span` のコンテンツは `rawHtml` プロパティの値に置き換えられ、プレーンな HTML として解釈されます。Vue は、文字列ベースのテンプレートエンジンではないので、`v-html` をテンプレート部品を構成して使用できないことに注意しましょう。代わりに、 UI の再利用や組み合わせのための基礎として、コンポーネントを利用することが好ましいです。
 
 <p class="tip">[XSS 脆弱性](https://en.wikipedia.org/wiki/Cross-site_scripting)を容易に引き起こすので、ウェブサイトで動的に任意のHTMLを描画することは、非常に危険です。信頼できるコンテンツにだけ HTML 展開を利用してください。ユーザーから提供されたコンテンツに対しては**決して**使用してはいけません。</p>
 
