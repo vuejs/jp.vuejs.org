@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-11-17
+updated: 2017-12-03
 type: guide
 order: 404
 ---
