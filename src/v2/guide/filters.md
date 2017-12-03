@@ -37,6 +37,32 @@ Vue.filter('capitalize', function (value) {
 })
 ```
 
+以下は `capitalize` フィルタの使用例です。
+
+{% raw %}
+<div id="example_1" class="demo">
+  <input type="text" v-model="message">
+  <p>{{ message | capitalize }}</p>
+</div>
+<script>
+  new Vue({
+    el: '#example_1',
+    data: function () {
+      return {
+        message: 'john'
+      }
+    },
+    filters: {
+      capitalize: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+      }
+    }
+  })
+</script>
+{% endraw %}
+
 フィルタ関数は常に式の値(前のチェーンの結果)を第一引数として受け取ります。この例では、 `capitalize` フィルタ関数は引数として `message` の値を受け取ります。
 
 フィルタは連結できます:
