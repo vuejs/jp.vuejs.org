@@ -833,9 +833,9 @@ Vue.config.keyCodes.f1 = 112
 
 ```
 Todos
-|-- NewTodoInput
-|-- Todo
-    |-- DeleteTodoButton
+├─ NewTodoInput
+└─ Todo
+   └─ DeleteTodoButton
 ```
 
 これらを単一のイベントハブによって、コンポーネント間の通信を管理することができるようになりました:
