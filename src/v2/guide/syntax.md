@@ -1,6 +1,6 @@
 ---
 title: テンプレート構文
-updated: 2017-10-17
+updated: 2017-12-03
 type: guide
 order: 4
 ---
@@ -94,7 +94,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 ディレクティブの中には "引数" を取るものもあります。これはディレクティブ名の後にコロンで表記します。例えば、`v-bind`ディレクティブは、リアクティブに HTML 属性を更新します:
 
 ``` html
-<a v-bind:href="url"></a>
+<a v-bind:href="url"> ... </a>
 ```
 
 ここでの `href` は `v-bind` ディレクティブに要素の `href` 属性に式 `url` の値を束縛することを教えるための引数です。
@@ -102,7 +102,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 `v-on` ディレクティブの別の例を見てみましょう。これは DOM イベントを受け取ります:
 
 ``` html
-<a v-on:click="doSomething">
+<a v-on:click="doSomething"> ... </a>
 ```
 
 ここでの引数は受け取りたいイベント名です。ここからイベントハンドリングの詳細について説明します。
@@ -112,7 +112,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 修飾子 (Modifier) は、ドットで表記された特別な接尾語で、ディレクティブが特別な方法で束縛されるべきということを示します。例えば、`.prevent` 修飾子は `v-on` ディレクティブに、イベントがトリガされた際 `event.preventDefault()` を呼ぶように伝えます:
 
 ``` html
-<form v-on:submit.prevent="onSubmit"></form>
+<form v-on:submit.prevent="onSubmit"> ... </form>
 ```
 
 これらの機能を調べるとき、この後、[`v-on`](events.html#イベント修飾子) や [`v-model`](forms.html#修飾子)については、修飾子の他の例を見るでしょう。
@@ -125,20 +125,20 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 ``` html
 <!-- 完全な構文 -->
-<a v-bind:href="url"></a>
+<a v-bind:href="url"> ... </a>
 
 <!-- 省略記法 -->
-<a :href="url"></a>
+<a :href="url"> ... </a>
 ```
 
 ### `v-on` 省略記法
 
 ``` html
 <!-- 完全な構文 -->
-<a v-on:click="doSomething"></a>
+<a v-on:click="doSomething"> ... </a>
 
 <!-- 省略記法 -->
-<a @click="doSomething"></a>
+<a @click="doSomething"> ... </a>
 ```
 
 これらは普通の HTML とはちょっと違うように見えるかもしれません。ですが、 `:` や `@` は属性名に利用可能な文字です。すべての Vue.js のサポートしているブラウザで、正しくパースすることができます。加えて、最終的に描画されるマークアップにそれらは現れません。省略記法の構文の利用は完全に任意ですが、後でその使用方法について詳しく学んだ時に便利と感じることでしょう。
