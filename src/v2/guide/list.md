@@ -323,7 +323,7 @@ Vue.set(vm.userProfile, 'age', 27)
 `vm.$set` インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
 
 ``` js
-this.$set(this.userProfile, 'age', 27)
+vm.$set(this.userProfile, 'age', 27)
 ```
 
 例えば `Object.assign()` や `_.extend()` を使って既存のオブジェクトにいくつかの新しいプロパティを割り当てたいときがあります。このような場合は、両方のオブジェクトのプロパティを使用して新しいオブジェクトを作成する必要があります。 なので以下のやり方ではなくて：
