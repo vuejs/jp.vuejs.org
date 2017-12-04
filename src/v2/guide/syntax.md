@@ -55,7 +55,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 <button v-bind:disabled="isButtonDisabled">Button</button>
 ```
 
-`isButtonDisabled` が `null`、`undefined`、または `false` の値を持つ場合、`disabled` 属性はレンダリングされた `<button>` 要素に含められません。
+`isButtonDisabled` が `null`、`undefined`、または `false` の値を持つ場合、`disabled` 属性は描画された `<button>` 要素に含められません。
 
 ### JavaScript 式の使用
 
