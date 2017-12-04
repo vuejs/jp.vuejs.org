@@ -7,7 +7,9 @@ order: 4
 
 Vue.js では HTML ベースのテンプレート構文を使っているので、Vue インスタンスのデータと描画された DOM を宣言的に対応させることができます。全ての Vue.js テンプレートは、仕様に準拠しているブラウザや HTML パーサによってパースできる有効な HTML です。
 
-内部では、Vue はテンプレートを Virtual DOM の描画関数にコンパイルします。リアクティブシステムと組み合わせて、Vue は再描画に必要なコンポーネントをインテリジェントに把握でき、アプリケーションの状態が変わった時に最低限の DOM 操作を適用します。もし、あなたが Virtual DOM の概要に詳しく、JavaScript で直接描画するのを好む場合、テンプレートの代わりに[直接 render 関数で書く](render-function.html) ことも可能で、オプションで JSX をサポートしています。
+内部では、Vue はテンプレートを Virtual DOM の描画関数にコンパイルします。リアクティブシステムと組み合わせて、Vue は再描画に必要なコンポーネントをインテリジェントに把握でき、アプリケーションの状態が変わった時に最低限の DOM 操作を適用します。
+
+もし、あなたが Virtual DOM の概要に詳しく、JavaScript で直接描画するのを好む場合、テンプレートの代わりに[直接 render 関数で書く](render-function.html) ことも可能で、オプションで JSX をサポートしています。
 
 ## 展開
 
@@ -65,11 +67,13 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 <div v-bind:id="dynamicId"></div>
 ```
 
-また、真偽値属性も使用できます。式を評価し、偽とみなせる値のとき、属性を削除します。
+属性が単に存在していることを `true` と示すといった真偽値属性の場合、`v-bind` は少し異なった働きをします。この例では：
 
 ``` html
 <button v-bind:disabled="isButtonDisabled">Button</button>
 ```
+
+`isButtonDisabled` が `null`、`undefined`、または `false` の値を持つ場合、`disabled` 属性は描画された `<button>` 要素に含められません。
 
 ### JavaScript 式の使用
 
