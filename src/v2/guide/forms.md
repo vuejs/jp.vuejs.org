@@ -312,17 +312,19 @@ radio 、 checkbox 、そして select オプションは、 `v-model` バイン
 <input
   type="checkbox"
   v-model="toggle"
-  v-bind:true-value="a"
-  v-bind:false-value="b"
+  true-value="yes"
+  false-value="no"
 >
 ```
 
 ``` js
 // チェックされたとき:
-vm.toggle === vm.a
-// チェックがはずれされたとき:
-vm.toggle === vm.b
+vm.toggle === 'yes'
+// チェックが外されたとき:
+vm.toggle === 'no'
 ```
+
+<p class="tip">`true-value` と ` false-value` 属性は入力フォームの `value` 属性に影響しません。なぜならブラウザはフォームの送信にチェックされていないボックスを含まないからです。 2つの値のうちのいずれかがフォームで送信されるようにするには、代わりにラジオを使用してください(例: "はい" または "いいえ")。</p>
 
 ### ラジオ
 
