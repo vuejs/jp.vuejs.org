@@ -84,7 +84,7 @@ updated: 2017-11-26
 
   > 2.4.0 以降では、このフックは Vue のカスタムイベントハンドラ内部で投げられたエラーもキャプチャします。
 
-  > このオプションのを使用して、[Sentry](https://sentry.io) というエラー追跡サービスを[公式に統合](https://sentry.io/for/vue/)ために使用します。
+  > エラー追跡サービスの [Sentry](https://sentry.io/for/vue/) と [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) はこのオプションを使用して公式の統合を提供しています。
 
 ### warnHandler
 
