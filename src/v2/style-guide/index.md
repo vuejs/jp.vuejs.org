@@ -307,6 +307,165 @@ data: function () {
 
 
 
+### `v-for` と一緒に `v-if` を使うのを避ける <sup data-p="a">必須</sup>
+
+**`v-for` と同じ要素に `v-if` を使わないでください。**
+
+こうしたくなってしまう2つの一般的なケースがあります:
+
+- リスト内のアイテムをフィルタする(例: `v-for="user in users" v-if="user.isActive"`)。このような場合は、フィルタリングされたリストを返却する算出プロパティに `users` を置き換えてください(例: `activeUsers`)。
+
+- 非表示にする必要がある場合、リストを描画しないようにする(例: `v-for="user in users" v-if="shouldShowUsers"`)。このような場合は、`v-if` をコンテナ要素(例: `ul`、`ol`)に移動してください。
+
+{% raw %}
+<details>
+<summary>
+  <h4>詳細な説明</h4>
+</summary>
+{% endraw %}
+
+Vue がディレクティブを処理するとき、`v-for`は `v-if` よりも優先度が高いので、このテンプレートは、
+
+``` html
+<ul>
+  <li
+    v-for="user in users"
+    v-if="user.isActive"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+
+以下と同様に評価されます:
+
+``` js
+this.users.map(function (user) {
+  if (user.isActive) {
+    return user.name
+  }
+})
+```
+
+たとえほんの少しのユーザーだけをレンダリングする場合でも、アクティブユーザーが変更されたかどうかに関わらず、再レンダリングするたびにリスト全体を繰り返し処理する必要があります。
+
+代わりに算出プロパティを繰り返し処理すると、次のようになります:
+
+``` js
+computed: {
+  activeUsers: function () {
+    return this.users.filter(function (user) {
+      return user.isActive
+    })
+  }
+}
+```
+
+``` html
+<ul>
+  <li
+    v-for="user in activeUsers"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+
+以下のような利点を得ます:
+
+- フィルタリングされたリストは `users` 配列に関連する変更があった場合に _のみ_ 再評価されるので、フィルタリングがはるかに効率的になります。
+- `v-for="user in activeUsers"` を使用して、描画中にアクティブユーザー _のみ_ 繰り返し処理するので、描画がはるかに効率的になります。
+- ロジックがプレゼンテーションレイヤから切り離され、メンテナンス(ロジックの変更/拡張)がはるかに容易になります。
+
+更新でも同様のメリットが得られます:
+
+``` html
+<ul>
+  <li
+    v-for="user in users"
+    v-if="shouldShowUsers"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+
+は以下のように書き換えられます:
+
+``` html
+<ul v-if="shouldShowUsers">
+  <li
+    v-for="user in users"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+
+`v-if` をコンテナ要素に移動することで、リスト内の _すべての_ ユーザーに対して `shouldShowUsers` をチェックしなくなりました。代わりに、それを一度チェックし、`shouldShowUsers`が false の場合は `v-for` を評価しません。
+
+{% raw %}</details>{% endraw %}
+
+{% raw %}<div class="style-example example-bad">{% endraw %}
+#### 悪い例
+
+``` html
+<ul>
+  <li
+    v-for="user in users"
+    v-if="user.isActive"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+
+``` html
+<ul>
+  <li
+    v-for="user in users"
+    v-if="shouldShowUsers"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+{% raw %}</div>{% endraw %}
+
+{% raw %}<div class="style-example example-good">{% endraw %}
+#### 良い例
+
+``` html
+<ul>
+  <li
+    v-for="user in activeUsers"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+
+``` html
+<ul v-if="shouldShowUsers">
+  <li
+    v-for="user in users"
+    :key="user.id"
+  >
+    {{ user.name }}
+  <li>
+</ul>
+```
+{% raw %}</div>{% endraw %}
+
+
+
 ### コンポーネントスタイルのスコープ <sup data-p="a">必須</sup>
 
 **アプリケーションにとって、トップレベルの `App` コンポーネントとレイアウトコンポーネント内のスタイルはグローバルかもしれませんが、他のすべてのコンポーネントは常にスコープされているべきです。**
@@ -1311,6 +1470,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 >
 ```
 {% raw %}</div>{% endraw %}
+
 
 
 
