@@ -3,8 +3,8 @@ title: インストール
 updated: 2017-12-03
 type: guide
 order: 1
-vue_version: 2.5.11
-gz_size: "30.59"
+vue_version: 2.5.13
+gz_size: "30.67"
 ---
 
 ### 互換性の注意
