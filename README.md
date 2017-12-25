@@ -20,6 +20,18 @@ $ npm install -g hexo-cli
 $ npm install
 $ npm start # http://localhost:4000 で開発サーバを開始
 ```
+## Deploying
+
+The site is deployed using GitHub pages, therefore you need push access to the vuejs.org repo to run the deploy script:
+
+``` bash
+$ npm run deploy
+```
+
+If you are working on a fork and deploying to a different URL, you need to update the following accordingly:
+
+- `url` and `deploy` sections in `_config.yml`
+- `src/CNAME`
 
 ## 貢献者
 貢献された方々は、[こちら](http://jp.vuejs.org/contribution/) 
