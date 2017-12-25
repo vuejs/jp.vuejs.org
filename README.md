@@ -15,12 +15,10 @@
 
 ## 開発
 
-**hexo 3.0 以降** を使っているか確認してください。`localhost:4000` で開発サーバーを開始します。
-
 ```
 $ npm install -g hexo-cli
 $ npm install
-$ hexo server
+$ npm start # http://localhost:4000 で開発サーバを開始
 ```
 
 ## 貢献者

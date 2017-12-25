@@ -1,12 +1,11 @@
 {
   "name": "jp.vuejs.org",
-  "version": "1.0.18",
   "private": true,
   "hexo": {
-    "version": "3.4.2"
+    "version": "3.4.4"
   },
   "dependencies": {
-    "hexo": "3.4.2",
+    "hexo": "^3.4.2",
     "hexo-deployer-git": "0.3.1",
     "hexo-generator-alias": "git+https://github.com/chrisvfritz/vuejs.org-hexo-generator-alias.git",
     "hexo-generator-archive": "^0.1.5",
@@ -18,7 +17,8 @@
     "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-marked": "^0.3.0",
     "hexo-renderer-stylus": "^0.3.3",
-    "hexo-server": "^0.2.2"
+    "hexo-server": "^0.2.2",
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "husky": "^0.14.3",
@@ -29,6 +29,8 @@
     "textlint-rule-preset-jtf-style": "^2.1.2"
   },
   "scripts": {
+    "start": "hexo server",
+    "deploy": "node pre-deploy.js && hexo generate && hexo deploy",
     "precommit": "npm test",
     "test": "npm run lint",
     "lint": "node -e \"var shell=require('shelljs');var files=shell.find(['./src/v2/guide/*.md','./src/v2/style-guide/*.md','./src/v2/api/*.md','./src/v2/examples/*.md','./src/_posts/*.md']).filter(function(file){return !file.endsWith('/guide/team.md')}).join(' ');if(shell.exec('textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error '+files).code!==0){shell.exit(1)};\""
