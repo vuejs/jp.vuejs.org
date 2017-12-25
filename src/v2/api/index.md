@@ -176,7 +176,7 @@ updated: 2017-12-14
 
 ## グローバル API
 
-<h3 id="Vue-extend">Vue.extend( options )</h3>
+### Vue.extend( options )
 
 - **引数:**
   - `{Object} options`
@@ -215,7 +215,7 @@ updated: 2017-12-14
 
 - **参照:** [コンポーネント](../guide/components.html)
 
-<h3 id="Vue-nextTick">Vue.nextTick( [callback, context] )</h3>
+### Vue.nextTick( [callback, context] )
 
 - **引数:**
   - `{Function} [callback]`
@@ -244,7 +244,7 @@ updated: 2017-12-14
 
 - **参照:** [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
-<h3 id="Vue-set">Vue.set( target, key, value )</h3>
+### Vue.set( target, key, value )
 
 - **引数:**
   - `{Object | Array} target`
@@ -262,7 +262,7 @@ updated: 2017-12-14
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 
-<h3 id="Vue-delete">Vue.delete( target, key )</h3>
+### Vue.delete( target, key )
 
 - **引数:**
   - `{Object | Array} target`
@@ -278,7 +278,7 @@ updated: 2017-12-14
 
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
-<h3 id="Vue-directive">Vue.directive( id, [definition] )</h3>
+### Vue.directive( id, [definition] )
 
 - **引数:**
   - `{string} id`
@@ -309,7 +309,7 @@ updated: 2017-12-14
 
 - **参照:** [カスタムディレクティブ](../guide/custom-directive.html)
 
-<h3 id="Vue-filter">Vue.filter( id, [definition] )</h3>
+### Vue.filter( id, [definition] )
 
 - **引数:**
   - `{string} id`
@@ -329,7 +329,7 @@ updated: 2017-12-14
   var myFilter = Vue.filter('my-filter')
   ```
 
-<h3 id="Vue-component">Vue.component( id, [definition] )</h3>
+### Vue.component( id, [definition] )
 
 - **引数:**
   - `{string} id`
@@ -352,7 +352,7 @@ updated: 2017-12-14
 
 - **参照:** [コンポーネント](../guide/components.html)
 
-<h3 id="Vue-use">Vue.use( plugin )</h3>
+### Vue.use( plugin )
 
 - **引数:**
   - `{Object | Function} plugin`
@@ -365,7 +365,7 @@ updated: 2017-12-14
 
 - **参照:** [プラグイン](../guide/plugins.html)
 
-<h3 id="Vue-mixin">Vue.mixin( mixin )</h3>
+### Vue.mixin( mixin )
 
 - **引数:**
   - `{Object} mixin`
@@ -376,7 +376,7 @@ updated: 2017-12-14
 
 - **参照:** [グローバルミックスイン](../guide/mixins.html#グローバルミックスイン)
 
-<h3 id="Vue-compile">Vue.compile( template )</h3>
+### Vue.compile( template )
 
 - **引数:**
   - `{string} template`
@@ -399,7 +399,7 @@ updated: 2017-12-14
 
 - **参照:** [描画関数](../guide/render-function.html)
 
-<h3 id="Vue-version">Vue.version</h3>
+### Vue.version
 
 - **詳細:** インストールされている Vue のバージョンを文字列として提供します。これはコミュニティのプラグインやコンポーネントで特に役立ち、異なるバージョンで違う戦略を使うことができます。
 
@@ -1420,7 +1420,7 @@ updated: 2017-12-14
 
 ## インスタンスメソッド / データ
 
-<h3 id="vm-watch">vm.$watch( expOrFn, callback, [options] )</h3>
+### vm.$watch( expOrFn, callback, [options] )
 
 - **引数:**
   - `{string | Function} expOrFn`
@@ -1487,7 +1487,7 @@ updated: 2017-12-14
   // その時の `a` の値で`コールバック`がただちに発火します
   ```
 
-<h3 id="vm-set">vm.$set( target, key, value )</h3>
+### vm.$set( target, key, value )
 
 - **引数:**
   - `{Object | Array} target`
@@ -1502,7 +1502,7 @@ updated: 2017-12-14
 
 - **参照:** [Vue.set](#Vue-set)
 
-<h3 id="vm-delete">vm.$delete( target, key )</h3>
+### vm.$delete( target, key )
 
 - **引数:**
   - `{Object | Array} target`
@@ -1516,7 +1516,7 @@ updated: 2017-12-14
 
 ## インスタンスメソッド / イベント
 
-<h3 id="vm-on">vm.$on( event, callback )</h3>
+### vm.$on( event, callback )
 
 - **引数:**
   - `{string | Array<string>} event` (Array は 2.2.0 以降でのみサポートされます)
@@ -1536,7 +1536,7 @@ updated: 2017-12-14
   // => "hi"
   ```
 
-<h3 id="vm-once">vm.$once( event, callback )</h3>
+### vm.$once( event, callback )
 
 - **引数:**
   - `{string} event`
@@ -1546,7 +1546,7 @@ updated: 2017-12-14
 
   一度きりだけ、カスタムイベントのリスナを提供します。リスナは最初にトリガされた時に削除されます。
 
-<h3 id="vm-off">vm.$off( [event, callback] )</h3>
+### vm.$off( [event, callback] )
 
 - **引数:**
   - `{string | Array<string>} [event]` (Array は 2.2.2 以降でのみサポートされます)
@@ -1562,7 +1562,7 @@ updated: 2017-12-14
 
   - イベントとコールバックの両方が与えられたら、その特定のコールバックに対するイベントリスナのみを削除します。
 
-<h3 id="vm-emit">vm.$emit( event, [...args] )</h3>
+### vm.$emit( event, [...args] )
 
 - **引数:**
   - `{string} event`
@@ -1572,7 +1572,7 @@ updated: 2017-12-14
 
 ## インスタンスメソッド / ライフサイクル
 
-<h3 id="vm-mount">vm.$mount( [elementOrSelector] )</h3>
+### vm.$mount( [elementOrSelector] )
 
 - **引数:**
   - `{Element | string} [elementOrSelector]`
@@ -1610,13 +1610,13 @@ updated: 2017-12-14
   - [ライフサイクルダイアグラム](../guide/instance.html#ライフサイクルダイアグラム)
   - [サーバサイドレンダリング](../guide/ssr.html)
 
-<h3 id="vm-forceUpdate">vm.$forceUpdate()</h3>
+### vm.$forceUpdate()
 
 - **使用方法:**
 
   Vue インスタンスに再描画を強制します。インスタンス自身と slot コンテンツに挿入された子コンポーネントだけで、全ての子コンポーネントに影響しないことに注意してください。
 
-<h3 id="vm-nextTick">vm.$nextTick( [callback] )</h3>
+### vm.$nextTick( [callback] )
 
 - **引数:**
   - `{Function} [callback]`
@@ -1652,7 +1652,7 @@ updated: 2017-12-14
   - [Vue.nextTick](#Vue-nextTick)
   - [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
-<h3 id="vm-destroy">vm.$destroy()</h3>
+### vm.$destroy()
 
 - **使用方法:**
 
