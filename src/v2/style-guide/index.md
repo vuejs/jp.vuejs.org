@@ -1727,7 +1727,10 @@ computed: {
 >
   Error: {{ error }}
 </div>
-<div v-else key="search-results">
+<div 
+  v-else 
+  key="search-results"
+>
   {{ results }}
 </div>
 ```
