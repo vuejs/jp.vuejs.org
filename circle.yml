@@ -11,4 +11,4 @@ deployment:
       - git config --global user.email "kawakazu80+vuejsjp@gmail.com"
       - git submodule init
       - git submodule update
-      - npm deploy
+      - npm run deploy
