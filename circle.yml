@@ -11,8 +11,4 @@ deployment:
       - git config --global user.email "kawakazu80+vuejsjp@gmail.com"
       - git submodule init
       - git submodule update
-      - ./node_modules/.bin/hexo clean
-      - rm -rf db.json
-      - ./node_modules/.bin/hexo generate
-      - cp -R ./todomvc public/examples
-      - ./node_modules/.bin/hexo deploy
+      - npm run deploy

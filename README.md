@@ -15,13 +15,24 @@
 
 ## 開発
 
-**hexo 3.0 以降** を使っているか確認してください。`localhost:4000` で開発サーバーを開始します。
-
 ```
 $ npm install -g hexo-cli
 $ npm install
-$ hexo server
+$ npm start # http://localhost:4000 で開発サーバを開始
 ```
+
+## デプロイ
+
+このサイトは GitHub pages を使用してデプロイされているため、デプロイスクリプトを実行するには、 jp.vuejs.org レポジトリへの push アクセス権限が必要です:
+
+``` bash
+$ npm run deploy
+```
+
+フォークしたレポジトリにおいて作業していて異なる URL にデプロイする場合は、それに応じて以下のものを更新する必要があります:
+
+- `_config.yml` の中の `url` と `deploy` セクション
+- `src/CNAME`
 
 ## 貢献者
 貢献された方々は、[こちら](http://jp.vuejs.org/contribution/) 
