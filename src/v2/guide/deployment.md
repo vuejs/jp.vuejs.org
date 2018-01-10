@@ -62,6 +62,29 @@ NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
     )
     .bundle()
   ```
+  
+- Or, using [envify](https://github.com/hughsk/envify) with Grunt and [grunt-browserify](https://github.com/jmreidy/grunt-browserify):
+
+  ``` js
+  // Use the envify custom module to specify environment variables
+  var envify = require('envify/custom')
+  
+  browserify: {
+    dist: {
+      options: {
+        // Function to deviate from grunt-browserify's default order
+        configure: b => b
+          .transform('vueify')
+          .transform(
+            // Required in order to process node_modules files
+            { global: true },
+            envify({ NODE_ENV: 'production' })
+          )
+          .bundle()
+      }
+    }
+  }
+  ```
 
 #### Rollup
 
