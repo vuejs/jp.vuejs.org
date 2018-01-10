@@ -54,7 +54,7 @@ NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
   var envify = require('envify/custom')
 
   browserify(browserifyOptions)
-    .transform(vueify),
+    .transform(vueify)
     .transform(
       // Required in order to process node_modules files
       { global: true },
