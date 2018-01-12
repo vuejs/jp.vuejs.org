@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2017-12-14
+updated: 2018-01-12
 type: guide
 order: 303
 ---
@@ -206,7 +206,7 @@ createElement(
   nativeOn: {
     click: this.nativeClickHandler
   },
-  // カスタムディレクティブ。バインディングの oldValue については
+  // カスタムディレクティブ。`binding` の `oldValue` については
   // あなたの代わりに Vue が面倒を見るので、設定することはできません。
   directives: [
     {
