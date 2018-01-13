@@ -3,12 +3,3 @@ machine:
     UTC
   node:
     version: 8.6
-deployment:
-  production:
-    branch: lang-ja
-    commands:
-      - git config --global user.name "Circle CI"
-      - git config --global user.email "kawakazu80+vuejsjp@gmail.com"
-      - git submodule init
-      - git submodule update
-      - npm run deploy

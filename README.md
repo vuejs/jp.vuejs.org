@@ -23,16 +23,7 @@ $ npm start # http://localhost:4000 で開発サーバを開始
 
 ## デプロイ
 
-このサイトは GitHub pages を使用してデプロイされているため、デプロイスクリプトを実行するには、 jp.vuejs.org レポジトリへの push アクセス権限が必要です:
-
-``` bash
-$ npm run deploy
-```
-
-フォークしたレポジトリにおいて作業していて異なる URL にデプロイする場合は、それに応じて以下のものを更新する必要があります:
-
-- `_config.yml` の中の `url` と `deploy` セクション
-- `src/CNAME`
+このサイトは `lang-ja`にコミットまたはプルリクエストがマージされると[Netlify](https://www.netlify.com/)を介して、自動的にデプロイされます。
 
 ## 貢献者
 貢献された方々は、[こちら](http://jp.vuejs.org/contribution/) 
