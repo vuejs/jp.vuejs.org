@@ -494,6 +494,7 @@ order: 803
         orgUrl: 'https://livestorm.co/'
       },
       reposOfficial: [
+        'vue-devtools',
         'vue-curated'
       ],
       reposPersonal: [
