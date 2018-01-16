@@ -9,6 +9,8 @@ order: 2
 
 Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他の一枚板(モノリシック: monolithic)なフレームワークとは異なり、Vue は少しずつ適用していけるように設計されています。中核となるライブラリは view 層だけに焦点を当てています。そのため、使い始めるのも、他のライブラリや既存のプロジェクトに統合するのも、とても簡単です。また、[モダンなツール](single-file-components.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#components--libraries)と併用することで、洗練されたシングルページアプリケーションの開発も可能です。
 
+Vue について深く知る前にもっと学びたい場合、中心となる原則とサンプルプロジェクトを説明する<a id="modal-player"  href="javascript:;">ビデオを作成しました。</a>
+
 あなたが経験豊富なフロントエンド開発者で、 Vue.js と他のライブラリ/フレームワークを比較したい場合、[他のフレームワークとの比較](comparison.html)を確認してください。
 
 ## はじめに
@@ -369,3 +371,5 @@ Vue のコンポーネントが [Web Components Spec](https://www.w3.org/wiki/We
 ## 準備ができましたか？
 
 Vue.js の中核の基本的な機能について手短に紹介しましたが、このガイドの残りでは、基本的な機能だけでなく他の高度な機能についてももっと詳しく扱うので、全てに目を通すようにしてください！
+
+<div id="video-modal" class="modal"><div class="vimeo-space" style="padding: 56.25% 0 0 0; position: relative;"><iframe src="https://player.vimeo.com/video/247494684" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%; margin: 0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script></div>
