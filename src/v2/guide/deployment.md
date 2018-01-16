@@ -47,16 +47,16 @@ module.exports = {
 NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 ```
 
-- Or, using [envify](https://github.com/hughsk/envify) with Gulp:
+- もしくは、[envify](https://github.com/hughsk/envify)を Gulp とともに使います:
 
   ``` js
-  // Use the envify custom module to specify environment variables
+  // 環境変数を指定するために envify のカスタムモジュールを使います
   var envify = require('envify/custom')
 
   browserify(browserifyOptions)
     .transform(vueify),
     .transform(
-      // Required in order to process node_modules files
+      // node_modules ファイルを処理するために必要です
       { global: true },
       envify({ NODE_ENV: 'production' })
     )
