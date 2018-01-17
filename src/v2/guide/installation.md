@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2017-12-03
+updated: 2018-01-17
 type: guide
 order: 1
 vue_version: 2.5.13
@@ -9,7 +9,7 @@ gz_size: "30.67"
 
 ### 互換性の注意
 
-Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](http://caniuse.com/#feat=es5) は全てサポートしています。
+Vue.js は IE8 でシム化できない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](https://caniuse.com/#feat=es5) は全てサポートしています。
 
 ### リリースノート
 
