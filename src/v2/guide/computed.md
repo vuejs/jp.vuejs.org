@@ -214,7 +214,7 @@ var watchExampleVM = new Vue({
   },
   watch: {
     // この関数は question が変わるごとに実行されます。
-    question: function (newQuestion) {
+    question: function (newQuestion, oldQuestion) {
       this.answer = 'Waiting for you to stop typing...'
       this.getAnswer()
     }
@@ -270,7 +270,7 @@ var watchExampleVM = new Vue({
     answer: 'I cannot give you an answer until you ask a question!'
   },
   watch: {
-    question: function (newQuestion) {
+    question: function (newQuestion, oldQuestion) {
       this.answer = 'Waiting for you to stop typing...'
       this.getAnswer()
     }
