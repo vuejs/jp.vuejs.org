@@ -1,6 +1,6 @@
 ---
 title: プロダクション環境への配信
-updated: 2017-09-08
+updated: 2018-01-16
 type: guide
 order: 401
 ---
@@ -47,20 +47,43 @@ module.exports = {
 NODE_ENV=production browserify -g envify -e main.js | uglifyjs -c -m > build.js
 ```
 
-- Or, using [envify](https://github.com/hughsk/envify) with Gulp:
+- もしくは、[envify](https://github.com/hughsk/envify)を Gulp とともに使います:
 
   ``` js
-  // Use the envify custom module to specify environment variables
+  // 環境変数を指定するために envify のカスタムモジュールを使います
   var envify = require('envify/custom')
 
   browserify(browserifyOptions)
     .transform(vueify)
     .transform(
-      // Required in order to process node_modules files
+      // node_modules ファイルを処理するために必要です
       { global: true },
       envify({ NODE_ENV: 'production' })
     )
     .bundle()
+  ```
+  
+- もしくは、[envify](https://github.com/hughsk/envify) を Grunt と [grunt-browserify](https://github.com/jmreidy/grunt-browserify) とともに使います:
+
+  ``` js
+  // 環境変数を指定するために envify のカスタムモジュールを使います
+  var envify = require('envify/custom')
+  
+  browserify: {
+    dist: {
+      options: {
+        // grunt-browserify のデフォルトの順番から逸脱するための関数
+        configure: b => b
+          .transform('vueify')
+          .transform(
+            // node_modules ファイルを処理するために必要です
+            { global: true },
+            envify({ NODE_ENV: 'production' })
+          )
+          .bundle()
+      }
+    }
+  }
   ```
 
 #### Rollup
