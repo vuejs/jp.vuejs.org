@@ -1,6 +1,6 @@
 ---
 type: api
-updated: 2017-12-14
+updated: 2018-01-16
 ---
 
 ## グローバル設定
@@ -594,7 +594,7 @@ updated: 2017-12-14
 
 ### watch
 
-- **型:** `{ [key: string]: string | Function | Object }`
+- **型:** `{ [key: string]: string | Function | Object | Array}`
 
 - **詳細:**
 
@@ -609,7 +609,12 @@ updated: 2017-12-14
       a: 1,
       b: 2,
       c: 3,
-      d: 4
+      d: 4,
+      e: {
+        f: {
+          g: 5
+        }
+      }
     },
     watch: {
       a: function (val, oldVal) {
@@ -626,7 +631,13 @@ updated: 2017-12-14
       d: {
         handler: function (val, oldVal) { /* ... */ },
         immediate: true
-      }
+      },
+      e: [
+        function handle1 (val, oldVal) { /* ... */ },
+        function handle2 (val, oldVal) { /* ... */ }
+      ],
+      // vm.e.f の値を監視する: {g: 5}
+      'e.f': function (val, oldVal) { /* ... */ }
     }
   })
   vm.a = 2 // => new: 2, old: 1
