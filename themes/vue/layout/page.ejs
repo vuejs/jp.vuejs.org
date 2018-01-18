@@ -25,7 +25,11 @@
   <% if (page.type === 'contribution') { %>
     <%- partial('partials/contribution') %>
   <% } %>
-  <%- page.content %>
+  <% if (page.sponsors) { %>
+    <%- partial('sponsors-page') %>
+  <% } else { %>
+    <%- page.content %>
+  <% } %>
   <% if (page.type === 'guide') { %>
     <div class="guide-links">
       <% site.pages.find({ type: page.type, order: page.order - 1 }).each(function (page) { %>
@@ -37,7 +41,9 @@
     </div>
   <% } %>
   <div class="footer">
-    <%- partial('partials/ad-text') %>
+    <%_ if (!page.sponsors) { _%>
+      <%- partial('partials/ad-text') %>
+    <%_ } _%>
     間違いを見つけた、またはドキュメントに貢献したいですか？
     <a href="https://github.com/vuejs/jp.vuejs.org/blob/lang-ja/src/<%- page.path.replace(/\.html$/, '.md') %>" target="_blank">Github 上でこのページを編集する</a> か、<a href="https://github.com/vuejs/jp.vuejs.org" target="_blank">Github からこのサイトを Fork してプルリクエストしましょう
     </a>！
