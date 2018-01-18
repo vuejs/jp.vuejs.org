@@ -372,4 +372,4 @@ Vue のコンポーネントが [Web Components Spec](https://www.w3.org/wiki/We
 
 Vue.js の中核の基本的な機能について手短に紹介しましたが、このガイドの残りでは、基本的な機能だけでなく他の高度な機能についてももっと詳しく扱うので、全てに目を通すようにしてください！
 
-<div id="video-modal" class="modal"><div class="vimeo-space" style="padding: 56.25% 0 0 0; position: relative;"><iframe src="https://player.vimeo.com/video/247494684" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%; margin: 0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script></div>
+<div id="video-modal" class="modal"><div class="video-space" style="padding: 56.25% 0 0 0; position: relative;"><iframe src="https://player.vimeo.com/video/247494684" style="height: 100%; left: 0; position: absolute; top: 0; width: 100%; margin: 0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script></div>
