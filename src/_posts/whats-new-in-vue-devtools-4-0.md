@@ -24,7 +24,7 @@ date: 2018-01-16
 
 - `null` と `undefined`
 - `文字列`
-- リテラル定数： `Boolean`, `Number`, `Infinity`, `-Infinity`（訳注：負の無限大） 及び `NaN`
+- リテラル定数： `Boolean`, `Number`, `Infinity`, `-Infinity`（訳注：負の無限大）及び `NaN`
 - 配列
 - プレーンオブジェクト
 
