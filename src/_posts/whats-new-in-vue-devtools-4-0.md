@@ -1,133 +1,134 @@
 ---
-title: What’s new in Vue Devtools 4.0
+title: Vue Devtools 4.0 の新機能
 date: 2018-01-16
 ---
 
-https://medium.com/the-vue-point/whats-new-in-vue-devtools-4-0-9361e75e05d0
+このブログは[こちら](https://medium.com/the-vue-point/whats-new-in-vue-devtools-4-0-9361e75e05d0)の翻訳ブログです。
 
-A big update was released to the Vue devtools just a few days ago. Let’s dive into the new features and improvements! 🎄
+先日 Vue devtools の大きなアップデートがリリースされました。
+新機能と改善点を掘り下げてみましょう！🎄
 
-## Editable component data
-You can now modify the data of your component directly in the Component inspector pane.
+## コンポーネントデータが編集可能に
+コンポーネントのデータを直接コンポーネントインスペクター枠内で変更できるようになりました。
 
-1. Select a component
-2. Under the `data` section in the inspector, mouse over a field
-3. Click on the pencil icon
-4. Submit your changes by clicking on the done icon or by hitting Enter. You can hit Escape to cancel the edition
+1. コンポーネントを選択します
+2. インスペクターの `data` セクションでフィールドにマウスを置きます
+3. 鉛筆アイコンをクリックします
+4. 完了アイコンのクリックまたは Enter キーの押下で変更を確定します。 Escape キーの押下で編集をキャンセルできます
 
 <iframe width="480" height="360" src="https://www.youtube.com/embed/xeBRtXLrQYA?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-The content of the field is the serialized JSON value. For example, if you want to enter a string, type `"hello"` with the double-quotes. An array should look like `[1, 2, "bar"]` and an object like `{ "a": 1, "b": "foo" }` .
+フィールドの内容はシリアライズされた JSON 値です。例えば、文字列を入力したいならダブルクオート付きで `"hello"` と入力します。配列は `[1, 2, "bar"]` のように、オブジェクトは `{ "a": 1, "b": "foo" }` のように入力します。
 
-Currently, the values of following types can be edited:
+現在、以下の型について値の編集が可能です：
 
-- `null` and `undefined`
-- `String`
-- Literal: `Boolean`, `Number`, `Infinity`, `-Infinity` and `NaN`
-- Arrays
-- Plain objects
+- `null` と `undefined`
+- `文字列`
+- リテラル定数： `Boolean`, `Number`, `Infinity`, `-Infinity`（訳注：負の無限大） 及び `NaN`
+- 配列
+- プレーンオブジェクト
 
-For the Arrays and Plain objects, you can add and remove items using the dedicated icons. You can also rename object keys.
+配列とプレーンオブジェクトは、専用のアイコンを使用して項目の追加と削除が可能です。またオブジェクトキーの名前を変更することもできます。
 
 <iframe width="480" height="360" src="https://www.youtube.com/embed/fx1zjvHryJ0?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-A warning will be displayed if the input isn’t valid JSON. However, some values like `undefined` or `NaN` can be typed directly for more convenience.
+入力が正しい JSON でない場合は警告が表示されます。ただし、`undefined` や `NaN` のような一部の値はよりよい利便性のため直接入力することができます。
 
-More types will be supported in future releases!
+今後のリリースではより多くの型がサポートされる予定です！
 
-## Quick Edit
-Some types of value can be edited in a single click with the ‘Quick Edit’ feature.
+## クイック編集
+いくつかの型の値は 'Quick Edit' 機能を使用してワンクリックで編集することができます。
 
-Booleans can be toggled directly with the checkbox icon:
+ブール値はチェックボックスアイコンで直接反転させることができます：
 
 <iframe width="480" height="360" src="https://www.youtube.com/embed/llNJapRZaHo?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Numbers can be incremented or decremented with the plus or minus icons:
+数値はプラスまたはマイナスアイコンで増減できます：
 
 <iframe width="480" height="360" src="https://www.youtube.com/embed/ZCToaOpId0w?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-You can use some keyboard modifiers to increment or decrement the value faster.
+いくつかの修飾キー（訳注： Shift/Ctrl/Alt のこと）を用い値を高速に増減させることができます。
 
-## Open component in editor
-If you are using vue-loader or Nuxt in your project, you can now open the selected component in your favorite code editor (provided it is a Single-File Component).
+## エディタでコンポーネントを開く
+プロジェクトで vue-loader または Nuxt を使用している場合、選択したコンポーネントを好みのコードエディタで開くことができます（単一ファイルコンポーネントの場合）。
 
-1. Follow this [setup guide](https://github.com/vuejs/vue-devtools/blob/master/docs/open-in-editor.md) (if you are using Nuxt, you don’t need to do anything)
-2. In the Component inspector, mouse over the component name — you should see a tooltip with the file path
-3. Click on the component name and it will open in your editor
+1. この[設定ガイド](https://github.com/vuejs/vue-devtools/blob/master/docs/open-in-editor.md)に従ってください（Nuxt を使用している場合は、何もする必要はありません）
+2. コンポーネントインスペクターで、コンポーネント名の上にマウスを置くと — ファイルパスが表示されたツールチップが表示されます
+3. コンポーネント名をクリックすることでエディタが開きます
 
 <iframe width="480" height="360" src="https://www.youtube.com/embed/XBKStgyhY18?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## Show the original component names
-PR by [manico](https://github.com/manico)
+## 元のコンポーネント名を表示
+[manico](https://github.com/manico) による PR
 
-By default, all the component names are formatted into CamelCase. You can disable this by toggling the ‘Format component names’ button in the Components tab. This settings will be remembered and it will also be applied to the Events tab.
+既定では、すべてのコンポーネント名は CamelCase にフォーマットされています。これはコンポーネントタブの 'Format component names' ボタンをトグルすることで無効にできます。この設定は記憶されイベントタブにも適用されます。
 
 <iframe width="480" height="270" src="https://www.youtube.com/embed/PoZmEcCdSbU?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## Inspecting components just got easier
-While you have the Vue devtools open, you can right-click on a component to inspect it:
+## コンポーネントのインスペクトがより簡単に
+Vue devtools を開いている間は、コンポーネントを右クリックすることでインスペクト可能です：
 
 ![](https://cdn-images-1.medium.com/max/800/1*8fhP5VTb6uev-8HfI4stYw.png)
-<figcaption style="font-size:smaller; text-align:center;">Right-click a component in the page</figcaption>
+<figcaption style="font-size:smaller; text-align:center;">ページ内のコンポーネントを右クリック</figcaption>
 
-You can also programmatically inspect a component using the `$inspect` special method:
+特殊メソッド `$inspect`を使用してコンポーネントをプログラムからインスペクトすることもできます：
 
 <script src="https://gist.github.com/Akryum/0187dbfd782d584eef46e85622685bac.js" charset="utf-8"></script>
-<figcaption style="font-size:smaller; text-align:center;">Use the \`$inspect\` method in your components</figcaption>
+<figcaption style="font-size:smaller; text-align:center;">コンポーネントで `$inspect` メソッドを使う</figcaption>
 
-Either way, the components tree will be expanded to the newly selected component automatically.
+いずれの方法でも、コンポーネントツリーが新しく選択されたコンポーネントに自動展開されます。
 
-## Filter events by component
-PR by [eigan](https://github.com/eigan)
+## コンポーネント毎にイベントをフィルター
+[eigan](https://github.com/eigan) による PR
 
-You can now filter the Events history by the components that emitted the events. Type `<` followed by the name of the component or part of it:
+イベントを発行したコンポーネントによってイベント履歴をフィルターできるようになりました。 `<` の後に続けてコンポーネント名またはその一部を入力してください。
 
 <iframe width="480" height="270" src="https://www.youtube.com/embed/wytquoUPSFo?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## Vuex inspector filter
-PR by [bartlomieju](https://github.com/bartlomieju)
+## Vuex インスペクターフィルター
+[bartlomieju](https://github.com/bartlomieju) による PR
 
-The Vuex inspector has now a filter input:
+Vuex インスペクターにフィルター入力が付きました：
 
 <iframe width="480" height="270" src="https://www.youtube.com/embed/T095k5hI_pA?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## Vertical layout
-PR by [crswll](https://github.com/crswll)
+## 垂直レイアウト
+[crswll](https://github.com/crswll) による PR
 
-When the devtools are not wide enough, they will now switch to an handy vertical layout. You can move the divider between the top and bottom panes just like in the default horizontal mode.
+devtools の幅が十分でないときは、便利な垂直レイアウトに切り替わります。既定の水平モードの場合と同様、上下の枠の仕切りは移動することができます。
 
 <iframe width="480" height="360" src="https://www.youtube.com/embed/33tJ_md8bX8?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## Improved scroll-to-component
-By default, selecting a component will no longer scroll the view to it. Instead, you need to click the new ‘Scroll into view’ icon:
+## コンポーネントへのスクロールの改善
+既定では、コンポーネントを選択してもビューはスクロールされなくなりました。代わりに、新設の 'Scroll into view' アイコンをクリックする必要があります：
 
 ![](https://cdn-images-1.medium.com/max/800/1*TJEfzB4ifK8t-5kpbZieRw.png)
-<figcaption style="font-size:smaller; text-align:center;">Click on the eye icon to scroll to the component</figcaption>
+<figcaption style="font-size:smaller; text-align:center;">目のアイコンをクリックしてコンポーネントにスクロール</figcaption>
 
-It will now center the component on the screen.
+これでコンポーネントが画面中央に表示されます。
 
-## Collapsible inspectors
-The sections of the different inspectors can now be collapsed. You can use keyboard modifier to collapse them all or expand them all in one click. This is very useful if you are, let’s say, only interested in the mutations details of the Vuex tab.
+## インスペクターが折り畳み可能に
+異なるインスペクターのセクションを折り畳むことができます。修飾キーを使用することで全てを折り畳んだりワンクリックで全てを展開できます。これは例えば、 Vuex タブのミューテックスの詳細のみに興味がある場合には非常に便利です。
 
 <iframe width="480" height="270" src="https://www.youtube.com/embed/bblGueKPsjE?ecver=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## And more!
-- The ‘Inspect DOM’ button is now hidden if the environment doesn’t have this feature — by [michalsnik](https://github.com/michalsnik)
-- `-Infinity` is now supported — by [David-Desmaisons](https://github.com/David-Desmaisons)
-- The event hook had an issue fixed by [maxushuang](https://github.com/maxushuang)
-- Some code was cleaned by [anteriovieira](https://github.com/anteriovieira)
-- Date, RegExp, Component support is improved (and time-traveling should work with those types now)
-- The devtools are now using [v-tooltip](https://github.com/Akryum/v-tooltip) for rich tooltips and popovers (also fixing some issues)
+## さらに！
+- 環境にその機能がない場合 'Inspect DOM' ボタンが非表示になります -  [michalsnik](https://github.com/michalsnik) により
+- `-Infinity` がサポートされました - [David-Desmaisons](https://github.com/David-Desmaisons) により
+- イベントフックにあった問題が修正されました - [maxushuang](https://github.com/maxushuang) により
+- コードのいくつかが綺麗になりました - [anteriovieira](https://github.com/anteriovieira) により
+- Date, RegExp, Component サポートが改善されました（これらの型では Time Travel が動作するはずです）
+- devtools は現在リッチなツールチップやポップオーバー用に [v-tooltip](https://github.com/Akryum/v-tooltip) を使用しています（いくつかの問題も修正されています）
 
-If you already have the extension, it should update automatically to 4.0.1 . You can also install it [on Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) and [on Firefox](https://addons.mozilla.org/fr/firefox/addon/vue-js-devtools/).
+拡張機能が既に存在する場合は、自動的に 4.0.1 に更新されます。また [Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) や [Firefox](https://addons.mozilla.org/fr/firefox/addon/vue-js-devtools/) に新規インストールすることもできます。
 
-**Thank you for all the contributors that helped make this big update possible!**
+**この大きなアップデートを可能にした全ての貢献者に感謝します！**
 
-If you find an issue or have a new feature to suggest, please [share it](https://new-issue.vuejs.org/?repo=vuejs/vue-devtools)!
+もし問題を見つけたり新機能を提案する場合は、[それを共有](https://new-issue.vuejs.org/?repo=vuejs/vue-devtools)してください！
 
-## What’s next?
-A new release should arrive pretty soon with even more features like selecting a component in the page (color picker-style) and some UI improvements.
+## 今後の予定は？
+新しいリリースではページ内のコンポーネントの選択（カラーピッカー風）やいくつかの UI の改善などのさらに多くの機能が追加される予定です。
 
-We also have a few things in the works, like a standalone Vue devtools app that will allow debugging any environment (not just Chrome and Firefox), a brand new Routing tab and an improved support for `Set` and `Map` types.
+また（Chrome や Firefox だけでなく）あらゆる環境でのデバッグを可能にするスタンドアロンの Vue devtools アプリや、まったく新しいルーティングタブ、そして `Set` と `Map` 型の改善されたサポートなどのいくつかの機能があります。
 
-Stay tuned!
+乞うご期待！
