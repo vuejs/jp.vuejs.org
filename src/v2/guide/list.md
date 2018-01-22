@@ -323,13 +323,13 @@ Vue.set(vm.userProfile, 'age', 27)
 `vm.$set` インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
 
 ``` js
-vm.$set(this.userProfile, 'age', 27)
+vm.$set(vm.userProfile, 'age', 27)
 ```
 
 例えば `Object.assign()` や `_.extend()` を使って既存のオブジェクトにいくつかの新しいプロパティを割り当てたいときがあります。このような場合は、両方のオブジェクトのプロパティを使用して新しいオブジェクトを作成する必要があります。 なので以下のやり方ではなくて：
 
 ``` js
-Object.assign(this.userProfile, {
+Object.assign(vm.userProfile, {
   age: 27,
   favoriteColor: 'Vue Green'
 })
@@ -338,7 +338,7 @@ Object.assign(this.userProfile, {
 新しいリアクティブプロパティをこのように追加します。
 
 ``` js
-this.userProfile = Object.assign({}, this.userProfile, {
+vm.userProfile = Object.assign({}, vm.userProfile, {
   age: 27,
   favoriteColor: 'Vue Green'
 })
