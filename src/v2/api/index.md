@@ -329,7 +329,7 @@ updated: 2018-01-16
   var myFilter = Vue.filter('my-filter')
   ```
 
-- **See also:** [Filters](../guide/filters.html)
+- **参照:** [フィルタ](../guide/filters.html)
 
 ### Vue.component( id, [definition] )
 
