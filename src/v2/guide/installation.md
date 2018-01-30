@@ -35,9 +35,18 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ### CDN
 
-推奨: [https://cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue) は、npm に公開されるとすぐに最新バージョンが反映されます。[https://cdn.jsdelivr.net/npm/vue/](https://cdn.jsdelivr.net/npm/vue/) では npm パッケージのソースも確認することができます。
+手動で更新できる特定のバージョン番号にリンクすることをお勧めします:
 
-[unpkg](https://unpkg.com/vue) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js) 上でも利用可能です。(cdnjs は同期に少し時間がかかるため、最新版ではない可能性があります)。
+``` html
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+```
+
+[cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue/) で NPM パッケージのソースを参照することができます。
+
+
+Vue は [unpkg](https://unpkg.com/vue@{{vue_version}}/dist/vue.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js) 上でも利用可能です(cdnjs は同期に少し時間がかかるため、最新版ではない可能性があります)。
+
+[Vue のさまざまなビルドについて](#さまざまなビルドについて)を読み、公開されたサイトでは**本番バージョン**を使用し、`vue.js` を `vue.min.js` に置き換えてください。これは開発体験の代わりにスピードのために最適化された小さなビルドです。
 
 ## NPM
 
