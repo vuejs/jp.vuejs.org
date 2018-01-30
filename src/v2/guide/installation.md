@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2018-01-17
+updated: 2018-01-30
 type: guide
 order: 1
 vue_version: 2.5.13
