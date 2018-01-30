@@ -1,6 +1,6 @@
 ---
 title: ミックスイン
-updated: 2017-09-03
+updated: 2018-01-30
 type: guide
 order: 301
 ---
