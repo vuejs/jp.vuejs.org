@@ -1,6 +1,6 @@
 ---
 title: イベントハンドリング
-updated: 2018-01-10
+updated: 2018-01-30
 type: guide
 order: 9
 ---
@@ -208,14 +208,18 @@ methods: {
 
 > 2.3.0 で新規追加
 
+Vue は [`addEventListener` の `passive` オプション](https://developer.mozilla.org/ja/docs/Web/API/EventTarget/addEventListener#Parameters)に対応する `.passive` 修飾子も提供しています。
+
 ``` html
-<!-- スクロールイベントはデフォルトのスクロールの挙動をキャンセルしません -->
+<!-- スクロールイベントのデフォルトの挙動(スクロール)は -->
+<!-- `onScroll` が `event.preventDefault()` を含んでいる場合、 -->
+<!-- イベントの完了を待たずに即座に起きるでしょう。 -->
 <div v-on:scroll.passive="onScroll">...</div>
 ```
 
-これらの修飾子に加え、Vue は特にモバイルでのパフォーマンスを改善するために `.passive` 修飾子を提供しています。例えば、スクロールを行う際、ブラウザは処理が完了した後にスクロールを行います。なぜなら、ブラウザはそのイベントがハンドラ内で `event.preventDefault()` を呼び出すかどうか分からないからです。`.passive` 修飾子はこのイベントがデフォルトのイベントの挙動をキャンセルしないことを前もってブラウザに伝えるために使われます。
+`.passive` 修飾子は特にモバイルでのパフォーマンスを改善するのに有用です。
 
-<p class="tip">`.passive` と `.prevent` を一緒に使わないでください。Passive ハンドラはデフォルトのイベントを中止できません。</p>
+<p class="tip">`.passive` と `.prevent` を一緒に使わないでください。`.prevent` は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げ_ない_ことをブラウザに伝達することを思い出してください。</p>
 
 ## キー修飾子
 
