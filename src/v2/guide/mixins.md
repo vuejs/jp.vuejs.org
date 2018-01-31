@@ -1,6 +1,6 @@
 ---
 title: ミックスイン
-updated: 2017-09-03
+updated: 2018-01-30
 type: guide
 order: 301
 ---
@@ -34,8 +34,36 @@ var component = new Component() // => "hello from mixin!"
 
 ## オプションのマージ
 
-ミックスインとコンポーネントそれ自身がオプションと重複するとき、それらは適切なストラテジを使用して"マージ"されます。例えば、同じ名前のフック関数はそれら全てが呼び出されるよう配列にマージされます。加えて、ミックスインのフックはコンポーネント自身のフック**前**に呼ばれます:
+ミックスインとコンポーネントそれ自身がオプションと重複するとき、それらは適切なストラテジを使用して"マージ"されます。
 
+例えば、データオブジェクトはシャローマージ(1層のプロパティ)され、コンフリクトした場合にはコンポーネントのデータが優先されます。
+
+``` js
+var mixin = {
+  data: function () {
+    return {
+      message: 'hello',
+      foo: 'abc'
+    }
+  }
+}
+
+new Vue({
+  mixins: [mixin],
+  data: function () {
+    return {
+      message: 'goodbye',
+      bar: 'def'
+    }
+  },
+  created: function () {
+    console.log(this.$data)
+    // => { message: "goodbye", foo: "abc", bar: "def" }
+  }
+})
+```
+
+同じ名前のフック関数はそれら全てが呼び出されるよう配列にマージされます。ミックスインのフックはコンポーネント自身のフック**前**に呼ばれます。
 
 ``` js
 var mixin = {
