@@ -1,6 +1,6 @@
 ---
 title: フィルター
-updated: 2017-12-03
+updated: 2018-01-30
 type: guide
 order: 305
 ---
@@ -27,13 +27,17 @@ filters: {
 }
 ```
 
-もしくはグローバルでフィルタを定義することもできます:
+もしくは Vue インスタンスを作成する前にグローバルでフィルタを定義することもできます:
 
 ``` js
 Vue.filter('capitalize', function (value) {
   if (!value) return ''
   value = value.toString()
   return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
+new Vue({
+  // ...
 })
 ```
 
