@@ -160,7 +160,7 @@ updated: 2018-01-30
 
 - **使用方法**:
 
-  これを `true` に設定することで、ブラウザの開発者ツールのタイムライン機能で、コンポーネントの初期化やコンパイル、描画、パッチのパフォーマンス追跡することが可能になります。 この機能は、開発者モードおよび [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API をサポートするブラウザでのみ動作します。
+  これを `true` に設定することで、ブラウザの開発者ツールのパフォーマンス/タイムライン機能で、コンポーネントの初期化やコンパイル、描画、パッチのパフォーマンス追跡することが可能になります。 この機能は、開発者モードおよび [performance.mark](https://developer.mozilla.org/en-US/docs/Web/API/Performance/mark) API をサポートするブラウザでのみ動作します。
 
 ### productionTip
 
