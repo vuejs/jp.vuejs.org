@@ -577,23 +577,23 @@ Vue.component('smart-list', {
 })
 ```
 
-### Passing Attributes and Events to Child Elements/Components
+### 子要素/コンポーネントへの属性およびイベントの受け渡し
 
-On normal components, attributes not defined as props are automatically added to the root element of the component, replacing or [intelligently merging with](class-and-style.html) any existing attributes of the same name. 
+通常のコンポーネントでは、props として定義されていない属性はコンポーネントのルート要素に自動的に追加され、同名の既存の属性と置換または[賢くマージ](class-and-style.html)されます。
 
-Functional components, however, require you to explicitly define this behavior:
+ところが、関数型コンポーネントでは、この動作を明示的に定義する必要があります:
 
 ```js
 Vue.component('my-functional-button', {
   functional: true,
   render: function (createElement, context) {
-    // Transparently pass any attributes, event listeners, children, etc.
+    // 任意の属性、イベントリスナ、子などを透過的に渡します。
     return createElement('button', context.data, context.children)
   }
 })
 ```
 
-By passing `context.data` as the second argument to `createElement`, we are passing down any attributes or event listeners used on `my-functional-button`. It's so transparent, in fact, that events don't even require the `.native` modifier.
+`context.data` を `createElement` の第2引数として渡すことで、`my-function-button` で使用された属性やイベントリスナを渡しています。実際、イベントが `.native` 修飾子を必要としないようにとても透過的です。
 
 ### `slots()` vs `children`
 
