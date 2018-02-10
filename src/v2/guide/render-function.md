@@ -172,7 +172,7 @@ createElement(
 ``` js
 {
   // `v-bind:class` と同じ API
-  'class': {
+  class: {
     foo: true,
     bar: false
   },
