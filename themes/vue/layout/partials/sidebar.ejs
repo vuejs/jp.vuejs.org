@@ -18,15 +18,13 @@
         スポンサーになる
       </a>
       <h2>
-        <% if (type === 'guide') { %>
-          ガイド
-        <% } else if (type === 'api') { %>
-          API
-        <% } else if (type === 'style-guide') { %>
-          スタイルガイド<sup class="beta">beta</sup>
-        <% } else if (type === 'examples') { %>
-          例
-        <% } %>
+        <% titles = {
+          api: 'API',
+          examples: '例',
+          guide: 'ガイド',
+          'style-guide': 'スタイルガイド<sup class="beta">beta</sup>'
+        } %>
+        <%- titles[type] %>
         <% if (['cookbook', 'style-guide'].indexOf(type) === -1) { %>
           <select class="version-select">
             <option value="SELF" selected>2.x</option>
