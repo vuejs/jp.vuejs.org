@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2018-01-12
+updated: 2018-02-10
 type: guide
 order: 303
 ---
@@ -172,7 +172,7 @@ createElement(
 ``` js
 {
   // `v-bind:class` と同じ API
-  'class': {
+  class: {
     foo: true,
     bar: false
   },
