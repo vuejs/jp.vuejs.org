@@ -577,6 +577,24 @@ Vue.component('smart-list', {
 })
 ```
 
+### 子要素/コンポーネントへの属性およびイベントの受け渡し
+
+通常のコンポーネントでは、props として定義されていない属性はコンポーネントのルート要素に自動的に追加され、同名の既存の属性と置換または[賢くマージ](class-and-style.html)されます。
+
+ところが、関数型コンポーネントでは、この動作を明示的に定義する必要があります:
+
+```js
+Vue.component('my-functional-button', {
+  functional: true,
+  render: function (createElement, context) {
+    // 任意の属性、イベントリスナ、子などを透過的に渡します。
+    return createElement('button', context.data, context.children)
+  }
+})
+```
+
+`context.data` を `createElement` の第2引数として渡すことで、`my-function-button` で使用された属性やイベントリスナを渡しています。実際、イベントは `.native` 修飾子を必要としないため、とても透過的です。
+
 ### `slots()` vs `children`
 
 もしかするとなぜ `slots()` と `children` の両方が必要なのか不思議に思うかもしれません。 `slots().default` は `children` と同じではないのですか？いくつかのケースではそうですが、もし以下の子を持つ関数型コンポーネントの場合はどうなるでしょう。
