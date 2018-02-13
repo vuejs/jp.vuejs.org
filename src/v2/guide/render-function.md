@@ -593,7 +593,7 @@ Vue.component('my-functional-button', {
 })
 ```
 
-`context.data` を `createElement` の第2引数として渡すことで、`my-function-button` で使用された属性やイベントリスナを渡しています。実際、イベントが `.native` 修飾子を必要としないようにとても透過的です。
+`context.data` を `createElement` の第2引数として渡すことで、`my-function-button` で使用された属性やイベントリスナを渡しています。実際、イベントは `.native` 修飾子を必要としないため、とても透過的です。
 
 ### `slots()` vs `children`
 
