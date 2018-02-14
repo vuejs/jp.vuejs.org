@@ -1,6 +1,6 @@
 ---
 title: テンプレート構文
-updated: 2017-12-03
+updated: 2018-02-14
 type: guide
 order: 4
 ---
