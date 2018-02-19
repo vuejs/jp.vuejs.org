@@ -515,7 +515,7 @@ Vue.component('my-component', {
 
 2.5.0以降では、[単一ファイルコンポーネント](single-file-components.html)を使用している場合、テンプレートベースの関数型コンポーネントは次のように宣言できます。
 
-``` js
+``` html
 <template functional>
 </template>
 ```
