@@ -1,0 +1,37 @@
+version: 2
+defaults: &defaults
+  working_directory: ~/tmp
+  docker:
+    - image: circleci/node:8.9.4
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - node8.9.4-dependencies-{{ checksum "package.json" }}
+          # Fallback to using the latest cache if no exact match is found
+          - node8.9.4-dependencies-
+
+      # Install dependencies
+      - run:
+          name: Install
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: node8.9.4-dependencies-{{ checksum "package.json" }}
+
+      # Test
+      - run:
+          name: Test
+          command: yarn test
