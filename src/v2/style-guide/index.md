@@ -1,4 +1,5 @@
 ---
+title: Style Guide
 type: style-guide
 updated: 2017-12-20
 ---
@@ -1727,8 +1728,8 @@ computed: {
 >
   Error: {{ error }}
 </div>
-<div 
-  v-else 
+<div
+  v-else
   key="search-results"
 >
   {{ results }}
