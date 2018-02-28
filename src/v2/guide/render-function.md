@@ -318,6 +318,7 @@ render: function (createElement) {
 これは render 関数においては JavaScript の `if` / `else` と `map` を使って書き換えることができます。
 
 ``` js
+props: ['items'],
 render: function (createElement) {
   if (this.items.length) {
     return createElement('ul', this.items.map(function (item) {
@@ -333,6 +334,7 @@ render: function (createElement) {
 描画関数には直接的な `v-model` の対応はありません。 あなた自身でロジックを実装する必要があります:
 
 ``` js
+props: ['value'],
 render: function (createElement) {
   var self = this
   return createElement('input', {
@@ -341,7 +343,6 @@ render: function (createElement) {
     },
     on: {
       input: function (event) {
-        self.value = event.target.value
         self.$emit('input', event.target.value)
       }
     }
@@ -416,11 +417,12 @@ render: function (createElement) {
 そして、[`this.$scopedSlots`](../api/#vm-scopedSlots) から VNode を返す関数としてスコープ付きスロットにアクセスできます:
 
 ``` js
+props: ['message'],
 render: function (createElement) {
-  // `<div><slot :text="msg"></slot></div>`
+  // `<div><slot :text="message"></slot></div>`
   return createElement('div', [
     this.$scopedSlots.default({
-      text: this.msg
+      text: this.message
     })
   ])
 }
@@ -429,7 +431,7 @@ render: function (createElement) {
 スコープ付きスロットを描画関数を使って子コンポーネントに渡すには、VNode データの `scopedSlots` フィールドを使います:
 
 ``` js
-render (createElement) {
+render: function (createElement) {
   return createElement('div', [
     createElement('child', {
       // { name: props => VNode | Array<VNode> } の形式で
@@ -476,7 +478,7 @@ import AnchoredHeading from './AnchoredHeading.vue'
 
 new Vue({
   el: '#demo',
-  render (h) {
+  render: function (h) {
     return (
       <AnchoredHeading level={1}>
         <span>Hello</span> world!
