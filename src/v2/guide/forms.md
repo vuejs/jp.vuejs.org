@@ -1,6 +1,6 @@
 ---
 title: フォーム入力バインディング
-updated: 2017-12-14
+updated: 2018-03-05
 type: guide
 order: 10
 ---
@@ -298,7 +298,7 @@ radio 、 checkbox 、そして select オプションは、 `v-model` バイン
 <!-- `toggle` は true かまたは false のどちらかです -->
 <input type="checkbox" v-model="toggle">
 
-<!-- 選択されたとき、`selected` は文字列"abc"です -->
+<!-- 最初のオプションが選択されたとき、`selected` は文字列"abc"です -->
 <select v-model="selected">
   <option value="abc">ABC</option>
 </select>
