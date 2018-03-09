@@ -68,7 +68,6 @@ $ npm install --global vue-cli
 $ vue init webpack my-project
 # 依存関係をインストールしてgo!
 $ cd my-project
-$ npm install
 $ npm run dev
 ```
 
