@@ -2,7 +2,7 @@
 title: Adding Instance Properties
 updated: 2017-08-21
 type: cookbook
-order: 1.3
+order: 2
 ---
 
 ## Simple Example
