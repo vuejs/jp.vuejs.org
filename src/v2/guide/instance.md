@@ -47,8 +47,9 @@ var vm = new Vue({
   data: data
 })
 
-// これらは同じオブジェクトを参照します!
-vm.a === data.a // => true
+// インスタンスのプロパティを取得すると、
+// 元のデータからそのプロパティが返されます
+vm.a == data.a // => true
 
 // プロパティへの代入は、元のデータにも反映されます
 vm.a = 2
@@ -88,19 +89,15 @@ Object.freeze(obj)
 
 new Vue({
   el: '#app',
-  data () {
-    return {
-      obj
-    }
-  }
+  data: obj
 })
 ```
 
 ```html
 <div id="app">
-  <p>{{ obj.foo }}</p>
-  <!-- これは obj.foo を更新しなくなります! -->
-  <button @click="obj.foo = 'baz'">Change it</button>
+  <p>{{ foo }}</p>
+  <!-- これは foo を更新しなくなります! -->
+  <button @click="foo = 'baz'">Change it</button>
 </div>
 ```
 
