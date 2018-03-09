@@ -292,11 +292,20 @@ Vue.component('child', {
 式に通常の属性をバインディングするのと同様に、 `v-bind` を使用して親のデータにプロパティを動的にバインディングすることもできます。親でデータが更新される度に、そのデータが子に流れ落ちます:
 
 ``` html
-<div>
+<div id="prop-example-2">
   <input v-model="parentMsg">
   <br>
   <child v-bind:my-message="parentMsg"></child>
 </div>
+```
+
+``` js
+new Vue({
+  el: '#prop-example-2',
+  data: {
+    parentMsg: 'Message from parent'
+  }
+})
 ```
 
 `v-bind` のための省略記法を使用するとよりシンプルです:
@@ -322,7 +331,7 @@ new Vue({
   components: {
     child: {
       props: ['myMessage'],
-      template: '<span>{{myMessage}}</span>'
+      template: '<span>{{ myMessage }}</span>'
     }
   }
 })
