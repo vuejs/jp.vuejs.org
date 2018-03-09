@@ -515,7 +515,7 @@ date picker プラグインのテーマを指定するには、次のような�
 すべての Vue インスタンスは [イベントインターフェイス](../api/#インスタンスメソッド-イベント) を実装しています。これは以下をできることを意味します:
 
 - `$on(eventName)`を使用してイベントを購読します。
-- `$emit(eventName)`を使用して自身にイベントをトリガします。
+- `$emit(eventName, optionalPayload)`を使用して自身にイベントをトリガします。
 
 <p class="tip">Vue のカスタムイベントはブラウザの [EventTarget API](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) とは別ものであることに注意してください。同等に動作しますが、`$on` と `$emit` は `addEventListener` と `dispatchEvent` に対するエイリアスでは__ありません__。</p>
 
@@ -598,6 +598,86 @@ new Vue({
 {% endraw %}
 
 この例では、子コンポーネントはその外で起こったこととはまだ完全に分離しているということに注目することが大切です。子コンポーネントが唯一行っていることは、親コンポーネントが監視している場合に備えて、自分自身の活動に関する情報を報告することです。
+
+
+ペイロードデータを使用する方法の例がこちらです:
+
+``` html
+<div id="message-event-example" class="demo">
+  <p v-for="msg in messages">{{ msg }}</p>
+  <button-message v-on:message="handleMessage"></button-message>
+</div>
+```
+
+``` js
+Vue.component('button-message', {
+  template: `<div>
+    <input type="text" v-model="message" />
+    <button v-on:click="handleSendMessage">Send</button>
+  </div>`,
+  data: function () {
+    return {
+      message: 'test message'
+    }
+  },
+  methods: {
+    handleSendMessage: function () {
+      this.$emit('message', { message: this.message })
+    }
+  }
+})
+
+new Vue({
+  el: '#message-event-example',
+  data: {
+    messages: []
+  },
+  methods: {
+    handleMessage: function (payload) {
+      this.messages.push(payload.message)
+    }
+  }
+})
+```
+
+{% raw %}
+<div id="message-event-example" class="demo">
+  <p v-for="msg in messages">{{ msg }}</p>
+  <button-message v-on:message="handleMessage"></button-message>
+</div>
+<script>
+Vue.component('button-message', {
+  template: `<div>
+    <input type="text" v-model="message" />
+    <button v-on:click="handleSendMessage">Send</button>
+  </div>`,
+  data: function () {
+    return {
+      message: 'test message'
+    }
+  },
+  methods: {
+    handleSendMessage: function () {
+      this.$emit('message', { message: this.message })
+    }
+  }
+})
+new Vue({
+  el: '#message-event-example',
+  data: {
+    messages: []
+  },
+  methods: {
+    handleMessage: function (payload) {
+      this.messages.push(payload.message)
+    }
+  }
+})
+</script>
+{% endraw %}
+
+この2番目の例では、子コンポーネントが外部で起きていることから完全に切り離されていることに注意することが重要です。
+子コンポーネントが唯一行っていることは、親コンポーネントが監視している場合に備えて、イベントエミッターへのペイロードデータを含む自分自身のアクティビティに関する情報を報告することです。
 
 ### ネイティブイベントとコンポーネントのバインディング
 
