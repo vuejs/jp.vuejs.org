@@ -169,7 +169,7 @@ const Component = Vue.extend({
       return this.greet() + '!'
     }
   },
-  // `createElement` は推論されますが、`render` は戻り値の方が必要です
+  // `createElement` は推論されますが、`render` は戻り値の型が必要です
   render (createElement): VNode {
     return createElement('div', this.greeting)
   }
