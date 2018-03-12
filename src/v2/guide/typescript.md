@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2017-12-03
+updated: 2018-03-11
 type: guide
 order: 404
 ---
@@ -169,7 +169,7 @@ const Component = Vue.extend({
       return this.greet() + '!'
     }
   },
-  // `createElement` は推論されますが、`render` は戻り値の方が必要です
+  // `createElement` は推論されますが、`render` は戻り値の型が必要です
   render (createElement): VNode {
     return createElement('div', this.greeting)
   }
