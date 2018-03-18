@@ -282,6 +282,9 @@ order: 803
       ],
       reposPersonal: [
         'vue-2.0-simple-routing-example', 'vue-ssr-demo-simple'
+      ],
+      links: [
+        'https://www.patreon.com/chrisvuefritz'
       ]
     },
     {
