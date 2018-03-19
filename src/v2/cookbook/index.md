@@ -1,8 +1,11 @@
 ---
 title: Introduction
 type: cookbook
+updated: 2018-03-20
 order: 0
 ---
+
+> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
 ## The Cookbook vs the Guide
 
