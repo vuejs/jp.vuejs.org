@@ -132,4 +132,4 @@ it('updates the rendered message when vm.message updates', done => {
 
 コンポーネントを特別な状態で描画し検証する(例えば、子コンポーネントを無視した浅い描画など)ような、テストをより簡単にするためのヘルパーセットの開発も検討しています。
 
-For more in-depth information on unit testing in vue, check out [vue-test-utils](https://vue-test-utils.vuejs.org/en/) and our cookbook entry about [unit testing vue components](https://vuejs.org/v2/cookbook/unit-testing-vue-components.html).
+Vue の単体テストに関する詳細情報については、[vue-test-utils](https://vue-test-utils.vuejs.org/en/) とクックブックエントリの [unit testing vue components](https://vuejs.org/v2/cookbook/unit-testing-vue-components.html) について確認してください。
