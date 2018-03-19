@@ -16,10 +16,10 @@ Vue のトランジションシステムは entering、leaving、およびリス
 
 ## ウォッチャによる状態のアニメーション
 
-ウォッチャは、任意の数値プロパティの変化によって他のプロパティをアニメーションさせることができるようにします。それは理論的には複雑に聞こえるかもしれませんが、[Tween.js](https://github.com/tweenjs/tween.js) を使った例に没頭してみましょう:
+ウォッチャは、任意の数値プロパティの変化によって他のプロパティをアニメーションさせることができるようにします。それは理論的には複雑に聞こえるかもしれませんが、[GreenSock](https://greensock.com/)を使った例に没頭してみましょう:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 
 <div id="animated-number-demo">
   <input v-model.number="number" type="number" step="20">
@@ -32,33 +32,23 @@ new Vue({
   el: '#animated-number-demo',
   data: {
     number: 0,
-    animatedNumber: 0
+    tweenedNumber: 0
+  },
+  computed: {
+    animatedNumber: function() {
+      return this.tweenedNumber.toFixed(0);
+    }
   },
   watch: {
-    number: function(newValue, oldValue) {
-      var vm = this
-      function animate () {
-        if (TWEEN.update()) {
-          requestAnimationFrame(animate)
-        }
-      }
-
-      new TWEEN.Tween({ tweeningNumber: oldValue })
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .to({ tweeningNumber: newValue }, 500)
-        .onUpdate(function () {
-          vm.animatedNumber = this.tweeningNumber.toFixed(0)
-        })
-        .start()
-
-      animate()
+    number: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedNumber: newValue });
     }
   }
 })
 ```
 
 {% raw %}
-<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 <div id="animated-number-demo" class="demo">
   <input v-model.number="number" type="number" step="20">
   <p>{{ animatedNumber }}</p>
@@ -68,33 +58,23 @@ new Vue({
   el: '#animated-number-demo',
   data: {
     number: 0,
-    animatedNumber: 0
+	tweenedNumber: 0
+  },
+  computed: {
+    animatedNumber: function() {
+      return this.tweenedNumber.toFixed(0);
+    }
   },
   watch: {
-    number: function(newValue, oldValue) {
-      var vm = this
-      function animate () {
-        if (TWEEN.update()) {
-          requestAnimationFrame(animate)
-        }
-      }
-
-      new TWEEN.Tween({ tweeningNumber: oldValue })
-        .easing(TWEEN.Easing.Quadratic.Out)
-        .to({ tweeningNumber: newValue }, 500)
-        .onUpdate(function () {
-          vm.animatedNumber = this.tweeningNumber.toFixed(0)
-        })
-        .start()
-
-      animate()
+    number: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedNumber: newValue });
     }
   }
 })
 </script>
 {% endraw %}
 
-数値を更新すると、その変更が入力の下でアニメーションします。これはよいデモですが、例えば有効な CSS の色のように、直接的に数値として保持されていないものの場合はどうでしょうか？こちらのように、[Color.js](https://github.com/brehaut/color-js) を加えることによってそれを成し遂げられます:
+数値を更新すると、その変更が入力の下でアニメーションします。これはよいデモですが、例えば有効な CSS の色のように、直接的に数値として保持されていないものの場合はどうでしょうか？こちらのように、[Tween.js](https://github.com/tweenjs/tween.js) と [Color.js](https://github.com/brehaut/color-js) を加えることによってそれを成し遂げられます:
 
 ``` html
 <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
