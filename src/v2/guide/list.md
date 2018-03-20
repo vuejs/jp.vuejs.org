@@ -1,6 +1,6 @@
 ---
 title: リストレンダリング
-updated: 2017-09-22
+updated: 2018-03-21
 type: guide
 order: 8
 ---
@@ -269,21 +269,39 @@ JavaScript の制限のため、Vue は配列で以下の変更を検出する�
 1. インデックスでアイテムを直接設定するとき。例: `vm.items[indexOfItem] = newValue`
 2. 配列の長さを変更するとき。例: `vm.items.length = newLength`
 
+例:
+
+``` js
+var vm = new Vue({
+  data: {
+    items: ['a', 'b', 'c']
+  }
+})
+vm.items[1] = 'x' // リアクティブではありません
+vm.items.length = 2 // リアクティブではありません
+```
+
 上記の注意事項 1 に対処するため、以下のどちらも `vm.items[indexOfItem] = newValue` と同じ動作になりますが、リアクティブなシステム内で状態の更新をトリガします。
 
 ``` js
 // Vue.set
-Vue.set(example1.items, indexOfItem, newValue)
+Vue.set(vm.items, indexOfItem, newValue)
 ```
 ``` js
 // Array.prototype.splice
-example1.items.splice(indexOfItem, 1, newValue)
+vm.items.splice(indexOfItem, 1, newValue)
+```
+
+[`vm.$set`]((https://jp.vuejs.org/v2/api/#vm-set)) インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
+
+``` js
+vm.$set(vm.items, indexOfItem, newValue)
 ```
 
 上記の注意事項 2 に対処するためにも `splice` を使います:
 
 ``` js
-example1.items.splice(newLength)
+vm.items.splice(newLength)
 ```
 
 ## オブジェクトの変更検出の注意
