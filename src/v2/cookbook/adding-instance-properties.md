@@ -2,8 +2,11 @@
 title: Adding Instance Properties
 updated: 2017-08-21
 type: cookbook
+updated: 2018-03-20
 order: 2
 ---
+
+> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
 ## Simple Example
 

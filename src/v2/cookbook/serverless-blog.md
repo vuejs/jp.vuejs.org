@@ -1,10 +1,11 @@
 ---
 title: Create a CMS-Powered Blog
 type: cookbook
+updated: 2018-03-20
 order: 5
 ---
 
-# Create a CMS-Powered Blog Using Vue.js
+> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
 So you've just launched your Vue.js website, congrats! Now you want to add a blog that quickly plugs into your website and you don't want to have to spin up a whole server just to host a Wordpress instance (or any DB-powered CMS for that matter). You want to just be able to add a few Vue.js blog components and some routes and have it all just work, right? What you're looking for a blog that's powered entirely by API's you can consume directly from your Vue.js application. This tutorial will teach you how to do just that, let's dive in!
 

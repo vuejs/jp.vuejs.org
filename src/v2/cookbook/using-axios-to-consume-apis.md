@@ -1,8 +1,11 @@
 ---
 title: Using Axios to Consume APIs
 type: cookbook
+updated: 2018-03-20
 order: 9
 ---
+
+> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
 ## Simple Example
 
