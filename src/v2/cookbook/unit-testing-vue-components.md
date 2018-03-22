@@ -1,5 +1,5 @@
 ---
-title: Unit Testing Vue Components
+title: 単体テスト Vue コンポーネント
 type: cookbook
 updated: 2018-03-20
 order: 6
@@ -7,11 +7,11 @@ order: 6
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-## Simple Example
+## 基本的な例
 
-Unit testing is a fundamental part of software development. Unit tests execute the smallest units of code in isolation, in order to increase ease of adding new features and track down bugs. Vue's [single-file components](../guide/single-file-components.html) make it straight forward to write unit tests for components in isolation. This lets you develop new features with confidence you are not breaking existing ones, and helps other developers understand what your component does.
+単体テストはソフトウエア開発の基本的な部分です。単体テストは、新しい機能の追加やバグの追跡を容易にするために、最小単位のコードを独立して実行します。Vueの[単一ファイルコンポーネント](../guide/single-file-components.html)は独立したコンポーネントの単体テストを書くことを容易にします。これによって、あなたは既存の機能を壊さない確信を持って新しい機能を開発ができ、また他の開発者がコンポーネントがしていることを理解するのを手助けします。
 
-This simple example tests whether some text is rendered:
+この簡単な例はいくつかのテキストがレンダリングされるかどうかをテストします:
 
 ```html
 <template>
@@ -50,26 +50,27 @@ export default {
 import { shallow } from '@vue/test-utils'
 
 test('Foo', () => {
-  // render the component
+  // コンポーネントをレンダリングします。
   const wrapper = shallow(Hello)
 
-  // should not allow for `username` less than 7 characters, excludes whitespace
+  // `username`は空白を除外して7文字未満は許されません。
   wrapper.setData({ username: ' '.repeat(7) })
 
-  // assert the error is rendered
+  // エラーがレンダリングされることをアサート（assert）します。
   expect(wrapper.find('.error').exists()).toBe(true)
 
-  // update the name to be long enough
+  // 名前を十分な長さにします。
   wrapper.setData({
     username: 'Lachlan'
   })
 
-  // assert the error has gone away
+  // エラーがなくなったとアサート（assert）します。
   expect(wrapper.find('.error').exists()).toBe(false)
 })
 ```
 
-The above code snippet shows how to test whether an error message is rendered based on the length of the username. It demonstrates the general idea of unit testing Vue components: render the component, and assert that the markup matches the state of the component.
+上記のコードスニペットは、usernameの長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。
+Vueコンポーネント単一テストの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
 
 ## Why test?
 
