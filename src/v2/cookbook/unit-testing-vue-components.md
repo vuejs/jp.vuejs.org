@@ -7,7 +7,7 @@ order: 6
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-## Simple Example
+## Base Example
 
 Unit testing is a fundamental part of software development. Unit tests execute the smallest units of code in isolation, in order to increase ease of adding new features and track down bugs. Vue's [single-file components](../guide/single-file-components.html) make it straight forward to write unit tests for components in isolation. This lets you develop new features with confidence you are not breaking existing ones, and helps other developers understand what your component does.
 
