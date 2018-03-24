@@ -1,7 +1,7 @@
 ---
 title: 単体テスト Vue コンポーネント
 type: cookbook
-updated: 2018-03-20
+updated: 2018-03-24
 order: 6
 ---
 
@@ -72,21 +72,21 @@ test('Foo', () => {
 上記のコードスニペットは、usernameの長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。
 Vueコンポーネント単一テストの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
 
-## Why test?
+## なぜテストをするのですか
 
-Component unit tests have lots of benefits:
+単体テスト Vue コンポーネントはたくさんの利益を持っています:
 
-- Provide documentation on how the component should behave
-- Save time over testing manually
-- Reduce bugs in new features
-- Improve design
-- Facilitate refactoring
+- コンポーネントがどう動作すべきかのドキュメントを提供します
+- 過度な(over)手動テストの時間を節約します
+- 新しい機能におけるバグを減らします
+- デザインを改良します
+- リファクタリングを容易にします
 
-Automated testing allows large teams of developers to maintain complex codebases.
+自動テストは大規模な開発チームチームが複雑なコードベース(codebases)を維持するのを許します。
 
-#### Getting started
+#### はじめる
 
-[Vue Test Utils](https://github.com/vuejs/vue-test-utils) is the official library for unit testing Vue components. The [vue-cli](https://github.com/vuejs/vue-cli) `webpack` template comes with either Karma or Jest, both well supported test runners, and there are some [guides](https://vue-test-utils.vuejs.org/en/guides/) in the Vue Test Utils documentation.
+[Vue Test Utils](https://github.com/vuejs/vue-test-utils)はVueコンポーネントをテストするための公式ライブラリです。[vue-cli](https://github.com/vuejs/vue-cli)の`webpack`テンプレートにはKarmaとJestというよくサポートされたテストランナーを備えており、またVue Test Utilsにいくつかの[ガイド](https://vue-test-utils.vuejs.org/en/guides/)があります。
 
 ## Real-World Example
 
