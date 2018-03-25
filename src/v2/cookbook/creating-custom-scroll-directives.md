@@ -7,9 +7,9 @@ order: 7
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-## Base Example
+## 基本的な例
 
-There are many times that we might want to add a bit of behavior, especially animation, to a scroll event on a site. There are many ways to do so, but the path with the least amount of code and dependencies is perhaps to use a [custom directive](https://vuejs.org/v2/guide/custom-directive.html) to create a hook for anything that fires off a particular scroll event.
+ちょっとした振る舞いを加えたくなる時は数多くあるでしょう。特に Web サイト上でスクロールイベントと連動するアニメーションなどです。そうする方法は多くありますが、最も少ないコード量と依存で実現できる方法はおそらく、特定のスクロールイベントを発火させるフック作成のための、[カスタムディレクティブ](https://vuejs.org/v2/guide/custom-directive.html)を使用することでしょう。
 
 ```js
 Vue.directive('scroll', {
@@ -49,9 +49,9 @@ new Vue({
 </div>
 ```
 
-<p class="tip">Remember! The directive must be registered before the Vue instance.</p>
+<p class="tip">注意! ディレクティブは Vue インスタンス作成前に登録されなければなりません。</p>
 
-We'd also need a style property that will transition the intermediary values here, in this case:
+私達はこのケースで、中継値を移行するスタイルプロパティも必要としています。
 
 ```
 .box {
@@ -62,7 +62,7 @@ We'd also need a style property that will transition the intermediary values her
 <p data-height="450" data-theme-id="5162" data-slug-hash="983220ed949ac670dff96bdcaf9d3338" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Custom Scroll Directive- CSS Transition" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/983220ed949ac670dff96bdcaf9d3338/">Custom Scroll Directive- CSS Transition</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Or, with GreenSock(GSAP) or any other JavaScript animation library, the code becomes even more simple:
+また GreenSock(GSAP) や他の JavaScript ライブラリーを使用することで、コードはよりシンプルになります。
 
 ```js
 Vue.directive('scroll', {
@@ -94,7 +94,7 @@ new Vue({
 })
 ```
 
-Though we would remove the previous CSS transition from this implementation because it's now handled with JavaScript.
+CSS トランジションは今 JavaScript によって操作されているので、私達はこの実装から以前の CSS トランジションを取り除くことができるでしょう。
 
 ## The Benefit of Using Custom Directives
 
