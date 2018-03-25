@@ -96,11 +96,11 @@ new Vue({
 
 CSS トランジションは今 JavaScript によって操作されているので、私達はこの実装から以前の CSS トランジションを取り除くことができるでしょう。
 
-## The Benefit of Using Custom Directives
+## カスタムディレクティブを使用することのメリット
 
-Vue is rich with options for directives, most of which cover very common use-cases, which can create a very productive developer experience. But even if you have an edge case not covered by the framework, it's got you covered in this case as well, because you can quite easily create a custom directive to fit your needs.
+Vue はディレクティブに対する豊富なオプションがあります。それらのオプションは一般的なユースケースをほとんど網羅し、とても生産的な開発体験を提供することでしょう。しかし、たとえフレームワークに網羅されていないニッチなユースケースを持っていたとしても、フレームワークに網羅されているユースケースと同様に網羅することができます。なぜなら、とても簡単にあなたが必要とするカスタムディレクティブを作成できるからです。
 
-Attaching and removing scroll events to elements is a really good use case for this technique because just like other directives we use, they are necessarily tied to the element and otherwise, we'd have to find the reference for it in the DOM. This pattern avoids the need for traversal, and keeps the event logic paired with the node that it's in reference to.
+要素に対してスクロールイベントを着脱は本当に良いユースケースです。なぜなら私たちが使用する他のディレクティブと同様に、要素に結びつく必要があり、DOM を参照しなければならないためです。このパターンはトラバーサルの必要性を回避し、参照先のノードとイベントロジックの組み合わせを保ちます。
 
 ## Real-World Example: Using a Custom Scroll Directive for Cascading Animations
 
