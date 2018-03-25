@@ -102,20 +102,20 @@ Vue はディレクティブに対する豊富なオプションがあります�
 
 要素に対してスクロールイベントを着脱は本当に良いユースケースです。なぜなら私たちが使用する他のディレクティブと同様に、要素に結びつく必要があり、DOM を参照しなければならないためです。このパターンはトラバーサルの必要性を回避し、参照先のノードとイベントロジックの組み合わせを保ちます。
 
-## Real-World Example: Using a Custom Scroll Directive for Cascading Animations
+## 実例: カスケードアニメーションでのカスタムスクロールディレクティブの使用
 
-In the course of creating a cohesive site, you may find that you're reusing the same type of animation logic in several areas. It seems simple, we would then create a very specific custom directive, right? Well, typically if you're reusing it, you will need to change it _just_ slightly for each use.
+一貫性のあるサイトを作成する過程で、あなたは様々な箇所で同じアニメーションロジックを再利用していることに気づくかもしれません。シンプルに見えますが、私達はとても限定的なカスタムディレクティブを作成します。概して、もしあなたがそれを再利用するならば、使用の度に「ほんの」些細な変更を必要とするでしょう。
 
-To help keep our code concise and legible, we would want to pass in some predefined arguments such as the beginning point and ending of the animation as we scroll down the page.
+簡潔で読みやすいコードの維持に役立てるため、私達はページを下にスクロールするときにアニメーションの開始・終了座標といった定義済みの引数を渡したいと思うでしょう。
 
-**This example is better viewed in the [full screen version](https://s.codepen.io/sdras/debug/078c19f5b3ed7f7d28584da450296cd0).**
+**この例は[フルスクリーンバージョン](https://s.codepen.io/sdras/debug/078c19f5b3ed7f7d28584da450296cd0)の方が見やすいです.**
 
 <p data-height="500" data-theme-id="5162" data-slug-hash="c8c55e3e0bba997350551dd747119100" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Scrolling Example- Using Custom Directives in Vue" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/c8c55e3e0bba997350551dd747119100/">Scrolling Example- Using Custom Directives in Vue</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-In the demo above, each of the sections has two different types of animation triggered from the scroll: a morphing animation, and a drawing animation that animates the individual paths in the SVG. We reuse those two animations, so we can create a custom directive for each. The arguments we'll pass in will help keep everything simple and reusable.
+上のデモで、それぞれのセクションはスクロールによって引き起こされる、2つの異なるアニメーションがあります。変形アニメーションと、SVG内の個々のパスに沿って動く描画アニメーションです。私達はこれら2つのアニメーションを再利用するので、それぞれのカスタムディレクティブを作成できます。私達が渡すであろう引数は、シンプルかつ再利用可能なコードの維持に役立ちます。
 
-To show how we do this, we'll take a look at the morphing shape example, where we'll need to state the start and finish, as well as pass in a path value that we'll create a morph to. These arguments are each defined as `binding.value.foo`:
+やり方を示すために、モーフィングシェイプの例を見てみましょう。ここでは開始・終了座標の状態と共に、モーフィングを作成するパス値が必要です。これらの引数はそれぞれ `binding.value.foo` に定義されています。
 
 ```js
 Vue.directive('clipscroll', {
@@ -138,7 +138,7 @@ Vue.directive('clipscroll', {
 })
 ```
 
-We can then use this animation in our template, in this case we're attaching the directive to the `clipPath` element, and pass all of our arguments to the directives in an object.
+テンプレートにこのアニメーションを使用することができます。この場合、`clipPath`要素にディレクティブを加え、全ての引数をオブジェクトとしてディレクティブに渡します。
 
 ```html
 <clipPath id="clip-path">
