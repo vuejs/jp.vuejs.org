@@ -150,8 +150,8 @@ Vue.directive('clipscroll', {
 </clipPath>
 ```
 
-## Alternative Patterns
+## 他のパターン
 
-Custom directives are extremely useful, but you may find some situations where you need something very specific that already exists in scrolling libraries that you don't wish to rebuild from scratch yourself.
+カスタムディレクティブは非常に役に立ちますが、スクラッチでは作りたくない、スクロールライブラリにすでに存在する非常に特殊な機能を使いたい場合もあるかもしれません。
 
-[Scrollmagic](http://scrollmagic.io/) has a very rich ecosystem of offerings to work with, as well as good documentation and demos to explore. This includes, but is not limited to things like [parallax](http://scrollmagic.io/examples/advanced/parallax_scrolling.html), [cascading pinning](http://scrollmagic.io/examples/expert/cascading_pins.html), [section wipes](http://scrollmagic.io/examples/basic/section_wipes_natural.html), and [responsive duration](http://scrollmagic.io/examples/basic/responsive_duration.html).
+[Scrollmagic](http://scrollmagic.io/)は豊富なエコシステムがあると同時に、優れたドキュメントやデモを用意しています。これには、[パララックス](http://scrollmagic.io/examples/advanced/parallax_scrolling.html)、[カスケードピンニング](http://scrollmagic.io/examples/expert/cascading_pins.html)、[セクションワイプ](http://scrollmagic.io/examples/basic/section_wipes_natural.html)、[レスポンシブデュレイション](http://scrollmagic.io/examples/basic/responsive_duration.html)など多様な機能が内包されています。
