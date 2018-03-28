@@ -1,6 +1,6 @@
 ---
 title: Vue インスタンス
-updated: 2018-03-09
+updated: 2018-03-28
 type: guide
 order: 3
 ---
