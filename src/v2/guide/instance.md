@@ -1,6 +1,6 @@
 ---
 title: Vue インスタンス
-updated: 2018-03-09
+updated: 2018-03-28
 type: guide
 order: 3
 ---
@@ -97,7 +97,7 @@ new Vue({
 <div id="app">
   <p>{{ foo }}</p>
   <!-- これは `foo` を更新しなくなります! -->
-  <button @click="foo = 'baz'">Change it</button>
+  <button v-on:click="foo = 'baz'">Change it</button>
 </div>
 ```
 
