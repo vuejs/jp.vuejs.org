@@ -140,7 +140,7 @@ return createElement('h1', this.blogTitle)
 createElement(
   // {String | Object | Function}
   // HTML タグ名、コンポーネントオプション、もしくは
-  // そのどちらかを返す関数です。必須です。
+  // そのどちらかを解決する非同期関数です。必須です。
   'div',
 
   // {Object}
@@ -603,7 +603,7 @@ Vue.component('my-functional-button', {
 <template functional>
   <button
     class="btn btn-primary"
-    v-bind="data.attrs" 
+    v-bind="data.attrs"
     v-on="listeners"
   >
     <slot/>
