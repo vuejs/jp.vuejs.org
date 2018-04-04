@@ -7,7 +7,7 @@ order: 502
 
 ## 公式 Flux ライクな実装
 
-大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は [vuex](https://github.com/vuejs/vuex) を提供します。これは Elm から触発された状態管理ライブラリで、特別なセットアップなしで時間を巻き戻せる [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携します。
+大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は Elm から触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供します。[vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
 
 ### React 開発者への情報
 
