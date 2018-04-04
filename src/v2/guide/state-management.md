@@ -1,6 +1,6 @@
 ---
 title: 状態管理
-updated: 2017-09-03
+updated: 2018-04-04
 type: guide
 order: 502
 ---
