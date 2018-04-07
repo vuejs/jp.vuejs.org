@@ -142,15 +142,14 @@ Vue.prototype.$reverseText = propertyName => {
 Uncaught TypeError: Cannot read property 'split' of undefined
 ```
 
-## When To Avoid This Pattern
+## このパターンを避ける時
+プロトタイプのプロパティのスコープを慎重にしている限り、このパターンを使用するのは非常に安全です（バグを生成する可能性は低いです）。
 
-As long as you're vigilant in scoping prototype properties, using this pattern is quite safe - as in, unlikely to produce bugs.
+ただし、他の開発者と混乱することがあります。例えば、`this.$http` を見て、「ああ、私はこのVueの機能について知らなかった！」と思うかもしれません。 その後、彼らは別のプロジェクトに移り、`this.$http` が定義されていなかった場合は混乱します。 あるいは、Googleで `this.$http` で何かできないか調べたいかもしれませんが、**実際はAxios を別名で使用していることを認識していない**ため、何も見つけることはできません。
 
-However, it can sometimes cause confusion with other developers. They might see `this.$http`, for example, and think, "Oh, I didn't know about this Vue feature!" Then they move to a different project and are confused when `this.$http` is undefined. Or, maybe they want to Google how to do something, but can't find results because they don't realize they're actually using Axios under an alias.
+**この利便性は明確さとのトレードオフです**。コンポーネントを見たとき、`this.$http` がどこから来たのかを知ることは不可能です。Vue 本体のですか？A プラグインのですか？それとも他のですか？
 
-**The convenience comes at the cost of explicitness.** When looking at a component, it's impossible to tell where `$http` came from. Vue itself? A plugin? A coworker?
-
-So what are the alternatives?
+では、良い代替案は何でしょう？
 
 ## Alternative Patterns
 
