@@ -151,21 +151,21 @@ Uncaught TypeError: Cannot read property 'split' of undefined
 
 では、良い代替案は何でしょう？
 
-## Alternative Patterns
+## 代替案
 
-### When Not Using a Module System
+### モジュールシステムを使用していない場合
+モジュールシステムが**ない**アプリケーション（WebpackやBrowserifyなど）では、JavaScriptで拡張したフロントエンドでよく使われるパターンがあります：それはグローバル `App` オブジェクトです。
 
-In applications with **no** module system (e.g. via Webpack or Browserify), there's a pattern that's often used with _any_ JavaScript-enhanced frontend: a global `App` object.
+追加したいものが Vue とは特に関係がない場合、これは届けるための良い選択肢かもしれません。ここに例があります：
 
-If what you want to add has nothing to do with Vue specifically, this may be a good alternative to reach for. Here's an example:
 
 ```js
 var App = Object.freeze({
   name: 'My App',
   version: '2.1.4',
   helpers: {
-    // This is a purely functional version of
-    // the $reverseText method we saw earlier
+    // これは前に見た $reverseText メソッドの
+    // 純粋に機能的なバージョンです
     reverseText: function(text) {
       return text
         .split('')
@@ -176,11 +176,11 @@ var App = Object.freeze({
 })
 ```
 
-<p class="tip">If you raised an eyebrow at `Object.freeze`, what it does is prevent the object from being changed in the future. This essentially makes all its properties constants, protecting you from future state bugs.</p>
+<p class="tip">`Object.freeze` で眉を釣り上げましたか？これはオブジェクトのプロパティを固定するメソッドです。これは基本的にすべてのプロパティを固定し、将来、 state バグからあなたを守ります。</p>
 
-Now the source of these shared properties is much more obvious: there's an `App` object defined somewhere in the app. To find it, developers need only run a project-wide search.
+これらの共有プロパティのソースははるかに明白です。アプリケーションのどこかに定義された `App` オブジェクトがあります。これを見つけるためには、開発者はプロジェクト全体の検索を実行するだけです。
 
-Another advantage is that `App` can now be used _anywhere_ in your code, whether it's Vue-related or not. That includes attaching values directly to instance options, rather than having to enter a function to access properties on `this`:
+もう一つの利点は、Vue 関連であろうとなかろうと、あなたのコードで `App` オブジェクトを使用できるようになりました。これでインスタンスに直接オプションを追加する必要がなくなり、関数で `this` からプロパティにアクセスする必要がなくなりました。
 
 ```js
 new Vue({
