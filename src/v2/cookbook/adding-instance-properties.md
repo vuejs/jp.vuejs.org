@@ -100,11 +100,10 @@ new Vue({
 })
 ```
 
-## The Context of Prototype Methods
+## プロトタイプメソッドのコンテキスト
+JavaScriptのプロトタイプに追加されたメソッドはインスタンスのコンテキストを取得します。 つまり、インスタンスに定義された **data**、**computed** プロパティ、**methods**、その他のものにアクセスするために **this** を使用できます。
 
-In case you're not aware, methods added to a prototype in JavaScript gain the context of the instance. That means they can use `this` to access data, computed properties, methods, or anything else defined on the instance.
-
-Let's take advantage of this in a `$reverseText` method:
+**this** を `$reverseText`メソッドで利用してみましょう：
 
 ```js
 Vue.prototype.$reverseText = function(propertyName) {
@@ -126,7 +125,7 @@ new Vue({
 })
 ```
 
-Note that the context binding will **not** work if you use an ES6/2015 arrow function, as they implicitly bind to their parent scope. That means the arrow function version:
+*Note* コンテキストバインディングは、ES6/2015のアロー演算子を使用している場合は、親スコープに暗黙的にバインドされるため、**機能しません**。次はアロー関数のパターン：
 
 ```js
 Vue.prototype.$reverseText = propertyName => {
@@ -137,7 +136,7 @@ Vue.prototype.$reverseText = propertyName => {
 }
 ```
 
-Would throw an error:
+これはエラーが発生します:
 
 ```log
 Uncaught TypeError: Cannot read property 'split' of undefined
