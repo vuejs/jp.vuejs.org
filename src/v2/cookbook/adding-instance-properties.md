@@ -26,29 +26,29 @@ new Vue({
 
 `"My App"` はコンソールに記録されます。これはとてもシンプルです!
 
-## The Importance of Scoping Instance Properties
+## スコープインスタンスプロパティの重要性
 
-You may be wondering:
+あなたは疑問に思うかもしれません：
 
-> "Why does `appName` start with `$`? Is that important? What does it do?
+> "`appName` はなぜ `$` で始まるのですか？ それは重要なのですか？"
 
-No magic is happening here. `$` is simply a convention Vue uses for properties that are available to all instances. This avoids conflicts with any defined data, computed properties, or methods.
+ここでは特別な事は一切起きていません。 Vueは全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義した `data`、`computed` プロパティ、または `methods` との衝突を回避できます。
 
-> "Conflicts? What do you mean?"
+> "衝突？ それはどういう意味ですか？"
 
-Another great question! If you just set:
+とても良い質問です！もしこのように設定した場合：
 
 ```js
 Vue.prototype.appName = 'My App'
 ```
 
-Then what would you expect to be logged below?
+以下にどのようなログが記録されると思いますか？
 
 ```js
 new Vue({
   data: {
-    // Uh oh - appName is *also* the name of the
-    // instance property we just defined!
+    // しまった！ appName は私たちが今定義した
+    // インスタンスのプロパティと *また* 同じ名前です！
     appName: 'The name of some other app'
   },
   beforeCreate: function() {
@@ -60,7 +60,7 @@ new Vue({
 })
 ```
 
-It would be `"My App"`, then `"The name of some other app"`, because `this.appName` is overwritten ([sort of](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md)) by `data` when the instance is created. We scope instance properties with `$` to avoid this. You can even use your own convention if you'd like, such as `$_appName` or `ΩappName`, to prevent even conflicts with plugins or future features.
+この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが([作成されるとき](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))に `data` によって上書きされるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
 
 ## Real-World Example: Replacing Vue Resource with Axios
 
