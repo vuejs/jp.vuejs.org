@@ -8,16 +8,14 @@ order: 2
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-## Base Example
-
-There may be data/utilities you'd like to use in many components, but you don't want to [pollute the global scope](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md). In these cases, you can make them available to each Vue instance by defining them on the prototype:
-
+## 基本的な例
+多くのコンポーネントで使用したい**データ/ユーティリティ**があるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md)。
+この場合は、**プロトタイプに追加すれば**全ての Vue インスタンスで使用できます：
 ```js
 Vue.prototype.$appName = 'My App'
 ```
 
-Now `$appName` is available on all Vue instances, even before creation. If we run:
-
+今 `$appName` は、作成前でも全ての Vue インスタンスで使用可能です。 実行した場合：
 ```js
 new Vue({
   beforeCreate: function() {
@@ -26,7 +24,7 @@ new Vue({
 })
 ```
 
-Then `"My App"` will be logged to the console. It's that simple!
+`"My App"` はコンソールに記録されます。これはとてもシンプルです!
 
 ## The Importance of Scoping Instance Properties
 
