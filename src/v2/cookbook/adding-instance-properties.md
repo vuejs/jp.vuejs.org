@@ -62,11 +62,10 @@ new Vue({
 
 この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが([作成されるとき](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))に `data` によって上書きされるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
 
-## Real-World Example: Replacing Vue Resource with Axios
+## 実例： Vue のリソースをAxiosに置き換える
+それでは[使われなくなったVueのリソースを置き換えるとしましょう](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4)。あなたは `this.$http` を通してリクエストメソッドにアクセスすることを凄く楽しんでいましたが、代わりにAxiosで同じことをしたいと思います。
 
-Let's say you're replacing the [now-retired Vue Resource](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4). You really enjoyed accessing request methods through `this.$http` and you want to do the same thing with Axios instead.
-
-All you have to do is include axios in your project:
+ただ、プロジェクトに axios を含めるだけです:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.js"></script>
@@ -78,13 +77,13 @@ All you have to do is include axios in your project:
 </div>
 ```
 
-Alias `axios` to `Vue.prototype.$http`:
+`Vue.prototype.$http` に `axios` を代入し、**alias** とします：
 
 ```js
 Vue.prototype.$http = axios
 ```
 
-Then you'll be able to use methods like `this.$http.get` in any Vue instance:
+そうすれば、全てのVueインスタンスで `this.$http.get` のようにメソッドを使うことができます：
 
 ```js
 new Vue({
