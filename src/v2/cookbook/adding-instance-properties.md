@@ -7,8 +7,8 @@ order: 2
 ---
 
 ## 基本的な例
-多くのコンポーネントで使用したい**データ/ユーティリティ**があるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md)。
-この場合は、**プロトタイプに追加すれば**全ての Vue インスタンスで使用できます：
+多くのコンポーネントで使用したいデータ/ユーティリティがあるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md)。
+この場合は、プロトタイプに追加すれば全ての Vue インスタンスで使用できます：
 ```js
 Vue.prototype.$appName = 'My App'
 ```
@@ -30,7 +30,7 @@ new Vue({
 
 > "`appName` はなぜ `$` で始まるのですか？ それは重要なのですか？"
 
-ここでは特別な事は一切起きていません。 Vueは全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義した **data**、**computed** プロパティ、または **methods** との衝突を回避できます。
+ここでは特別な事は一切起きていません。 Vueは全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義した data、computed プロパティ、または methods との衝突を回避できます。
 
 > "衝突？ それはどういう意味ですか？"
 
@@ -75,7 +75,7 @@ new Vue({
 </div>
 ```
 
-`Vue.prototype.$http` に `axios` を代入し、**alias** とします：
+`Vue.prototype.$http` に `axios` を代入し、alias とします：
 
 ```js
 Vue.prototype.$http = axios
@@ -101,9 +101,9 @@ new Vue({
 ```
 
 ## プロトタイプメソッドのコンテキスト
-JavaScriptのプロトタイプに追加されたメソッドはインスタンスのコンテキストを取得します。 つまり、インスタンスに定義された **data**、**computed** プロパティ、**methods**、その他のものにアクセスするために **this** を使用できます。
+JavaScriptのプロトタイプに追加されたメソッドはインスタンスのコンテキストを取得します。 つまり、インスタンスに定義された data、computed プロパティ、methods、その他のものにアクセスするために this を使用できます。
 
-**this** を `$reverseText`メソッドで利用してみましょう：
+this を `$reverseText`メソッドで利用してみましょう：
 
 ```js
 Vue.prototype.$reverseText = function(propertyName) {
@@ -145,7 +145,7 @@ Uncaught TypeError: Cannot read property 'split' of undefined
 ## このパターンを避ける時
 プロトタイプのプロパティのスコープを慎重にしている限り、このパターンを使用するのは非常に安全です（バグを生成する可能性は低いです）。
 
-ただし、他の開発者と混乱することがあります。例えば、`this.$http` を見て、「ああ、私はこのVueの機能について知らなかった！」と思うかもしれません。 その後、彼らは別のプロジェクトに移り、`this.$http` が定義されていなかった場合は混乱します。 あるいは、Googleで `this.$http` で何かできないか調べたいかもしれませんが、**実際はAxios を別名で使用していることを認識していない**ため、何も見つけることはできません。
+ただし、他の開発者と混乱することがあります。例えば、`this.$http` を見て、「ああ、私はこのVueの機能について知らなかった！」と思うかもしれません。 その後、彼らは別のプロジェクトに移り、`this.$http` が定義されていなかった場合は混乱します。 あるいは、Googleで `this.$http` で何かできないか調べたいかもしれませんが、実際はAxios を別名で使用していることを認識していないため、何も見つけることはできません。
 
 **この利便性は明確さとのトレードオフです**。コンポーネントを見たとき、`this.$http` がどこから来たのかを知ることは不可能です。Vue 本体のですか？A プラグインのですか？それとも他のですか？
 
@@ -193,8 +193,9 @@ new Vue({
 })
 ```
 
-### When Using a Module System
+### モジュールシステムを使用する場合
 
-When you have access to a module system, you can easily organize shared code into modules, then `require`/`import` those modules wherever they're needed. This is the epitome of explicitness, because in each file you gain a list of dependencies. You know _exactly_ where each one came from.
+モジュールシステムにアクセスができると、共有されたコードをモジュールへ簡単に統合できます。必要な場所で`require`/`import` を行なってください。
+これはとてもわかりやすく、各ファイルで依存関係のリストが得られます。それにより、あなたはそれぞれのコードがどこからのコードかを正確に知ることができます。
 
-While certainly more verbose, this approach is definitely the most maintainable, especially when working with other developers and/or building a large app.
+冗長ですが、このアプローチは、他の開発者や大規模なアプリケーションを開発する際に、最も保守性が高いです。
