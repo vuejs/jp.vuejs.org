@@ -316,9 +316,9 @@ OpenWhisk にて実行される API の URL を表す変数から始まります
 <p data-height="265" data-theme-id="0" data-slug-hash="BmgzeM" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 4" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/BmgzeM/">form validation 4</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-## Alternative Patterns
+## 代替パターン
 
-While this cookbook entry focused on doing form validation "by hand", there are, of course, some great Vue libraries that will handle a lot of this for you. Switching to a prepackage library may impact the final size of your application, but the benefits could be tremendous. You have code that is (most likely) heavily tested and also updated on a regular basis. Some examples of form validation libraries for Vue include:
+このクックブックでは、手作業でフォームのバリデーションを行うことに焦点をあてていますが、もちろん、これを取り扱うための素晴らしい Vue ライブラリが多く存在します。パッケージ化されたライブラリに切り替えることで、アプリケーションの最終的なサイズに影響をあたえることがありますが、切り替えることは大きなメリットとなりえるでしょう。十分にテストされ、定期的に更新されているコードとして、 Vue のフォームバリデーションライブラリには次のようなものがあります:
 
 * [vuelidate](https://github.com/monterail/vuelidate)
 * [VeeValidate](http://vee-validate.logaretm.com/)
