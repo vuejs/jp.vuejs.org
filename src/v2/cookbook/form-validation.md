@@ -234,9 +234,9 @@ We set up the total value as a computed value, and outside of that bug I ran int
 <p data-height="265" data-theme-id="0" data-slug-hash="vWqGoy" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 3" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/vWqGoy/">form validation 3</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-## Server-side Validation
+## サーバーサイドでのバリデーション
 
-In my final example, we built something that makes use of Ajax to validate at the server. The form will ask you to name a new product and will then check to ensure that the name is unique. We wrote a quick [OpenWhisk](http://openwhisk.apache.org/) serverless action to do the validation. While it isn't terribly important, here is the logic:
+最後の例では、 Ajax を利用してサーバーにてバリデーションを行うものを作成しました。このフォームでは、新しい product の名前を尋ね、その名前が一意であることをチェックします。このバリデーションのために、サーバーレスな [OpenWhisk](http://openwhisk.apache.org/) アクションを書きました。ここでは重要ではありませんが、ロジックはこちらになります:
 
 ``` js
 function main(args) {
@@ -253,7 +253,7 @@ function main(args) {
 }
 ```
 
-Basically any name but "vista", "empire", and "mbp" are acceptable. Ok, so let's look at the form.
+基本的には "vista", "empire", "mbp" 以外の名前で問題ありません。フォームをみてみましょう。
 
 ``` html
 <form id="app" @submit="checkForm" method="post">
@@ -277,7 +277,7 @@ Basically any name but "vista", "empire", and "mbp" are acceptable. Ok, so let's
 </form>
 ```
 
-There isn't anything special here. So let's go on to the JavaScript.
+ここには特別な要素はありません。 JavaScript の例に進みましょう。
 
 ``` js
 const apiUrl = 'https://openwhisk.ng.bluemix.net/api/v1/web/rcamden%40us.ibm.com_My%20Space/safeToDelete/productName.json?name=';
@@ -311,7 +311,7 @@ const app = new Vue({
 })
 ```
 
-We start off with a variable representing the URL of the API that is running on OpenWhisk. Now look at `checkForm`. In this version, we always prevent the form from submitting (which, by the way, could be done in the HTML with Vue as well). You can see a basic check on `this.name` being empty, and then we hit the API. If it's bad, we add an error as before. If it's good, right now we do nothing (just an alert), but you could navigate the user to a new page with the product name in the URL, or do other actions as well. You can run this demo below:
+OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。 In this version, we always prevent the form from submitting (which, by the way, could be done in the HTML with Vue as well). You can see a basic check on `this.name` being empty, and then we hit the API. If it's bad, we add an error as before. If it's good, right now we do nothing (just an alert), but you could navigate the user to a new page with the product name in the URL, or do other actions as well. You can run this demo below:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="BmgzeM" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 4" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/BmgzeM/">form validation 4</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
