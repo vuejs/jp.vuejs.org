@@ -1,5 +1,5 @@
 ---
-title: Form Validation
+title: フォームのバリデーション
 type: cookbook
 updated: 2018-03-20
 order: 3
@@ -7,22 +7,22 @@ order: 3
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-## Base Example
+## ベースとなる例
 
-Form validation is natively supported by the browser, but sometimes different browsers will handle things in a manner which makes relying on it a bit tricky. Even when validation is supported perfectly, there may be times when custom validations are needed and a more manual, Vue-based solution may be more appropriate. Let's begin with a simple example.
+フォームのバリデーションはブラウザにネイティブサポートされていますが、異なるブラウザ間での取り扱いには注意が必要です。またバリデーションが完全にサポートされている場合であっても、カスタマイズしたバリデーションが必要な場合もるため、 Vue ベースでのソリューションが適切かもしれません。簡単な例から見ていきましょう。
 
-Given a form of three fields, make two required. Let's look at the HTML first:
+3 つのフィールドをもち、2 つが必須の場合。はじめに HTML を見てみましょう。
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post">
-  
+
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
   </p>
-  
+
   <p>
     <label for="name">Name<label>
     <input type="text" name="name" id="name" v-model="name">
@@ -43,17 +43,17 @@ Given a form of three fields, make two required. Let's look at the HTML first:
   </p>
 
   <p>
-    <input type="submit" value="Submit">  
+    <input type="submit" value="Submit">
   </p>
 
 </form>
 ```
 
-Let's cover it from the top. The `<form>` tag has an ID that we'll be using for the Vue component. There's a submit handler that you'll see in a bit, and the `action` is a temporary URL that would point to something real on a server someplace (where you have backup server-side validation of course).
+そして、その HTML をラップしましょう。 `<form>` タグには、 Vue コンポーネントに使用する ID が存在します。 submit のハンドラと `action` がありますが、一時的な URL であり、現実のサーバーのどこかを指しています(ここでは、サーバーサイドでのバリデーションをバックアップしています)。
 
-Beneath that there is a paragraph that shows or hides itself based on an error state. This will render a simple list of errors on top of the form. Also note we fire the validation on submit rather than as every field is modified. 
+その子には、エラーの状態にもとづいてそれ自身を表示・非表示とするための段落があります。これによって、フォーム上にシンプルなエラーのリストが表示されます。バリデーションはフィールドの変更時ではなく、 submit の際に実行されることに注意してください。
 
-The final thing to note is that each of the three fields has a corresponding `v-model` to connect them to values we will work with in the JavaScript. Now let's look at that.
+最後に、3つのフィールドそれぞれに対応、対応する `v-model`が存在し、これをJavaScriptで利用する値と接続する必要があります。その例を見てみましょう。
 
 ``` js
 const app = new Vue({
@@ -76,7 +76,7 @@ const app = new Vue({
 })
 ```
 
-Fairly short and simple. We define an array to hold errors and set `null` values for the three form fields. The `checkForm` logic (which is run on submit remember) checks for name and age only as movie is optional. If they are empty we check each and set a specific error for each. And that's really it. You can run the demo below. Don't forget that on a successful submission it's going to POST to a temporary URL.
+短くてシンプルです。エラーを保持した上で、 3 つのフォームのフィールドに対して `null` を設定する配列を定義します。 `checkForm` のロジック(フォーム送信時に実行されるもの)では、 movie の値はオプショナルであるため、 name および age についてのみチェックしています。それぞれについて、空であればチェックをし、特定のエラーを設定するだけです。 以下のデモで実行してみることができます。なお、このデモでは送信が成功すると一時的な URL へと POST されることを忘れないでください。
 
 <p data-height="265" data-theme-id="0" data-slug-hash="GObpZM" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 1" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/GObpZM/">form validation 1</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
@@ -87,14 +87,14 @@ For the second example, the second text field (age) was switched to email which 
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
-  
+
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
   </p>
-  
+
   <p>
     <label for="name">Name<label>
     <input type="text" name="name" id="name" v-model="name">
@@ -115,7 +115,7 @@ For the second example, the second text field (age) was switched to email which 
   </p>
 
   <p>
-    <input type="submit" value="Submit">  
+    <input type="submit" value="Submit">
   </p>
 
 </form>
@@ -139,7 +139,7 @@ const app = new Vue({
       if(!this.email) {
         this.errors.push("Email required.");
       } else if(!this.validEmail(this.email)) {
-        this.errors.push("Valid email required.");        
+        this.errors.push("Valid email required.");
       }
       if(!this.errors.length) return true;
       e.preventDefault();
@@ -163,7 +163,7 @@ For the third example, we've built something you've probably seen in survey apps
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
-  
+
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
     <ul>
@@ -190,7 +190,7 @@ For the third example, we've built something you've probably seen in survey apps
   </p>
 
   <p>
-    <input type="submit" value="Submit">  
+    <input type="submit" value="Submit">
   </p>
 
 </form>
@@ -257,7 +257,7 @@ Basically any name but "vista", "empire", and "mbp" are acceptable. Ok, so let's
 
 ``` html
 <form id="app" @submit="checkForm" method="post">
-  
+
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
     <ul>
@@ -271,7 +271,7 @@ Basically any name but "vista", "empire", and "mbp" are acceptable. Ok, so let's
   </p>
 
   <p>
-    <input type="submit" value="Submit">  
+    <input type="submit" value="Submit">
   </p>
 
 </form>
