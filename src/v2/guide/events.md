@@ -172,6 +172,7 @@ methods: {
 - `.capture`
 - `.self`
 - `.once`
+- `.passive`
 
 ``` html
 <!-- クリックイベントの伝搬が止まります -->
