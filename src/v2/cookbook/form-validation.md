@@ -81,9 +81,9 @@ const app = new Vue({
 <p data-height="265" data-theme-id="0" data-slug-hash="GObpZM" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 1" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/GObpZM/">form validation 1</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-## Using Custom Validation
+## カスタムバリデーションの利用
 
-For the second example, the second text field (age) was switched to email which will be validated with a bit of custom logic. The code is taken from the StackOverflow question, [How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript). This is an awesome question because it makes your most intense Facebook political/religious argument look like a slight disagreement over who makes the best beer. Seriously - it's insane. Here is the HTML, even though it's really close to the first example.
+次の例では、２つめのテキストフィールドを email へと切り替え、カスタマイズしたロジックでバリデーションをします。このコードは、 StackOverflow の質問「[How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript)」から持ってきています。 This is an awesome question because it makes your most intense Facebook political/religious argument look like a slight disagreement over who makes the best beer. Seriously - it's insane. Here is the HTML, even though it's really close to the first example.
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
@@ -121,7 +121,7 @@ For the second example, the second text field (age) was switched to email which 
 </form>
 ```
 
-While the change here is small, note the `novalidate="true"` on top. This is important because the browser will attempt to validate the email address in the field when `type="email"`. Frankly it may make more sense to trust the browser in this case, but as we wanted an example with custom validation, we're disabling it. Here's the updated JavaScript.
+ここでの変更は少しだけですが、トップのフォームに対して `novalidate="true"` をつけます。 `type="email"` の場合、ブラウザがフィールドに入力された E メールアドレスをバリデーションしようするため、この設定は重要です。率直に言えば、この場合はブラウザを信用すべきかもしれませんが、ここではカスタムバリデーションのサンプルであるため無効化しています。 JavaScript 側の更新は以下になります:
 
 ``` js
 const app = new Vue({
@@ -152,14 +152,14 @@ const app = new Vue({
 })
 ```
 
-As you can see, we've added `validEmail` as a new method and it is simply called from `checkForm`. You can play with this example here:
+見て分かるとおり、 `validEmail` メソッドが新しく追加されました。これは、単純に `checkForm` から呼び出されています。こちらで実際に動作させることができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="vWqNXZ" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 2" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/vWqNXZ/">form validation 2</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-## Another Example of Custom Validation
+## カスタムバリデーションにおけるその他の例
 
-For the third example, we've built something you've probably seen in survey apps. The user is asked to spend a "budget" for a set of features for a new Star Destroyer model. The total must equal 100. First, the HTML.
+3 つめの例は、アンケートアプリにて見たことがあるかもしれません。ユーザーは、 戦艦のそれぞれの機能に対して予算を振り分ける必要があります。かつ合計は必ず 100 である必要があります。まずは HTMLです。
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
@@ -196,7 +196,7 @@ For the third example, we've built something you've probably seen in survey apps
 </form>
 ```
 
-Note the set of inputs covering the five different features. Note the addition of `.number` to the `v-model` attribute. This tells Vue to cast the value to a number when you use it. However, there is a bug with this feature such that when the value is blank, it turns back into a string. You'll see the workaround below. To make it a bit easier for the user, we also added a current total right below so they can see, in real time, what their total is. Now let's look at the JavaScript.
+5 つの機能ごとの入力フォームを見てみてください。そして、 `v-model` 属性に対して、 `.number` が付与されていることを注目してください。これは、値が利用される時に、 number にキャストするように Vue に対して指定することが可能です。しかしながら、この機能にはバグがあり、値が空の場合は空文字列に戻ってしまいます。以下に、その回避策を示しています。ユーザーにとってわかりやすくするため、現在の合計値をリアルタイムで見ることができるように追加しました。 JavaScript 側を見てみましょう。
 
 ``` js
 const app = new Vue({
@@ -229,7 +229,7 @@ const app = new Vue({
 })
 ```
 
-We set up the total value as a computed value, and outside of that bug I ran into, it was simple enough to setup. My checkForm method now just needs to see if the total is 100 and that's it. You can play with this here:
+合計値を算出プロパティとして設定し、バグを取り除いて動かすために十分に簡潔でした。 checkForm メソッドでは、合計値が 100 であるかどうかだけ確認する必要があります。こちらで実際に動作させることができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="vWqGoy" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 3" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/vWqGoy/">form validation 3</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
