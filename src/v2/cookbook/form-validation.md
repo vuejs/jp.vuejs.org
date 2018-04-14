@@ -311,7 +311,7 @@ const app = new Vue({
 })
 ```
 
-OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。 In this version, we always prevent the form from submitting (which, by the way, could be done in the HTML with Vue as well). You can see a basic check on `this.name` being empty, and then we hit the API. If it's bad, we add an error as before. If it's good, right now we do nothing (just an alert), but you could navigate the user to a new page with the product name in the URL, or do other actions as well. You can run this demo below:
+OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。この例においては、フォームが送信されないようにしています(ただし、 HTML 上で Vue にて動かすことはできます). ここで、 `this.name` が空であるかのチェックを行い、その後 API を叩いていることが見てとれます。問題がある場合は、先ほどの例と同じようにエラーを追加しています。うまくいけば、なにもしません(ここではアラートのみ URL に含まれる product の名前をもとに新しいページへと遷移させたり、他の動作を実行することもできます。以下でデモを実行できます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="BmgzeM" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 4" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/BmgzeM/">form validation 4</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
