@@ -1,5 +1,5 @@
 ---
-title: Editable SVG Icon Systems
+title: 編集可能なSVGアイコンシステム
 type: cookbook
 updated: 2018-03-20
 order: 4
@@ -8,26 +8,36 @@ order: 4
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
 ## Base Example
+## ベースとなる例
 
 There are many ways to create an SVG Icon System, but one method that takes advantage of Vue's capabilities is to create editable inline icons as components. Some of the advantages of this way of working is:
+SVGアイコンシステムを作成する方法は多くありますが、 Vue の能力を活かす1つの方法はコンポーネントとして編集可能なインラインのアイコンを作成することです。この方法のいくつかの利点は:
 
 * They are easy to edit on the fly
+* すぐに編集することが簡単です
 * They are animatable
+* アニメーション可能です
 * You can use standard props and defaults to keep them to a typical size or alter them if you need to
+* 一般的なサイズを保つために標準の props やデフォルトを使用することができ、必要であれば変えることもできます
 * They are inline, so no HTTP requests are necessary
+* インラインなので、 HTTP リクエストは必要ありません
 * They can be made accessible dynamically
+* 動的にアクセス可能に作ることができます
 
 First, we'll create a folder for all of the icons, and name them in a standardized fashion for easy retrieval:
+まず、全てのアイコンのためのフォルダを作り、簡単に検索できるように標準化された方法で命名をしましょう。
 
 > components/icons/IconBox.vue
 > components/icons/IconCalendar.vue
 > components/icons/IconEnvelope.vue
 
 Here's an example repo to get you going, where you can see the entire setup: [https://github.com/sdras/vue-sample-svg-icons/](https://github.com/sdras/vue-sample-svg-icons/)
+ここにサンプルのリポジトリがあります。全てのセットアップを見ることができます: [https://github.com/sdras/vue-sample-svg-icons/](https://github.com/sdras/vue-sample-svg-icons/)
 
 ![Documentation site](https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/screendocs.jpg 'Docs demo')
 
 We'll create a base icon (`IconBase.vue`) component that uses a slot.
+スロットを使うベースとなるアイコンコンポーネント (`IconBase.vue`) を作成しましょう。
 
 ```html
 <template>
@@ -47,8 +57,10 @@ We'll create a base icon (`IconBase.vue`) component that uses a slot.
 ```
 
 You can use this base icon as is- the only thing you might need to update is the `viewBox` depending on the `viewBox` of your icons. In the base, we're making the `width`, `height`, `iconColor`, and name of the icon props so that it can be dynamically updated with props. The name will be used for both the `<title>` content and its `id` for accessibility.
+あなたはこのベースとなるアイコンをそのまま使うことができます。あなたが更新する必要があるものは、あなたのアイコンの `viewBox` に依存している `viewBox` だけです。ベースに、`width` 、 `height` 、 `iconColor` 、そして props を動的に更新できるようにアイコンの props の名前を作ります。その名前は `<title>` コンテンツと、アクセシビリティのための `id` の両方に使用されます。
 
 Our script will look like this, we'll have some defaults so that our icon will be rendered consistently unless we state otherwise:
+我々のスクリプトはこのようになるでしょう。そうでないと宣言しない限り一貫してアイコンが表示されるように、いくつかのデフォルトを持っています:
 
 ```js
 export default {
@@ -74,22 +86,28 @@ export default {
 ```
 
 The `currentColor` property that's the default on the fill will make the icon inherit the color of whatever text surrounds it. We could also pass in a different color as a prop if we wish.
+塗りのデフォルトである `currentColor` プロパティはアイコンにそれを囲むテキストの色を継承させます。私たちが望むのなら、 prop として別の色を渡すこともできます。
 
 We can use it like so, with the only contents of `IconWrite.vue` containing the paths inside the icon:
+アイコンの中にパスを含む `IconWrite.vue` の内容のみでそのように使うことができます:
 
 ```html
 <icon-base icon-name="write"><icon-write /></icon-base>
 ```
 
 Now, if we'd like to make many sizes for the icon, we can do so very easily:
+今、もしアイコンのために多くのサイズを作りたいのであれば、とても簡単にできます:
 
 ```html
 <p>
   <!-- you can pass in a smaller `width` and `height` as props -->
+  <!-- props として小さな `width` と `height` を渡すことができます  -->
   <icon-base width="12" height="12" icon-name="write"><icon-write /></icon-base>
   <!-- or you can use the default, which is 18 -->
+  <!-- あるいはデフォルトを使うことも可能です。デフォルトは18です -->
   <icon-base icon-name="write"><icon-write /></icon-base>
   <!-- or make it a little bigger too :) -->
+  <!-- あるいはすこし大きくすることももちろん可能です :) -->
   <icon-base width="30" height="30" icon-name="write"><icon-write /></icon-base>
 </p>
 ```
@@ -97,7 +115,9 @@ Now, if we'd like to make many sizes for the icon, we can do so very easily:
 <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/Screen%20Shot%202018-01-01%20at%204.51.40%20PM.png" width="450" />
 
 ## Animatable Icons
+## アニメーション可能なアイコン
 
+Keeping icons in components comes in very handy when you'd like to animate them, especially on an interaction. Inline SVGs have the highest support for interaction of any method. Here's a very basic example of an icon that's animated on click:
 Keeping icons in components comes in very handy when you'd like to animate them, especially on an interaction. Inline SVGs have the highest support for interaction of any method. Here's a very basic example of an icon that's animated on click:
 
 ```html
