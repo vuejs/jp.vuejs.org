@@ -2,7 +2,7 @@
   "name": "jp.vuejs.org",
   "private": true,
   "hexo": {
-    "version": "3.4.4"
+    "version": "3.6.0"
   },
   "dependencies": {
     "hexo": "^3.4.2",
