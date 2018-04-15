@@ -4,6 +4,8 @@ type: guide
 order: 105
 ---
 
+> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+
 > This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
 
 ## `keep-alive` with Dynamic Components

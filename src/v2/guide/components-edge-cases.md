@@ -4,6 +4,8 @@ type: guide
 order: 106
 ---
 
+> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+
 > This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
 
 <p class="tip">All the features on this page document the handling of edge cases, meaning unusual situations that sometimes require bending Vue's rules a little. Note however, that they all have disadvantages or situations where they could be dangerous. These are noted in each case, so keep them in mind when deciding to use each feature.</p>
