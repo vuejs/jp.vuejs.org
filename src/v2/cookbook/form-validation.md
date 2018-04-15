@@ -5,7 +5,7 @@ updated: 2018-03-20
 order: 3
 ---
 
-## ベースとなる例
+## 基本的な例
 
 フォームのバリデーションはブラウザにネイティブサポートされていますが、異なるブラウザ間での取り扱いには注意が必要です。またバリデーションが完全にサポートされている場合であっても、カスタマイズしたバリデーションが必要な場合もあるため、 Vue ベースでのソリューションが適切かもしれません。簡単な例から見ていきましょう。
 
@@ -51,7 +51,7 @@ order: 3
 
 その子には、エラーの状態にもとづいてそれ自身を表示・非表示とするための段落があります。これによって、フォーム上にシンプルなエラーのリストが表示されます。バリデーションはフィールドの変更時ではなく、フォーム送信の際に実行されることに注意してください。
 
-最後に、3つのフィールドそれぞれに対応、対応する `v-model`が存在し、これをJavaScriptで利用する値と接続する必要があります。その例を見てみましょう。
+最後に、3つのフィールドそれぞれに対応、対応する `v-model`が存在し、これをJavaScriptで利用する値と紐付ける必要があります。その例を見てみましょう。
 
 ``` js
 const app = new Vue({
@@ -81,7 +81,7 @@ const app = new Vue({
 
 ## カスタムバリデーションの利用
 
-次の例では、２つめのテキストフィールドを email へと切り替え、カスタマイズしたロジックでバリデーションをします。このコードは、 StackOverflow の質問「[How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript)」から持ってきています。 This is an awesome question because it makes your most intense Facebook political/religious argument look like a slight disagreement over who makes the best beer. Seriously - it's insane. Here is the HTML, even though it's really close to the first example.
+次の例では、２つめのテキストフィールドを email へと切り替え、カスタマイズしたロジックでバリデーションをします。このコードは、 StackOverflow の質問「[How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript)」から持ってきています。 HTML はこちらですが、はじめの例と非常に似通っています。
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
@@ -119,7 +119,7 @@ const app = new Vue({
 </form>
 ```
 
-ここでの変更は少しだけですが、トップのフォームに対して `novalidate="true"` をつけます。 `type="email"` の場合、ブラウザがフィールドに入力された E メールアドレスをバリデーションしようするため、この設定は重要です。率直に言えば、この場合はブラウザを信用すべきかもしれませんが、ここではカスタムバリデーションのサンプルであるため無効化しています。 JavaScript 側の更新は以下になります:
+ここでの変更は少しだけですが、トップのフォームに対して `novalidate="true"` に注目してください。 `type="email"` の場合、ブラウザがフィールドに入力された E メールアドレスをバリデーションしようするため、この設定は重要です。率直に言えば、この場合はブラウザを信用すべきかもしれませんが、ここではカスタムバリデーションのサンプルであるため無効化しています。 JavaScript 側の更新は以下になります:
 
 ``` js
 const app = new Vue({
@@ -209,7 +209,7 @@ const app = new Vue({
   },
   computed:{
      total:function() {
-       // must parse cuz Vue turns empty value to string
+       // Vue は空の値を string に変換する必要があります
        return Number(this.weapons)+
          Number(this.shields)+
          Number(this.coffee)+
@@ -241,7 +241,7 @@ function main(args) {
 
     return new Promise((resolve, reject) => {
 
-        // bad product names: vista, empire, mbp
+        // 悪い製品名: vista, empire, mbp
         let badNames = ['vista','empire','mbp'];
         if(badNames.includes(args.name)) reject({error:'Existing product'});
         resolve({status:'ok'});
@@ -299,7 +299,7 @@ const app = new Vue({
           if(res.error) {
             this.errors.push(res.error);
           } else {
-            // redirect to a new URL, or do something on success
+            // 新しい URL への遷移、または成功時に何かをする
             alert('ok!');
           }
         });
@@ -309,7 +309,7 @@ const app = new Vue({
 })
 ```
 
-OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。この例においては、フォームが送信されないようにしています(ただし、 HTML 上で Vue にて動かすことはできます). ここで、 `this.name` が空であるかのチェックを行い、その後 API を叩いていることが見てとれます。問題がある場合は、先ほどの例と同じようにエラーを追加しています。うまくいけば、なにもしません(ここではアラートのみ URL に含まれる product の名前をもとに新しいページへと遷移させたり、他の動作を実行することもできます。以下でデモを実行できます:
+OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。この例においては、フォームが送信されないようにしています(ただし、 HTML 上で Vue にて動かすことはできます). ここで、 `this.name` が空であるかのチェックを行い、その後 API を叩いていることが見てとれます。問題がある場合は、先ほどの例と同じようにエラーを追加しています。うまくいけば、なにもしません(ここではアラートのみ) URL に含まれる product の名前をもとに新しいページへと遷移させたり、他の動作を実行することもできます。以下でデモを実行できます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="BmgzeM" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 4" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/BmgzeM/">form validation 4</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
