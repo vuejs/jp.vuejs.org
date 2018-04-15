@@ -1,15 +1,13 @@
 ---
-title: Creating Custom Scroll Directives
+title: カスタムスクロールディレクティブの作成
 type: cookbook
 updated: 2018-03-20
 order: 7
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+## 基本的な例
 
-## Base Example
-
-There are many times that we might want to add a bit of behavior, especially animation, to a scroll event on a site. There are many ways to do so, but the path with the least amount of code and dependencies is perhaps to use a [custom directive](https://vuejs.org/v2/guide/custom-directive.html) to create a hook for anything that fires off a particular scroll event.
+Web サイト上でスクロールイベントと連動するアニメーションなど、ちょっとした振る舞いを加えたくなる時は多くあります。やり方は多くありますが、最も少ないコード量と依存で実現できる方法はおそらく、特定のスクロールイベントを発火させるフックを作成する、[カスタムディレクティブ](https://jp.vuejs.org/v2/guide/custom-directive.html)を使用することでしょう。
 
 ```js
 Vue.directive('scroll', {
@@ -49,9 +47,9 @@ new Vue({
 </div>
 ```
 
-<p class="tip">Remember! The directive must be registered before the Vue instance.</p>
+<p class="tip">注意! ディレクティブは Vue インスタンス作成前に登録されなければなりません。</p>
 
-We'd also need a style property that will transition the intermediary values here, in this case:
+以下のケースでは、中間値を遷移するスタイルプロパティも必要となります。
 
 ```
 .box {
@@ -62,7 +60,7 @@ We'd also need a style property that will transition the intermediary values her
 <p data-height="450" data-theme-id="5162" data-slug-hash="983220ed949ac670dff96bdcaf9d3338" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Custom Scroll Directive- CSS Transition" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/983220ed949ac670dff96bdcaf9d3338/">Custom Scroll Directive- CSS Transition</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Or, with GreenSock(GSAP) or any other JavaScript animation library, the code becomes even more simple:
+また GreenSock(GSAP) や他の JavaScript ライブラリーを使用することで、コードはよりシンプルになります。
 
 ```js
 Vue.directive('scroll', {
@@ -94,28 +92,28 @@ new Vue({
 })
 ```
 
-Though we would remove the previous CSS transition from this implementation because it's now handled with JavaScript.
+CSS トランジションは今 JavaScript によって操作されているので、以前のスタイルプロパティをあてがっていた CSS トランジションは取り除くことができるでしょう。
 
-## The Benefit of Using Custom Directives
+## カスタムディレクティブを使用することのメリット
 
-Vue is rich with options for directives, most of which cover very common use-cases, which can create a very productive developer experience. But even if you have an edge case not covered by the framework, it's got you covered in this case as well, because you can quite easily create a custom directive to fit your needs.
+Vue はディレクティブに対する豊富なオプションがあります。それらのオプションは一般的なユースケースをほとんど網羅し、とても生産的な開発体験を提供することでしょう。しかし、たとえフレームワークに網羅されていないニッチなユースケースを持っていたとしても、フレームワークに網羅されているユースケースと同様に付け加えることができます。なぜなら、とても簡単に必要とするカスタムディレクティブを作成できるからです。
 
-Attaching and removing scroll events to elements is a really good use case for this technique because just like other directives we use, they are necessarily tied to the element and otherwise, we'd have to find the reference for it in the DOM. This pattern avoids the need for traversal, and keeps the event logic paired with the node that it's in reference to.
+要素に対してスクロールイベントの着脱は本当に良いユースケースです。他のディレクティブと同様に、要素に結びつけられる必要があり、DOM を参照しなければならないためです。このパターンはトラバーサルを回避し、参照先のノードとイベントロジックのペアを保つことができます。
 
-## Real-World Example: Using a Custom Scroll Directive for Cascading Animations
+## 実例: カスケードアニメーションでのカスタムスクロールディレクティブの使用
 
-In the course of creating a cohesive site, you may find that you're reusing the same type of animation logic in several areas. It seems simple, we would then create a very specific custom directive, right? Well, typically if you're reusing it, you will need to change it _just_ slightly for each use.
+統一感のあるサイトを作成する過程で、様々な箇所で同じアニメーションロジックを再利用していることに気づくこともあるでしょう。それはシンプルなロジックに見えますが、カスタムディレクティブは再利用し辛いものになっているかもしれません。何も考えずに再利用すれば、使用の度に_ほんの_些細な変更を必要とすることになるでしょう。
 
-To help keep our code concise and legible, we would want to pass in some predefined arguments such as the beginning point and ending of the animation as we scroll down the page.
+簡潔で読みやすいコードの維持に役立てるため、ページを下にスクロールするときにアニメーションの開始・終了座標といった定義済みの引数を渡したくなります。
 
-**This example is better viewed in the [full screen version](https://s.codepen.io/sdras/debug/078c19f5b3ed7f7d28584da450296cd0).**
+**この例は[フルスクリーンバージョン](https://s.codepen.io/sdras/debug/078c19f5b3ed7f7d28584da450296cd0)の方が見やすいです.**
 
 <p data-height="500" data-theme-id="5162" data-slug-hash="c8c55e3e0bba997350551dd747119100" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Scrolling Example- Using Custom Directives in Vue" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/c8c55e3e0bba997350551dd747119100/">Scrolling Example- Using Custom Directives in Vue</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-In the demo above, each of the sections has two different types of animation triggered from the scroll: a morphing animation, and a drawing animation that animates the individual paths in the SVG. We reuse those two animations, so we can create a custom directive for each. The arguments we'll pass in will help keep everything simple and reusable.
+上のデモのそれぞれのセクションには、スクロールによって引き起こされる2つの異なるアニメーションがあります。モーフィングアニメーションと、SVG内の個々のパスに沿って動く描画アニメーションです。これら2つのアニメーションを再利用するため、それぞれのカスタムディレクティブを作成します。カスタムディレクティブに渡す引数は、シンプルかつ再利用可能なコードの維持に役立ちます。
 
-To show how we do this, we'll take a look at the morphing shape example, where we'll need to state the start and finish, as well as pass in a path value that we'll create a morph to. These arguments are each defined as `binding.value.foo`:
+やり方を示すために、モーフィングシェイプの例を見てみましょう。ここでは開始・終了座標の状態と共に、モーフィングを作成するパス値が必要です。これらの引数はそれぞれ `binding.value.foo` として定義されています。
 
 ```js
 Vue.directive('clipscroll', {
@@ -138,7 +136,7 @@ Vue.directive('clipscroll', {
 })
 ```
 
-We can then use this animation in our template, in this case we're attaching the directive to the `clipPath` element, and pass all of our arguments to the directives in an object.
+それではテンプレートでこのアニメーションを使用してみましょう。この場合、`clipPath`要素にディレクティブを加え、全ての引数をオブジェクトとしてディレクティブに渡します。
 
 ```html
 <clipPath id="clip-path">
@@ -150,8 +148,8 @@ We can then use this animation in our template, in this case we're attaching the
 </clipPath>
 ```
 
-## Alternative Patterns
+## 他のパターン
 
-Custom directives are extremely useful, but you may find some situations where you need something very specific that already exists in scrolling libraries that you don't wish to rebuild from scratch yourself.
+カスタムディレクティブは非常に役に立ちます。しかしスクラッチで作るのではなく、スクロールライブラリにすでに存在する機能を使いたい場合もあるかもしれません。
 
-[Scrollmagic](http://scrollmagic.io/) has a very rich ecosystem of offerings to work with, as well as good documentation and demos to explore. This includes, but is not limited to things like [parallax](http://scrollmagic.io/examples/advanced/parallax_scrolling.html), [cascading pinning](http://scrollmagic.io/examples/expert/cascading_pins.html), [section wipes](http://scrollmagic.io/examples/basic/section_wipes_natural.html), and [responsive duration](http://scrollmagic.io/examples/basic/responsive_duration.html).
+[Scrollmagic](http://scrollmagic.io/)は豊富なエコシステムがあると同時に、優れたドキュメントやデモを用意しています。これには、[パララックス](http://scrollmagic.io/examples/advanced/parallax_scrolling.html)、[カスケードピンニング](http://scrollmagic.io/examples/expert/cascading_pins.html)、[セクションワイプ](http://scrollmagic.io/examples/basic/section_wipes_natural.html)、[レスポンシブデュレイション](http://scrollmagic.io/examples/basic/responsive_duration.html)など多様な機能が内包されています。
