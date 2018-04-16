@@ -51,44 +51,43 @@ test('Foo', () => {
   // コンポーネントをレンダリングします。
   const wrapper = shallow(Hello)
 
-  // `username`は空白を除外して7文字未満は許されません。
+  // `username`は空白を除外して7文字未満は許されません
   wrapper.setData({ username: ' '.repeat(7) })
 
-  // エラーがレンダリングされることをアサート（assert）します。
+  // エラーがレンダリングされることをアサートします
   expect(wrapper.find('.error').exists()).toBe(true)
 
-  // 名前を十分な長さにします。
+  // 名前を十分な長さにします
   wrapper.setData({
     username: 'Lachlan'
   })
 
-  // エラーがなくなったとアサート（assert）します。
+  // エラーがなくなったことをアサートします
   expect(wrapper.find('.error').exists()).toBe(false)
 })
 ```
 
-上記のコードスニペットは、 username の長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。
-Vue コンポーネント単一テストの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
+上記のコードスニペットは、 username の長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。単体テスト Vue コンポーネントの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
 
 ## なぜテストをするのですか
 
-単体テスト Vue コンポーネントはたくさんの利益を持っています:
+単体テストコンポーネントはたくさんの利益を持っています:
 
 - コンポーネントがどう動作すべきかのドキュメントを提供します
-- 過度な(over)手動テストの時間を節約します
+- 過度な手動テストの時間を節約します
 - 新しい機能におけるバグを減らします
 - デザインを改良します
 - リファクタリングを容易にします
 
-自動テストは大規模な開発チームチームが複雑なコードベース(codebases)を維持するのを許します。
+自動テストは大規模な開発チームチームが複雑なコードベースを維持するのを許します。
 
 #### はじめる
 
-[Vue Test Utils](https://github.com/vuejs/vue-test-utils) は Vue コンポーネントをテストするための公式ライブラリです。[vue-cli](https://github.com/vuejs/vue-cli)の `webpack` テンプレートには Karma と Jest というよくサポートされたテストランナーを備えており、また Vue Test Utils にいくつかの[ガイド](https://vue-test-utils.vuejs.org/en/guides/)があります。
+[Vue Test Utils](https://github.com/vuejs/vue-test-utils) は 単体テスト Vue コンポーネントのための公式ライブラリです。 [vue-cli](https://github.com/vuejs/vue-cli) の `webpack` テンプレートには Karma と Jest というよくサポートされたテストランナーを備えており、また Vue Test Utils にいくつかの[ガイド](https://vue-test-utils.vuejs.org/ja/guides/)があります。
 
 ## 現実的な例
 
-単体テストのすべきことは
+単体テストのすべきことは:
 
 - 実行が早いこと
 - 理解しやすいこと
@@ -109,11 +108,11 @@ Vue コンポーネント単一テストの一般的なアイデアを示しま�
       {{ message }}
     </div>
     ユーザー名を入力してください: <input v-model="username">
-    <div 
+    <div
       v-if="error"
       class="error"
     >
-      少なくとも7文字でユーザー名を入力してください。
+      少なくとも7文字でユーザー名を入力してください
     </div>
   </div>
 </template>
@@ -150,7 +149,7 @@ export default {
 import { shallow } from '@vue/test-utils'
 
 describe('Foo', () => {
-  it('メッセージを表示し、ユーザー入力に正しく応答します', () => {
+  it('メッセージをレンダリングし、ユーザー入力に正しく応答します', () => {
       const wrapper = shallow(Foo, {
     data: {
       message: 'Hello World',
@@ -158,10 +157,10 @@ describe('Foo', () => {
     }
   })
 
-  // message がレンダーされていたら見られる
+  // message がレンダリングされていたら見られる
   expect(wrapper.find('.message').text()).toEqual('Hello World')
 
-  // エラーのアサートがレンダーされる
+  // エラーのアサートがレンダリングされる
   expect(wrapper.find('.error').exists()).toBeTruthy()
 
   // `username`を更新してエラーのアサートがレンダリングされなくなる
@@ -173,8 +172,8 @@ describe('Foo', () => {
 
 上記テストにはいくつかの問題があります:
 
-- 1つのテストが異なることについてアサーションが行われています
-- コンポーネントが存在できる異なる状態やレンダリングすべきものを伝えるのは難しい
+- 1つのテストが異なることについてアサーションが行っています
+- コンポーネントが存在できる異なる状態やレンダリングすべきものを伝えるのが難しい
 
 以下の例では、テストを次のように改善していきます:
 
@@ -246,7 +245,7 @@ e2e テストは複数のコンポーネントがうまく相互作用するこ�
 
 エンドツーエンドテストなどのレベルの高いテストはかなり遅く実行されます。これらは通常デプロイ前に実行されて、システムの各部分がそれぞれ正しく連携して動いていることを確かにします。
 
-Vue コンポーネントのテストについてらさらなる情報はコアチームメンバー[Edd Yerburgh](https://eddyerburgh.me/)による[Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications)で見つけることができます。
+Vue コンポーネントのテストについてらさらなる情報はコアチームメンバー [Edd Yerburgh](https://eddyerburgh.me/) による [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications) で見つけることができます。
 
 ## このパターンを避けるとき
 
