@@ -9,7 +9,7 @@ order: 6
 
 ## 基本的な例
 
-単体テストはソフトウエア開発の基本的な部分です。単体テストは、新しい機能の追加やバグの追跡を容易にするために、最小単位のコードを独立して実行します。Vueの[単一ファイルコンポーネント](../guide/single-file-components.html)は独立したコンポーネントの単体テストを書くことを容易にします。これによって、あなたは既存の機能を壊さない確信を持って新しい機能を開発ができ、また他の開発者がコンポーネントがしていることを理解するのを手助けします。
+単体テストはソフトウエア開発の基本的な部分です。単体テストは、新しい機能の追加やバグの追跡を容易にするために、最小単位のコードを独立して実行します。 Vue の[単一ファイルコンポーネント](../guide/single-file-components.html)は独立したコンポーネントの単体テストを書くことを容易にします。これによって、あなたは既存の機能を壊さない確信を持って新しい機能を開発ができ、また他の開発者がコンポーネントがしていることを理解するのを手助けします。
 
 この簡単な例はいくつかのテキストがレンダリングされるかどうかをテストします:
 
@@ -69,8 +69,8 @@ test('Foo', () => {
 })
 ```
 
-上記のコードスニペットは、usernameの長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。
-Vueコンポーネント単一テストの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
+上記のコードスニペットは、 username の長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。
+Vue コンポーネント単一テストの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
 
 ## なぜテストをするのですか
 
@@ -86,23 +86,23 @@ Vueコンポーネント単一テストの一般的なアイデアを示しま�
 
 #### はじめる
 
-[Vue Test Utils](https://github.com/vuejs/vue-test-utils)はVueコンポーネントをテストするための公式ライブラリです。[vue-cli](https://github.com/vuejs/vue-cli)の`webpack`テンプレートにはKarmaとJestというよくサポートされたテストランナーを備えており、またVue Test Utilsにいくつかの[ガイド](https://vue-test-utils.vuejs.org/en/guides/)があります。
+[Vue Test Utils](https://github.com/vuejs/vue-test-utils) は Vue コンポーネントをテストするための公式ライブラリです。[vue-cli](https://github.com/vuejs/vue-cli)の `webpack` テンプレートには Karma と Jest というよくサポートされたテストランナーを備えており、また Vue Test Utils にいくつかの[ガイド](https://vue-test-utils.vuejs.org/en/guides/)があります。
 
-## Real-World Example
+## 現実的な例
 
-Unit tests should be:
+単体テストのすべきことは
 
-- Fast to run
-- Easy to understand
-- Only test a _single unit of work_
+- 実行が早いこと
+- 理解しやすいこと
+- _一つの仕事_だけをテストすること
 
-Let's continue building on the previous example, while introducing the idea of a <a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">factory function</a> to make our test more compact and readable. The component should:
+私達のテストをもっと簡潔に読みやすくするために<a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">ファクトリ関数</a>のアイデアを紹介しつつ、以前の例の構築を続けていきましょう。コンポーネントがすべきこと：
 
-- show a 'Welcome to the Vue.js cookbook' greeting.
-- prompt the user to enter their username
-- display an error if the entered username is less than seven letters
+- 'Welcome to the Vue.js cookbook' という挨拶を表示する
+- ユーザーにユーザー名の入力を促す
+- もし入力された文字数が7文字未満ならエラーを表示する
 
-Let's take a look at the component code first:
+最初にコンポーネントのコードを見てみましょう:
 
 ```html
 <template>
@@ -110,12 +110,12 @@ Let's take a look at the component code first:
     <div class="message">
       {{ message }}
     </div>
-    Enter your username: <input v-model="username">
+    ユーザー名を入力してください: <input v-model="username">
     <div 
       v-if="error"
       class="error"
     >
-      Please enter a username with at least seven letters.
+      少なくとも7文字でユーザー名を入力してください。
     </div>
   </div>
 </template>
@@ -140,19 +140,19 @@ export default {
 </script>
 ```
 
-The things that we should test are:
+私たちがテストすべきは:
 
-- is the `message` rendered?
-- if `error` is `true`, `<div class="error">` should be present
-- if `error` is `false`, `<div class="error">` should not be present
+- `message` が表示されているか
+- もし `error` が `true`の場合、 `<div class="error">` が存在するか
+- もし `error` が `false`の場合、 `<div class="error">` が存在しないか
 
-And our first attempt at test:
+私達のテストでの最初の試み:
 
 ```js
 import { shallow } from '@vue/test-utils'
 
 describe('Foo', () => {
-  it('renders a message and responds correctly to user input', () => {
+  it('メッセージを表示し、ユーザー入力に正しく応答します', () => {
       const wrapper = shallow(Foo, {
     data: {
       message: 'Hello World',
@@ -160,32 +160,33 @@ describe('Foo', () => {
     }
   })
 
-  // see if the message renders
+  // message がレンダーされていたら見られる
   expect(wrapper.find('.message').text()).toEqual('Hello World')
 
-  // assert the error is rendered
+  // エラーのアサートがレンダーされる
   expect(wrapper.find('.error').exists()).toBeTruthy()
 
-  // update the `username` and assert error is no longer rendered
+  // `username`を更新してエラーのアサートがレンダリングされなくなる
   wrapper.setData({ username: 'Lachlan' })
   expect(wrapper.find('.error').exists()).toBeFalsy()
   })
 })
 ```
 
-There are some problems with the above:
+上記テストにはいくつかの問題があります:
 
-- a single test is making assertions about different things
-- difficult to tell the different states the component can be in, and what should be rendered
+- 1つのテストが異なることについてアサーションが行われています
+- コンポーネントが存在できる異なる状態やレンダリングすべきものを伝えるのは難しい
 
-The below example improves the test by:
+以下の例では、テストを次のように改善していきます:
 
-- only making one assertion per `it` block
-- having short, clear test descriptions
-- providing only the minimum data required for the test
-- refactoring duplicated logic (creating the `wrapper` and setting the `username` variable) into a factory function
+- `it` ブロックごとに1つのアサーションしか作成しない
+- 短く明確なテストの説明を持つ
+- テストに必要な最低限のデータだけを提供する
+- 二重のロジック（`wrapper` の作成と `username` 変数の設定）をファクトリ関数にリファクタリングする
 
-*Updated test*:
+*テストの更新*:
+
 ```js
 import { shallow } from '@vue/test-utils'
 import Foo from './Foo'
@@ -197,35 +198,35 @@ const factory = (values = {}) => {
 }
 
 describe('Foo', () => {
-  it('renders a welcome message', () => {
+  it('welcome メッセージをレンダリングする', () => {
     const wrapper = factory()
 
     expect(wrapper.find('.message').text()).toEqual("Welcome to the Vue.js cookbook")
   })
 
-  it('renders an error when username is less than 7 characters', () => {
+  it('usernameが7未満のときエラーをレンダリングする', () => {
     const wrapper = factory({ username: ''  })
 
     expect(wrapper.find('.error').exists()).toBeTruthy()
   })
 
-  it('renders an error when username is whitespace', () => {
+  it('usernameが空白のときエラーをレンダリングする', () => {
     const wrapper = factory({ username: ' '.repeat(7) })
 
     expect(wrapper.find('.error').exists()).toBeTruthy()
   })
 
-  it('does not render an error when username is 7 characters or more', () => {
-    const wrapper = factory({ username: 'Lachlan'  })
+  it('usernameが7文字かそれ以上のとき、エラーがレンダリングされない', () => {
+    const wrapper = factory({ username: 'Lachlan' })
 
     expect(wrapper.find('.error').exists()).toBeFalsy()
   })
 })
 ```
 
-Points to note:
+注意すべき点:
 
-At the top, we declare the factory function which merges the `values` object into `data` and returns a new `wrapper` instance. This way, we don't need to duplicate `const wrapper = shallow(Foo)` in every test. Another great benefit to this is when more complex components with a method or computed property you might want to mock or stub in every test, you only need to declare it once.
+一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallow（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや computed プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
 
 ## Additional Context
 
