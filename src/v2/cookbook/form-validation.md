@@ -209,7 +209,7 @@ const app = new Vue({
   },
   computed:{
      total:function() {
-       // Vue は空の値を string に変換する必要があります
+       // Vue は空の値を string に変換するので、パースする必要があります
        return Number(this.weapons)+
          Number(this.shields)+
          Number(this.coffee)+
