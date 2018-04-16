@@ -250,6 +250,6 @@ e2e テストは複数のコンポーネントがうまく相互作用するこ�
 
 Vue コンポーネントのテストについてらさらなる情報はコアチームメンバー[Edd Yerburgh](https://eddyerburgh.me/)による[Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications)で見つけることができます。
 
-## When To Avoid This Pattern
+## このパターンを避けるとき
 
-Unit testing is an important part of any serious application. At first, when the vision of an application is not clear, unit testing might slow down development, but once a vision is established and real users will be interacting with the application, unit tests (and other types of automated tests) are absolutely essential to ensure the codebase is maintainable and scalable.
+単体テストは重大なアプリケーションの重要な部分です。まず最初は、アプリケーションのビジョンが明確ではない時、単体テストによって開発が遅くなる可能性がありますが、しかし一度ビジョンが決まり、実際のユーザーがアプリケーションとやりとりをすると、単体テスト（と他の種類の自動テスト）はコードベースが維持可能でスケーラブルなことを保証するために絶対に必要です。
