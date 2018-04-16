@@ -228,27 +228,27 @@ describe('Foo', () => {
 
 一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallow（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや computed プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
 
-## Additional Context
+## コンテキストの追加
 
-The above test is fairly simple, but in practice Vue components often have other behaviors you want to test, such as:
+上記のテストはかなりシンプルですが、実際の Vue コンポーネントは以下のような他のテストしたい振る舞いをよく持ちます:
 
-- making API calls
-- committing or dispatching mutations or actions with a `Vuex` store
-- testing interaction
+- API コールの作成
+- `Vuex` ストアでコミットやミューテーションのディスパッチやアクションすること
+- 対話的テスト
 
-There are more complete examples showing such tests in the Vue Test Utils [guides](https://vue-test-utils.vuejs.org/en/guides/).
+そのようなテストを示すより完全な例がVue Test Utils [ガイド](https://vue-test-utils.vuejs.org/en/guides/)にあります。
 
-Vue Test Utils and the enormous JavaScript ecosystem provides plenty of tooling to facilitate almost 100% test coverage. Unit tests are only one part of the testing pyramid, though. Some other types of tests include e2e (end to end) tests, and snapshot tests. Unit tests are the smallest and most simple of tests - they make assertions on the smallest units of work, isolating each part of a single component.
+Vue Test Utils と巨大な JavaScript エコシステムはほぼ 100％ のテスト網羅率を容易にする豊富なツールを提供します。とはいえ、単体テストはテストピラミッドの一部に過ぎません。その他のタイプのテストには e2e (end to end) テストとスナップショットテストがあります。単体テストは最小で最も簡単なテストです - 最小の仕事単位でアサーションを行い、単一のコンポーネントの各部分を分離します。
 
-Snapshot tests save the markup of your Vue component, and compare to the new one generated each time the test runs. If something changes, the developer is notified, and can decide if the change was intentional (the component was updated) or accidental (the component is behaving incorrectly).
+スナップショットテストはあなたの Vue コンポーネントのマークアップを保存し、テストが実行されるたびに新しく生成されたものと比較します。もし何かが変更された場合、開発者に通知され、そして開発者はその変化が意図的（コンポーネントが変更された）か偶発的（コンポーネントが正しい動作をしていない）かを選ぶことができます。
 
-End to end tests ensure a number of components interact well together. They are more high level. Some examples might be testing if a user can sign up, log in, and update their username. These are slower to run than unit tests or snapshot tests.
+e2e テストは複数のコンポーネントがうまく相互作用することを保証します。それらはより高いレベルです。幾つかの例は、ユーザーがサインアップやログインやユーザー名を更新できるかどうかをテストするものです。これらは単体テストやスナップショットテストより実行が遅くなります。
 
-Unit tests are most useful during development, either to help a developer think about how to design a component, or refactor an existing component, and are often run every time code is changed.
+単体テストはどうコンポーネントを設計するか、どう既存のコンポーネントをリファクタリングするかについて考えるのに役に立ち、コードが変更されるたびに実行されることが多いため、開発中にもっとも有用です。
 
-Higher level tests, such as end to end tests, run much slower. These usually run pre-deploy, to ensure each part of the system is working together correctly.
+エンドツーエンドテストなどのレベルの高いテストはかなり遅く実行されます。これらは通常デプロイ前に実行されて、システムの各部分がそれぞれ正しく連携して動いていることを確かにします。
 
-More information about testing Vue components can be found in [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications) by core team member [Edd Yerburgh](https://eddyerburgh.me/).
+Vue コンポーネントのテストについてらさらなる情報はコアチームメンバー[Edd Yerburgh](https://eddyerburgh.me/)による[Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications)で見つけることができます。
 
 ## When To Avoid This Pattern
 
