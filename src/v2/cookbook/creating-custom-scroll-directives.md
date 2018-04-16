@@ -106,12 +106,12 @@ Vue はディレクティブに対する豊富なオプションがあります�
 
 簡潔で読みやすいコードの維持に役立てるため、ページを下にスクロールするときにアニメーションの開始・終了座標といった定義済みの引数を渡したくなります。
 
-**この例は[フルスクリーンバージョン](https://s.codepen.io/sdras/debug/078c19f5b3ed7f7d28584da450296cd0)の方が見やすいです.**
+**この例は[フルスクリーンバージョン](https://s.codepen.io/sdras/debug/078c19f5b3ed7f7d28584da450296cd0)の方が見やすいです。**
 
 <p data-height="500" data-theme-id="5162" data-slug-hash="c8c55e3e0bba997350551dd747119100" data-default-tab="result" data-user="sdras" data-embed-version="2" data-pen-title="Scrolling Example- Using Custom Directives in Vue" class="codepen">See the Pen <a href="https://codepen.io/sdras/pen/c8c55e3e0bba997350551dd747119100/">Scrolling Example- Using Custom Directives in Vue</a> by Sarah Drasner (<a href="https://codepen.io/sdras">@sdras</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-上のデモのそれぞれのセクションには、スクロールによって引き起こされる2つの異なるアニメーションがあります。モーフィングアニメーションと、SVG内の個々のパスに沿って動く描画アニメーションです。これら2つのアニメーションを再利用するため、それぞれのカスタムディレクティブを作成します。カスタムディレクティブに渡す引数は、シンプルかつ再利用可能なコードの維持に役立ちます。
+上のデモのそれぞれのセクションには、スクロールによって引き起こされる 2 つの異なるアニメーションがあります。モーフィングアニメーションと、 SVG 内の個々のパスに沿って動く描画アニメーションです。これら 2 つのアニメーションを再利用するため、それぞれのカスタムディレクティブを作成します。カスタムディレクティブに渡す引数は、シンプルかつ再利用可能なコードの維持に役立ちます。
 
 やり方を示すために、モーフィングシェイプの例を見てみましょう。ここでは開始・終了座標の状態と共に、モーフィングを作成するパス値が必要です。これらの引数はそれぞれ `binding.value.foo` として定義されています。
 
