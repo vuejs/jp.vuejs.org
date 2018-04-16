@@ -23,7 +23,7 @@ SVGアイコンシステムを作成する方法は多くありますが、 Vue 
 > components/icons/IconCalendar.vue
 > components/icons/IconEnvelope.vue
 
-ここに全てのセットアップを見ることができサンプルのリポジトリがあります: [https://github.com/sdras/vue-sample-svg-icons/](https://github.com/sdras/vue-sample-svg-icons/)
+ここに全てのセットアップを見ることができるサンプルのリポジトリがあります: [https://github.com/sdras/vue-sample-svg-icons/](https://github.com/sdras/vue-sample-svg-icons/)
 
 ![Documentation site](https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/screendocs.jpg 'Docs demo')
 
@@ -73,7 +73,7 @@ export default {
 }
 ```
 
-塗りつぶしのデフォルトである `currentColor` プロパティは、アイコンにそれを囲むテキストの色を継承させます。私たちが望むのなら、 prop として別の色を渡すこともできます。
+塗りつぶしのデフォルトである `currentColor` プロパティは、アイコンを囲むテキストの色を継承させます。私たちが望むのなら、 prop として別の色を渡すこともできます。
 
 アイコンの中にパスを含む `IconWrite.vue` の内容のみでそのように使うことができます:
 
