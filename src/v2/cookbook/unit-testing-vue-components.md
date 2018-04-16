@@ -1,5 +1,5 @@
 ---
-title: 単体テスト Vue コンポーネント
+title: Vue コンポーネントの単体テスト
 type: cookbook
 updated: 2018-04-16
 order: 6
@@ -7,9 +7,9 @@ order: 6
 
 ## 基本的な例
 
-単体テストはソフトウエア開発の基本的な部分です。単体テストは、新しい機能の追加やバグの追跡を容易にするために、最小単位のコードを独立して実行します。 Vue の[単一ファイルコンポーネント](../guide/single-file-components.html)は独立したコンポーネントの単体テストを書くことを容易にします。これによって、あなたは既存の機能を壊さない確信を持って新しい機能を開発ができ、また他の開発者がコンポーネントがしていることを理解するのを手助けします。
+単体テストはソフトウェア開発の重要な部分です。単体テストは、新しい機能の追加やバグの追跡を容易にするために、最小単位のコードを独立して実行します。 Vue の[単一ファイルコンポーネント](../guide/single-file-components.html)は独立したコンポーネントの単体テストを書くことを容易にします。これによって、あなたは既存の機能を壊さない確信を持って新しい機能を開発ができ、また他の開発者がコンポーネントがしていることを理解するのを手助けします。
 
-この簡単な例はいくつかのテキストがレンダリングされるかどうかをテストします:
+この簡単な例はいくつかのテキストが描画されるかどうかをテストします:
 
 ```html
 <template>
@@ -48,13 +48,13 @@ export default {
 import { shallow } from '@vue/test-utils'
 
 test('Foo', () => {
-  // コンポーネントをレンダリングします。
+  // コンポーネントを描画します。
   const wrapper = shallow(Hello)
 
   // `username`は空白を除外して7文字未満は許されません
   wrapper.setData({ username: ' '.repeat(7) })
 
-  // エラーがレンダリングされることをアサートします
+  // エラーが描画されることをアサートします
   expect(wrapper.find('.error').exists()).toBe(true)
 
   // 名前を十分な長さにします
@@ -67,31 +67,31 @@ test('Foo', () => {
 })
 ```
 
-上記のコードスニペットは、 username の長さに基づいてエラーメッセージがレンダリングされるかどうかをテストする方法を示しています。単体テスト Vue コンポーネントの一般的なアイデアを示します: コンポーネントをレンダリングし、マークアップがコンポーネントの状態に一致するかをアサートします。
+上記のコードスニペットは、ユーザー名の長さに基づいてエラーメッセージが描画されるかどうかをテストする方法を示しています。 Vue コンポーネントの単体テストの一般的なアイデアを示します: コンポーネントを描画し、マークアップがコンポーネントの状態に一致するかをアサートします。
 
 ## なぜテストをするのですか
 
-単体テストコンポーネントはたくさんの利益を持っています:
+単体テストコンポーネントはたくさんの利点を持っています:
 
 - コンポーネントがどう動作すべきかのドキュメントを提供します
 - 過度な手動テストの時間を節約します
 - 新しい機能におけるバグを減らします
-- デザインを改良します
+- 設計を改良します
 - リファクタリングを容易にします
 
-自動テストは大規模な開発チームチームが複雑なコードベースを維持するのを許します。
+自動テストは大規模な開発チームが複雑なコードベースを保つのを可能にします。
 
 #### はじめる
 
-[Vue Test Utils](https://github.com/vuejs/vue-test-utils) は 単体テスト Vue コンポーネントのための公式ライブラリです。 [vue-cli](https://github.com/vuejs/vue-cli) の `webpack` テンプレートには Karma と Jest というよくサポートされたテストランナーを備えており、また Vue Test Utils にいくつかの[ガイド](https://vue-test-utils.vuejs.org/ja/guides/)があります。
+[Vue Test Utils](https://github.com/vuejs/vue-test-utils) は Vue コンポーネントの単体テストのための公式ライブラリです。 [vue-cli](https://github.com/vuejs/vue-cli) の `webpack` テンプレートには Karma と Jest というよくサポートされたテストランナーを備えており、また Vue Test Utils にいくつかの[ガイド](https://vue-test-utils.vuejs.org/ja/guides/)があります。
 
-## 現実的な例
+## 実例
 
 単体テストのすべきことは:
 
 - 実行が早いこと
 - 理解しやすいこと
-- _一つの仕事_だけをテストすること
+- _一つの作業_だけをテストすること
 
 私達のテストをもっと簡潔に読みやすくするために<a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">ファクトリ関数</a>のアイデアを紹介しつつ、以前の例の構築を続けていきましょう。コンポーネントがすべきこと：
 
@@ -149,7 +149,7 @@ export default {
 import { shallow } from '@vue/test-utils'
 
 describe('Foo', () => {
-  it('メッセージをレンダリングし、ユーザー入力に正しく応答します', () => {
+  it('メッセージを描画し、ユーザー入力に正しく応答します', () => {
       const wrapper = shallow(Foo, {
     data: {
       message: 'Hello World',
@@ -157,13 +157,13 @@ describe('Foo', () => {
     }
   })
 
-  // message がレンダリングされていたら見られる
+  // message が描画されていたら見られる
   expect(wrapper.find('.message').text()).toEqual('Hello World')
 
-  // エラーのアサートがレンダリングされる
+  // エラーのアサートが描画される
   expect(wrapper.find('.error').exists()).toBeTruthy()
 
-  // `username`を更新してエラーのアサートがレンダリングされなくなる
+  // `username`を更新してエラーのアサートが描画されなくなる
   wrapper.setData({ username: 'Lachlan' })
   expect(wrapper.find('.error').exists()).toBeFalsy()
   })
@@ -172,17 +172,17 @@ describe('Foo', () => {
 
 上記テストにはいくつかの問題があります:
 
-- 1つのテストが異なることについてアサーションが行っています
-- コンポーネントが存在できる異なる状態やレンダリングすべきものを伝えるのが難しい
+- 1つのテストが異なることについてアサーションを行っています
+- コンポーネントが存在できる異なる状態や描画すべきものを伝えるのが難しい
 
 以下の例では、テストを次のように改善していきます:
 
 - `it` ブロックごとに1つのアサーションしか作成しない
 - 短く明確なテストの説明を持つ
 - テストに必要な最低限のデータだけを提供する
-- 二重のロジック（`wrapper` の作成と `username` 変数の設定）をファクトリ関数にリファクタリングする
+- 重複したロジック（`wrapper` の作成と `username` 変数の設定）をファクトリ関数にリファクタリングする
 
-*テストの更新*:
+*更新したテスト*:
 
 ```js
 import { shallow } from '@vue/test-utils'
@@ -195,25 +195,25 @@ const factory = (values = {}) => {
 }
 
 describe('Foo', () => {
-  it('welcome メッセージをレンダリングする', () => {
+  it('welcome メッセージを描画する', () => {
     const wrapper = factory()
 
     expect(wrapper.find('.message').text()).toEqual("Welcome to the Vue.js cookbook")
   })
 
-  it('usernameが7未満のときエラーをレンダリングする', () => {
+  it('usernameが7未満のときエラーを描画する', () => {
     const wrapper = factory({ username: ''  })
 
     expect(wrapper.find('.error').exists()).toBeTruthy()
   })
 
-  it('usernameが空白のときエラーをレンダリングする', () => {
+  it('usernameが空白のときエラーを描画する', () => {
     const wrapper = factory({ username: ' '.repeat(7) })
 
     expect(wrapper.find('.error').exists()).toBeTruthy()
   })
 
-  it('usernameが7文字かそれ以上のとき、エラーがレンダリングされない', () => {
+  it('usernameが7文字かそれ以上のとき、エラーが描画されない', () => {
     const wrapper = factory({ username: 'Lachlan' })
 
     expect(wrapper.find('.error').exists()).toBeFalsy()
@@ -223,19 +223,19 @@ describe('Foo', () => {
 
 注意すべき点:
 
-一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallow（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや computed プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
+一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallow（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや算出プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
 
 ## コンテキストの追加
 
 上記のテストはかなりシンプルですが、実際の Vue コンポーネントは以下のような他のテストしたい振る舞いをよく持ちます:
 
-- API コールの作成
+- API コール
 - `Vuex` ストアでコミットやミューテーションのディスパッチやアクションすること
-- 対話的テスト
+- 相互作用テスト
 
 そのようなテストを示すより完全な例が Vue Test Utils [ガイド](https://vue-test-utils.vuejs.org/en/guides/)にあります。
 
-Vue Test Utils と巨大な JavaScript エコシステムはほぼ 100％ のテスト網羅率を容易にする豊富なツールを提供します。とはいえ、単体テストはテストピラミッドの一部に過ぎません。その他のタイプのテストには e2e (end to end) テストとスナップショットテストがあります。単体テストは最小で最も簡単なテストです - 最小の仕事単位でアサーションを行い、単一のコンポーネントの各部分を分離します。
+Vue Test Utils と巨大な JavaScript エコシステムはほぼ 100％ のテスト網羅率を容易にする豊富なツールを提供します。とはいえ、単体テストはテストピラミッドの一部に過ぎません。その他のタイプのテストには e2e (end to end) テストとスナップショットテストがあります。単体テストは最小で最も簡単なテストです - 最小の作業単位でアサーションを行い、単一のコンポーネントの各部分を分離します。
 
 スナップショットテストはあなたの Vue コンポーネントのマークアップを保存し、テストが実行されるたびに新しく生成されたものと比較します。もし何かが変更された場合、開発者に通知され、そして開発者はその変化が意図的（コンポーネントが変更された）か偶発的（コンポーネントが正しい動作をしていない）かを選ぶことができます。
 
@@ -245,7 +245,7 @@ e2e テストは複数のコンポーネントがうまく相互作用するこ�
 
 エンドツーエンドテストなどのレベルの高いテストはかなり遅く実行されます。これらは通常デプロイ前に実行されて、システムの各部分がそれぞれ正しく連携して動いていることを確かにします。
 
-Vue コンポーネントのテストについてらさらなる情報はコアチームメンバー [Edd Yerburgh](https://eddyerburgh.me/) による [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications) で見つけることができます。
+Vue コンポーネントのテストについてのさらなる情報はコアチームメンバー [Edd Yerburgh](https://eddyerburgh.me/) による [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications) で見つけることができます。
 
 ## このパターンを避けるとき
 
