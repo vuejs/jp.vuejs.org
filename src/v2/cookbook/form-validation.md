@@ -7,7 +7,7 @@ order: 3
 
 ## 基本的な例
 
-フォームのバリデーションはブラウザにネイティブサポートされていますが、異なるブラウザ間での取り扱いには注意が必要です。またバリデーションが完全にサポートされている場合であっても、カスタマイズしたバリデーションが必要な場合もあるため、 Vue ベースでのソリューションが適切かもしれません。簡単な例から見ていきましょう。
+フォームのバリデーションはブラウザにネイティブサポートされますが、異なるブラウザ間での取り扱いには注意が必要です。またバリデーションが完全にサポートされている場合においても、カスタマイズしたバリデーションが必要な場合もあるため、 Vue ベースでのソリューションが適切かもしれません。簡単な例から見ていきましょう。
 
 3 つのフィールドをもち、2 つが必須の場合。はじめに HTML を見てみましょう。
 
@@ -47,11 +47,11 @@ order: 3
 </form>
 ```
 
-そして、その HTML をラップしましょう。 `<form>` タグには、 Vue コンポーネントに使用する ID が存在します。フォーム送信のハンドラと `action` がありますが、一時的な URL であり、現実のサーバーのどこかを指しています(ここでは、サーバーサイドでのバリデーションをバックアップしています)。
+そして、その HTML をラップしましょう。 `<form>` タグには、 Vue コンポーネントに使用する ID が存在します。フォーム送信のハンドラと `action` がありますが、一時的な URL で、本来は現実のサーバーのどこかを指しています(ここでは、サーバーサイドでのバリデーションをバックアップしています)。
 
 その子には、エラーの状態にもとづいてそれ自身を表示・非表示とするための段落があります。これによって、フォーム上にシンプルなエラーのリストが表示されます。バリデーションはフィールドの変更時ではなく、フォーム送信の際に実行されることに注意してください。
 
-最後に、3つのフィールドそれぞれに対応、対応する `v-model`が存在し、これをJavaScriptで利用する値と紐付ける必要があります。その例を見てみましょう。
+最後に、 3 つのフィールドそれぞれに対応、対応する `v-model` が存在し、これを JavaScript で利用する値と紐付ける必要があります。その例を見てみましょう。
 
 ``` js
 const app = new Vue({
@@ -74,14 +74,14 @@ const app = new Vue({
 })
 ```
 
-短くてシンプルです。エラーを保持した上で、 3 つのフォームのフィールドに対して `null` を設定する配列を定義します。 `checkForm` のロジック(フォーム送信時に実行されるもの)では、 movie の値はオプショナルであるため、 name および age についてのみチェックしています。それぞれについて、空であればチェックをし、特定のエラーを設定するだけです。 以下のデモで実行してみることができます。なお、このデモでは送信が成功すると一時的な URL へと POST されることを忘れないでください。
+短くてシンプルです。エラーを保持した上で、 3 つのフォームのフィールドに対して `null` を設定する配列を定義します。 `checkForm` のロジック(フォーム送信時に実行されるもの)では、 movie の値はオプショナルなので、 name および age についてのみチェックしています。それぞれについて、空ならばチェックをし、特定のエラーを設定するだけです。 以下のデモで実行してみることができます。なお、このデモでは送信が成功すると一時的な URL へと POST されることを忘れないでください。
 
 <p data-height="265" data-theme-id="0" data-slug-hash="GObpZM" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 1" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/GObpZM/">form validation 1</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 ## カスタムバリデーションの利用
 
-次の例では、２つめのテキストフィールドを email へと切り替え、カスタマイズしたロジックでバリデーションをします。このコードは、 StackOverflow の質問「[How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript)」から持ってきています。 HTML はこちらですが、はじめの例と非常に似通っています。
+次の例では、 2 つめのテキストフィールドを email へと切り替え、カスタマイズしたロジックでバリデーションをします。このコードは、 StackOverflow の質問「[How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript)」から持ってきています。 HTML はこちらですが、はじめの例と非常に似通っています。
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
@@ -119,7 +119,7 @@ const app = new Vue({
 </form>
 ```
 
-ここでの変更は少しだけですが、トップのフォームに対して `novalidate="true"` に注目してください。 `type="email"` の場合、ブラウザがフィールドに入力された E メールアドレスをバリデーションしようするため、この設定は重要です。率直に言えば、この場合はブラウザを信用すべきかもしれませんが、ここではカスタムバリデーションのサンプルであるため無効化しています。 JavaScript 側の更新は以下になります:
+ここでの変更は少しだけですが、トップのフォームに対して `novalidate="true"` に注目してください。 `type="email"` の場合、ブラウザがフィールドに入力された E メールアドレスをバリデーションしようするため、この設定は重要です。率直に言えば、この場合はブラウザを信用すべきかもしれませんが、ここではカスタムバリデーションのサンプルのため無効化しています。 JavaScript 側の更新は以下になります:
 
 ``` js
 const app = new Vue({
@@ -157,7 +157,7 @@ const app = new Vue({
 
 ## カスタムバリデーションにおけるその他の例
 
-3 つめの例は、アンケートアプリにて見たことがあるかもしれません。ユーザーは、 戦艦のそれぞれの機能に対して予算を振り分ける必要があります。かつ合計は必ず 100 である必要があります。まずは HTMLです。
+3 つめの例は、アンケートアプリにて見たことがあるかもしれません。ユーザーは、 戦艦のそれぞれの機能に対して予算を振り分ける必要があります。かつ合計は必ず 100 となる必要があります。まずは HTML です。
 
 ``` html
 <form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
@@ -227,14 +227,14 @@ const app = new Vue({
 })
 ```
 
-合計値を算出プロパティとして設定し、バグを取り除いて動かすために十分に簡潔でした。 checkForm メソッドでは、合計値が 100 であるかどうかだけ確認する必要があります。こちらで実際に動作させることができます:
+合計値を算出プロパティとして設定し、バグを取り除いて動かすために十分に簡潔でした。 checkForm メソッドでは、合計値が 100 かどうかだけ確認する必要があります。こちらで実際に動作させることができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="vWqGoy" data-default-tab="html,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 3" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/vWqGoy/">form validation 3</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 ## サーバーサイドでのバリデーション
 
-最後の例では、 Ajax を利用してサーバーにてバリデーションを行うものを作成しました。このフォームでは、新しい product の名前を尋ね、その名前が一意であることをチェックします。このバリデーションのために、サーバーレスな [OpenWhisk](http://openwhisk.apache.org/) アクションを書きました。ここでは重要ではありませんが、ロジックはこちらになります:
+最後の例では、 Ajax を利用してサーバーにてバリデーションを行うものを作成しました。このフォームでは、新しい product の名前を尋ね、その名前が一意かをチェックします。このバリデーションのために、サーバーレスな [OpenWhisk](http://openwhisk.apache.org/) アクションを書きました。ここでは重要ではありませんが、ロジックはこちらになります:
 
 ``` js
 function main(args) {
@@ -309,7 +309,7 @@ const app = new Vue({
 })
 ```
 
-OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。この例においては、フォームが送信されないようにしています(ただし、 HTML 上で Vue にて動かすことはできます). ここで、 `this.name` が空であるかのチェックを行い、その後 API を叩いていることが見てとれます。問題がある場合は、先ほどの例と同じようにエラーを追加しています。うまくいけば、なにもしません(ここではアラートのみ) URL に含まれる product の名前をもとに新しいページへと遷移させたり、他の動作を実行することもできます。以下でデモを実行できます:
+OpenWhisk にて実行される API の URL を表す変数から始まります。 `checkForm` を見てみましょう。この例においては、フォームが送信されないようにしています(ただし、 HTML 上で Vue にて動かすことはできます). ここで、 `this.name` が空かどうかのチェックを行い、その後 API を叩いていることが見てとれます。問題がある場合は、先ほどの例と同じようにエラーを追加しています。うまくいけば、なにもしません(ここではアラートのみ) URL に含まれる product の名前をもとに新しいページへと遷移させたり、他の動作を実行することもできます。以下でデモを実行できます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="BmgzeM" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="form validation 4" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/BmgzeM/">form validation 4</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
