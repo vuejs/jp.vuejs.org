@@ -1,5 +1,5 @@
 ---
-title: axiosを利用したAPIの使用
+title: axios を利用した API の使用
 type: cookbook
 updated: 2018-03-20
 order: 9
@@ -8,9 +8,9 @@ order: 9
 
 ## 基本的な例
 
-ウェブアプリケーション構築するとき、 API からデータを取得して表示することがよくあります。これを行うにはいくつかの方法があり、一般的なアプローチは Promise ベースの HTTP クライアントの [axios](https://github.com/axios/axios) を使うことです。
+ウェブアプリケーションを構築するとき、 API からデータを取得して表示することがよくあります。これを行うにはいくつかの方法があり、一般的なアプローチは Promise ベースの HTTP クライアントの [axios](https://github.com/axios/axios) を使うことです。
 
-この例題では、 [CoinDesk API](https://www.coindesk.com/api/) を利用して Bitcoin の価格を表示し、毎分更新します。最初に、 npm/yarn か CDN リンクのいずれかを利用して axios をインストールします。
+この例題では、 [CoinDesk API](https://www.coindesk.com/api/) を利用して Bitcoin の価格を表示し、毎分更新します。最初に、 npm か yarn もしくは CDN リンクのいずれかを利用して axios をインストールします。
 
 API から情報を取得する方法はいくつかありますが、表示する内容を知るために、まずデータ形式どうなっているかを調べることをオススメします。 API エンドポイントを呼び出して出力をすることでデータ形式がどうなっているか調べられます。 CoinDesk API ドキュメントをみることによって `https://api.coindesk.com/v1/bpi/currentprice.json` と同じ結果が返ってきてるのがわかります。まず初めに、 data プロパティを作成し、 `mounted` ライフサイクルフックを使用し、データを取得し最終的に情報を格納します。
 
@@ -41,7 +41,7 @@ new Vue({
 <p data-height="350" data-theme-id="32763" data-slug-hash="80043dfdb7b90f138f5585ade1a5286f" data-default-tab="result" data-user="Vue" data-embed-version="2" data-pen-title="First Step Axios and Vue" class="codepen">See the Pen <a href="https://codepen.io/team/Vue/pen/80043dfdb7b90f138f5585ade1a5286f/">First Step Axios and Vue</a> by Vue (<a href="https://codepen.io/Vue">@Vue</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Excellent! 私たちはは様々なデータを持っています。しかし、今は乱雑だと思われるので、適切に表示して、期待通りに動作しない場合や、情報を取得するのに時間がかかる場合に備えて、エラー処理を追加してみましょう。
+Excellent! 私たちは様々なデータを持っています。しかし、今は乱雑だと思われるので、適切に表示して、期待通りに動作しない場合や、情報を取得するのに時間がかかる場合に備えて、エラー処理を追加してみましょう。
 
 ## 実例: データの操作
 
@@ -161,11 +161,11 @@ new Vue({
 
 これは使用している API とアプリケーションの複雑さに依存して、異なるセクションのコンポーネントの使用とより明確なエラー報告によってさらに改善されます。
 
-## 他のパターン
+## 代替パターン
 
 ### Fetch API
 
-この [Fetch API](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) はこれらのタイプの要求のための強力なネイティヴ API です。あなたは聞いたことがあるかもしれませんが、Fetch API の1つの利点は、これを使用するために外部リソースを読み込む必要がないことです。ただし、まだ完全にサポートされていないので、 polyfill を使用する必要があります。この API を使用するにはいくつか問題があり、今のところ axios を使用することがより好ましいです。しかし将来的には非常に変化するかもしれません。
+この [Fetch API](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) はこれらのタイプの要求のための強力なネイティブ API です。あなたは聞いたことがあるかもしれませんが、Fetch API の1つの利点は、これを使用するために外部リソースを読み込む必要がないことです。ただし、まだ完全にサポートされていないので、 polyfill を使用する必要があります。この API を使用するにはいくつか問題があり、今のところ axios を使用することがより好ましいです。しかし将来的には非常に変化するかもしれません。
 
 もし Fetch API を使用することに興味があるなら、使用方法を説明してくれる [とてもいい記事](https://scotch.io/@bedakb/lets-build-type-ahead-component-with-vuejs-2-and-fetch-api) があります。
 
