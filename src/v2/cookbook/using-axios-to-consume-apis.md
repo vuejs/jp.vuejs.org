@@ -165,7 +165,7 @@ new Vue({
 
 ### Fetch API
 
-この [Fetch API](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) はこれらのタイプの要求のための強力なネイティブ API です。あなたは聞いたことがあるかもしれませんが、Fetch API の1つの利点は、これを使用するために外部リソースを読み込む必要がないことです。ただし、まだ完全にサポートされていないので、 polyfill を使用する必要があります。この API を使用するにはいくつか問題があり、今のところ axios を使用することがより好ましいです。しかし将来的には非常に変化するかもしれません。
+この [Fetch API](https://developers.google.com/web/updates/2015/03/introduction-to-fetch) はこれらのタイプの要求のための強力なネイティブ API です。ご存知かもしれませんが、Fetch API の1つの利点は、これを使用するために外部リソースを読み込む必要がないことです。ただし、まだ完全にサポートされていないので、 polyfill を使用する必要があります。この API を使用するにはいくつか問題があり、今のところ axios を使用することがより好ましいです。しかし将来的には非常に変化するかもしれません。
 
 もし Fetch API を使用することに興味があるなら、使用方法を説明してくれる [とてもいい記事](https://scotch.io/@bedakb/lets-build-type-ahead-component-with-vuejs-2-and-fetch-api) があります。
 
