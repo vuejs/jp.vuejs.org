@@ -79,7 +79,7 @@ export default {
 <icon-base icon-name="write"><icon-write /></icon-base>
 ```
 
-もし、多くのアイコンのサイズを作成したいのであれば、とても簡単にすることができます:
+もし、多くのアイコンのサイズを作成したいなら、とても簡単にすることができます:
 
 ```html
 <p>
