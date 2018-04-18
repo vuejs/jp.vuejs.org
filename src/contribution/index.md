@@ -111,6 +111,17 @@ Priority B Rules | 優先度 B ルール | [wonderful-panda](https://github.com/
 Priority C Rules | 優先度 C ルール | [shika358](https://github.com/shika358)
 Priority D Rules | 優先度 D ルール | [zakuro9715](https://github.com/zakuro9715)
 
+## Vue.js クックブック 翻訳プロジェクト
+
+- [GitHub Projects](https://github.com/vuejs/jp.vuejs.org/projects/3)
+
+ファイル | タイトル | 貢献者
+----- |  ------------- | ---
+form-validation.md| フォームのバリデーション | [potato4d](https://github.com/potato4d)
+editable-svg-icons.md | 編集可能な SVG アイコンシステム | [hisako135](https://github.com/hisako135)
+creating-custom-scroll-directives.md | カスタムスクロールディレクティブの作成 | [pipopotamasu](https://github.com/pipopotamasu)
+using-axios-to-consume-apis.md | axios を利用した API の使用 | [masaakikunsan](https://github.com/masaakikunsan)
+
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
 英語タイトル | 翻訳タイトル | 貢献者
