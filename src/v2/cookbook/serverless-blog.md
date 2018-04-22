@@ -1,5 +1,5 @@
 ---
-title: Create a CMS-Powered Blog
+title: CMS による Blog の作成
 type: cookbook
 updated: 2018-03-20
 order: 5
@@ -7,36 +7,36 @@ order: 5
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-So you've just launched your Vue.js website, congrats! Now you want to add a blog that quickly plugs into your website and you don't want to have to spin up a whole server just to host a Wordpress instance (or any DB-powered CMS for that matter). You want to just be able to add a few Vue.js blog components and some routes and have it all just work, right? What you're looking for a blog that's powered entirely by API's you can consume directly from your Vue.js application. This tutorial will teach you how to do just that, let's dive in!
+あなたが Vue.js のウェブサイトをちょうど立ち上げたばかりならば、おめでとうございます！いま、あなたは自分のウェブサイトに早くブログを追加したいが、１つの Wordpress のインスタンス（また、さらに言えば DB の動作する CMS）だけをホスティングするためにサーバ全体をスピンアップさせたくはないでしょう。あなたは、少しの Vue.js のブログ構成要素といくつかのルーティングを追加でき、１つの サーバにすべてを適切に持たせられるようにしたいですよね？あなたが探しているのは、あなたの Vue.js アプリケーションから直接処理できる API によって完全に制御されたブログです。このチュートリアルは、あなたにどうやってそれを適切に行うか、教えるでしょう。飛び込みましょう！
 
-We're going to quickly build a CMS-powered blog with Vue.js. It uses [ButterCMS](https://buttercms.com/), an API-first CMS that lets you manage content using the ButterCMS dashboard and integrate our content API into your Vue.js app. You can use ButterCMS for new or existing Vue.js projects.
+私たちは、Vue.js で CMS によるブログを素早くつくるつもりです。これに、[ButterCMS](https://buttercms.com/) を使います。これは、あなたに、ButterCMS ダッシュボードでコンテンツを管理させ、 コンテンツをあなたの Vue.js アプリケーションに API で統合させる API first な CMS です。あなたは、新しく、またはすでにある Vue.js のプロジェクトのために、ButterCMS を使えます。
  
 ![Butter Dashboard](https://user-images.githubusercontent.com/160873/36677285-648798e4-1ad3-11e8-9454-d22fca8280b7.png "Butter Dashboard")
 
-## Install
+## インストール
 
-Run this in your commandline:
+コマンドラインで以下を実行してください。:
 
 `npm install buttercms --save`
 
-Butter can also be loaded using a CDN: 
+Butter は、CDN からも読み込めます。: 
 
 `<script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>`
 
-## Quickstart
+## クイックスタート
 
-Set your API token:
+あなたの API token を設定します。:
 
 `var butter = require('buttercms')('your_api_token');`
 
-Using ES6:
+ES6 を使用する場合:
 
 ```javascript
 import Butter from 'buttercms';
 const butter = Butter('your_api_token');
 ```
 
-Using CDN: 
+CDN を使用する場合: 
 
 ```html
 <script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>
@@ -45,19 +45,19 @@ Using CDN:
 </script>
 ```
  
-Import this file into any component you want to use ButterCMS. Then from the console run:
- 
+このファイルを ButterCMS を使いたいコンポネントでインポートし、コンソールで以下を実行します。:
+
 ```javascript
 butter.post.list({page: 1, page_size: 10}).then(function(response) {
   console.log(response)
 })
 ```
 
-This API request fetches your blog posts. Your account comes with one example post which you'll see in the response.
+この API リクエストは、あなたのブログの投稿をフェッチします。あなたのアカウントは、レスポンスから１つの投稿例とセットで取得します。
 
-## Display posts
+## 投稿の表示
 
-To display posts we create a `/blog` route (using Vue Router) in our app and fetch blog posts from the Butter API, as well as a `/blog/:slug` route to handle individual posts. 
+投稿を表示するには、アプリケーションで、`/blog` ルーティングを (Vue Router を使用) 作成し、Butter API でブログの投稿をフェッチします。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。 
 
 See the ButterCMS [API reference](https://buttercms.com/docs/api/?javascript#blog-posts) for additional options such as filtering by category or author. The response also includes some metadata we'll use for pagination.
 
@@ -88,7 +88,7 @@ export default new Router({
 })
 ```
 
-Then create `components/BlogHome.vue` which will be your blog homepage that lists your most recent posts.
+それから、あなたの最も最近の投稿を並べるブログのホームページを `components/BlogHome.vue` で作成します。 
 
 ```html
 <script>
