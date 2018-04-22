@@ -137,7 +137,7 @@ export default new Router({
 </template>
 ```
 
-これはこのようになります（注釈：速くスタイリングするために、from https://bulma.io/ の CSS を追加しました。）:
+これはこのようになります（注釈：速くスタイリングするために、from https://bulma.io/ の CSS を追加しました）:
 
 ![buttercms-bloglist](https://user-images.githubusercontent.com/160873/36868500-1b22e374-1d5e-11e8-82a0-20c8dc312716.png)
 
