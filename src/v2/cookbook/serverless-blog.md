@@ -5,11 +5,9 @@ updated: 2018-03-20
 order: 5
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+あなたが Vue.js のウェブサイトをちょうど立ち上げたばかりならば、おめでとうございます！いま、あなたは自分のウェブサイトに早くブログを追加したいが、1つの Wordpress のインスタンス（また、さらに言えば DB の動作する CMS）だけをホスティングするためにサーバ全体をスピンアップさせたくはないでしょう。あなたは、少しの Vue.js のブログ構成要素といくつかのルーティングを追加でき、1つの サーバにすべてを適切に持たせられるようにしたいですよね？あなたが探しているのは、あなたの Vue.js アプリケーションから直接処理できる API によって完全に制御されたブログです。このチュートリアルは、あなたにどうやってそれを適切に行うか、教えます。飛び込みましょう！
 
-あなたが Vue.js のウェブサイトをちょうど立ち上げたばかりならば、おめでとうございます！いま、あなたは自分のウェブサイトに早くブログを追加したいが、１つの Wordpress のインスタンス（また、さらに言えば DB の動作する CMS）だけをホスティングするためにサーバ全体をスピンアップさせたくはないでしょう。あなたは、少しの Vue.js のブログ構成要素といくつかのルーティングを追加でき、１つの サーバにすべてを適切に持たせられるようにしたいですよね？あなたが探しているのは、あなたの Vue.js アプリケーションから直接処理できる API によって完全に制御されたブログです。このチュートリアルは、あなたにどうやってそれを適切に行うか、教えるでしょう。飛び込みましょう！
-
-私たちは、Vue.js で CMS によるブログを素早くつくるつもりです。これに、[ButterCMS](https://buttercms.com/) を使います。これは、あなたに、ButterCMS ダッシュボードでコンテンツを管理させ、 コンテンツをあなたの Vue.js アプリケーションに API で統合させる API first な CMS です。あなたは、新しく、またはすでにある Vue.js のプロジェクトのために、ButterCMS を使えます。
+私たちは、Vue.js で CMS によるブログを素早くつくっていきます。これには、[ButterCMS](https://buttercms.com/) を使います。これは、あなたに、ButterCMS ダッシュボードでコンテンツを管理させ、 コンテンツをあなたの Vue.js アプリケーションに API で統合させる API first な CMS です。あなたは、新しく、または既にある Vue.js のプロジェクトのために、ButterCMS を使えます。
  
 ![Butter Dashboard](https://user-images.githubusercontent.com/160873/36677285-648798e4-1ad3-11e8-9454-d22fca8280b7.png "Butter Dashboard")
 
@@ -53,13 +51,13 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
 })
 ```
 
-この API リクエストは、あなたのブログの投稿をフェッチします。あなたのアカウントは、レスポンスから１つの投稿例とセットで取得します。
+この API リクエストは、あなたのブログの投稿をフェッチします。あなたのアカウントは、レスポンスから1つの投稿例とセットで取得します。
 
 ## 投稿の表示
 
 投稿を表示するには、アプリケーションで、`/blog` ルーティングを (Vue Router を使用) 作成し、Butter API でブログの投稿をフェッチします。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。 
 
-See the ButterCMS [API reference](https://buttercms.com/docs/api/?javascript#blog-posts) for additional options such as filtering by category or author. The response also includes some metadata we'll use for pagination.
+カテゴリ、または著者によるフィルタリングのような追加オプションは、ButterCMS [API reference](https://buttercms.com/docs/api/?javascript#blog-posts) を参照してください。 レスポンスは、あなたがページネーションのために使用するいくつかのメタデータも含みます。
 
 `router/index.js:`
 
@@ -120,13 +118,13 @@ export default new Router({
 <template>
   <div id="blog-home">
       <h1>{{ page_title }}</h1>
-      <!-- Create `v-for` and apply a `key` for Vue. Here we are using a combination of the slug and index. -->
+      <!-- `v-for` を生成し、Vue のために `key` を適用します。ここでは、slug と index の組みを使用します。-->
       <div v-for="(post,index) in posts" :key="post.slug + '_' + index">
         <router-link :to="'/blog/' + post.slug">
           <article class="media">
             <figure>
-              <!-- Bind results using a `:` -->
-              <!-- Use a `v-if`/`else` if their is a `featured_image` -->
+              <!-- 結果をバインディングするには、`:` を使います。-->
+              <!-- `featured_image` を使うかどうかは、`v-if`/`else` で判定します。-->
               <img v-if="post.featured_image" :src="post.featured_image" alt="">
               <img v-else src="http://via.placeholder.com/250x250" alt="">
             </figure>
@@ -139,11 +137,11 @@ export default new Router({
 </template>
 ```
 
-Here's what it looks like (note we added CSS from https://bulma.io/ for quick styling):
+これはこのようになります（注釈：速くスタイリングするために、from https://bulma.io/ の CSS を追加しました。）:
 
 ![buttercms-bloglist](https://user-images.githubusercontent.com/160873/36868500-1b22e374-1d5e-11e8-82a0-20c8dc312716.png)
 
-Now create `components/BlogPost.vue` which will be your Blog Post page to list a single post.
+以下は、あなたのブログの投稿ページをただ1つのリストにする `components/BlogPost.vue` を生成します。
 
 ```html
 <script>
@@ -187,19 +185,19 @@ Now create `components/BlogPost.vue` which will be your Blog Post page to list a
 </template>
 ```
 
-Here's a preview:
+これはこのように表示されます。:
 
 ![buttercms-blogdetail](https://user-images.githubusercontent.com/160873/36868506-218c86b6-1d5e-11e8-8691-0409d91366d6.png)
 
-Now our app is pulling all blog posts and we can navigate to individual posts. However, our next/previous post buttons are not working.
+いま、アプリケーションはすべてのブログの記事を取得し、各々の投稿ページへ遷移できます。しかし、次/前の投稿へのボタンは動作していません。
 
-One thing to note when using routes with params is that when the user navigates from `/blog/foo` to `/blog/bar`, the same component instance will be reused. Since both routes render the same component, this is more efficient than destroying the old instance and then creating a new one. 
+ルーティングをパラメータと一緒に使用する際にもう1つ注意すべきなのは、ユーザが `/blog/foo` から `/blog/bar` へ遷移するとき、同じコンポネントのインスタンスが再利用される点です。各々のルーティングが同じコンポネントを描画するため、これは古いインスタンスの破棄と新しいインスタンスの生成をするより、効率的です。
 
-<p class="tip">Be aware, that using the component this way will mean that the lifecycle hooks of the component will not be called. Visit the Vue Router's docs to learn more about [Dynamic Route Matching](https://router.vuejs.org/en/essentials/dynamic-matching.html)</p>
+<p class="tip">注意してください。この方法でコンポネントが使われるということは、コンポネントのライフサイクルによるフックが呼ばれないことを意味します。より詳しくは、Vue Router のドキュメントを参照してください。[動的ルートマッチング] (https://router.vuejs.org/ja/essentials/dynamic-matching.html)</p>
 
-To fix this we need to watch the `$route` object and call `getPost()` when the route changes.
+これを固定するために、私たちは `$route` オブジェクトをウォッチし、ルーティングが変わるときに、`getPost()` を呼ぶ必要があります。
 
-Updated `<script>` section in `components/BlogPost.vue`:
+`components/BlogPost.vue` 内の `<script>` を以下のように更新します。:
 
 ```html
 <script>
@@ -234,19 +232,19 @@ Updated `<script>` section in `components/BlogPost.vue`:
 </script>
 ```
 
-Now your app has a working blog that can be updated easily in the ButterCMS dashboard.
+いま、あなたのアプリケーションは、ButterCMS ダッシュボード内で、簡単に更新できるブログを持っています。
 
-## Categories, Tags, and Authors
+## カテゴリー、タグ、および著者
 
-Use Butter's APIs for categories, tags, and authors to feature and filter content on your blog.
+あなたのブログ上で、コンテンツをカテゴリー、タグ、および著者で特徴づける、あるいはフィルタリングするために、Butter の API を使用します。
 
-See the ButterCMS API reference for more information about these objects:
+これらのオブジェクトについて、より情報を得るには、ButterCMS API リファレンスを参照してください。
 
 * [Categories](https://buttercms.com/docs/api/?ruby#categories)
 * [Tags](https://buttercms.com/docs/api/?ruby#tags)
 * [Authors](https://buttercms.com/docs/api/?ruby#authors)
 
-Here's an example of listing all categories and getting posts by category. Call these methods on the `created()` lifecycle hook:
+以下は、すべてのカテゴリーと、カテゴリーによる投稿を取得する例です。これらの関数は、`created()` のライフサイクルをフックとして呼び出してください。
 
 ```javascript
 methods: {
@@ -275,10 +273,11 @@ created() {
 }
 ```
 
-## Alternative Patterns
+## 代替手段
 
-An alternative pattern to consider, especially if you prefer writing only in Markdown, is using something like [Nuxtent](https://nuxtent.now.sh/guide/writing#async-components). Nuxtent allows you to use `Vue Component` inside of Markdown files. This approach would be akin to a static site approach (i.e. Jekyll) where you compose your blog posts in Markdown files. Nuxtent adds a nice integration between Vue.js and Markdown allowing you to live in a 100% Vue.js world.
+もし、あなたがマークダウンでのみの記述を好むなら、特に代替手段として考えられるのは、[Nuxtent](https://nuxtent.now.sh/guide/writing#async-components) のようなものを使う方法です。Nuxtent は、マークダウン形式のファイルの代わりに、`Vue Component` の利用をあなたに提供します。 このアプローチは、マークダウン形式のファイルであなたのブログの投稿が構成される静的サイト（すなわち、Jekyll）のアプローチと類似するでしょう。Nuxtent は、Vue.js の世界であなたが Vue.js とマークダウンの間で生きるための良いインテグレーションを追加します。
 
-## Wrap up
 
-That's it! You now have a fully functional CMS-powered blog running in your app. We hope this tutorial was helpful and made your development experience with Vue.js even more enjoyable :)
+## 要約
+
+以上です！あなたはいま、アプリケーション上で動作する完全な機能を持った CMS によるブログを手に入れました。私たちは、このチュートリアルが役に立つことと、あなたの Vue.js の開発経験をより一層楽しくすることを願っています。:)
