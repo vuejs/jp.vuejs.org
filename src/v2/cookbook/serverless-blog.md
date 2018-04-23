@@ -5,9 +5,9 @@ updated: 2018-03-20
 order: 5
 ---
 
-あなたが Vue.js のウェブサイトをちょうど立ち上げたばかりならば、おめでとうございます！いま、あなたは自分のウェブサイトに早くブログを追加したいが、1つの Wordpress のインスタンス（また、さらに言えば DB の動作する CMS）だけをホスティングするためにサーバ全体をスピンアップさせたくはないでしょう。あなたは、少しの Vue.js のブログ構成要素といくつかのルーティングを追加でき、1つの サーバにすべてを適切に持たせられるようにしたいですよね？あなたが探しているのは、あなたの Vue.js アプリケーションから直接処理できる API によって完全に制御されたブログです。このチュートリアルは、あなたにどうやってそれを適切に行うか、教えます。飛び込みましょう！
+あなたが Vue.js のウェブサイトを新しく立ち上げたとしましょう。おめでとうございます！いま、あなたは自分のウェブサイトに早くブログを追加したいでしょうが、1つの WordPress のインスタンス（また、さらに言えば DB の動作する CMS）だけをホスティングするためにサーバ全体をスピンアップさせたくはないでしょう。少しの Vue.js のブログ構成要素といくつかのルーティングを追加でき、1つの サーバにすべてを適切に持たせられるようにしたいですよね？あなたが探しているのは、Vue.js アプリケーションから直接処理できる API によって完全に制御されたブログです。このチュートリアルは、どうやってそれを適切に行うか、教えます。飛び込みましょう！
 
-私たちは、Vue.js で CMS によるブログを素早くつくっていきます。これには、[ButterCMS](https://buttercms.com/) を使います。これは、あなたに、ButterCMS ダッシュボードでコンテンツを管理させ、 コンテンツをあなたの Vue.js アプリケーションに API で統合させる API first な CMS です。あなたは、新しく、または既にある Vue.js のプロジェクトのために、ButterCMS を使えます。
+私たちは、Vue.js で CMS によるブログを素早くつくっていきます。これには、[ButterCMS](https://buttercms.com/) を使います。これは、ButterCMS ダッシュボードでコンテンツを管理し、コンテンツ API を Vue.js アプリケーションに統合させる API ファーストな CMS です。新しく、または既にある Vue.js のプロジェクトのために、ButterCMS を使えます。
  
 ![Butter Dashboard](https://user-images.githubusercontent.com/160873/36677285-648798e4-1ad3-11e8-9454-d22fca8280b7.png "Butter Dashboard")
 
@@ -23,18 +23,18 @@ Butter は、CDN からも読み込めます:
 
 ## クイックスタート
 
-あなたの API token を設定します:
+API トークンの設定:
 
 `var butter = require('buttercms')('your_api_token');`
 
-ES6 を使用する場合:
+ES6 の使用:
 
 ```javascript
 import Butter from 'buttercms';
 const butter = Butter('your_api_token');
 ```
 
-CDN を使用する場合: 
+CDN の使用: 
 
 ```html
 <script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>
@@ -51,13 +51,13 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
 })
 ```
 
-この API リクエストは、あなたのブログの投稿をフェッチします。あなたのアカウントは、レスポンスから1つの投稿例とセットで取得します。
+この API リクエストは、ブログの投稿をフェッチします。あなたのアカウントは、レスポンスから1つの投稿例とセットで取得します。
 
 ## 投稿の表示
 
 投稿を表示するには、アプリケーションで、`/blog` ルーティング (Vue Router を使用) を作成し、Butter API でブログの投稿をフェッチします。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。 
 
-カテゴリ、または著者によるフィルタリングのような追加オプションは、ButterCMS [API リファレンス](https://buttercms.com/docs/api/?javascript#blog-posts) を参照してください。 レスポンスは、あなたがページネーションのために使用するいくつかのメタデータも含みます。
+カテゴリ、または著者によるフィルタリングのような追加オプションは、ButterCMS [API リファレンス](https://buttercms.com/docs/api/?javascript#blog-posts) を参照してください。 レスポンスは、ページネーションのために使用するいくつかのメタデータも含みます。
 
 `router/index.js:`
 
@@ -86,7 +86,7 @@ export default new Router({
 })
 ```
 
-それから、あなたの最も最近の投稿を並べるブログのホームページを `components/BlogHome.vue` で作成します。 
+それから、直近の投稿を並べるブログのホームページを `components/BlogHome.vue` で作成します。 
 
 ```html
 <script>
@@ -141,7 +141,7 @@ export default new Router({
 
 ![buttercms-bloglist](https://user-images.githubusercontent.com/160873/36868500-1b22e374-1d5e-11e8-82a0-20c8dc312716.png)
 
-以下は、あなたのブログの投稿ページをただ1つのリストにする `components/BlogPost.vue` を生成します。
+以下は、ブログの投稿ページをただ1つのリストにする `components/BlogPost.vue` を生成します。
 
 ```html
 <script>
@@ -185,7 +185,7 @@ export default new Router({
 </template>
 ```
 
-これは以下のように表示されます:
+以下がプレビューです:
 
 ![buttercms-blogdetail](https://user-images.githubusercontent.com/160873/36868506-218c86b6-1d5e-11e8-8691-0409d91366d6.png)
 
@@ -275,9 +275,9 @@ created() {
 
 ## 代替パターン
 
-もし、あなたがマークダウンでのみの記述を好むなら、特に代替手段として考えられるのは、[Nuxtent](https://nuxtent.now.sh/guide/writing#async-components) のようなものを使う方法です。Nuxtent は、マークダウン形式のファイルの代わりに、`Vue Component` の利用をあなたに提供します。 このアプローチは、マークダウン形式のファイルであなたのブログの投稿が構成される静的サイト（すなわち、Jekyll）のアプローチと類似するでしょう。Nuxtent は、Vue.js の世界であなたが Vue.js とマークダウンの間で生きるための良いインテグレーションを追加します。
+もし、あなたがマークダウンでのみの記述を好むなら、特に代替パターンとして考えられるのは、[Nuxtent](https://nuxtent.now.sh/guide/writing#async-components) のようなものを使う方法です。Nuxtent は、マークダウン形式のファイルの代わりに、`Vue Component` の利用を提供します。 このアプローチは、マークダウン形式のファイルでブログの投稿が構成される静的サイト（すなわち、Jekyll）のアプローチと類似するでしょう。Nuxtent は、Vue.js の世界で Vue.js とマークダウンの間で生きるための良いインテグレーションを追加します。
 
 
 ## まとめ
 
-以上です！あなたはいま、アプリケーション上で動作する完全な機能を持った CMS によるブログを手に入れました。私たちは、このチュートリアルが役に立つことと、あなたの Vue.js の開発経験をより一層楽しくすることを願っています。:)
+以上です！あなたはいま、アプリケーション上で動作する完全な機能を持った CMS によるブログを手に入れました。私たちは、このチュートリアルが役に立ち、Vue.js の開発経験がより一層楽しくなることを願っています。:)
