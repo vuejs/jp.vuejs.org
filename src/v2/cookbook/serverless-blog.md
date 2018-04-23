@@ -141,7 +141,7 @@ export default new Router({
 
 ![buttercms-bloglist](https://user-images.githubusercontent.com/160873/36868500-1b22e374-1d5e-11e8-82a0-20c8dc312716.png)
 
-以下は、ブログの投稿ページをただ1つのリストにする `components/BlogPost.vue` を生成します。
+以下は、ブログの記事ページを個別投稿のリストにする `components/BlogPost.vue` を生成します。
 
 ```html
 <script>
