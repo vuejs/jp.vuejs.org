@@ -13,17 +13,17 @@ order: 5
 
 ## インストール
 
-コマンドラインで以下を実行してください。:
+コマンドラインで以下を実行してください:
 
 `npm install buttercms --save`
 
-Butter は、CDN からも読み込めます。: 
+Butter は、CDN からも読み込めます: 
 
 `<script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>`
 
 ## クイックスタート
 
-あなたの API token を設定します。:
+あなたの API token を設定します:
 
 `var butter = require('buttercms')('your_api_token');`
 
@@ -43,7 +43,7 @@ CDN を使用する場合:
 </script>
 ```
  
-このファイルを ButterCMS を使いたいコンポーネントでインポートし、コンソールで以下を実行します。:
+このファイルを ButterCMS を使いたいコンポーネントでインポートし、コンソールで以下を実行します:
 
 ```javascript
 butter.post.list({page: 1, page_size: 10}).then(function(response) {
@@ -55,9 +55,9 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
 
 ## 投稿の表示
 
-投稿を表示するには、アプリケーションで、`/blog` ルーティングを (Vue Router を使用) 作成し、Butter API でブログの投稿をフェッチします。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。 
+投稿を表示するには、アプリケーションで、`/blog` ルーティング (Vue Router を使用) を作成し、Butter API でブログの投稿をフェッチします。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。 
 
-カテゴリ、または著者によるフィルタリングのような追加オプションは、ButterCMS [API reference](https://buttercms.com/docs/api/?javascript#blog-posts) を参照してください。 レスポンスは、あなたがページネーションのために使用するいくつかのメタデータも含みます。
+カテゴリ、または著者によるフィルタリングのような追加オプションは、ButterCMS [API リファレンス](https://buttercms.com/docs/api/?javascript#blog-posts) を参照してください。 レスポンスは、あなたがページネーションのために使用するいくつかのメタデータも含みます。
 
 `router/index.js:`
 
@@ -118,13 +118,13 @@ export default new Router({
 <template>
   <div id="blog-home">
       <h1>{{ page_title }}</h1>
-      <!-- `v-for` を生成し、Vue のために `key` を適用します。ここでは、slug と index の組みを使用します。-->
+      <!-- `v-for` の生成、および Vue 用に `key` 属性の適用。ここでは、slug と index の組みを使用します -->
       <div v-for="(post,index) in posts" :key="post.slug + '_' + index">
         <router-link :to="'/blog/' + post.slug">
           <article class="media">
             <figure>
-              <!-- 結果をバインディングするには、`:` を使います。-->
-              <!-- `featured_image` を使うかどうかは、`v-if`/`else` で判定します。-->
+              <!-- `:` による結果のバインディング -->
+              <!-- `featured_image` を使うかどうかは、`v-if`/`else` で判定します -->
               <img v-if="post.featured_image" :src="post.featured_image" alt="">
               <img v-else src="http://via.placeholder.com/250x250" alt="">
             </figure>
@@ -137,7 +137,7 @@ export default new Router({
 </template>
 ```
 
-これはこのようになります（注釈：速くスタイリングするために、from https://bulma.io/ の CSS を追加しました）:
+これは以下のようになります（注釈：速くスタイリングするために、https://bulma.io/ の CSS フレームワークを追加しています）:
 
 ![buttercms-bloglist](https://user-images.githubusercontent.com/160873/36868500-1b22e374-1d5e-11e8-82a0-20c8dc312716.png)
 
@@ -185,7 +185,7 @@ export default new Router({
 </template>
 ```
 
-これはこのように表示されます。:
+これは以下のように表示されます:
 
 ![buttercms-blogdetail](https://user-images.githubusercontent.com/160873/36868506-218c86b6-1d5e-11e8-8691-0409d91366d6.png)
 
@@ -195,9 +195,9 @@ export default new Router({
 
 <p class="tip">注意してください。この方法でコンポーネントが使われるということは、コンポーネントのライフサイクルによるフックが呼ばれないことを意味します。より詳しくは、Vue Router のドキュメントを参照してください。[動的ルートマッチング] (https://router.vuejs.org/ja/essentials/dynamic-matching.html)</p>
 
-これを固定するために、私たちは `$route` オブジェクトをウォッチし、ルーティングが変わるときに、`getPost()` を呼ぶ必要があります。
+これを固定するために、私たちは `$route` オブジェクトを監視し、ルーティングが変わるときに、`getPost()` を呼ぶ必要があります。
 
-`components/BlogPost.vue` 内の `<script>` を以下のように更新します。:
+`components/BlogPost.vue` 内の `<script>` を以下のように更新します:
 
 ```html
 <script>
@@ -238,7 +238,7 @@ export default new Router({
 
 あなたのブログ上で、コンテンツをカテゴリー、タグ、および著者で特徴づける、あるいはフィルタリングするために、Butter の API を使用します。
 
-これらのオブジェクトについて、より情報を得るには、ButterCMS API リファレンスを参照してください。
+これらのオブジェクトについて、より情報を得るには、ButterCMS の API リファレンスを参照してください。
 
 * [Categories](https://buttercms.com/docs/api/?ruby#categories)
 * [Tags](https://buttercms.com/docs/api/?ruby#tags)
@@ -273,11 +273,11 @@ created() {
 }
 ```
 
-## 代替手段
+## 代替パターン
 
 もし、あなたがマークダウンでのみの記述を好むなら、特に代替手段として考えられるのは、[Nuxtent](https://nuxtent.now.sh/guide/writing#async-components) のようなものを使う方法です。Nuxtent は、マークダウン形式のファイルの代わりに、`Vue Component` の利用をあなたに提供します。 このアプローチは、マークダウン形式のファイルであなたのブログの投稿が構成される静的サイト（すなわち、Jekyll）のアプローチと類似するでしょう。Nuxtent は、Vue.js の世界であなたが Vue.js とマークダウンの間で生きるための良いインテグレーションを追加します。
 
 
-## 要約
+## まとめ
 
 以上です！あなたはいま、アプリケーション上で動作する完全な機能を持った CMS によるブログを手に入れました。私たちは、このチュートリアルが役に立つことと、あなたの Vue.js の開発経験をより一層楽しくすることを願っています。:)
