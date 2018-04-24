@@ -1,36 +1,36 @@
 ---
-title: Custom Events
+title: カスタムイベント
 type: guide
 order: 103
 ---
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はそちらのページを先に読んでください。
 
-## Event Names
+## イベント名
 
-Unlike components and props, event names don't provide any automatic case transformation. Instead, the name of an emitted event must exactly match the name used to listen to that event. For example, if emitting a camelCased event name:
+コンポーネントや props とは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり放出されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを放出した場合:
 
 ```js
 this.$emit('myEvent')
 ```
 
-Listening to the kebab-cased version will have no effect:
+ケバブケース(kebab-case)でリスナ名を作っても何も起こりません：
 
 ```html
 <my-component v-on:my-event="doSomething"></my-component>
 ```
 
-Unlike components and props, event names will never be used as variable or property names in JavaScript, so there's no reason to use camelCase or PascalCase. Additionally, `v-on` event listeners inside DOM templates will be automatically transformed to lowercase (due to HTML's case-insensitivity), so `v-on:myEvent` would become `v-on:myevent` -- making `myEvent` impossible to listen to.
+コンポーネントや props とは違い、イベント名は Javascript 内で変数やプロパティ名として扱われることはないので、キャメルケース(camelCase)やパスカルケース(PascalCase)を使う理由はありません。さらに DOM テンプレート内の `v-on` イベントリスナは自動的に小文字に変換されます (HTML が大文字と小文字を判別しないため)。このため `v-on:myEvent` は `v-on:myevent` になり `myEvent` にリスナが反応することができなくなります。
 
-For these reasons, we recommend you **always use kebab-case for event names**.
+こういった理由から ** いつもケバブケース(kebab-case)を使うこと ** をお薦めします。
 
-## Customizing Component `v-model`
+## `v-model` を使ってコンポーネントのカスタマイズ
 
-> New in 2.2.0+
+> 2.2.0+からの新しい機能
 
-By default, `v-model` on a component uses `value` as the prop and `input` as the event, but some input types such as checkboxes and radio buttons may want to use the `value` attribute for a [different purpose](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value). Using the `model` option can avoid a conflict in such cases:
+デフォルトではコンポーネントに対する `v-model` は `value` を prop として、`input` をイベントして使いますが、チェックボックスやラジオボタンなどのインプットタイプは `value` 属性を[別の目的](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value)で使う事があります。`model` オプションを使うことでこういった衝突を回避する事ができます。
 
 ```js
 Vue.component('base-checkbox', {
@@ -51,25 +51,25 @@ Vue.component('base-checkbox', {
 })
 ```
 
-Now when using `v-model` on this component:
+このコンポーネントで `v-model` を使う場合：
 
 ```js
 <base-checkbox v-model="lovingVue"></base-checkbox>
 ```
 
-the value of `lovingVue` will be passed to the `checked` prop. The `lovingVue` property will then be updated when `<base-checkbox>` emits a `change` event with a new value.
+`lovingVue` の値が `checked` prop に渡ります。 `<base-checkbox>`　が `change` イベントを新しい値で発火した時に `lovingVue` プロパティが更新されます。
 
-<p class="tip">Note that you still have to declare the <code>checked</code> prop in component's <code>props</code> option.</p>
+<p class="tip"><code>checked</code> prop をコンポーネント内の <code>props</code> オプションで宣言する必要があるのに注意してください</p>
 
-## Binding Native Events to Components
+## コンポーネントにネイティブイベントをバインディングする
 
-There may be times when you want to listen directly to a native event on the root element of a component. In these cases, you can use the `.native` modifier for `v-on`:
+コンポーネントの元要素にあるネイティブイベントを購読したい場合もあるかもしれません。こういった場合は `.native` 修飾子を `v-on` に付けてください。
 
 ```html
 <base-input v-on:focus.native="onFocus"></base-input>
 ```
 
-This can be useful sometimes, but it's not a good idea when you're trying to listen on a very specific element, like an `<input>`. For example, the `<base-input>` component above might refactor so that the root element is actually a `<label>` element:
+このやり方が役に立つこともありますが、`<input>` など特定の要素に購読したい場合はあまりいいやり方ではありません。例えば上にある `<base-input>` コンポーネントがリファクタリングされた場合、元要素は `<label>` 要素になってしまうかもしれません：
 
 ```html
 <label>
@@ -82,9 +82,9 @@ This can be useful sometimes, but it's not a good idea when you're trying to lis
 </label>
 ```
 
-In that case, the `.native` listener in the parent would silently break. There would be no errors, but the `onFocus` handler wouldn't be called when we expected it to.
+このような場合は親にある `.native` リスナは静かに動作しなくなります。エラーは何も出力されませんが、`onFocus` ハンドラが呼ばれるはずの時に呼ばれなくなります。
 
-To solve this problem, Vue provides a `$listeners` property containing an object of listeners being used on the component. For example:
+この問題を解決するために Vue は `$listeners` というリスナオブジェクトの入ったプロパティを提供しています。例えば：
 
 ```js
 {
@@ -93,7 +93,7 @@ To solve this problem, Vue provides a `$listeners` property containing an object
 }
 ```
 
-Using the `$listeners` property, you can forward all event listeners on the component to a specific child element with `v-on="$listeners"`. For elements like `<input>`, that you also want to work with `v-model`, it's often useful to create a new computed property for listeners, like `inputListeners` below:
+'$listeners' プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使ったほうがいいでしょう。以下の `inputListeners` の様に新しい computed property を作った方が便利なことも多いです。
 
 ```js
 Vue.component('base-input', {
@@ -130,21 +130,21 @@ Vue.component('base-input', {
 })
 ```
 
-Now the `<base-input>` component is a **fully transparent wrapper**, meaning it can be used exactly like a normal `<input>` element: all the same attributes and listeners will work.
+`<base-input>` コンポーネントが **完全に透明なラッパ** として扱えるようになったため、普通の `<input>` 要素と全く同じように使うことができるようになりました。全ての同じ要素とリスナが動作します。
 
-## `.sync` Modifier
+## `.sync` 修飾子
 
-> New in 2.3.0+
+> 2.3.0+からの新しい機能
 
-In some cases, we may need "two-way binding" for a prop. Unfortunately, true two-way binding can create maintenance issues, because child components can mutate the parent without the source of that mutation being obvious in both the parent and the child.
+"双方向バインディング"が prop に対して必要な場合もあります。変更ポイントの元が子コンポーネントと親コンポーネントに対して明確にならない状態で子コンポーネントが親コンポーネントを変更してしまうことがあるため、残念ながら本当の双方向バインディングを行うとメンテナンスで問題が発生します。
 
-That's why instead, we recommend emitting events in the pattern of `update:my-prop-name`. For example, in a hypothetical component with a `title` prop, we could communicate the intent of assigning a new value with:
+このため代わりに `update:my-prop-name` というパターンでイベントを発火させる事をお薦めします。例えば `title` というコンポーネントがあった場合に新しい値を割り当てる事ができます
 
 ```js
 this.$emit('update:title', newTitle)
 ```
 
-Then the parent can listen to that event and update a local data property, if it wants to. For example:
+こうする事で親がこのイベントに購読できるようになり、ローカルデータプロパティを更新します。この様な事をした場合例えば：
 
 ```html
 <text-document
@@ -153,18 +153,18 @@ Then the parent can listen to that event and update a local data property, if it
 ></text-document>
 ```
 
-For convenience, we offer a shorthand for this pattern with the `.sync` modifier:
+このパターンを `.sync` 修飾子で短く書くことができます：
 
 ```html
 <text-document v-bind:title.sync="doc.title"></text-document>
 ```
 
-The `.sync` modifier can also be used with `v-bind` when using an object to set multiple props at once:
+`.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数の props を一度にセットする事がでっきます：
 
 ```html
 <text-document v-bind.sync="doc"></text-document>
 ```
 
-This passes each property in the `doc` object (e.g. `title`) as an individual prop, then adds `v-on` update listeners for each one.
+こうする事で `doc` オブジェクト内の各プロパティ (例えば `title`) がひとつの prop として渡され、`v-on` アップデートリスナがそれぞれに付けられます。
 
-<p class="tip">Using <code>v-bind.sync</code> with a literal object, such as in <code>v-bind.sync="{ title: doc.title }"</code>, will not work, because there are too many edge cases to consider in parsing a complex expression like this.</p>
+<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられます。</p>
