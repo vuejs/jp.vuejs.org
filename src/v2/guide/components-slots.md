@@ -30,7 +30,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </a>
 ```
 
-コンポーネントが描画される時、 `<slot>` 要素は "Your Profile" に置換されるでしょう。スロットには HTML を含む任意のテンプレートを入れることが出来ます:
+コンポーネントが描画される時、 `<slot>` 要素は「Your Profile」に置換されるでしょう。スロットには HTML を含む任意のテンプレートを入れることが出来ます:
 
 ``` html
 <navigation-link url="/profile">
@@ -135,7 +135,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 ## デフォルトスロットコンテンツ
 
-デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば `<submit-button>` コンポーネントはデフォルトでは "Submit" ボタンの文言にすると良いでしょう。しかし、ユーザが "Save" や "Upload" など他の文言に上書き出来るのもまた良いでしょう。
+デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば `<submit-button>` コンポーネントはデフォルトでは「Submit」ボタンの文言にすると良いでしょう。しかし、ユーザが「Save」や「Upload」など他の文言に上書き出来るのもまた良いでしょう。
 
 これを実現するためには、`slot` タグの中にデフォルトコンテンツを記述してください。
 
