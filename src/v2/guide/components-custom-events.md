@@ -4,13 +4,11 @@ type: guide
 order: 103
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
-
-> このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はそちらのページを先に読んでください。
+> このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
 ## イベント名
 
-コンポーネントや props とは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり放出されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを放出した場合:
+コンポーネントや props とは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり放出されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを発火した場合:
 
 ```js
 this.$emit('myEvent')
@@ -24,13 +22,13 @@ this.$emit('myEvent')
 
 コンポーネントや props とは違い、イベント名は Javascript 内で変数やプロパティ名として扱われることはないので、キャメルケース(camelCase)やパスカルケース(PascalCase)を使う理由はありません。さらに DOM テンプレート内の `v-on` イベントリスナは自動的に小文字に変換されます (HTML が大文字と小文字を判別しないため)。このため `v-on:myEvent` は `v-on:myevent` になり `myEvent` にリスナが反応することができなくなります。
 
-こういった理由から ** いつもケバブケース(kebab-case)を使うこと ** をお薦めします。
+こういった理由から **いつもケバブケース(kebab-case)を使うこと** をお薦めします。
 
-## `v-model` を使ってコンポーネントのカスタマイズ
+## `v-model` を使ったコンポーネントのカスタマイズ
 
-> 2.2.0+からの新しい機能
+> 2.2.0から新規追加
 
-デフォルトではコンポーネントに対する `v-model` は `value` を prop として、`input` をイベントして使いますが、チェックボックスやラジオボタンなどのインプットタイプは `value` 属性を[別の目的](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value)で使う事があります。`model` オプションを使うことでこういった衝突を回避する事ができます。
+デフォルトではコンポーネントにある `v-model` は `value` を prop として、`input` をイベントして使いますが、チェックボックスやラジオボタンなどのインプットタイプは `value` 属性を[別の目的](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value)で使う事があります。`model` オプションを使うことでこういった衝突を回避する事ができます。
 
 ```js
 Vue.component('base-checkbox', {
@@ -59,9 +57,9 @@ Vue.component('base-checkbox', {
 
 `lovingVue` の値が `checked` prop に渡ります。 `<base-checkbox>`　が `change` イベントを新しい値で発火した時に `lovingVue` プロパティが更新されます。
 
-<p class="tip"><code>checked</code> prop をコンポーネント内の <code>props</code> オプションで宣言する必要があるのに注意してください</p>
+<p class="tip"><code>checked</code> prop をコンポーネント内の <code>props</code> オプション内でも宣言する必要がある事を注意してください。</p>
 
-## コンポーネントにネイティブイベントをバインディングする
+## コンポーネントにネイティブイベントをバインディング
 
 コンポーネントの元要素にあるネイティブイベントを購読したい場合もあるかもしれません。こういった場合は `.native` 修飾子を `v-on` に付けてください。
 
@@ -69,7 +67,7 @@ Vue.component('base-checkbox', {
 <base-input v-on:focus.native="onFocus"></base-input>
 ```
 
-このやり方が役に立つこともありますが、`<input>` など特定の要素に購読したい場合はあまりいいやり方ではありません。例えば上にある `<base-input>` コンポーネントがリファクタリングされた場合、元要素は `<label>` 要素になってしまうかもしれません：
+このやり方が役に立つこともありますが、`<input>` など特定の要素を購読したい場合はあまりいいやり方ではありません。例えば上にある `<base-input>` コンポーネントがリファクタリングされた場合、元要素は `<label>` 要素になってしまうかもしれません：
 
 ```html
 <label>
@@ -84,7 +82,7 @@ Vue.component('base-checkbox', {
 
 このような場合は親にある `.native` リスナは静かに動作しなくなります。エラーは何も出力されませんが、`onFocus` ハンドラが呼ばれるはずの時に呼ばれなくなります。
 
-この問題を解決するために Vue は `$listeners` というリスナオブジェクトの入ったプロパティを提供しています。例えば：
+この問題を解決するために Vue は `$listeners` というコンポーネントで使えるリスナオブジェクトの入ったプロパティを提供しています。例えば：
 
 ```js
 {
@@ -93,7 +91,7 @@ Vue.component('base-checkbox', {
 }
 ```
 
-'$listeners' プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使ったほうがいいでしょう。以下の `inputListeners` の様に新しい computed property を作った方が便利なことも多いです。
+`$listeners` プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使ったほうがいいでしょう。以下の `inputListeners` の様に新しい computed property を作った方が便利なことも多いです。
 
 ```js
 Vue.component('base-input', {
@@ -102,14 +100,14 @@ Vue.component('base-input', {
   computed: {
     inputListeners: function () {
       var vm = this
-      // `Object.assign` merges objects together to form a new object
+      // `Object.assign` が複数のオブジェクトを一つの新しいオブジェクトにマージします
       return Object.assign({},
-        // We add all the listeners from the parent
+        // 親からの全てのリスナを追加します
         this.$listeners,
-        // Then we can add custom listeners or override the
-        // behavior of some listeners.
+        // そしてカスタムリスナを追加したり
+        // すでに存在するリスナの振る舞いを変えることができます
         {
-          // This ensures that the component works with v-model
+          // こうすることでコンポーネントが v-model と動作します
           input: function (event) {
             vm.$emit('input', event.target.value)
           }
@@ -134,9 +132,9 @@ Vue.component('base-input', {
 
 ## `.sync` 修飾子
 
-> 2.3.0+からの新しい機能
+> 2.3.0から新規追加
 
-"双方向バインディング"が prop に対して必要な場合もあります。変更ポイントの元が子コンポーネントと親コンポーネントに対して明確にならない状態で子コンポーネントが親コンポーネントを変更してしまうことがあるため、残念ながら本当の双方向バインディングを行うとメンテナンスで問題が発生します。
+"two-way バインディング"が prop に対して必要な場合もあります。変更ポイントの元が子コンポーネントと親コンポーネントに対して明確にならない状態で子コンポーネントが親コンポーネントを変更してしまうことがあるため、残念ながら本当の two-way バインディングを行うとメンテナンスで問題が発生します。
 
 このため代わりに `update:my-prop-name` というパターンでイベントを発火させる事をお薦めします。例えば `title` というコンポーネントがあった場合に新しい値を割り当てる事ができます
 
@@ -159,7 +157,7 @@ this.$emit('update:title', newTitle)
 <text-document v-bind:title.sync="doc.title"></text-document>
 ```
 
-`.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数の props を一度にセットする事がでっきます：
+`.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数の props を一度にセットする事ができます：
 
 ```html
 <text-document v-bind.sync="doc"></text-document>
@@ -167,4 +165,4 @@ this.$emit('update:title', newTitle)
 
 こうする事で `doc` オブジェクト内の各プロパティ (例えば `title`) がひとつの prop として渡され、`v-on` アップデートリスナがそれぞれに付けられます。
 
-<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられます。</p>
+<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられるので、動作しません。</p>
