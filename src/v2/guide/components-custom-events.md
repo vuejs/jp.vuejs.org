@@ -93,7 +93,7 @@ Vue.component('base-checkbox', {
 }
 ```
 
-'$listeners' プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使ったほうがいいでしょう。以下の `inputListeners` の様に新しい computed プロパティを作った方が便利なことも多いです。
+'$listeners' プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使ったほうがいいでしょう。以下の `inputListeners` の様に新しい computed property を作った方が便利なことも多いです。
 
 ```js
 Vue.component('base-input', {
