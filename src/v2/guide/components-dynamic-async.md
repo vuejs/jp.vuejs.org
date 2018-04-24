@@ -1,5 +1,6 @@
 ---
 title: 動的 & 非同期コンポーネント
+updated: 2018-04-25 00:00:00
 type: guide
 order: 105
 ---
