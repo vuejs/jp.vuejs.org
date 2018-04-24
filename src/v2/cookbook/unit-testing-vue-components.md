@@ -1,17 +1,15 @@
 ---
-title: Unit Testing Vue Components
+title: Vue コンポーネントの単体テスト
 type: cookbook
-updated: 2018-03-20
+updated: 2018-04-16
 order: 6
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+## 基本的な例
 
-## Base Example
+単体テストはソフトウェア開発の重要な部分です。単体テストは、新しい機能の追加やバグの追跡を容易にするために、最小単位のコードを独立して実行します。 Vue の[単一ファイルコンポーネント](../guide/single-file-components.html)は独立したコンポーネントの単体テストを書くことを容易にします。これによって、あなたは既存の機能を壊さない確信を持って新しい機能を開発ができ、また他の開発者がコンポーネントがしていることを理解するのを手助けします。
 
-Unit testing is a fundamental part of software development. Unit tests execute the smallest units of code in isolation, in order to increase ease of adding new features and track down bugs. Vue's [single-file components](../guide/single-file-components.html) make it straight forward to write unit tests for components in isolation. This lets you develop new features with confidence you are not breaking existing ones, and helps other developers understand what your component does.
-
-This simple example tests whether some text is rendered:
+この簡単な例はいくつかのテキストが描画されるかどうかをテストします:
 
 ```html
 <template>
@@ -50,58 +48,58 @@ export default {
 import { shallow } from '@vue/test-utils'
 
 test('Foo', () => {
-  // render the component
+  // コンポーネントを描画します
   const wrapper = shallow(Hello)
 
-  // should not allow for `username` less than 7 characters, excludes whitespace
+  // `username`は空白を除外して7文字未満は許されません
   wrapper.setData({ username: ' '.repeat(7) })
 
-  // assert the error is rendered
+  // エラーが描画されることをアサートします
   expect(wrapper.find('.error').exists()).toBe(true)
 
-  // update the name to be long enough
+  // 名前を十分な長さにします
   wrapper.setData({
     username: 'Lachlan'
   })
 
-  // assert the error has gone away
+  // エラーがなくなったことをアサートします
   expect(wrapper.find('.error').exists()).toBe(false)
 })
 ```
 
-The above code snippet shows how to test whether an error message is rendered based on the length of the username. It demonstrates the general idea of unit testing Vue components: render the component, and assert that the markup matches the state of the component.
+上記のコードスニペットは、ユーザー名の長さに基づいてエラーメッセージが描画されるかどうかをテストする方法を示しています。 Vue コンポーネントの単体テストの一般的なアイデアを示します: コンポーネントを描画し、マークアップがコンポーネントの状態に一致するかをアサートします。
 
-## Why test?
+## なぜテストをするのですか
 
-Component unit tests have lots of benefits:
+コンポーネントの単体テストにはたくさんの利点があります:
 
-- Provide documentation on how the component should behave
-- Save time over testing manually
-- Reduce bugs in new features
-- Improve design
-- Facilitate refactoring
+- コンポーネントがどう動作すべきかのドキュメントを提供します
+- 過度な手動テストの時間を節約します
+- 新しい機能におけるバグを減らします
+- 設計を改良します
+- リファクタリングを容易にします
 
-Automated testing allows large teams of developers to maintain complex codebases.
+自動テストは大規模な開発チームが複雑なコードベースを保つことを可能にします。
 
-#### Getting started
+#### はじめる
 
-[Vue Test Utils](https://github.com/vuejs/vue-test-utils) is the official library for unit testing Vue components. The [vue-cli](https://github.com/vuejs/vue-cli) `webpack` template comes with either Karma or Jest, both well supported test runners, and there are some [guides](https://vue-test-utils.vuejs.org/en/guides/) in the Vue Test Utils documentation.
+[Vue Test Utils](https://github.com/vuejs/vue-test-utils) は Vue コンポーネントの単体テストのための公式ライブラリです。 [vue-cli](https://github.com/vuejs/vue-cli) の `webpack` テンプレートには Karma と Jest というよくサポートされたテストランナーを備えており、また Vue Test Utils にいくつかの[ガイド](https://vue-test-utils.vuejs.org/ja/guides/)があります。
 
-## Real-World Example
+## 実例
 
-Unit tests should be:
+単体テストのすべきことは:
 
-- Fast to run
-- Easy to understand
-- Only test a _single unit of work_
+- 実行が早いこと
+- 理解しやすいこと
+- _一つの作業_ だけをテストすること
 
-Let's continue building on the previous example, while introducing the idea of a <a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">factory function</a> to make our test more compact and readable. The component should:
+私達のテストをもっと簡潔に読みやすくするために<a href="https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)">ファクトリ関数</a>のアイデアを紹介しつつ、以前の例の構築を続けていきましょう。コンポーネントがすべきこと：
 
-- show a 'Welcome to the Vue.js cookbook' greeting.
-- prompt the user to enter their username
-- display an error if the entered username is less than seven letters
+- 'Welcome to the Vue.js cookbook' という挨拶を表示する
+- ユーザーにユーザー名の入力を促す
+- もし入力された文字数が7文字未満ならエラーを表示する
 
-Let's take a look at the component code first:
+最初にコンポーネントのコードを見てみましょう:
 
 ```html
 <template>
@@ -109,12 +107,12 @@ Let's take a look at the component code first:
     <div class="message">
       {{ message }}
     </div>
-    Enter your username: <input v-model="username">
-    <div 
+    ユーザー名を入力してください: <input v-model="username">
+    <div
       v-if="error"
       class="error"
     >
-      Please enter a username with at least seven letters.
+      少なくとも7文字でユーザー名を入力してください
     </div>
   </div>
 </template>
@@ -139,19 +137,19 @@ export default {
 </script>
 ```
 
-The things that we should test are:
+私たちがテストすべきは:
 
-- is the `message` rendered?
-- if `error` is `true`, `<div class="error">` should be present
-- if `error` is `false`, `<div class="error">` should not be present
+- `message` が表示されているか
+- もし `error` が `true`の場合、 `<div class="error">` が存在するか
+- もし `error` が `false`の場合、 `<div class="error">` が存在しないか
 
-And our first attempt at test:
+私達のテストでの最初の試み:
 
 ```js
 import { shallow } from '@vue/test-utils'
 
 describe('Foo', () => {
-  it('renders a message and responds correctly to user input', () => {
+  it('メッセージを描画し、ユーザー入力に正しく応答します', () => {
       const wrapper = shallow(Foo, {
     data: {
       message: 'Hello World',
@@ -159,32 +157,33 @@ describe('Foo', () => {
     }
   })
 
-  // see if the message renders
+  // message が描画されていたら見られる
   expect(wrapper.find('.message').text()).toEqual('Hello World')
 
-  // assert the error is rendered
+  // エラーのアサートが描画される
   expect(wrapper.find('.error').exists()).toBeTruthy()
 
-  // update the `username` and assert error is no longer rendered
+  // `username`を更新してエラーのアサートが描画されなくなる
   wrapper.setData({ username: 'Lachlan' })
   expect(wrapper.find('.error').exists()).toBeFalsy()
   })
 })
 ```
 
-There are some problems with the above:
+上記テストにはいくつかの問題があります:
 
-- a single test is making assertions about different things
-- difficult to tell the different states the component can be in, and what should be rendered
+- 1つのテストが異なることについてアサーションを行っています
+- コンポーネントが存在できる異なる状態や描画すべきものを伝えるのが難しい
 
-The below example improves the test by:
+以下の例では、テストを次のように改善していきます:
 
-- only making one assertion per `it` block
-- having short, clear test descriptions
-- providing only the minimum data required for the test
-- refactoring duplicated logic (creating the `wrapper` and setting the `username` variable) into a factory function
+- `it` ブロックごとに1つのアサーションのみ作成する
+- 短く明確なテストの説明を持つ
+- テストに必要な最低限のデータだけを提供する
+- 重複したロジック（`wrapper` の作成と `username` 変数の設定）をファクトリ関数にリファクタリングする
 
-*Updated test*:
+*更新したテスト*:
+
 ```js
 import { shallow } from '@vue/test-utils'
 import Foo from './Foo'
@@ -196,58 +195,58 @@ const factory = (values = {}) => {
 }
 
 describe('Foo', () => {
-  it('renders a welcome message', () => {
+  it('welcome メッセージを描画する', () => {
     const wrapper = factory()
 
     expect(wrapper.find('.message').text()).toEqual("Welcome to the Vue.js cookbook")
   })
 
-  it('renders an error when username is less than 7 characters', () => {
+  it('usernameが7未満のときエラーを描画する', () => {
     const wrapper = factory({ username: ''  })
 
     expect(wrapper.find('.error').exists()).toBeTruthy()
   })
 
-  it('renders an error when username is whitespace', () => {
+  it('usernameが空白のときエラーを描画する', () => {
     const wrapper = factory({ username: ' '.repeat(7) })
 
     expect(wrapper.find('.error').exists()).toBeTruthy()
   })
 
-  it('does not render an error when username is 7 characters or more', () => {
-    const wrapper = factory({ username: 'Lachlan'  })
+  it('usernameが7文字かそれ以上のとき、エラーが描画されない', () => {
+    const wrapper = factory({ username: 'Lachlan' })
 
     expect(wrapper.find('.error').exists()).toBeFalsy()
   })
 })
 ```
 
-Points to note:
+注意すべき点:
 
-At the top, we declare the factory function which merges the `values` object into `data` and returns a new `wrapper` instance. This way, we don't need to duplicate `const wrapper = shallow(Foo)` in every test. Another great benefit to this is when more complex components with a method or computed property you might want to mock or stub in every test, you only need to declare it once.
+一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallow（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや算出プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
 
-## Additional Context
+## コンテキストの追加
 
-The above test is fairly simple, but in practice Vue components often have other behaviors you want to test, such as:
+上記のテストはかなりシンプルですが、実際の Vue コンポーネントは以下のような他のテストしたい振る舞いをよく持ちます:
 
-- making API calls
-- committing or dispatching mutations or actions with a `Vuex` store
-- testing interaction
+- API コール
+- `Vuex` ストアでコミットやミューテーションのディスパッチやアクションすること
+- 相互作用テスト
 
-There are more complete examples showing such tests in the Vue Test Utils [guides](https://vue-test-utils.vuejs.org/en/guides/).
+そのようなテストを示すより完全な例が Vue Test Utils [ガイド](https://vue-test-utils.vuejs.org/ja/guides/)にあります。
 
-Vue Test Utils and the enormous JavaScript ecosystem provides plenty of tooling to facilitate almost 100% test coverage. Unit tests are only one part of the testing pyramid, though. Some other types of tests include e2e (end to end) tests, and snapshot tests. Unit tests are the smallest and most simple of tests - they make assertions on the smallest units of work, isolating each part of a single component.
+Vue Test Utils と巨大な JavaScript エコシステムはほぼ 100％ のテスト網羅率を容易にする豊富なツールを提供します。とはいえ、単体テストはテストピラミッドの一部に過ぎません。その他のタイプのテストには e2e (end to end) テストとスナップショットテストがあります。単体テストは最小で最も簡単なテストです - 最小の作業単位でアサーションを行い、単一のコンポーネントの各部分を分離します。
 
-Snapshot tests save the markup of your Vue component, and compare to the new one generated each time the test runs. If something changes, the developer is notified, and can decide if the change was intentional (the component was updated) or accidental (the component is behaving incorrectly).
+スナップショットテストはあなたの Vue コンポーネントのマークアップを保存し、テストが実行されるたびに新しく生成されたものと比較します。もし何かが変更された場合、開発者に通知され、そして開発者はその変化が意図的（コンポーネントが変更された）か偶発的（コンポーネントが正しい動作をしていない）かを選ぶことができます。
 
-End to end tests ensure a number of components interact well together. They are more high level. Some examples might be testing if a user can sign up, log in, and update their username. These are slower to run than unit tests or snapshot tests.
+e2e テストは複数のコンポーネントがうまく相互作用することを保証します。それらはより高いレベルです。幾つかの例は、ユーザーがサインアップやログインやユーザー名を更新できるかどうかをテストするものです。これらは単体テストやスナップショットテストより実行が遅くなります。
 
-Unit tests are most useful during development, either to help a developer think about how to design a component, or refactor an existing component, and are often run every time code is changed.
+単体テストはどうコンポーネントを設計するか、どう既存のコンポーネントをリファクタリングするかについて考えるのに役に立ち、コードが変更されるたびに実行されることが多いため、開発中にもっとも有用です。
 
-Higher level tests, such as end to end tests, run much slower. These usually run pre-deploy, to ensure each part of the system is working together correctly.
+e2e などのレベルの高いテストはかなり遅く実行されます。これらは通常デプロイ前に実行されて、システムの各部分がそれぞれ正しく連携して動いていることを確かにします。
 
-More information about testing Vue components can be found in [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications) by core team member [Edd Yerburgh](https://eddyerburgh.me/).
+Vue コンポーネントのテストについてのさらなる情報はコアチームメンバー [Edd Yerburgh](https://eddyerburgh.me/) による [Testing Vue.js Applications](https://www.manning.com/books/testing-vuejs-applications) で見つけることができます。
 
-## When To Avoid This Pattern
+## このパターンを避けるとき
 
-Unit testing is an important part of any serious application. At first, when the vision of an application is not clear, unit testing might slow down development, but once a vision is established and real users will be interacting with the application, unit tests (and other types of automated tests) are absolutely essential to ensure the codebase is maintainable and scalable.
+単体テストは重大なアプリケーションの重要な部分です。まず最初は、アプリケーションのビジョンが明確ではない時、単体テストによって開発が遅くなる可能性がありますが、しかし一度ビジョンが決まり、実際のユーザーがアプリケーションにふれると、単体テスト（と他の種類の自動テスト）はコードベースが維持可能でスケーラブルなことを保証するために絶対に必要です。
