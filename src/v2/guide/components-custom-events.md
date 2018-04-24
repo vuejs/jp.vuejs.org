@@ -144,8 +144,6 @@ Vue.component('base-input', {
 this.$emit('update:title', newTitle)
 ```
 
-Then the parent can listen to that event and update a local data property, if it wants to. For example:
-
 こうする事で親がこのイベントに購読できるようになり、ローカルデータプロパティを更新します。この様な事をした場合例えば：
 
 ```html
@@ -155,15 +153,11 @@ Then the parent can listen to that event and update a local data property, if it
 ></text-document>
 ```
 
-For convenience, we offer a shorthand for this pattern with the `.sync` modifier:
-
 このパターンを `.sync` 修飾子で短く書くことができます：
 
 ```html
 <text-document v-bind:title.sync="doc.title"></text-document>
 ```
-
-The `.sync` modifier can also be used with `v-bind` when using an object to set multiple props at once:
 
 `.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数の props を一度にセットする事がでっきます：
 
@@ -171,10 +165,6 @@ The `.sync` modifier can also be used with `v-bind` when using an object to set 
 <text-document v-bind.sync="doc"></text-document>
 ```
 
-This passes each property in the `doc` object (e.g. `title`) as an individual prop, then adds `v-on` update listeners for each one.
-
 こうする事で `doc` オブジェクト内の各プロパティ (例えば `title`) がひとつの prop として渡され、`v-on` アップデートリスナがそれぞれに付けられます。
-
-<p class="tip">Using <code>v-bind.sync</code> with a literal object, such as in <code>v-bind.sync="{ title: doc.title }"</code>, because there are simply too many edge cases to consider in parsing a complex expression like this.</p>
 
 <p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられます。</p>
