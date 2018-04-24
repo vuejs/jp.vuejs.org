@@ -1,4 +1,4 @@
----
+プロパティ---
 title: カスタムイベント
 type: guide
 order: 103
@@ -8,7 +8,7 @@ order: 103
 
 ## イベント名
 
-コンポーネントや props とは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり放出されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを発火した場合:
+コンポーネントやプロパティとは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり発火されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを発火した場合:
 
 ```js
 this.$emit('myEvent')
@@ -20,7 +20,7 @@ this.$emit('myEvent')
 <my-component v-on:my-event="doSomething"></my-component>
 ```
 
-コンポーネントや props とは違い、イベント名は Javascript 内で変数やプロパティ名として扱われることはないので、キャメルケース(camelCase)やパスカルケース(PascalCase)を使う理由はありません。さらに DOM テンプレート内の `v-on` イベントリスナは自動的に小文字に変換されます (HTML が大文字と小文字を判別しないため)。このため `v-on:myEvent` は `v-on:myevent` になり `myEvent` にリスナが反応することができなくなります。
+コンポーネントやプロパティとは違い、イベント名は JavaScript 内で変数やプロパティ名として扱われることはないので、キャメルケース(camelCase)やパスカルケース(PascalCase)を使う理由はありません。さらに DOM テンプレート内の `v-on` イベントリスナは自動的に小文字に変換されます (HTML が大文字と小文字を判別しないため)。このため `v-on:myEvent` は `v-on:myevent` になり `myEvent` にリスナが反応することができなくなります。
 
 こういった理由から **いつもケバブケース(kebab-case)を使うこと** をお薦めします。
 
@@ -28,7 +28,8 @@ this.$emit('myEvent')
 
 > 2.2.0から新規追加
 
-デフォルトではコンポーネントにある `v-model` は `value` を prop として、`input` をイベントして使いますが、チェックボックスやラジオボタンなどのインプットタイプは `value` 属性を[別の目的](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#Value)で使う事があります。`model` オプションを使うことでこういった衝突を回避する事ができます。
+デフォルトではコンポーネントにある `v-model` は `value` をプロパティとして、`input` をイベントして使いますが、チェックボックスやラジオボタンなどのインプットタイプは `value` 属性を[別の目的](
+https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/checkbox#Value)で使う事があります。`model` オプションを使うことでこういった衝突を回避する事ができます。
 
 ```js
 Vue.component('base-checkbox', {
@@ -55,13 +56,13 @@ Vue.component('base-checkbox', {
 <base-checkbox v-model="lovingVue"></base-checkbox>
 ```
 
-`lovingVue` の値が `checked` prop に渡ります。 `<base-checkbox>`　が `change` イベントを新しい値で発火した時に `lovingVue` プロパティが更新されます。
+`lovingVue` の値が `checked` プロパティに渡ります。 `<base-checkbox>`　が `change` イベントを新しい値で発火した時に `lovingVue` プロパティが更新されます。
 
-<p class="tip"><code>checked</code> prop をコンポーネント内の <code>props</code> オプション内でも宣言する必要がある事を注意してください。</p>
+<p class="tip"><code>checked</code>プロパティをコンポーネント内の <code>プロパティ</code> オプション内でも宣言する必要がある事を注意してください。</p>
 
 ## コンポーネントにネイティブイベントをバインディング
 
-コンポーネントの元要素にあるネイティブイベントを購読したい場合もあるかもしれません。こういった場合は `.native` 修飾子を `v-on` に付けてください。
+コンポーネントのルート要素にあるネイティブイベントを購読したい場合もあるかもしれません。こういった場合は `.native` 修飾子を `v-on` に付けてください。
 
 ```html
 <base-input v-on:focus.native="onFocus"></base-input>
@@ -91,7 +92,7 @@ Vue.component('base-checkbox', {
 }
 ```
 
-`$listeners` プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使ったほうがいいでしょう。以下の `inputListeners` の様に新しい computed property を作った方が便利なことも多いです。
+`$listeners` プロパティを使うことで、コンポーネントの全てのイベントリスナを `v-on="$listeners"` を使って特定の子要素に送ることができます、`<input>` の様な要素の場合は `v-model` を使って動作させたいでしょう。以下の `inputListeners` の様に新しい算出プロパティを作った方が便利なことも多いです。
 
 ```js
 Vue.component('base-input', {
@@ -128,21 +129,21 @@ Vue.component('base-input', {
 })
 ```
 
-`<base-input>` コンポーネントが **完全に透明なラッパ** として扱えるようになったため、普通の `<input>` 要素と全く同じように使うことができるようになりました。全ての同じ要素とリスナが動作します。
+`<base-input>` コンポーネントが **完全に透過的なラッパ** として扱えるようになったため、普通の `<input>` 要素と全く同じように使うことができるようになりました。全ての同じ要素とリスナが動作します。
 
 ## `.sync` 修飾子
 
 > 2.3.0から新規追加
 
-"two-way バインディング"が prop に対して必要な場合もあります。変更ポイントの元が子コンポーネントと親コンポーネントに対して明確にならない状態で子コンポーネントが親コンポーネントを変更してしまうことがあるため、残念ながら本当の two-way バインディングを行うとメンテナンスで問題が発生します。
+"双方向バインディング"がプロパティに対して必要な場合もあります。残念ながら、本当の双方向バインディングはメンテナンスの問題を引き起こす可能性があります。子コンポーネントは親でも子でもその変更元が明らかでなくても親を変更させることができるからです。
 
-このため代わりに `update:my-prop-name` というパターンでイベントを発火させる事をお薦めします。例えば `title` というコンポーネントがあった場合に新しい値を割り当てる事ができます
+このため代わりに `update:my-prop-name` というパターンでイベントを発火させる事をお薦めします。例えば `title` というプロパティを持つ仮のコンポーネントがあった場合、意図的に新しい値を割り当てる事ができます
 
 ```js
 this.$emit('update:title', newTitle)
 ```
 
-こうする事で親がこのイベントに購読できるようになり、ローカルデータプロパティを更新します。この様な事をした場合例えば：
+こうする事で、必要な場合、親がこのイベントを購読し、ローカルデータプロパティを更新することができます。例えば:
 
 ```html
 <text-document
@@ -157,12 +158,12 @@ this.$emit('update:title', newTitle)
 <text-document v-bind:title.sync="doc.title"></text-document>
 ```
 
-`.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数の props を一度にセットする事ができます：
+`.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数のプロパティを一度にセットする事ができます：
 
 ```html
 <text-document v-bind.sync="doc"></text-document>
 ```
 
-こうする事で `doc` オブジェクト内の各プロパティ (例えば `title`) がひとつの prop として渡され、`v-on` アップデートリスナがそれぞれに付けられます。
+こうする事で `doc` オブジェクト内の各プロパティ (例えば `title`) がひとつのプロパティとして渡され、`v-on` アップデートリスナがそれぞれに付けられます。
 
-<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられるので、動作しません。</p>
+<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられるので、</p>
