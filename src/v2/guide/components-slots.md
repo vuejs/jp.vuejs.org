@@ -9,7 +9,7 @@ order: 104
 
 ## スロットコンテンツ
 
-Vue は現在の[Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md)にならったコンテンツ配信APIが実装されており、 `<slot>` 要素をコンテンツ配信の受け渡し口として利用します。
+Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) にならったコンテンツ配信 API が実装されており、 `<slot>` 要素をコンテンツ配信の受け渡し口として利用します。
 
 これを使うことで次のようなコンポーネントを作成することが出来ます:
 
@@ -54,7 +54,7 @@ Vue は現在の[Web Components spec draft](https://github.com/w3c/webcomponents
 
 ## 名前付きスロット
 
-複数のスロットがあると便利なときもあります。例えば、仮に `base-layout` コンポーネントが下記のようなテンプレートであるとしましょう:
+複数のスロットがあると便利なときもあります。例えば、仮に `base-layout` コンポーネントが下記のようなテンプレートだとしましょう:
 
 ``` html
 <div class="container">
@@ -116,7 +116,7 @@ Vue は現在の[Web Components spec draft](https://github.com/w3c/webcomponents
 </base-layout>
 ```
 
-その上で名前無しのスロットを引き続き使うこともでき、**デフォルトスロット**として、マッチしなかった全ての要素を受け取る受け渡し口となります。上記の例はどちらも以下のようなHTMLにレンダリングされるでしょう:
+その上で名前無しのスロットを引き続き使うこともでき、**デフォルトスロット**として、マッチしなかった全ての要素を受け取る受け渡し口となります。上記の例はどちらも以下のような HTML にレンダリングされるでしょう:
 
 ``` html
 <div class="container">
@@ -217,7 +217,7 @@ Vue は現在の[Web Components spec draft](https://github.com/w3c/webcomponents
 
 ### `slot-scope` の分割代入
 
-`slot-scope` の値は実際には関数定義の引数位置に表示できる有効な JavaScript式を受け入れます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) では[ES2015 分割代入](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring)を式の中で下記のように利用できることを意味します:
+`slot-scope` の値は実際には関数定義の引数位置に表示できる有効な JavaScript 式を受け入れます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) では [ES2015 分割代入](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) を式の中で下記のように利用できることを意味します:
 
 ```html
 <todo-list v-bind:todos="todos">
