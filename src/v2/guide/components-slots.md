@@ -135,7 +135,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 ## デフォルトスロットコンテンツ
 
-デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば `<submit-button>` コンポーネントはデフォルトでは「Submit」ボタンの文言にすると良いでしょう。しかし、ユーザが「Save」や「Upload」など他の文言に上書き出来るのもまた良いでしょう。
+デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば、 `<submit-button>` コンポーネントはデフォルトでは「Submit」という文言にしたいですが、ユーザが「Save」や「Upload」など他の文言に上書き出来るようにもしたいです。
 
 これを実現するためには、`slot` タグの中にデフォルトコンテンツを記述してください。
 
@@ -178,7 +178,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </ul>
 ```
 
-しかしアプリケーションのいくつかの部分では、それぞれの todo アイテムがただの `todo.text` とは違うものをレンダリングすることを求めます。そういった場合がスコープ付きスロットの出番です。
+しかしアプリケーションのいくつかの部分では、それぞれの todo アイテムがただの `todo.text` とは違うものをレンダリングしたいでしょう。そういった場合はスコープ付きスロットの出番です。
 
 この機能を実現するために行わなければならないことは、todo アイテムのコンテンツを `<slot>` 要素で囲うことで、スロットに対してコンテキストに関連した全てのデータを渡すことです: この場合は `todo` オブジェクトです:
 
@@ -217,7 +217,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 ### `slot-scope` の分割代入
 
-`slot-scope` の値は実際には関数定義の引数位置に表示できる有効な JavaScript 式を受け入れます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) では [ES2015 分割代入](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) を式の中で下記のように利用できることを意味します:
+`slot-scope` の値は実際には関数定義の引数位置にあらわせる有効な JavaScript 式を受け入れます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) では [ES2015 分割代入](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) を式の中で下記のように利用できることを意味します:
 
 ```html
 <todo-list v-bind:todos="todos">
@@ -228,4 +228,4 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </todo-list>
 ```
 
-これはスコープ付きスロットを少しだけきれいにする素晴らしい方法です。
+これはスコープ付きスロットを少しきれいにする素晴らしい方法です。
