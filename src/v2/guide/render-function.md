@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2018-02-10
+updated: 2018-04-04
 type: guide
 order: 303
 ---
@@ -140,7 +140,7 @@ return createElement('h1', this.blogTitle)
 createElement(
   // {String | Object | Function}
   // HTML タグ名、コンポーネントオプション、もしくは
-  // そのどちらかを返す関数です。必須です。
+  // そのどちらかを解決する非同期関数です。必須です。
   'div',
 
   // {Object}
@@ -596,6 +596,20 @@ Vue.component('my-functional-button', {
 ```
 
 `context.data` を `createElement` の第2引数として渡すことで、`my-function-button` で使用された属性やイベントリスナを渡しています。実際、イベントは `.native` 修飾子を必要としないため、とても透過的です。
+
+もしあなたがテンプレートベースの関数型コンポーネントを使用している場合、属性とリスナーも手動で追加する必要があります。私たちは個々のコンテキストの内容にアクセスできるので、イベントリスナを渡すための `listeners` _(`data.on` のエイリアス)_ と HTML の属性を渡すための `data.attrs` を使用することができます。
+
+```html
+<template functional>
+  <button
+    class="btn btn-primary"
+    v-bind="data.attrs"
+    v-on="listeners"
+  >
+    <slot/>
+  </button>
+</template>
+```
 
 ### `slots()` vs `children`
 

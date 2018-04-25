@@ -1,17 +1,17 @@
 ---
 title: 状態管理
-updated: 2017-09-03
+updated: 2018-04-04
 type: guide
 order: 502
 ---
 
 ## 公式 Flux ライクな実装
 
-大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は [vuex](https://github.com/vuejs/vuex) を提供します。これは Elm から触発された状態管理ライブラリで、特別なセットアップなしで時間を巻き戻せる [vue-devtools](https://github.com/vuejs/vue-devtools) とも連携します。
+大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は Elm から触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供します。[vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
 
 ### React 開発者への情報
 
-もしあなたが React のエコシステムから来たのなら、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどう比較されるか気になっていることでしょう。Redux は実際に view レイヤの知識を持たないので、[シンプルなバインディング](https://github.com/egoist/revue) を通して簡単に Vue とあわせて利用することができます。Vuex は、 自らが Vue のアプリケーション内にいることを**知っている**、という点で異なります。これにより Vue といっそう良く連携することができ、より直感的な API を提供したり、開発体験を向上させることができます。
+もしあなたが React のエコシステムから来たのなら、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどう比較されるか気になっていることでしょう。Redux は実際に view レイヤの知識を持たないので、[シンプルなバインディング](https://yarnpkg.com/en/packages?q=redux%20vue&p=1) を通して簡単に Vue とあわせて利用することができます。Vuex は、 自らが Vue のアプリケーション内にいることを**知っている**、という点で異なります。これにより Vue といっそう良く連携することができ、より直感的な API を提供したり、開発体験を向上させることができます。
 
 ## シンプルな状態管理をゼロから作る
 

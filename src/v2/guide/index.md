@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2018-01-16
+updated: 2018-03-26
 type: guide
 order: 2
 ---
@@ -9,7 +9,7 @@ order: 2
 
 Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインターフェイスを構築するための**プログレッシブフレームワーク**です。他の一枚板(モノリシック: monolithic)なフレームワークとは異なり、Vue は少しずつ適用していけるように設計されています。中核となるライブラリは view 層だけに焦点を当てています。そのため、使い始めるのも、他のライブラリや既存のプロジェクトに統合するのも、とても簡単です。また、[モダンなツール](single-file-components.html)や[サポートライブラリ](https://github.com/vuejs/awesome-vue#components--libraries)と併用することで、洗練されたシングルページアプリケーションの開発も可能です。
 
-あなたが Vue についてもっと深く学ぶ前に概要を知りたいのなら、中核となる原則とサンプルプロジェクトを元に説明する<a id="modal-player"  href="javascript:;">ビデオ</a>を作成しているので、それを見るとよいでしょう。
+あなたが Vue についてもっと深く学ぶ前に概要を知りたいのなら、中核となる原則とサンプルプロジェクトを元に説明する<a id="modal-player"  href="#">ビデオ</a>を作成しているので、それを見るとよいでしょう。
 
 あなたが経験豊富なフロントエンド開発者で、 Vue.js と他のライブラリ/フレームワークを比較したい場合、[他のフレームワークとの比較](comparison.html)を確認してください。
 
@@ -20,6 +20,14 @@ Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインター
 Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。気軽に他のタブを開いて、基本的な例を試してみましょう。もしくは、単純に <a href="https://gist.githubusercontent.com/chrisvfritz/7f8d7d63000b48493c336e48b3db3e52/raw/ed60c4e5d5c6fec48b0921edaed0cb60be30e87c/index.html" target="_blank" download="index.html"><code>index.html</code> を作成し </a> 、以下のコードで Vue を導入することができます:
 
 ``` html
+<!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+```
+
+or:
+
+``` html
+<!-- 本番バージョン、サイズと速度のために最適化されています -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 ```
 
