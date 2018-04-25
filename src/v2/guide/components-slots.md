@@ -60,13 +60,13 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 ``` html
 <div class="container">
   <header>
-    <!-- ヘッダコンテンツをここに挿入したい -->
+    <!-- ここにヘッダコンテンツ -->
   </header>
   <main>
-    <!-- メインコンテンツをここに挿入したい -->
+    <!-- ここにメインコンテンツ -->
   </main>
   <footer>
-    <!-- フッターコンテンツをここに挿入したい -->
+    <!-- ここにフッターコンテンツ -->
   </footer>
 </div>
 ```
