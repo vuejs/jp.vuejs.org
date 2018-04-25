@@ -215,9 +215,9 @@ requireComponent.keys().forEach(fileName => {
   // コンポーネントをグローバル登録する
   Vue.component(
     componentName,
-    // `export default` でコンポーネントがエクスポートされた場合に存在する、
-    // `.default` :コンポーネントオプションを期待して
-    // 見つからなかった場合にはモジュールのルートにフォールバックします。
+    // `export default` を使ってコンポーネントがエクスポートされた場合に存在する
+    // `.default` でコンポーネントオプションを期待していて
+    // 存在しない場合にはモジュールのルートにフォールバックします。
     componentConfig.default || componentConfig
   )
 })
