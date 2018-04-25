@@ -39,14 +39,27 @@ order: 0
 
 ### 基本の例
 
+<<<<<<< HEAD
 _必須_
+=======
+We request that you follow the template below. We understand, however, that there are times when you may necessarily need to deviate for clarity or flow. Either way, all recipes should at some point discuss the nuance of the choice made using this pattern, preferably in the form of the alternative patterns section.
+
+### Base Example
+>>>>>>> 00263b2fb997370b06cd85c0f6ba91f4edc34d5b
 
 1. ひとこと、ふたことで問題を明確にしてください。
 2. ひとこと、ふたことで最もかんたんな解決策を説明してください。
 3. 最小のコードサンプルで示してください。
 4. ひとことで達成されたものは何か説明してください。
 
+<<<<<<< HEAD
 ### 価値の詳細
+=======
+1.  Articulate the problem in a sentence or two.
+2.  Explain the simplest possible solution in a sentence or two.
+3.  Show a small code sample.
+4.  Explain what this accomplishes in a sentence.
+>>>>>>> 00263b2fb997370b06cd85c0f6ba91f4edc34d5b
 
 _必須_
 
@@ -55,7 +68,14 @@ _必須_
 3. とてもシンプルなコードサンプルでグッドパターンとバッドパターンを示してください。
 4. なぜこれが説得力のあるサンプルなのか議論してください。 参照リンクは必須ではありませんが、推奨されています。
 
+<<<<<<< HEAD
 ### 実例
+=======
+1.  Address common questions that one might have while looking at the example. (Blockquotes are great for this)
+2.  Show examples of common missteps and how they can be avoided.
+3.  Show very simple code samples of good and bad patterns.
+4.  Discuss why this may be a compelling pattern. Links for reference are not required but encouraged.
+>>>>>>> 00263b2fb997370b06cd85c0f6ba91f4edc34d5b
 
 _必須_
 
@@ -64,7 +84,12 @@ _必須_
 1. いくつかの簡潔なセットアップを済ませる、もしくは、
 2. codepen/jsfiddle でサンプルを実行する
 
+<<<<<<< HEAD
 もし後者を選択した場合、それはどんなものか、またどのように動作するか話し合う必要があります。
+=======
+1.  Walking through a few terse examples of setup, or
+2.  Embedding a codepen/jsfiddle example
+>>>>>>> 00263b2fb997370b06cd85c0f6ba91f4edc34d5b
 
 ### その他のコンテクスト
 
