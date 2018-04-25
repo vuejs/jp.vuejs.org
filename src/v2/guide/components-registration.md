@@ -190,32 +190,32 @@ import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
 const requireComponent = require.context(
-  // The relative path of the components folder
+  // コンポーネントフォルダの相対パス
   './components',
-  // Whether or not to look in subfolders
+  // サブフォルダ内を調べるかどうか
   false,
-  // The regular expression used to match base component filenames
+  // 基底コンポーネントのファイル名に一致させるのに使う正規表現
   /Base[A-Z]\w+\.(vue|js)$/
 )
 
 requireComponent.keys().forEach(fileName => {
-  // Get component config
+  // コンポーネント設定を取得する
   const componentConfig = requireComponent(fileName)
 
-  // Get PascalCase name of component
+  // コンポーネント名をパスカルケース (PascalCase) で取得する
   const componentName = upperFirst(
     camelCase(
-      // Strip the leading `'./` and extension from the filename
+      // 先頭の `'./` と拡張子をファイル名から取り除く
       fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
     )
   )
 
-  // Register component globally
+  // コンポーネントをグローバル登録する
   Vue.component(
     componentName,
-    // Look for the component options on `.default`, which will
-    // exist if the component was exported with `export default`,
-    // otherwise fall back to module's root.
+    // `export default` でコンポーネントがエクスポートされた場合に存在する、
+    // `.default` でコンポーネントオプションを期待して
+    // 見つからなかった場合にはモジュールのルートにフォールバックします。
     componentConfig.default || componentConfig
   )
 })
