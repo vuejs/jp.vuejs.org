@@ -1,5 +1,6 @@
 ---
 title: コンポーネントの登録
+updated: 2018-04-26 00:00:00
 type: guide
 order: 101
 ---
@@ -16,7 +17,7 @@ Vue.component('my-component-name', { /* ... */ })
 
 コンポーネントの命名は、コンポーネントの使用箇所に左右されます。(文字列テンプレート、または[単一ファイルコンポーネント](single-file-components.html)ではなく) DOM 上で直接コンポーネントを使用する場合は、[W3C rules](https://www.w3.org/TR/custom-elements/#concepts) に従ったカスタムタグ名(全て小文字で、ハイフンが含まれていること)を推奨します。これは、既に存在する、そして将来定義される HTML 要素との衝突を防止するのに役立ちます。
 
-[スタイルガイド](../style-guide/#Base-component-names-strongly-recommended)では、コンポーネント名についてのその他の推奨項目を見ることができます。
+[スタイルガイド](../style-guide/#基底コンポーネントの名前-強く推奨)では、コンポーネント名についてのその他の推奨項目を見ることができます。
 
 ### 命名のケース (Name Casing)
 
@@ -79,7 +80,6 @@ var ComponentB = { /* ... */ }
 var ComponentC = { /* ... */ }
 ```
 
-
 次に、`components` オプション内に使いたいコンポーネントを定義します:
 
 ```js
@@ -133,7 +133,7 @@ ES2015+ では `ComponentA` のような変数名をオブジェクト内部に�
 
 ここを見ているということは、おそらくあなたは Babel と Webpack のようなものを用いて、モジュールシステムを使用していることでしょう。もしそうなら、それぞれのコンポーネントをファイルとして配置する `components` ディレクトリを作成することを推奨します。
 
-ローカル登録をする前に、使いたいコンポーネントごとに読み込む必要があります。例えば、`ComponentB.js` または `ComponentB.vue` ファイルを仮定して:
+ローカル登録をする前に、使いたいコンポーネントごとにインポートする必要があります。例えば、`ComponentB.js` または `ComponentB.vue` ファイルを仮定して:
 
 ```js
 import ComponentA from './ComponentA'
@@ -182,7 +182,7 @@ export default {
 </BaseButton>
 ```
 
-幸いにも、Webpack (または 内部的に Webpack を利用している [Vue CLI 3+](https://github.com/vuejs/vue-cli) ) を使用しているなら、 このような非常に汎用的な基底コンポーネントのグローバル登録に `require.context` を用いることができます。次に示す例は、アプリケーションのエントリファイル(例: `src/main.js` )で、基底コンポーネントをグローバル読み込みするコードです:
+幸いにも、Webpack (または 内部的に Webpack を利用している [Vue CLI 3+](https://github.com/vuejs/vue-cli) ) を使用しているなら、 このような非常に汎用的な基底コンポーネントのグローバル登録に `require.context` を用いることができます。次に示す例は、アプリケーションのエントリファイル(例: `src/main.js` )で、基底コンポーネントをグローバルにインポートするコードです:
 
 ```js
 import Vue from 'vue'
@@ -214,7 +214,7 @@ requireComponent.keys().forEach(fileName => {
   Vue.component(
     componentName,
     // `export default` でコンポーネントがエクスポートされた場合に存在する、
-    // `.default` でコンポーネントオプションを期待して
+    // `.default` :コンポーネントオプションを期待して
     // 見つからなかった場合にはモジュールのルートにフォールバックします。
     componentConfig.default || componentConfig
   )
