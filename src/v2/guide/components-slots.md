@@ -30,7 +30,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </a>
 ```
 
-コンポーネントが描画される時、 `<slot>` 要素は「Your Profile」に置換されるでしょう。スロットには HTML を含む任意のテンプレートを入れることが出来ます:
+コンポーネントを描画する時、 `<slot>` 要素は「Your Profile」に置換されるでしょう。スロットには HTML を含む任意のテンプレートを入れることが出来ます:
 
 ``` html
 <navigation-link url="/profile">
@@ -40,7 +40,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </navigation-link>
 ```
 
-または、他のコンポーネントも入れることも出来ます:
+または、他のコンポーネントを入れることも出来ます:
 
 ``` html
 <navigation-link url="/profile">
@@ -50,7 +50,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </navigation-link>
 ```
 
-もし `<navigation-link>` が `<slot>` 要素を含んでい**ない**場合、どんなコンテンツが渡されてもただ無視されるでしょう。
+もし `<navigation-link>` が `<slot>` 要素を含んで**いない**場合、どんなコンテンツが渡されてもただ無視されるでしょう。
 
 ## 名前付きスロット
 
@@ -133,7 +133,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </div>
 ```
 
-## デフォルトスロットコンテンツ
+## デフォルトのスロットコンテンツ
 
 デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば、 `<submit-button>` コンポーネントはデフォルトでは「Submit」という文言にしたいですが、ユーザが「Save」や「Upload」など他の文言に上書き出来るようにもしたいです。
 
@@ -145,7 +145,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </button>
 ```
 
-もし親からコンテンツが提供されていた場合、デフォルトコンテンツを置き換えます。
+もし親からコンテンツが提供されていた場合、このデフォルトコンテンツを置き換えます。
 
 ## コンパイルスコープ
 
@@ -157,7 +157,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </navigation-link>
 ```
 
-そのスロットはテンプレートの残りの部分と同じインスタンスプロパティ(つまり同じ"スコープ")にアクセスできます。 `<navigation-link>` のスコープにアクセスすることは**できません**。例えば、 `url` へのアクセスは動作しないでしょう。ルールとして以下を覚えてください:
+このスロットはテンプレートの残りの部分と同じインスタンスプロパティ(つまり同じ"スコープ")にアクセスできます。 `<navigation-link>` のスコープにアクセスすることは**できません**。例えば、 `url` へのアクセスは動作しないでしょう。ルールとして以下を覚えてください:
 
 > 親テンプレート内の全てのものは親のスコープでコンパイルされ、子テンプレート内の全てものは子のスコープでコンパイルされる
 
@@ -165,7 +165,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 > 2.1.0から新規追加
 
-ときどき子コンポーネントからデータにアクセスできる再利用可能なスロットを提供したいでしょう。例えば、シンプルな `<todo-list>` コンポーネントはそのテンプレートで以下のようにしたいかもしれません。
+ときどき子コンポーネントからデータにアクセスできる再利用可能なスロットを提供したいでしょう。例えば、簡単な `<todo-list>` コンポーネントは以下のようなテンプレートで書けます。
 
 ```html
 <ul>
@@ -180,7 +180,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 しかしアプリケーションのいくつかの部分では、それぞれの todo アイテムがただの `todo.text` とは違うものをレンダリングしたいでしょう。そういった場合はスコープ付きスロットの出番です。
 
-この機能を実現するために行わなければならないことは、todo アイテムのコンテンツを `<slot>` 要素で囲うことで、スロットに対してコンテキストに関連した全てのデータを渡すことです: この場合は `todo` オブジェクトです:
+この機能を実現するために行わなければならないことは、todo アイテムのコンテンツを `<slot>` 要素で囲い、スロットに対してコンテキストに関連した全てのデータ(この場合は `todo` オブジェクト)を渡すことです:
 
 
 ```html
@@ -189,7 +189,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
     v-for="todo in todos"
     v-bind:key="todo.id"
   >
-    <!-- それぞれの todo に対してスロットがあり、 `todo` オブジェクトを -->
+    <!-- それぞれの todo のためのスロットがあり、 `todo` オブジェクトを -->
     <!-- スロットのプロパティとして渡している                           -->
     <slot v-bind:todo="todo">
       <!-- フォールバックコンテンツ -->
@@ -199,14 +199,14 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </ul>
 ```
 
-この `<todo-list>` コンポーネントを利用する時、`slot-scope` 属性を使うことで、子からデータにアクセスすること無しに todo アイテムに代替となる `<template>` を定義することができます
+この `<todo-list>` コンポーネントを利用する時、 `slot-scope` 属性を使うことで、子からデータにアクセスすることなく、 todo アイテムの代替となる `<template>` を任意で定義することができます:
 
 ```html
 <todo-list v-bind:todos="todos">
   <!-- スロットスコープの名前として `slotProps` を定義してください。 -->
   <template slot-scope="slotProps">
-    <!-- todo アイテムに対してカスタムテンプレートを定義して、`slotProps` を -->
-    <!-- 使ってそれぞれの todo をカスタマイズしてください。                   -->
+    <!-- todo アイテムに対してカスタムテンプレートを定義することで、`slotProps` を -->
+    <!-- 使ってそれぞれの todo をカスタマイズしてください。                        -->
     <span v-if="slotProps.todo.isComplete">✓</span>
     {{ slotProps.todo.text }}
   </template>
@@ -217,7 +217,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 ### `slot-scope` の分割代入
 
-`slot-scope` の値は実際には関数定義の引数位置にあらわせる有効な JavaScript 式を受け入れます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) では [ES2015 分割代入](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) を式の中で下記のように利用できることを意味します:
+`slot-scope` の値は実際には関数定義の引数の部分にあらわせる有効な JavaScript 式を受け付けます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) では [ES2015 分割代入](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) を式の中で下記のように利用できることを意味します:
 
 ```html
 <todo-list v-bind:todos="todos">
