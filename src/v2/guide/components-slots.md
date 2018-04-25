@@ -71,7 +71,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </div>
 ```
 
-こういった場合のために、 `<slot>` 要素は `name` という特別な属性を持っていて、追加のスロットを定義できます。
+こういった場合のために、 `<slot>` 要素は `name` という特別な属性を持っていて、追加のスロットを定義できます:
 
 ``` html
 <div class="container">
@@ -166,7 +166,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 > 2.1.0から新規追加
 
-ときどき子コンポーネントからデータにアクセスできる再利用可能なスロットを提供したいでしょう。例えば、簡単な `<todo-list>` コンポーネントは以下のようなテンプレートで書けます。
+ときどき子コンポーネントからデータにアクセスできる再利用可能なスロットを提供したいでしょう。例えば、簡単な `<todo-list>` コンポーネントは以下のようなテンプレートで書けます:
 
 ```html
 <ul>
