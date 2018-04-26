@@ -150,7 +150,7 @@ new Vue({
 </style>
 {% endraw %}
 
-post を選択し、 _Archive_ タブに切り替えてから _Posts_ に戻ると、選択していた post は表示されなくなります。 これは、新しいタブに切り替えるたびに、Vue が `currentTabComponent` の新しいインスタンスを作成するからです。
+投稿を選択し、 _Archive_ タブに切り替えてから _Posts_ に戻ると、選択していた投稿は表示されなくなります。 これは、新しいタブに切り替えるたびに、Vue が `currentTabComponent` の新しいインスタンスを作成するからです。
 
 動的コンポーネントの再生成は通常は便利な挙動です。しかし、このケースでは最初に作成されたタブコンポーネントのインスタンスがキャッシュされるのが好ましいでしょう。この解決策として、動的コンポーネントを `<keep-alive>` 要素でラップすることができます:
 
@@ -194,7 +194,7 @@ new Vue({
 </script>
 {% endraw %}
 
-このように _Posts_ タブがレンダリングされていなくても、自身の状態(選択されたpost)を保持するようになります。完全なコードは [この fiddle](https://jsfiddle.net/chrisvfritz/Lp20op9o/) を参照してください。
+このように _Posts_ タブがレンダリングされていなくても、自身の状態(選択された投稿)を保持するようになります。完全なコードは [この fiddle](https://jsfiddle.net/chrisvfritz/Lp20op9o/) を参照してください。
 
 <p class="tip">`<keep-alive>` にラップされるコンポーネントは、全て `name` を持つ必要があります。 コンポーネントの `name` オプションを使うか、ローカル/グローバル登録を使用してください。</p>
 
@@ -236,7 +236,7 @@ Vue.component(
 ```
 
 
-[ローカル登録](components.html#Local-Registration) を使っている場合、, `Promise` を返す関数を直接与えることもできます:
+[ローカル登録](components.html#Local-Registration) を使っている場合、`Promise` を返す関数を直接与えることもできます:
 
 ``` js
 new Vue({
