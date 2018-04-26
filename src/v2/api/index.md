@@ -1022,6 +1022,7 @@ updated: 2018-03-21
 - **例:**
 
   ``` js
+  // parent component providing 'foo'
   var Provider = {
     provide: {
       foo: 'bar'
@@ -1029,6 +1030,7 @@ updated: 2018-03-21
     // ...
   }
 
+  // child component injecting 'foo'
   var Child = {
     inject: ['foo'],
     created () {
