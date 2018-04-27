@@ -166,4 +166,4 @@ this.$emit('update:title', newTitle)
 
 こうする事で `doc` オブジェクト内の各プロパティ (例えば `title`) がひとつのプロパティとして渡され、`v-on` アップデートリスナがそれぞれに付けられます。
 
-<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、ここういった複雑な表現をパースする際に様々なケースが考えられるのでうまく動作しません。</p>
+<p class="tip"><code>v-bind.sync</code> を<code>v-bind.sync="{ title: doc.title }"</code> などの様に文字列オブジェクトと一緒に使う場合、こういった複雑な表現をパースする際に様々なケースが考えられるのでうまく動作しません。</p>
