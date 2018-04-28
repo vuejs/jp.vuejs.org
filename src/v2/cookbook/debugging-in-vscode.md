@@ -113,4 +113,4 @@ export default {
 
 ## 謝辞
 
-このレシピは、[Kenneth Auchenberg](https://twitter.com/auchenberg) の寄稿に基づいています。[ここから利用可能](https://github.com/Microsoft/VSCode-recipes/tree/master/vuejs-cli)です.
+このレシピは、[Kenneth Auchenberg](https://twitter.com/auchenberg) の寄稿に基づいています。[ここから利用可能](https://github.com/Microsoft/VSCode-recipes/tree/master/vuejs-cli)です。
