@@ -13,11 +13,11 @@ order: 8
 
 Chrome と VS Code がインストールされている必要があります。VS Code にインストールされている [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) の最新版を入手してください。
 
-[vue-cli](https://github.com/vuejs/vue-cli) 使ってプロジェクトをインストールして作成します。インストールの手順はプロジェクトの readme に記載されています。新しく作成したアプリケーションディレクトリに移動し、VS Code を開いてください。
+[vue-cli](https://github.com/vuejs/vue-cli) を使ってプロジェクトをインストールして作成します。インストールの手順はプロジェクトの readme に記載されています。新しく作成したアプリケーションディレクトリに移動し、VS Code を開いてください。
 
 ### Chrome Devtools でソースコードを表示する
 
-VS Code から Vue コンポーネントをデバックする前に、あなたはソースマップを構築するために生成された Webpack のコンフィグを更新する必要があります。デバッガには圧縮ファイル内のコードを元のファイル内の位置にマップするための方法があります。これにより、Webpack によってアセットが最適化された後でもアプリケーションをデバックすることができます。
+VS Code から Vue コンポーネントをデバックする前に、ソースマップを構築するために生成された Webpack のコンフィグを更新する必要があります。デバッガには圧縮ファイル内のコードを元のファイル内の位置にマップするための方法があります。これにより、Webpack によってアセットが最適化された後でもアプリケーションをデバックすることができます。
 
 `config/index.js` に行き、`devtool` プロパティを見つけてください。それを更新してください:
 
@@ -74,7 +74,7 @@ npm start
 
 ### Vue Devtools
 
-複雑さが変化する、他のデバッグの方法もあります。最も人気がありシンプルなのは、優れた [vue-devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) を使用することです。devtools を使用する利点の 1 つは、データプロパティをライブ編集でき、変更がすぐに反映反映されることを確認できることです。もう 1 つの大きな利点は、Vuex のタイムトラベルデバックデバッグを行うことができることです。
+他にもデバッグの方法がありますが、複雑さは異なります。最も人気がありシンプルなのは、優れた [vue-devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) を使用することです。devtools を使用する利点の 1 つは、データプロパティをライブ編集でき、変更がすぐに反映されることを確認できることです。もう 1 つの大きな利点は、Vuex のタイムトラベルデバッグを行うことができることです。
 
 ![Devtools Timetravel Debugger](/images/devtools-timetravel.gif)
 
@@ -85,14 +85,14 @@ npm start
 [Vuetron](http://vuetron.io/) は、vue-devtools が行った作業のいくつかを拡張した素晴らしいプロジェクトです。通常の devtools ワークフローに加えて、次のことが可能です:
 
 * API リクエスト/レスポンスをすばやく表示: リクエストにフェッチ API を使用している場合、送信されたリクエストに対してこのイベントが表示されます。拡張カードには、要求データも応答データも表示されます。
-* より素早いデバッグのためにアプリケーションの状態の特定部分に同意し、
+* より素早いデバッグのためにアプリケーションの状態の特定部分を購読します。
 * コンポーネント階層を可視化し、アニメーションを使用して特定の階層ビューのツリーを折りたたんだり展開することができます。
 
 ![Vuetron Heirarchy](/images/vuetron-heirarchy.gif)
 
-### 単純なデバッグステイトメント
+### 単純なデバッグステートメント
 
-上記の例は素晴らしいワークフローを持っています。しかしながら、[native debugger statement](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/debugger) をあなたのコード内に直接使用できる代替オプションがあります。この方法を用いることを選択する場合、完了した時にそのステートメントを槊杖することを覚えておくことが重要です。
+上記の例は素晴らしいワークフローを持っています。しかしながら、[native debugger statement](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/debugger) をあなたのコード内に直接使用できる代替オプションがあります。この方法を用いることを選択する場合、完了した時にそのステートメントを削除することを覚えておくことが重要です。
 
 ```js
 <script>
@@ -113,4 +113,4 @@ export default {
 
 ## 謝辞
 
-このレシピは、[Kenneth Auchenberg](https://twitter.com/auchenberg) の寄稿に基づいています。[ここから利用可能](https://github.com/Microsoft/VSCode-recipes/tree/master/vuejs-cli).
+このレシピは、[Kenneth Auchenberg](https://twitter.com/auchenberg) の寄稿に基づいています。[ここから利用可能](https://github.com/Microsoft/VSCode-recipes/tree/master/vuejs-cli)です.
