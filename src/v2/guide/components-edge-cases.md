@@ -1,22 +1,22 @@
 ---
-title: Handling Edge Cases
+title: 特別な問題に対処する
 type: guide
 order: 106
 ---
 
 > ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> このページはすでに[コンポーネントの基本](components.html)を読んでいることを前提に書いています。もしまだ読んでいないのなら、先に読みましょう。
 
-<p class="tip">All the features on this page document the handling of edge cases, meaning unusual situations that sometimes require bending Vue's rules a little. Note however, that they all have disadvantages or situations where they could be dangerous. These are noted in each case, so keep them in mind when deciding to use each feature.</p>
+<p class="tip">特別な問題、つまり珍しい状況に対処するためのこのページの全ての機能は、時にVueのルールを多少なりとも曲げることになります。しかしながら注意して欲しいのが、それらは全てデメリットや危険な状況をもたらし得るということです。これらのマイナス的な面はそれぞれのケースで注意されているので、このページで紹介されるそれぞれの機能を使用すると決めた時は心に止めておいてください。</p>
 
-## Element & Component Access
+## 要素 & コンポーネントへのアクセス
 
-In most cases, it's best to avoid reaching into other component instances or manually manipulating DOM elements. There are cases, however, when it can be appropriate.
+ほとんどのケースで、他のコンポーネントインスタンスへのアクセスやDOM要素を手動操作することを避けるのがベストです。しかし、それが適切な場合もあります。
 
-### Accessing the Root Instance
+### ルートインスタンスへのアクセス
 
-In every subcomponent of a `new Vue` instance, this root instance can be accessed with the `$root` property. For example, in this root instance:
+`new Vue`インスタンスの全てのサブコンポーネントから、`$root`プロパティを用いてルートインスタンスへアクセスできます。例えば、以下のルートインスタンスでは...
 
 ```js
 // The root Vue instance
@@ -33,7 +33,7 @@ new Vue({
 })
 ```
 
-All subcomponents will now be able to access this instance and use it as a global store:
+全てのサブコンポーネントはこのインスタンスにアクセスすることができ、グローバルストアとして使うことができます。
 
 ```js
 // Get root data
@@ -49,13 +49,15 @@ this.$root.bar
 this.$root.baz()
 ```
 
-<p class="tip">This can be convenient for demos or very small apps with a handful of components. However, the pattern does not scale well to medium or large-scale applications, so we strongly recommend using <a href="https://github.com/vuejs/vuex">Vuex</a> to manage state in most cases.</p>
+<p class="tip">これはデモや一握りのコンポーネントで構成された非常に小さいアプリケーションとしては便利かもしれませんが、中〜大規模のアプリケーションにスケールさせづらいです。なので我々はほとんどのケースでステートを管理するために<a href="https://github.com/vuejs/vuex">Vuex</a>の使用を強くおすすめしています。</p>
 
-### Accessing the Parent Component Instance
+### 親コンポーネントインスタンスへのアクセス
 
-Similar to `$root`, the `$parent` property can be used to access the parent instance from a child. This can be tempting to reach for as a lazy alternative to passing data with a prop.
+`$root`と似たように、`$parent`プロパティは子から親インスタンスへアクセスするために使われます。これはpropsでデータを渡すことへの怠惰な代替手段として魅力あることでしょう。
 
 <p class="tip">In most cases, reaching into the parent makes your application more difficult to debug and understand, especially if you mutate data in the parent. When looking at that component later, it will be very difficult to figure out where that mutation came from.</p>
+
+<p class="tip">ほとんどのケースで、親へのアクセスはアプリケーションのデバッグや理解をより難しくします。特に、もしあなたが親のデータを変化させるなら。</p>
 
 There are cases however, particularly shared component libraries, when this _might_ be appropriate. For example, in abstract components that interact with JavaScript APIs instead of rendering HTML, like these hypothetical Google Maps components:
 
