@@ -5,7 +5,7 @@ type: guide
 order: 101
 ---
 
-> このページは[コンポーネントの基本](components.html)を読んでいることを前提としています。コンポーネントになじみがない方は、まずそちらから読んでください。
+> このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
 ## コンポーネント名
 
@@ -109,7 +109,7 @@ var ComponentB = {
 }
 ```
 
-もしくは、Babel と Webpack ようなものを用いて ES2015 モジュールを利用しているならば、このようになるでしょう:
+もしくは、Babel と Webpack のようなものを用いて ES2015 モジュールを利用しているならば、このようになるでしょう:
 
 ```js
 import ComponentA from './ComponentA.vue'
@@ -223,4 +223,4 @@ requireComponent.keys().forEach(fileName => {
 })
 ```
 
-**(`new Vue` を使って)ルート Vue インスタンスの作成するより前に、グローバル登録を行う必要があることを** 覚えておいてください。[この例は](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js)実際のプロジェクトの文脈における、このパターンの一例です。
+**(`new Vue` を使って)ルート Vue インスタンスを作成するより前に、グローバル登録を行う必要があることを** 覚えておいてください。[この例は](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js)実際のプロジェクトの文脈における、このパターンの一例です。
