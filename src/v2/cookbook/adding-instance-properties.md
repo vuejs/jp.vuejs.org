@@ -1,7 +1,7 @@
 ---
-title: Adding Instance Properties
+title: インスタンスプロパティの追加
 type: cookbook
-updated: 2018-04-27
+updated: 2018-05-02
 order: 2
 ---
 
@@ -29,7 +29,7 @@ new Vue({
 
 > "`appName` はなぜ `$` で始まるのですか？ それは重要なのですか？"
 
-ここでは特別な事は一切起きていません。 Vueは全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義した data、computed プロパティ、または methods との衝突を回避できます。
+ここでは特別な事は一切起きていません。 Vueは全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義したデータ、算出プロパティ、またはメソッドとの衝突を回避できます。
 
 > "衝突？ それはどういう意味ですか？"
 
@@ -57,7 +57,7 @@ new Vue({
 })
 ```
 
-この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが([作成されるとき](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))に `data` によって上書きされるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
+この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが([並び替えられるとき](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))に `data` によって上書きされるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
 
 ## 実例： Vue のリソースをAxiosに置き換える
 それでは[使われなくなったVue Resourceを置き換えるとしましょう](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4)。あなたは `this.$http` を通してリクエストメソッドにアクセスすることを凄く楽しんでいましたが、代わりにAxiosで同じことをしたいと思います。
@@ -148,9 +148,9 @@ Uncaught TypeError: Cannot read property 'split' of undefined
 
 **この利便性は明確さとのトレードオフです**。コンポーネントを見たとき、`$http` がどこから来たのかを知ることは不可能です。Vue 本体ですか？プラグインですか？それとも同僚ですか？
 
-では、良い代替案は何でしょう？
+では、良い代替パターンは何でしょう？
 
-## 代替案
+## 代替パターン
 
 ### モジュールシステムを使用していない場合
 モジュールシステムが**ない**アプリケーション（WebpackやBrowserifyなど）では、JavaScriptで拡張したフロントエンドでよく使われるパターンがあります：それはグローバル `App` オブジェクトです。
