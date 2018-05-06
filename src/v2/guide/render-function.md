@@ -501,13 +501,13 @@ new Vue({
 ``` js
 Vue.component('my-component', {
   functional: true,
+  // プロパティは任意です
+  props: {
+    // ...
+  },
   // インスタンスが無いことを補うために、
   // 2 つ目の context 引数が提供されます。
   render: function (createElement, context) {
-    // ...
-  },
-  // プロパティは任意です
-  props: {
     // ...
   }
 })
@@ -552,6 +552,13 @@ var UnorderedList = { /* ... */ }
 
 Vue.component('smart-list', {
   functional: true,
+  props: {
+    items: {
+      type: Array,
+      required: true
+    },
+    isOrdered: Boolean
+  },
   render: function (createElement, context) {
     function appropriateListComponent () {
       var items = context.props.items
@@ -568,13 +575,6 @@ Vue.component('smart-list', {
       context.data,
       context.children
     )
-  },
-  props: {
-    items: {
-      type: Array,
-      required: true
-    },
-    isOrdered: Boolean
   }
 })
 ```
