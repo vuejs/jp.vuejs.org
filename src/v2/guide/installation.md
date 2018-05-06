@@ -174,7 +174,15 @@ CommonJS と ES Module ビルドはまた、実行モードを決めるために
 
 #### Webpack
 
-Webpack の [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) は以下のようにして利用します:
+In Webpack 4+, you can use the `mode` option:
+
+``` js
+module.exports = {
+  mode: 'production'
+}
+```
+
+But in Webpack 3 and earlier, you'll need to use [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):
 
 ``` js
 var webpack = require('webpack')
