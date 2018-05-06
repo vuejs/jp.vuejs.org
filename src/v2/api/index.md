@@ -462,7 +462,11 @@ updated: 2018-03-21
   })
   ```
 
-  <p class="tip">__`data` プロパティ(例 `data: () => { return { a: this.myProp }}`) でアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.myProp` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
+  Note that if you use an arrow function with the `data` property, `this` will be undefined, but you can still access the instance as the function's first argument:
+
+  ``` js
+  data: vm => ({ a: vm.myProp })
+  ```
 
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
@@ -535,7 +539,13 @@ updated: 2018-03-21
 
   Vue インスタンスに組み込まれる算出プロパティ (Computed property) です。すべての getter や setter は、自動的に Vue インスタンスに束縛された `this` コンテキストを持ちます。
 
-  <p class="tip">__算出プロパティ(例 `aDouble: () => this.a * 2`) を定義するためにアロー関数を使用すべきではないこと__に注意してください。アロー関数は、`this` が期待する Vue インスタンスではなく、`this.a` が undefined になるため、親コンテキストに束縛できないことが理由です。</p>
+  Note that if you use an arrow function with a computed property, `this` will be undefined, but you can still access the instance as the function's first argument:
+
+  ```js
+  computed: {
+    aDouble: vm => vm.a * 2
+  }
+  ```
 
   算出プロパティはキャッシュされ、そしてリアクティブ依存が変更されたときにだけ再算出します。ある依存関係がインスタンスのスコープ外の(つまりリアクティブではない)場合、算出プロパティは更新され**ない**ことに注意してください。
 
