@@ -1,5 +1,6 @@
 ---
 title: カスタムイベント
+updated: 2018-05-07
 type: guide
 order: 103
 ---
