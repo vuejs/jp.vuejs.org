@@ -462,7 +462,7 @@ updated: 2018-03-21
   })
   ```
 
-  Note that if you use an arrow function with the `data` property, `this` will be undefined, but you can still access the instance as the function's first argument:
+  `data` プロパティでアロー関数を使用する場合は、`this` は undefined になりますが、それでも関数の第 1 引数としてアクセスすることができます:
 
   ``` js
   data: vm => ({ a: vm.myProp })
@@ -539,7 +539,7 @@ updated: 2018-03-21
 
   Vue インスタンスに組み込まれる算出プロパティ (Computed property) です。すべての getter や setter は、自動的に Vue インスタンスに束縛された `this` コンテキストを持ちます。
 
-  Note that if you use an arrow function with a computed property, `this` will be undefined, but you can still access the instance as the function's first argument:
+  算出プロパティでアロー関数を使用する場合は、`this` は undefined になりますが、それでも関数の第 1 引数としてアクセスすることができます:
 
   ```js
   computed: {
