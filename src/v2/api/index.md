@@ -1398,7 +1398,7 @@ updated: 2018-03-21
 
 - **詳細:**
 
-  An object of DOM elements and component instances, registered with [`ref` attributes](#ref).
+  [`ref` 属性](#ref)によって登録されたDOM 要素のオブジェクトとコンポーネントインスタンスです。
 
 - **参照:**
   - [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
