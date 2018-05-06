@@ -1022,7 +1022,7 @@ updated: 2018-03-21
 - **例:**
 
   ``` js
-  // parent component providing 'foo'
+  // 'foo' を提供している親コンポーネント
   var Provider = {
     provide: {
       foo: 'bar'
@@ -1030,7 +1030,7 @@ updated: 2018-03-21
     // ...
   }
 
-  // child component injecting 'foo'
+  // 'foo' を注入している子コンポーネント
   var Child = {
     inject: ['foo'],
     created () {
