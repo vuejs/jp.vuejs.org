@@ -1398,7 +1398,7 @@ updated: 2018-03-21
 
 - **詳細:**
 
-  `ref` によって登録された子コンポーネントを保持するオブジェクトです。
+  An object of DOM elements and component instances, registered with [`ref` attributes](#ref).
 
 - **参照:**
   - [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
