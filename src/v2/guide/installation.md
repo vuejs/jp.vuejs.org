@@ -163,6 +163,19 @@ rollup({
 }
 ```
 
+#### Parcel
+
+Add to your project's `package.json`:
+
+``` js
+{
+  // ...
+  "alias": {
+    "vue" : "./node_modules/vue/dist/vue.common.js"
+  }
+}
+```
+
 ### 開発モードと本番モードの違い
 
 開発/本番モードは UMD ビルドではハードコードされています: 開発用では非縮小ファイルで、本番用では圧縮されたファイルになっています。
