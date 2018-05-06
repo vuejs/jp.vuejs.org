@@ -165,7 +165,7 @@ rollup({
 
 #### Parcel
 
-Add to your project's `package.json`:
+プロジェクトの `package.json` に追加してください:
 
 ``` js
 {
