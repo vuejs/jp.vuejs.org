@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2018-04-04
+updated: 2018-05-06
 type: guide
 order: 303
 ---
