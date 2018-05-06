@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2018-03-21
+updated: 2018-05-06
 ---
 
 ## グローバル設定
