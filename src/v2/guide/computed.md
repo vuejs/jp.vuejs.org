@@ -216,35 +216,34 @@ var watchExampleVM = new Vue({
     // この関数は question が変わるごとに実行されます。
     question: function (newQuestion, oldQuestion) {
       this.answer = 'Waiting for you to stop typing...'
-      this.getAnswer()
+      this.debouncedGetAnswer()
     }
   },
-  methods: {
+  created: function () {
     // _.debounce は特にコストの高い処理の実行を制御するための
     // lodash の関数です。この場合は、どのくらい頻繁に yesno.wtf/api
     // へのアクセスすべきかを制限するために、ユーザーの入力が完全に
     // 終わるのを待ってから ajax リクエストを実行しています。
     // _.debounce (とその親戚である _.throttle )  についての詳細は
     // https://lodash.com/docs#debounce を見てください。
-    getAnswer: _.debounce(
-      function () {
-        if (this.question.indexOf('?') === -1) {
-          this.answer = 'Questions usually contain a question mark. ;-)'
-          return
-        }
-        this.answer = 'Thinking...'
-        var vm = this
-        axios.get('https://yesno.wtf/api')
-          .then(function (response) {
-            vm.answer = _.capitalize(response.data.answer)
-          })
-          .catch(function (error) {
-            vm.answer = 'Error! Could not reach the API. ' + error
-          })
-      },
-      // ユーザーの入力が終わるのを待つ時間をミリ秒で指定します。
-      500
-    )
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+  },
+  methods: {
+    getAnswer: function () {
+      if (this.question.indexOf('?') === -1) {
+        this.answer = 'Questions usually contain a question mark. ;-)'
+        return
+      }
+      this.answer = 'Thinking...'
+      var vm = this
+      axios.get('https://yesno.wtf/api')
+        .then(function (response) {
+          vm.answer = _.capitalize(response.data.answer)
+        })
+        .catch(function (error) {
+          vm.answer = 'Error! Could not reach the API. ' + error
+        })
+    }
   }
 })
 </script>
@@ -272,28 +271,28 @@ var watchExampleVM = new Vue({
   watch: {
     question: function (newQuestion, oldQuestion) {
       this.answer = 'Waiting for you to stop typing...'
-      this.getAnswer()
+      this.debouncedGetAnswer()
     }
   },
+  created: function () {
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+  },
   methods: {
-    getAnswer: _.debounce(
-      function () {
-        var vm = this
-        if (this.question.indexOf('?') === -1) {
-          vm.answer = 'Questions usually contain a question mark. ;-)'
-          return
-        }
-        vm.answer = 'Thinking...'
-        axios.get('https://yesno.wtf/api')
-          .then(function (response) {
-            vm.answer = _.capitalize(response.data.answer)
-          })
-          .catch(function (error) {
-            vm.answer = 'Error! Could not reach the API. ' + error
-          })
-      },
-      500
-    )
+    getAnswer: function () {
+      if (this.question.indexOf('?') === -1) {
+        this.answer = 'Questions usually contain a question mark. ;-)'
+        return
+      }
+      this.answer = 'Thinking...'
+      var vm = this
+      axios.get('https://yesno.wtf/api')
+        .then(function (response) {
+          vm.answer = _.capitalize(response.data.answer)
+        })
+        .catch(function (error) {
+          vm.answer = 'Error! Could not reach the API. ' + error
+        })
+	}
   }
 })
 </script>
