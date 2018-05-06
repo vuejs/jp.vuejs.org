@@ -174,7 +174,7 @@ CommonJS と ES Module ビルドはまた、実行モードを決めるために
 
 #### Webpack
 
-In Webpack 4+, you can use the `mode` option:
+Webpack 4 以降では、`mode` オプションを使用できます:
 
 ``` js
 module.exports = {
@@ -182,7 +182,7 @@ module.exports = {
 }
 ```
 
-But in Webpack 3 and earlier, you'll need to use [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):
+しかし、Webpack 3 以前では、[DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を使用する必要があります:
 
 ``` js
 var webpack = require('webpack')

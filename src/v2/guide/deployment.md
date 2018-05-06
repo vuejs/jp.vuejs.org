@@ -19,7 +19,7 @@ Webpack や Browserify のようなビルドツールを使用する場合、プ
 
 #### Webpack
 
-In Webpack 4+, you can use the `mode` option:
+Webpack 4 以降では、`mode` オプションを使用できます:
 
 ``` js
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 }
 ```
 
-But in Webpack 3 and earlier, you'll need to use [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):
+しかし、Webpack 3 以前では、[DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を使用する必要があります:
 
 ```javascript
 var webpack = require('webpack')
