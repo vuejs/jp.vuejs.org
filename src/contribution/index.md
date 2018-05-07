@@ -117,9 +117,14 @@ Priority D Rules | 優先度 D ルール | [zakuro9715](https://github.com/zakur
 
 ファイル | タイトル | 貢献者
 ----- |  ------------- | ---
-form-validation.md| フォームのバリデーション | [potato4d](https://github.com/potato4d)
+index.md | はじめに | [nicedchy](https://github.com/nicedchy)
+adding-instance-properties.md | インスタンスプロパティの追加 | [k-okina](https://github.com/k-okina)
+form-validation.md | フォームのバリデーション | [potato4d](https://github.com/potato4d)
 editable-svg-icons.md | 編集可能な SVG アイコンシステム | [hisako135](https://github.com/hisako135)
+serverless-blog.md | CMS によるブログの作成 | [hikimon](https://github.com/hikimon)
+unit-testing-vue-components.md | Vue コンポーネントの単体テスト | [ykhirao](https://github.com/ykhirao)
 creating-custom-scroll-directives.md | カスタムスクロールディレクティブの作成 | [pipopotamasu](https://github.com/pipopotamasu)
+debugging-in-vscode.md | VS Code と Chrome によるデバッグ | [c-su](https://github.com/c-su)
 using-axios-to-consume-apis.md | axios を利用した API の使用 | [masaakikunsan](https://github.com/masaakikunsan)
 
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
