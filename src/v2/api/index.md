@@ -2181,7 +2181,7 @@ updated: 2018-05-06
 
 ### is
 
-- **要求事項:** `string`
+- **要求事項:** `string | Object (component’s options object)`
 
   [動的コンポーネント](../guide/components.html#動的コンポーネント)と [DOM テンプレートの制限](../guide/components.html#DOM-テンプレート解析の注意事項)を回避するために使用します。
 
