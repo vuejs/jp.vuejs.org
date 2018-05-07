@@ -1434,7 +1434,7 @@ updated: 2018-03-21
 
 - **詳細:**
 
-  親スコープの (`.native` 修飾子なしの) `v-on` イベントリスナーを含みます。これは、`v-on="$listeners"` を介して内部コンポーネントに渡すことができます。高次コンポーネントを作成するときに便利です。
+  親スコープの (`.native` 修飾子なしの) `v-on` イベントリスナーを含みます。これは、`v-on="$listeners"` を介して内部コンポーネントに渡すことができます。透過的なラッパーコンポーネントを作成するときに便利です。
 
 ## インスタンスメソッド / データ
 
@@ -2125,8 +2125,8 @@ updated: 2018-03-21
   <!-- vm.$refs.p は DOM ノード -->
   <p ref="p">hello</p>
 
-  <!-- vm.$refs.child は child-comp インスタンス -->
-  <child-comp ref="child"></child-comp>
+  <!-- vm.$refs.child は child-component のインスタンス -->
+  <child-component ref="child"></child-component>
   ```
 
   `v-for` で要素/コンポーネントに対して使用されるとき、登録された参照は DOM ノードまたはコンポーネントインスタンスを含んでいる配列になります。
