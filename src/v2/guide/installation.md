@@ -59,17 +59,7 @@ $ npm install vue
 
 ## CLI
 
-大規模なシングルページアプリケーション開発のための足場を素早く組むために、Vue.js では[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。この CLI にはモダンなフロントエンドワークフローのための、すぐに使えるビルド設定を用意しています。ホットリロード、保存時のリント、製品リリース用ビルドができるようになるまでに、ほんの数分しかかかりません。
-
-``` bash
-# vue-cli をインストール
-$ npm install --global vue-cli
-# "webpack" ボイラープレートを使用した新しいプロジェクトを作成する
-$ vue init webpack my-project
-# 依存関係をインストールしてgo!
-$ cd my-project
-$ npm run dev
-```
+大規模なシングルページアプリケーション開発のための足場を素早く組むために、Vue.js では[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。この CLI にはモダンなフロントエンドワークフローのための、すぐに使えるビルド設定を用意しています。ホットリロード、保存時のリント、製品リリース用ビルドができるようになるまでに、ほんの数分しかかかりません。より詳細は [Vue CLI ドキュメント](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md#introduction)を参照してください。
 
 <p class="tip">CLI は Node.js および関連するビルドツールに関する事前知識を前提としています。Vue またはフロントエンドビルドツールを初めて使用している場合、CLI を使用する前に、ビルドツールなしで[ガイド](./)を参照することを強くお勧めします。</p>
 
