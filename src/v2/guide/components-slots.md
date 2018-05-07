@@ -1,18 +1,18 @@
 ---
-title: Slots
+title: スロット
 type: guide
+updated: 2018-04-26
 order: 104
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-## Slot Content
+## スロットコンテンツ
 
-Vue implements a content distribution API that's modeled after the current [Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md), using the `<slot>` element to serve as distribution outlets for content.
+Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) にならったコンテンツ配信 API が実装されており、 `<slot>` 要素をコンテンツ配信の受け渡し口として利用します。
 
-This allows you to compose components like this:
+これを使うことで次のようなコンポーネントを作成することが出来ます:
 
 ``` html
 <navigation-link url="/profile">
@@ -20,7 +20,7 @@ This allows you to compose components like this:
 </navigation-link>
 ```
 
-Then in the template for `<navigation-link>`, you might have:
+そして、 `<navigation-link>` のテンプレートはこうなります:
 
 ``` html
 <a
@@ -31,47 +31,47 @@ Then in the template for `<navigation-link>`, you might have:
 </a>
 ```
 
-When the component renders, the `<slot>` element will be replaced by "Your Profile". Slots can contain any template code, including HTML:
+コンポーネントを描画する時、 `<slot>` 要素は「Your Profile」に置換されるでしょう。スロットには HTML を含む任意のテンプレートを入れることが出来ます:
 
 ``` html
 <navigation-link url="/profile">
-  <!-- Add a Font Awesome icon -->
+  <!-- Font Awesome のアイコンを追加 -->
   <span class="fa fa-user"></span>
   Your Profile
 </navigation-link>
 ```
 
-Or even other components:
+または、他のコンポーネントを入れることも出来ます:
 
 ``` html
 <navigation-link url="/profile">
-  <!-- Use a component to add an icon -->
+  <!-- コンポーネントを使ってアイコンを追加 -->
   <font-awesome-icon name="user"></font-awesome-icon>
   Your Profile
 </navigation-link>
 ```
 
-If `<navigation-link>` did **not** contain a `<slot>` element, any content passed to it would simply be discarded.
+もし `<navigation-link>` が `<slot>` 要素を含んで**いない**場合、どんなコンテンツが渡されてもただ破棄されるでしょう。
 
-## Named Slots
+## 名前付きスロット
 
-There are times when it's useful to have multiple slots. For example, in a hypothetical `base-layout` component with the following template:
+複数のスロットがあると便利なときもあります。例えば、仮に `base-layout` コンポーネントが下記のようなテンプレートだとしましょう:
 
 ``` html
 <div class="container">
   <header>
-    <!-- We want header content here -->
+    <!-- ここにヘッダコンテンツ -->
   </header>
   <main>
-    <!-- We want main content here -->
+    <!-- ここにメインコンテンツ -->
   </main>
   <footer>
-    <!-- We want footer content here -->
+    <!-- ここにフッターコンテンツ -->
   </footer>
 </div>
 ```
 
-For these cases, the `<slot>` element has a special attribute, `name`, which can be used to define additional slots:
+こういった場合のために、 `<slot>` 要素は `name` という特別な属性を持っていて、追加のスロットを定義できます:
 
 ``` html
 <div class="container">
@@ -87,7 +87,7 @@ For these cases, the `<slot>` element has a special attribute, `name`, which can
 </div>
 ```
 
-To provide content to named slots, we can use the `slot` attribute on a `<template>` element in the parent:
+名前付きスロットにコンテンツを配信するために、 親の中の `template` 要素に `slot` 属性を含めることが出来ます:
 
 ```html
 <base-layout>
@@ -104,7 +104,7 @@ To provide content to named slots, we can use the `slot` attribute on a `<templa
 </base-layout>
 ```
 
-Or, the `slot` attribute can also be used directly on a normal element:
+もしくは、要素に直接 `slot` 属性を指定することもできます:
 
 ``` html
 <base-layout>
@@ -117,7 +117,7 @@ Or, the `slot` attribute can also be used directly on a normal element:
 </base-layout>
 ```
 
-There can still be one unnamed slot, which is the **default slot** that serves as a catch-all outlet for any unmatched content. In both examples above, the  rendered HTML would be:
+その上で名前無しのスロットを引き続き使うこともでき、**デフォルトスロット**として、マッチしなかった全ての要素を受け取る受け渡し口となります。上記の例はどちらも以下のような HTML にレンダリングされるでしょう:
 
 ``` html
 <div class="container">
@@ -134,11 +134,11 @@ There can still be one unnamed slot, which is the **default slot** that serves a
 </div>
 ```
 
-## Default Slot Content
+## デフォルトのスロットコンテンツ
 
-There are cases when it's useful to provide a slot with default content. For example, a `<submit-button>` component might want the content of the button to be "Submit" by default, but also allow users to override with "Save", "Upload", or anything else.
+デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば、 `<submit-button>` コンポーネントはデフォルトでは「Submit」という文言にしたいですが、ユーザが「Save」や「Upload」など他の文言に上書き出来るようにもしたいです。
 
-To achieve this, specify the default content in between the `<slot>` tags.
+これを実現するためには、`slot` タグの中にデフォルトコンテンツを記述してください。
 
 ```html
 <button type="submit">
@@ -146,11 +146,11 @@ To achieve this, specify the default content in between the `<slot>` tags.
 </button>
 ```
 
-If the slot is provided content by the parent, it will replace the default content.
+もし親からコンテンツが提供されていた場合、このデフォルトコンテンツを置き換えます。
 
-## Compilation Scope
+## コンパイルスコープ
 
-When you want to use data inside a slot, such as in:
+スロットの中でデータを取り扱いたい場合はこうします:
 
 ``` html
 <navigation-link url="/profile">
@@ -158,15 +158,15 @@ When you want to use data inside a slot, such as in:
 </navigation-link>
 ```
 
-That slot has access to the same instance properties (i.e. the same "scope") as the rest of the template. The slot does **not** have access to `<navigation-link>`'s scope. For example, trying to access `url` would not work. As a rule, remember that:
+このスロットはテンプレートの残りの部分と同じインスタンスプロパティ(つまり同じ"スコープ")にアクセスできます。 `<navigation-link>` のスコープにアクセスすることは**できません**。例えば、 `url` へのアクセスは動作しないでしょう。ルールとして以下を覚えてください:
 
-> Everything in the parent template is compiled in parent scope; everything in the child template is compiled in the child scope.
+> 親テンプレート内の全てのものは親のスコープでコンパイルされ、子テンプレート内の全てものは子のスコープでコンパイルされる
 
-## Scoped Slots
+## スコープ付きスロット
 
-> New in 2.1.0+
+> 2.1.0から新規追加
 
-Sometimes you'll want to provide a component with a reusable slot that can access data from the child component. For example, a simple `<todo-list>` component may contain the following in its template:
+ときどき子コンポーネントからデータにアクセスできる再利用可能なスロットを提供したいでしょう。例えば、簡単な `<todo-list>` コンポーネントは以下のようなテンプレートで書けます:
 
 ```html
 <ul>
@@ -179,9 +179,10 @@ Sometimes you'll want to provide a component with a reusable slot that can acces
 </ul>
 ```
 
-But in some parts of our app, we want the individual todo items to render something different than just the `todo.text`. This is where scoped slots come in.
+しかしアプリケーションのいくつかの部分では、それぞれの todo アイテムがただの `todo.text` とは違うものをレンダリングしたいでしょう。そういった場合はスコープ付きスロットの出番です。
 
-To make the feature possible, all we have to do is wrap the todo item content in a `<slot>` element, then pass the slot any data relevant to its context: in this case, the `todo` object:
+この機能を実現するために行わなければならないことは、todo アイテムのコンテンツを `<slot>` 要素で囲い、スロットに対してコンテキストに関連した全てのデータ(この場合は `todo` オブジェクト)を渡すことです:
+
 
 ```html
 <ul>
@@ -189,35 +190,35 @@ To make the feature possible, all we have to do is wrap the todo item content in
     v-for="todo in todos"
     v-bind:key="todo.id"
   >
-    <!-- We have a slot for each todo, passing it the -->
-    <!-- `todo` object as a slot prop.                -->
+    <!-- それぞれの todo のためのスロットがあり、 `todo` オブジェクトを -->
+    <!-- スロットのプロパティとして渡している                           -->
     <slot v-bind:todo="todo">
-      <!-- Fallback content -->
+      <!-- フォールバックコンテンツ -->
       {{ todo.text }}
     </slot>
   </li>
 </ul>
 ```
 
-Now when we use the `<todo-list>` component, we can optionally define an alternative `<template>` for todo items, but with access to data from the child via the `slot-scope` attribute:
+この `<todo-list>` コンポーネントを利用する時、 `slot-scope` 属性を使うことで、子からデータにアクセスすることなく、 todo アイテムの代替となる `<template>` を任意で定義することができます:
 
 ```html
 <todo-list v-bind:todos="todos">
-  <!-- Define `slotProps` as the name of our slot scope -->
+  <!-- スロットスコープの名前として `slotProps` を定義してください。 -->
   <template slot-scope="slotProps">
-    <!-- Define a custom template for todo items, using -->
-    <!-- `slotProps` to customize each todo.            -->
+    <!-- todo アイテムに対してカスタムテンプレートを定義することで、`slotProps` を -->
+    <!-- 使ってそれぞれの todo をカスタマイズしてください。                        -->
     <span v-if="slotProps.todo.isComplete">✓</span>
     {{ slotProps.todo.text }}
   </template>
 </todo-list>
 ```
 
-> In 2.5.0+, `slot-scope` is no longer limited to the `<template>` element, but can instead be used on any element or component in the slot.
+> 2.5.0 以降では、`slot-scope` はもはや `<template>` に限定されず、どの要素やコンポーネントでも使用できます。
 
-### Destructuring `slot-scope`
+### `slot-scope` の分割代入
 
-The value of `slot-scope` can actually accept any valid JavaScript expression that can appear in the argument position of a function definition. This means in supported environments ([single-file components](single-file-components.html) or [modern browsers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Browser_compatibility)) you can also use [ES2015 destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring) in the expression, like so:
+`slot-scope` の値は実際には関数定義の引数の部分にあらわせる有効な JavaScript 式を受け付けます。これはサポートされている環境 ([単一ファイルコンポーネント](single-file-components.html) または [モダンブラウザ](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%83%BC%E5%AE%9F%E8%A3%85%E7%8A%B6%E6%B3%81)) では [ES2015 分割代入](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E5%88%86%E5%89%B2%E4%BB%A3%E5%85%A5) を式の中で下記のように利用できることを意味します:
 
 ```html
 <todo-list v-bind:todos="todos">
@@ -228,4 +229,4 @@ The value of `slot-scope` can actually accept any valid JavaScript expression th
 </todo-list>
 ```
 
-This is a great way to make scoped slots a little cleaner.
+これはスコープ付きスロットを少しきれいにする素晴らしい方法です。
