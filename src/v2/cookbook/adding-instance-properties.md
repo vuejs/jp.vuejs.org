@@ -57,7 +57,7 @@ new Vue({
 })
 ```
 
-この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが([並び替えられるとき](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))に `data` によって上書きされるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
+この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが作成されるときに `data` によって上書き([並び替え](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))されるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
 
 ## 実例： Vue のリソースをAxiosに置き換える
 それでは[使われなくなったVue Resourceを置き換えるとしましょう](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4)。あなたは `this.$http` を通してリクエストメソッドにアクセスすることを凄く楽しんでいましたが、代わりにAxiosで同じことをしたいと思います。
