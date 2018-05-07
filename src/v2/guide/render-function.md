@@ -171,14 +171,14 @@ createElement(
 
 ``` js
 {
-  // `v-bind:class` と同じ API, accepting either
-  // a string, object, or array of strings and objects.
+  // `v-bind:class` と同じ API、いずれかを受け付ける
+  // 文字列、オブジェクトまたは文字列の配列かつオブジェクト
   class: {
     foo: true,
     bar: false
   },
-  // `v-bind:style` と同じ API, accepting either
-  // a string, object, or array of objects.
+  // `v-bind:style` と同じ API、いずれかを受け付ける
+  // 文字列、オブジェクトまたはオブジェクトの配列
   style: {
     color: 'red',
     fontSize: '14px'
