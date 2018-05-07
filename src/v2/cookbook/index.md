@@ -1,92 +1,89 @@
 ---
-title: Introduction
+title: はじめに
 type: cookbook
-updated: 2018-03-20
+updated: 2018-04-30
 order: 0
 ---
+## クックブックとガイド
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+クックブックとガイドはどのように異なるのでしょうか？なぜクックブックが必要なのでしょうか？
 
-## The Cookbook vs the Guide
+* **注目すべきところ**: ガイドというものは、本質的にストーリーを伝えるものです。 各セクションは、前の各セクションの知識を元に成り立っています。 一方でこのクックブックは、各レシピが独立しています。つまり、これが意図することは、一般的な全体像を把握することより、むしろ各レシピが Vue の特定の側面に焦点を当てることができるということです。
 
-How is the cookbook different from the guide? Why is this necessary?
+* **より深く**: ガイドが長くなることを避けるために、各機能を理解するのに役立つ最もかんたんな例を使用しています。 そしてクックブックでは、より複雑な例を使用することで、興味深い方法で機能を組み合わせることができます。 それぞれのレシピは、その盲点を完全に学習するために、長くなる可能性もありますが必然的に詳細になります。
 
-* **Greater Focus**: In the guide, we're essentially telling a story. Each section builds on and assumes knowledge from each previous section. In the cookbook, each recipe can and should stand on its own. This means recipes can focus on one specific aspect of Vue, rather than having to give a general overview.
+* **JavaScript の指導**: ガイドでは、少なくとも ES5 JavaScript に精通している必要があります。 例えば、  `Array.prototype.filter` がリストをフィルタする算出プロパティでどのように動作するかは説明しません。 しかし、クックブックにおいては、より良い Vue アプリケーションを構築するためにどのように私たちの手助けをしてくれているかという前提の上で、必須な JavaScript の機能( ES6/2015+ を含む)は、説明されます。
 
-* **Greater Depth**: To avoid making the guide too long, we try to include only the simplest possible examples to help you understand each feature. Then we move on. In the cookbook, we can include more complex examples, combining features in interesting ways. Each recipe can also be as long and detailed as it needs to be, in order to fully explore its niche.
+* **エコシステムを学習する**: 高度な機能については、エコシステムの知識を前提にしています。 例えば、 Webpack で単一ファイルコンポーネントを使用する場合、 Webpack config の Vue 以外の部分の設定については説明しません。 クックブックでは、そのままの場所でこれらのエコシステムやライブラリ群をより深く学習する余裕があります。 - 少なくとも、 Vue 開発者にとって一般的に有用な程度まで。
 
-* **Teaching JavaScript**: In the guide, we assume at least intermediate familiarity with ES5 JavaScript. For example, we won't explain how `Array.prototype.filter` works in a computed property that filters a list. In the cookbook however, essential JavaScript features (including ES6/2015+) can be explored and explained in the context of how they help us build better Vue applications.
+## クックブックの貢献
 
-* **Exploring the Ecosystem**: For advanced features, we assume some ecosystem knowledge. For example, if you want to use single-file components in Webpack, we don't explain how to configure the non-Vue parts of the Webpack config. In the cookbook, we have the space to explore these ecosystem libraries in more depth - at least to the extent that is universally useful for Vue developers.
+### 私たちが目指しているもの
 
-## Cookbook Contributions
+クックブックは一般的なものや興味深いユースケースのどちらも進めるための具体例を開発者たちに提供し、より複雑な内容を徐々に説明していきます。私たちの目標は、簡単な入門例を超え、広く適用可能なコンセプトと、そのアプローチに対する注意点を実証することです。
 
-### What we're looking for
+貢献に興味があれば、 **cookbook idea** タグがついている Issue 上にあなたのコンセプトを提出することによってコラボレーションを開始し、プルリクエストが成功するようにガイドします。 あなたのアイディアが承認されたら、可能な限りテンプレートに従ってください。 一部のセクションは必須で、いくつかは任意です。 数値順にすることが強く推奨されますが、必須ではありません。
 
-The Cookbook gives developers examples to work off of that both cover common or interesting use cases, and also progressively explain more complex detail. Our goal is to move beyond a simple introductory example, and demonstrate concepts that are more widely applicable, as well as some caveats to the approach.
+レシピは一般的に:
 
-If you're interested in contributing, please initiate collaboration by filing an issue under the tag **cookbook idea** with your concept so that we can help guide you to a successful pull request. After your idea has been approved, please follow the template below as much as possible. Some sections are required, and some are optional. Following the numerical order is strongly suggested, but not required.
+> * 特定の共通の問題を解決します
+> * 可能な限りかんたんな例から始まります
+> * 一度に１つずつ複雑なものが紹介されます
+> * コンセプトを再び説明するのではなく、他のドキュメントにリンクします
+> * 精通することよりも問題を示します。
+> * 結果だけではなく、プロセスを説明します
+> * あなたの方法の長所と短所を、また適切ではない場合を含めて説明します
+> * もし該当する場合、代替案を挙げ、別のレシピで学習することができます
 
-Recipes should generally:
+以下のテンプレートに従ってください。しかしながら、わかりやすくするために必ずしもフローに沿う必要はありません。どちらの方法でも、すべてのレシピで、このパターンを選び使用したニュアンスを、任意の時点で、好ましくは代替パターンセクションの形で説明する必要があります。
 
-> * Solve a specific, common problem
-> * Start with the simplest possible example
-> * Introduce complexities one at a time
-> * Link to other docs, rather than re-explaining concepts
-> * Describe the problem, rather than assuming familiarity
-> * Explain the process, rather than just the end result
-> * Explain the pros and cons of your strategy, including when it is and isn't appropriate
-> * Mention alternative solutions, if relevant, but leave in-depth explorations to a separate recipe
+### 基本例
 
-We request that you follow the template below. We understand, however, that there are times when you may necessarily need to deviate for clarity or flow. Either way, all recipes should at some point discuss the nuance of the choice made using this pattern, preferably in the form of the alternative patterns section.
+_必須_
 
-### Base Example
+1. ひとこと、ふたことで問題を明確にしてください。
+2. ひとこと、ふたことで最もかんたんな解決策を説明してください。
+3. 最小のコードサンプルで示してください。
+4. ひとことで達成されたものは何か説明してください。
 
-_required_
+### 価値の詳細
 
-1.  Articulate the problem in a sentence or two.
-2.  Explain the simplest possible solution in a sentence or two.
-3.  Show a small code sample.
-4.  Explain what this accomplishes in a sentence.
+_必須_
 
-### Details about the Value
+1. 例を見ながら、持つかもしれない共通の質問について取り扱ってください。 (ブロッククォートはこれに最適です)
+2. 一般的な失敗例とそれの回避方法を示してください。
+3. とてもシンプルなコードサンプルでグッドパターンとバッドパターンを示してください。
+4. なぜこれが説得力のあるサンプルなのか議論してください。 参照リンクは必須ではありませんが、推奨されています。
 
-_required_
+### 実例
 
-1.  Address common questions that one might have while looking at the example. (Blockquotes are great for this)
-2.  Show examples of common missteps and how they can be avoided.
-3.  Show very simple code samples of good and bad patterns.
-4.  Discuss why this may be a compelling pattern. Links for reference are not required but encouraged.
+_必須_
 
-### Real-World Example
+次のいずれかの方法で、一般的な、または興味深いユースケースを提供するコードを試してください:
 
-_required_
+1. いくつかの簡潔なセットアップを済ませる、もしくは、
+2. codepen/jsfiddle でサンプルを実行する
 
-Demonstrate the code that would power a common or interesting use case, either by:
+もし後者を選択した場合、それはどんなものか、またどのように動作するかについてしっかりと話す必要があります。
 
-1.  Walking through a few terse examples of setup, or
-2.  Embedding a codepen/jsfiddle example
+### その他のコンテクスト
 
-If you choose to do the latter, you should still talk through what it is and does.
+_任意_
 
-### Additional Context
+どこに適用するのか、なぜそれがうまくいくのかというパターンについて書くときにとても役立ちます。自分でやるかまたは、人々にここの参考資料を見せてコードを実行してください。
 
-_optional_
+### このパターンを避けるとき
 
-It's extremely helpful to write a bit about this pattern, where else it would apply, why it works well, and run through a bit of code as you do so or give people further reading materials here.
+_任意_
 
-### When To Avoid This Pattern
+このセクションは必須ではありませんが、強くお勧めします。 それは状態の変化に基づいてクラスを切り替えるなど非常にシンプルなものを書くには向いておらず、 mixins のようなさらに高度なパターンでは意味を成します。 開発に関するほとんどの質問に対しての答えは ["時と場合による!"](https://codepen.io/rachsmith/pen/YweZbG) です。 このセクションではそれを受け入れます。 ここでは、パターンが有用なとき、それを避けるべきとき、また他のものがなにか意味をなすときなどについて、隠すことなく見ていきます。
 
-_optional_
+### 代替パターン
 
-This section is not required, but heavily recommended. It won't make sense to write it for something very simple such as toggling classes based on state change, but for more advanced patterns like mixins it's vital. The answer to most questions about development is ["It depends!"](https://codepen.io/rachsmith/pen/YweZbG), this section embraces that. Here, we'll take an honest look at when the pattern is useful and when it should be avoided, or when something else makes more sense.
+_必須_
 
-### Alternative Patterns
+このセクションは、回避に関する上記のセクションを提供したとき必須になります。驚いていないという特定の状況下で人々はアンチパターンを伝えるので、別の方法を探ることは重要です。そうするときには、ウェブは大きな集合体だということや、多くの人々が異なったコードベースを持ち、異なった目標を解決しようとしていることを考慮してください。アプリケーションは大規模または小規模ですか？　Vue を既存のプロジェクトに統合していますか？または新しく構築していますか？1つまたはたくさんの目標を解決しようとしていますか？非同期データはたくさんありますか？これらの懸念はすべて代替の実装に影響します。良いクックブックレシピは、開発者にこのコンテクストを提供します。
 
-_required_
+## 最後に
 
-This section is required when you've provided the section above about avoidance. It's important to explore other methods so that people told that something is an antipattern in certain situations are not left wondering. In doing so, consider that the web is a big tent and that many people have different codebase structures and are solving different goals. Is the app large or small? Are they integrating Vue into an existing project, or are they building from scratch? Are their users only trying to achieve one goal or many? Is there a lot of asynchronous data? All of these concerns will impact alternative implementations. A good cookbook recipe gives developers this context.
-
-## Thank you
-
-It takes time to contribute to documentation, and if you spend the time to submit a PR to this section of our docs, you do so with our gratitude.
+このドキュメンテーションに貢献するためにはたくさんの時間が必要です。もしあなたが私たちのドキュメントにプルリクエストを送っていただけたら、感謝します。
