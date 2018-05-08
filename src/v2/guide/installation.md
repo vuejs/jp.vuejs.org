@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2018-01-30
+updated: 2018-05-07
 type: guide
 order: 1
 vue_version: 2.5.13
@@ -177,7 +177,15 @@ CommonJS と ES Module ビルドはまた、実行モードを決めるために
 
 #### Webpack
 
-Webpack の [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) は以下のようにして利用します:
+Webpack 4 以降では、`mode` オプションを使用できます:
+
+``` js
+module.exports = {
+  mode: 'production'
+}
+```
+
+しかし、Webpack 3 以前では、[DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を使用する必要があります:
 
 ``` js
 var webpack = require('webpack')
