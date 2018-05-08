@@ -256,7 +256,7 @@ updated: 2018-05-06
 
 - **使用方法:**
 
-  Adds a property to a reactive object, ensuring the new property is also reactive, so triggers view updates. This must be used to add new properties to reactive objects, as Vue cannot detect normal property additions (e.g. `this.myObject.newProperty = 'hi'`)
+  リアクティブオブジェクトにプロパティを追加し、新しいプロパティもリアクティブになることを保証し、View 更新をトリガします。これは、通常、Vue がプロパティの追加 (例: `this.myObject.newProperty = 'hi'`) を検出できないため、リアクティブオブジェクトに新しいプロパティを追加するために使用する必要があります。
 
   <p class="tip">オブジェクトは Vue インスタンス、または Vue インスタンスのルートな data オブジェクトにできません。</p>
 
