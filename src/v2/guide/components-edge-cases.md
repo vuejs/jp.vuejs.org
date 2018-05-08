@@ -55,11 +55,9 @@ this.$root.baz()
 
 `$root`と似たように、`$parent`プロパティは子から親インスタンスへアクセスするために使われます。これはpropsでデータを渡すことへの怠惰な代替手段として魅力あることでしょう。
 
-<p class="tip">In most cases, reaching into the parent makes your application more difficult to debug and understand, especially if you mutate data in the parent. When looking at that component later, it will be very difficult to figure out where that mutation came from.</p>
+<p class="tip">ほとんどのケースで、親へのアクセスはアプリケーションのデバッグや理解をより難しくします。特に、あなたが親のデータを変化させる場合はなおさらです。後々になってそのコンポーネントを扱う時、その変化がどこから来たものなのかを理解することはとても難しいことでしょう。</p>
 
-<p class="tip">ほとんどのケースで、親へのアクセスはアプリケーションのデバッグや理解をより難しくします。特に、もしあなたが親のデータを変化させるなら。</p>
-
-There are cases however, particularly shared component libraries, when this _might_ be appropriate. For example, in abstract components that interact with JavaScript APIs instead of rendering HTML, like these hypothetical Google Maps components:
+しかしながらとりわけ共有コンポーネントライブラリの場合は、これが適切で_あるかもしれない_場合があります。例えば、仮想的なGoogle Mapコンポーネントのような、HTMLを描画する代わりにJavaScriptのAPIを扱う抽象コンポーネントの場合は...
 
 ```html
 <google-map>
@@ -67,9 +65,11 @@ There are cases however, particularly shared component libraries, when this _mig
 </google-map>
 ```
 
-The `<google-map>` component might define a `map` property that all subcomponents need access to. In this case `<google-map-markers>` might want to access that map with something like `this.$parent.getMap`, in order to add a set of markers to it. You can see this pattern [in action here](https://jsfiddle.net/chrisvfritz/ttzutdxh/).
+`<google-map>`コンポーネントは全てのサブコンポーネントがアクセスする必要がある`map`プロパティを定義しています。この場合、`<google-map-markers>`は地図上にマーカーを設定するため`this.$parent.getMap`のような何かでmapプロパティにアクセスしたいことでしょう。[ここから](https://jsfiddle.net/chrisvfritz/ttzutdxh/)このパターンをみることができます。
 
 Keep in mind, however, that components built with this pattern are still inherently fragile. For example, imagine we add a new `<google-map-region>` component and when `<google-map-markers>` appears within that, it should only render markers that fall within that region:
+
+しかしながら、このパターンで作成されたコンポーネントはやはり本質的に壊れやすくなるということを覚えておいてください。例えば、`<google-map-region>`という新しいコンポーネントを追加することをイメージしてください。そして、`<google-map-markers>`が`<google-map-region>`内に現れる時、その領域内のマーカーのみ描画すべきです。
 
 ```html
 <google-map>
@@ -80,34 +80,36 @@ Keep in mind, however, that components built with this pattern are still inheren
 ```
 
 Then inside `<google-map-markers>` you might find yourself reaching for a hack like this:
+そのとき`<google-map-markers>`の内部で、あなたはこのようなハックに行き着くかもしれない...
 
 ```js
 var map = this.$parent.map || this.$parent.$parent.map
 ```
 
-This has quickly gotten out of hand. That's why to provide context information to descendent components arbitrarily deep, we instead recommend [dependency injection](#Dependency-Injection).
+このハックはすぐに手に負えなくなります。コンテキストの情報を子孫のコンポーネントに専ら深く提供するからです。私たちは代わりに[依存性の注入](#Dependency-Injection)を勧めます。
 
-### Accessing Child Component Instances & Child Elements
+### 子コンポーネントインスタンスと子要素へのアクセス
 
-Despite the existence of props and events, sometimes you might still need to directly access a child component in JavaScript. To achieve this you can assign a reference ID to the child component using the `ref` attribute. For example:
+propsとイベントが存在するにも関わらず、ときどきJavaScriptで直接子コンポーネントにアクセスする必要があるかもしれません。このために`ref`属性を使い、子コンポーネントにリファレンスIDを割り当てることができます。例えば...
 
 ```html
 <base-input ref="usernameInput"></base-input>
 ```
 
-Now in the component where you've defined this `ref`, you can use:
+今この`ref`を定義したコンポーネントでこのように...
 
 ```js
 this.$refs.usernameInput
 ```
 
-to access the `<base-input>` instance. This may be useful when you want to, for example, programmatically focus this input from a parent. In that case, the `<base-input>` component may similarly use a `ref` to provide access to specific elements inside it, such as:
+`<base-input>`インスタンスにアクセスすることができるようになります。例えば、あなたがプログラムによって、親コンポーネントからこのインプットフォームにフォーカスしたいときに役立ちます。この場合、`<base-input>`コンポーネントは内部の特定要素へのアクセスを提供するため、親と同様に`ref`を使うかもしれません。このように...
+
 
 ```html
 <input ref="input">
 ```
 
-And even define methods for use by the parent:
+親にも使用されるメソッドを定義して...
 
 ```js
 methods: {
@@ -118,19 +120,19 @@ methods: {
 }
 ```
 
-Thus allowing the parent component to focus the input inside `<base-input>` with:
+このようなコードで、親コンポーネントに`<base-input>`内部のinput要素にフォーカスさせます。
 
 ```js
 this.$refs.usernameInput.focus()
 ```
 
-When `ref` is used together with `v-for`, the ref you get will be an array containing the child components mirroring the data source.
+`ref`が`v-for`と共に使用されるとき、あなたが得る参照はデータソースをミラーリングした子コンポーネントの配列であるでしょう。
 
-<p class="tip"><code>$refs</code> are only populated after the component has been rendered, and they are not reactive. It is only meant as an escape hatch for direct child manipulation - you should avoid accessing <code>$refs</code> from within templates or computed properties.</p>
+<p class="tip"><code>$refs</code>はコンポーネントの描画後に生きるだけで、リアクティブではありません。それは子コンポーネントへの直接操作(テンプレート内または算出プロパティから<code>$refs</code>にアクセスするのは避けるべきです)のための、退避用ハッチのような意味合いです。</p>
 
-### Dependency Injection
+### 依存性の注入
 
-Earlier, when we described [Accessing the Parent Component Instance](#Accessing-the-Parent-Component-Instance), we showed an example like this:
+先ほど、[親コンポーネントインスタンスへのアクセス](#Accessing-the-Parent-Component-Instance)を説明したとき、以下のような例を出しました。
 
 ```html
 <google-map>
