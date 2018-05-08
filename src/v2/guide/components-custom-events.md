@@ -57,7 +57,7 @@ Vue.component('base-checkbox', {
 <base-checkbox v-model="lovingVue"></base-checkbox>
 ```
 
-`lovingVue` の値が `checked` プロパティに渡ります。 `<base-checkbox>`　が `change` イベントを新しい値で発火した時に `lovingVue` プロパティが更新されます。
+`lovingVue` の値が `checked` プロパティに渡ります。 `<base-checkbox>` が `change` イベントを新しい値で発火した時に `lovingVue` プロパティが更新されます。
 
 <p class="tip"><code>checked</code>プロパティをコンポーネント内の <code>プロパティ</code> オプション内でも宣言する必要がある事を注意してください。</p>
 
