@@ -1,6 +1,6 @@
 ---
 title: Enter/Leave とトランジション一覧
-updated: 2017-11-13
+updated: 2018-05-08
 type: guide
 order: 201
 ---
