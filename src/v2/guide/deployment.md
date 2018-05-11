@@ -1,6 +1,6 @@
 ---
 title: プロダクション環境への配信
-updated: 2018-01-16
+updated: 2018-05-07
 type: guide
 order: 401
 ---
@@ -19,7 +19,15 @@ Webpack や Browserify のようなビルドツールを使用する場合、プ
 
 #### Webpack
 
-Webpack の [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を使用して本番環境を指定してください。そうすると UglifyJS が圧縮・縮小化時に自動的に警告部を切り落としてくれます。 以下は設定例です:
+Webpack 4 以降では、`mode` オプションを使用できます:
+
+``` js
+module.exports = {
+  mode: 'production'
+}
+```
+
+しかし、Webpack 3 以前では、[DefinePlugin](https://webpack.js.org/plugins/define-plugin/) を使用する必要があります:
 
 ```javascript
 var webpack = require('webpack')
@@ -30,13 +38,12 @@ module.exports = {
     // ...
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ]
 }
 ```
-
 #### Browserify
 
 - `"production"` に設定した `NODE_ENV` 環境変数を使ってバンドリングコマンドを実行してください。これは `vueify` にホットリロードと開発関連のコードを含まないように指示します。
