@@ -53,7 +53,7 @@ Vue.component('base-checkbox', {
 
 このコンポーネントで `v-model` を使う場合：
 
-```js
+```html
 <base-checkbox v-model="lovingVue"></base-checkbox>
 ```
 
