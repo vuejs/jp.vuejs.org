@@ -1,6 +1,6 @@
 ---
 title: 算出プロパティとウォッチャ
-updated: 2018-05-07
+updated: 2018-05-14
 type: guide
 order: 5
 ---
@@ -180,7 +180,7 @@ computed: {
 // ...
 ```
 
-`vm.fullname = 'John Doe'` を呼ぶと、setter 関数が呼び出され、`vm.firstName` と `vm.lastName` が適切に更新されます。
+`vm.fullName = 'John Doe'` を呼ぶと、setter 関数が呼び出され、`vm.firstName` と `vm.lastName` が適切に更新されます。
 
 ## ウォッチャ
 
