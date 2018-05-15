@@ -1,7 +1,7 @@
 ---
 title: はじめに
 type: cookbook
-updated: 2018-04-30
+updated: 2018-05-08
 order: 0
 ---
 ## クックブックとガイド
