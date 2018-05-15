@@ -126,6 +126,7 @@ unit-testing-vue-components.md | Vue コンポーネントの単体テスト | [
 creating-custom-scroll-directives.md | カスタムスクロールディレクティブの作成 | [pipopotamasu](https://github.com/pipopotamasu)
 debugging-in-vscode.md | VS Code と Chrome によるデバッグ | [c-su](https://github.com/c-su)
 using-axios-to-consume-apis.md | axios を利用した API の使用 | [masaakikunsan](https://github.com/masaakikunsan)
+avoiding-memory-leaks.md | メモリリークを回避する | [nicedchy](https://github.com/nicedchy)
 
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
