@@ -125,6 +125,10 @@ Vue の開発者がもうすぐ利用できるもう1つの選択肢は、 [Nati
 
 MobX は React コミュニティ内でとても人気になってきており、実はそれは Vue のリアクティブシステムとほぼ同じものを使っています。限られた範囲内では、React + MobX の流れはより冗長な Vue として考えることができるので、もしあなたがその組み合わせを使って、それを楽しんでいるのならば、Vue を使ってみるのは、おそらく次のステップとして理にかなっているでしょう。
 
+### Preact and Other React-Like Libraries
+
+React-like libraries usually try to share as much of their API and ecosystem with React as is feasible. For that reason, the vast majority of comparisons above will also apply to them. The main difference will typically be a reduced ecosystem, often significantly, compared to React. Since these libraries cannot be 100% compatible with everything in the React ecosystem, some tooling and companion libraries may not be usable. Or, even if they appear to work, they could break at any time unless your specific React-like library is officially supported on par with React.
+
 ## AngularJS (Angular 1)
 
 いくつかの Vue の構文は AngularJS と非常に良く似ているように見えることでしょう（例えば、`v-if` と `ng-if`）。これは AngularJS が解決した多くのものがあるのと、最初期の Vue の開発の際にインスピレーションを受けているためです。しかしながら、AngularJS から導入された多くの痛みもあり、それらは Vue が大きな改善を提供しようと試みた点でもあります。
