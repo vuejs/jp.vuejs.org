@@ -243,17 +243,17 @@ methods: {
 
 <p class="tip">Vue.jsのイベントシステムは<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">ブラウザのイベントターゲットAPI</a>とは異なっていることに注意してください。それらは<code>$emit</code>, <code>$on</code>, <code>$off</code>と似たように動作しますが、<code>dispatchEvent</code>, <code>addEventListener</code>, <code>removeEventListener</code>のエイリアスでは<strong>ありません</strong>。</p>
 
-## Circular References
+## 循環参照
 
-### Recursive Components
+### 再帰的コンポーネント
 
-Components can recursively invoke themselves in their own template. However, they can only do so with the `name` option:
+コンポーネントは自身テンプレートで再帰的に呼び出すことができます。しかし、`name`オプションのみでしかそうすることはできません。
 
 ``` js
 name: 'unique-name-of-my-component'
 ```
 
-When you register a component globally using `Vue.component`, the global ID is automatically set as the component's `name` option.
+`Vue.component`を用いてグローバルにコンポーネントを登録する時、グローバルIDは自動的に、コンポーネントの`name`オプションとしてセットされます。
 
 ``` js
 Vue.component('unique-name-of-my-component', {
@@ -261,18 +261,18 @@ Vue.component('unique-name-of-my-component', {
 })
 ```
 
-If you're not careful, recursive components can also lead to infinite loops:
+注意しないと、再帰的なコンポーネントも無限ループに繋がる可能性があります。
 
 ``` js
 name: 'stack-overflow',
 template: '<div><stack-overflow></stack-overflow></div>'
 ```
 
-A component like the above will result in a "max stack size exceeded" error, so make sure recursive invocation is conditional (i.e. uses a `v-if` that will eventually be `false`).
+上記のようなコンポーネントは"max stack size exceeded"エラーに終わるでしょう。なので必ず再帰的な呼び出しは条件付きにしましょう(例えば最終的に`false`になる`v-if`を使用するように)。
 
-### Circular References Between Components
+### コンポーネント間の循環参照
 
-Let's say you're building a file directory tree, like in Finder or File Explorer. You might have a `tree-folder` component with this template:
+あなたはFinderやファイルエクスプローラのようなファイルディレクトリツリーを構築しているとしましょう。このテンプレートのような`tree-folder`コンポーネントを持つかもしれません。
 
 ``` html
 <p>
@@ -281,7 +281,7 @@ Let's say you're building a file directory tree, like in Finder or File Explorer
 </p>
 ```
 
-Then a `tree-folder-contents` component with this template:
+`tree-folder-contents`は以下のようなテンプレートです。
 
 ``` html
 <ul>
@@ -292,17 +292,19 @@ Then a `tree-folder-contents` component with this template:
 </ul>
 ```
 
-When you look closely, you'll see that these components will actually be each other's descendent _and_ ancestor in the render tree - a paradox! When registering components globally with `Vue.component`, this paradox is resolved for you automatically. If that's you, you can stop reading here.
+よく見てみると、これらのコンポーネントは実際に、それぞれ他のレンダリングツリーの子孫_と_祖先であることがわかります。逆説的です! `Vue.component`でグローバルにコンポーネントを登録する時、この逆説は自動的に解決されます。もしそれがあなたなら、ここで読むことをやめることもできます。 # TODO: if that's you が訳せない
 
 However, if you're requiring/importing components using a __module system__, e.g. via Webpack or Browserify, you'll get an error:
+
+しかしながらもしあなたが、例えばWebpackやBrowserify経由で、__モジュールシステム__を使用するコンポーネントをrequire/importするならば、以下のようなエラーに遭遇するでしょう。
 
 ```
 Failed to mount component: template or render function not defined.
 ```
 
-To explain what's happening, let's call our components A and B. The module system sees that it needs A, but first A needs B, but B needs A, but A needs B, etc. It's stuck in a loop, not knowing how to fully resolve either component without first resolving the other. To fix this, we need to give the module system a point at which it can say, "A needs B _eventually_, but there's no need to resolve B first."
+何が起こったかを説明するために、コンポーネントAとBを呼び出して見ましょう。モジュールシステムはコンポーネントAを必要とすると認識します。しかしコンポーネントAはコンポーネントBを必要とします。しかしコンポーネントBはコンポーネントAを必要とします。しかしコンポーネントAはコンポーネントBを必要とします...。最初に他のものを解決することなく、いずれかのコンポーネントを完全に解決する方法がわからずにループで詰まってしまっています。これを直すために、私達はモジュールシステムに「コンポーネントAは最終的にコンポーネントBを必要としますが、Bを最初に解決する必要はありません。」ということを教える必要があります。
 
-In our case, let's make that point the `tree-folder` component. We know the child that creates the paradox is the `tree-folder-contents` component, so we'll wait until the `beforeCreate` lifecycle hook to register it:
+今回は、そのことを`tree-folder`コンポーネントに教えてみましょう。私達はその逆説を生み出す子が、`tree-folder-contents`コンポーネントだということを知っています。なので、`beforeCreate`ライフサイクルフックが`tree-folder-contents`コンポーネントを登録するまで待ってみましょう。
 
 ``` js
 beforeCreate: function () {
@@ -310,7 +312,7 @@ beforeCreate: function () {
 }
 ```
 
-Or alternatively, you could use Webpack's asynchronous `import` when you register the component locally:
+もしくは別の方法として、コンポーネントをローカルに登録するときにWebpackの非同期`import`を使用することができます。
 
 ``` js
 components: {
@@ -318,7 +320,7 @@ components: {
 }
 ```
 
-Problem solved!
+これで問題が解決されました!
 
 ## Alternate Template Definitions
 
