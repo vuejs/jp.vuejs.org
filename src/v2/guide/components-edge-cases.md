@@ -67,8 +67,6 @@ this.$root.baz()
 
 `<google-map>`コンポーネントは全てのサブコンポーネントがアクセスする必要がある`map`プロパティを定義しています。この場合、`<google-map-markers>`は地図上にマーカーを設定するため`this.$parent.getMap`のような何かでmapプロパティにアクセスしたいことでしょう。[ここから](https://jsfiddle.net/chrisvfritz/ttzutdxh/)このパターンをみることができます。
 
-Keep in mind, however, that components built with this pattern are still inherently fragile. For example, imagine we add a new `<google-map-region>` component and when `<google-map-markers>` appears within that, it should only render markers that fall within that region:
-
 しかしながら、このパターンで作成されたコンポーネントはやはり本質的に壊れやすくなるということを覚えておいてください。例えば、`<google-map-region>`という新しいコンポーネントを追加することをイメージしてください。そして、`<google-map-markers>`が`<google-map-region>`内に現れる時、その領域内のマーカーのみ描画すべきです。
 
 ```html
@@ -142,9 +140,9 @@ this.$refs.usernameInput.focus()
 </google-map>
 ```
 
-In this component, all descendants of `<google-map>` needed access to a `getMap` method, in order to know which map to interact with. Unfortunately, using the `$parent` property didn't scale well to more deeply nested components. That's where dependency injection can be useful, using two new instance options: `provide` and `inject`.
+このコンポーネントで、`<google-map>`の全ての子孫は地図のどの部分に作用させるのかを知るために`getMap`へアクセスすることを必要としていました。不幸にも`$parent`プロパティの使用は、より深くネストされたコンポーネントに適合できませんでした。それこそが、二つの新しいインスタンスオプション、`provide`と`inject`の使用により、依存性の注入が役立つところです。
 
-The `provide` options allows us to specify the data/methods we want to **provide** to descendent components. In this case, that's the `getMap` method inside `<google-map>`:
+`provide`オプションは子孫のコンポーネントに**提供**したいデータやメソッドを特定させます。この場合、それは`<google-map>`内にある`getMap`です。
 
 ```js
 provide: function () {
@@ -154,22 +152,22 @@ provide: function () {
 }
 ```
 
-Then in any descendants, we can use the `inject` option to receive specific properties we'd like to add to that instance:
+このとき全ての子孫で、私達はインスタンスに追加したい特定のプロパティを受け取るため`inject`オプションを使うことができます。
 
 ```js
 inject: ['getMap']
 ```
 
-You can see the [full example here](https://jsfiddle.net/chrisvfritz/tdv8dt3s/). The advantage over using `$parent` is that we can access `getMap` in _any_ descendant component, without exposing the entire instance of `<google-map>`. This allows us to more safely keep developing that component, without fear that we might change/remove something that a child component is relying on. The interface between these components remains clearly defined, just as with `props`.
+以上の[完例はここから](https://jsfiddle.net/chrisvfritz/tdv8dt3s/)確認できます。`$parent`を使う以上の利点は`<google-map>`インスタンス全体を晒すことなく、どの子孫コンポーネントからでも`getMap`にアクセスできることです。これは子コンポーネントが依存する何かを変更や削除するかもしれないという恐怖を無くし、より安全にコンポーネントを開発できるようにします。これらのコンポーネント間のインターフェースは、ちょうど`props`を用いるように明確に定義されます。
 
-In fact, you can think of dependency injection as sort of "long-range props", except:
+事実、いわば"広範囲のprops"のようなものと、依存性の注入について考えることができます。# TODO: expectはどう訳せばいいのだろう?
 
-* ancestor components don't need to know which descendants use the properties it provides
-* descendant components don't know need to know where injected properties are coming from
+* 祖先のコンポーネントはどの子孫が自分が提供するプロパティを使っているのかを知る必要がありません。
+* 子孫のコンポーネントは注入されたプロパティがどこからきているのかを知る必要がありません。
 
-<p class="tip">However, there are downsides to dependency injection. It couples components in your application to the way they're currently organized, making refactoring more difficult. Provided properties are also not reactive. This is by design, because using them to create a central data store scales just as poorly as <a href="#Accessing-the-Root-Instance">using <code>$root</code></a> for the same purpose. If the properties you want to share are specific to your app, rather than generic, or if you ever want to update provided data inside ancestors, then that's a good sign that you probably need a real state management solution like <a href="https://github.com/vuejs/vuex">Vuex</a> instead.</p>
+<p class="tip">しかしながら、依存性の注入には不都合な点があります。 依存性の注入はアプリケーションのコンポーネントを現在の状態につなぎ合わせさせ、リファクタリングを難しくさせます。そして提供されるプロパティはリアクティブではありません。これは設計上の理由によるものです。中央データストアを作るために依存性の注入を使うことは、同じ目的のために<a href="#Accessing-the-Root-Instance"><code>$root</code>を使うこと</a>と同じくらいアプリケーションのスケールを難しくします。もしアプリケーションに特定のプロパティをシェアしたいのなら、もしくはもし先祖に提供したデータを更新したいのなら、組み込みの機能よりむしろ、代わりに<a href="https://github.com/vuejs/vuex">Vuex</a>のような本物の状態管理ソリューションを必要とするいい兆候です。</p>
 
-Learn more about dependency injection in [the API doc](https://vuejs.org/v2/api/#provide-inject).
+依存性の注入についてより学びたいのなら、[このAPIドキュメント](https://vuejs.org/v2/api/#provide-inject)を参照してください。
 
 ## Programmatic Event Listeners
 
