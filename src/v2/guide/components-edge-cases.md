@@ -322,11 +322,11 @@ components: {
 
 これで問題が解決されました!
 
-## Alternate Template Definitions
+## 代替テンプレート定義
 
-### Inline Templates
+### インラインテンプレート
 
-When the `inline-template` special attribute is present on a child component, the component will use its inner content as its template, rather than treating it as distributed content. This allows more flexible template-authoring.
+`inline-template`属性が子コンポーネント上に存在するとき、分散コンテントして扱うよりむしろ、そのコンポーネントは自身のテンプレートとしてその内部コンテントを使用します。これはよりテンプレート作成をフレキシブルにします。# TODO: 上手く訳せない...
 
 ``` html
 <my-component inline-template>
@@ -337,11 +337,11 @@ When the `inline-template` special attribute is present on a child component, th
 </my-component>
 ```
 
-<p class="tip">However, <code>inline-template</code> makes the scope of your templates harder to reason about. As a best practice, prefer defining templates inside the component using the <code>template</code> option or in a <code>&lt;template&gt;</code> element in a <code>.vue</code> file.</p>
+<p class="tip">しかしながら、<code>inline-template</code>はテンプレートのスコープの推論を難しくします。ベストプラクティスとして、<code>template</code>オプションを使用してコンポーネント内部でテンプレート定義するようにしなさい。または<code>.vue</code>ファイルの<code>&lt;template&gt;</code>要素で定義するのもいいでしょう。</p>
 
-### X-Templates
+### X-テンプレート
 
-Another way to define templates is inside of a script element with the type `text/x-template`, then referencing the template by an id. For example:
+テンプレートを定義する別の方法は、type属性`text/x-template`を用いたスクリプト要素の内部で定義することです。そのとき、idによってテンプレートを参照する必要があります。例えば以下のように。
 
 ``` html
 <script type="text/x-template" id="hello-world-template">
@@ -355,7 +355,7 @@ Vue.component('hello-world', {
 })
 ```
 
-<p class="tip">These can be useful for demos with large templates or in extremely small applications, but should otherwise be avoided, because they separate templates from the rest of the component definition.</p>
+<p class="tip">これらは大規模なテンプレートを必要とするデモや非常に小さなアプリケーションで役立ちます。しかし一方で避けられるべきでもあります。なぜなら、それらはコンポーネント定義からテンプレートを分離させるからです。</p>
 
 ## Controlling Updates
 
