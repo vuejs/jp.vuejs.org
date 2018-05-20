@@ -169,15 +169,15 @@ inject: ['getMap']
 
 依存性の注入についてより学びたいのなら、[このAPIドキュメント](https://vuejs.org/v2/api/#provide-inject)を参照してください。
 
-## Programmatic Event Listeners
+## プログラマティックなイベントリスナー
 
-So far, you've seen uses of `$emit`, listened to with `v-on`, but Vue instances also offer other methods in its events interface. We can:
+今のところ、`v-on`により発火される`$emit`の使用法を見てきました。しかしVueインスタンスは以下のような、他のイベントインターフェースのメソッドも提供しています。
 
-- Listen for an event with `$on(eventName, eventHandler)`
-- Listen for an event only once with `$once(eventName, eventHandler)`
-- Stop listening for an event with `$off(eventName, eventHandler)`
+- 特定のイベントを監視する`$on(eventName, eventHandler)`
+- 一度のイベントしか監視しない`$once(eventName, eventHandler)`
+- イベントの監視をやめる`$off(eventName, eventHandler)`
 
-You normally won't have to use these, but they're available for cases when you need to manually listen for events on a component instance. They can also be useful as a code organization tool. For example, you may often see this pattern for integrating a 3rd-party library:
+通常これらを使用する必要はありませんが、手動でコンポーネントインスタンスを監視する必要があるときに用いることができます。それらはコードの統合ツールとしても役立ちます。例えば、時々サードパーティライブラリーを使用するためにこのようなパターンに遭遇するかもしれません。
 
 ```js
 // Attach the datepicker to an input once
@@ -196,12 +196,12 @@ beforeDestroy: function () {
 }
 ```
 
-This has two potential issues:
+これには2つの潜在的な問題があります。
 
-- It requires saving the `picker` to the component instance, when it's possible that only lifecycle hooks need access to it. This isn't terrible, but it could be considered clutter.
-- Our setup code is kept separate from our cleanup code, making it more difficult to programmatically clean up anything we set up.
+- ライフサイクルフックが`picker`オブジェクトにアクセスする必要がある可能性がある時、コンポーネントインスタンスにそれを保存する必要があります。酷くはないですが、煩雑に感じられるかもしれません。
+- セットアップコードが削除コードから分離している状態は、セットアップしたものをプログラムでクリーンアップすることをより難しくします。 # TODO: 上手く翻訳できない
 
-You could resolve both issues with a programmatic listener:
+プログラマティックリスナー使用することで両方の問題を解決することができます。
 
 ```js
 mounted: function () {
@@ -216,7 +216,7 @@ mounted: function () {
 }
 ```
 
-Using this strategy, we could even use Pikaday with several input elements, with each new instance automatically cleaning up after itself:
+この戦略を使用することで、私達はいくつかのインプット要素を持つPikadayさえ使うことができます。そしてそれぞれの新しいインスタンスは自動的にクリーンアップされます。 # TODO: after itselfが訳せない
 
 ```js
 mounted: function () {
@@ -237,11 +237,11 @@ methods: {
 }
 ```
 
-See [this fiddle](https://jsfiddle.net/chrisvfritz/1Leb7up8/) for the full code. Note, however, that if you find yourself having to do a lot of setup and cleanup within a single component, the best solution will usually be to create more modular components. In this case, we'd recommend creating a reusable `<input-datepicker>` component.
+全てのコードが乗っている[このfiddle](https://jsfiddle.net/chrisvfritz/1Leb7up8/)を見てください。しかしながら注意して欲しいのが、もし一つのコンポーネント内で多くのセットアップやクリーンアップをしなければならない場合、ベストな解決策はたいていより細分化したコンポーネントを作ることです。このケースでは、再利用可能な`<input-datepicker>`コンポーネントを作ることをおすすめします。
 
-To learn more about programmatic listeners, check out the API for [Events Instance Methods](https://vuejs.org/v2/api/#Instance-Methods-Events).
+よりプログラマティックリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://vuejs.org/v2/api/#Instance-Methods-Events)のAPIをチェックしてください。
 
-<p class="tip">Note that Vue's event system is different from the browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">EventTarget API</a>. Though they work similarly, <code>$emit</code>, <code>$on</code>, and <code>$off</code> are <strong>not</strong> aliases for <code>dispatchEvent</code>, <code>addEventListener</code>, and <code>removeEventListener</code>.</p>
+<p class="tip">Vue.jsのイベントシステムは<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">ブラウザのイベントターゲットAPI</a>とは異なっていることに注意してください。それらは<code>$emit</code>, <code>$on</code>, <code>$off</code>と似たように動作しますが、<code>dispatchEvent</code>, <code>addEventListener</code>, <code>removeEventListener</code>のエイリアスでは<strong>ありません</strong>。</p>
 
 ## Circular References
 
