@@ -294,8 +294,6 @@ template: '<div><stack-overflow></stack-overflow></div>'
 
 よく見てみると、これらのコンポーネントは実際に、それぞれ他のレンダリングツリーの子孫_と_祖先であることがわかります。逆説的です! `Vue.component`でグローバルにコンポーネントを登録する時、この逆説は自動的に解決されます。もしそれがあなたなら、ここで読むことをやめることもできます。 # TODO: if that's you が訳せない
 
-However, if you're requiring/importing components using a __module system__, e.g. via Webpack or Browserify, you'll get an error:
-
 しかしながらもしあなたが、例えばWebpackやBrowserify経由で、__モジュールシステム__を使用するコンポーネントをrequire/importするならば、以下のようなエラーに遭遇するでしょう。
 
 ```
