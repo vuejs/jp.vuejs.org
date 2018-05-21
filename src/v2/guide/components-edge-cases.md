@@ -241,7 +241,7 @@ methods: {
 
 よりプログラマティックリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://vuejs.org/v2/api/#Instance-Methods-Events)のAPIをチェックしてください。
 
-<p class="tip">Vue.jsのイベントシステムは<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">ブラウザのイベントターゲットAPI</a>とは異なっていることに注意してください。それらは<code>$emit</code>, <code>$on</code>, <code>$off</code>と似たように動作しますが、<code>dispatchEvent</code>, <code>addEventListener</code>, <code>removeEventListener</code>のエイリアスでは<strong>ありません</strong>。</p>
+<p class="tip">Vueのイベントシステムは<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">ブラウザのイベントターゲットAPI</a>とは異なっていることに注意してください。それらは<code>$emit</code>, <code>$on</code>, <code>$off</code>と似たように動作しますが、<code>dispatchEvent</code>, <code>addEventListener</code>, <code>removeEventListener</code>のエイリアスでは<strong>ありません</strong>。</p>
 
 ## 循環参照
 
@@ -357,19 +357,19 @@ Vue.component('hello-world', {
 
 ## 更新をコントロールする
 
-Vue.jsのリアクティブシステムのおかげで、いつもいつ更新するかを知ることができます(もしあなたが正確に使っているなら)。しかしながら、リアクティブデータが変更されていないにも関わらず更新を強制したい時など、特別なケースがあります。
+Vueのリアクティブシステムのおかげで、いつもいつ更新するかを知ることができます(もしあなたが正確に使っているなら)。しかしながら、リアクティブデータが変更されていないにも関わらず更新を強制したい時など、特別なケースがあります。
 
 ### 強制更新
 
-<p class="tip">もしVue.jsで強制更新をする必要な場面に遭遇場合、99.99%のケースであなたは何かを間違えています。</p>
+<p class="tip">もしVueで強制更新をする必要な場面に遭遇場合、99.99%のケースであなたは何かを間違えています。</p>
 
-あなたは[配列](https://vuejs.org/v2/guide/list.html#Caveats)や[オブジェクト](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats)や`data`で用いられるような、Vue.jsのリアクティブシステムに追跡されていない状態に依存しているかもしれないと言う変更検出の警告を考慮していないかもしれません。 # TODO: 上手く訳せない
+あなたは[配列](https://vuejs.org/v2/guide/list.html#Caveats)や[オブジェクト](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats)や`data`で用いられるような、Vueのリアクティブシステムに追跡されていない状態に依存しているかもしれないと言う変更検出の警告を考慮していないかもしれません。 # TODO: 上手く訳せない
 
 しかしながら、もし上記の可能性を排除し、この手動で強制更新をする非常に稀な状況と認識しているならば、`$forceUpdate`を用いることで強制更新をすることができます。
 
 ### `v-once`を使用するチープスタティックコンポーネント
 
-プレーンなHTML要素をレンダリングすることはVue.jsにおいてとても高速です。しかしときどき**多くの**静的な内容を含むコンポーネントを持ちたい場合もあるかもしれません。これらのケースでは、このようにルート要素に`v-once`ディレクティブを加えることによって一度だけ評価され、そしてキャッシュされることを保証することができます。
+プレーンなHTML要素をレンダリングすることはVueにおいてとても高速です。しかしときどき**多くの**静的な内容を含むコンポーネントを持ちたい場合もあるかもしれません。これらのケースでは、このようにルート要素に`v-once`ディレクティブを加えることによって一度だけ評価され、そしてキャッシュされることを保証することができます。
 
 ``` js
 Vue.component('terms-of-service', {
