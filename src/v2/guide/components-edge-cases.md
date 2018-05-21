@@ -324,7 +324,7 @@ components: {
 
 ### インラインテンプレート
 
-`inline-template`属性が子コンポーネント上に存在するとき、分散コンテントして扱うよりむしろ、そのコンポーネントは自身のテンプレートとしてその内部コンテントを使用します。これはよりテンプレート作成をフレキシブルにします。# TODO: 上手く訳せない...
+`inline-template`属性が子コンポーネントの上に存在するとき、子コンポーネントを別のコンテントして扱うよりむしろ、自身のテンプレートとしてそれを使用します。これはよりテンプレート作成をフレキシブルにします。
 
 ``` html
 <my-component inline-template>
@@ -363,7 +363,7 @@ Vueのリアクティブシステムのおかげで、いつもいつ更新す�
 
 <p class="tip">もしVueで強制更新をする必要な場面に遭遇場合、99.99%のケースであなたは何かを間違えています。</p>
 
-あなたは[配列](https://vuejs.org/v2/guide/list.html#Caveats)や[オブジェクト](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats)や`data`で用いられるような、Vueのリアクティブシステムに追跡されていない状態に依存しているかもしれないと言う変更検出の警告を考慮していないかもしれません。 # TODO: 上手く訳せない
+あなたは[配列](https://vuejs.org/v2/guide/list.html#Caveats)や[オブジェクト](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats)、もしくは`data`と共に用いられる、Vueのリアクティブシステムに追跡されていない状態に依存しているかもしれないと言う変更検出の警告を考慮していないかもしれません。 # TODO: 上手く訳せない
 
 しかしながら、もし上記の可能性を排除し、この手動で強制更新をする非常に稀な状況と認識しているならば、`$forceUpdate`を用いることで強制更新をすることができます。
 
