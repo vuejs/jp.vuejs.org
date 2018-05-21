@@ -211,24 +211,63 @@ new Vue({
 `<blog-post>`コンポーネントを構築するとき、テンプレートには最終的にタイトル以上のものが含まれます:
 
 ```html
-<h3>{{ post.title }}</h3>
+<h3>{{ title }}</h3>
 ```
 
 最低でも、投稿の内容を含めたいでしょう:
 
 ```html
-<h3>{{ post.title }}</h3>
-<div v-html="post.content"></div>
+<h3>{{ title }}</h3>
+<div v-html="content"></div>
 ```
 
 テンプレートで試してみると、Vue は**すべてのコンポーネントに単一のルート要素**が必要ということを示すエラーを表示します。このエラーは、次のようにテンプレートを親要素でラップすることで修正できます:
 
 ```html
 <div class="blog-post">
-  <h3>{{ post.title }}</h3>
-  <div v-html="post.content"></div>
+  <h3>{{ title }}</h3>
+  <div v-html="content"></div>
 </div>
 ```
+
+コンポーネントが大きくなると、タイトルや投稿内容だけでなく、公開日やコメントなども必要になってくるかもしれません。しかし、それぞれの情報ごとにプロパティを定義してしまうと、とてもうるさいものになります:
+
+```html
+<blog-post
+  v-for="post in posts"
+  v-bind:key="post.id"
+  v-bind:title="post.title"
+  v-bind:content="post.content"
+  v-bind:publishedAt="post.publishedAt"
+  v-bind:comments="post.comments"
+></blog-post>
+```
+
+そうなったら、`<blog-post>` コンポーネントをリファクタする好機かもしれません。代わりに、単一の `post` プロパティを受け入れる形にするのです:
+
+```html
+<blog-post
+  v-for="post in posts"
+  v-bind:key="post.id"
+  v-bind:post="post"
+></blog-post>
+```
+
+```js
+Vue.component('blog-post', {
+  props: ['post'],
+  template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+      <div v-html="post.content"></div>
+    </div>
+  `
+})
+```
+
+<p class="tip">上記の例や後に出てくる例では、JavaScript の[テンプレート文字列](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/template_strings)を使用して、複数行にわたるテンプレートをより読みやすくします。これらはインターネットエクスプローラー(IE)ではサポートされていないので、IE をサポートして、かつトランスパイル(例: Babel もしくは TypeScript を使用した)を行わない場合、代わりに[改行エスケープ](https://css-tricks.com/snippets/javascript/multiline-string-variables-in-javascript/)を使用してください。</p>
+
+これで、新しいプロパティが `post` オブジェクトに追加される際にはいつでも、`<blog-post>` 内で自動的に利用可能になるのです。
 
 ## イベントとメッセージを親コンポーネントに送出する
 
@@ -276,8 +315,6 @@ Vue.component('blog-post', {
   `
 })
 ```
-
-<p class="tip">上記の例や後に出てくる例では、JavaScript の[テンプレート文字列](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/template_strings)を使用して、複数行にわたるテンプレートをより読みやすくします。これらはインターネットエクスプローラー(IE)ではサポートされていないので、IE をサポートして、かつトランスパイル(例: Babel もしくは TypeScript を使用した)を行わない場合、代わりに[改行エスケープ](https://css-tricks.com/snippets/javascript/multiline-string-variables-in-javascript/)を使用してください。</p>
 
 問題は、このボタンがなにもしないことです:
 
