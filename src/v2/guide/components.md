@@ -211,22 +211,22 @@ new Vue({
 `<blog-post>`コンポーネントを構築するとき、テンプレートには最終的にタイトル以上のものが含まれます:
 
 ```html
-<h3>{{ post.title }}</h3>
+<h3>{{ title }}</h3>
 ```
 
 最低でも、投稿の内容を含めたいでしょう:
 
 ```html
-<h3>{{ post.title }}</h3>
-<div v-html="post.content"></div>
+<h3>{{ title }}</h3>
+<div v-html="content"></div>
 ```
 
 テンプレートで試してみると、Vue は**すべてのコンポーネントに単一のルート要素**が必要ということを示すエラーを表示します。このエラーは、次のようにテンプレートを親要素でラップすることで修正できます:
 
 ```html
 <div class="blog-post">
-  <h3>{{ post.title }}</h3>
-  <div v-html="post.content"></div>
+  <h3>{{ title }}</h3>
+  <div v-html="content"></div>
 </div>
 ```
 
