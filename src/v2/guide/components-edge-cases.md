@@ -357,21 +357,21 @@ Vue.component('hello-world', {
 
 <p class="tip">これらは大規模なテンプレートを必要とするデモや非常に小さなアプリケーションで役立ちます。しかし一方で避けられるべきでもあります。なぜなら、それらはコンポーネント定義からテンプレートを分離させるからです。</p>
 
-## Controlling Updates
+## 更新をコントロールする
 
-Thanks to Vue's Reactivity system, it always knows when to update (if you use it correctly). There are edge cases, however, when you might want to force an update, despite the fact that no reactive data has changed. Then there are other cases when you might want to prevent unnecessary updates.
+Vue.jsのリアクティブシステムのおかげで、いつもいつ更新するかを知ることができます(もしあなたが正確に使っているなら)。しかしながら、リアクティブデータが変更されていないにも関わらず更新を強制したい時など、特別なケースがあります。
 
-### Forcing an Update
+### 強制更新
 
-<p class="tip">If you find yourself needing to force an update in Vue, in 99.99% of cases, you've made a mistake somewhere.</p>
+<p class="tip">もしVue.jsで強制更新をする必要な場面に遭遇場合、99.99%のケースであなたは何かを間違えています。</p>
 
-You may not have accounted for change detection caveats [with arrays](https://vuejs.org/v2/guide/list.html#Caveats) or [objects](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats), or you may be relying on state that isn't tracked by Vue's reactivity system, e.g. with `data`.
+あなたは[配列](https://vuejs.org/v2/guide/list.html#Caveats)や[オブジェクト](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats)や`data`で用いられるような、Vue.jsのリアクティブシステムに追跡されていない状態に依存しているかもしれないと言う変更検出の警告を考慮していないかもしれません。 # TODO: 上手く訳せない
 
-However, if you've ruled out the above and find yourself in this extremely rare situation of having to manually force an update, you can do so with [`$forceUpdate`](../api/#vm-forceUpdate).
+しかしながら、もし上記の可能性を排除し、この手動で強制更新をする非常に稀な状況と認識しているならば、`$forceUpdate`を用いることで強制更新をすることができます。
 
-### Cheap Static Components with `v-once`
+### `v-once`を使用するチープスタティックコンポーネント
 
-Rendering plain HTML elements is very fast in Vue, but sometimes you might have a component that contains **a lot** of static content. In these cases, you can ensure that it's only evaluated once and then cached by adding the `v-once` directive to the root element, like this:
+プレーンなHTML要素をレンダリングすることはVue.jsにおいてとても高速です。しかしときどき**多くの**静的な内容を含むコンポーネントを持ちたい場合もあるかもしれません。これらのケースでは、このようにルート要素に`v-once`ディレクティブを加えることによって一度だけ評価され、そしてキャッシュされることを保証することができます。
 
 ``` js
 Vue.component('terms-of-service', {
@@ -384,4 +384,4 @@ Vue.component('terms-of-service', {
 })
 ```
 
-<p class="tip">Once again, try not to overuse this pattern. While convenient in those rare cases when you have to render a lot of static content, it's simply not necessary unless you actually notice slow rendering -- plus, it could cause a lot of confusion later. For example, imagine another developer who's not familiar with <code>v-once</code> or simply misses it in the template. They might spend hours trying to figure out why the template isn't updating correctly.</p>
+<p class="tip">再度注意しますが、このパターンを多様しないようにしてください。多くの静的な内容を描画しなければならないとき、これらのレアケースは便利である一方、あなたが実際に遅いレンダリングに気付かない限りは絶対に必要ではありません。さらにそれは後に多くの混乱の原因になりうるでしょう。例えば、<code>v-once</code>に精通していない開発者や、単純にテンプレート内にそれを見逃した開発者を想像してみてください。それらはなぜテンプレートが正確に更新されないのかの原因究明に時間を費やすことになるかもしれません。</p>
