@@ -1,7 +1,7 @@
 ---
 title: Vue コンポーネントの単体テスト
 type: cookbook
-updated: 2018-04-16
+updated: 2018-05-23
 order: 6
 ---
 
