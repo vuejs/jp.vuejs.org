@@ -1,7 +1,7 @@
 ---
 title: Vue コンポーネントの単体テスト
 type: cookbook
-updated: 2018-04-16
+updated: 2018-05-23
 order: 6
 ---
 
@@ -45,11 +45,11 @@ export default {
 ```
 
 ```js
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 test('Foo', () => {
   // コンポーネントを描画します
-  const wrapper = shallow(Hello)
+  const wrapper = shallowMount(Hello)
 
   // `username`は空白を除外して7文字未満は許されません
   wrapper.setData({ username: ' '.repeat(7) })
@@ -146,11 +146,11 @@ export default {
 私達のテストでの最初の試み:
 
 ```js
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 
 describe('Foo', () => {
   it('メッセージを描画し、ユーザー入力に正しく応答します', () => {
-      const wrapper = shallow(Foo, {
+      const wrapper = shallowMount(Foo, {
     data: {
       message: 'Hello World',
       username: ''
@@ -185,11 +185,11 @@ describe('Foo', () => {
 *更新したテスト*:
 
 ```js
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Foo from './Foo'
 
 const factory = (values = {}) => {
-  return shallow(Foo, {
+  return shallowMount(Foo, {
     data: { ...values  }
   })
 }
@@ -223,7 +223,7 @@ describe('Foo', () => {
 
 注意すべき点:
 
-一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallow（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや算出プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
+一番上に `values` オブジェクトをまとめて `data` にして、新しい `wrapper` インスタンスを返すファクトリ関数を宣言します。このようにすると、すべてのテストで `const wrapper = shallowMount（Foo）` を複製する必要がありません。このことのもう1つの大きな利点は、メソッドや算出プロパティを持つ複雑なコンポーネントをすべてのテストでモックまたはスタブにしたい場合は、一度だけ宣言すればいいということです。
 
 ## コンテキストの追加
 
