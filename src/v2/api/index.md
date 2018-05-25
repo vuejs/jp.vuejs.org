@@ -1602,7 +1602,7 @@ updated: 2018-05-24
 
 - **例:**
 
-  `$emit` を1つのイベント名のみと共に使う場合:
+  `$emit` をイベント名のみと共に使う場合:
 
   ```js
   Vue.component('welcome-button', {
