@@ -4,6 +4,10 @@ type: cookbook
 updated: 2018-05-08
 order: 0
 ---
+
+> ⚠️注意: クックブックは随時追加されます。このため、一部のセクションでは翻訳がされず原文ものがあります。現在本着作業中一覧は[こちら](https://github.com/vuejs/jp.vuejs.org/issues?q=is%3Aissue+is%3Aopen+label%3Acookbook)。本作業中のものついては、お待ち下さい🙏。もし、翻訳のお手伝いをしたい方は、[こちらの翻訳ガイド](https://github.com/vuejs/jp.vuejs.org/blob/lang-ja/CONTRIBUTING.md)をお読みください。
+
+
 ## クックブックとガイド
 
 クックブックとガイドはどのように異なるのでしょうか？なぜクックブックが必要なのでしょうか？
