@@ -166,7 +166,7 @@ inject: ['getMap']
 
 <p class="tip">しかし、依存性の注入には不都合な点があります。 依存性の注入はアプリケーションのコンポーネントを現在の状態に密結合させ、リファクタリングを難しくさせます。そして提供されるプロパティはリアクティブではありません。これは設計上の理由によるものです。中央データストアを作るために依存性の注入を使うことは、同じ目的のために<a href="#Accessing-the-Root-Instance"><code>$root</code>を使うこと</a>と同じくらいアプリケーションのスケールを難しくします。もしアプリケーションに特定のプロパティをシェアしたいのなら、もしくはもし先祖に提供したデータを更新したいのなら、そのときは組み込みの機能よりむしろ、<a href="https://github.com/vuejs/vuex">Vuex</a>のような本物の状態管理ソリューションを必要とするいい兆候です。</p>
 
-依存性の注入についてより学びたいのなら、[この API ドキュメント](https://vuejs.org/v2/api/#provide-inject)を参照してください。
+依存性の注入についてより学びたいのなら、[この API ドキュメント](https://jp.vuejs.org/v2/api/#provide-inject)を参照してください。
 
 ## プログラム的なイベントリスナー
 
@@ -238,7 +238,7 @@ methods: {
 
 全てのコードが載っている[この fiddle](https://jsfiddle.net/chrisvfritz/1Leb7up8/)を見てください。しかし注意して欲しいのが、もし1つのコンポーネント内で多くのセットアップやクリーンアップをしなければならない場合、ベストな解決策はたいていより細分化したコンポーネントを作ることです。このケースでは、再利用可能な `<input-datepicker>` コンポーネントを作ることをおすすめします。
 
-よりプログラム的なリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://vuejs.org/v2/api/#Instance-Methods-Events)の API をチェックしてください。
+よりプログラム的なリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://jp.vuejs.org/v2/api/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)の API をチェックしてください。
 
 <p class="tip">Vue のイベントシステムは<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">ブラウザのイベントターゲット API </a>とは異なっていることに注意してください。それらは<code>$emit</code>, <code>$on</code>, <code>$off</code>と似たように動作しますが、<code>dispatchEvent</code>, <code>addEventListener</code>, <code>removeEventListener</code>のエイリアスでは<strong>ありません</strong>。</p>
 
@@ -362,7 +362,7 @@ Vue のリアクティブシステムのおかげで、いつもいつ更新す�
 
 <p class="tip">もし Vue で強制更新をする必要な場面に遭遇する場合、99.99% のケースであなたは何かを間違えています。</p>
 
-[配列](https://vuejs.org/v2/guide/list.html#Caveats)、または[オブジェクト](https://vuejs.org/v2/guide/list.html#Object-Change-Detection-Caveats) 、または例として`data`のようなリアクティブシステムによって追跡されていない状態に依存しているように、変更検出の警告を考慮していないかもしれません。
+[配列](https://jp.vuejs.org/v2/guide/list.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85)、または[オブジェクト](https://jp.vuejs.org/v2/guide/list.html#%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E5%A4%89%E6%9B%B4%E6%A4%9C%E5%87%BA%E3%81%AE%E6%B3%A8%E6%84%8F) 、または例として`data`のようなリアクティブシステムによって追跡されていない状態に依存しているように、変更検出の警告を考慮していないかもしれません。
 
 しかし、もし上記の可能性を排除し、手動で強制更新をする非常に稀な状況と認識しているならば、`$forceUpdate` を用いることで強制更新をすることができます。
 
