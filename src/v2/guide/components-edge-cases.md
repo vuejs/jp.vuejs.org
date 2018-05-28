@@ -19,7 +19,7 @@ order: 106
 `new Vue` インスタンスの全てのサブコンポーネントから、`$root` プロパティを用いてルートインスタンスへアクセスできます。例えば、このルートインスタンスを見てください:
 
 ```js
-// The root Vue instance
+// ルート Vue インスタンス
 new Vue({
   data: {
     foo: 1
@@ -36,16 +36,16 @@ new Vue({
 全てのサブコンポーネントはこのインスタンスにアクセスすることができ、グローバルストアとして使うことができます:
 
 ```js
-// Get root data
+// ルートデータの取得
 this.$root.foo
 
-// Set root data
+// ルートデータの設定
 this.$root.foo = 2
 
-// Access root computed properties
+// ルート算出プロパティへのアクセス
 this.$root.bar
 
-// Call root methods
+// ルートメソッドの呼び出し
 this.$root.baz()
 ```
 
@@ -110,7 +110,7 @@ this.$refs.usernameInput
 
 ```js
 methods: {
-  // Used to focus the input from the parent
+  // 親からインプット要素をフォーカスするために使われる
   focus: function () {
     this.$refs.input.focus()
   }
@@ -179,17 +179,17 @@ inject: ['getMap']
 通常これらを使用する必要はありませんが、手動でコンポーネントインスタンスを監視する必要があるときに用いることができます。それらはコードの統合ツールとしても役立ちます。例えば、時々サードパーティライブラリーを使用するためにこのようなパターンに遭遇するかもしれません:
 
 ```js
-// Attach the datepicker to an input once
-// it's mounted to the DOM.
+// 一旦DOMにマウントされたとき、
+// datepicker をインプット要素に紐付ける
 mounted: function () {
-  // Pikaday is a 3rd-party datepicker library
+  // Pikaday はサードパーティの日付選択のライブラリーです
   this.picker = new Pikaday({
     field: this.$refs.input,
     format: 'YYYY-MM-DD'
   })
 },
-// Right before the component is destroyed,
-// also destroy the datepicker.
+// コンポーネントが破棄させる直前に、
+// datepicker も破棄されます
 beforeDestroy: function () {
   this.picker.destroy()
 }
