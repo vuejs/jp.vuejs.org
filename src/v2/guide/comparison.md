@@ -177,7 +177,7 @@ Angular は本当に AngularJS から完全に異なるフレームワークな�
 
 ### サイズ
 
-Angular の最近のバージョンは、[AOT コンパイル](https://ja.wikipedia.org/wiki/%E4%BA%8B%E5%89%8D%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9)と [tree-shaking](https://en.wikipedia.org/wiki/Tree_shaking) によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (圧縮済みで 〜 30 KB) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (圧縮済みで 〜 130 KB) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
+Angular の最近のバージョンは、[AOT コンパイル](https://ja.wikipedia.org/wiki/%E4%BA%8B%E5%89%8D%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%A9)と [tree-shaking](https://en.wikipedia.org/wiki/Tree_shaking) によって、サイズを大幅に縮小することができました。しかしながら、Vuex + Vue Router (圧縮済みで 〜 30 KB) を含むフル機能の Vue 2 プロジェクトは、`angular-cli` (圧縮済みで 〜 65 KB) によって生成された独創的な AOT コンパイルされたアプリケーションよりもかなり軽量です。
 
 ### 柔軟性
 
