@@ -1,14 +1,15 @@
 ---
-title: Packaging Vue Components for npm
+title: Vue コンポーネントを npm パッケージ化する
+updated: 2018-05-28
 type: cookbook
 order: 12
 ---
 
-## Base Example
+## 基本例
 
-Vue components by nature are meant to be re-used. This is easy when the component is only used within a single application. But how can you write a component once and use it in multiple sites/applications? Perhaps the easiest solution is via npm.
+元々 Vue コンポーネントは再利用される物です。再利用はそのコンポーネントを1つのアプリケーション内でのみ利用する場合は簡単に行えます。しかし一度書いたコンポーネントを複数のサイトやアプリケーションで利用するにはどうしたら良いでしょう。おそらく最も簡単な解決策は npm を利用する事です。
 
-By packaging your component to be shared via npm, it can be imported/required into a build process for use in full-fledged web applications:
+npm を経由して共有できるようにコンポーネントをパッケージ化する事で、成熟したウェブ・アプリケーションにおけるビルドのプロセス内にコンポーネントを組み込むことができます。:
 
 ```js
 import MyComponent from 'my-component';
@@ -17,11 +18,11 @@ export default {
   components: {
     MyComponent,
   },
-  // rest of the component
+  // コンポーネントの残りの箇所
 }
 ```
 
-Or even used via `<script>` tag in the browser directly:
+直接ブラウザ内で `<script>` タグを用いて利用する事もできます:
 
 ```html
   <script src="https://unpkg.com/vue"></script>
@@ -31,7 +32,7 @@ Or even used via `<script>` tag in the browser directly:
   ...
 ```
 
-Not only does this help you avoid copy/pasting components around, but it also allows you to give back to the Vue community!
+この手順を踏む事でコンポーネント周りをコピー&ペーストしなくて済むだけでなく、Vue コミュニティに還元する事にもなります！
 
 ## Can't I Just Share `.vue` Files Directly?
 
