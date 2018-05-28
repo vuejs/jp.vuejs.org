@@ -168,7 +168,7 @@ inject: ['getMap']
 
 依存性の注入についてより学びたいのなら、[この API ドキュメント](https://vuejs.org/v2/api/#provide-inject)を参照してください。
 
-## プログラマティックなイベントリスナー
+## プログラム的なイベントリスナー
 
 今のところ、`v-on` により発火される `$emit` の使用法を見てきました。しかし Vue インスタンスは以下のような、他のイベントインターフェースのメソッドも提供しています。
 
@@ -200,7 +200,7 @@ beforeDestroy: function () {
 - ライフサイクルフックが `picker` オブジェクトにアクセスする必要がある可能性があるとき、コンポーネントインスタンスにそれを保存する必要があります。酷くはないですが、煩雑に感じられるかもしれません。
 - セットアップコードが、クリーンアップコードとは別に保たれており、それは、セットアップしたものをプログラムでクリーンアップすることをより困難にしています。
 
-プログラマティックリスナー使用することで両方の問題を解決することができます:
+プログラム的なリスナーを使用することで両方の問題を解決することができます:
 
 ```js
 mounted: function () {
@@ -238,7 +238,7 @@ methods: {
 
 全てのコードが乗っている[この fiddle](https://jsfiddle.net/chrisvfritz/1Leb7up8/)を見てください。しかしながら注意して欲しいのが、もし1つのコンポーネント内で多くのセットアップやクリーンアップをしなければならない場合、ベストな解決策はたいていより細分化したコンポーネントを作ることです。このケースでは、再利用可能な `<input-datepicker>` コンポーネントを作ることをおすすめします。
 
-よりプログラマティックリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://vuejs.org/v2/api/#Instance-Methods-Events)の API をチェックしてください。
+よりプログラム的なリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://vuejs.org/v2/api/#Instance-Methods-Events)の API をチェックしてください。
 
 <p class="tip">Vue のイベントシステムは<a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget">ブラウザのイベントターゲット API </a>とは異なっていることに注意してください。それらは<code>$emit</code>, <code>$on</code>, <code>$off</code>と似たように動作しますが、<code>dispatchEvent</code>, <code>addEventListener</code>, <code>removeEventListener</code>のエイリアスでは<strong>ありません</strong>。</p>
 
