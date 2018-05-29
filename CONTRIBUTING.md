@@ -22,6 +22,11 @@
 12. レビュー :eyes: で OK :ok_woman: ならば、マージされて内容がデプロイされてドキュメントに反映されます! :tada:
 13. ドキュメント反映後、[貢献者一覧](https://jp.vuejs.org/contribution/)に**貢献者**としてあなたの GitHub アカウントが登録されます！ :tada:
 
+#### Tips: より円滑な Pull Request のコメント記載方法
+
+GitHub の Pull Request には、特定の記法を Pull Request の本文に書くことによって、該当 Pull Request のマージ時に自動的に対応する Issues をクローズできる機能があります。
+Pull Request を送るときに、余裕があれば "resolve #123" といった形で、該当する Issues の番号を記載されているとレビュアーが非常に助かります :pray:
+
 ### GitHub Issues とは別のものについて貢献する
 
 手順は上記の `4.`以降と同じです。
