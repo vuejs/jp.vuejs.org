@@ -34,17 +34,17 @@ export default {
 
 この手順を踏む事でコンポーネント周りをコピー&ペーストしなくて済むだけでなく、Vue コミュニティに還元する事にもなります！
 
-## Can't I Just Share `.vue` Files Directly?
+## `.vue` ファイルを直接共有するだけでは駄目なのか
 
-Vue already allows components to be written as a single file. Because a Single File Component (SFC) is already just one file, you might ask:
+Vue は既にコンポーネントを1つのファイルとして記述する事を許容しています。単一ファイルコンポーネントは元から1つのファイルのため、次のような疑問を抱くかもしれません:
 
-> "Why can't people use my `.vue` file directly? Isn't that the simplest way to share components?"
+> 「なぜみんなは `.vue` ファイルを直接使ってくれないんだ？これがコンポーネントを共有する最も簡単な方法だろ？」
 
-It's true, you can share `.vue` files directly, and anyone using a [Vue build](https://vuejs.org/v2/guide/installation.html#Explanation-of-Different-Builds) containing the Vue compiler can consume it immediately. Also, the SSR build uses string concatenation as an optimization, so the `.vue` file might be preferred in this scenario (see [Packaging Components for npm > SSR Usage](#SSR-Usage) for details). However, this excludes anyone who wishes to use the component directly in a browser via `<script>` tag, anyone who uses a runtime-only build, or build processes which don't understand what to do with `.vue` files.
+その考えは正しく、`.vue` ファイルは直接共有する事ができ、Vue コンパイラを含んで [ビルドされた Vue](https://vuejs.org/v2/guide/installation.html#Explanation-of-Different-Builds) を利用する人は誰でもそのファイルを直ちに利用できます。また、サーバサイドレンダリングのためのビルドにおいては文字列の連結を最適化のため用いるので、その状況においては `.vue` ファイルの利用が適しています（詳細は [npm を用いたコンポーネントのパッケージ化 > サーバサイドレンダリングでの利用](#サーバサイドレンダリングでの利用) を参照）。しかしながら、その方針ではコンポーネントをブラウザで `<script>` タグを通して直接利用したい人、ランタイム限定ビルドや、 `.vue` ファイルをどのように扱うかが示されていないビルドを用いる人を排除する事になります。
 
-Properly packaging your SFC for distribution via npm enables your component to be shared in a way which is ready to use everywhere!
+npm を用いて配布できるように単一ファイルコンポーネントを適切にパッケージ化する事でどこでも利用可能な物としてコンポーネントを共有できるのです！
 
-## Packaging Components for npm
+## npm を用いたコンポーネントのパッケージ化
 
 For the purposes of this section, assume the following file structure:
 
@@ -80,7 +80,7 @@ The package.json file used by npm really only requires one version (`main`), but
 
 When webpack 2+, Rollup, or other modern build tools are used, they will pick up on the `module` build. Legacy applications would use the `main` build, and the `unpkg` build can be used directly in browsers. In fact, the [unpkg](https://unpkg.com) cdn automatically uses this when someone enters the URL for your module into their service!
 
-### SSR Usage
+### サーバサイドレンダリングでの利用
 
 You might have noticed something interesting - browsers aren't going to be using the `browser` version. That's because this field is actually intended to allow authors to provide [hints to bundlers](https://github.com/defunctzombie/package-browser-field-spec#spec) which in turn create their own packages for client side use. With a little creativity, this field allows us to map an alias to the `.vue` file itself. For example:
 
