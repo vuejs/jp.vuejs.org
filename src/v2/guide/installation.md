@@ -3,8 +3,8 @@ title: インストール
 updated: 2018-05-07
 type: guide
 order: 1
-vue_version: 2.5.13
-gz_size: "30.67"
+vue_version: 2.5.16
+gz_size: "30.90"
 ---
 
 ### 互換性の注意
@@ -38,7 +38,7 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 手動で更新できる特定のバージョン番号にリンクすることをお勧めします:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 ```
 
 [cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue/) で NPM パッケージのソースを参照することができます。
