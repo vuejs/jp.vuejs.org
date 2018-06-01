@@ -78,19 +78,19 @@ npm が用いる package.json ファイルにおいて本当は1つのバージ�
 }
 ```
 
-webpack バージョン 2 以降、 Rollup あるいは他のモダンなビルドツールを用いれば、 `module` ビルドを解釈してくれます。レガシーなアプリケーションは `main` ビルドを使い、 `unpkg` ビルドはブラウザで直接利用されます。実際に、誰かがあなたのモジュールの URL を入れれば彼らのサービス内では [unpkg](https://unpkg.com) の CDN がこのビルドを自動的に利用します。
+webpack バージョン 2 以降や、 Rollup あるいは他のモダンなビルドツールを用いれば、 `module` ビルドを解釈してくれます。レガシーなアプリケーションは `main` ビルドを使い、 `unpkg` ビルドはブラウザで直接利用されます。実際に、誰かがあなたのモジュールの URL を入れれば彼らのサービス内では [unpkg](https://unpkg.com) の CDN がこのビルドを自動的に利用します。
 
 ### サーバサイドレンダリングでの利用
 
-You might have noticed something interesting - browsers aren't going to be using the `browser` version. That's because this field is actually intended to allow authors to provide [hints to bundlers](https://github.com/defunctzombie/package-browser-field-spec#spec) which in turn create their own packages for client side use. With a little creativity, this field allows us to map an alias to the `.vue` file itself. For example:
+興味深い点に気づかれたかもしれません - ブラウザは `brower` バージョンを利用する訳ではないのです。これはこのフィールドが実は利用者側で各自のパッケージを作成する際に作成者が [モジュールバンドラを補助する](https://github.com/defunctzombie/package-browser-field-spec#spec) ために有るからです。少し創造性を持たせて、このフィールドは `.vue` ファイル自体へエイリアスを作成する事を許容します。以下の例のように記述できます:
 
 ```js
-import MyComponent from 'my-component/sfc'; // Note the '/sfc'
+import MyComponent from 'my-component/sfc'; // '/sfc' に注意
 ```
 
-Compatible bundlers see the `browser` definition in package.json and translate requests for `my-component/sfc` into `my-component/src/my-component.vue`, resulting in the original `.vue` file being used instead. Now the SSR process can use the string concatenation optimizations it needs to for a boost in performance.
+互換性の有るモジュールバンドラは package.json 内の `browser` の定義を参照して `my-component/sfc` に対するリクエストを `my-component/src/my-component.vue` へと変換し、結果として元の `.vue` ファイルが代わりに利用されます。現在ではサーバサイドレンダリングの処理においてパフォーマンス向上の為に必要な文字列連結時の最適化を利用できます。
 
-<p class="tip">Note: When using `.vue` components directly, pay attention to any type of pre-processing required by `script` and `style` tags. These dependencies will be passed on to users. Consider providing 'plain' SFCs to keep things as light as possible.</p>
+<p class="tip">注意: `.vue` 形式のコンポーネントを直接利用する場合、`script` や `style` タグが必要とするあらゆるプリ・プロセス処理に注意して下さい。これらの依存性は利用者に引き継がれます。可能な限り物事を簡単にしておくため「プレーンな」単一ファイルコンポーネントを提供する事を心がけてください。</p>
 
 ### How do I make multiple versions of my component?
 
