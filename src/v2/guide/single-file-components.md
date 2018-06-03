@@ -20,7 +20,7 @@ order: 402
 
 こちらが `Hello.vue` と呼ばれたファイルの単純な例です:
 
-<img src="/images/vue-component.png" style="display: block; margin: 30px auto;">
+<a href="https://gist.github.com/chrisvfritz/e2b6a6110e0829d78fa4aedf7cf6b235" target="_blank"><img src="/images/vue-component.png" alt="Single-file component example (click for code as text)" style="display: block; margin: 30px auto;"></a>
 
 さて次にこちらに入ります:
 
@@ -30,7 +30,7 @@ order: 402
 
 約束したとおり、 Pug、 Babel(ES2015 モジュールと一緒に）や Stylus などより美しくかつ機能が豊富なコンポーネントもプリプロセッサとして利用できます。
 
-<img src="/images/vue-component-with-preprocessors.png" style="display: block; margin: 30px auto;">
+<a href="https://gist.github.com/chrisvfritz/1c9f2daea9bc078dcb47e9a82e5f7587" target="_blank"><img src="/images/vue-component-with-preprocessors.png" alt="Single-file component example with preprocessors (click for code as text)" style="display: block; margin: 30px auto;"></a>
 
 これらの特定の言語は単なる一例です。Buble 、TypeScript 、SCSS 、PostCSS などの生産的なプリプロセッサも簡単に使うことができます。`vue-loader` で Webpack を使用しているならば、CSS Modules 向けに素晴らしいサポートがあります。
 
