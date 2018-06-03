@@ -92,9 +92,9 @@ import MyComponent from 'my-component/sfc'; // '/sfc' に注意
 
 <p class="tip">注意: `.vue` 形式のコンポーネントを直接利用する場合、`script` や `style` タグが必要とするあらゆるプリ・プロセス処理に注意して下さい。これらの依存性は利用者に引き継がれます。可能な限り物事を簡単にしておくため「プレーンな」単一ファイルコンポーネントを提供する事を心がけてください。</p>
 
-### How do I make multiple versions of my component?
+### どのようにしてコンポーネントのバージョンを複数作成するのか
 
-There is no need to write your module multiple times. It is possible to prepare all 3 versions of your module in one step, in a matter of seconds. The example here uses [Rollup](https://rollupjs.org) due to its minimal configuration, but similar configuration is possible with other build tools - more details on this decision can be found [here](https://medium.com/webpack/webpack-and-rollup-the-same-but-different-a41ad427058c). The package.json `scripts` section can be updated with a single entry for each build target, and a more generic `build` script that runs them all in one pass. The sample package.json file now looks like this:
+モジュールを複数回作成する必要は有りません。少しの時間で完了する、1つの手順でモジュールの 3 つのバージョン全てを用意する事が可能です。ここの例では設定を最小限にするため [Rollup](https://rollupjs.org) を利用しますが、他のビルドツールでも同様の設定ができます - この決定に関わる詳細は [こちら](https://medium.com/webpack/webpack-and-rollup-the-same-but-different-a41ad427058c) から参照できます。 package.json の `scripts` セクションはビルド対象毎に行う処理、加えてそれら全てをまとめて処理する、より一般的な `build` スクリプトによって更新されます。例となる package.json ファイルは以下のようになります:
 
 ```json
 {
@@ -124,31 +124,33 @@ There is no need to write your module multiple times. It is possible to prepare 
 }
 ```
 
-<p class="tip">Remember, if you have an existing package.json file, it will likely contain a lot more than this one does. This merely illustrates a starting point. Also, the <i>packages</i> listed in devDependencies (not their versions) are the minimum requirements for rollup to create the three separate builds (umd, es, and unpkg) mentioned. As newer versions become available, they should be updated as necessary.</p>
+<p class="tip">もし既に package.json ファイルを利用している場合、上記よりも多くの内容を含んでいるであろう事を忘れないでください。これは単に初期段階を示しただけです。また、 devDependencies 内に記述された(それぞれのバージョンでなく)<i>パッケージ</i>は先述した 3 つの異なるビルド (umd、 es および unpkg) を rollup が作成するために最低限必要な物になっています。より新しいバージョンが利用できるようになれば、必要に応じて更新する必要が有ります。</p>
 
-Our changes to package.json are complete. Next, we need a small wrapper to export/auto-install the actual SFC, plus a mimimal Rollup configuration, and we're set!
+package.json に加える変更は完了しました。続いて、実際に単一ファイルコンポーネントをエクスポートおよび自動インストールするための小さなラッパーを用意し、必要な Rollup の設定を加えて準備します。
 
+### パッケージ化されたコンポーネントはどんな風になったか
 ### What does my packaged component look like?
 
-Depending on how your component is being used, it needs to be exposed as either a [CommonJS/UMD](https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#c33a) javascript module, an [ES6 javascript](https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#4f5e) module, or in the case of a `<script>` tag, it will be automatically loaded into Vue via `Vue.use(...)` so it's immediately available to the page. This is accomplished by a simple wrapper.js file which handles the module export and auto-install. That wrapper, in its entirety, looks like this:
+コンポーネントがどのように利用されるかに応じて、[CommonJS/UMD](https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#c33a) の javascript モジュール、 [ES6 javascript](https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#4f5e) のモジュール、あるいは `<script>` タグでの利用に対応した形式のいずれかの形で利用可能とする必要が有り、そのコンポーネントは `Vue.use(...)` を通して Vue に自動的に読み込まれてページ上で即座に利用できるようになります。この処理はモジュールのエクスポートおよび自動インストールを引き受ける単純な wrapper.js ファイルによって行えます。その wrapper は、全体を記述すると、以下のようになります:
 
 ```js
-// Import vue component
+// vue コンポーネントのインポート
 import component from './my-component.vue';
 
-// Declare install function executed by Vue.use()
+// Vue.use() によって実行される install 関数を定義
 export function install(Vue) {
 	if (install.installed) return;
 	install.installed = true;
 	Vue.component('MyComponent', component);
 }
 
+// Vue.use() のためのモジュール定義を作成
 // Create module definition for Vue.use()
 const plugin = {
 	install,
 };
 
-// Auto-install when vue is found (eg. in browser via <script> tag)
+// vue が見つかった場合に自動インストールする (ブラウザで <script> タグを用いた場合等)
 let GlobalVue = null;
 if (typeof window !== 'undefined') {
 	GlobalVue = window.Vue;
@@ -159,11 +161,11 @@ if (GlobalVue) {
 	GlobalVue.use(plugin);
 }
 
-// To allow use as module (npm/webpack/etc.) export component
+// (npm/webpack 等で) モジュールとして利用させるためコンポーネントを export する
 export default component;
 ```
 
-Notice the first line directly imports your SFC, and the last line exports it unchanged. As indicated by the comments in the rest of the code, the wrapper provides an `install` function for Vue, then attempts to detect Vue and automatically install the component. With 90% of the work done, it's time to sprint to the finish!
+最初の行では単一ファイルコンポーネントを直接読み込み、最後の行ではその内容を変更しないでエクスポートしている事に気づくでしょう。コード内のコメントで示されるように、このラッパーは Vue のための `install` 関数を提供し、続いて Vue を検知してコンポーネントを自動的にインストールしようと試みています。作業は9割方終わりました、最後まで一気に進みましょう。
 
 ### How do I configure the Rollup build?
 
