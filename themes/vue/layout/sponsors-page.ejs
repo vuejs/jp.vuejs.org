@@ -121,6 +121,16 @@ window.addEventListener('hashchange', function () {
 <%_ } _%>
 </p>
 
+<h3>Patreon Silver</h3>
+
+<p class="patreon-sponsors sponsor-section">
+<%_ for (const sponsor of theme.silver_sponsors) {_%>
+  <a href="<%- sponsor.url %>" target="_blank">
+    <img src="<%- url_for(`/images/${sponsor.img}`) %>">
+  </a>
+<%_ } _%>
+</p>
+
 <p>
 もしあなたが実業家で、Vue.js を利用した製品で利益を生み出しているのなら、Vue の開発を支援することはビジネス的に妥当性があります。<b>それは、あなたの製品が頼りにしているプロジェクトを健全にし、活発に保守されることを保証します。</b>また同時に、それは Vue コミュニティの中であなたの存在を際立たせ、優秀な Vue 開発者を引き寄せることも容易にします。
 </p>
