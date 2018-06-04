@@ -128,8 +128,7 @@ import MyComponent from 'my-component/sfc'; // '/sfc' に注意
 
 package.json に加える変更は完了しました。続いて、実際に単一ファイルコンポーネントをエクスポートおよび自動インストールするための小さなラッパーを用意し、必要な Rollup の設定を加えて準備します。
 
-### パッケージ化されたコンポーネントはどんな風になったか
-### What does my packaged component look like?
+### パッケージ化されたコンポーネントはどのようになったか
 
 コンポーネントがどのように利用されるかに応じて、[CommonJS/UMD](https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#c33a) の javascript モジュール、 [ES6 javascript](https://medium.freecodecamp.org/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#4f5e) のモジュール、あるいは `<script>` タグでの利用に対応した形式のいずれかの形で利用可能とする必要が有り、そのコンポーネントは `Vue.use(...)` を通して Vue に自動的に読み込まれてページ上で即座に利用できるようになります。この処理はモジュールのエクスポートおよび自動インストールを引き受ける単純な wrapper.js ファイルによって行えます。その wrapper は、全体を記述すると、以下のようになります:
 
@@ -194,26 +193,26 @@ export default {
 
 また、ここでコンポーネントに付与された `name` の値に注目すべきです。コンポーネントに付与されるのはパスカル・ケースの名称で、これはここまでの手順で利用されてきたケバブ・ケースの名称に対応していなければなりません。
 
-### Will this replace my current development process?
+### この手順は現在の開発工程に取って代わるものか
 
-The configuration here is not meant to replace the development process that you currently use. If you currently have a webpack setup with hot module reloading (HMR), keep using it! If you're starting from scratch, feel free to install [Vue CLI 3](https://github.com/vuejs/vue-cli/), which will give you the whole HMR experience config free:
+このページの設定は現在使っている開発工程を置き換えるものでは有りません。もし現在 webpack を用いたホット・モジュール・リロードを行う環境を利用しているのならば、その環境を使い続けるべきです。もし何もない状態ならば、ホット・モジュール・リロードの設定全体を自由に扱える、 [Vue CLI 3](https://github.com/vuejs/vue-cli/) を使って下さい。
 
 ```bash
 vue serve --open src/my-component.vue
 ```
 
-In other words, do all of your development in whatever way you are comfortable. The things outlined in this recipe are more like 'finishing touches' than a full dev process.
+言い換えると、各自の好みに合った物を開発環境で使ってください。この手順で大まかに示されているのは完全な開発プロセスというよりは「最後の仕上げ」になります。
 
-## When to Avoid this Pattern
+## どのような場合にこのパターンの利用を避けるべきか
 
-Packaging SFCs in this manner might not be a good idea in certain scenarios. This recipe doesn't go into detail on how the components themselves are written. Some components might provide side effects like directives, or extend other libraries with additional functionality. In those cases, you will need to evaluate whether or not the changes required to this recipe are too extensive.
+ここで示した方法で単一ファイルコンポーネントをパッケージ化するのは特定の状況では良いアイデアとはならないかもしれません。この手順はコンポーネント自体がどのように書かれるかという点については深く掘り下げませんでした。ある種のコンポーネントはディレクティブや追加した機能によって他のライブラリに対して副作用をおよぼすかもしれません。こういった場合には、ここで紹介した手順が必要とする変更が広い範囲に及び過ぎないか評価する必要が有るでしょう。
 
-In addition, pay attention to any dependencies that your SFC might have. For example, if you require a third party library for sorting or communication with an API, Rollup might roll those packages into the final code if not properly configured. To continue using this recipe, you would need to configure Rollup to exclude those files from the output, then update your documentation to inform your users about these dependencies.
+加えて、自分の単一ファイルコンポーネントが持つかもしれないあらゆる依存性に注意をはらって下さい。例えば、ソートや API を使った操作のためにサードパーティのライブラリが必要となる場合、適切に設定されていないと Rollup はこれらのパッケージを最終的なコードにまとめてしまう可能性が有ります。この手順を使い続けるにあたって、このようなファイルを出力から除外するように Rollup を設定し、利用者に対してはその依存性について周知するためドキュメントを更新する必要が有るかもしれません。
 
-## Alternative Patterns
+## 別のパターンについて
 
-At the time this recipe was written, Vue CLI 3 was itself in beta. This version of the CLI comes with a built-in `library` build mode, which creates CommonJS and UMD versions of a component. This might be adequate for your use cases, though you will still need to make sure your package.json file points to `main` and `unpkg` properly. Also, there will be no ES6 `module` output unless that capability is added to the CLI before its release or via plugin.
+このページが書かれた時点では、Vue CLI 3 はベータ版の状態でした。このバージョンの CLI には、コンポーネントの CommonJS および UMD バージョンを生成するビルドインの `library` ビルドモードが備わっています。これは状況によっては適していますが、 package.json ファイルが `main` および `unpkg` を正しく指定している事は確認する必要が有ります。また、リリースの前に CLI にその機能が付与されるかプラグインを経由しなければ ES6 の `module` は出力されません。
 
-## Acknowledgements
+## 謝辞
 
-This recipe is the result of a lightning talk given by [Mike Dodge](https://twitter.com/mgdodgeycode) at VueConf.us in March 2018. He has published a utility to npm which will quickly scaffold a sample SFC using this recipe. You can download the utility, [vue-sfc-rollup](https://www.npmjs.com/package/vue-sfc-rollup), from npm. You can also [clone the repo](https://github.com/team-innovation/vue-sfc-rollup) and customize it.
+このページは 2018 年 3 月の VueConf.us で発表された [Mike Dodge](https://twitter.com/mgdodgeycode) によるライトニング・トークの成果です。彼はこの手順を用いてサンプルの単一ファイルコンポーネントを基本に構築したユーティリティを npm に公開しました。このユーティリティは、 npm を通じて、 [vue-sfc-rollup](https://www.npmjs.com/package/vue-sfc-rollup) からダウンロードできます。さらに [そのリポジトリをクローンして](https://github.com/team-innovation/vue-sfc-rollup) カスタマイズする事もできます。
