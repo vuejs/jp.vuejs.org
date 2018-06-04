@@ -167,13 +167,13 @@ export default component;
 
 最初の行では単一ファイルコンポーネントを直接読み込み、最後の行ではその内容を変更しないでエクスポートしている事に気づくでしょう。コード内のコメントで示されるように、このラッパーは Vue のための `install` 関数を提供し、続いて Vue を検知してコンポーネントを自動的にインストールしようと試みています。作業は9割方終わりました、最後まで一気に進みましょう。
 
-### How do I configure the Rollup build?
+### Rollup ビルドをどのように設定するか
 
-With the package.json `scripts` section ready and the SFC wrapper in place, all that is left is to ensure Rollup is properly configured. Fortunately, this can be done with a small 16 line rollup.config.js file:
+package.json の `script` セクションの準備と単一ファイルコンポーネント用のラッパーが用意できれば、残りは Rollup が適切に設定されていることを確認するだけです。幸いにも、この操作はほんの 16 行の rollup.config.js ファイルによって行えます:
 
 ```js
-import vue from 'rollup-plugin-vue'; // Handle .vue SFC files
-import buble from 'rollup-plugin-buble'; // Transpile/polyfill with reasonable browser support
+import vue from 'rollup-plugin-vue'; // .vue 単一ファイルコンポーネントを取得
+import buble from 'rollup-plugin-buble'; // 適切にブラウザをサポートするトランスパイラおよびポリフィル
 export default {
     input: 'build/wrapper.js', // Path relative to package.json
     output: {
@@ -182,17 +182,17 @@ export default {
     },
     plugins: [
         vue({
-            css: true, // Dynamically inject css as a <style> tag
-            compileTemplate: true, // Explicitly convert template to render function
+            css: true, // css を <style> タグとして注入
+            compileTemplate: true, // 明示的にテンプレートをレンダ関数に変換
         }),
-        buble(), // Transpile to ES5
+        buble(), // ES5 へトランスパイルする
     ],
 };
 ```
 
-This sample config file contains the minimum settings to package your SFC for npm. There is room for customization, such as extracting CSS to a separate file, using a CSS preprocessor, uglifying the JS output, etc.
+ここに例示した設定ファイルは npm のために単一ファイルコンポーネントをパッケージ化する最小限の設定となっています。CSS プリプロセッサを利用して、 CSS を別のファイルとして取得したり、JS の出力を難読化したりするカスタマイズを加える余地が有ります。
 
-Also, it is worth noting the `name` given the component here. This is a PascalCase name that the component will be given, and should correspond with the kebab-case name used elsewhere throughout this recipe.
+また、ここでコンポーネントに付与された `name` の値に注目すべきです。コンポーネントに付与されるのはパスカル・ケースの名称で、これはここまでの手順で利用されてきたケバブ・ケースの名称に対応していなければなりません。
 
 ### Will this replace my current development process?
 
