@@ -1518,6 +1518,16 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 9. **イベント** (リアクティブなイベントによって引き起こされたコールバック)
   - `watch`
   - ライフサイクルイベント (呼び出される順)
+    - `beforeCreate`
+    - `created`
+    - `beforeMount`
+    - `mounted`
+    - `beforeUpdate`
+    - `updated`
+    - `activated`
+    - `deactivated`
+    - `beforeDestroy`
+    - `destroyed`
 
 10. **リアクティブではないプロパティ** (リアクティブシステムから独立したインスタンス プロパティ)
   - `methods`
