@@ -13,8 +13,6 @@ order: 404
 
 これらは [NPM に公開](https://cdn.jsdelivr.net/npm/vue/types/)されており、そして最新の TypeScript は NPM パッケージ内の型宣言を解決する方法を知っています。つまり、NPM でインストールした時、TypeScript を Vue と共に使うための追加のツールを必要としません。
 
-近い将来、`vue-cli` で準備が整った  Vue + TypeScript プロジェクトで scaffold するためのオプションも提供する予定です。
-
 ## 推奨構成
 
 ``` js
@@ -37,12 +35,24 @@ order: 404
 
 ## 開発ツール
 
-TypeScript による Vue アプリケーションを開発するために、すぐに利用できる TypeScript のサポートを提供する [Visual Studio Code](https://code.visualstudio.com/) を使用することを強く勧めます。
+## プロジェクト作成
 
-[単一ファイルコンポーネント](./single-file-components.html) (SFC) を使用している場合、SFC 内部で TypeScript インターフェイスと他の多くの優れた機能を提供する素晴らしい [Vetur 拡張](https://github.com/vuejs/vetur) を入手してください。
+[Vue CLI 3](https://github.com/vuejs/vue-cli) は TypeScript を利用する新規のプロジェクトを生成する事ができます。次の手順で開始してください:
+
+```bash
+# 1. インストールされていない場合、 Vue CLI をインストールしてください
+npm install --global @vue/cli
+
+# 2. 新規のプロジェクトを作成し、続いて "Manually select features" を選択して下さい
+vue create my-project-name
+```
+
+## 各エディタによるサポート
+
+TypeScript による Vue アプリケーションを開発するために、すぐに利用できる TypeScript のサポートを提供する [Visual Studio Code](https://code.visualstudio.com/) を使用することを強く勧めます。[単一ファイルコンポーネント](./single-file-components.html) (SFC) を使用している場合、SFC 内部で TypeScript インターフェイスと他の多くの優れた機能を提供する素晴らしい [Vetur 拡張](https://github.com/vuejs/vetur) を入手してください。
 
 [WebStorm](https://www.jetbrains.com/webstorm/) も TypeScript と Vue.js の両方に対してすぐに利用できるサポートを提供しています。
-  
+
 ## 基本的な使い方
 
 Vue コンポーネントオプション内部で TypeScript が型を適切に推測できるようにするには、`Vue.component` または `Vue.extend` でコンポーネントを定義する必要があります:
