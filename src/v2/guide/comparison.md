@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2018-03-09
+updated: 2018-06-12
 type: guide
 order: 801
 ---
@@ -125,9 +125,9 @@ Vue の開発者がもうすぐ利用できるもう1つの選択肢は、 [Nati
 
 MobX は React コミュニティ内でとても人気になってきており、実はそれは Vue のリアクティブシステムとほぼ同じものを使っています。限られた範囲内では、React + MobX の流れはより冗長な Vue として考えることができるので、もしあなたがその組み合わせを使って、それを楽しんでいるのならば、Vue を使ってみるのは、おそらく次のステップとして理にかなっているでしょう。
 
-### Preact and Other React-Like Libraries
+### Preact とその他の React 系ライブラリ
 
-React-like libraries usually try to share as much of their API and ecosystem with React as is feasible. For that reason, the vast majority of comparisons above will also apply to them. The main difference will typically be a reduced ecosystem, often significantly, compared to React. Since these libraries cannot be 100% compatible with everything in the React ecosystem, some tooling and companion libraries may not be usable. Or, even if they appear to work, they could break at any time unless your specific React-like library is officially supported on par with React.
+React 系のライブラリはたいてい、API とエコシステムの多くをなるべく React と共有しようとします。そのため、上に挙げた比較の大部分はそれらのライブラリにも当てはまります。主な違いは、まず React と比べてエコシステムの規模が（しばしばかなり）小さいことです。これらのライブラリが React のエコシステムのすべてと 100 パーセントの互換性を持つことは無いはずですから、いくつかのツールや関連ライブラリは使用できないかもしれません。あるいは、うまく動いているように見えたとしても、その React 系ライブラリが React と同等に公式にサポートされていない限りは、いつ壊れないとも限りません。
 
 ## AngularJS (Angular 1)
 
