@@ -15,7 +15,7 @@ var vm = new Vue({
 })
 ```
 
-Vue のデザインは、[MVVM パターン](https://en.wikipedia.org/wiki/Model_View_ViewModel)と厳密には関連が無いものの、部分的には影響を受けています。慣例として、 `vm` (ViewModel の略) を Vue インスタンスの変数名としてよく使います。
+Vue のデザインは、[MVVM パターン](https://ja.wikipedia.org/wiki/Model_View_ViewModel)と厳密には関連が無いものの、部分的には影響を受けています。慣例として、 `vm` (ViewModel の略) を Vue インスタンスの変数名としてよく使います。
 
 Vue インスタンスを生成するには、**オプションオブジェクト**を渡します。このガイドの大部分では、これらのオプションを使用して望んだ挙動にするための方法について説明しています。参考までに、全てのオプションの一覧は[API リファレンス](../api/#オプション-データ)で参照できます。
 
