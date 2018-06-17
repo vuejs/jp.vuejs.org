@@ -389,7 +389,7 @@ computed: {
 または、コンポーネントメソッドで:
 
 ``` js
-template: '<p>message: {{ getTimeMessage }}</p>',
+template: '<p>message: {{ getTimeMessage() }}</p>',
 methods: {
   getTimeMessage: function () {
     return Date.now() + this.message
