@@ -54,13 +54,13 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
 
 1. `data` 関数が文字列を返す `90 行目` の **src/components/HelloWorld.vue** にブレイクポイントを設定してください。
 
-![Breakpoint Renderer](/images/breakpoint_set.png)
+  ![Breakpoint Renderer](/images/breakpoint_set.png)
 
 2. ルートフォルダであなたのお気に入りのターミナルを開き、Vue CLI を使用してアプリを提供してください:
 
-```
-npm start
-```
+  ```
+  npm start
+  ```
 
 3. Debug ビューに移動し、**'vuejs: chrome'** 設定を選択し、F5 キーを押すか緑の再生ボタンをクリックしてください。
 
@@ -68,7 +68,7 @@ npm start
 
 
 
-![Breakpoint Hit](/images/breakpoint_hit.png)
+  ![Breakpoint Hit](/images/breakpoint_hit.png)
 
 ## 代替パターン
 
