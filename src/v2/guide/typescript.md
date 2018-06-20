@@ -35,7 +35,7 @@ order: 404
 
 ## 開発ツール
 
-## プロジェクト作成
+### プロジェクト作成
 
 [Vue CLI 3](https://github.com/vuejs/vue-cli) は TypeScript を利用する新規のプロジェクトを生成する事ができます。次の手順で開始してください:
 
@@ -47,7 +47,7 @@ npm install --global @vue/cli
 vue create my-project-name
 ```
 
-## 各エディタによるサポート
+### 各エディタによるサポート
 
 TypeScript による Vue アプリケーションを開発するために、すぐに利用できる TypeScript のサポートを提供する [Visual Studio Code](https://code.visualstudio.com/) を使用することを強く勧めます。[単一ファイルコンポーネント](./single-file-components.html) (SFC) を使用している場合、SFC 内部で TypeScript インターフェイスと他の多くの優れた機能を提供する素晴らしい [Vetur 拡張](https://github.com/vuejs/vetur) を入手してください。
 
