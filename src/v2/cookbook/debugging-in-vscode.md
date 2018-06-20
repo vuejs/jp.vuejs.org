@@ -25,6 +25,16 @@ VS Code から Vue コンポーネントをデバックする前に、ソース�
 devtool: 'source-map',
 ```
 
+Vue CLI 3 を利用している場合は `vue.config.js` 内にプロパティ `devtool` を定義する必要が有ります。
+
+```js
+module.exports = {
+  configureWebpack: {
+    devtool: 'source-map'
+  }
+}
+```
+
 ### VS Code からアプリケーションを起動する
 
 Activity Bar の Debugging アイコン をクリックして Debug ビューを表示し、歯車アイコンをクリックして launch.json ファイルを設定し、環境に **Chrome** を選択してください。生成された launch.json の内容を次の 2 つの構成に置き換えます:
