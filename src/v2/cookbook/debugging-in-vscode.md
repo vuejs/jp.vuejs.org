@@ -25,7 +25,7 @@ VS Code から Vue コンポーネントをデバックする前に、ソース�
 devtool: 'source-map',
 ```
 
-Vue CLI 3 を利用している場合は `vue.config.js` 内にプロパティ `devtool` を定義する必要が有ります。
+Vue CLI 3 を利用している場合は `vue.config.js` 内にプロパティ `devtool` を定義する必要があります。
 
 ```js
 module.exports = {
