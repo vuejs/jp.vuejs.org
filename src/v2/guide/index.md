@@ -33,7 +33,11 @@ or:
 
 Vue の他のインストール方法について、[インストール](../guide/installation.html) ページで紹介しています。注意点として、初心者が `vue-cli` で始めることは推奨**しません**（特に、Node.js ベースのツールについてまだ詳しくない場合）。
 
+よりインタラクティブに学びたい場合、スクリーンキャストといつでも一時停止してコードを試せる環境を組み合わせた、 [Scrimba の一連のチュートリアル](https://scrimba.com/playlist/pXKqta) を利用可能です。
+
 ## 宣言的レンダリング
+
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cQ3QVcr" target="_blank">Scrimba のレッスンを試す</a></div>
 
 Vue.js のコアは、単純なテンプレート構文を使って宣言的にデータを DOM に描画することを可能にするシステムです:
 
@@ -105,6 +109,8 @@ var app2 = new Vue({
 再び JavaScript コンソールを開いて、`app2.message = 'some new message'` を打ち込むと、もう一度束縛されたHTML（このケースでは `title` 属性）が更新されるのが確認できるでしょう。
 
 ## 条件分岐とループ
+
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQe4SJ" target="_blank">Scrimba でレッスンを試す</a></div>
 
 要素の有無を切り替えることも非常にシンプルにできます:
 
@@ -190,6 +196,8 @@ var app4 = new Vue({
 
 ## ユーザー入力の制御
 
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/czPNaUr" target="_blank">Scrimba のレッスンを試す</a></div>
+
 あなたのアプリケーション上でユーザーにインタラクションをとってもらうために、`v-on` ディレクティブを使ってイベントリスナを加え、Vue インスタンスのメソッドを呼び出すことができます:
 
 ``` html
@@ -265,6 +273,8 @@ var app6 = new Vue({
 {% endraw %}
 
 ## コンポーネントによる構成
+
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQVkA3" target="_blank">Scrimba のレッスンを試す</a></div>
 
 コンポーネントシステムは Vue.js におけるもうひとつの重要な抽象概念です。「小さく、自己完結的で、（多くの場合）再利用可能なコンポーネント」を組み合わせることで、大規模アプリケーションを構築することが可能になります。アプリケーションのインターフェイスについて考えてみると、ほぼすべてのタイプのインターフェイスはコンポーネントツリーとして抽象化することができます:
 

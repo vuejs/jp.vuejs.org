@@ -25,6 +25,16 @@ VS Code から Vue コンポーネントをデバックする前に、ソース�
 devtool: 'source-map',
 ```
 
+Vue CLI 3 を利用している場合は `vue.config.js` 内にプロパティ `devtool` を定義する必要があります。
+
+```js
+module.exports = {
+  configureWebpack: {
+    devtool: 'source-map'
+  }
+}
+```
+
 ### VS Code からアプリケーションを起動する
 
 Activity Bar の Debugging アイコン をクリックして Debug ビューを表示し、歯車アイコンをクリックして launch.json ファイルを設定し、環境に **Chrome** を選択してください。生成された launch.json の内容を次の 2 つの構成に置き換えます:
@@ -54,13 +64,13 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
 
 1. `data` 関数が文字列を返す `90 行目` の **src/components/HelloWorld.vue** にブレイクポイントを設定してください。
 
-![Breakpoint Renderer](/images/breakpoint_set.png)
+  ![Breakpoint Renderer](/images/breakpoint_set.png)
 
 2. ルートフォルダであなたのお気に入りのターミナルを開き、Vue CLI を使用してアプリを提供してください:
 
-```
-npm start
-```
+  ```
+  npm start
+  ```
 
 3. Debug ビューに移動し、**'vuejs: chrome'** 設定を選択し、F5 キーを押すか緑の再生ボタンをクリックしてください。
 
@@ -68,7 +78,7 @@ npm start
 
 
 
-![Breakpoint Hit](/images/breakpoint_hit.png)
+  ![Breakpoint Hit](/images/breakpoint_hit.png)
 
 ## 代替パターン
 

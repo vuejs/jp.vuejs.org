@@ -150,22 +150,22 @@ import { shallowMount } from '@vue/test-utils'
 
 describe('Foo', () => {
   it('メッセージを描画し、ユーザー入力に正しく応答します', () => {
-      const wrapper = shallowMount(Foo, {
-    data: {
-      message: 'Hello World',
-      username: ''
-    }
-  })
+    const wrapper = shallowMount(Foo, {
+      data: {
+        message: 'Hello World',
+        username: ''
+      }
+    })
 
-  // message が描画されていたら見られる
-  expect(wrapper.find('.message').text()).toEqual('Hello World')
+    // message が描画されていたら見られる
+    expect(wrapper.find('.message').text()).toEqual('Hello World')
 
-  // エラーのアサートが描画される
-  expect(wrapper.find('.error').exists()).toBeTruthy()
+    // エラーのアサートが描画される
+    expect(wrapper.find('.error').exists()).toBeTruthy()
 
-  // `username`を更新してエラーのアサートが描画されなくなる
-  wrapper.setData({ username: 'Lachlan' })
-  expect(wrapper.find('.error').exists()).toBeFalsy()
+    // `username`を更新してエラーのアサートが描画されなくなる
+    wrapper.setData({ username: 'Lachlan' })
+    expect(wrapper.find('.error').exists()).toBeFalsy()
   })
 })
 ```

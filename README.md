@@ -15,7 +15,7 @@
 
 ## 開発
 
-```
+```sh
 $ npm install -g hexo-cli
 $ npm install
 $ npm start # http://localhost:4000 で開発サーバを開始
