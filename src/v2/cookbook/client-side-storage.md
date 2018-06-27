@@ -1,16 +1,16 @@
 ---
-title: Client-Side Storage
+title: クライアントサイドストレージ
 type: cookbook
 order: 11
 ---
 
-## Base Example
+## 基本の例
 
-Client-side storage is an excellent way to quickly add performance gains to an application. By storing data on the browser itself, you can skip fetching information from the server every time the user needs it. While especially useful when offline, even online users will benefit from using data locally versus a remote server. Client-side storage can be done with [cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies), [Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) (technically "Web Storage"), [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), and [WebSQL](https://www.w3.org/TR/webdatabase/) (a deprecated method that should not be used in new projects). 
+クライアントサイドストレージは、パフォーマンスの向上をアプリケーションに対してすばやく追加する優れた方法です。ブラウザ自体にデータを格納することで、ユーザが必要とするたびにサーバから情報を取得するのをスキップすることができます。オフラインのとき特に便利ですが、オンラインユーザでもリモートサーバと比較してローカルデータを使用することにメリットがあります。クライアントサイドストレージは、[クッキー](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies), [ローカルストレージ](https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API)（技術的には "Web Storage"）, [IndexedDB](https://developer.mozilla.org/ja/docs/Web/API/IndexedDB_API), および [WebSQL](https://www.w3.org/TR/webdatabase/)（新しいプロジェクトでは使用しないでください）で実行できます。
 
-In this cookbook entry we'll focus on Local Storage, the simplest of the storage mechanisms. Local Storage uses a key/value system for storing data. It is limited to storing only simple values but complex data can be stored if you are willing to encode and decode the values with JSON. In general, Local Storage is appropriate for smaller sets of data you would want to persist, things like user preferences or form data. Larger data with more complex storage needs would be better stored typically in IndexedDB. 
+このクックブックでは最も単純なストレージメカニズムの、ローカルストレージに焦点を当てます。ローカルストレージはデータを格納するための key/value システムを使用します。単純な値だけを格納することに限られますが JSON で値をエンコード及びデコードする場合は複雑なデータを格納できます。一般的に、ローカルストレージは保持したいと思う小さなデータセット、環境設定やフォームデータなどに適しています。より複雑なストレージニーズを伴う大規模なデータは、通常は IndexedDB に格納する方がよいでしょう。
 
-Let's begin with a simple form based example:
+簡単なフォームベースの例からはじめましょう:
 
 ``` html
 <div id="app">
@@ -18,7 +18,7 @@ Let's begin with a simple form based example:
 </div>
 ```
 
-This example has one form field bound to a Vue value called `name`. Here's the JavaScript:
+この例では `name` という Vue にバインドされたひとつのフォームフィールドがあります。ここに JavaScript があります:
 
 ``` js
 const app = new Vue({
@@ -39,28 +39,28 @@ const app = new Vue({
 });
 ```
 
-Focus on the `mounted` and `watch` parts. We use `mounted` to handle loading the value from localStorage. To handle writing the data base, we watch the `name` value and on change, immediately write it. 
+`mounted` と ` watch` パーツに注目してください。localStorage の値のロードを処理するために `mounted` を使います。データベースの作成を扱うために、`name` 値を監視し変更したら、直ちに書き込みます。
 
-You can run this yourself here:
+あなたはここで実行することができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="KodaKb" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="testing localstorage" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/KodaKb/">testing localstorage</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-Type something in the form and then reload this page. You'll note that the value you typed previously will show up automatically. Don't forget that your browser provides excellent developer tools for inspecting client-side storage. Here's an example in Firefox:
+フォームに何か入力してこのページをリロードしてください。前に入力した値が自動的に表示されます。ブラウザがクラインアントサイドストレージを詳しく調べるための優れた開発者ツールを提供していることを忘れないでください。ここでは、Firefox の例です:
 
 ![Storage devtools in Firefox](/images/devtools-storage.png)
 
-And here it is in Chrome:
+そしてここでは Chrome です:
 
 ![Storage devtools in Chrome](/images/devtools-storage-chrome.png)
 
-And then finally, an example in Microsoft Edge. Note that you can find application storage values under the Debugger tab.
+最後に、Microsoft Edge の例です。アプリケーションのストレージ値は、デバッガタブで確認することができます。
 
 ![Storage devtools in Edge](/images/devtools-storage-edge.png)
 
-<p class="tip">As a quick aside, these dev tools also offer you a way to remove storage values. This can be very useful when testing.</p>
+<p class="tip">これらの開発ツールは、すぐにストレージ値を削除する手段を提供します。これはテスト時に非常に便利です。</p>
 
-Immediately writing the value may not advisable. Let's consider a slightly more advanced example. First, the updated form.
+直ちに値を書くことはお勧めできません。やや高度な例を考えてみましょう。まず、更新されたフォーム。
 
 ``` html
 <div id="app">
@@ -71,9 +71,9 @@ Immediately writing the value may not advisable. Let's consider a slightly more 
 </div>
 ```
 
-Now we've got two fields (again, bound to a Vue instance) but now there is the addition of a button that runs a `persist` method. Let's look at the JavaScript.
+今度は2つのフィールド（Vue インスタンスにバインドされています）がありますが、`persist` メソッドを実行するボタンが追加されています。JavaScript を見てみましょう。
 
-``` js 
+``` js
 const app = new Vue({
   el:'#app',
   data: {
@@ -98,14 +98,14 @@ const app = new Vue({
 })
 ```
 
-As before, `mounted` is used to load persisted data, if it exists. This time, though, data is only persisted when the button is clicked. We could also do any validations or transformations here before storing the value. You could also store a date representing when the values were stored. With that metadata, the `mounted` method could make a logical call on whether or not to store the values again, such as in this version below. You can try this version below.
+前述したように、`mounted` は永続されたデータがあれば、それを読み込みます。ただし、今回は、ボタンがクリックされたときにのみデータが保持されます。値を保持する前に、ここで検証や変換を行うことも可能です。値が格納された日を表す日付を格納することもできます。このメタデータでは、`mounted` メソッドはこのバージョンのように値を再度格納するかどうかを論理的に呼び出すことができます。次のバージョンを試してください。
 
 <p data-height="265" data-theme-id="0" data-slug-hash="rdOjLN" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="testing localstorage 2" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/rdOjLN/">testing localstorage 2</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Working with Complex Values
+## 複雑な値を扱う
 
-As mentioned above, Local Storage only works with simple values. To store more complex values, like objects or arrays, you must serialize and deserialize the values with JSON. Here is a more advanced example that persists an array of cats (the best kind of array possible). 
+上記のように、ローカルストレージは単純な値でしか動作しません。オブジェクトや配列などのより複雑な値を格納するには、JSON を使用して値をシリアライズまたデシリアライズする必要があります。以下は、猫の配列を維持するより高度な例です（可能な限り最良の配列）。
 
 ``` html
 <div id="app">
@@ -115,16 +115,16 @@ As mentioned above, Local Storage only works with simple values. To store more c
     <span class="cat">{{ cat }}</span> <button @click="removeCat(n)">Remove</button>
     </p>
   </div>
-  
+
   <p>
-    <input v-model="newCat"> 
+    <input v-model="newCat">
     <button @click="addCat">Add Cat</button>
   </p>
-  
+
 </div>
 ```
 
-This "app" consists of a simple list on top (with a button to remove a cat) and a small form at the bottom to add a new cat. Now let's look at the JavaScript.
+この "app" は、上部のシンプルなリスト（猫を除外するボタン付き）と新しい猫を追加するための下部の小さなフォームから成り立っています。JavaScript を見てみましょう。
 
 ``` js
 const app = new Vue({
@@ -134,7 +134,7 @@ const app = new Vue({
     newCat: null
   },
   mounted() {
-    
+
     if (localStorage.getItem('cats')) {
       try {
         this.cats = JSON.parse(localStorage.getItem('cats'));
@@ -145,11 +145,11 @@ const app = new Vue({
   },
   methods: {
     addCat() {
-      // ensure they actually typed something
+      // 実際に何かしたことを入力する
       if (!this.newCat) {
         return;
       }
-      
+
       this.cats.push(this.newCat);
       this.newCat = '';
       this.saveCats();
@@ -166,20 +166,20 @@ const app = new Vue({
 })
 ```
 
-In this application, we've switched to use the Local Storage APIs versus "direct" access. Both work but the API method is generally preferred. `mounted` now has to grab the value and parse the JSON value. If anything goes wrong here we assume the data is corrupt and delete it. (Remember, any time your web application uses client-side storage, the user has access to it and can modify it at will.)
+このアプリケーションでは、"ダイレクト" アクセスに対しローカルストレージ API を使用するように切り替えました。どちらも機能しますが API メソッドのほうが一般的に好まれます。`mounted` は値を取得し JSON の値を解析する必要があります。もし何か問題が発生した場合データが破損していると判断しそれを削除します。（Web アプリケーションがクライアントサイドストレージを使用するときはいつでも、ユーザーはそれにアクセスして好きなように変更することができるということを忘れないでください）
 
-We have three methods now to handle working with cat. Both `addCat` and `removeCat` handle updating the "live" Vue data stored in `this.cats`. They then run `saveCats` which handles serializing and persisting the data. You can play with this version below:
+猫を処理するための3つのメソッドがあります。`addCat` と `removeCat` は `this.cats` に格納されている "生" Vue データの更新を処理します。次にデータのシリアライズと永続化を処理する `saveCats` を実行します。あなたは次のバージョンを試すことができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="qoYbyW" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="localstorage, complex" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/qoYbyW/">localstorage, complex</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
-## Alternative Patterns
+## 代替パターン
 
-While the Local Storage API is relatively simple, it is missing some basic features that would be useful in many applications. The following plugins wrap Local Storage access and make it easier to use, while also adding functionality like default values.
+ローカルストレージ API は比較的シンプルですが、多くのアプリケーションで役に立ついくつかの基本的な機能が欠けています。以下のプラグインでは、ローカルストレージをラップして使いやすくし、デフォルト値のような機能を追加します。
 
 * [vue-local-storage](https://github.com/pinguinjkeke/vue-local-storage)
 * [vue-reactive-storage](https://github.com/ropbla9/vue-reactive-storage)
 
-## Wrapping Up
+## おわりに
 
-While the browser will never replace a server persistence system, having multiple ways to cache data locally can be a huge performance boost for your application, and working with it in Vue.js makes it even more powerful.
+ブラウザはサーバの永続性システムを置き換えることはありませんが、データをローカルにキャッシュする方法が複数あると、アプリケーションのパフォーマンスが大幅に向上し、Vue.js でそれを処理することでさらに強力になります。
