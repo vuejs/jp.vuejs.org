@@ -6,9 +6,9 @@ order: 11
 
 ## 基本の例
 
-クライアントサイドストレージは、パフォーマンスの向上をアプリケーションに対してすばやく追加する優れた方法です。ブラウザ自体にデータを格納することで、ユーザが必要とするたびにサーバから情報を取得するのをスキップすることができます。オフラインのとき特に便利ですが、オンラインユーザでもリモートサーバと比較してローカルデータを使用することにメリットがあります。クライアントサイドストレージは、[cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies), [ローカルストレージ](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)（技術的には "Web Storage"）, [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API), および [WebSQL](https://www.w3.org/TR/webdatabase/)（新しいプロジェクトでは使用しないでください）で実行できます。
+クライアントサイドストレージは、パフォーマンスの向上をアプリケーションに対してすばやく追加する優れた方法です。ブラウザ自体にデータを格納することで、ユーザが必要とするたびにサーバから情報を取得するのをスキップすることができます。オフラインのとき特に便利ですが、オンラインユーザでもリモートサーバと比較してローカルデータを使用することにメリットがあります。クライアントサイドストレージは、[クッキー](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies), [ローカルストレージ](https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API)（技術的には "Web Storage"）, [IndexedDB](https://developer.mozilla.org/ja/docs/Web/API/IndexedDB_API), および [WebSQL](https://www.w3.org/TR/webdatabase/)（新しいプロジェクトでは使用しないでください）で実行できます。
 
-このクッキングブックでは最も単純なストレージメカニズムの、ローカルストレージに焦点を当てます。ローカルストレージはデータを格納するための key/value システムを使用します。単純な値だけを格納することに限られますが JSON で値をエンコード及びデコードする場合は複雑なデータを格納できます。一般的に、ローカルストレージは保持したいと思う小さなデータセット、環境設定やフォームデータなどに適しています。より複雑なストレージニーズを伴う大規模なデータは、通常は IndexedDB に格納する方がよいでしょう。
+このクックブックでは最も単純なストレージメカニズムの、ローカルストレージに焦点を当てます。ローカルストレージはデータを格納するための key/value システムを使用します。単純な値だけを格納することに限られますが JSON で値をエンコード及びデコードする場合は複雑なデータを格納できます。一般的に、ローカルストレージは保持したいと思う小さなデータセット、環境設定やフォームデータなどに適しています。より複雑なストレージニーズを伴う大規模なデータは、通常は IndexedDB に格納する方がよいでしょう。
 
 簡単なフォームベースの例からはじめましょう:
 
@@ -166,9 +166,9 @@ const app = new Vue({
 })
 ```
 
-このアプリケーションでは、"ダイレクト" アクセスに対しローカルストレージ APIs を使用するように切り替えました。どちらも機能しますが API メソッドのほうが一般的に好まれます。`mounted` は値を取得し JSON の値を解析する必要があります。もし何か問題が発生した場合データが破損していると判断しそれを削除します。（Web アプリケーションがクライアントサイドストレージを使用するときはいつでも、ユーザーはそれにアクセスして好きなように変更することができるということを忘れないでください）
+このアプリケーションでは、"ダイレクト" アクセスに対しローカルストレージ API を使用するように切り替えました。どちらも機能しますが API メソッドのほうが一般的に好まれます。`mounted` は値を取得し JSON の値を解析する必要があります。もし何か問題が発生した場合データが破損していると判断しそれを削除します。（Web アプリケーションがクライアントサイドストレージを使用するときはいつでも、ユーザーはそれにアクセスして好きなように変更することができるということを忘れないでください）
 
-猫を処理するための3つのメソッドがあります。`addCat` と `removeCat` は `this.cats` に格納されている "ライブ" Vue データの更新を処理します。次にデータのシリアライズと永続化を処理する `saveCats` を実行します。あなたは次のバージョンを試すことができます:
+猫を処理するための3つのメソッドがあります。`addCat` と `removeCat` は `this.cats` に格納されている "生" Vue データの更新を処理します。次にデータのシリアライズと永続化を処理する `saveCats` を実行します。あなたは次のバージョンを試すことができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="qoYbyW" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="localstorage, complex" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/qoYbyW/">localstorage, complex</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
