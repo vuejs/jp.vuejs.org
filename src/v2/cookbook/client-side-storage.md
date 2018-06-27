@@ -105,7 +105,7 @@ const app = new Vue({
 
 ## 複雑な値を扱う
 
-上記のように、ローカルストレージは単純な値でしか動作しません。オブジェクトや配列などのより複雑な値を格納するには、JSON を使用して値をシリアライズ化またデシリアライズ化する必要があります。以下は、猫の配列を維持するより高度な例です（可能な限り最良の配列）。
+上記のように、ローカルストレージは単純な値でしか動作しません。オブジェクトや配列などのより複雑な値を格納するには、JSON を使用して値をシリアライズまたデシリアライズする必要があります。以下は、猫の配列を維持するより高度な例です（可能な限り最良の配列）。
 
 ``` html
 <div id="app">
@@ -124,7 +124,7 @@ const app = new Vue({
 </div>
 ```
 
-この "app" は新しい猫を追加するために、上部にシンプルなリスト（猫を除外するボタン付き）と下部に小さなフォームから成り立っています。JavaScript を見てみましょう。
+この "app" は、上部のシンプルなリスト（猫を除外するボタン付き）と新しい猫を追加するための下部の小さなフォームから成り立っています。JavaScript を見てみましょう。
 
 ``` js
 const app = new Vue({
@@ -166,9 +166,9 @@ const app = new Vue({
 })
 ```
 
-このアプリケーションでは、ローカルストレージ API と "直接" アクセスできるように切り替えました。どちらも機能しますが API メソッドのほうが一般的に好まれます。`mounted` は値を取得し JSON の値を解析する必要があります。もし何か問題が発生した場合データが破損していると判断しそれを削除します。（Web アプリケーションがクライアントサイドストレージをを使用するたびに、ユーザーはアクセスすることができ、自らの意思で変更することができます）
+このアプリケーションでは、"ダイレクト" アクセスに対しローカルストレージ APIs を使用するように切り替えました。どちらも機能しますが API メソッドのほうが一般的に好まれます。`mounted` は値を取得し JSON の値を解析する必要があります。もし何か問題が発生した場合データが破損していると判断しそれを削除します。（Web アプリケーションがクライアントサイドストレージを使用するときはいつでも、ユーザーはそれにアクセスして好きなように変更することができるということを忘れないでください）
 
-猫を処理するための3つのメソッドがあります。`addCat` と `removeCat` は `this.cats` に格納されている "ライブ" Vue データの更新を処理します。次にデータのシリアライズ化と永続化を処理する `saveCats` を実行します。あなたは次のバージョンを試すことができます:
+猫を処理するための3つのメソッドがあります。`addCat` と `removeCat` は `this.cats` に格納されている "ライブ" Vue データの更新を処理します。次にデータのシリアライズと永続化を処理する `saveCats` を実行します。あなたは次のバージョンを試すことができます:
 
 <p data-height="265" data-theme-id="0" data-slug-hash="qoYbyW" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="localstorage, complex" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/qoYbyW/">localstorage, complex</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
