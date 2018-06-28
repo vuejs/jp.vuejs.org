@@ -127,6 +127,8 @@ creating-custom-scroll-directives.md | カスタムスクロールディレク�
 debugging-in-vscode.md | VS Code と Chrome によるデバッグ | [c-su](https://github.com/c-su)
 using-axios-to-consume-apis.md | axios を利用した API の使用 | [masaakikunsan](https://github.com/masaakikunsan)
 avoiding-memory-leaks.md | メモリリークを回避する | [nicedchy](https://github.com/nicedchy)
+client-side-storage.md | クライアントサイドストレージ | [nicedchy](https://github.com/nicedchy)
+packaging-sfc-for-npm.md | Vue コンポーネントを npm パッケージ化する | [desigrammer](https://github.com/desigrammer)
 
 ## Vue.js 公式ブログ "The Vue Point" の翻訳
 
