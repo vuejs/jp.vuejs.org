@@ -2,14 +2,14 @@
 
 <%_ for (const sponsor of theme.platinum_sponsors) {_%>
 <a href="<%- sponsor.url %>" target="_blank" style="width: 160px;">
-  <img src="<%- url_for(`/images/${sponsor.img}`) %>" style="width: 160px;">
+  <img src="<%- url_for(`/images/${sponsor.img}`) %>" style="width: 160px;" alt="<%-sponsor.name-%>">
 </a>
 <%_ } _%>
 <br>
 <br>
 <%_ for (const sponsor of theme.gold_sponsors) {_%>
 <a href="<%- sponsor.url %>" target="_blank" style="width: 120px;">
-  <img src="<%- url_for(`/images/${sponsor.img}`) %>" style="width: 120px;">
+  <img src="<%- url_for(`/images/${sponsor.img}`) %>" style="width: 120px;" alt="<%-sponsor.name-%>">
 </a>
 <%_ } _%>
 <br>
