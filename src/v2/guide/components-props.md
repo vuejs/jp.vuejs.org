@@ -1,41 +1,39 @@
 ---
-title: Props
+title: プロパティ
 type: guide
 order: 102
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+> このページは、[コンポーネントの基本](components.html)を読んでいることを前提としています。はじめてコンポーネントについて読む場合は、まずはそちらをお読みください。
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+## プロパティの形式 (キャメルケース vs ケバブケース)
 
-## Prop Casing (camelCase vs kebab-case)
-
-HTML attribute names are case-insensitive, so browsers will interpret any uppercase characters as lowercase. That means when you're using in-DOM templates, camelCased prop names need to use their kebab-cased (hyphen-delimited) equivalents:
+HTML の属性名は大文字小文字を区別せず、ブラウザは全ての大文字を小文字として解釈します。つまりは、 DOM(HTML) のテンプレート内においては、キャメルケースのプロパティはケバブケース(ハイフンで区切ったもの)を使用する必要があります。
 
 ``` js
 Vue.component('blog-post', {
-  // camelCase in JavaScript
+  // JavaScript 内ではキャメルケース
   props: ['postTitle'],
   template: '<h3>{{ postTitle }}</h3>'
 })
 ```
 
 ``` html
-<!-- kebab-case in HTML -->
+<!-- HTML 内ではケバブケース -->
 <blog-post post-title="hello!"></blog-post>
 ```
 
-Again, if you're using string templates, this limitation does not apply.
+文字列テンプレートを利用している場合も、この制限は適用されません。
 
-## Prop Types
+## プロパティの型
 
-So far, we've only seen props listed as an array of strings:
+ここまででは、プロパティを、プロパティ名の文字列として列挙してきました。
 
 ```js
 props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
 ```
 
-Usually though, you'll want every prop to be a specific type of value. In these cases, you can list props as an object, where the properties' names and values contain the prop names and types, respectively:
+しかしながら、通常は全てのプロパティの属性を、特定の型の値にしたいと考えることでしょう。そのような場合、プロパティーのキーと値に、それぞれのプロパティ名と型を設定したオブジェクトの配列として、プロパティを列挙することができます:
 
 ```js
 props: {
@@ -47,7 +45,7 @@ props: {
 }
 ```
 
-This not only documents your component, but will also warn users in the browser's JavaScript console if they pass the wrong type. You'll learn much more about [type checks and other prop validations](#Prop-Validation) further down this page.
+これは、コンポーネントへのドキュメンテーションだけでなく、間違った型を渡した場合に、ブラウザの JavaScript コンソールにて警告をします。詳しくはこのページの下にある[type checks and other prop validations](#Prop-Validation) にて説明します。
 
 ## Passing Static or Dynamic Props
 
