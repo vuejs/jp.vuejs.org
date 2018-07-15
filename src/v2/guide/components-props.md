@@ -45,7 +45,7 @@ props: {
 }
 ```
 
-これは、コンポーネントへのドキュメンテーションだけでなく、間違った型を渡した場合に、ブラウザの JavaScript コンソールにて警告をします。詳しくはこのページの下にある[type checks and other prop validations](#Prop-Validation) にて説明します。
+これは、コンポーネントへのドキュメンテーションだけでなく、間違った型を渡した場合に、ブラウザの JavaScript コンソールにて警告をします。詳しくはこのページの下にある[type checks and other prop validations](#プロパティのバリデーション) にて説明します。
 
 ## 静的あるいは動的なプロパティの受け渡し
 
