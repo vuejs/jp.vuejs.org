@@ -47,15 +47,15 @@ props: {
 
 これは、コンポーネントへのドキュメンテーションだけでなく、間違った型を渡した場合に、ブラウザの JavaScript コンソールにて警告をします。詳しくはこのページの下にある[type checks and other prop validations](#Prop-Validation) にて説明します。
 
-## Passing Static or Dynamic Props
+## 静的あるいは動的なプロパティの受け渡し
 
-So far, you've seen props passed a static value, like in:
+これまでは、このような形でプロパティが静的な値を渡しているところも見てきましたが:
 
 ```html
 <blog-post title="My journey with Vue"></blog-post>
 ```
 
-You've also seen props assigned dynamically with `v-bind`, such as in:
+次のような `v-bind` で動的に割り当てられたプロパティも見てきました:
 
 ```html
 <!-- Dynamically assign the value of a variable -->
@@ -65,58 +65,58 @@ You've also seen props assigned dynamically with `v-bind`, such as in:
 <blog-post v-bind:title="post.title + ' by ' + post.author.name"></blog-post>
 ```
 
-In the two examples above, we happen to pass string values, but _any_ type of value can actually be passed to a prop.
+上の 2 つの例では、文字列の値を渡していますが、プロパティには任意の型の値を渡すことが可能です。
 
-### Passing a Number
+### 数値の受け渡し
 
 ```html
-<!-- Even though `42` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.       -->
+<!-- `42` が静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これは文字列ではなく、 JavaScript の式となります。                    -->
 <blog-post v-bind:likes="42"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:likes="post.likes"></blog-post>
 ```
 
-### Passing a Boolean
+### 真偽値の受け渡し
 
 ```html
-<!-- Including the prop with no value will imply `true`. -->
+<!-- 値のないプロパティは、 `true` を意味することとなります。 -->
 <blog-post is-published></blog-post>
 
-<!-- Even though `false` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.          -->
+<!-- `false` が静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これもまた、文字列ではなく JavaScript の式となります。                        -->
 <blog-post v-bind:is-published="false"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:is-published="post.isPublished"></blog-post>
 ```
 
-### Passing an Array
+### 配列の受け渡し
 
 ```html
-<!-- Even though the array is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.            -->
+<!-- 配列が静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これもまた、文字列ではなく JavaScript の式となります。               -->
 <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:comment-ids="post.commentIds"></blog-post>
 ```
 
-### Passing an Object
+### オブジェクトの受け渡し
 
 ```html
-<!-- Even though the object is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.             -->
+<!-- オブジェクトが静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これもまた、文字列ではなく JavaScript の式となります。                      -->
 <blog-post v-bind:author="{ name: 'Veronica', company: 'Veridian Dynamics' }"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:author="post.author"></blog-post>
 ```
 
-### Passing the Properties of an Object
+### オブジェクトのプロパティの受け渡し
 
-If you want to pass all the properties of an object as props, you can use `v-bind` without an argument (`v-bind` instead of `v-bind:prop-name`). For example, given a `post` object:
+オブジェクトの全てのプロパティをコンポーネントのプロパティ(props)として渡したい場合は、`v-bind` を引数無しで使うことができます(`v-bind:prop-name` の代わりに `v-bind` を使用). 例えば、 `post` オブジェクトの場合:
 
 ``` js
 post: {
@@ -125,13 +125,13 @@ post: {
 }
 ```
 
-The following template:
+次のテンプレートは:
 
 ``` html
 <blog-post v-bind="post"></blog-post>
 ```
 
-Will be equivalent to:
+以下と同等となります:
 
 ``` html
 <blog-post
