@@ -174,42 +174,42 @@ post: {
 
 <p class="tip">JavaScript のオブジェクトと配列は、参照渡しされることに注意してください。参照として渡されるため、子コンポーネント内で配列やオブジェクトを変更すると、 **親の状態へと影響します。**</p>
 
-## Prop Validation
+## プロパティのバリデーション
 
-Components can specify requirements for its props, such as the types you've already seen. If a requirement isn't met, Vue will warn you in the browser's JavaScript console. This is especially useful when developing a component that's intended to be used by others.
+コンポーネントは、プロパティに対して既存の型などの要件を指定することができます。もし指定した要件が満たされない場合、 Vue はブラウザの JavaScript コンソールにて警告します。これは、他の人が利用することを意図したコンポーネントを開発する場合に、特に便利です。
 
-To specify prop validations, you can provide an object with validation requirements to the value of `props`, instead of an array of strings. For example:
+プロパティへのバリデーションは、文字列の配列の代わりに、 `props` の値へとバリデーションの条件をもったオブジェクトを渡すことで指定できます。 例えば以下のようなものです:
 
 ``` js
 Vue.component('my-component', {
   props: {
-    // Basic type check (`null` matches any type)
+    // 基本的な型の検査 (`null` は全ての型にマッチします)
     propA: Number,
-    // Multiple possible types
+    // 複数の型の許容
     propB: [String, Number],
-    // Required string
+    // 文字列型を必須で要求する
     propC: {
       type: String,
       required: true
     },
-    // Number with a default value
+    // デフォルト値つきの数値型
     propD: {
       type: Number,
       default: 100
     },
-    // Object with a default value
+    // デフォルト値つきのオブジェクト型
     propE: {
       type: Object,
-      // Object or array defaults must be returned from
-      // a factory function
+      // オブジェクトもしくは配列のデフォルト値は
+      // 必ずそれを生み出すための関数を返す必要があります。
       default: function () {
         return { message: 'hello' }
       }
     },
-    // Custom validator function
+    // カスタマイズしたバリデーション関数
     propF: {
       validator: function (value) {
-        // The value must match one of these strings
+        // プロパティの値は、必ずいずれかの文字列でなければならない
         return ['success', 'warning', 'danger'].indexOf(value) !== -1
       }
     }
@@ -217,13 +217,13 @@ Vue.component('my-component', {
 })
 ```
 
-When prop validation fails, Vue will produce a console warning (if using the development build).
+プロパティのバリデーションが失敗した場合、 Vue はコンソールにて警告します (開発用ビルドを利用しているとき)。
 
-<p class="tip">Note that props are validated **before** a component instance is created, so instance properties (e.g. `data`, `computed`, etc) will not be available inside `default` or `validator` functions.</p>
+<p class="tip">プロパティのバリデーションはコンポーネントのインスタンスが生成される **前** に行われるため、インスタンスのプロパティ (例えば `data`, `computed` など) を `dafault` および `validator` 関数の中で利用することはできません。</p>
 
-### Type Checks
+### 型の検査
 
-The `type` can be one of the following native constructors:
+`type` は、次のネイティブコンストラクタのいずれかです:
 
 - String
 - Number
@@ -234,7 +234,7 @@ The `type` can be one of the following native constructors:
 - Function
 - Symbol
 
-In addition, `type` can also be a custom constructor function and the assertion will be made with an `instanceof` check. For example, given the following constructor function exists:
+さらに、 `type` はカスタムコンストラクタ関数でもあり、 `instanceof` によるアサーションを行います。例えば、以下のコンストラクタ関数が存在すると仮定したとき:
 
 ```js
 function Person (firstName, lastName) {
@@ -243,7 +243,7 @@ function Person (firstName, lastName) {
 }
 ```
 
-You could use:
+このように利用することができます:
 
 ```js
 Vue.component('blog-post', {
@@ -253,7 +253,7 @@ Vue.component('blog-post', {
 })
 ```
 
-to validate that the value of the `author` prop was created with `new Person`.
+`author` プロパティの値が、 `new Person` によって作成されたものと検証できました。
 
 ## Non-Prop Attributes
 
