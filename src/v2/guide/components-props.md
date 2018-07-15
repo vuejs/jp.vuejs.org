@@ -255,29 +255,29 @@ Vue.component('blog-post', {
 
 `author` プロパティの値が、 `new Person` によって作成されたものと検証できました。
 
-## Non-Prop Attributes
+## プロパティでない属性
 
-A non-prop attribute is an attribute that is passed to a component, but does not have a corresponding prop defined.
+プロパティでない属性は、属性としてコンポーネントに受け渡されますが、対応するプロパティは定義されていません。
 
-While explicitly defined props are preferred for passing information to a child component, authors of component libraries can't always foresee the contexts in which their components might be used. That's why components can accept arbitrary attributes, which are added to the component's root element.
+子コンポーネントへと情報を渡す場合には、明示的に定義されたプロパティが好まれますが、コンポーネントライブラリの作成者には、コンポーネントが使用されうるコンテキストを必ずしも把握できるわけではありません。そのため、コンポーネントは、そのルートに対して追加される任意の属性を受け入れます。
 
-For example, imagine we're using a 3rd-party `bootstrap-date-input` component with a Bootstrap plugin that requires a `data-date-picker` attribute on the `input`. We can add this attribute to our component instance:
+例えば、サードパーティの `bootstrap-date-input` コンポーネントを用いて `data-date-picker` 属性を要求する Bootstrap プラグインを使っているとします。その場合、その属性をコンポーネントのインスタンスに追加できます:
 
 ``` html
 <bootstrap-date-input data-date-picker="activated"></bootstrap-date-input>
 ```
 
-And the `data-date-picker="activated"` attribute will automatically be added to the root element of `bootstrap-date-input`.
+また、 `data-datepicker="activated"` 属性は、自動的に `bootstrap-date-input` のルート属性へと追加されます。
 
-### Replacing/Merging with Existing Attributes
+### 既存の属性への置換とマージ
 
-Imagine this is the template for `bootstrap-date-input`:
+これが `bootstrap-date-input` 側のテンプレートとします:
 
 ``` html
 <input type="date" class="form-control">
 ```
 
-To specify a theme for our date picker plugin, we might need to add a specific class, like this:
+この日付プラグインのテーマを指定するには、以下のような特定のクラスを追加する必要があります:
 
 ``` html
 <bootstrap-date-input
@@ -286,16 +286,16 @@ To specify a theme for our date picker plugin, we might need to add a specific c
 ></bootstrap-date-input>
 ```
 
-In this case, two different values for `class` are defined:
+こういった場合、異なる2つのクラスが定義されています:
 
-- `form-control`, which is set by the component in its template
-- `date-picker-theme-dark`, which is passed to the component by its parent
+- `form-control` はコンポーネント自身のテンプレート内で定義されています
+- `date-picker-theme-dark` は、親コンポーネントによって受け渡されます
 
-For most attributes, the value provided to the component will replace the value set by the component. So for example, passing `type="text"` will replace `type="date"` and probably break it! Fortunately, the `class` and `style` attributes are a little smarter, so both values are merged, making the final value: `form-control date-picker-theme-dark`.
+ほとんどの属性においては、コンポーネント側の値が、コンポーネントに受け渡された値へと置換されます。たとえば、 `type="text"` を渡すと、 `type="date"` は置き換えられ、そして壊れてしまうでしょう！幸運なことに、 `class` および `style` 属性は少しスマートに作られていますので、両方の値がマージされ、最終的な値は `form-control date-picker-theme-dark` となります。
 
-### Disabling Attribute Inheritance
+### 属性の継承の無効化
 
-If you do **not** want the root element of a component to inherit attributes, you can set `inheritAttrs: false` in the component's options. For example:
+コンポーネントのルート要素に対して、属性を継承させたく **ない** 場合は、コンポーネントのオプション内にて `inheritAttrs: false` を設定できます。例:
 
 ```js
 Vue.component('my-component', {
@@ -304,7 +304,7 @@ Vue.component('my-component', {
 })
 ```
 
-This can be especially useful in combination with the `$attrs` instance property, which contains the attribute names and values passed to a component, such as:
+これは、 コンポーネントの `$attrs` インスタンスプロパティと組み合わせる時に特に便利です。 `$attrs` は、コンポーネントに渡される属性名およびその値が含まれています :
 
 ```js
 {
@@ -313,7 +313,7 @@ This can be especially useful in combination with the `$attrs` instance property
 }
 ```
 
-With `inheritAttrs: false` and `$attrs`, you can manually decide which element you want to forward attributes to, which is often desirable for [base components](../style-guide/#Base-component-names-strongly-recommended):
+`inheritAttrs: false` と `$attrs` を併用すると、要素に送る属性を手動で決定することができます。これは、 [基底コンポーネント](../style-guide/#基底コンポーネントの名前-強く推奨) の利用においてはしばしば望ましいことがあります:
 
 ```js
 Vue.component('base-input', {
@@ -332,7 +332,7 @@ Vue.component('base-input', {
 })
 ```
 
-This pattern allows you to use base components more like raw HTML elements, without having to care about which element is actually at its root:
+このパターンを使用すると、ルート上にある要素を気にすることなく、生の HTML 要素のように基底コンポーネントを利用できます。
 
 ```html
 <base-input
