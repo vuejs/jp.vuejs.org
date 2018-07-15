@@ -140,15 +140,17 @@ post: {
 ></blog-post>
 ```
 
-## One-Way Data Flow
+## 単方向のデータフロー
 
-All props form a **one-way-down binding** between the child property and the parent one: when the parent property updates, it will flow down to the child, but not the other way around. This prevents child components from accidentally mutating the parent's state, which can make your app's data flow harder to understand.
+全てのプロパティは、子プロパティと親プロパティの間に、 **単方向のバインディング** を形成します: 親のプロパティが更新されると、子へと流れ落ちていきますが、それ以外の方法でデータが流れることはありません。これによって、子コンポーネントが誤って親の状態を変更することがなく、<<WIP>>
 
-In addition, every time the parent component is updated, all props in the child component will be refreshed with the latest value. This means you should **not** attempt to mutate a prop inside a child component. If you do, Vue will warn you in the console.
+> This prevents child components from accidentally mutating the parent's state, which can make your app's data flow harder to understand.
 
-There are usually two cases where it's tempting to mutate a prop:
+また、親コンポーネントが更新されるたびに、子コンポーネント内の全てのプロパティが最新の値へと更新されます。これは、子コンポーネント内において、プロパティを **変化させない** ことを意味しています。それを行った場合、 Vue は コンソールにて警告します。
 
-1. **The prop is used to pass in an initial value; the child component wants to use it as a local data property afterwards.** In this case, it's best to define a local data property that uses the prop as its initial value:
+多くの場合、プロパティの値を変化させたい場合には、 2 つのケースがあります:
+
+1. **プロパティを初期値として受け渡し、子コンポーネントにてローカルのデータとして後で利用したいと考える場合** この場合、プロパティの値をローカルの data の初期値として定義することを推奨します:
 
   ``` js
   props: ['initialCounter'],
@@ -159,7 +161,7 @@ There are usually two cases where it's tempting to mutate a prop:
   }
   ```
 
-2. **The prop is passed in as a raw value that needs to be transformed.** In this case, it's best to define a computed property using the prop's value:
+2. **プロパティを未加工の値として渡す場合** この場合、プロパティの値を使用した算出プロパティを別途定義することを推奨します:
 
   ``` js
   props: ['size'],
@@ -170,7 +172,7 @@ There are usually two cases where it's tempting to mutate a prop:
   }
   ```
 
-<p class="tip">Note that objects and arrays in JavaScript are passed by reference, so if the prop is an array or object, mutating the object or array itself inside the child component **will** affect parent state.</p>
+<p class="tip">JavaScript のオブジェクトと配列は、参照渡しされることに注意してください。参照として渡されるため、子コンポーネント内で配列やオブジェクトを変更すると、 **親の状態へと影響します。**</p>
 
 ## Prop Validation
 
