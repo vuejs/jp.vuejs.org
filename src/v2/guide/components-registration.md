@@ -207,7 +207,7 @@ requireComponent.keys().forEach(fileName => {
   // コンポーネント名をパスカルケース (PascalCase) で取得する
   const componentName = upperFirst(
     camelCase(
-      // 先頭の `'./` と拡張子をファイル名から取り除く
+      // 先頭の `./` と拡張子をファイル名から取り除く
       fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
     )
   )
