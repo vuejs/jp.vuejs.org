@@ -1,41 +1,39 @@
 ---
-title: Props
+title: プロパティ
 type: guide
 order: 102
 ---
 
-> ⚠️注意: この内容は原文のままです。現在翻訳中ですのでお待ち下さい。🙏
+> このページは、[コンポーネントの基本](components.html)を読んでいることを前提としています。はじめてコンポーネントについて読む場合は、まずはそちらをお読みください。
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+## プロパティの形式 (キャメルケース vs ケバブケース)
 
-## Prop Casing (camelCase vs kebab-case)
-
-HTML attribute names are case-insensitive, so browsers will interpret any uppercase characters as lowercase. That means when you're using in-DOM templates, camelCased prop names need to use their kebab-cased (hyphen-delimited) equivalents:
+HTML の属性名は大文字小文字を区別せず、ブラウザは全ての大文字を小文字として解釈します。つまりは、 DOM(HTML) のテンプレート内においては、キャメルケースのプロパティはケバブケース(ハイフンで区切ったもの)を使用する必要があります。
 
 ``` js
 Vue.component('blog-post', {
-  // camelCase in JavaScript
+  // JavaScript 内ではキャメルケース
   props: ['postTitle'],
   template: '<h3>{{ postTitle }}</h3>'
 })
 ```
 
 ``` html
-<!-- kebab-case in HTML -->
+<!-- HTML 内ではケバブケース -->
 <blog-post post-title="hello!"></blog-post>
 ```
 
-Again, if you're using string templates, this limitation does not apply.
+文字列テンプレートを利用している場合も、この制限は適用されません。
 
-## Prop Types
+## プロパティの型
 
-So far, we've only seen props listed as an array of strings:
+ここまででは、プロパティを、プロパティ名の文字列として列挙してきました。
 
 ```js
 props: ['title', 'likes', 'isPublished', 'commentIds', 'author']
 ```
 
-Usually though, you'll want every prop to be a specific type of value. In these cases, you can list props as an object, where the properties' names and values contain the prop names and types, respectively:
+しかしながら、通常は全てのプロパティの属性を、特定の型の値にしたいと考えることでしょう。そのような場合、プロパティーのキーと値に、それぞれのプロパティ名と型を設定したオブジェクトの配列として、プロパティを列挙することができます:
 
 ```js
 props: {
@@ -47,78 +45,78 @@ props: {
 }
 ```
 
-This not only documents your component, but will also warn users in the browser's JavaScript console if they pass the wrong type. You'll learn much more about [type checks and other prop validations](#Prop-Validation) further down this page.
+これは、コンポーネントへのドキュメンテーションだけでなく、間違った型を渡した場合に、ブラウザの JavaScript コンソールにて警告をします。詳しくはこのページの下にある[type checks and other prop validations](#プロパティのバリデーション) にて説明します。
 
-## Passing Static or Dynamic Props
+## 静的あるいは動的なプロパティの受け渡し
 
-So far, you've seen props passed a static value, like in:
+これまでは、このような形でプロパティが静的な値を渡しているところも見てきましたが:
 
 ```html
 <blog-post title="My journey with Vue"></blog-post>
 ```
 
-You've also seen props assigned dynamically with `v-bind`, such as in:
+次のような `v-bind` で動的に割り当てられたプロパティも見てきました:
 
 ```html
-<!-- Dynamically assign the value of a variable -->
+<!-- 変数の値を動的に割り当てます -->
 <blog-post v-bind:title="post.title"></blog-post>
 
-<!-- Dynamically assign the value of a complex expression -->
+<!-- 複数の変数を合成した値を動的に割り当てます -->
 <blog-post v-bind:title="post.title + ' by ' + post.author.name"></blog-post>
 ```
 
-In the two examples above, we happen to pass string values, but _any_ type of value can actually be passed to a prop.
+上の 2 つの例では、文字列の値を渡していますが、プロパティには __任意の__ 型の値を渡すことが可能です。
 
-### Passing a Number
+### 数値の受け渡し
 
 ```html
-<!-- Even though `42` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.       -->
+<!-- `42` が静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これは文字列ではなく、 JavaScript の式となります。                    -->
 <blog-post v-bind:likes="42"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:likes="post.likes"></blog-post>
 ```
 
-### Passing a Boolean
+### 真偽値の受け渡し
 
 ```html
-<!-- Including the prop with no value will imply `true`. -->
+<!-- 値のないプロパティは、 `true` を意味することとなります。 -->
 <blog-post is-published></blog-post>
 
-<!-- Even though `false` is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.          -->
+<!-- `false` が静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これもまた、文字列ではなく JavaScript の式となります。                        -->
 <blog-post v-bind:is-published="false"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:is-published="post.isPublished"></blog-post>
 ```
 
-### Passing an Array
+### 配列の受け渡し
 
 ```html
-<!-- Even though the array is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.            -->
+<!-- 配列が静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これもまた、文字列ではなく JavaScript の式となります。               -->
 <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:comment-ids="post.commentIds"></blog-post>
 ```
 
-### Passing an Object
+### オブジェクトの受け渡し
 
 ```html
-<!-- Even though the object is static, we need v-bind to tell Vue that -->
-<!-- this is a JavaScript expression rather than a string.             -->
+<!-- オブジェクトが静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
+<!-- これもまた、文字列ではなく JavaScript の式となります。                      -->
 <blog-post v-bind:author="{ name: 'Veronica', company: 'Veridian Dynamics' }"></blog-post>
 
-<!-- Dynamically assign to the value of a variable. -->
+<!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:author="post.author"></blog-post>
 ```
 
-### Passing the Properties of an Object
+### オブジェクトのプロパティの受け渡し
 
-If you want to pass all the properties of an object as props, you can use `v-bind` without an argument (`v-bind` instead of `v-bind:prop-name`). For example, given a `post` object:
+オブジェクトの全てのプロパティをコンポーネントのプロパティ(props)として渡したい場合は、`v-bind` を引数無しで使うことができます(`v-bind:prop-name` の代わりに `v-bind` を使用). 例えば、 `post` オブジェクトの場合:
 
 ``` js
 post: {
@@ -127,13 +125,13 @@ post: {
 }
 ```
 
-The following template:
+次のテンプレートは:
 
 ``` html
 <blog-post v-bind="post"></blog-post>
 ```
 
-Will be equivalent to:
+以下と同等となります:
 
 ``` html
 <blog-post
@@ -142,15 +140,15 @@ Will be equivalent to:
 ></blog-post>
 ```
 
-## One-Way Data Flow
+## 単方向のデータフロー
 
-All props form a **one-way-down binding** between the child property and the parent one: when the parent property updates, it will flow down to the child, but not the other way around. This prevents child components from accidentally mutating the parent's state, which can make your app's data flow harder to understand.
+全てのプロパティは、子プロパティと親プロパティの間に、 **単方向のバインディング** を形成します: 親のプロパティが更新されると、子へと流れ落ちていきますが、それ以外の方法でデータが流れることはありません。これによって、子コンポーネントが誤って親の状態を変更することがなく、これによって、アプリのデータフローを **理解しづらい** 可能性のある子コンポーネントによる誤った親の状態変更から、防ぎます。
 
-In addition, every time the parent component is updated, all props in the child component will be refreshed with the latest value. This means you should **not** attempt to mutate a prop inside a child component. If you do, Vue will warn you in the console.
+また、親コンポーネントが更新されるたびに、子コンポーネント内の全てのプロパティが最新の値へと更新されます。これは、子コンポーネント内において、プロパティを **変化させない** ことを意味しています。それを行った場合、 Vue は コンソールにて警告します。
 
-There are usually two cases where it's tempting to mutate a prop:
+多くの場合、プロパティの値を変化させたい場合には、 2 つのケースがあります:
 
-1. **The prop is used to pass in an initial value; the child component wants to use it as a local data property afterwards.** In this case, it's best to define a local data property that uses the prop as its initial value:
+1. **プロパティを初期値として受け渡し、子コンポーネントにてローカルのデータとして後で利用したいと考える場合** この場合、プロパティの値をローカルの data の初期値として定義することを推奨します:
 
   ``` js
   props: ['initialCounter'],
@@ -161,7 +159,7 @@ There are usually two cases where it's tempting to mutate a prop:
   }
   ```
 
-2. **The prop is passed in as a raw value that needs to be transformed.** In this case, it's best to define a computed property using the prop's value:
+2. **プロパティを未加工の値として渡す場合** この場合、プロパティの値を使用した算出プロパティを別途定義することを推奨します:
 
   ``` js
   props: ['size'],
@@ -172,44 +170,44 @@ There are usually two cases where it's tempting to mutate a prop:
   }
   ```
 
-<p class="tip">Note that objects and arrays in JavaScript are passed by reference, so if the prop is an array or object, mutating the object or array itself inside the child component **will** affect parent state.</p>
+<p class="tip">JavaScript のオブジェクトと配列は、参照渡しされることに注意してください。参照として渡されるため、子コンポーネント内で配列やオブジェクトを変更すると、 **親の状態へと影響します。**</p>
 
-## Prop Validation
+## プロパティのバリデーション
 
-Components can specify requirements for its props, such as the types you've already seen. If a requirement isn't met, Vue will warn you in the browser's JavaScript console. This is especially useful when developing a component that's intended to be used by others.
+コンポーネントは、プロパティに対して既存の型などの要件を指定することができます。もし指定した要件が満たされない場合、 Vue はブラウザの JavaScript コンソールにて警告します。これは、他の人が利用することを意図したコンポーネントを開発する場合に、特に便利です。
 
-To specify prop validations, you can provide an object with validation requirements to the value of `props`, instead of an array of strings. For example:
+プロパティへのバリデーションは、文字列の配列の代わりに、 `props` の値へとバリデーションの条件をもったオブジェクトを渡すことで指定できます。 例えば以下のようなものです:
 
 ``` js
 Vue.component('my-component', {
   props: {
-    // Basic type check (`null` matches any type)
+    // 基本的な型の検査 (`null` は全ての型にマッチします)
     propA: Number,
-    // Multiple possible types
+    // 複数の型の許容
     propB: [String, Number],
-    // Required string
+    // 文字列型を必須で要求する
     propC: {
       type: String,
       required: true
     },
-    // Number with a default value
+    // デフォルト値つきの数値型
     propD: {
       type: Number,
       default: 100
     },
-    // Object with a default value
+    // デフォルト値つきのオブジェクト型
     propE: {
       type: Object,
-      // Object or array defaults must be returned from
-      // a factory function
+      // オブジェクトもしくは配列のデフォルト値は
+      // 必ずそれを生み出すための関数を返す必要があります。
       default: function () {
         return { message: 'hello' }
       }
     },
-    // Custom validator function
+    // カスタマイズしたバリデーション関数
     propF: {
       validator: function (value) {
-        // The value must match one of these strings
+        // プロパティの値は、必ずいずれかの文字列でなければならない
         return ['success', 'warning', 'danger'].indexOf(value) !== -1
       }
     }
@@ -217,13 +215,13 @@ Vue.component('my-component', {
 })
 ```
 
-When prop validation fails, Vue will produce a console warning (if using the development build).
+プロパティのバリデーションが失敗した場合、 Vue はコンソールにて警告します (開発用ビルドを利用しているとき)。
 
-<p class="tip">Note that props are validated **before** a component instance is created, so instance properties (e.g. `data`, `computed`, etc) will not be available inside `default` or `validator` functions.</p>
+<p class="tip">プロパティのバリデーションはコンポーネントのインスタンスが生成される **前** に行われるため、インスタンスのプロパティ (例えば `data`, `computed` など) を `dafault` および `validator` 関数の中で利用することはできません。</p>
 
-### Type Checks
+### 型の検査
 
-The `type` can be one of the following native constructors:
+`type` は、次のネイティブコンストラクタのいずれかです:
 
 - String
 - Number
@@ -234,7 +232,7 @@ The `type` can be one of the following native constructors:
 - Function
 - Symbol
 
-In addition, `type` can also be a custom constructor function and the assertion will be made with an `instanceof` check. For example, given the following constructor function exists:
+さらに、 `type` はカスタムコンストラクタ関数でもあり、 `instanceof` によるアサーションを行います。例えば、以下のコンストラクタ関数が存在すると仮定したとき:
 
 ```js
 function Person (firstName, lastName) {
@@ -243,7 +241,7 @@ function Person (firstName, lastName) {
 }
 ```
 
-You could use:
+このように利用することができます:
 
 ```js
 Vue.component('blog-post', {
@@ -253,31 +251,31 @@ Vue.component('blog-post', {
 })
 ```
 
-to validate that the value of the `author` prop was created with `new Person`.
+`author` プロパティの値が、 `new Person` によって作成されたものと検証できました。
 
-## Non-Prop Attributes
+## プロパティでない属性
 
-A non-prop attribute is an attribute that is passed to a component, but does not have a corresponding prop defined.
+プロパティでない属性は、属性としてコンポーネントに受け渡されますが、対応するプロパティは定義されていません。
 
-While explicitly defined props are preferred for passing information to a child component, authors of component libraries can't always foresee the contexts in which their components might be used. That's why components can accept arbitrary attributes, which are added to the component's root element.
+子コンポーネントへと情報を渡す場合には、明示的に定義されたプロパティが好まれますが、コンポーネントライブラリの作成者には、コンポーネントが使用されうるコンテキストを必ずしも把握できるわけではありません。そのため、コンポーネントは、そのルートに対して追加される任意の属性を受け入れます。
 
-For example, imagine we're using a 3rd-party `bootstrap-date-input` component with a Bootstrap plugin that requires a `data-date-picker` attribute on the `input`. We can add this attribute to our component instance:
+例えば、サードパーティの `bootstrap-date-input` コンポーネントを用いて `data-date-picker` 属性を要求する Bootstrap プラグインを使っているとします。その場合、その属性をコンポーネントのインスタンスに追加できます:
 
 ``` html
 <bootstrap-date-input data-date-picker="activated"></bootstrap-date-input>
 ```
 
-And the `data-date-picker="activated"` attribute will automatically be added to the root element of `bootstrap-date-input`.
+また、 `data-datepicker="activated"` 属性は、自動的に `bootstrap-date-input` のルート属性へと追加されます。
 
-### Replacing/Merging with Existing Attributes
+### 既存の属性への置換とマージ
 
-Imagine this is the template for `bootstrap-date-input`:
+これが `bootstrap-date-input` 側のテンプレートとします:
 
 ``` html
 <input type="date" class="form-control">
 ```
 
-To specify a theme for our date picker plugin, we might need to add a specific class, like this:
+この日付プラグインのテーマを指定するには、以下のような特定のクラスを追加する必要があります:
 
 ``` html
 <bootstrap-date-input
@@ -286,16 +284,16 @@ To specify a theme for our date picker plugin, we might need to add a specific c
 ></bootstrap-date-input>
 ```
 
-In this case, two different values for `class` are defined:
+こういった場合、異なる2つのクラスが定義されています:
 
-- `form-control`, which is set by the component in its template
-- `date-picker-theme-dark`, which is passed to the component by its parent
+- `form-control` はコンポーネント自身のテンプレート内で定義されています
+- `date-picker-theme-dark` は、親コンポーネントによって受け渡されます
 
-For most attributes, the value provided to the component will replace the value set by the component. So for example, passing `type="text"` will replace `type="date"` and probably break it! Fortunately, the `class` and `style` attributes are a little smarter, so both values are merged, making the final value: `form-control date-picker-theme-dark`.
+ほとんどの属性においては、コンポーネント側の値が、コンポーネントに受け渡された値へと置換されます。たとえば、 `type="text"` を渡すと、 `type="date"` は置き換えられ、そして壊れてしまうでしょう！幸運なことに、 `class` および `style` 属性は少しスマートに作られていますので、両方の値がマージされ、最終的な値は `form-control date-picker-theme-dark` となります。
 
-### Disabling Attribute Inheritance
+### 属性の継承の無効化
 
-If you do **not** want the root element of a component to inherit attributes, you can set `inheritAttrs: false` in the component's options. For example:
+コンポーネントのルート要素に対して、属性を継承させたく **ない** 場合は、コンポーネントのオプション内にて `inheritAttrs: false` を設定できます。例:
 
 ```js
 Vue.component('my-component', {
@@ -304,7 +302,7 @@ Vue.component('my-component', {
 })
 ```
 
-This can be especially useful in combination with the `$attrs` instance property, which contains the attribute names and values passed to a component, such as:
+これは、 コンポーネントの `$attrs` インスタンスプロパティと組み合わせる時に特に便利です。 `$attrs` は、コンポーネントに渡される属性名およびその値が含まれています :
 
 ```js
 {
@@ -313,7 +311,7 @@ This can be especially useful in combination with the `$attrs` instance property
 }
 ```
 
-With `inheritAttrs: false` and `$attrs`, you can manually decide which element you want to forward attributes to, which is often desirable for [base components](../style-guide/#Base-component-names-strongly-recommended):
+`inheritAttrs: false` と `$attrs` を併用すると、要素に送る属性を手動で決定することができます。これは、 [基底コンポーネント](../style-guide/#基底コンポーネントの名前-強く推奨) の利用においてはしばしば望ましいことがあります:
 
 ```js
 Vue.component('base-input', {
@@ -332,7 +330,7 @@ Vue.component('base-input', {
 })
 ```
 
-This pattern allows you to use base components more like raw HTML elements, without having to care about which element is actually at its root:
+このパターンを使用すると、ルート上にある要素を気にすることなく、生の HTML 要素のように基底コンポーネントを利用できます。
 
 ```html
 <base-input
