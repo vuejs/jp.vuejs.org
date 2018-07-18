@@ -58,14 +58,14 @@ props: {
 次のような `v-bind` で動的に割り当てられたプロパティも見てきました:
 
 ```html
-<!-- Dynamically assign the value of a variable -->
+<!-- 変数の値を動的に割り当てます -->
 <blog-post v-bind:title="post.title"></blog-post>
 
-<!-- Dynamically assign the value of a complex expression -->
+<!-- 複数の変数を合成した値を動的に割り当てます -->
 <blog-post v-bind:title="post.title + ' by ' + post.author.name"></blog-post>
 ```
 
-上の 2 つの例では、文字列の値を渡していますが、プロパティには任意の型の値を渡すことが可能です。
+上の 2 つの例では、文字列の値を渡していますが、プロパティには __任意の__ 型の値を渡すことが可能です。
 
 ### 数値の受け渡し
 
