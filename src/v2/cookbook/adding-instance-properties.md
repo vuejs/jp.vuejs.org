@@ -153,7 +153,7 @@ Uncaught TypeError: Cannot read property 'split' of undefined
 ## 代替パターン
 
 ### モジュールシステムを使用していない場合
-モジュールシステムが**ない**アプリケーション（Webpack や Browserify など）では、JavaScript で拡張したフロントエンドでよく使われるパターンがあります：それはグローバル `App` オブジェクトです。
+モジュールシステム（Webpack や Browserify など）が**ない**アプリケーションでは、JavaScript で拡張したフロントエンドでよく使われるパターンがあります：それはグローバル `App` オブジェクトです。
 
 追加したいものが Vue とは特に関係がない場合、これは届けるための良い選択肢かもしれません。ここに例があります：
 
