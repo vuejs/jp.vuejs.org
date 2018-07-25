@@ -1,68 +1,69 @@
 ---
-title: Dockerize Vue.js App
+title: Vue.js アプリケーションを Docker 化する
 type: cookbook
+updated: 2018-07-25
 order: 13
 ---
 
-## Simple Example
+## 簡単な例
 
-So you built your first Vue.js app using the amazing [Vue.js webpack template](https://github.com/vuejs-templates/webpack) and now you really want to show off with your colleagues by demonstrating that you can also run it in a Docker container.
+あなたははじめての Vue.js アプリケーションを素晴らしい [Vue.js webpack テンプレート](https://github.com/vuejs-templates/webpack) を利用して作成し、Docker コンテナで実行もできることを同僚に披露したいと思っています。
 
-Let's start by creating a `Dockerfile` in the root folder of our project:
+ではプロジェクトルートに `Dockerfile` を作成しましょう:
 
 ```docker
 FROM node:9.11.1-alpine
 
-# install simple http server for serving static content
+# 静的コンテンツを配信するシンプルな http サーバをインストールする
 RUN npm install -g http-server
 
-# make the 'app' folder the current working directory
+# カレントワーキングディレクトリとして 'app' フォルダを作成する
 WORKDIR /app
 
-# copy both 'package.json' and 'package-lock.json' (if available)
+# (可能であれば) `package.json` と `package-lock.json` を両方コピーする
 COPY package*.json ./
 
-# install project dependencies
+# プロジェクトの依存ライブラリをインストールする
 RUN npm install
 
-# copy project files and folders to the current working directory (i.e. 'app' folder)
+# カレントワーキングディレクトリ(つまり 'app' フォルダ)にプロジェクトのファイルやフォルダをコピーする
 COPY . .
 
-# build app for production with minification
+# 本番向けに圧縮しながらアプリケーションをビルドする
 RUN npm run build
 
 EXPOSE 8080
 CMD [ "http-server", "dist" ]
 ```
 
-It may seem reduntant to first copy `package.json` and `package-lock.json` and then all project files and folders in two separate steps but there is actually [a very good reason for that](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/) (spoiler: it allows us to take advantage of cached Docker layers).
+はじめに `package.json` と `package-lock.json` をコピーし、次にプロジェクトの全てのファイルとフォルダをコピーするという2つに別れたステップは冗長に見えるかもしれませんが、実際には [とても好ましい理由](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/) があります。(ネタばれ: これによってキャッシュされた Docker レイヤーを活用できます)
 
-Now let's build the Docker image of our Vue.js app:
+では Vue.js アプリケーションの Docker イメージをビルドしましょう:
 
 ```bash
 docker build -t vuejs-cookbook/dockerize-vuejs-app .
 ```
 
-Finally, let's run our Vue.js app in a Docker container:
+最後に、 Vue.js アプリケーションを Docker コンテナで実行しましょう:
 
 ```bash
 docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/dockerize-vuejs-app
 ```
 
-We should be able to access our Vue.js app on `localhost:8080`.
+`localhost:8080` で Vue.js アプリケーションにアクセスができるでしょう。
 
-## Real-World Example
+## 現実の例
 
-In the previous example, we used a simple, zero-configuration command-line [http server](https://github.com/indexzero/http-server) to serve our Vue.js app which is perfectly ok for quick prototyping and _may_ even be ok for simple production scenarios. After all, the documentation says:
+上述の例では、シンプルで設定の無いコマンドラインの [http server](https://github.com/indexzero/http-server) を使って、素早いプロトタイピング完璧で、シンプルな本番のシナリオに良い _かもしれない_ Vue.js アプリケーションを配信しました。とにかく、そのドキュメントではこう言っています:
 
-> It is powerful enough for production usage, but it's simple and hackable enough to be used for testing, local development, and learning.
+> 本番環境で使うには十分強力ですが、テスト、ローカル開発、および学習に使用するにはシンプルでハックが可能です。
 
-Nevertheless, for realistically complex production use cases, it may be wiser to stand on the shoulders of some giant like [NGINX](https://www.nginx.com/) or [Apache](https://httpd.apache.org/) and that is exactly what we are going to do next: we are about to leverage NGINX to serve our vue.js app because it is considered to be one of the most performant and battle-tested solutions out there.
+それでも、現実的に複雑な本番環境のユースケースでは、 [NGINX](https://www.nginx.com/) や [Apache](https://httpd.apache.org/) などの巨人の肩に乗るのが賢明でしょうし、それがまさに我々が次にやろうとしていることです。我々は最も性能が良く実戦で試されている解決策の1つだと考えられているという理由で、まさに NGINX を活用して vue.js アプリケーションを配信しようとしています。
 
-Let's refactor our `Dockerfile` to use NGINX:
+`Dockerfile` を NGINX を使うようにリファクタリングしましょう:
 
  ```docker
-# build stage
+# ビルドステージ
 FROM node:9.11.1-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
@@ -70,65 +71,66 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# production stage
+# 本番ステージ
 FROM nginx:1.13.12-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-Ok, let's see what's going on here:
-* we have split our original `Dockerfile` in multiple stages by leveraging the Docker [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) feature;
-* the first stage is responsible for building a production-ready artifact of our Vue.js app;
-* the second stage is responsible for serving such artifact using NGINX.
+OK、ここで何が起きているか見てみましょう:
+* 元の `Dockerfile` を Docker の [マルチステージビルド](https://docs.docker.com/develop/develop-images/multistage-build/) 機能を活用して、複数のステージに分離しました。
+* はじめのステージでは Vue.js アプリケーションの本番環境に準備された成果物をビルドする責務があります。
+* 2つ目のステージではその成果物を NGINX を使って配信する責務があります。
 
-Now let's build the Docker image of our Vue.js app:
+さて Vue.js アプリケーションを Docker イメージを使ってビルドしましょう:
 
 ```bash
 docker build -t vuejs-cookbook/dockerize-vuejs-app .
 ```
 
-Finally, let's run our Vue.js app in a Docker container:
+最後に、 Vue.js アプリケーション を Docker コンテナの中で実行しましょう:
 
 ```bash
 docker run -it -p 8080:80 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/dockerize-vuejs-app
 ```
 
-We should be able to access our Vue.js app on `localhost:8080`.
+`localhost:8080` で Vue.js アプリケーションにアクセスができるでしょう。
 
-## Additional Context
+<!-- ## Additional Context -->
+## さらなる背景
 
-If you are reading this cookbook, chances are you already know why you decided to dockerize your Vue.js app. But if you simply landed on this page after hitting the Google's `I'm feeling lucky` button, let me share with you a couple of good reasons for doing that.
+もしあなたがこのクックブックを読んでいるなら、おそらく Vue.js アプリケーションを Docker 化することにした理由を既にわかっているでしょう。しかし、あなたが単に Google の `I'm feeling lucky` ボタンを押した後にこのページにたどり着いたとしたら、いくつかの好ましい理由を共有しましょう。
 
-Today's modern trend is to build applications using the [Cloud-Native](https://pivotal.io/cloud-native) approach which revolves mainly around the following buzzwords:
-* Microservices
+今日のモダンな流行りは、主に下記のバズワードを中心にしたアプローチとして [Cloud-Native](https://pivotal.io/cloud-native) を使ってアプリケーションを構築することです。
+* マイクロサービス
 * DevOps
-* Continuous Delivery
+* 継続的デリバリ
 
-Let's see how these concepts actually affect our decision of dockerizing our Vue.js app.
+これらのコンセプトが実際にどうやって Vue.js アプリケーションを Docker 化するという決断に影響するか見ていきましょう。
 
-### Effects of Microservices
+### マイクロサービスへの効果
 
-By adopting the [microservices architectural style](https://martinfowler.com/microservices/), we end up building a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms. These services are built around business capabilities and independently deployable by fully automated deployment machinery. 
+[マイクロサービスアーキテクチャスタイル](https://martinfowler.com/microservices/) を採用することによって、小さなサービスの組み合わせの一式として単一のアプリケーションを構築することになり、それぞれ独自のプロセスで実行して軽量な機構で通信します。これらのサービスはビジネスの機能を中心に構築され、完全に自動化されたデプロイ機構によって独立してデプロイ可能です。
 
-So, committing to this architectural approach most of the time implies developing and delivering our front-end as an independent service.
+そのため、このアーキテクチャのアプローチへほとんどの時間を費やすことは、フロントエンドを独立したサービスとして開発・配信することを意味します。
 
-### Effects of DevOps
+### DevOps への効果
 
-The adoption of [DevOps](https://martinfowler.com/bliki/DevOpsCulture.html) culture, tools and agile engineering practices has, among other things, the nice effect of increasing the collaboration between the roles of development and operations. One of the main problem of the past (but also today in some realities) is that the dev team tended to be uninterested in the operation and maintenance of a system once it was handed over to the ops team, while the latter tended to be not really aware of the system's business goals and, therefore, reluctant in satisfying the operational needs of the system (also referred to as "whims of developers").
+[DevOps](https://martinfowler.com/bliki/DevOpsCulture.html) 文化、ツールおよびアジャイル開発の実践を採用することは、とりわけ開発と運用の役割の強力を増やす良い影響があります。過去の（しかし一部では実際に今でも）主な問題の1つは開発チームは一度運用チームに引き渡されたシステムの運用や保守には無関心な傾向にあり、後者はシステムのビジネスの目標を知らず、したがってシステムの運用上のニーズを満たすことを渋る（「開発者の気まぐれ」と言われる）傾向にあります。
 
-So, delivering our Vue.js app as a Docker image helps reducing, if not removing entirely, the difference between running the service on a deveveloper's laptop, the production environment or any environment we may think of.
+そのため、 Vue.js アプリケーションを Docker イメージとして配信することは、全てを無くすことはないとしても、開発者のラップトップや本番環境など考えうる全ての環境で実行されるサービスの差を減らす助けになります。
 
-### Effects of Continuous Delivery
+### 継続的デリバリへの効果
 
-By leveraging the [Continuous Delivery](https://martinfowler.com/bliki/ContinuousDelivery.html) discipline we build our software in a way that it can potentially be released to production at any time. Such engineering practice is enabled by means of what is normally called [continuous delivery pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html). The purpose of a continuous delivery pipeline is to split our build into stages (e.g. compilation, unit tests, integration tests, performance tests, etc.) and let each stage verify our build artifact whenever our software changes. Ultimately, each stage increases our confidence in the production readiness of our build artifact and, therefore, reduces the risk of breaking things in production (or any other environment for that matters).
+[継続的デリバリ](https://martinfowler.com/bliki/ContinuousDelivery.html) の規律を活用することで、いつでも本番にリリースされる可能性のあるやり方でソフトウェアを構築します。このようなエンジニアリングの実践は通常、 [継続的デリバリパイプライン](https://martinfowler.com/bliki/DeploymentPipeline.html) と呼ばれるものによって可能になります。継続的デリバリパイプラインの目的はビルドを段階（例：コンパイル、単体テスト、結合テスト、性能テストなど）に分け、ソフトウェアの変更のたびにそれぞれの段階でビルド成果物を検証することです。最終的に、それぞれの段階はプロダクションビルドの成果物の準備状況の自信を高め、したがって本番環境（またはそのような他の環境）で壊れるリスクを減らします。
 
-So, creating a Docker image for our Vue.js app is a good choice here because that would represent our final build artifact, the same artifact that would be verified against our continuous delivery pipeline and that could potentially be released to production with confidence.
+そのため、 Vue.js アプリケーションから Docker イメージを作ることは最終的なビルド成果物、つまり継続的デリバリパイプラインで検証され、自信を持って本番環境に配信できる成果物を表すため、ここでは良い選択です。
 
-## Alternative Patterns
+## 代替案
 
-If your company is not into Docker and Kubernetes just yet or you simply want to get your MVP out the door, maybe dockerizing your Vue.js app is not what you need.
+もしあなたの会社が Docker や Kubernetes を使っていない場合や、ただシンプルに MVP を世にリリースしたいという場合は、 Vue.js アプリケーションを Docker 化するのは求めているものでは無いかもしれません。
 
-Common alternatives are:
-* leveraging an all-in-one platform like [netlify](https://www.netlify.com/);
-* hosting your SPA on [Amazon S3](https://aws.amazon.com/s3/) and serving it with [Amazon CloudFront](https://aws.amazon.com/cloudfront/) (see [this](https://serverless-stack.com/chapters/deploy-the-frontend.html) link for a detailed guide).
+よくある代替案は以下の通りです:
+* [netlify](https://www.netlify.com/) のような全部入りのプラットフォームを活用する。
+* SPA を [Amazon S3](https://aws.amazon.com/jp/s3/) でホスティングし、 [Amazon CloudFront](https://aws.amazon.com/jp/cloudfront/)（[こちら](https://serverless-stack.com/chapters/deploy-the-frontend.html) のリンクで詳細なガイドを読んでください）で配信する。
