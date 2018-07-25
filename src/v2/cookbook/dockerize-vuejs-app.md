@@ -132,5 +132,5 @@ docker run -it -p 8080:80 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/docke
 もしあなたの会社が Docker や Kubernetes を使っていない場合や、ただシンプルに MVP を世にリリースしたいという場合は、 Vue.js アプリケーションを Docker 化するのは求めているものでは無いかもしれません。
 
 よくある代替パターンは以下の通りです:
-* [netlify](https://www.netlify.com/) のような全部入りのプラットフォームを活用する。
+* [Netlify](https://www.netlify.com/) のような全部入りのプラットフォームを活用する。
 * SPA を [Amazon S3](https://aws.amazon.com/jp/s3/) でホスティングし、 [Amazon CloudFront](https://aws.amazon.com/jp/cloudfront/)（[こちら](https://serverless-stack.com/chapters/deploy-the-frontend.html) のリンクで詳細なガイドを読んでください）で配信する。
