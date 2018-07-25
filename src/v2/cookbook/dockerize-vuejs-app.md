@@ -63,7 +63,7 @@ docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/doc
 `Dockerfile` を NGINX を使うようにリファクタリングしましょう:
 
  ```docker
-# ビルドステージ
+# ビルド環境
 FROM node:9.11.1-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
@@ -71,7 +71,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# 本番ステージ
+# 本番環境
 FROM nginx:1.13.12-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80
