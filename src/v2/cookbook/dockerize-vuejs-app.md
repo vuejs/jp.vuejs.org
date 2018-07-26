@@ -20,7 +20,7 @@ RUN npm install -g http-server
 # カレントワーキングディレクトリとして 'app' フォルダを指定する
 WORKDIR /app
 
-# (可能であれば) `package.json` と `package-lock.json` を両方コピーする
+# `package.json` と `package-lock.json` （あれば）を両方コピーする
 COPY package*.json ./
 
 # プロジェクトの依存ライブラリをインストールする
