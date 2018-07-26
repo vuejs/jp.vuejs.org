@@ -100,7 +100,7 @@ docker run -it -p 8080:80 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/docke
 <!-- ## Additional Context -->
 ## さらなる背景
 
-もしあなたがこのクックブックを読んでいるなら、おそらく Vue.js アプリケーションを Docker 化することにした理由を既にわかっているでしょう。しかし、あなたが単に Google の `I'm feeling lucky` ボタンを押した後にこのページにたどり着いたとしたら、いくつかの好ましい理由を共有しましょう。
+もしあなたがこのクックブックを読んでいるなら、おそらく Vue.js アプリケーションを Docker 化することにした理由を既にわかっているでしょう。しかし、あなたが単に Google の `I'm feeling lucky` ボタンを押した後にこのページにたどり着いたとしたら、いくつかのもっともな理由を共有しましょう。
 
 今日のモダンな流行りは、主に下記のバズワードを中心にしたアプローチとして [Cloud-Native](https://pivotal.io/cloud-native) を使ってアプリケーションを構築することです。
 * マイクロサービス
