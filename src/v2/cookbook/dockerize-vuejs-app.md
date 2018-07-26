@@ -129,7 +129,7 @@ docker run -it -p 8080:80 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/docke
 
 ## 代替パターン
 
-もしあなたの会社が Docker や Kubernetes を使っていない場合や、ただシンプルに MVP を世にリリースしたいという場合は、 Vue.js アプリケーションを Docker 化するのは求めているものでは無いかもしれません。
+もしあなたの会社が Docker や Kubernetes を使っていない場合や、ただシンプルに MVP を世にリリースしたいという場合は、 Vue.js アプリケーションを Docker 化するのは求めているものではないかもしれません。
 
 よくある代替パターンは以下の通りです:
 * [Netlify](https://www.netlify.com/) のような全部入りのプラットフォームを活用する。
