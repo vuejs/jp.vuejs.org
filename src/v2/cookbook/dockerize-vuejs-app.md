@@ -36,7 +36,7 @@ EXPOSE 8080
 CMD [ "http-server", "dist" ]
 ```
 
-はじめに `package.json` と `package-lock.json` をコピーし、次にプロジェクトの全てのファイルとフォルダをコピーするという2つに別れたステップは冗長に見えるかもしれませんが、実際には [とても好ましい理由](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/) があります。(ネタばれ: これによってキャッシュされた Docker レイヤーを活用できます)
+はじめに `package.json` と `package-lock.json` をコピーし、次にプロジェクトの全てのファイルとフォルダをコピーするという2つに別れたステップは冗長に見えるかもしれませんが、実際には [とてももっともな理由](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/) があります。(ネタばれ: これによってキャッシュされた Docker レイヤーを活用できます)
 
 では Vue.js アプリケーションの Docker イメージをビルドしましょう:
 
