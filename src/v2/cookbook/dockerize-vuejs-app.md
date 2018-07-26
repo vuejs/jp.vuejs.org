@@ -17,7 +17,7 @@ FROM node:9.11.1-alpine
 # 静的コンテンツを配信するシンプルな http サーバをインストールする
 RUN npm install -g http-server
 
-# カレントワーキングディレクトリとして 'app' フォルダを作成する
+# カレントワーキングディレクトリとして 'app' フォルダを指定する
 WORKDIR /app
 
 # (可能であれば) `package.json` と `package-lock.json` を両方コピーする
