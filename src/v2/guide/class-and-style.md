@@ -1,25 +1,25 @@
 ---
 title: クラスとスタイルのバインディング
-updated: 2017-10-15
+updated: 2018-07-28
 type: guide
 order: 6
 ---
 
-データバインディングに対する共通の必要なことは、要素のクラスリストとインラインスタイルを操作していることです。それらは両方属性になるので、それらを `v-bind` を使用して処理することができます。私達の式で最終的に文字列を計算する必要があります。しかしながら、文字列の連結に関わることは、迷惑なエラーが発生しやすいです。この理由のため、Vue は `v-bind` が `class` と `style` と一緒に使われるとき、特別な拡張を提供します。文字列に加えて、式はオブジェクトまたは配列も評価することができます。
+データバインディングに一般に求められることの 1 つは、要素のクラスリストとインラインスタイルを操作することです。それらはどちらも属性ですから、`v-bind` を使って扱うことができます。最終的な文字列を式で計算するだけです。しかしながら、文字列の連結に手を出すのは煩わしく、エラーのもとです。そのため、Vue は `v-bind` が `class` と `style` と一緒に使われるとき、特別な拡張機能を提供します。文字列だけではなく、式はオブジェクトまたは配列を返すことができます。
 
 ## HTML クラスのバインディング
 
 ### オブジェクト構文
 
-`v-bind:class` に動的にクラスを切り替えるオブジェクトを渡すことができます:
+`v-bind:class` にオブジェクトを渡すことでクラスを動的に切り替えることができます:
 
 ``` html
 <div v-bind:class="{ active: isActive }"></div>
 ```
 
-上記の構文は `active` クラスが存在するかどうかを、データプロパティの `isActive` が[ true と評価される値か](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)によって決まることを意味します。
+上記の構文は、`active` クラスの有無がデータプロパティ `isActive` の[真偽性](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)によって決まることを意味しています。
 
-オブジェクトに複数の項目を持たせることで、複数のクラスを切り替えることができます。加えて、`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できます。 次のようなテンプレートに:
+オブジェクトにさらにフィールドを持たせることで複数のクラスを切り替えることができます。加えて、`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できます。つまり、次のようなテンプレートと:
 
 ``` html
 <div class="static"
@@ -27,7 +27,7 @@ order: 6
 </div>
 ```
 
-次のようなデータを与えます:
+次のようなデータがあったとすると:
 
 ``` js
 data: {
@@ -36,15 +36,15 @@ data: {
 }
 ```
 
-これは次のように描画されます:
+このように描画されます:
 
 ``` html
 <div class="static active"></div>
 ```
 
-`isActive` と `hasError` が変化するとき、クラスリストはそれに応じて更新されます。例えば、`hasError` が `true` になった場合、クラスリストは `"static active text-danger"` になります。
+`isActive` もしくは `hasError` が変化するとき、クラスリストはそれに応じて更新されます。例えば、`hasError` が `true` になった場合、クラスリストは `"static active text-danger"` になります。
 
-オブジェクトによる束縛はインラインでなくてもかまいません:
+束縛されるオブジェクトはインラインでなくてもかまいません:
 
 ``` html
 <div v-bind:class="classObject"></div>
@@ -58,7 +58,7 @@ data: {
 }
 ```
 
-これは同じ結果を描画します。オブジェクトを返す[算出プロパティ](computed.html)を束縛することもできます。これは一般的で強力なパターンです:
+これは同じ結果を描画します。オブジェクトを返す[算出プロパティ](computed.html)に束縛することもできます。これは一般的で強力なパターンです:
 
 ``` html
 <div v-bind:class="classObject"></div>
@@ -80,7 +80,7 @@ computed: {
 
 ### 配列構文
 
-`v-bind:class` にクラスのリストを適用する配列を渡すことができます:
+`v-bind:class` に配列を渡してクラスのリストを適用することができます:
 
 ``` html
 <div v-bind:class="[activeClass, errorClass]"></div>
@@ -92,13 +92,13 @@ data: {
 }
 ```
 
-このように描画されます:
+これは次のように描画されます:
 
 ``` html
 <div class="active text-danger"></div>
 ```
 
-条件付きリストでクラスを切り替えたい場合、三項演算子式でそれを行うことができます:
+リスト内のクラスを条件に応じて切り替えたい場合は、三項演算子式を使って実現することができます:
 
 ``` html
 <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
@@ -106,7 +106,7 @@ data: {
 
 これは常に `errorClass` が適用されますが、`isActive` が truthy (`true` になりうる)な値のときにだけ `activeClass` クラスが適用されます。
 
-しかしながら、これは複数条件のクラスがある場合は少し冗長です。なので配列構文内部ではオブジェクト構文も使えます:
+しかしながら、これでは複数の条件つきクラスがあると少し冗長になってしまいます。そのため、配列構文の内部ではオブジェクト構文を使うこともできます:
 
 ``` html
 <div v-bind:class="[{ active: isActive }, errorClass]"></div>
@@ -126,7 +126,7 @@ Vue.component('my-component', {
 })
 ```
 
-それを使用するときに、いくつかのクラスを追加したとします:
+使用するときにいくつかのクラスを追加したとします:
 
 ``` html
 <my-component class="baz boo"></my-component>
@@ -144,7 +144,7 @@ Vue.component('my-component', {
 <my-component v-bind:class="{ active: isActive }"></my-component>
 ```
 
-`isActive` が真となりうるときは、以下の HTML が描画されます:
+`isActive` が truthy なときは、以下の HTML が描画されます:
 
 ``` html
 <p class="foo bar active">Hi</p>
@@ -154,7 +154,7 @@ Vue.component('my-component', {
 
 ### オブジェクト構文
 
-`v-bind:style`向けのオブジェクト構文は非常に簡単です。それは、JavaScript オブジェクトを除いては、ほとんど CSS のように見えます。CSS プロパティ名に対して、キャメルケース (camelCase) またはケバブケース (kebab-case: クォートとともに使うことになります) のどちらでも使用することができます:
+`v-bind:style` 向けのオブジェクト構文は非常に簡単です。JavaScript オブジェクトということを除けば、ほとんど CSS のように見えます。CSS のプロパティ名には、キャメルケース (camelCase) またはケバブケース (kebab-case: クォートとともに使うことになります) のどちらでも使用することができます:
 
 ``` html
 <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
@@ -180,7 +180,7 @@ data: {
 }
 ```
 
-また、オブジェクト構文はよくオブジェクトを返す算出プロパティと併せて使用されます。
+ここでもまた、オブジェクト構文はしばしばオブジェクトを返す算出プロパティと併せて使用されます。
 
 ### 配列構文
 
@@ -192,16 +192,16 @@ data: {
 
 ### 自動プリフィックス
 
-`v-bind:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に検出し、適用されるスタイルに適切な接頭辞を追加します。
+`v-bind:style` で[ベンダー接頭辞](https://developer.mozilla.org/ja/docs/Glossary/Vendor_Prefix)を要求される CSS プロパティを使用するとき、例えば、`transform` においては、Vue.js は自動的に適切な接頭辞を検出し、適用されるスタイルに追加します。
 
 ### 複数の値
 
-> 2.3.0 から
+> 2.3.0 以降
 
-2.3 から style プロパティに複数の (接頭辞付き) 値の配列を設定できます。例えば次のようになります:
+2.3.0 以降では、 style プロパティに複数の (接頭辞付き) 値の配列を設定できます。例えば次のようになります:
 
 ``` html
 <div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
 ```
 
-これはブラウザがサポートしている配列の最後の値だけを描画します。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは、 `display: flex` を描画します。
+これは、配列内でブラウザがサポートしている最後の値だけを描画します。この例では、flexbox の接頭されていないバージョンをサポートしているブラウザでは `display: flex` を描画します。
