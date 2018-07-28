@@ -17,7 +17,7 @@ order: 6
 <div v-bind:class="{ active: isActive }"></div>
 ```
 
-上記の構文は、`active` クラスの有無がデータプロパティ `isActive` の[真偽性](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)によって決まることを意味しています。
+上記の構文は、`active` クラスの有無がデータプロパティ `isActive` の[真偽性](https://developer.mozilla.org/ja-JP/docs/Glossary/Truthy)によって決まることを意味しています。
 
 オブジェクトにさらにフィールドを持たせることで複数のクラスを切り替えることができます。加えて、`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できます。つまり、次のようなテンプレートと:
 
@@ -104,7 +104,7 @@ data: {
 <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
 ```
 
-これは常に `errorClass` が適用されますが、`isActive` が truthy (`true` になりうる)な値のときにだけ `activeClass` クラスが適用されます。
+この場合 `errorClass` は常に適用されますが、`activeClass` クラスは `isActive` が真と評価されるときだけ適用されます。
 
 しかしながら、これでは複数の条件つきクラスがあると少し冗長になってしまいます。そのため、配列構文の内部ではオブジェクト構文を使うこともできます:
 
@@ -144,7 +144,7 @@ Vue.component('my-component', {
 <my-component v-bind:class="{ active: isActive }"></my-component>
 ```
 
-`isActive` が truthy なときは、以下の HTML が描画されます:
+`isActive` が真と評価されるときは、以下の HTML が描画されます:
 
 ``` html
 <p class="foo bar active">Hi</p>
