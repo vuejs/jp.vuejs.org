@@ -135,7 +135,7 @@ const app = new Vue({
     <input
       id="name"
       v-model="name"
-      type="text
+      type="text"
       name="name"
     >
   </p>
