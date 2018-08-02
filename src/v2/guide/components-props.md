@@ -265,7 +265,7 @@ Vue.component('blog-post', {
 <bootstrap-date-input data-date-picker="activated"></bootstrap-date-input>
 ```
 
-また、 `data-datepicker="activated"` 属性は、自動的に `bootstrap-date-input` のルート属性へと追加されます。
+また、 `data-date-picker="activated"` 属性は、自動的に `bootstrap-date-input` のルート属性へと追加されます。
 
 ### 既存の属性への置換とマージ
 
