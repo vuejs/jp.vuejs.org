@@ -51,7 +51,7 @@ npm を用いて配布できるように単一ファイルコンポーネント�
 ```
 package.json
 build/
-   rollup.config.json
+   rollup.config.js
 src/
    wrapper.js
    my-component.vue
