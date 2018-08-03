@@ -179,6 +179,7 @@ const app = new Vue({
 
 * [vue-local-storage](https://github.com/pinguinjkeke/vue-local-storage)
 * [vue-reactive-storage](https://github.com/ropbla9/vue-reactive-storage)
+* [vue2-storage](https://github.com/yarkovaleksei/vue2-storage)
 
 ## おわりに
 
