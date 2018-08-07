@@ -15,17 +15,23 @@ order: 5
 
 コマンドラインで以下を実行してください:
 
-`npm install buttercms --save`
+```bash
+npm install buttercms --save
+```
 
 Butter は、CDN からも読み込めます: 
 
-`<script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>`
+```html
+<script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>
+```
 
 ## クイックスタート
 
 API トークンの設定:
 
-`var butter = require('buttercms')('your_api_token');`
+```javascript
+var butter = require('buttercms')('your_api_token');
+```
 
 ES6 の使用:
 
@@ -104,7 +110,7 @@ export default new Router({
         butter.post.list({
           page: 1,
           page_size: 10
-        }).then((res) => {
+        }).then(res => {
           this.posts = res.data.data
         })
       }
@@ -156,9 +162,9 @@ export default new Router({
     methods: {
       getPost() {
         butter.post.retrieve(this.$route.params.slug)
-          .then((res) => {
+          .then(res => {
             this.post = res.data
-          }).catch((res) => {
+          }).catch(res => {
             console.log(res)
           })
       }
@@ -207,16 +213,15 @@ export default new Router({
     name: 'blog-post',
     data() {
       return {
-        post: {}
+        post: null
       }
     },
     methods: {
       getPost() {
         butter.post.retrieve(this.$route.params.slug)
-          .then((res) => {
-            // console.log(res.data)
+          .then(res => {
             this.post = res.data
-          }).catch((res) => {
+          }).catch(res => {
             console.log(res)
           })
       }
@@ -249,10 +254,10 @@ export default new Router({
 
 ```javascript
 methods: {
-  ...
+  // ...
   getCategories() {
     butter.category.list()
-      .then((res) => {
+      .then(res => {
         console.log('List of Categories:')
         console.log(res.data.data)
       })
@@ -261,14 +266,14 @@ methods: {
     butter.category.retrieve('example-category', {
         include: 'recent_posts'
       })
-      .then((res) => {
+      .then(res => {
         console.log('Posts with specific category:')
         console.log(res)
       })
   }
 },
 created() {
-  ...
+  // ...
   this.getCategories()
   this.getPostsByCategory()
 }

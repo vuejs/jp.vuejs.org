@@ -75,7 +75,7 @@ const app = new Vue({
 
 ``` js
 const app = new Vue({
-  el:'#app',
+  el: '#app',
   data: {
     name: '',
     age: 0
@@ -159,7 +159,7 @@ const app = new Vue({
       this.saveCats();
     },
     saveCats() {
-      let parsed = JSON.stringify(this.cats);
+      const parsed = JSON.stringify(this.cats);
       localStorage.setItem('cats', parsed);
     }
   }
@@ -179,6 +179,7 @@ const app = new Vue({
 
 * [vue-local-storage](https://github.com/pinguinjkeke/vue-local-storage)
 * [vue-reactive-storage](https://github.com/ropbla9/vue-reactive-storage)
+* [vue2-storage](https://github.com/yarkovaleksei/vue2-storage)
 
 ## おわりに
 

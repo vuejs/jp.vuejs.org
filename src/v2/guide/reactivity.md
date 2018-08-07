@@ -11,7 +11,7 @@ order: 601
 
 プレーンな JavaScript オブジェクトを `data` オプションとして Vue インスタンスに渡すとき、Vue はその全てのプロパティを渡り歩いて、それらを [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) を使用して getter/setter に変換します。これは ES5 だけの、シム (shim) ができない機能で、Vue が IE8 以下をサポートしないのはこのためです。
 
-getter/setter はユーザーには見えませんが、内部では、Vue が依存性を追跡したり、プロパティがアクセスまたは変更されたときに変更を通知したりすることを可能にしています。ひとつ注意点を挙げると、変換されたデータオブジェクトをログ出力するとき、各ブラウザコンソールで getter/setter のフォーマットが異なるため、より調査に適したインターフェイスの [vue-devtools](https://github.com/vuejs/vue-devtools) をインストールしたほうがいいかもしれません。
+[getter/setter](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Working_with_Objects#Defining_getters_and_setters) はユーザーには見えませんが、内部では、Vue が依存性を追跡したり、プロパティがアクセスまたは変更されたときに変更を通知したりすることを可能にしています。ひとつ注意点を挙げると、変換されたデータオブジェクトをログ出力するとき、各ブラウザコンソールで getter/setter のフォーマットが異なるため、より調査に適したインターフェイスの [vue-devtools](https://github.com/vuejs/vue-devtools) をインストールしたほうがいいかもしれません。
 
 全てのコンポーネントインスタンスは対応する **ウォッチャ (watcher)** インスタンスを持っていて、これはコンポーネントを描画する間に "触れた (touched)" プロパティを全て依存性として記録しています。その後、依存性の setter がトリガされると、ウォッチャに通知してコンポーネントの再描画が起動します。
 
