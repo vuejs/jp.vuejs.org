@@ -8,7 +8,7 @@ order: 5
 あなたが Vue.js のウェブサイトを新しく立ち上げたとしましょう。おめでとうございます！いま、あなたは自分のウェブサイトに早くブログを追加したいでしょうが、1つの WordPress のインスタンス（また、さらに言えば DB の動作する CMS）だけをホスティングするためにサーバ全体をチューニングしたくはないでしょう。いくつかの Vue.js ブログのコンポーネントといくつかのルーティングを追加して、それらがすべてうまく動作するようにしたいだけですよね？あなたが探しているのは、Vue.js アプリケーションから直接処理できる API によって完全に制御されたブログです。このチュートリアルは、どうやってそれを適切に行うか、教えます。詳しく見ていきましょう！
 
 私たちは、Vue.js で CMS によるブログを素早くつくっていきます。これには、[ButterCMS](https://buttercms.com/) を使います。これは、ButterCMS ダッシュボードでコンテンツを管理し、コンテンツ API を Vue.js アプリケーションに統合させる API ファーストな CMS です。新しく、または既にある Vue.js のプロジェクトのために、ButterCMS を使えます。
- 
+
 ![Butter Dashboard](https://user-images.githubusercontent.com/160873/36677285-648798e4-1ad3-11e8-9454-d22fca8280b7.png "Butter Dashboard")
 
 ## インストール
@@ -19,7 +19,7 @@ order: 5
 npm install buttercms --save
 ```
 
-Butter は、CDN からも読み込めます: 
+Butter は、CDN からも読み込めます:
 
 ```html
 <script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>
@@ -40,7 +40,7 @@ import Butter from 'buttercms';
 const butter = Butter('your_api_token');
 ```
 
-CDN の使用: 
+CDN の使用:
 
 ```html
 <script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>
@@ -48,7 +48,7 @@ CDN の使用:
   var butter = Butter('your_api_token');
 </script>
 ```
- 
+
 このファイルを ButterCMS を使いたいコンポーネントでインポートし、コンソールで以下を実行します:
 
 ```javascript
@@ -61,7 +61,7 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
 
 ## 投稿の表示
 
-投稿を表示するには、アプリケーションで、`/blog` ルーティング (Vue Router を使用) を作成し、Butter API でブログの投稿を取得します。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。 
+投稿を表示するには、アプリケーションで、`/blog` ルーティング (Vue Router を使用) を作成し、Butter API でブログの投稿を取得します。`/blog/:slug` ルーティングが同様に各々の投稿をハンドルします。
 
 カテゴリ、または著者によるフィルタリングのような追加オプションは、ButterCMS [API リファレンス](https://buttercms.com/docs/api/?javascript#blog-posts) を参照してください。 レスポンスは、ページネーションのために使用するいくつかのメタデータも含みます。
 
@@ -92,7 +92,7 @@ export default new Router({
 })
 ```
 
-次に、直近の投稿を並べるブログのホームページを `components/BlogHome.vue` で作成します。 
+次に、直近の投稿を並べるブログのホームページを `components/BlogHome.vue` で作成します。
 
 ```html
 <script>
@@ -125,14 +125,25 @@ export default new Router({
   <div id="blog-home">
       <h1>{{ page_title }}</h1>
       <!-- `v-for` の生成、および Vue 用に `key` 属性の適用。ここでは、slug と index の組みを使用します -->
-      <div v-for="(post,index) in posts" :key="post.slug + '_' + index">
+      <div
+        v-for="(post,index) in posts"
+        :key="post.slug + '_' + index"
+      >
         <router-link :to="'/blog/' + post.slug">
           <article class="media">
             <figure>
               <!-- `:` による結果のバインディング -->
               <!-- `featured_image` を使うかどうかは、`v-if`/`else` で判定します -->
-              <img v-if="post.featured_image" :src="post.featured_image" alt="">
-              <img v-else src="http://via.placeholder.com/250x250" alt="">
+              <img
+                v-if="post.featured_image"
+                :src="post.featured_image"
+                alt=""
+              >
+              <img
+                v-else
+                src="http://via.placeholder.com/250x250"
+                alt=""
+              >
             </figure>
             <h2>{{ post.title }}</h2>
             <p>{{ post.summary }}</p>
@@ -181,10 +192,18 @@ export default new Router({
     <h4>{{ post.data.author.first_name }} {{ post.data.author.last_name }}</h4>
     <div v-html="post.data.body"></div>
 
-    <router-link v-if="post.meta.previous_post" :to="/blog/ + post.meta.previous_post.slug" class="button">
+    <router-link
+      v-if="post.meta.previous_post"
+      :to="/blog/ + post.meta.previous_post.slug"
+      class="button"
+    >
       {{ post.meta.previous_post.title }}
     </router-link>
-    <router-link v-if="post.meta.next_post" :to="/blog/ + post.meta.next_post.slug" class="button">
+    <router-link
+      v-if="post.meta.next_post"
+      :to="/blog/ + post.meta.next_post.slug"
+      class="button"
+    >
       {{ post.meta.next_post.title }}
     </router-link>
   </div>

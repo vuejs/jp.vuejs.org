@@ -64,10 +64,13 @@ const app = new Vue({
 
 ``` html
 <div id="app">
-  My name is <input v-model="name">
-  and I am <input v-model="age"> years old.
-  <p/>
-  <button @click="persist">Save</button>
+  <p>
+    My name is <input v-model="name">
+    and I am <input v-model="age"> years old.
+  </p>
+  <p>
+    <button @click="persist">Save</button>
+  </p>
 </div>
 ```
 
@@ -110,9 +113,10 @@ const app = new Vue({
 ``` html
 <div id="app">
   <h2>Cats</h2>
-  <div v-for="(cat,n) in cats">
+  <div v-for="(cat, n) in cats">
     <p>
-    <span class="cat">{{ cat }}</span> <button @click="removeCat(n)">Remove</button>
+      <span class="cat">{{ cat }}</span>
+      <button @click="removeCat(n)">Remove</button>
     </p>
   </div>
 
@@ -134,7 +138,6 @@ const app = new Vue({
     newCat: null
   },
   mounted() {
-
     if (localStorage.getItem('cats')) {
       try {
         this.cats = JSON.parse(localStorage.getItem('cats'));

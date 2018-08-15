@@ -36,7 +36,10 @@ SVG アイコンシステムを作成する方法は多くありますが、 Vue
     :aria-labelledby="iconName"
     role="presentation"
   >
-    <title :id="iconName" lang="en">{{iconName}} icon</title>
+    <title
+      :id="iconName"
+      lang="en"
+    >{{ iconName }} icon</title>
     <g :fill="iconColor">
       <slot />
     </g>
@@ -83,12 +86,20 @@ export default {
 
 ```html
 <p>
-  <!--プロパティとして小さな `width` と `height` を渡すことができます  -->
-  <icon-base width="12" height="12" icon-name="write"><icon-write /></icon-base>
+  <!-- プロパティとして小さな `width` と `height` を渡すことができます -->
+  <icon-base
+    width="12"
+    height="12"
+    icon-name="write"
+  ><icon-write /></icon-base>
   <!-- あるいはデフォルトを使うことも可能です。デフォルトは18です -->
   <icon-base icon-name="write"><icon-write /></icon-base>
   <!-- あるいはすこし大きくすることももちろん可能です :) -->
-  <icon-base width="30" height="30" icon-name="write"><icon-write /></icon-base>
+  <icon-base
+    width="30"
+    height="30"
+    icon-name="write"
+  ><icon-write /></icon-base>
 </p>
 ```
 
@@ -100,16 +111,23 @@ export default {
 
 ```html
 <template>
-  <svg @click="startScissors"
+  <svg
+    @click="startScissors"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
     width="100"
     height="100"
     aria-labelledby="scissors"
     role="presentation"
-    >
-    <title id="scissors" lang="en">Scissors Animated Icon</title>
-    <path id="bk" fill="#fff" d="M0 0h100v100H0z"/>
+  >
+    <title
+      id="scissors"
+      lang="en"
+    >Scissors Animated Icon</title>
+    <path
+      id="bk"
+      fill="#fff"
+      d="M0 0h100v100H0z"/>
     <g ref="leftscissor">
       <path d="M..."/>
       ...
