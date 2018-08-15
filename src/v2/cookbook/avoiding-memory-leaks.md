@@ -4,6 +4,7 @@ type: cookbook
 updated: 2018-05-14
 order: 10
 ---
+
 ## はじめに
 
 もしあなたが Vue でアプリケーションを構築しているとき、メモリリークに注意する必要があります。 この Issue はシングルページアプリケーション( SPA )を設計する際には特に重要で、SPA を使っているときユーザはブラウザをリフレッシュする必要はなく、コンポーネントをクリーンアップすることとガベージコレクションが期待通りに動作することを確認することは JavaScript アプリケーションの責務です。    
@@ -14,20 +15,27 @@ Vue アプリケーションのメモリリークは一般的に Vue 自体か�
 
 次の例のメモリリークは Vue コンポーネント上で [Choices.js](https://github.com/jshjohnson/Choices) ライブラリが原因で引き起こされていて正しく解放されません。それでは、どのようにして Choices.js のフットプリントを取り除くかメモリリークを回避するかを示します。
 
-以下の例では、たくさんのオプションを持つ select をロードしてから [v-if](/v2/guide/conditional.html) ディレクティブを使用して show/hide ボタンを使って追加したり仮想 DOM から削除しています。この例での問題は `v-if` ディレクティブが DOM から親要素を取り除きますが、 Choices.js で生成された追加 DOM 部分をクリーンアップできずに、メモリリークを引き起こします。   
+以下の例では、たくさんのオプションを持つ select をロードしてから [v-if](/v2/guide/conditional.html) ディレクティブを使用して show/hide ボタンを使って追加したり仮想 DOM から削除しています。この例での問題は `v-if` ディレクティブが DOM から親要素を取り除きますが、 Choices.js で生成された追加 DOM 部分をクリーンアップできずに、メモリリークを引き起こします。
 
 ```html
 <link rel='stylesheet prefetch' href='https://joshuajohnson.co.uk/Choices/assets/styles/css/choices.min.css?version=3.0.3'>
 <script src='https://joshuajohnson.co.uk/Choices/assets/scripts/dist/choices.min.js?version=3.0.3'></script>
 
 <div id="app">
-  <button v-if="showChoices" @click="hide">Hide</button>
-  <button v-if="!showChoices" @click="show">Show</button>
+  <button
+    v-if="showChoices"
+    @click="hide"
+  >Hide</button>
+  <button
+    v-if="!showChoices"
+    @click="show"
+  >Show</button>
   <div v-if="showChoices">
     <select id="choices-single-default"></select>
   </div>
 </div>
 ```
+
 ```js
 new Vue({
   el: "#app",
@@ -68,6 +76,7 @@ new Vue({
   }
 })
 ```
+
 このメモリリークを確認するためには、この [CodePen の例](https://codepen.io/freeman-g/pen/qobpxo) を Chrome で開き、そして Chrome タスクマネージャー を開きます。Chrome タスクマネージャーを Mac で開くためには、Chrome トップナビゲーション > ウィンドウ > タスクマネージャーを選択するか、 Windows の場合 Shift + ESC ショートカットを使用します。そして、 show/hide ボタンを50回またはそれ以上クリックしてください。Chrome タスクマネージャー上でメモリ使用量が増え、再利用されないことが確認できます。
 
 ![Memory Leak Example](/images/memory-leak-example.png)

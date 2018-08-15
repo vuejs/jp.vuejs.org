@@ -12,7 +12,12 @@ order: 3
 3 つのフィールドをもち、2 つが必須の場合。はじめに HTML を見てみましょう。
 
 ``` html
-<form id="app" @submit="checkForm" action="https://vuejs.org/" method="post">
+<form
+  id="app"
+  @submit="checkForm"
+  action="https://vuejs.org/"
+  method="post"
+>
 
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
@@ -23,17 +28,31 @@ order: 3
 
   <p>
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" v-model="name">
+    <input
+      id="name"
+      v-model="name"
+      type="text"
+      name="name"
+    >
   </p>
 
   <p>
     <label for="age">Age</label>
-    <input type="number" name="age" id="age" v-model="age" min="0">
+    <input
+      id="age"
+      v-model="age"
+      type="number"
+      name="age"
+      min="0">
   </p>
 
   <p>
     <label for="movie">Favorite Movie</label>
-    <select name="movie" id="movie" v-model="movie">
+    <select
+      id="movie"
+      v-model="movie"
+      name="movie"
+    >
       <option>Star Wars</option>
       <option>Vanilla Sky</option>
       <option>Atomic Blonde</option>
@@ -41,7 +60,10 @@ order: 3
   </p>
 
   <p>
-    <input type="submit" value="Submit">
+    <input
+      type="submit"
+      value="Submit"
+    >
   </p>
 
 </form>
@@ -93,7 +115,13 @@ const app = new Vue({
 次の例では、 2 つめのテキストフィールドを email へと切り替え、カスタマイズしたロジックでバリデーションをします。このコードは、 StackOverflow の質問「[How to validate email address in JavaScript?](https://stackoverflow.com/questions/46155/how-to-validate-email-address-in-javascript)」から持ってきています。 HTML はこちらですが、はじめの例と非常に似通っています。
 
 ``` html
-<form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
+<form
+  id="app"
+  @submit="checkForm"
+  action="https://vuejs.org/"
+  method="post"
+  novalidate="true"
+>
 
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
@@ -104,17 +132,31 @@ const app = new Vue({
 
   <p>
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" v-model="name">
+    <input
+      id="name"
+      v-model="name"
+      type="text
+      name="name"
+    >
   </p>
 
   <p>
     <label for="email">Email</label>
-    <input type="email" name="email" id="email" v-model="email">
+    <input
+      id="email"
+      v-model="email"
+      type="email"
+      name="email"
+    >
   </p>
 
   <p>
     <label for="movie">Favorite Movie</label>
-    <select name="movie" id="movie" v-model="movie">
+    <select
+      id="movie"
+      v-model="movie"
+      name="movie"
+    >
       <option>Star Wars</option>
       <option>Vanilla Sky</option>
       <option>Atomic Blonde</option>
@@ -122,7 +164,10 @@ const app = new Vue({
   </p>
 
   <p>
-    <input type="submit" value="Submit">
+    <input
+      type="submit"
+      value="Submit"
+    >
   </p>
 
 </form>
@@ -176,7 +221,13 @@ const app = new Vue({
 3 つめの例は、アンケートアプリにて見たことがあるかもしれません。ユーザーは、 戦艦のそれぞれの機能に対して予算を振り分ける必要があります。かつ合計は必ず 100 となる必要があります。まずは HTML です。
 
 ``` html
-<form id="app" @submit="checkForm" action="https://vuejs.org/" method="post" novalidate="true">
+<form
+  id="app"
+  @submit="checkForm"
+  action="https://vuejs.org/"
+  method="post"
+  novalidate="true"
+>
 
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
@@ -192,11 +243,31 @@ const app = new Vue({
   </p>
 
   <p>
-    <input type="number" name="weapons" v-model.number="weapons"> Weapons <br/>
-    <input type="number" name="shields" v-model.number="shields"> Shields <br/>
-    <input type="number" name="coffee" v-model.number="coffee"> Coffee <br/>
-    <input type="number" name="ac" v-model.number="ac"> Air Conditioning <br/>
-    <input type="number" name="mousedroids" v-model.number="mousedroids"> Mouse Droids <br/>
+    <input
+      v-model.number="weapons"
+      type="number"
+      name="weapons"
+    > Weapons <br/>
+    <input
+      v-model.number="shields"
+      type="number"
+      name="shields"
+    > Shields <br/>
+    <input
+      v-model.number="coffee"
+      type="number"
+      name="coffee"
+    > Coffee <br/>
+    <input
+      v-model.number="ac"
+      type="number"
+      name="ac"
+    > Air Conditioning <br/>
+    <input
+      v-model.number="mousedroids"
+      type="number"
+      name="mousedroids"
+    > Mouse Droids <br/>
   </p>
 
   <p>
@@ -204,7 +275,10 @@ const app = new Vue({
   </p>
 
   <p>
-    <input type="submit" value="Submit">
+    <input
+      type="submit"
+      value="Submit"
+    >
   </p>
 
 </form>
@@ -277,7 +351,11 @@ function main(args) {
 基本的には "vista", "empire", "mbp" 以外の名前で問題ありません。フォームをみてみましょう。
 
 ``` html
-<form id="app" @submit="checkForm" method="post">
+<form
+  id="app"
+  @submit="checkForm"
+  method="post"
+>
 
   <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
@@ -288,11 +366,19 @@ function main(args) {
 
   <p>
     <label for="name">New Product Name: </label>
-    <input type="text" name="name" id="name" v-model="name">
+    <input
+      id="name"
+      v-model="name"
+      type="text"
+      name="name"
+    >
   </p>
 
   <p>
-    <input type="submit" value="Submit">
+    <input
+      type="submit"
+      value="Submit"
+    >
   </p>
 
 </form>
@@ -345,4 +431,3 @@ OpenWhisk にて実行される API の URL を表す変数から始まります
 
 * [vuelidate](https://github.com/monterail/vuelidate)
 * [VeeValidate](http://vee-validate.logaretm.com/)
-
