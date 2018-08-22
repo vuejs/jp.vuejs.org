@@ -11,18 +11,4 @@
   </div>
 </div>
 
-<div id="sidebar-sponsors-platinum">
-  <div class="main-sponsor">
-    <span>プラチナスポンサー</span>
-    <div>
-    <%_ for (const sponsor of theme.platinum_sponsors) {_%>
-    <a href="<%- sponsor.url %>" target="_blank" class="logo">
-      <img src="<%- url_for(`/images/${sponsor.wide_img || sponsor.img}`) %>" alt="<%-sponsor.name-%>">
-    </a>
-    <%_ } _%>
-    </div>
-  </div>
-  <a class="become-backer" href="<%- url_for("/support-vuejs") %>">
-    スポンサーになる
-  </a>
-</div>
+<%- partial('partials/platinum_sponsors', { context: 'left' }) %>
