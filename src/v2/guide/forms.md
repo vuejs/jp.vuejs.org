@@ -371,7 +371,7 @@ vm.selected.number // => 123
 <input v-model.number="age" type="number">
 ```
 
-これは、しばしば有用です。なぜなら、 `type=number` と書いたときでさえ、 HTML の input 要素の value は常に文字列を返すからです。
+これは、しばしば有用です。なぜなら、 `type=number` と書いたときでさえ、 HTML の input 要素の value は常に文字列を返すからです。もし値が `parseFloat()` で解釈できない場合は、もとの値が返却されます。
 
 ### `.trim`
 

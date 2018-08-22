@@ -2143,7 +2143,7 @@ updated: 2018-05-24
 
 - **修飾子:**
   - [`.lazy`](../guide/forms.html#lazy) - `input` の代わりに `change` イベントを購読します
-  - [`.number`](../guide/forms.html#number) - input の文字列を数値にキャストします
+  - [`.number`](../guide/forms.html#number) - 有効な input の文字列を数値にキャストします
   - [`.trim`](../guide/forms.html#trim) - input をトリムします
 
 - **使用方法:**
