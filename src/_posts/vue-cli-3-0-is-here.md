@@ -18,7 +18,7 @@ Vue CLI 3 は以前のバージョンとは全く別物です。書換えのゴ�
 
 - [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/)、[コード分​​割](https://webpack.js.org/guides/code-splitting/)、 [tree Shaking](https://webpack.js.org/guides/tree-shaking/#src/components/Sidebar/Sidebar.jsx) 、[効率的な長期キャッシング](https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31)、[エラーオーバーレイ](https://webpack.js.org/configuration/dev-server/#devserver-overlay)などの事前設定済みの webpack 機能
 - ES2017 トランスコンパイル（オブジェクトのレスト、スプレッドやダイナミックインポートのような一般的な提案を含む）及び Babel 7 と[プリセット env](https://github.com/babel/babel/tree/master/packages/babel-preset-env) による使用に応じたポリフィル注入
-- PostCSS （デフォルトで autoprefixer が有効）と全ての主要な CSS プリプロセッサのサポート
+- PostCSS（デフォルトで autoprefixer が有効）と全ての主要な CSS プリプロセッサのサポート
 - ハッシュ付のアセットリンクとプリロード/プリフェッチのリソースヒントを含む HTML の自動生成
 - `.env` ファイルを介したモードとカスケード環境変数
 - [モダンモード](https://cli.vuejs.org/guide/browser-compatibility.html#modern-mode)：ネイティブ ES2017+ バンドルとレガシーバンドルを並行で出荷（詳細は後述）
@@ -40,7 +40,7 @@ Vue CLI 3 は以前のバージョンとは全く別物です。書換えのゴ�
 最も重要なのは、Vue CLI は上記の全ての機能がうまく連携しているので構築作業を自身で行う必要がないことです。
 
 ## イジェクト不要の構成が可能
-上記の全ての機能は何の構築無しで動作します： Vue CLI 3 でプロジェクトを生成すると、それは Vue CLI ランタイムサービス ( @vue/cli-service ）と選択された機能プラグインをインストールし、必要な設定ファイルを生成します。ほとんどの場合、あなたはコードの作成に専念するだけで良いです。
+上記の全ての機能は何の構築無しで動作します： Vue CLI 3 でプロジェクトを生成すると、それは Vue CLI ランタイムサービス (@vue/cli-service）と選択された機能プラグインをインストールし、必要な設定ファイルを生成します。ほとんどの場合、あなたはコードの作成に専念するだけで良いです。
 
 しかしながら、潜在的な依存関係を抽象化しようとする CLI ツールではしばしばそれら依存関係の内部構成を細かく調整する機能が削除されることがありますーそのような変更を行うには、ユーザーは通常 "イジェクト" 、つまり変更を加えるため生の構成をプロジェクトにチェックインする必要があります。これの欠点は一度イジェクトすると、自己責任となり長期的にはツールの新しいバージョンにアップグレードすることができなくなることです。
 
@@ -82,7 +82,7 @@ Vue CLI はこの問題を解決するのに役立つ "モダンモード" を�
 vue-cli-service build --modern
 ```
 
-Vue CLI は 2 種類のバージョンを生成します：一つは[ES モジュール](https://jakearchibald.com/2017/es-modules-in-browsers/)をサポートするモダンブラウザを対象としたモダンバンドル、もう一つはそうでない古いブラウザを対象としたレガシーバンドル。
+Vue CLI は 2 種類のバージョンを生成します：1つは[ES モジュール](https://jakearchibald.com/2017/es-modules-in-browsers/)をサポートするモダンブラウザを対象としたモダンバンドル、もう1つはそうでない古いブラウザを対象としたレガシーバンドル。
 
 しかしクールなところは特別なデプロイ要件が無いことです。生成された HTML ファイルは、[Phillip Walton の素晴らしい記事](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)で説明されているテクニックを自動的に用います：
 
