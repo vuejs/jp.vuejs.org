@@ -1,6 +1,6 @@
 ---
 title: 貢献
-updated: 2018-02-11
+updated: 2018-08-25
 type: contribution
 ---
 
@@ -142,6 +142,7 @@ Upcoming TypeScript Changes in Vue 2.5 | やって来る Vue 2.5 での TypeScri
 Vue 2.5 released | Vue 2.5 がリリースされました | [chi-bd](https://github.com/chi-bd)
 What’s new in Vue Devtools 4.0 | Vue Devtools 4.0 の新機能 | [chi-bd](https://github.com/chi-bd)
 Vue.js News Announcement | Vue.js News のお知らせ | [chi-bd](https://github.com/chi-bd)
+Vue CLI 3.0 is here! | Vue CLI 3.0 が来ました！ | [chi-bd](https://github.com/chi-bd)
 
 ## Vue.js コアチームからの謝辞！
 日本語公式サイトの翻訳、レビュー、修正などに貢献された全ての方々に大変感謝いたします！
