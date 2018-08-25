@@ -29,9 +29,9 @@ Vue CLI 3 は以前のバージョンとは全く別物です。書換えのゴ�
 
 - [TypeScript](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript)
 - [PWA](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa)
-- [Vue Router](https://router.vuejs.org/) & [Vuex](https://vuex.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/ja/) & [Vuex](https://vuex.vuejs.org/ja/)
 - [ESLint](https://eslint.org/) / [TSLint](https://palantir.github.io/tslint/) / [Prettier](https://prettier.io/)
-- [Jest](https://jestjs.io/) または [Mocha](https://mochajs.org/) による単体テスト
+- [Jest](https://jestjs.io/ja/) または [Mocha](https://mochajs.org/) による単体テスト
 - [Cypress](https://www.cypress.io/) または [Nightwatch](http://nightwatchjs.org/) による E2E テスト
 
 ![](https://cdn-images-1.medium.com/max/880/1*llJjroMC2YJWizrXOgCDuA.png)
