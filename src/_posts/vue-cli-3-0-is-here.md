@@ -56,7 +56,7 @@ Babel 、 TypeScript 、 PostCSS などのサードパーティの統合では�
 
 Vue CLI 3 にはもはや "テンプレート" がありませんー代わりに、独自の[リモートプリセット](https://cli.vuejs.org/guide/plugins-and-presets.html#remote-presets)を作成してプラグインやオプションの選択肢を他の開発者と共有することができます。
 
-## Graphical User Interface
+## グラフィカルユーザーインターフェース
 [Guillaume CHAU](https://medium.com/@Akryum) の素晴らしい仕事のおかげで、 Vue CLI 3 には完全な GUI が付属しており、それは新しいプロジェクトを作成するだけでなく、プロジェクト内のプラグインやタスクも管理できます（そう、以下の上質な webpack ダッシュボードも付属しています）：
 
 ![](https://cdn-images-1.medium.com/max/880/1*gFc-hzoWXxts2VT40pic1Q.png)
