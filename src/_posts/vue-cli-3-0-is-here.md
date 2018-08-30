@@ -12,11 +12,11 @@ date: 2018-8-11 00:00:00
 Vue CLI 3 は以前のバージョンとは全く別物です。書換えのゴールは以下の 2 つです：
 
 1. モダンなフロントエンドツール、特に複数のツールを混在させる場合の構築疲れを軽減する；
-1. どんな Vue アプリのデフォルトにもなるよう、可能な限りツールチェインにベストプラクティスを組込む
+2. どんな Vue アプリのデフォルトにもなるよう、可能な限りツールチェインにベストプラクティスを組込む
 
 核として、 Vue CLI は webpack 4 の上に構築された事前設定済みのビルド設定を提供します。開発者が必要とする構成の量を最小限に抑えることを目指すため、 Vue CLI 3 プロジェクトは以下の革新的なサポートを同梱しています：
 
-- [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/)、[コード分​​割](https://webpack.js.org/guides/code-splitting/)、 [tree Shaking](https://webpack.js.org/guides/tree-shaking/#src/components/Sidebar/Sidebar.jsx) 、[効率的な長期キャッシング](https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31)、[エラーオーバーレイ](https://webpack.js.org/configuration/dev-server/#devserver-overlay)などの事前設定済みの webpack 機能
+- [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)、[コード分​​割](https://webpack.js.org/guides/code-splitting/)、 [Tree Shaking](https://webpack.js.org/guides/tree-shaking/#src/components/Sidebar/Sidebar.jsx) 、[効率的な長期キャッシング](https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31)、[エラーオーバーレイ](https://webpack.js.org/configuration/dev-server/#devserver-overlay)などの事前設定済みの webpack 機能
 - ES2017 トランスコンパイル（オブジェクトのレスト、スプレッドやダイナミックインポートのような一般的な提案を含む）及び Babel 7 と[プリセット env](https://github.com/babel/babel/tree/master/packages/babel-preset-env) による使用に応じたポリフィル注入
 - PostCSS（デフォルトで autoprefixer が有効）と全ての主要な CSS プリプロセッサのサポート
 - ハッシュ付のアセットリンクとプリロード/プリフェッチのリソースヒントを含む HTML の自動生成
@@ -113,9 +113,9 @@ vue-cli-service build --target wc-async 'src/components/*.vue'
 
 - - -
 
-Vue CLI 3 で、同じコードベースを使用してアプリケーション、 UMD ライブラリ、またはネイティブ Web コンポーネントを構築できます。どんなターゲットを構築していても同じ Vue 開発エクスペリエンスを楽しむことができます。
+Vue CLI 3 で、同じコードベースを使用してアプリケーション、 UMD ライブラリ、またはネイティブ Web コンポーネントを構築できます。どんなターゲットを構築していても同じ Vue 開発体験を楽しむことができます。
 
-## 今日それを試してみましょう！
+## 今日から試してみましょう！
 Vue CLI 3 は 今 Vue アプリケーションの標準ビルドツールとして機能する準備が整いましたが、これはほんの始まりに過ぎません。前述のように、Vue CLI の長期目標は現在と未来のベストプラクティスをツールチェーンに組込むことです。私たちは web プラットフォームが進化するにつれて、Vue CLI はユーザーがパフォーマンスの良いアプリを提供する手助けとなることを願っています。
 
 あなたは[このドキュメントの指示に従う](https://cli.vuejs.org/guide/installation.html)ことで今すぐ試すことができます。私たちはあなたがそれを使って何を構築するか待てません。ハッピーハッキング！
