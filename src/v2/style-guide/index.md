@@ -1707,7 +1707,7 @@ computed: {
 
 
 
-### `key` を使わない `v-if`/`v-if-else`/`v-else` <sup data-p="d">使用注意</sup>
+### `key` を使わない `v-if`/`v-else-if`/`v-else` <sup data-p="d">使用注意</sup>
 
 **それらが同じ種類の要素の場合、通常は `v-if` + `v-else` と一緒に `key` を使用するのが最善です(例: どちらも `<div>` 要素).**
 
