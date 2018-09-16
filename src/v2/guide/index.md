@@ -152,9 +152,7 @@ Vue.js にはかなりの数のディレクティブがあり、それぞれ独�
 ``` html
 <div id="app-4">
   <ol>
-    <li v-for="todo in todos"
-      :key="todo.id"
-    >
+    <li v-for="todo in todos">
       {{ todo.text }}
     </li>
   </ol>
@@ -165,9 +163,9 @@ var app4 = new Vue({
   el: '#app-4',
   data: {
     todos: [
-      { id: 1, text: 'Learn JavaScript' },
-      { id: 2, text: 'Learn Vue' },
-      { id: 3, text: 'Build something awesome' }
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
     ]
   }
 })
