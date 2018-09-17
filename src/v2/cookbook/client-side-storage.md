@@ -101,7 +101,7 @@ const app = new Vue({
 })
 ```
 
-前述したように、`mounted` は永続されたデータがあれば、それを読み込みます。ただし、今回は、ボタンがクリックされたときにのみデータが保持されます。値を保持する前に、ここで検証や変換を行うことも可能です。値が格納された日を表す日付を格納することもできます。このメタデータでは、`mounted` メソッドはこのバージョンのように値を再度格納するかどうかを論理的に呼び出すことができます。次のバージョンを試してください。
+前述したように、`mounted` は永続されたデータがあれば、それを読み込みます。ただし、今回は、ボタンがクリックされたときにのみデータが保持されます。値を保持する前に、ここで検証や変換を行うことも可能です。値が格納された日を表す日付を格納することもできます。このメタデータを使用することで、`mounted` メソッドは値を再度格納するかどうかを論理的に呼び出すことができます。次のバージョンを試してください。
 
 <p data-height="265" data-theme-id="0" data-slug-hash="rdOjLN" data-default-tab="js,result" data-user="cfjedimaster" data-embed-version="2" data-pen-title="testing localstorage 2" class="codepen">See the Pen <a href="https://codepen.io/cfjedimaster/pen/rdOjLN/">testing localstorage 2</a> by Raymond Camden (<a href="https://codepen.io/cfjedimaster">@cfjedimaster</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
