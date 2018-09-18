@@ -292,7 +292,7 @@ Vue.set(vm.items, indexOfItem, newValue)
 vm.items.splice(indexOfItem, 1, newValue)
 ```
 
-[`vm.$set`]((https://jp.vuejs.org/v2/api/#vm-set)) インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
+[`vm.$set`](https://jp.vuejs.org/v2/api/#vm-set) インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
 
 ``` js
 vm.$set(vm.items, indexOfItem, newValue)
