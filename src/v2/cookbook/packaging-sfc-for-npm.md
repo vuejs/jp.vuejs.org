@@ -174,7 +174,7 @@ package.json の `script` セクションの準備と単一ファイルコンポ
 import vue from 'rollup-plugin-vue'; // .vue 単一ファイルコンポーネントを取得
 import buble from 'rollup-plugin-buble'; // 適切にブラウザをサポートするトランスパイラおよびポリフィル
 export default {
-    input: 'build/wrapper.js', // Path relative to package.json
+    input: 'src/wrapper.js', // Path relative to package.json
     output: {
         name: 'MyComponent',
         exports: 'named',
