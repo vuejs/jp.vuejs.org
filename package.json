@@ -25,7 +25,7 @@
     "request": "^2.85.0"
   },
   "devDependencies": {
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "shelljs": "^0.7.8",
     "textlint": "^5.5.0",
     "textlint-checker-for-vuejs-jp-docs": "git+https://github.com/vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
@@ -36,8 +36,12 @@
     "start": "hexo server",
     "build": "node pre-deploy.js && hexo clean && hexo generate",
     "deploy": "npm run build && hexo deploy",
-    "precommit": "npm test",
     "test": "npm run lint",
     "lint": "node -e \"var shell=require('shelljs');var files=shell.find(['./src/v2/**/*.md','./src/_posts/*.md']).filter(function(file){return !file.endsWith('/guide/team.md')}).join(' ');if(shell.exec('textlint --rulesdir ./node_modules/textlint-checker-for-vuejs-jp-docs/rules/textlint-rule-vue-jp-docs -f pretty-error '+files).code!==0){shell.exit(1)};\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
   }
 }
