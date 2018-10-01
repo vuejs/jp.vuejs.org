@@ -97,12 +97,7 @@ observer と scheduler を個別のパッケージに分離することで、こ
 
 - tree-shaking-capable なバンドラを対象とし、テンプレートはオプション機能をインポートするために ES modules syntax を利用するようになる。これにより、未使用のオプション機能は、最終的なバンドルから削除される。
 
-- 新しい Virtual DOM 実装の改善により、より効果的なコンパイル時の最適化も実行できる。
-    - static tree hoisting
-    - static props hoisting
-    - compiler-hints for runtime to skip children normalization
-    - VNode creation fast paths
-    - etc...
+- 新しい Virtual DOM 実装の改善により、より効果的なコンパイル時の最適化も実行できる。静的なツリーの巻き上げ (static tree hoisting), 静的な props の巻き上げ (static props hoisting), ランタイムで子の正規化をスキップするためのコンパイラヒント (compiler-hints for runtime to skip children normalization), VNode 生成に関するファストパス (VNode creation fast paths), etc...
 
 - テンプレートのコンパイルエラーで位置情報を提供するためにパーサを書き直す予定がある。これは、テンプレートのソースマップのサポートにもつながるはずである。新しいパーサは、`eslint-plugin-vue` や IDE 言語サービスなど、サードパーティツールとのインテグレーションの基礎となる。
 
