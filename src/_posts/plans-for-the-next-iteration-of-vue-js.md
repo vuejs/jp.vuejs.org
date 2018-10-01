@@ -3,6 +3,9 @@ title: Vue.js における次のイテレーションの計画
 date: 2018-10-01 00:00:00
 ---
 
+*このブログはこちらの翻訳ブログです。*
+[Plans for the Next Iteration of Vue\.js – The Vue Point – Medium](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)
+
 # Vue.js における次のイテレーションの計画
 
 先週の [Vue.js London](https://vuejs.london/summary/) で、私は Vue の次のメジャーバージョンについて簡単なプレビューを行いました。このポストでは、計画の詳細な概要を提供します。
