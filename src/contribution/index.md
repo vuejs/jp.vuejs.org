@@ -143,6 +143,7 @@ Vue 2.5 released | Vue 2.5 がリリースされました | [chi-bd](https://git
 What’s new in Vue Devtools 4.0 | Vue Devtools 4.0 の新機能 | [chi-bd](https://github.com/chi-bd)
 Vue.js News Announcement | Vue.js News のお知らせ | [chi-bd](https://github.com/chi-bd)
 Vue CLI 3.0 is here! | Vue CLI 3.0 が来ました！ | [chi-bd](https://github.com/chi-bd)
+Plans for the Next Iteration of Vue.js | Vue.js における次のイテレーションの計画 | [uneco](https://github.com/uneco)
 
 ## Vue.js コアチームからの謝辞！
 日本語公式サイトの翻訳、レビュー、修正などに貢献された全ての方々に大変感謝いたします！
