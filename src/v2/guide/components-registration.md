@@ -17,7 +17,7 @@ Vue.component('my-component-name', { /* ... */ })
 
 コンポーネント名は `Vue.component` の第一引数です。
 
-コンポーネントの命名は、コンポーネントの使用箇所に左右されます。(文字列テンプレート、または[単一ファイルコンポーネント](single-file-components.html)ではなく) DOM 上で直接コンポーネントを使用する場合は、[W3C rules](https://www.w3.org/TR/custom-elements/#concepts) に従ったカスタムタグ名(全て小文字で、ハイフンが含まれていること)を推奨します。これは、既に存在する、そして将来定義される HTML 要素との衝突を防止するのに役立ちます。
+コンポーネントの命名は、コンポーネントの使用箇所に左右されます。(文字列テンプレート、または[単一ファイルコンポーネント](single-file-components.html)ではなく) DOM 上で直接コンポーネントを使用する場合は、[W3C rules](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name) に従ったカスタムタグ名(全て小文字で、ハイフンが含まれていること)を推奨します。これは、既に存在する、そして将来定義される HTML 要素との衝突を防止するのに役立ちます。
 
 [スタイルガイド](../style-guide/#基底コンポーネントの名前-強く推奨)では、コンポーネント名についてのその他の推奨項目を見ることができます。
 
