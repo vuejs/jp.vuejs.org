@@ -27,7 +27,7 @@ React と Vue には多くの類似点があります。それらは両方とも
 
 ### 実行時性能
 
-React と Vue の両方は、どちらも非常に早いので、速度はどちらを選ぶかの決定要因になりそうにありません。ですが、具体的なメトリクスについては、この[サードパーティのベンチマーク](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)を確認してください。これは、シンプルなコンポーネントツリーでの生のレンダリング / 更新のパフォーマンスに重点をおいています。
+React と Vue の両方は、どちらも非常に早いので、速度はどちらを選ぶかの決定要因になりそうにありません。ですが、具体的なメトリクスについては、この[サードパーティのベンチマーク](https://stefankrause.net/js-frameworks-benchmark8/table.html)を確認してください。これは、シンプルなコンポーネントツリーでの生のレンダリング / 更新のパフォーマンスに重点をおいています。
 
 #### 最適化の取り組み
 
@@ -175,7 +175,7 @@ Angular は本当に AngularJS から完全に異なるフレームワークな�
 
 ### 実行時性能
 
-両方のフレームワークは非常に高速で、ベンチマークでも似たようなメトリクスがあります。より詳細な比較のために、[具体的なメトリクスを参照](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)することもできますが、速度は決定要因にはなりそうにありません。
+両方のフレームワークは非常に高速で、ベンチマークでも似たようなメトリクスがあります。より詳細な比較のために、[具体的なメトリクスを参照](https://stefankrause.net/js-frameworks-benchmark8/table.html)することもできますが、速度は決定要因にはなりそうにありません。
 
 ### サイズ
 
@@ -201,7 +201,7 @@ Ember はフル機能のフレームワークでとても強い思想（highly o
 
 - Vue のテンプレート構文は JavaScript の式の完全な力を利用しているのに対し、Handlebars の式とヘルパの構文は意図的にかなり制限されています。
 
-- 性能面では、Ember 2.0 で最新の Glimmer エンジンのアップデートがされた後にも関わらず、Vue は大きく差をつけて Ember よりも[優れています](http://www.stefankrause.net/js-frameworks-benchmark7/table.html)。Ember では性能が重要な状況において、手動でランループ（run loop）を管理する必要がある一方で、Vue は自動的にバッチ更新を行います。
+- 性能面では、Ember 3.x で最新の Glimmer エンジンのアップデートがされた後にも関わらず、Vue は大きく差をつけて Ember よりも[優れています](https://stefankrause.net/js-frameworks-benchmark8/table.html)。Ember では性能が重要な状況において、手動でランループ（run loop）を管理する必要がある一方で、Vue は自動的にバッチ更新を行います。
 
 ## Knockout
 
