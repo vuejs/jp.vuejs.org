@@ -1,7 +1,7 @@
 ---
 title: Vue コンポーネントの単体テスト
 type: cookbook
-updated: 2018-05-23
+updated: 2018-10-05
 order: 6
 ---
 
@@ -58,9 +58,7 @@ test('Foo', () => {
   expect(wrapper.find('.error').exists()).toBe(true)
 
   // 名前を十分な長さにします
-  wrapper.setData({
-    username: 'Lachlan'
-  })
+  wrapper.setData({ username: 'Lachlan' })
 
   // エラーがなくなったことをアサートします
   expect(wrapper.find('.error').exists()).toBe(false)
