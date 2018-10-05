@@ -58,9 +58,7 @@ test('Foo', () => {
   expect(wrapper.find('.error').exists()).toBe(true)
 
   // 名前を十分な長さにします
-  wrapper.setData({
-    username: 'Lachlan'
-  })
+  wrapper.setData({ username: 'Lachlan' })
 
   // エラーがなくなったことをアサートします
   expect(wrapper.find('.error').exists()).toBe(false)
