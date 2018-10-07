@@ -98,7 +98,7 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
 * より素早いデバッグのためにアプリケーションの状態の特定部分を購読します。
 * コンポーネント階層を可視化し、アニメーションを使用して特定の階層ビューのツリーを折りたたんだり展開することができます。
 
-![Vuetron Heirarchy](/images/vuetron-heirarchy.gif)
+![Vuetron Hierarchy](/images/vuetron-hierarchy.gif)
 
 ### 単純なデバッグステートメント
 
