@@ -612,7 +612,8 @@ order: 803
         'news.vuejs.org'
       ],
       reposPersonal: [
-        'shentao/vue-multiselect'
+        'shentao/vue-multiselect',
+        'shentao/vue-global-events'
       ]
     },
     {
