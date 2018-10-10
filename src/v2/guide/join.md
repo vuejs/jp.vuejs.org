@@ -1,6 +1,6 @@
 ---
 title: Vue.js コミュニティへ参加しましょう!
-updated: 2017-10-10
+updated: 2018-10-10
 type: guide
 order: 802
 ---
