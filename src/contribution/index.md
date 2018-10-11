@@ -8,7 +8,7 @@ type: contribution
 
 ### Essentials - 基本的な使い方
 ファイル | タイトル | 貢献者
------ | ------------- | --- 
+----- | ------------- | ---
 installation.md | インストール | [satotakumi](https://github.com/satotakumi)
 index.md | はじめに | [edwardkenfox](https://github.com/edwardkenfox)
 instance.md | Vue インスタンス | [kitak](https://github.com/kitak)
@@ -16,20 +16,20 @@ syntax.md  | テンプレート構文 | [kitak](https://github.com/kitak)
 computed.md | 算出プロパティとウォッチャ | [edwardkenfox](https://github.com/edwardkenfox)
 class-and-style.md | クラスとスタイルのバインディング | [nakajmg](https://github.com/nakajmg)
 conditional.md  | 条件付きレンダリング | [noliaki](https://github.com/noliaki)
-list.md | リストレンダリング | [nakajmg](https://github.com/nakajmg) 
+list.md | リストレンダリング | [nakajmg](https://github.com/nakajmg)
 events.md | イベントハンドリング | [kitak](https://github.com/kitak)
 forms.md  | フォーム入力バインディング | [kdnk](https://github.com/kdnk)
 components.md | コンポーネント | [kdnk](https://github.com/kdnk)
 
 ### Advanced - 高度な使い方
 ファイル | タイトル | 貢献者
------ | ------------- | --- 
+----- | ------------- | ---
 reactivity.md | リアクティブの探求 | [toshilow](https://github.com/toshilow)
 transitions.md | トランジション効果 | [kitak](https://github.com/kitak)
 transitioning-state.md | 状態のトランジション | [mono0x](https://github.com/mono0x)
 render-function.md | 描画関数 | [tejitak](https://github.com/tejitak)
 custom-directive.md | カスタムディレクティブ | [massa142](https://github.com/massa142)
-mixins.md | ミックスイン | [toshilow](https://github.com/toshilow) 
+mixins.md | ミックスイン | [toshilow](https://github.com/toshilow)
 plugins.md | プラグイン | [kdnk](https://github.com/kdnk)
 single-file-components.md | 単一ファイルコンポーネント | [hypermkt](https://github.com/hypermkt)
 deployment.md | プロダクション環境への配信のヒント | [kazupon](https://github.com/kazupon)
@@ -43,15 +43,15 @@ typescript.md | TypeScript のサポート | [kazupon](https://github.com/kazupo
 ファイル | タイトル | 貢献者
 ----- |  ------------- | ---
 migration.md | Vue 1.x からの移行 | [potato4d](https://github.com/potato4d)
-migration-vue-router.md | Vue Router 0.7.x からの移行 | [mikakane](https://github.com/mikakane) 
-migration-vuex.md | Vuex 0.6.x から 1.0 への移行 | [kazupon](https://github.com/kazupon) 
+migration-vue-router.md | Vue Router 0.7.x からの移行 | [mikakane](https://github.com/mikakane)
+migration-vuex.md | Vuex 0.6.x から 1.0 への移行 | [kazupon](https://github.com/kazupon)
 
 ### Meta - その他
 
 ファイル | タイトル | 貢献者
 ----- |  ------------- | ---
 comparison.md | 他のフレームワークとの比較 | [ktsn](https://github.com/ktsn)
-join.md | Vue.js コミュニティへ参加しましょう! | [sshono1210](https://github.com/sshono1210)
+join.md | Vue.js コミュニティへ参加しましょう！ | [sshono1210](https://github.com/sshono1210)
 team.md | チームに会おう | [chi-bd](https://github.com/chi-bd)
 
 ### API
@@ -70,7 +70,7 @@ svg.md | SVG グラフ | [kazupon](https://github.com/kazupon)
 modal.md | モーダルコンポーネント | [kazupon](https://github.com/kazupon)
 elastic-header.md | 弾力のあるヘッダ | [kazupon](https://github.com/kazupon)
 select2.md | ラッパーコンポーネント | [kazupon](https://github.com/kazupon)
-deepstream.md | deepstreamHubを使用したリアルタイム機能 | [re-fort](https://github.com/re-fort)
+deepstream.md | deepstreamHub を使用したリアルタイム機能 | [re-fort](https://github.com/re-fort)
 firebase.md | Firebase + バリデーション | [kazupon](https://github.com/kazupon)
 todomvc.md | TodoMVC | [kazupon](https://github.com/kazupon)
 hackernews.md | HackerNews クローン | [kazupon](https://github.com/kazupon)
@@ -81,7 +81,7 @@ hackernews.md | HackerNews クローン | [kazupon](https://github.com/kazupon)
 - [GitLocalize repo](https://gitlocalize.com/repo/62)
 
 ファイル | タイトル | 貢献者
------ | ------------- | --- 
+----- | ------------- | ---
 README.md | introduction | [doutori](https://github.com/doutori)
 SUMMARY.md | 目次 | [inouetakuya](https://github.com/inouetakuya)
 basic.md | 基本的な使い方 | [satotakumi](https://github.com/satotakumi)
@@ -104,7 +104,7 @@ api.md | API リファレンス | [hikimon](https://github.com/hikimon)
 - [GitHub Projects](https://github.com/vuejs/jp.vuejs.org/projects/2)
 
 英語カテゴリ | 翻訳カテゴリ | 貢献者
------ | ------------- | --- 
+----- | ------------- | ---
 Introduction | - | [potato4d](https://github.com/potato4d)
 Priority A Rules | 優先度 A ルール | [hisako135](https://github.com/hisako135)
 Priority B Rules | 優先度 B ルール | [wonderful-panda](https://github.com/wonderful-panda)
@@ -144,6 +144,12 @@ What’s new in Vue Devtools 4.0 | Vue Devtools 4.0 の新機能 | [chi-bd](http
 Vue.js News Announcement | Vue.js News のお知らせ | [chi-bd](https://github.com/chi-bd)
 Vue CLI 3.0 is here! | Vue CLI 3.0 が来ました！ | [chi-bd](https://github.com/chi-bd)
 Plans for the Next Iteration of Vue.js | Vue.js における次のイテレーションの計画 | [uneco](https://github.com/uneco)
+
+## Vue.js コミュニティ向けドキュメントの翻訳者一覧
+
+英語タイトル | 翻訳タイトル | 貢献者
+----- |  ------------- | ---
+Code Of Conduct | 行動規範 | [teinen](https://github.com/teinen)
 
 ## Vue.js コアチームからの謝辞！
 日本語公式サイトの翻訳、レビュー、修正などに貢献された全ての方々に大変感謝いたします！
