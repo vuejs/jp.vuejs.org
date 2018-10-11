@@ -230,7 +230,11 @@ createElement(
   slot: 'name-of-slot',
   // 他の特殊なトップレベルのプロパティ
   key: 'myKey',
-  ref: 'myRef'
+  ref: 'myRef',
+  // If you are applying the same ref name to multiple
+  // elements in the render function. This will make `$refs.myRef` become an
+  // array
+  refInFor: true
 }
 ```
 
