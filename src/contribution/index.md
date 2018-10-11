@@ -51,7 +51,7 @@ migration-vuex.md | Vuex 0.6.x から 1.0 への移行 | [kazupon](https://githu
 ファイル | タイトル | 貢献者
 ----- |  ------------- | ---
 comparison.md | 他のフレームワークとの比較 | [ktsn](https://github.com/ktsn)
-join.md | Vue.js コミュニティへ参加しましょう! | [sshono1210](https://github.com/sshono1210)
+join.md | Vue.js コミュニティへ参加しましょう！ | [sshono1210](https://github.com/sshono1210)
 team.md | チームに会おう | [chi-bd](https://github.com/chi-bd)
 
 ### API
@@ -70,7 +70,7 @@ svg.md | SVG グラフ | [kazupon](https://github.com/kazupon)
 modal.md | モーダルコンポーネント | [kazupon](https://github.com/kazupon)
 elastic-header.md | 弾力のあるヘッダ | [kazupon](https://github.com/kazupon)
 select2.md | ラッパーコンポーネント | [kazupon](https://github.com/kazupon)
-deepstream.md | deepstreamHubを使用したリアルタイム機能 | [re-fort](https://github.com/re-fort)
+deepstream.md | deepstreamHub を使用したリアルタイム機能 | [re-fort](https://github.com/re-fort)
 firebase.md | Firebase + バリデーション | [kazupon](https://github.com/kazupon)
 todomvc.md | TodoMVC | [kazupon](https://github.com/kazupon)
 hackernews.md | HackerNews クローン | [kazupon](https://github.com/kazupon)
