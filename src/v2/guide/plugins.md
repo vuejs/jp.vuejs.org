@@ -1,6 +1,6 @@
 ---
 title: プラグイン
-updated: 2017-09-03
+updated: 2018-10-13
 type: guide
 order: 304
 ---
