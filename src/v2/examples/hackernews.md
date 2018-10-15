@@ -1,6 +1,6 @@
 ---
 title: HackerNews クローン
-updated: 2017-09-23
+updated: 2018-10-15
 type: examples
 order: 12
 ---
