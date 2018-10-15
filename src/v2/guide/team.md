@@ -1,6 +1,6 @@
 ---
 title: チームに会おう
-updated: 2017-09-08
+updated: 2018-10-15
 type: guide
 order: 803
 ---
@@ -975,7 +975,7 @@ order: 803
         var work = this.profile.work
         var html = ''
         if (work.orgUrl) {
-          html += '<a href="' + work.orgUrl + '" target="_blank">'
+          html += '<a href="' + work.orgUrl + '" target="_blank" rel="noopener noreferrer">'
           if (work.org) {
             html += work.org
           } else {

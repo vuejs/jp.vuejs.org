@@ -1,7 +1,7 @@
 ---
 title: スタイルガイド
 type: style-guide
-updated: 2018-04-10
+updated: 2018-10-15
 ---
 
 このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
@@ -1991,7 +1991,7 @@ export default {
   var enforcementTypes = {
     none: '<span title="There is unfortunately no way to automatically enforce this rule.">self-discipline</span>',
     runtime: 'runtime error',
-    linter: '<a href="https://github.com/vuejs/eslint-plugin-vue#eslint-plugin-vue" target="_blank">plugin:vue/recommended</a>'
+    linter: '<a href="https://github.com/vuejs/eslint-plugin-vue#eslint-plugin-vue" target="_blank" rel="noopener noreferrer">plugin:vue/recommended</a>'
   }
   Vue.component('sg-enforcement', {
     template: '\

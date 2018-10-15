@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2018-03-26
+updated: 2018-10-15
 type: guide
 order: 2
 ---
@@ -17,7 +17,7 @@ Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインター
 
 <p class="tip">公式ガイドは、HTML、CSS そして JavaScript の中レベルのフロントエンドの知識を前提にしています。フロントエンドの開発が初めてであるならば、最初のステップとして、フレームワークに直接入門するのは良いアイデアではないかもしれません。基礎を学んで戻ってきましょう！他のフレームワークでの以前の経験は役に立ちますが、必須ではありません。</p>
 
-Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。気軽に他のタブを開いて、基本的な例を試してみましょう。もしくは、単純に <a href="https://gist.githubusercontent.com/chrisvfritz/7f8d7d63000b48493c336e48b3db3e52/raw/ed60c4e5d5c6fec48b0921edaed0cb60be30e87c/index.html" target="_blank" download="index.html"><code>index.html</code> を作成し </a> 、以下のコードで Vue を導入することができます:
+Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。気軽に他のタブを開いて、基本的な例を試してみましょう。もしくは、単純に <a href="https://gist.githubusercontent.com/chrisvfritz/7f8d7d63000b48493c336e48b3db3e52/raw/ed60c4e5d5c6fec48b0921edaed0cb60be30e87c/index.html" target="_blank" download="index.html" rel="noopener noreferrer"><code>index.html</code> を作成し </a> 、以下のコードで Vue を導入することができます:
 
 ``` html
 <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
@@ -37,7 +37,7 @@ Vue の他のインストール方法について、[インストール](../guid
 
 ## 宣言的レンダリング
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cQ3QVcr" target="_blank">Scrimba のレッスンを試す</a></div>
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cQ3QVcr" target="_blank" rel="noopener noreferrer">Scrimba のレッスンを試す</a></div>
 
 Vue.js のコアは、単純なテンプレート構文を使って宣言的にデータを DOM に描画することを可能にするシステムです:
 
@@ -110,7 +110,7 @@ var app2 = new Vue({
 
 ## 条件分岐とループ
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQe4SJ" target="_blank">Scrimba でレッスンを試す</a></div>
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQe4SJ" target="_blank" rel="noopener noreferrer">Scrimba でレッスンを試す</a></div>
 
 要素の有無を切り替えることも非常にシンプルにできます:
 
@@ -196,7 +196,7 @@ var app4 = new Vue({
 
 ## ユーザー入力の制御
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/czPNaUr" target="_blank">Scrimba のレッスンを試す</a></div>
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/czPNaUr" target="_blank" rel="noopener noreferrer">Scrimba のレッスンを試す</a></div>
 
 あなたのアプリケーション上でユーザーにインタラクションをとってもらうために、`v-on` ディレクティブを使ってイベントリスナを加え、Vue インスタンスのメソッドを呼び出すことができます:
 
@@ -274,7 +274,7 @@ var app6 = new Vue({
 
 ## コンポーネントによる構成
 
-<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQVkA3" target="_blank">Scrimba のレッスンを試す</a></div>
+<div class="scrimba"><a href="https://scrimba.com/p/pXKqta/cEQVkA3" target="_blank" rel="noopener noreferrer">Scrimba のレッスンを試す</a></div>
 
 コンポーネントシステムは Vue.js におけるもうひとつの重要な抽象概念です。「小さく、自己完結的で、（多くの場合）再利用可能なコンポーネント」を組み合わせることで、大規模アプリケーションを構築することが可能になります。アプリケーションのインターフェイスについて考えてみると、ほぼすべてのタイプのインターフェイスはコンポーネントツリーとして抽象化することができます:
 
