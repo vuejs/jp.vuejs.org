@@ -382,7 +382,7 @@ var app7 = new Vue({
 
 Vue のコンポーネントが [Web Components Spec](https://www.w3.org/wiki/WebComponents/) の一部の「カスタム要素 (Custom Element)」によく似ていることに気付いたかもしれません。これは Vue のコンポーネント構文は Web Components を手本にしているためです。例えば、Vue コンポーネントは [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) と `is` という特別な属性を実装しています。しかしながら、いくつか重要な違いがあります:
 
-1. Web Components の仕様はまだ草案の状態で、全てのブラウザにネイティブ実装されているわけではありません。一方、Vue コンポーネントはどんなポリフィル (polyfill) も必要とせず、サポートされる全てのブラウザ (IE9 とそれ以上) で同じ動作をします。必要に応じて、Vue コンポーネントはネイティブなカスタム要素内で抱合 (wrap) することができます。
+1. Web Components の仕様は確定しましたが、全てのブラウザにネイティブ実装されているわけではありません。Safari 10.1 以上、Chrome 54 以上、Firefox 63 以上が Web Components をネイティブでサポートしています。一方、Vue コンポーネントはどんなポリフィル (polyfill) も必要とせず、サポートされる全てのブラウザ (IE9 とそれ以上) で同じ動作をします。必要に応じて、Vue コンポーネントはネイティブなカスタム要素内で抱合 (wrap) することができます。
 
 2. Vue コンポーネントは、クロスコンポーネントデータフローをはじめ、カスタムイベント通信やビルドツールとの統合など、プレーンなカスタム要素内では利用できないいくつかの重要な機能を提供します。
 
