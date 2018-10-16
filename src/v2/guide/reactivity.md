@@ -1,6 +1,6 @@
 ---
 title: リアクティブの探求
-updated: 2018-08-07
+updated: 2018-10-16
 type: guide
 order: 601
 ---
@@ -120,10 +120,9 @@ Vue.component('example', {
 })
 ```
 
-`$nextTick()` は Promise を返却するため、新しい [ES7 async/await](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function) 構文を用いて、同じことができます:
+`$nextTick()` は Promise を返却するため、新しい [ES2016 async/await](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function) 構文を用いて、同じことができます:
 
-```
-...
+``` js
   methods: {
     async updateMessage: function () {
       this.message = 'updated'
@@ -132,5 +131,4 @@ Vue.component('example', {
       console.log(this.$el.textContent) // => 'updated'
     }
   }
-...
 ```
