@@ -1,31 +1,36 @@
 ---
-title: VS Code と Chrome によるデバッグ
+title: VS Code によるデバッグ
 type: cookbook
-updated: 2018-04-25
+updated: 2018-10-17
 order: 8
 ---
 
-すべてのアプリケーションは、小規模から大規模の障害を理解する必要があるところまできました。このレシピでは、テストのために Chrome を使っている VS Code ユーザーのためにいくつかのワークフローを説明します。
+すべてのアプリケーションは、小規模から大規模の障害を理解する必要があるところまできました。このレシピでは、ブラウザでアプリケーションのデバッグをしたいと考えている VS Code ユーザーのためにいくつかのワークフローを説明します。
 
-このレシピでは、[Vue CLI](https://github.com/vuejs/vue-cli) によって生成された Vue.js アプリケーションをデバックするために VS Code の拡張機能の [Debugger for Chrome](https://github.com/Microsoft/VSCode-chrome-debug) を使用する方法を示します。
+このレシピでは、ブラウザで実行している [Vue CLI](https://github.com/vuejs/vue-cli) アプリケーションをデバッグする方法を示します。
+
+<p class="tip">注意: このレシピは Chrome と Firefox を含みます。もしあなたが他のブラウザで VS Code のデバッグを設定する方法を知っている場合、あなたの知見を共有することを検討してください (ページの下部を参照してください)。</p>
 
 ## 前提条件
 
-Chrome と VS Code がインストールされている必要があります。VS Code にインストールされている [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) の最新版を入手してください。
+VS Code とあなたが選択したブラウザがインストールされていることと、ブラウザに対応するデバッガの拡張機能がインストールされ有効化されていることを確認してください:
 
-[vue-cli](https://github.com/vuejs/vue-cli) を使ってプロジェクトをインストールして作成します。インストールの手順はプロジェクトの readme に記載されています。新しく作成したアプリケーションディレクトリに移動し、VS Code を開いてください。
+* [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome)
+* [Debugger for Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug)
 
-### Chrome Devtools でソースコードを表示する
+[Vue CLI Guide](https://cli.vuejs.org/) 内の手順に従い、[vue-cli](https://github.com/vuejs/vue-cli) を使ってプロジェクトをインストールして作成します。新しく作成したアプリケーションディレクトリに移動し、VS Code を開いてください。
+
+### ブラウザでソースコードを表示する
 
 VS Code から Vue コンポーネントをデバックする前に、ソースマップを構築するために生成された Webpack のコンフィグを更新する必要があります。デバッガには圧縮ファイル内のコードを元のファイル内の位置にマップするための方法があります。これにより、Webpack によってアセットが最適化された後でもアプリケーションをデバックすることができます。
 
-`config/index.js` に行き、`devtool` プロパティを見つけてください。それを更新してください:
+Vue CLI 2 を使っている場合、`config/index.js` 内の `devtool` プロパティを設定もしくは更新してください:
 
 ```json
 devtool: 'source-map',
 ```
 
-Vue CLI 3 を利用している場合は `vue.config.js` 内にプロパティ `devtool` を定義する必要があります。
+Vue CLI 3 を使っている場合、`vue.config.js` 内の `devtool` プロパティを設定もしくは更新してください:
 
 ```js
 module.exports = {
@@ -37,7 +42,7 @@ module.exports = {
 
 ### VS Code からアプリケーションを起動する
 
-Activity Bar の Debugging アイコン をクリックして Debug ビューを表示し、歯車アイコンをクリックして launch.json ファイルを設定し、環境に **Chrome** を選択してください。生成された launch.json の内容を次の 2 つの構成に置き換えます:
+Activity Bar の Debugging アイコン をクリックして Debug ビューを表示し、歯車アイコンをクリックして launch.json ファイルを設定し、環境として **Chrome/Firefox: Launch** を選択してください。生成された launch.json の内容を対応する構成に置き換えます:
 
 ![Add Chrome Configuration](/images/config_add.png)
 
@@ -55,6 +60,14 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
       "sourceMapPathOverrides": {
         "webpack:///src/*": "${webRoot}/*"
       }
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "vuejs: firefox",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/src",
+      "pathMappings": [{ "url": "webpack:///src/", "path": "${webRoot}/" }]
     }
   ]
 }
@@ -72,9 +85,9 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
   npm start
   ```
 
-3. Debug ビューに移動し、**'vuejs: chrome'** 設定を選択し、F5 キーを押すか緑の再生ボタンをクリックしてください。
+3. Debug ビューに移動し、**'vuejs: chrome/firefox'** 設定を選択し、F5 キーを押すか緑の再生ボタンをクリックしてください。
 
-4. Chrome の新しいインスタンスが `http://localhost:8080` を開くと、ブレイクポイントがヒットするはずです。
+4. ブラウザの新しいインスタンスが `http://localhost:8080` を開くと、ブレイクポイントがヒットするはずです。
 
 
 
@@ -84,7 +97,7 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
 
 ### Vue Devtools
 
-他にもデバッグの方法がありますが、複雑さは異なります。最も人気がありシンプルなのは、優れた [vue-devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) を使用することです。devtools を使用する利点の 1 つは、データプロパティをライブ編集でき、変更がすぐに反映されることを確認できることです。もう 1 つの大きな利点は、Vuex のタイムトラベルデバッグを行うことができることです。
+他にもデバッグの方法がありますが、複雑さは異なります。最も人気がありシンプルなのは、[Chrome 向け](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) および [Firefox 向け](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/) の優れた Vue.js devtools を使用することです。devtools を使用する利点の 1 つは、データプロパティをライブ編集でき、変更がすぐに反映されることを確認できることです。もう 1 つの大きな利点は、Vuex のタイムトラベルデバッグを行うことができることです。
 
 ![Devtools Timetravel Debugger](/images/devtools-timetravel.gif)
 
