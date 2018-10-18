@@ -1,6 +1,6 @@
 ---
 title: 単体テスト
-updated: 2018-03-20
+updated: 2018-10-18
 type: guide
 order: 403
 ---
@@ -132,4 +132,4 @@ it('updates the rendered message when vm.message updates', done => {
 
 コンポーネントを特別な状態で描画し検証する(例えば、子コンポーネントを無視した浅い描画など)ような、テストをより簡単にするためのヘルパーセットの開発も検討しています。
 
-Vue の単体テストに関する詳細情報については、[vue-test-utils](https://vue-test-utils.vuejs.org/ja/) とクックブックエントリの [unit testing vue components](https://vuejs.org/v2/cookbook/unit-testing-vue-components.html) について確認してください。
+Vue の単体テストに関する詳細情報については、[vue-test-utils](https://vue-test-utils.vuejs.org/ja/) とクックブックエントリの [Vue コンポーネントの単体テスト](../cookbook/unit-testing-vue-components.html) について確認してください。
