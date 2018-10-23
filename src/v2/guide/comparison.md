@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2018-06-27
+updated: 2018-10-24
 type: guide
 order: 801
 ---
@@ -121,7 +121,7 @@ React Native によって同じ React コンポーネントモデルを使って
 
 今の段階では、Weex はまだ活発に開発が続いており、React Native ほど熟しておらず、実際に使われているわけではありませんが、その開発は世界で最も大きな e コマースの製品要件に基づいており、そして Vue のチームは Vue の開発者のための円滑な体験を保証するために Weex のチームと活発に協業するつもりです。
 
-Vue の開発者がもうすぐ利用できるもう 1 つの選択肢は、 [NativeScript](https://www.nativescript.org/) です。[コミュニティドリブンのプラグイン](https://github.com/rigor789/nativescript-vue)を介して使用することができます。
+もう 1 つの選択肢は、[NativeScript-Vue](https://nativescript-vue.org/) です。これは、Vue.js を用いて真のネイティブアプリケーションを構築するための [NativeScript](https://www.nativescript.org/) プラグインです。
 
 ### MobX と用いた場合
 
