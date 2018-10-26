@@ -7,7 +7,7 @@ order: 7
 
 ## `v-if`
 
-文字列テンプレートでは、例えば Handlebars の例は、このような条件ブロックを記述します:
+文字列テンプレートでは、例えば [Handlebars](https://handlebarsjs.com/) の例は、このような条件ブロックを記述します:
 
 ``` html
 <!-- Handlebars の例 -->
