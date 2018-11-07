@@ -59,7 +59,7 @@ order: 402
 
 `.vue` コンポーネントにより、高度な JavaScript アプリケーションの分野に入っていきます。これはあなたがまだ使ったことのない、いくつかの追加ツールの使い方を学ぶことを意味します。
 
-- **Node Package Manager (NPM)**: [Getting Started guide](https://docs.npmjs.com/getting-started/what-is-npm) のセクション _10: Uninstalling global packages_ を読んでください。
+- **Node Package Manager (NPM)**: [Getting Started guide](https://docs.npmjs.com/getting-started/what-is-npm) のセクション _10: Uninstalling global packages_ までを読んでください。
 
 - **Modern JavaScript with ES2015/16**: Babel の [Learn ES2015 guide](https://babeljs.io/docs/learn-es2015/) を読んでください。現状では全ての機能を暗記する必要はないですが、参考として戻れるようにしておいてください。
 
