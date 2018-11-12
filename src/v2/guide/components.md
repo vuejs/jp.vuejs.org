@@ -626,7 +626,7 @@ new Vue({
 
 - 文字列テンプレート(例: `template： '...'`)
 - [単一ファイル(`.vue`)コンポーネント](single-file-components.html)
-- [`<script type="text/x-template">`](components-edge-cases.html＃X-Templates)
+- [`<script type="text/x-template">`](components-edge-cases.html#X-テンプレート)
 
 これがDOM テンプレートパース時の警告について今のところ知っておくべきことです。そして、実際には Vue の <em>本質</em> の最後となります。おめでとうございます！まだまだ学ぶことはありますが、最初に Vue を自身で遊ぶために休憩をとり、何か面白いものを作ってみることをお勧めします。
 
