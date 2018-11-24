@@ -220,7 +220,7 @@ Vue は [`addEventListener` の `passive` オプション](https://developer.moz
 
 `.passive` 修飾子は特にモバイルでのパフォーマンスを改善するのに有用です。
 
-<p class="tip">`.passive` と `.prevent` を一緒に使わないでください。`.prevent` は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げ_ない_ことをブラウザに伝達することを思い出してください。</p>
+<p class="tip">`.passive` と `.prevent` を一緒に使わないでください。`.prevent` は無視され、ブラウザにはおそらく警告が表示されます。`.passive` はイベントのデフォルトの挙動を妨げないことをブラウザに伝達することを思い出してください。</p>
 
 ## キー修飾子
 
