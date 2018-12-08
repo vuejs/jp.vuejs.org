@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2018-10-15
+updated: 2018-12-08
 type: guide
 order: 2
 ---
@@ -319,7 +319,11 @@ Vue.component('todo-item', {
       これにより内容は動的に変化します。
       また後述する "key" を各コンポーネントに提供する必要があります。
     -->
-    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    <todo-item
+      v-for="item in groceryList"
+      v-bind:todo="item"
+      v-bind:key="item.id"
+    ></todo-item>
   </ol>
 </div>
 ```
