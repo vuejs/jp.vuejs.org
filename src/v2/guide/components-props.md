@@ -1,5 +1,6 @@
 ---
 title: プロパティ
+updated: 2018-12-08
 type: guide
 order: 102
 ---
@@ -62,7 +63,9 @@ props: {
 <blog-post v-bind:title="post.title"></blog-post>
 
 <!-- 複数の変数を合成した値を動的に割り当てます -->
-<blog-post v-bind:title="post.title + ' by ' + post.author.name"></blog-post>
+<blog-post
+  v-bind:title="post.title + ' by ' + post.author.name"
+></blog-post>
 ```
 
 上の 2 つの例では、文字列の値を渡していますが、プロパティには __任意の__ 型の値を渡すことが可能です。
@@ -108,7 +111,12 @@ props: {
 ```html
 <!-- オブジェクトが静的な値であっても、 Vue へとそれを伝えるには v-bind が必要です。 -->
 <!-- これもまた、文字列ではなく JavaScript の式となります。                      -->
-<blog-post v-bind:author="{ name: 'Veronica', company: 'Veridian Dynamics' }"></blog-post>
+<blog-post
+  v-bind:author="{
+    name: 'Veronica',
+    company: 'Veridian Dynamics'
+  }"
+></blog-post>
 
 <!-- 変数の値を動的に割り当てています。 -->
 <blog-post v-bind:author="post.author"></blog-post>
