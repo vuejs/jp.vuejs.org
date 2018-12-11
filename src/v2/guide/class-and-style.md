@@ -1,6 +1,6 @@
 ---
 title: クラスとスタイルのバインディング
-updated: 2018-07-28
+updated: 2018-12-08
 type: guide
 order: 6
 ---
@@ -22,9 +22,10 @@ order: 6
 オブジェクトにさらにフィールドを持たせることで複数のクラスを切り替えることができます。加えて、`v-bind:class` ディレクティブはプレーンな `class` 属性と共存できます。つまり、次のようなテンプレートと:
 
 ``` html
-<div class="static"
-     v-bind:class="{ active: isActive, 'text-danger': hasError }">
-</div>
+<div
+  class="static"
+  v-bind:class="{ active: isActive, 'text-danger': hasError }"
+></div>
 ```
 
 次のようなデータがあったとすると:
