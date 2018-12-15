@@ -236,7 +236,7 @@ Vue.component(
 ```
 
 
-[ローカル登録](components.html#Local-Registration) を使っている場合、`Promise` を返す関数を直接与えることもできます:
+[ローカル登録](components-registration.html#ローカル登録) を使っている場合、`Promise` を返す関数を直接与えることもできます:
 
 ``` js
 new Vue({
