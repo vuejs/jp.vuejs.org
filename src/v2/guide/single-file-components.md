@@ -1,6 +1,6 @@
 ---
 title: 単一ファイルコンポーネント
-updated: 2018-11-7
+updated: 2018-12-20
 type: guide
 order: 402
 ---
@@ -63,7 +63,7 @@ order: 402
 
 - **Modern JavaScript with ES2015/16**: Babel の [Learn ES2015 guide](https://babeljs.io/docs/learn-es2015/) を読んでください。現状では全ての機能を暗記する必要はないですが、参考として戻れるようにしておいてください。
 
-これらのリソースに没頭した後は、 [webpack](https://github.com/vuejs-templates/webpack) テンプレートを確認することをお勧めします。手順に沿って学習することで、あっという間に ES2015 とホットリローディングで動作した `.vue` コンポーネントの Vue プロジェクトを持っているはずです！
+これらのリソースに没頭した後は、 [Vue CLI 3](https://cli.vuejs.org/) を確認することをお勧めします。手順に沿って学習することで、あっという間に `.vue` コンポーネントと ES2015、Webpack、ホットリローディングをそなえた Vue プロジェクトを手に入れられるはずです！
 
 Webpack 自体の詳細については、[公式ドキュメント](https://webpack.js.org/configuration/)や [Webpack Academy](https://webpack.academy/p/the-core-concepts) を参照してください。Webpack では、各ファイルはバンドルに含まれる前に"ローダ (loader)" によって変換され、Vue は単一ファイル(`.vue`)コンポーネントを変換するための [vue-loader](https://vue-loader.vuejs.org) プラグインを提供します。
 
