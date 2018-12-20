@@ -648,8 +648,12 @@ updated: 2018-10-16
         immediate: true
       },
       e: [
-        function handle1 (val, oldVal) { /* ... */ },
-        function handle2 (val, oldVal) { /* ... */ }
+        'handle1',
+        function handle2 (val, oldVal) { /* ... */ },
+        {
+          handler: function handle3 (val, oldVal) { /* ... */ },
+          /* ... */
+        }
       ],
       // vm.e.f の値を監視する: {g: 5}
       'e.f': function (val, oldVal) { /* ... */ }
