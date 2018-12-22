@@ -1,8 +1,8 @@
 ---
 title: 単一ファイルコンポーネント
-updated: 2018-12-20
+updated: 2018-12-22
 type: guide
-order: 402
+order: 401
 ---
 
 ## 前書き
@@ -65,8 +65,8 @@ order: 402
 
 これらのリソースに没頭した後は、 [Vue CLI 3](https://cli.vuejs.org/) を確認することをお勧めします。手順に沿って学習することで、あっという間に `.vue` コンポーネントと ES2015、Webpack、ホットリローディングをそなえた Vue プロジェクトを手に入れられるはずです！
 
-Webpack 自体の詳細については、[公式ドキュメント](https://webpack.js.org/configuration/)や [Webpack Academy](https://webpack.academy/p/the-core-concepts) を参照してください。Webpack では、各ファイルはバンドルに含まれる前に"ローダ (loader)" によって変換され、Vue は単一ファイル(`.vue`)コンポーネントを変換するための [vue-loader](https://vue-loader.vuejs.org) プラグインを提供します。
-
 ### 上級者ユーザー向け
 
-あなたが Webpack か Browserify のどちらが好みでも、私達はシンプルなものと、複雑なプロジェクトのテンプレート両方を用意しました。[github.com/vuejs-templates](https://github.com/vuejs-templates) を閲覧し、あなたに合ったテンプレートを選んでください。そうしたら、[vue-cli](https://github.com/vuejs/vue-cli) で新しいプロジェクトを生成するために README 内の手順に沿ってください。
+CLI はツール設定の大部分の面倒を見てくれますが、 [設定オプション](https://cli.vuejs.org/config/) を通してきめ細かなカスタマイズをすることも許しています。
+
+あなたが独自のビルドセットアップをゼロから作ることを好む場合、webpack と [vue-loader](https://vue-loader.vuejs.org) を手動で設定する必要があるでしょう。webpack 自体についてさらに学ぶには、[公式ドキュメント](https://webpack.js.org/configuration/)や [Webpack Academy](https://webpack.academy/p/the-core-concepts) を参照してください。
