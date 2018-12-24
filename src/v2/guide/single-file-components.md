@@ -67,6 +67,6 @@ order: 401
 
 ### 上級者ユーザー向け
 
-CLI はツール設定の大部分の面倒を見てくれますが、 [設定オプション](https://cli.vuejs.org/config/) を通してきめ細かなカスタマイズをすることも許しています。
+CLI はツール設定の大部分の面倒を見てくれますが、 [設定オプション](https://cli.vuejs.org/config/) を通してきめ細かなカスタマイズをすることもできます。
 
 あなたが独自のビルドセットアップをゼロから作ることを好む場合、webpack と [vue-loader](https://vue-loader.vuejs.org) を手動で設定する必要があるでしょう。webpack 自体についてさらに学ぶには、[公式ドキュメント](https://webpack.js.org/configuration/)や [Webpack Academy](https://webpack.academy/p/the-core-concepts) を参照してください。
