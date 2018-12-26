@@ -1,13 +1,11 @@
 ---
 title: 単体テスト
-updated: 2018-12-22
+updated: 2018-12-26
 type: guide
 order: 402
 ---
 
-## テストツールとセットアップ
-
-> [Vue CLI](https://cli.vuejs.org/) には、[Jest](https://github.com/facebook/jest) または [Mocha](https://mochajs.org/) を使って難しい設定なしにユニットテストするための組み込みのオプションがあります。カスタムセットアップのためのより詳細なガイダンスとなる公式の [vue-test-utils](https://vue-test-utils.vuejs.org/ja/) もあります。
+> [Vue CLI](https://cli.vuejs.org/) には、[Jest](https://github.com/facebook/jest) または [Mocha](https://mochajs.org/) を使って難しい設定なしにユニットテストするための組み込みのオプションがあります。カスタムセットアップのためのより詳細なガイダンスとなる公式の [Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) もあります。
 
 ## 単純なテスト
 
