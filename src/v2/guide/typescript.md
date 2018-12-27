@@ -1,11 +1,11 @@
 ---
 title: TypeScript のサポート
-updated: 2018-03-11
+updated: 2018-12-22
 type: guide
-order: 404
+order: 403
 ---
 
-> Vue 2.5.0 以降で、デフォルトのオブジェクトベースの API を使用するため型宣言が大幅に改善されました。同時に、アップグレード操作を必須とするいくつかの変更が導入されています。より詳細は[このブログ記事](https://medium.com/the-vue-point/upcoming-typescript-changes-in-vue-2-5-e9bd7e2ecf08)を読んで下さい。
+> [Vue CLI](https://cli.vuejs.org) は、TypeScript ツールのサポートを組み込みで提供します。次期メジャーバージョンの Vue (3.x) では、クラスベースのコンポーネント API をもつ TypeScript サポートと TSX サポートの大幅な改善も予定しています。
 
 ## NPM パッケージ内の公式型宣言
 

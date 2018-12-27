@@ -1,13 +1,11 @@
 ---
 title: 単体テスト
-updated: 2018-10-18
+updated: 2018-12-26
 type: guide
-order: 403
+order: 402
 ---
 
-## テストツールとセットアップ
-
-テストツールは、モジュールベースのビルドシステムで動作するものならどのようなものでも問題ありませんが、テストツールを探している場合、[Karma](http://karma-runner.github.io)を試してみましょう。 Karma には多くのコミュニティ製プラグインが存在し、[Webpack](https://github.com/webpack/karma-webpack)や[Browserify](https://github.com/Nikku/karma-browserify)へのサポートも充実しています。 Karma の設定例として、[Webpack](https://github.com/vuejs-templates/webpack/blob/master/template/test/unit/karma.conf.js) と [Browserify](https://github.com/vuejs-templates/browserify/blob/master/template/karma.conf.js) のサンプル設定が最初のスタートに役立ちますが、詳しいセットアップについては、各テストツールのドキュメントを確認して下さい。
+> [Vue CLI](https://cli.vuejs.org/) には、[Jest](https://github.com/facebook/jest) または [Mocha](https://mochajs.org/) を使って難しい設定なしにユニットテストするための組み込みのオプションがあります。カスタムセットアップのためのより詳細なガイダンスとなる公式の [Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) もあります。
 
 ## 単純なテスト
 
@@ -32,7 +30,7 @@ order: 403
 </script>
 ```
 
-コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトをインポートし、検証を実施します。
+コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトをインポートし、検証を実施します (ここでは、例として Jasmine/Jest スタイルの `expect` アサーションを使用しています):
 
 ``` js
 // Vue と テスト対象のコンポーネントをインポートする
@@ -129,7 +127,5 @@ it('updates the rendered message when vm.message updates', done => {
   })
 })
 ```
-
-コンポーネントを特別な状態で描画し検証する(例えば、子コンポーネントを無視した浅い描画など)ような、テストをより簡単にするためのヘルパーセットの開発も検討しています。
 
 Vue の単体テストに関する詳細情報については、[Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) とクックブックエントリの [Vue コンポーネントの単体テスト](../cookbook/unit-testing-vue-components.html) について確認してください。
