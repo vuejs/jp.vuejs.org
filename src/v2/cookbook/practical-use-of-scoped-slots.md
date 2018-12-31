@@ -483,7 +483,7 @@ export default {
 
 ## When To Avoid This Pattern
 
-このような非常に複雑な解決法は魅力的に思われかもしれませんが、ある一定のレベルまでその複雑さが進んでしまうと、その抽象性が、この機能を構成する他のコードの部分よりもかなり高くなってしまい、浮いた存在になってしまうでしょう。その段階まできたのであれば、add-on に抽出することを検討する段階でしょう。(訳注: add-on はおそらく、plugin や mixin などのことです)
+このような非常に複雑な解決法は魅力的に思われるかもしれませんが、ある一定のレベルまでその複雑さが進んでしまうと、その抽象性が、この機能を構成する他のコードの部分よりもかなり高くなってしまい、浮いた存在になってしまうでしょう。そこまできた場合は、add-on に抽出することを検討する段階でしょう。(訳注: add-on はおそらく、plugin や mixin などのことです)
 
 > It might be tempting to create a very complex solution based on the example, but at some point we can get to the situation where this abstraction becomes an independent part of the code living in our codebase. If we get to that point it might be worth considering extraction to an add-on.
 
