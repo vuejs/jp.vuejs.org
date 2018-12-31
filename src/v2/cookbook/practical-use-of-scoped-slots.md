@@ -250,7 +250,7 @@ export default {
 
 > Expose `google` and `map` properties to the parent component by adding a scoped slot.
 
-最後に scoped slot を追加して、望む仕事をしてもらうことにしましょう。これによって、親コンポーネントの中から、子コンポーネントのプロパティにアクセすることができるようになります。子コンポーネントの中に `<slot>` タグを追加し、さらに `v-bind` もしくは `:propName` を使って、親コンポーネントへと露出させたい値をプロパティとして渡します。これは通常の props の役割である、子コンポーネントへと値を伝える機能とは異なっています。`<slot>` タグの中で props を渡すことで、(訳注: 親から子へという通常の) 流れとは反対の方向に、データを流すことができます。
+最後に scoped slot を追加して、望む仕事をしてもらうことにしましょう。これによって、親コンポーネントの中から、子コンポーネントのプロパティにアクセすることができるようになります。子コンポーネントの中に `<slot>` タグを追加し、さらに `v-bind` もしくは `:propName` を使って、親コンポーネントへと露出させたい値をプロパティとして渡します。これは通常の props の役割の、子コンポーネントへと値を伝える機能とは異なっています。`<slot>` タグの中で props を渡すことで、(訳注: 親から子へという通常の) 流れとは反対の方向に、データを流すことができます。
 
 > Finally, we can add a scoped slot that will do the job and allow us to access the child component props in the parent component. We do that by adding the `<slot>` tag in the child component and passing the props that we want to expose (using `v-bind` directive or `:propName` shorthand). It does not differ from passing the props down to the child component, but doing it in the `<slot>` tag will reverse the direction of data flow.
 
@@ -483,7 +483,7 @@ export default {
 
 ## When To Avoid This Pattern
 
-このような非常に複雑な解決法は魅力的に思われかもしれませんが、ある一定のレベルまでその複雑さが進んでしまうと、その抽象性が、この機能を構成する他のコードの部分よりもかなり高くなってしまい、浮いた存在になってしまうでしょう。その段階まできたのであれば、add-on に抽出することを検討する段階でしょう。(訳注: add-on はおそらく、plugin や mixin などのことです)
+このような非常に複雑な解決法は魅力的に思われるかもしれませんが、ある一定のレベルまでその複雑さが進んでしまうと、その抽象性が、この機能を構成する他のコードの部分よりもかなり高くなってしまい、浮いた存在になってしまうでしょう。その段階にまできた場合には、add-on に抽出することを検討する段階でしょう。(訳注: add-on はおそらく、plugin や mixin などのことです)
 
 > It might be tempting to create a very complex solution based on the example, but at some point we can get to the situation where this abstraction becomes an independent part of the code living in our codebase. If we get to that point it might be worth considering extraction to an add-on.
 
@@ -494,6 +494,6 @@ export default {
 
 > That's it. With all those bits and pieces created we can now re-use the `GoogleMapLoader` component as a base for all our maps by passing different templates to each one of them. Imagine that you need to create another map with different Markers or just Markers without Polylines. By using the above pattern it becomes very easy as we just need to pass different content to the `GoogleMapLoader` component.
 
-このパターンは Google Map の場合にしか使えないわけではありません。どんなライブラリであれ、ベースとなるコンポーネントをセットして、(ベースコンポーネントを呼び出したコンポーネントが実行する) API を露出させればいいのです。
+このパターンは Google Map の場合にしか使えないわけではありません。どんなライブラリの場合にも、ベースとなるコンポーネントをセットして、(ベースコンポーネントを呼び出したコンポーネントが実行する) API を露出させればいいのです。
 
 > This pattern is not strictly connected to Google Maps; it can be used with any library to set the base component and expose the library's API that might be then used in the component that summoned the base component.
