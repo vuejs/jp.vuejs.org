@@ -1472,7 +1472,7 @@ Vue.component('my-special-transition', {
 })
 ```
 
-そして、関数型コンポーネントは、このタスクにとてもよく適しています:
+そして、[関数型コンポーネント](render-function.html#関数型コンポーネント)は、このタスクにとてもよく適しています:
 
 ``` js
 Vue.component('my-special-transition', {
