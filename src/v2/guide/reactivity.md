@@ -7,6 +7,8 @@ order: 601
 
 さらに深く見ていきましょう！Vue の最大の特徴の1つは、控えめなリアクティブシステムです。モデルは単なるプレーンな JavaScript オブジェクトです。それらを変更するとビューが更新されます。これは状態管理を非常にシンプルかつ直感的にしますが、よくある問題を避けるためにその仕組みを理解することも重要です。このセクションでは、Vue のリアクティブシステムの低レベルの詳細の一部について掘り下げていきます。
 
+<div class="vue-mastery"><a href="https://www.vuemastery.com/courses/advanced-components/build-a-reactivity-system" target="_blank" rel="noopener" title="Vue Reactivity">Vue Masteryでビデオの説明を見る</a></div>
+
 ## 変更の追跡方法
 
 プレーンな JavaScript オブジェクトを `data` オプションとして Vue インスタンスに渡すとき、Vue はその全てのプロパティを渡り歩いて、それらを [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) を使用して getter/setter に変換します。これは ES5 だけの、シム (shim) ができない機能で、Vue が IE8 以下をサポートしないのはこのためです。
