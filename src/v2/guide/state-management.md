@@ -9,6 +9,8 @@ order: 502
 
 大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は Elm から触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供します。[vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
 
+<div class="vue-mastery"><a href="https://www.vuemastery.com/courses/mastering-vuex/intro-to-vuex/" target="_blank" rel="noopener" title="Vuex Tutorial">Vue Masteryで動画の説明を見る</a></div>
+
 ### React 開発者への情報
 
 もしあなたが React のエコシステムから来たのなら、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどう比較されるか気になっていることでしょう。Redux は実際に view レイヤの知識を持たないので、[シンプルなバインディング](https://yarnpkg.com/en/packages?q=redux%20vue&p=1) を通して簡単に Vue とあわせて利用することができます。Vuex は、 自らが Vue のアプリケーション内にいることを**知っている**、という点で異なります。これにより Vue といっそう良く連携することができ、より直感的な API を提供したり、開発体験を向上させることができます。
