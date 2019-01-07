@@ -1,6 +1,6 @@
 ---
 title: フォーム入力バインディング
-updated: 2018-06-06
+updated: 2019-01-07
 type: guide
 order: 10
 ---
@@ -375,7 +375,7 @@ vm.selected.number // => 123
 
 ### `.trim`
 
-ユーザの入力を自動的にトリムしたいとき、 `v-model` に管理された入力に `trim` 修飾子を追加することができます:
+ユーザの入力から空白を自動的に取り除きたいときは、 `v-model` に管理された入力に `trim` 修飾子を追加することができます:
 
 ```html
 <input v-model.trim="msg">
