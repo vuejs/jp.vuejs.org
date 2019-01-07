@@ -138,7 +138,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 
 デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば、 `<submit-button>` コンポーネントはデフォルトでは「Submit」という文言にしたいですが、ユーザが「Save」や「Upload」など他の文言に上書き出来るようにもしたいです。
 
-これを実現するためには、`slot` タグの中にデフォルトコンテンツを記述してください。
+これを実現するためには、コンポーネントのテンプレートの `slot` タグの中にデフォルトコンテンツを記述してください。
 
 ```html
 <button type="submit">
