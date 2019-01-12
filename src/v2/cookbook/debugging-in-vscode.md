@@ -105,7 +105,7 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
 
 ### Vuetron
 
-[Vuetron](http://vuetron.io/) は、vue-devtools が行った作業のいくつかを拡張した素晴らしいプロジェクトです。通常の devtools ワークフローに加えて、次のことが可能です:
+[Vuetron](https://github.com/vuetwo/vuetron) は、vue-devtools が行った作業のいくつかを拡張した素晴らしいプロジェクトです。通常の devtools ワークフローに加えて、次のことが可能です:
 
 * API リクエスト/レスポンスをすばやく表示: リクエストにフェッチ API を使用している場合、送信されたリクエストに対してこのイベントが表示されます。拡張カードには、要求データも応答データも表示されます。
 * より素早いデバッグのためにアプリケーションの状態の特定部分を購読します。
