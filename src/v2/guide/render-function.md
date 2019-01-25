@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2018-12-15
+updated: 2019-01-20
 type: guide
 order: 303
 ---
@@ -477,7 +477,7 @@ createElement(
 </anchored-heading>
 ```
 
-そのような理由から Vue で JSX を使うための [Babel プラグイン](https://github.com/vuejs/babel-plugin-transform-vue-jsx) があります。よりテンプレートに近い文法が戻ってきました。
+そのような理由から Vue で JSX を使うための [Babel プラグイン](https://github.com/vuejs/jsx) があります。よりテンプレートに近い文法が戻ってきました。
 
 ``` js
 import AnchoredHeading from './AnchoredHeading.vue'
@@ -496,7 +496,7 @@ new Vue({
 
 <p class="tip">`createElement` を `h` にエイリアスしていることは、 Vue のエコシステムの中でよく見かける慣習です。そして、それは実は JSX には必須です。もし `h` がそのスコープ内で利用可能でない場合、アプリケーションはエラーを throw するでしょう。</p>
 
-より詳しい JSX の JavaScript へのマップの仕方については、[usage ドキュメント](https://github.com/vuejs/babel-plugin-transform-vue-jsx#usage) をご参照ください。
+より詳しい JSX の JavaScript へのマップの仕方については、[usage ドキュメント](https://github.com/vuejs/jsx#installation) をご参照ください。
 
 ## 関数型コンポーネント
 

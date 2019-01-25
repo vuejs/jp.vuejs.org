@@ -1,7 +1,7 @@
 ---
 title: Vue コンポーネントの単体テスト
 type: cookbook
-updated: 2018-10-05
+updated: 2019-01-20
 order: 6
 ---
 
@@ -46,8 +46,9 @@ export default {
 
 ```js
 import { shallowMount } from '@vue/test-utils'
+import Hello from './Hello.vue'
 
-test('Foo', () => {
+test('Hello', () => {
   // コンポーネントを描画します
   const wrapper = shallowMount(Hello)
 
@@ -145,6 +146,7 @@ export default {
 
 ```js
 import { shallowMount } from '@vue/test-utils'
+import Foo from './Foo.vue'
 
 describe('Foo', () => {
   it('メッセージを描画し、ユーザー入力に正しく応答します', () => {
