@@ -16,7 +16,7 @@ order: 12
 {% endraw %}
  
 
-> [ライブデモ](https://vue-hn.now.sh/)
+> [ライブデモ](https://vue-hn.herokuapp.com/)
 > 注意: 一定期間誰もアクセスしていなかった場合、デモはスピンアップ時間を要するかもしれません。
 >
 > [[ソース](https://github.com/vuejs/vue-hackernews-2.0)]
