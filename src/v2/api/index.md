@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2018-12-26
+updated: 2019-01-29
 ---
 
 ## グローバル設定
@@ -1488,9 +1488,9 @@ updated: 2018-12-26
   // 関数
   vm.$watch(
     function () {
-      // everytime the expression `this.a + this.b` yields a different result,
-      // the handler will be called. It's as if we were watching a computed
-      // property without defining the computed property itself
+      // 式 `this.a + this.b` が異なる結果を返すたびに、ハンドラが呼び出されます。
+      // これは、算出プロパティを定義することなしに、その算出プロパティを監視している
+      // ようなものです。
       return this.a + this.b
     },
     function (newVal, oldVal) {
