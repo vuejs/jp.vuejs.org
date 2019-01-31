@@ -164,7 +164,7 @@ order: 803
 
   <div class="team">
     <h2 id="core-team-emeriti">
-      コアチーム名誉教授
+      コアチーム表彰
     </h2>
 
     <p>
