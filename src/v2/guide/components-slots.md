@@ -1,7 +1,7 @@
 ---
 title: スロット
 type: guide
-updated: 2018-04-26
+updated: 2019-01-30
 order: 104
 ---
 
@@ -134,7 +134,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </div>
 ```
 
-## デフォルトのスロットコンテンツ
+## スロットのデフォルトコンテンツ
 
 デフォルトのコンテンツを持ったスロットがあると便利な場合もあります。例えば、 `<submit-button>` コンポーネントはデフォルトでは「Submit」という文言にしたいですが、ユーザが「Save」や「Upload」など他の文言に上書き出来るようにもしたいです。
 
