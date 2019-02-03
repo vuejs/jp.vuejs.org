@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2019-01-20
+updated: 2019-02-03
 type: guide
 order: 303
 ---
@@ -494,7 +494,7 @@ new Vue({
 })
 ```
 
-<p class="tip">`createElement` を `h` にエイリアスしていることは、 Vue のエコシステムの中でよく見かける慣習です。そして、それは実は JSX には必須です。もし `h` がそのスコープ内で利用可能でない場合、アプリケーションはエラーを throw するでしょう。</p>
+<p class="tip">`createElement` を `h` にエイリアスしていることは、 Vue のエコシステムの中でよく見かける慣習です。そして、それは実は JSX には必須です。Vue の Babel プラグインの [バージョン 3.4.0](https://github.com/vuejs/babel-plugin-transform-vue-jsx#h-auto-injection) 以降では、ES2015 のシンタックスで宣言された JSX を含むメソッドや getter（関数やアロー関数は対象外）に対しては、自動的に `const h = this.$createElement` が注入されるため、`(h)` パラメーターは省略できます。それ以前のバージョンでは、もし `h` がそのスコープ内で利用可能でない場合、アプリケーションはエラーを throw するでしょう。</p>
 
 より詳しい JSX の JavaScript へのマップの仕方については、[usage ドキュメント](https://github.com/vuejs/jsx#installation) をご参照ください。
 
