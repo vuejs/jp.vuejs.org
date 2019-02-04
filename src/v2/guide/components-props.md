@@ -1,6 +1,6 @@
 ---
 title: プロパティ
-updated: 2018-12-08
+updated: 2019-02-04
 type: guide
 order: 102
 ---
@@ -314,7 +314,7 @@ Vue.component('my-component', {
 
 ```js
 {
-  class: 'username-input',
+  required: true,
   placeholder: 'Enter your username'
 }
 ```
@@ -338,12 +338,14 @@ Vue.component('base-input', {
 })
 ```
 
+<p class="tip">`inheritAttrs: false` オプションは、`style` および `class` 属性のバインディングには影響 **しない** ことに注意してください。</p>
+
 このパターンを使用すると、ルート上にある要素を気にすることなく、生の HTML 要素のように基底コンポーネントを利用できます。
 
 ```html
 <base-input
   v-model="username"
-  class="username-input"
+  required
   placeholder="Enter your username"
 ></base-input>
 ```
