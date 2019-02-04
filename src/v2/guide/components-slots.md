@@ -1,7 +1,7 @@
 ---
 title: スロット
 type: guide
-updated: 2019-01-30
+updated: 2019-02-04
 order: 104
 ---
 
@@ -214,7 +214,7 @@ Vue は現在の [Web Components spec draft](https://github.com/w3c/webcomponent
 </todo-list>
 ```
 
-> 2.5.0 以降では、`slot-scope` はもはや `<template>` に限定されず、どの要素やコンポーネントでも使用できます。
+> 2.5.0 より前では、`slot-scope` は `scope` という名前で、`<template>` 要素に制限されていました。2.5.0 以降では、`slot-scope` にこの制限がなくなり、どの要素やコンポーネントでも使用できます。
 
 ### `slot-scope` の分割代入
 
