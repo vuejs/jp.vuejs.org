@@ -227,13 +227,17 @@ Vue は [`addEventListener` の `passive` オプション](https://developer.moz
 キーボードイベントを購読するにあたって、特定のキーのチェックが必要になることがあります。Vue では、`v-on` に対してキー修飾子を追加することができます:
 
 ``` html
-<!-- `key` が PageDown のときだけ、`vm.submit()` が呼ばれます  -->
-<input @keyup.page-down="onPageDown">
+<!-- `key` が `Enter` のときだけ、`vm.submit()` が呼ばれます  -->
+<input v-on:keyup.enter="submit">
+```
+
+[`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) で公開されている任意のキー名は、ケバブケースに変換することで修飾子として直接使用できます。
+
+``` html
+<input v-on:keyup.page-down="onPageDown">
 ```
 
 上の例では、ハンドラは `$event.key` が `'PageDown'` に等しい場合だけ呼ばれます。
-
-[`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) で公開されている任意のキー名は、ケバブケースに変換することで修飾子として直接使用できます。
 
 ### キーコード
 
