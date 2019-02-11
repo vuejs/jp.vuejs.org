@@ -1,6 +1,6 @@
 ---
 title: ミックスイン
-updated: 2018-01-30
+updated: 2019-02-06
 type: guide
 order: 301
 ---
@@ -8,6 +8,8 @@ order: 301
 ## 基本
 
 ミックスイン (mixin) は、Vue コンポーネントに再利用可能で柔軟性のある機能を持たせるための方法です。ミックスインオブジェクトは任意のコンポーネントオプションを含むことができます。コンポーネントがミックスインを使用するとき、ミックスインの全てのオプションはコンポーネント自身のオプションに"混ぜられ"ます。
+
+<div class="vue-mastery"><a href="https://www.vuemastery.com/courses/next-level-vue/mixins" target="_blank" rel="noopener" title="Mixins Tutorial">Vue Masteryで動画の説明を見る</a></div>
 
 例:
 
