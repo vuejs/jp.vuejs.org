@@ -1,6 +1,6 @@
 ---
 title: 描画関数とJSX
-updated: 2019-02-03
+updated: 2019-02-11
 type: guide
 order: 303
 ---
@@ -533,6 +533,7 @@ Vue.component('my-component', {
 - `props`: 提供されるプロパティのオブジェクト
 - `children`: 子 VNode の配列
 - `slots`: slots オブジェクトを返す関数
+- `scopedSlots`: (2.6.0+) An object that exposes passed-in scoped slots. Also exposes normal slots as functions.
 - `data`: `createElement` の第 2 引数としてコンポーネントに渡される全体の[データオブジェクト](#データオブジェクト詳解)
 - `parent`: 親コンポーネントへの参照
 - `listeners`: (2.3.0 以降) 親に登録されたイベントリスナーを含むオブジェクト。これは単純に `data.on` のエイリアスです

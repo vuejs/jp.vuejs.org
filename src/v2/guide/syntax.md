@@ -1,6 +1,6 @@
 ---
 title: テンプレート構文
-updated: 2018-02-14
+updated: 2019-02-11
 type: guide
 order: 4
 ---
@@ -47,9 +47,9 @@ mustache タグは、対応するオブジェクトの `msg` プロパティの�
 new Vue({
   el: '#example1',
   data: function () {
-  	return {
-  	  rawHtml: '<span style="color: red">This should be red.</span>'
-  	}
+    return {
+      rawHtml: '<span style="color: red">This should be red.</span>'
+    }
   }
 })
 </script>
@@ -129,6 +129,43 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 ここでの引数は受け取りたいイベント名です。ここからイベントハンドリングの詳細について説明します。
 
+### Dynamic Arguments
+
+> New in 2.6.0+
+
+Starting in version 2.6.0, it is also possible to use a JavaScript expression in a directive argument by wrapping it with square brackets:
+
+``` html
+<a v-bind:[attributeName]="url"> ... </a>
+```
+
+Here `attributeName` will be dynamically evaluated as a JavaScript expression, and its evaluated value will be used as the final value for the argument. For example, if your Vue instance has a data property, `attributeName`, whose value is `"href"`, then this binding will be equivalent to `v-bind:href`.
+
+Similarly, you can use dynamic arguments to bind a handler to a dynamic event name:
+
+``` html
+<a v-on:[eventName]="doSomething"> ... </a>
+```
+
+Similarly, when `eventName`'s value is `"focus"`, for example, `v-on:[eventName]` will be equivalent to `v-on:focus`.
+
+#### Dynamic Argument Value Constraints
+
+Dynamic arguments are expected to evaluate to a string, with the exception of `null`. The special value `null` can be used to explicitly remove the binding. Any other non-string value will trigger a warning.
+
+#### Dynamic Argument Expression Constraints
+
+<p class="tip">Dynamic argument expressions have some syntax constraints because certain characters are invalid inside HTML attribute names, such as spaces and quotes.</p>
+
+For example, the following is invalid:
+
+``` html
+<!-- This will trigger a compiler warning. -->
+<a v-bind:['foo' + bar]="value"> ... </a>
+```
+
+The workaround is to either use expressions without spaces or quotes, or replace the complex expression with a computed property.
+
 ### 修飾子
 
 修飾子 (Modifier) は、ドットで表記された特別な接尾語で、ディレクティブが特別な方法で束縛されるべきということを示します。例えば、`.prevent` 修飾子は `v-on` ディレクティブに、イベントがトリガされた際 `event.preventDefault()` を呼ぶように伝えます:
@@ -141,7 +178,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 ## 省略記法
 
-`v-` 接頭辞は、テンプレート内の Vue 独自の属性を識別するための目印となっています。これは既存のマークアップに対して、 Vue.js を利用して動的な振る舞いを適用する場合に便利ですが、頻繁に利用されるディレクティブに対しては冗長に感じることがあるでしょう。同時に[シングルページアプリケーション](https://en.wikipedia.org/wiki/Single-page_application)を作成するにあたり、全てのテンプレートを Vue.js で管理しているとき、`v-` 接頭辞を付ける必要性は低いものになるでしょう。したがって、 Vue.js は 2 つの最もよく使われるディレクティブ `v-bind` と `v-on` に対して特別な省略記法を提供しています:
+`v-` 接頭辞は、テンプレート内の Vue 独自の属性を識別するための目印となっています。これは既存のマークアップに対して、 Vue.js を利用して動的な振る舞いを適用する場合に便利ですが、頻繁に利用されるディレクティブに対しては冗長に感じることがあるでしょう。同時に[シングルページアプリケーション](https://en.wikipedia.org/wiki/Single-page_application)を作成するにあたり、全てのテンプレートを Vue で管理しているとき、`v-` 接頭辞を付ける必要性は低いものになるでしょう。したがって、 Vue は 2 つの最もよく使われるディレクティブ `v-bind` と `v-on` に対して特別な省略記法を提供しています:
 
 ### `v-bind` 省略記法
 
@@ -151,6 +188,9 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 <!-- 省略記法 -->
 <a :href="url"> ... </a>
+
+<!-- shorthand with dynamic argument (2.6.0+) -->
+<a :[key]="url"> ... </a>
 ```
 
 ### `v-on` 省略記法
@@ -161,6 +201,9 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 <!-- 省略記法 -->
 <a @click="doSomething"> ... </a>
+
+<!-- shorthand with dynamic argument (2.6.0+) -->
+<a @[event]="doSomething"> ... </a>
 ```
 
-これらは普通の HTML とはちょっと違うように見えるかもしれません。ですが、 `:` や `@` は属性名に利用可能な文字です。すべての Vue.js のサポートしているブラウザで、正しくパースすることができます。加えて、最終的に描画されるマークアップにそれらは現れません。省略記法の構文の利用は完全に任意ですが、後でその使用方法について詳しく学んだ時に便利と感じることでしょう。
+これらは普通の HTML とはちょっと違うように見えるかもしれません。ですが、 `:` や `@` は属性名に利用可能な文字です。Vue のサポートしているすべてのブラウザで、正しくパースすることができます。加えて、最終的に描画されるマークアップにそれらは現れません。省略記法の構文の利用は完全に任意ですが、後でその使用方法について詳しく学んだ時に便利と感じることでしょう。
