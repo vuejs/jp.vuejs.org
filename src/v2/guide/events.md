@@ -1,6 +1,6 @@
 ---
 title: イベントハンドリング
-updated: 2018-03-05
+updated: 2019-02-06
 type: guide
 order: 9
 ---
@@ -224,24 +224,32 @@ Vue は [`addEventListener` の `passive` オプション](https://developer.moz
 
 ## キー修飾子
 
-キーボードイベントを購読するにあたって、時にはキーコードのチェックが共通で必要になります。Vue は、`v-on` に対してキー修飾子を追加することで、キーコードのチェックを可能にします:
+キーボードイベントを購読するにあたって、特定のキーのチェックが必要になることがあります。Vue では、`v-on` に対してキー修飾子を追加することができます:
 
 ``` html
-<!-- `keyCode` が13のときだけ、`vm.submit()` が呼ばれます  -->
+<!-- `key` が `Enter` のときだけ、`vm.submit()` が呼ばれます  -->
+<input v-on:keyup.enter="submit">
+```
+
+[`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) で公開されている任意のキー名は、ケバブケースに変換することで修飾子として直接使用できます。
+
+``` html
+<input v-on:keyup.page-down="onPageDown">
+```
+
+上の例では、ハンドラは `$event.key` が `'PageDown'` に等しい場合だけ呼ばれます。
+
+### キーコード
+
+<p class="tip">`keyCode` イベントの使用は [非推奨](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode)  で、新しいブラウザではサポートされない可能性があります。</p>
+
+`keyCode` 属性を使うこともできます:
+
+``` html
 <input v-on:keyup.13="submit">
 ```
 
-全てのキーコードを覚えることは大変なので、Vue は最も一般的に使用されるキーのエイリアスを提供します:
-
-``` html
-<!-- 上記と同じです -->
-<input v-on:keyup.enter="submit">
-
-<!-- 省略記法も同様に動作します -->
-<input @keyup.enter="submit">
-```
-
-キー修飾子のエイリアスの全てのリストを示します:
+レガシーブラウザのサポートが必要なときのために、Vue は最も一般的に使用されるキーコードのエイリアスを提供しています:
 
 - `.enter`
 - `.tab`
@@ -253,26 +261,14 @@ Vue は [`addEventListener` の `passive` オプション](https://developer.moz
 - `.left`
 - `.right`
 
+<p class="tip">いくつかのキー (`.esc`、そして全ての矢印キー) は IE9 で一貫性のない `key` 値を持っています。IE9 をサポートする必要がある場合は、これらの組み込みエイリアスを使うべきです。</p>
+
 グローバルな `config.keyCodes` オブジェクト経由で[カスタムキー修飾子のエイリアス](../api/#keyCodes)も定義できます:
 
 ``` js
 // `v-on:keyup.f1` を可能にします
 Vue.config.keyCodes.f1 = 112
 ```
-
-### 自動キー修飾子
-
->  2.5.0 で新規追加
-
-[`KeyboardEvent.key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)で公表されている任意の有効なキー名をケバブケースに変換することによって、修飾子として直接使用できます。
-
-``` html
-<input @keyup.page-down="onPageDown">
-```
-
-上記例では、ハンドラは `$event.key === 'PageDown'` の場合だけ呼ばれます。
-
-<p class="tip">いくつかのキー (`.esc`、そして全てのアローキー) は IE9 で一貫性のない `key` 値を持っています。IE9 をサポートする必要がある場合、組み込みのエイリアスが優先されます。</p>
 
 ## システム修飾子キー
 
