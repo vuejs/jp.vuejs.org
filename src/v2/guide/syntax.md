@@ -1,6 +1,6 @@
 ---
 title: テンプレート構文
-updated: 2019-02-11
+updated: 2019-02-13
 type: guide
 order: 4
 ---
@@ -129,42 +129,42 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 
 ここでの引数は受け取りたいイベント名です。ここからイベントハンドリングの詳細について説明します。
 
-### Dynamic Arguments
+### 動的引数
 
-> New in 2.6.0+
+> 2.6.0 から新規
 
-Starting in version 2.6.0, it is also possible to use a JavaScript expression in a directive argument by wrapping it with square brackets:
+バージョン 2.6.0 から、角括弧で囲むことで JavaScript 式をディレクティブの引数に使うこともできます:
 
 ``` html
 <a v-bind:[attributeName]="url"> ... </a>
 ```
 
-Here `attributeName` will be dynamically evaluated as a JavaScript expression, and its evaluated value will be used as the final value for the argument. For example, if your Vue instance has a data property, `attributeName`, whose value is `"href"`, then this binding will be equivalent to `v-bind:href`.
+ここで `attributeName` は JavaScript 式として動的に評価され、その評価結果が引数の最終的な値として使われます。例えば、Vue インスタンスが `"href"` という値の `attributeName` という data プロパティをもつ場合、このバインディングは `v-bind:href` と等しくなります。
 
-Similarly, you can use dynamic arguments to bind a handler to a dynamic event name:
+同様に、動的なイベント名にハンドラをバインドするために動的引数を使うこともできます:
 
 ``` html
 <a v-on:[eventName]="doSomething"> ... </a>
 ```
 
-Similarly, when `eventName`'s value is `"focus"`, for example, `v-on:[eventName]` will be equivalent to `v-on:focus`.
+ここでも、例えば `eventName` の値が `"focus"` だとすると、`v-on:[eventName]` は `v-on:focus` と等しくなります。
 
-#### Dynamic Argument Value Constraints
+#### 動的引数の値の制約
 
-Dynamic arguments are expected to evaluate to a string, with the exception of `null`. The special value `null` can be used to explicitly remove the binding. Any other non-string value will trigger a warning.
+動的引数は、`null` を除くと string に評価されることが想定されています。特殊値 `null` は、明示的にバインディングを削除するのに使われます。その他の string 以外の値は、警告を引き起こします。
 
-#### Dynamic Argument Expression Constraints
+#### 動的引数の式の制約
 
-<p class="tip">Dynamic argument expressions have some syntax constraints because certain characters are invalid inside HTML attribute names, such as spaces and quotes.</p>
+<p class="tip">動的引数の式には構文上の制約があります。というのも、スペースや引用符のような一部の文字は、HTML の属性名には不正な文字だからです。</p>
 
-For example, the following is invalid:
+例えば、以下は不正です:
 
 ``` html
-<!-- This will trigger a compiler warning. -->
+<!-- これはコンパイラ警告を引き起こします -->
 <a v-bind:['foo' + bar]="value"> ... </a>
 ```
 
-The workaround is to either use expressions without spaces or quotes, or replace the complex expression with a computed property.
+回避策は、スペースや引用符を含まない式を使うか、複雑な式を算出プロパティで置き換えるかです。
 
 ### 修飾子
 
@@ -189,7 +189,7 @@ The workaround is to either use expressions without spaces or quotes, or replace
 <!-- 省略記法 -->
 <a :href="url"> ... </a>
 
-<!-- shorthand with dynamic argument (2.6.0+) -->
+<!-- 動的引数の省略記法 (2.6.0 以降) -->
 <a :[key]="url"> ... </a>
 ```
 
@@ -202,7 +202,7 @@ The workaround is to either use expressions without spaces or quotes, or replace
 <!-- 省略記法 -->
 <a @click="doSomething"> ... </a>
 
-<!-- shorthand with dynamic argument (2.6.0+) -->
+<!-- 動的引数の省略記法 (2.6.0 以降) -->
 <a @[event]="doSomething"> ... </a>
 ```
 
