@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2019-02-11
+updated: 2019-02-14
 type: guide
 order: 1
 vue_version: 2.5.16
@@ -35,19 +35,19 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 ### CDN
 
-For prototyping or learning purposes, you can use the latest version with:
+プロトタイピングや学習を目的とする場合は、以下のようにして最新バージョンを使うことができます:
 
 ``` html
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 ```
 
-For production, we recommend linking to a specific version number and build to avoid unexpected breakage from newer versions:
+本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします:
 
 ``` html
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
 ```
 
-If you are using native ES Modules, there is also an ES Modules compatible build:
+もしもネイティブの ES Modules を使っているなら、ES Modules 互換のビルドもあります:
 
 ``` html
 <script type="module">
@@ -83,7 +83,7 @@ $ npm install vue
 
 [NPM パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
 
-| | UMD | CommonJS | ES Module (for bundlers) | ES Module (for browsers) |
+| | UMD | CommonJS | ES Module (バンドラ用) | ES Module (ブラウザ用) |
 | --- | --- | --- | --- | --- |
 | **完全** | vue.js | vue.common.js | vue.esm.js | vue.esm.browser.js |
 | **ランタイム限定** | vue.runtime.js | vue.runtime.common.js | vue.runtime.esm.js | - |
@@ -102,11 +102,11 @@ $ npm install vue
 
 - **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図しています。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
-- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: starting in 2.6 Vue provides two ES Modules (ESM) builds:
+- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: バージョン 2.6 から Vue は 2 種類の ES Modules (ESM) ビルドを提供します:
 
-  - ESM for bundlers: intended for use with modern bundlers like [webpack 2](https://webpack.js.org) or [Rollup](https://rollupjs.org/). ESM format is designed to be statically analyzable so the bundlers can take advantage of that to perform "tree-shaking" and eliminate unused code from your final bundle. The default file for these bundlers (`pkg.module`) is the Runtime only ES Module build (`vue.runtime.esm.js`).
+  - バンドラ用 ESM: [webpack 2](https://webpack.js.org) や [Rollup](https://rollupjs.org/) のようなモダンバンドラでの利用を想定しています。ESM フォーマットは、バンドラが "tree-shaking" を実行して最終バンドルから未使用コードを除去しやすいように、静的解析できる設計になっています。これらのバンドラ (`pkg.module`) のための既定のファイルは、ランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
 
-  - ESM for browsers (2.6+ only): intended for direct imports in modern browsers via `<script type="module">`.
+  - ブラウザ用 ESM (2.6 以降のみ): モダンブラウザでの `<script type="module">` による直接インポートを想定しています。
 
 ### ランタイム + コンパイラとランタイム限定の違い
 
