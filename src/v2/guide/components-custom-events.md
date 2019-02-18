@@ -18,7 +18,7 @@ this.$emit('myEvent')
 ケバブケース(kebab-case)でリスナ名を作っても何も起こりません：
 
 ```html
-<!-- Won't work -->
+<!-- 動作しません -->
 <my-component v-on:my-event="doSomething"></my-component>
 ```
 
