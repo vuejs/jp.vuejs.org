@@ -1221,9 +1221,9 @@ props: {
 }
 ```
 
-``` html
+{% codeblock lang:html %}
 <WelcomeMessage greetingText="hi"/>
-```
+{% endcodeblock %}
 {% raw %}</div>{% endraw %}
 
 {% raw %}<div class="style-example example-good">{% endraw %}
@@ -1235,9 +1235,9 @@ props: {
 }
 ```
 
-``` html
+{% codeblock lang:html %}
 <WelcomeMessage greeting-text="hi"/>
-```
+{% endcodeblock %}
 {% raw %}</div>{% endraw %}
 
 
