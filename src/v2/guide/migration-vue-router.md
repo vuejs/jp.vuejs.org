@@ -211,9 +211,9 @@ router.alias({
 
 複数のエイリアスが必要な場合、配列記法を用いることができます。
 
-``` js
+{% codeblock lang:js %}
 alias: ['/manage', '/administer', '/administrate']
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
