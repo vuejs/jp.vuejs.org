@@ -11,9 +11,9 @@ order: 105
 
 まず、`is` 属性を利用してタブインタフェースのコンポーネントを切り替えることができます:
 
-```html
+{% codeblock lang:html %}
 <component v-bind:is="currentTabComponent"></component>
-```
+{% endcodeblock %}
 
 しかし、コンポーネントを切り替える時、コンポーネントの状態を保持したり、パフォーマンスの理由から再レンダリングを避けたいときもあるでしょう。例えば、タブインターフェースを少し拡張した場合:
 
