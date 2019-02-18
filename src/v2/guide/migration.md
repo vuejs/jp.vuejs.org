@@ -225,15 +225,15 @@ mounted: function () {
 殆どの場合、式として動的なバインディングを行いたいでしょう。その場合、例えば、以下の代わりに
 
 
-``` html
+{% codeblock lang:html %}
 <div v-for="item in items" track-by="id">
-```
+{% endcodeblock %}
 
 このように使用します:
 
-``` html
+{% codeblock lang:html %}
 <div v-for="item in items" v-bind:key="item.id">
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -428,9 +428,9 @@ methods: {
 
 コンポーネントを使用している時、 `v-on` は、そのコンポーネントに向けて発生したカスタムイベントのみを購読するようになりました。ルート要素上でネイティブの DOM イベントを購読したい時は、 `.native` 修飾子によって実現できます。以下がその例です:
 
-``` html
+{% codeblock lang:html %}
 <my-component v-on:click.native="doSomething"></my-component>
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -631,9 +631,9 @@ strings.map(function (str) {
 
 代わりに、 `v-model` が、オブジェクトのフィールドを更新できるようにするためには、 __オブジェクト__ の配列を使用する必要があります。例えば以下となります:
 
-``` html
+{% codeblock lang:html %}
 <input v-for="obj in objects" v-model="obj.str">
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -744,7 +744,7 @@ strings.map(function (str) {
 
 例えば、以下のように更新できます:
 
-``` js
+``` html
 <p v-my-directive.literal="foo bar baz"></p>
 ```
 これは、以下のようにできます:
@@ -1029,9 +1029,9 @@ computed: {
 
 複数のカラムを用いた並び替えも可能です:
 
-``` js
+{% codeblock lang:js %}
 _.orderBy(this.users, ['name', 'last_login'], ['asc', 'desc'])
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -1116,9 +1116,9 @@ function pluralizeKnife (count) {
 
 非常に単純な実装例として、このような形で実現することができます:
 
-``` js
+{% codeblock lang:js %}
 '$' + price.toFixed(2)
-```
+{% endcodeblock %}
 
 しかしながら、ほとんどの場合、これらは奇妙な動作をする場合があります(例えば、 0.035.toFixed(2) の丸め誤差が 0.04 として評価されるにも関わらず、 0.045 の丸め誤差が 0.04と評価されるなどです)。これらの問題を解消するためには、より確実な [通貨のフォーマット管理のライブラリ](http://openexchangerates.github.io/accounting.js/) などを使用します。
 
@@ -1440,9 +1440,9 @@ Vue.set および Vue.delete はもはや、 Vue インスタンス上で動作�
 
 ネイティブの DOM API を使用します:
 
-``` js
+{% codeblock lang:js %}
 myElement.appendChild(vm.$el)
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -1458,9 +1458,9 @@ myElement.appendChild(vm.$el)
 
 ネイティブの DOM API を使用します:
 
-``` js
+{% codeblock lang:js %}
 myElement.parentNode.insertBefore(vm.$el, myElement)
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -1476,15 +1476,15 @@ myElement.parentNode.insertBefore(vm.$el, myElement)
 
 ネイティブの DOM API を使用します:
 
-``` js
+{% codeblock lang:js %}
 myElement.parentNode.insertBefore(vm.$el, myElement.nextSibling)
-```
+{% endcodeblock %}
 
 もし `myElement` が最後の要素の場合は、以下のように対処します:
 
-``` js
+{% codeblock lang:js %}
 myElement.parentNode.appendChild(vm.$el)
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
@@ -1500,9 +1500,9 @@ myElement.parentNode.appendChild(vm.$el)
 
 ネイティブの DOM API を使用します:
 
-``` js
+{% codeblock lang:js %}
 vm.$el.remove()
-```
+{% endcodeblock %}
 
 {% raw %}
 <div class="upgrade-path">
