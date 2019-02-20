@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-01-29
+updated: 2019-02-18
 ---
 
 ## グローバル設定
@@ -84,6 +84,8 @@ updated: 2019-01-29
   > 2.2.0 以降では、このフックは、コンポーネントのライフサイクルフック中のエラーも捉えます。また、このフックが `undefined` の場合、捕捉されたエラーは、アプリケーションをクラッシュさせずに、代わりに `console.error` を用いて記録されます。
 
   > 2.4.0 以降では、このフックは Vue のカスタムイベントハンドラ内部で投げられたエラーもキャプチャします。
+
+  > 2.6.0 以降では、このフックは `v-on` DOM リスナ内で投げられたエラーもキャプチャします。加えて、フックやハンドラが Promise チェーン (例えば、async 関数) を返す場合、その Promise チェーンからのエラーもハンドリングされます。
 
   > エラー追跡サービスの [Sentry](https://sentry.io/for/vue/) と [Bugsnag](https://docs.bugsnag.com/platforms/browsers/vue/) はこのオプションを使用して公式の統合を提供しています。
 
@@ -403,6 +405,35 @@ updated: 2019-01-29
   ```
 
 - **参照:** [描画関数](../guide/render-function.html)
+
+### Vue.observable( object )
+
+> 2.6.0 から新規
+
+- **引数:**
+  - `{Object} object`
+
+- **使用方法:**
+
+  オブジェクトをリアクティブにします。内部的には、Vue は `data` 関数から返されたオブジェクトに対してこれを使っています。
+
+  戻り値のオブジェクトは、[描画関数](../guide/render-function.html) や [算出プロパティ](../guide/computed.html) の中で直接使え、値が変更されたときには適切な更新をトリガーします。単純なシナリオでは、コンポーネントをまたぐ最小の state ストアとして使用することもできます:
+
+  ``` js
+  const state = Vue.observable({ count: 0 })
+
+  const Demo = {
+    render(h) {
+      return h('button', {
+        on: { click: () => { state.count++ }}
+      }, `count is: ${state.count}`)
+    }
+  }
+  ```
+
+  <p class="tip">Vue 2.x では、`Vue.observable` は渡されたオブジェクトを直接操作するため、[ここでデモされる](../guide/instance.html#データとメソッド) ように戻り値のオブジェクトと等しくなります。Vue 3.x では、代わりにリアクティブプロキシを返し、元のオブジェクトを直接変更してもリアクティブにならないようにします。そのため、将来の互換性を考えると、`Vue.observable` に渡したオブジェクトではなく、返されたオブジェクトを使うことを推奨します。</p>
+
+- **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 ### Vue.version
 
@@ -1347,7 +1378,7 @@ updated: 2019-01-29
 
 - **デフォルト:**
 
-  プログラム的に[スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](/guide/components.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付きスロットに含まれない任意のノードを含みます。
+  プログラム的に[スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](../guide/components-slots.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付きスロットに含まれない任意のノードを含みます。
 
   `vm.$slots` のアクセスは、[描画関数](/guide/render-function.html) によるコンポーネントを書くときに最も便利です。
 
@@ -1393,19 +1424,25 @@ updated: 2019-01-29
 
 > 2.1.0 から新規
 
-- **型:** `{ [name: string]: props => VNode | Array<VNode> }`
+- **型:** `{ [name: string]: props => Array<VNode> | undefined }`
 
 - **読み込みのみ**
 
 - **詳細:**
 
-  [スコープ付きスロット (scoped slot)](../guide/components.html#スコープ付きスロット)にプログラムでアクセスするために使用されます。`default` を含む各スロットに対して、オブジェクトには VNode を返す対応する関数が含まれています。
+  [スコープ付きスロット](../guide/components-slots.html#スコープ付きスロット) にプログラムでアクセスするために使用されます。`default` を含む各スロットに対して、オブジェクトには VNode を返す対応する関数が含まれています。
 
   `vm.$scopedSlots` にアクセスする際に、[描画関数](../guide/render-function.html) でコンポーネントを書くときに最も便利です。
 
-- **See also:**
-  - [`<slot>` コンポーネント](#slot-1)
-  - [スコープ付きスロット](../guide/components.html#スコープ付きスロット)
+  **注意:** 2.6.0 以降では、このプロパティに特筆すべき変更が 2 つあります:
+
+  1. スコープ付きスロット関数は、戻り値が不正でない限り (この場合は `undefined` を返す) VNode の配列を返すことが保証されるようになりました。
+
+  2. すべての `$slots` は `$scopedSlots` にも関数として公開されるようになりました。描画関数を使う場合、今後はスコープ付きを使うかどうかに関係なく、常に `$scopedSlots` 経由でスロットにアクセスすることを推奨します。これは、将来スコープを追加するリファクタリングをシンプルにするだけでなく、すべてのスロットが関数になる Vue 3 への移行を簡単にします。
+
+- **参照:**
+  - [`<slot>` コンポーネント](#slot)
+  - [スコープ付きスロット](../guide/components-slots.html#スコープ付きスロット)
   - [描画関数 - スロット](../guide/render-function.html#スロット)
 
 ### vm.$refs
@@ -1950,7 +1987,7 @@ updated: 2019-01-29
 
 ### v-for
 
-- **要求事項:** `Array | Object | number | string`
+- **要求事項:** `Array | Object | number | string | Iterable (2.6 以降)`
 
 - **使用方法:**
 
@@ -1977,6 +2014,8 @@ updated: 2019-01-29
     {{ item.text }}
   </div>
   ```
+
+  2.6 以降では、`v-for` はネイティブの `Map` や `Set`を含む、[Iterable プロトコル](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol) を実装した値でも動作できるようになりました。ただし、Vue 2.x は今のところ `Map` 値や `Set` 値をリアクティブにはできず、変更を自動的に検知できない点は注意しておく必要があります。
 
   <p class="tip">`v-if` といっしょに使用されるとき、`v-for` は `v-if` より優先度が高くなります。詳細については<a href="../guide/list.html#v-for-と-v-if">リストレンダリングのガイド</a>を参照してください。</p>
 
@@ -2023,11 +2062,17 @@ updated: 2019-01-29
   <!-- メソッドハンドラ -->
   <button v-on:click="doThis"></button>
 
+  <!-- 動的イベント (2.6.0 以降) -->
+  <button v-on:[event]="doThis"></button>
+
   <!-- インラインステートメント -->
   <button v-on:click="doThat('hello', $event)"></button>
 
   <!-- 省略記法 -->
   <button @click="doThis"></button>
+
+  <!-- 動的イベントの省略記法 (2.6.0 以降) -->
+  <button @[event]="doThis"></button>
 
   <!-- イベント伝播の停止 -->
   <button @click.stop="doThis"></button>
@@ -2100,8 +2145,14 @@ updated: 2019-01-29
   <!-- 属性を束縛 -->
   <img v-bind:src="imageSrc">
 
+  <!-- 動的な属性名 (2.6.0 以降) -->
+  <button v-bind:[key]="value"></button>
+
   <!-- 省略記法 -->
   <img :src="imageSrc">
+
+  <!-- 動的な属性名の省略記法 (2.6.0 以降) -->
+  <button :[key]="value"></button>
 
   <!-- インライン文字列連結 -->
   <img :src="'/path/to/images/' + fileName">
@@ -2166,6 +2217,59 @@ updated: 2019-01-29
 - **See also:**
   - [フォーム入力バインディング](../guide/forms.html)
   - [コンポーネント - カスタムイベントを使用してフォーム入力コンポーネント](../guide/components.html#カスタムイベントを使用したフォーム入力コンポーネント)
+
+### v-slot
+
+- **省略記法:** `#`
+
+- **要求事項:** 関数定義の引数部分で有効な JavaScript 式 ([サポートされている環境](../guide/components-slots.html#スロットプロパティの分割代入) では分割代入も使用可能)。省略可 - プロパティがスロットに渡される場合のみ必要。
+
+- **引数:** スロット名 (省略可。デフォルト値 `default`)
+
+- **適用対象制限:**
+  - `<template>`
+  - [コンポーネント](../guide/components-slots.html#デフォルトスロットしかない場合の省略記法) (デフォルトスロットしかない場合)
+
+- **使用方法:**
+
+  名前付きスロットあるいはプロパティを受け取るスロットとなることを示します。
+
+- **例:**
+
+  ```html
+  <!-- 名前付きスロット -->
+  <base-layout>
+    <template v-slot:header>
+      Header content
+    </template>
+
+    Default slot content
+
+    <template v-slot:footer>
+      Footer content
+    </template>
+  </base-layout>
+
+  <!-- プロパティを受け取る名前付きスロット -->
+  <infinite-scroll>
+    <template v-slot:item="slotProps">
+      <div class="item">
+        {{ slotProps.item.text }}
+      </div>
+    </template>
+  </infinite-scroll>
+
+  <!-- 分割代入でプロパティを受け取るデフォルトスロット -->
+  <mouse-position v-slot="{ x, y }">
+    Mouse position: {{ x }}, {{ y }}
+  </mouse-position>
+  ```
+
+  詳細は、以下のリンクを参照してください。
+
+- **参照:**
+  - [スロット](../guide/components-slots.html)
+  - [RFC-0001](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0001-new-slot-syntax.md)
 
 ### v-pre
 
@@ -2286,38 +2390,6 @@ updated: 2019-01-29
 
 - **参照:** [子コンポーネントの参照](../guide/components.html#子コンポーネントの参照)
 
-### slot
-
-- **要求事項:** `string`
-
-  名前付き slot のコンテンツが属しているというのを示すために、コンテンツを子コンポーネントに挿入するために使用されます。
-
-  詳しい使い方については、以下のリンク先のガイドを参照してください。
-
-- **参照:** [名前付きスロット](../guide/components.html#名前付きスロット)
-
-### slot-scope
-
-> 2.5.0 から新規
-
-- **要求事項:** `function argument expression`
-
-- **使用方法:**
-
-  要素またはコンポーネントをスコープ付きスロットとして示すときに使用します。属性の値は、関数シグネチャの引数位置に表示できる有効な JavaScript 式が必要です。これは、式で ES2015 destructuring (分割代入)を使用できる環境をサポートすることを意味します。2.5.0以降で [`scope`](#scope-置き換え)の代わりとして提供されています。
-
-  この属性は動的なバインディングはサポートしません。
-
-- **参照:** [スコープ付きスロット](../guide/components.html#スコープ付きスロット)
-
-### scope <sup>置き換え</sup>
-
-  スコープ付きスロットとして `<template>` 要素を表すのに使われ、2.5.0以降では [`slot-scope`](#slot-scope)に置き換えられます。
-
-- **使用方法:**
-
-  [`<slot-scope>`](#slot-scope)と同じですが、`scope`は `<template>` 要素に対してのみ使用できます。
-
 ### is
 
 - **要求事項:** `string | Object (コンポーネントオプションのオブジェクト)`
@@ -2338,9 +2410,43 @@ updated: 2019-01-29
 
   詳しい使用方法については、上記のリンクを参照してください。
 
-- **See also:**
+- **参照:**
   - [動的コンポーネント](../guide/components.html#動的コンポーネント)
   - [DOM-テンプレート解析の注意事項](../guide/components.html#DOM-テンプレート解析の注意事項)
+
+### slot <sup style="color:#c92222">非推奨</sup>
+
+**2.6.0 以降では [v-slot](#v-slot) を使うこと**
+
+- **要求事項:** `string`
+
+  子コンポーネントに挿入されるコンテンツに対して、どの名前付きスロットのコンテンツになるかを示すために使われます。
+
+- **参照:** [`slot` 属性による名前付きスロット](../guide/components-slots.html#slot-属性による名前付きスロット)
+
+### slot-scope <sup style="color:#c92222">非推奨</sup>
+
+**2.6.0 以降では [v-slot](#v-slot) を使うこと**
+
+- **要求事項:** `function argument expression`
+
+- **使用方法:**
+
+  要素またはコンポーネントがスコープ付きスロットとなることを示すために使われます。属性の値は、関数シグネチャの引数部分で有効な JavaScript 式となる必要があります。これは、サポートされている環境では式に ES2015 の分割代入が使えることを意味します。2.5.0 以降では、[`scope`](#scope-削除) を置き換えます。
+
+  この属性は、動的なバインディングはサポートしません。
+
+- **参照:** [`slot-scope` 属性によるスコープ付きスロット](../guide/components-slots.html#slot-scope-属性によるスコープ付きスロット)
+
+### scope <sup style="color:#c92222">削除</sup>
+
+**2.5.0 以降では [slot-scope](#slot-scope-非推奨) で置き換え。2.6.0 以降では [v-slot](#v-slot) を使うこと**
+
+`<template>` 要素がスコープ付きスロットとなることを示すために使われます。
+
+- **使用方法:**
+
+  [`slot-scope`](#slot-scope-非推奨) と同じですが、`scope` は `<template>` 要素に対してのみ使用できます。
 
 ## 組み込みコンポーネント
 

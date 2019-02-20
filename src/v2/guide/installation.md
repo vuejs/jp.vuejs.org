@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2018-05-07
+updated: 2019-02-14
 type: guide
 order: 1
 vue_version: 2.5.16
@@ -28,17 +28,31 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 <p class="tip">開発中は本番バージョンを使用しないでください。 警告や一般的な間違いを見逃す可能性があります!</p>
 
 <div id="downloads">
-<a class="button" href="/js/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり </span>
+  <a class="button" href="/js/vue.js" download>開発バージョン</a><span class="light info">警告出力とデバッグモードあり </span>
 
-<a class="button" href="/js/vue.min.js" download>本番バージョン</a><span class="light info">警告出力なし、 {{gz_size}} KB min+gzip</span>
+  <a class="button" href="/js/vue.min.js" download>本番バージョン</a><span class="light info">警告出力なし、 {{gz_size}} KB min+gzip</span>
 </div>
 
 ### CDN
 
-手動で更新できる特定のバージョン番号にリンクすることをお勧めします:
+プロトタイピングや学習を目的とする場合は、以下のようにして最新バージョンを使うことができます:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+```
+
+本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします:
+
+``` html
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
+```
+
+もしもネイティブの ES Modules を使っているなら、ES Modules 互換のビルドもあります:
+
+``` html
+<script type="module">
+  import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.esm.browser.js'
+</script>
 ```
 
 [cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue/) で NPM パッケージのソースを参照することができます。
@@ -69,12 +83,12 @@ $ npm install vue
 
 [NPM パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
 
-| | UMD | CommonJS | ES Module |
-| --- | --- | --- | --- |
-| **完全** | vue.js | vue.common.js | vue.esm.js |
-| **ランタイム限定** | vue.runtime.js | vue.runtime.common.js | vue.runtime.esm.js |
-| **完全 (本番用)** | vue.min.js | - | - |
-| **ランタイム限定 (本番用)** | vue.runtime.min.js | - | - |
+| | UMD | CommonJS | ES Module (バンドラ用) | ES Module (ブラウザ用) |
+| --- | --- | --- | --- | --- |
+| **完全** | vue.js | vue.common.js | vue.esm.js | vue.esm.browser.js |
+| **ランタイム限定** | vue.runtime.js | vue.runtime.common.js | vue.runtime.esm.js | - |
+| **完全 (本番用)** | vue.min.js | - | - | vue.esm.browser.min.js |
+| **ランタイム限定 (本番用)** | vue.runtime.min.js | - | - | - |
 
 ### 用語
 
@@ -88,7 +102,11 @@ $ npm install vue
 
 - **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図しています。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
-- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: ES module ビルドは [webpack 2](https://webpack.js.org) や [rollup](https://rollupjs.org/)のような最新のバンドラでの利用を意図しています。これらのバンドラ (`pkg.module`) のための既定のファイルはランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
+- **[ES Module](http://exploringjs.com/es6/ch_modules.html)**: バージョン 2.6 から Vue は 2 種類の ES Modules (ESM) ビルドを提供します:
+
+  - バンドラ用 ESM: [webpack 2](https://webpack.js.org) や [Rollup](https://rollupjs.org/) のようなモダンバンドラでの利用を想定しています。ESM フォーマットは、バンドラが "tree-shaking" を実行して最終バンドルから未使用コードを除去しやすいように、静的解析できる設計になっています。これらのバンドラ (`pkg.module`) のための既定のファイルは、ランタイム限定 ES Module ビルド (`vue.runtime.esm.js`) です。
+
+  - ブラウザ用 ESM (2.6 以降のみ): モダンブラウザでの `<script type="module">` による直接インポートを想定しています。
 
 ### ランタイム + コンパイラとランタイム限定の違い
 
