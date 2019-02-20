@@ -15,4 +15,4 @@ order: 503
 
 ## Quasar Framework SSR + PWA
 
- [Quasar Framework](https://quasar-framework.org/) が生成する SSR アプリケーションは最高クラスのビルドシステム・聡明な構成・開発者の拡張性を活用し、あなたのアイデアを設計し構築することを容易くしてくれます。100を超えるマテリアルデザイン2.0に準拠したコンポーネントがあり、どれかひとつをサーバ上で実行できます。これはブラウザでも使用でき、サイト内の `<meta>` タグで管理もできます。 Quasar は node.js と webpack ベースの開発環境で、SPA ・ PWA ・ SSR ・ Electron ・ Cordova の各アプリケーションを1つのコードベースから迅速に開発し、効率化します。
+ [Quasar Framework](https://quasar-framework.org/) は、SSR アプリケーション (PWA ハンドオフ�オプションあり)を生成するフレームワークで、最高クラスのビルドシステム、実用的な環境設定、そして開発者の拡張性を活用して、あなたのアイデアを設計し構築することを簡単にします。100 を超える "Material Design 2.0" に準拠したコンポーネントがあり、どれかひとつをサーバ上で実行できます。これはブラウザでも使用でき、サイト内の `<meta>` タグで管理もできます。 Quasar は node.js と webpack ベースの開発環境で、SPA、PWA、SSR、Electron、そして Cordova アプリケーション、全て 1 つのコードベースからの迅速な開発を合理化し、加速させます。
