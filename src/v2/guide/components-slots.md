@@ -1,7 +1,7 @@
 ---
 title: スロット
 type: guide
-updated: 2019-02-16
+updated: 2019-02-20
 order: 104
 ---
 
@@ -228,7 +228,7 @@ Vue には [Web Components spec draft](https://github.com/w3c/webcomponents/blob
 
 ## スコープ付きスロット
 
-> 2.6.0 から更新。`slot-props` 属性を使った非推奨の構文については、[こちらを参照](#非推奨の構文)
+> 2.6.0 から更新。`slot-scope` 属性を使った非推奨の構文については、[こちらを参照](#非推奨の構文)
 
 スロットコンテンツから、子コンポーネントの中だけで利用可能なデータにアクセスできると便利なことがあります。例えば、以下のようなテンプレートの `<current-user>` コンポーネントを考えてみてください:
 
@@ -366,7 +366,7 @@ function (slotProps) {
 
 > 2.6.0 で新規追加
 
-`v-on` や `v-bind` と同様に `v-slot` にも省略記法があり、引数の前のすべての部分 (`v-slot:`) を特別な記号 `#` で置き換えます。例えば、`v-slot:header` は `#header` に書き換えます:
+`v-on` や `v-bind` と同様に `v-slot` にも省略記法があり、引数の前のすべての部分 (`v-slot:`) を特別な記号 `#` で置き換えます。例えば、`v-slot:header` は `#header` に書き換えることができます:
 
 ```html
 <base-layout>
