@@ -1,32 +1,23 @@
 ---
 title: 条件付きレンダリング
-updated: 2017-10-23
+updated: 2019-02-23
 type: guide
 order: 7
 ---
 
 ## `v-if`
 
-文字列テンプレートでは、例えば [Handlebars](https://handlebarsjs.com/) の例は、このような条件ブロックを記述します:
+`v-if` ディレクティブは、ブロックを条件に応じて描画したい場合に使用されます。ブロックは、ディレクティブの式が真を返す場合のみ描画されます。
 
 ``` html
-<!-- Handlebars の例 -->
-{{#if ok}}
-  <h1>Yes</h1>
-{{/if}}
-```
-
-Vue.js では、同じことを達成するために、`v-if` ディレクティブを使用します:
-
-``` html
-<h1 v-if="ok">Yes</h1>
+<h1 v-if="awesome">Vue is awesome!</h1>
 ```
 
 これは、`v-else` で "else ブロック" を追加することも可能です:
 
 ``` html
-<h1 v-if="ok">Yes</h1>
-<h1 v-else>No</h1>
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
 ```
 
 ### テンプレートでの `v-if` による条件グループ
