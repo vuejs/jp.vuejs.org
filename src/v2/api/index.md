@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-02-18
+updated: 2019-02-24
 ---
 
 ## グローバル設定
@@ -701,7 +701,7 @@ updated: 2019-02-18
 
 ### el
 
-- **型:** `string | HTMLElement`
+- **型:** `string | Element`
 
 - **制約:** `new` 経由でインスタンス作成のみだけなので注意してください。
 
@@ -1313,7 +1313,7 @@ updated: 2019-02-18
 
 ### vm.$el
 
-- **型:** `HTMLElement`
+- **型:** `Element`
 
 - **読み込みのみ**
 
