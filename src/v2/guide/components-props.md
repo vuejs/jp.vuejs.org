@@ -1,6 +1,6 @@
 ---
 title: プロパティ
-updated: 2019-02-04
+updated: 2019-02-24
 type: guide
 order: 102
 ---
@@ -191,7 +191,7 @@ post: {
 ``` js
 Vue.component('my-component', {
   props: {
-    // 基本的な型の検査 (`null` は全ての型にマッチします)
+    // 基本的な型の検査 (`null` と `undefined` は全てのバリデーションにパスします)
     propA: Number,
     // 複数の型の許容
     propB: [String, Number],
