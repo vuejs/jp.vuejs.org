@@ -335,7 +335,7 @@ function (slotProps) {
 こうするとテンプレートはよりきれいになります。特に、スロットが多くのプロパティを提供している場合はそうです。また、プロパティをリネームする (例えば、`user` から `person`) など別の可能性も開けます:
 
 ``` html
-<current-user v-slot="{ user: person }">>
+<current-user v-slot="{ user: person }">
   {{ person.firstName }}
 </current-user>
 ```
@@ -343,7 +343,7 @@ function (slotProps) {
 スロットプロパティが未定義だった場合のフォールバックを定義することさえできます:
 
 ``` html
-<current-user v-slot="{ user = { firstName: 'Guest' } }">>
+<current-user v-slot="{ user = { firstName: 'Guest' } }">
   {{ user.firstName }}
 </current-user>
 ```
