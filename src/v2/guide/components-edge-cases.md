@@ -334,6 +334,8 @@ components: {
 </my-component>
 ```
 
+<p>インラインテンプレートは、Vue がアタッチされた DOM 要素の内側で定義する必要があります。</p>
+
 <p class="tip">しかし、<code>inline-template</code>はテンプレートのスコープの推論を難しくします。ベストプラクティスとして、<code>template</code>オプションを使用してコンポーネント内部でテンプレート定義するようにしてください。または<code>.vue</code>ファイルの<code>&lt;template&gt;</code>要素で定義するのもいいでしょう。</p>
 
 ### X- テンプレート
@@ -351,6 +353,8 @@ Vue.component('hello-world', {
   template: '#hello-world-template'
 })
 ```
+
+<p>x-template は、Vue がアタッチされた DOM 要素の外側で定義する必要があります。</p>
 
 <p class="tip">これらは大規模なテンプレートを必要とするデモや非常に小さなアプリケーションで役立ちます。しかし一方で避けられるべきでもあります。なぜなら、それらはコンポーネント定義からテンプレートを分離させるからです。</p>
 
