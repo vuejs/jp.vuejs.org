@@ -1,6 +1,6 @@
 ---
 title: コンポーネントの登録
-updated: 2018-04-26 00:00:00
+updated: 2019-02-28
 type: guide
 order: 101
 ---
@@ -207,10 +207,14 @@ requireComponent.keys().forEach(fileName => {
   // コンポーネント名をパスカルケース (PascalCase) で取得する
   const componentName = upperFirst(
     camelCase(
-      // 先頭の `./` と拡張子をファイル名から取り除く
-      fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+      // フォルダの深さに関わらずファイル名を取得する
+      fileName
+        .split('/')
+        .pop()
+        .replace(/\.\w+$/, '')
     )
   )
+
 
   // コンポーネントをグローバル登録する
   Vue.component(
