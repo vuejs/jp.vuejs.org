@@ -405,6 +405,7 @@
 
       new SmoothScroll('a[href*="#"]', {
         speed: 400,
+        speedAsDuration: true,
         offset: function (anchor, toggle) {
           let dataTypeAttr = anchor.attributes['data-type']
           if(dataTypeAttr && dataTypeAttr.nodeValue === 'theme-product-title') {
