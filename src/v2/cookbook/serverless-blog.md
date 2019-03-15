@@ -1,7 +1,7 @@
 ---
 title: CMS によるブログの作成
 type: cookbook
-updated: 2018-03-20
+updated: 2019-03-11
 order: 5
 ---
 
@@ -300,7 +300,7 @@ created() {
 
 ## 代替パターン
 
-もし、あなたがマークダウンでのみの記述を好むなら、特に代替パターンとして考えられるのは、[Nuxtent](https://nuxtent.now.sh/guide/writing#async-components) のようなものを使う方法です。Nuxtent は、マークダウン形式のファイルの代わりに、`Vue Component` の利用を提供します。 このアプローチは、マークダウン形式のファイルでブログの投稿が構成される静的サイト（すなわち、Jekyll）のアプローチと類似するでしょう。Nuxtent は、Vue.js の世界で Vue.js とマークダウンの間で生きるための良いインテグレーションを追加します。
+もし、あなたがマークダウンでのみの記述を好むなら、特に代替パターンとして考えられるのは、[Nuxtent](https://nuxtent-module.netlify.com/guide/writing/#async-components) のようなものを使う方法です。Nuxtent は、マークダウン形式のファイルの代わりに、`Vue Component` の利用を提供します。 このアプローチは、マークダウン形式のファイルでブログの投稿が構成される静的サイト（すなわち、Jekyll）のアプローチと類似するでしょう。Nuxtent は、Vue.js の世界で Vue.js とマークダウンの間で生きるための良いインテグレーションを追加します。
 
 
 ## まとめ
