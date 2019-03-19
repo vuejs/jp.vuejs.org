@@ -6,8 +6,8 @@ order: 2
 ---
 
 ## 基本的な例
-多くのコンポーネントで使用したいデータ/ユーティリティがあるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md)。
-この場合は、プロトタイプに追加すれば全ての Vue インスタンスで使用できます：
+多くのコンポーネントで使用したいデータ/ユーティリティがあるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md)。
+この場合は、プロトタイプに追加すれば全ての Vue インスタンスで使用できます：
 ```js
 Vue.prototype.$appName = 'My App'
 ```
@@ -29,7 +29,7 @@ new Vue({
 
 > "`appName` はなぜ `$` で始まるのですか？ それは重要なのですか？"
 
-ここでは特別な事は一切起きていません。Vue は全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義したデータ、算出プロパティ、またはメソッドとの衝突を回避できます。
+ここでは特別な事は一切起きていません。Vue は全てのインスタンスが利用できるプロパティに対して接頭辞に `$` をつけるよう規約を設けています。この規約により、定義したデータ、算出プロパティ、またはメソッドとの衝突を回避できます。
 
 > "衝突？ それはどういう意味ですか？"
 
@@ -57,10 +57,10 @@ new Vue({
 })
 ```
 
-この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが作成されるときに `data` によって上書き([並び替え](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))されるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
+この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが作成されるときに `data` によって上書き([並び替え](https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md))されるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
 
 ## 実例： Vue のリソースを Axios に置き換える
-それでは[使われなくなった Vue Resource を置き換えるとしましょう](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4)。あなたは `this.$http` を通してリクエストメソッドにアクセスすることを凄く楽しんでいましたが、代わりに Axios で同じことをしたいと思います。
+それでは[使われなくなった Vue Resource を置き換えるとしましょう](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4)。あなたは `this.$http` を通してリクエストメソッドにアクセスすることを凄く楽しんでいましたが、代わりに Axios で同じことをしたいと思います。
 
 ただ、プロジェクトに axios を含めるだけです:
 

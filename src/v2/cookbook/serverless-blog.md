@@ -210,7 +210,7 @@ export default new Router({
 </template>
 ```
 
-以下がプレビューです:
+以下がプレビューです:
 
 ![buttercms-blogdetail](https://user-images.githubusercontent.com/160873/36868506-218c86b6-1d5e-11e8-8691-0409d91366d6.png)
 
