@@ -155,4 +155,4 @@ Vue.directive('clipscroll', {
 
 カスタムディレクティブは非常に役に立ちます。しかしスクラッチで作るのではなく、スクロールライブラリにすでに存在する機能を使いたい場合もあるかもしれません。
 
-[Scrollmagic](http://scrollmagic.io/)は豊富なエコシステムがあると同時に、優れたドキュメントやデモを用意しています。これには、[パララックス](http://scrollmagic.io/examples/advanced/parallax_scrolling.html)、[カスケードピンニング](http://scrollmagic.io/examples/expert/cascading_pins.html)、[セクションワイプ](http://scrollmagic.io/examples/basic/section_wipes_natural.html)、[レスポンシブデュレイション](http://scrollmagic.io/examples/basic/responsive_duration.html)など多様な機能が内包されています。
+[Scrollmagic](http://scrollmagic.io/)は豊富なエコシステムがあると同時に、優れたドキュメントやデモを用意しています。これには、[パララックス](http://scrollmagic.io/examples/advanced/parallax_scrolling.html)、[カスケードピンニング](http://scrollmagic.io/examples/expert/cascading_pins.html)、[セクションワイプ](http://scrollmagic.io/examples/basic/section_wipes_natural.html)、[レスポンシブデュレイション](http://scrollmagic.io/examples/basic/responsive_duration.html)など多様な機能が内包されています。

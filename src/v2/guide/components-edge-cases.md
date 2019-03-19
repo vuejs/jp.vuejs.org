@@ -64,7 +64,7 @@ this.$root.baz()
 </google-map>
 ```
 
-`<google-map>` コンポーネントは全てのサブコンポーネントがアクセスする必要がある `map`プロパティを定義しています。この場合、`<google-map-markers>` は地図上にマーカーを設定するため  `this.$parent.getMap` のような方法で map プロパティにアクセスしたいことでしょう。[ここから](https://jsfiddle.net/chrisvfritz/ttzutdxh/)このパターンをみることができます。
+`<google-map>` コンポーネントは全てのサブコンポーネントがアクセスする必要がある `map`プロパティを定義しています。この場合、`<google-map-markers>` は地図上にマーカーを設定するため  `this.$parent.getMap` のような方法で map プロパティにアクセスしたいことでしょう。[ここから](https://jsfiddle.net/chrisvfritz/ttzutdxh/)このパターンをみることができます。
 
 しかし、このパターンで作成されたコンポーネントはやはり本質的に壊れやすくなるということを覚えておいてください。例えば、`<google-map-region>` という新しいコンポーネントを追加することをイメージしてください。そして、`<google-map-markers>` が `<google-map-region>` 内に現れるとき、その領域内のマーカーのみ描画すべきです:
 
