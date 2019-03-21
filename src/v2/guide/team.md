@@ -610,6 +610,11 @@ order: 803
       languages: ['vi', 'en'],
       github: 'phanan',
       twitter: 'notphanan',
+      work: {
+        role: 'Engineering Team Lead',
+        org: 'InterNations',
+        orgUrl: 'https://www.internations.org/'
+      },
       reposOfficial: [
         'vuejs.org'
       ],
