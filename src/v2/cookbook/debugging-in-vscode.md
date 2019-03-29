@@ -1,7 +1,7 @@
 ---
 title: VS Code によるデバッグ
 type: cookbook
-updated: 2018-10-17
+updated: 2019-03-29
 order: 8
 ---
 
@@ -41,6 +41,8 @@ module.exports = {
 ```
 
 ### VS Code からアプリケーションを起動する
+
+<p class="tip">ここではポートが `8080` 番であることを想定しています。もしそうでない（例えば、`8080` 番が使われていて、Vue CLI が自動的に別のポートを選択した）場合、それに合わせて設定を修正してください。</p>
 
 Activity Bar の Debugging アイコン をクリックして Debug ビューを表示し、歯車アイコンをクリックして launch.json ファイルを設定し、環境として **Chrome/Firefox: Launch** を選択してください。生成された launch.json の内容を対応する構成に置き換えます:
 
@@ -82,7 +84,7 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
 2. ルートフォルダであなたのお気に入りのターミナルを開き、Vue CLI を使用してアプリを提供してください:
 
   ```
-  npm start
+  npm run serve
   ```
 
 3. Debug ビューに移動し、**'vuejs: chrome/firefox'** 設定を選択し、F5 キーを押すか緑の再生ボタンをクリックしてください。
