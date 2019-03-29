@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-03-04
+updated: 2019-03-26
 ---
 
 ## グローバル設定
@@ -1387,7 +1387,9 @@ updated: 2019-03-04
 
 - **デフォルト:**
 
-  プログラム的に[スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](../guide/components-slots.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `slot="foo"` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは名前付きスロットに含まれない任意のノードを含みます。
+  プログラム的に[スロットにより配信された](/guide/components.html#スロットによるコンテンツ配信)コンテンツにアクセスするために使用されます。各[名前付きスロット](../guide/components-slots.html#名前付きスロット) は自身に対応するプロパティを持ちます (例: `v-slot:foo` のコンテンツは `vm.$slots.foo` で見つかります)。`default` プロパティは、名前付きスロットに含まれない任意のノード、または `v-slot:default` のコンテンツを含みます。
+
+  **注意:** `v-slot:foo` は 2.6 以降でサポートされます。古いバージョンでは、[非推奨の構文](../guide/components-slots.html#非推奨の構文) を利用できます。
 
   `vm.$slots` のアクセスは、[描画関数](/guide/render-function.html) によるコンポーネントを書くときに最も便利です。
 
@@ -1395,15 +1397,15 @@ updated: 2019-03-04
 
   ```html
   <blog-post>
-    <h1 slot="header">
-      About Me
-    </h1>
+    <template v-slot:header>
+      <h1>About Me</h1>
+    </template>
 
     <p>Here's some page content, which will be included in vm.$slots.default, because it's not inside a named slot.</p>
 
-    <p slot="footer">
-      Copyright 2016 Evan You
-    </p>
+    <template v-slot:footer>
+      <p>Copyright 2016 Evan You</p>
+    </template>
 
     <p>If I have some content down here, it will also be included in vm.$slots.default.</p>.
   </blog-post>
