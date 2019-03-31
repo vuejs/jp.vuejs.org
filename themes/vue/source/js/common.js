@@ -85,8 +85,9 @@
       'Inline-Templates':
         '/v2/guide/components-edge-cases.html#Inline-Templates',
       'X-Templates': '/v2/guide/components-edge-cases.html#X-Templates',
-      'Cheap-Static-Components-with-v-once':
-        '/v2/guide/components-edge-cases.html#Cheap-Static-Components-with-v-once'
+      // encodeURIComponent('v-once-を使用した安価な静的コンポーネント')
+      'v-once-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E5%AE%89%E4%BE%A1%E3%81%AA%E9%9D%99%E7%9A%84%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88':
+        '/v2/guide/components-edge-cases.html#v-once-を使用するチープスタティックコンポーネント'
     })
     function checkForHashRedirect(pageRegex, redirects) {
       // Abort if the current page doesn't match the page regex
