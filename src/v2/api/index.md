@@ -2484,11 +2484,11 @@ updated: 2019-04-01
 ### transition
 
 - **プロパティ:**
-  - `name` - string、自動的に生成されるトランジション CSS クラス名で使用する。例: `name: 'fade'` は `.fade-enter`、`.fade-enter-active`などに自動で展開する。デフォルトは`"v"`
-  - `appear` - boolean、初期描画でのトランジションを適用するかどうか。デフォルトは `false`
-  - `css` - boolean、CSS トランジションクラスを提供するかどうか。デフォルトは `true`。`false` に設定する場合、コンポーネントイベント経由登録された JavaScript フックだけトリガする
-  - `type` - string、トランジションの終了タイミングを決定するためにトランジションイベントのタイプを指定する。利用可能な値は `"transition"`、`"animation"`。デフォルトでは自動的により長い時間を持つタイプを検出する
-  - `mode` - string、leaving/entering トランジションのタイミングシーケンスを制御する。利用可能なモードは、`"out-in"`、`"in-out"`。デフォルトは同時になる。
+  - `name` - string、自動的に生成されるトランジション CSS クラス名に使用します。例: `name: 'fade'` は `.fade-enter`、`.fade-enter-active` などに自動で展開します。デフォルトは `"v"` です。
+  - `appear` - boolean、初期描画でのトランジションを適用するかどうか。デフォルトは `false` です。
+  - `css` - boolean、CSS トランジションクラスを提供するかどうか。デフォルトは `true`。`false` に設定する場合、コンポーネントイベント経由登録された JavaScript フックだけトリガします。
+  - `type` - string、トランジションの終了タイミングを決定するためにトランジションイベントのタイプを指定します。利用可能な値は `"transition"` と `"animation"` です。デフォルトでは自動的により長い時間を持つタイプを検出します。
+  - `mode` - string、leaving/entering トランジションのタイミングシーケンスを制御します。利用可能なモードは、`"out-in"` と `"in-out"` です。デフォルトは同時になります。
   - `duration` - number | { `enter`: number, `leave`: number } トランジションの期間を指定します。デフォルトでは、Vue はルートのトランジション要素の最初の `transitionend` または `animationend` イベントを待ちます。
   - `enter-class` - string
   - `leave-class` - string
