@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-03-29
+updated: 2019-04-01
 ---
 
 ## グローバル設定
@@ -2489,6 +2489,7 @@ updated: 2019-03-29
   - `css` - boolean、CSS トランジションクラスを提供するかどうか。デフォルトは `true`。`false` に設定する場合、コンポーネントイベント経由登録された JavaScript フックだけトリガする
   - `type` - string、トランジションの終了タイミングを決定するためにトランジションイベントのタイプを指定する。利用可能な値は `"transition"`、`"animation"`。デフォルトでは自動的により長い時間を持つタイプを検出する
   - `mode` - string、leaving/entering トランジションのタイミングシーケンスを制御する。利用可能なモードは、`"out-in"`、`"in-out"`。デフォルトは同時になる。
+  - `duration` - number | { enter: number, leave: number } トランジションの期間を指定します。デフォルトでは、Vue はルートのトランジション要素の最初の `transitionend` または `animationend` イベントを待ちます
   - `enter-class` - string
   - `leave-class` - string
   - `appear-class` - string
