@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2019-03-11
+updated: 2019-04-14
 type: guide
 order: 2
 ---
@@ -16,6 +16,8 @@ Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインター
 <div class="vue-mastery"><a href="https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance/" target="_blank" rel="noopener" title="Free Vue.js Course">Vue Masteryで無料の動画コースを見る</a></div>
 
 ## はじめに
+
+<a class="button" href="installation.html">インストール</a>
 
 <p class="tip">公式ガイドは、HTML、CSS そして JavaScript の中レベルのフロントエンドの知識を前提にしています。フロントエンドの開発が初めてであるならば、最初のステップとして、フレームワークに直接入門するのは良いアイデアではないかもしれません。基礎を学んで戻ってきましょう！他のフレームワークでの以前の経験は役に立ちますが、必須ではありません。</p>
 
