@@ -1,6 +1,6 @@
 ---
 title: リストレンダリング
-updated: 2019-04-08
+updated: 2019-04-21
 type: guide
 order: 8
 ---
@@ -45,11 +45,6 @@ var example1 = new Vue({
       { message: 'Foo' },
       { message: 'Bar' }
     ]
-  },
-  watch: {
-    items: function () {
-      smoothScroll.animateScroll(document.querySelector('#example-1'))
-    }
   }
 })
 </script>
@@ -95,11 +90,6 @@ var example2 = new Vue({
       { message: 'Foo' },
       { message: 'Bar' }
     ]
-  },
-  watch: {
-    items: function () {
-      smoothScroll.animateScroll(document.querySelector('#example-2'))
-    }
   }
 })
 </script>
