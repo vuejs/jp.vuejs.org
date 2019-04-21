@@ -1,6 +1,6 @@
 ---
 title: Vue.js コミュニティへ参加しましょう!
-updated: 2018-10-10
+updated: 2019-04-21
 type: guide
 order: 802
 ---
@@ -19,7 +19,7 @@ Vue コミュニティは驚くべき速さで成長しています、そして�
 
 - [フォーラム](https://forum.vuejs.org/): Vue について回答を得たり、そのエコシステムについて質問するために最適な場所です。
 - [Chat](https://chat.vuejs.org/): Vue 開発者がリアルタイムで会い、チャットできる場所です。
-- [Meetups](https://www.vuemeetups.org): 地元で Vue.js に熱中している人々を探していませんか？コミュニティの代表になる事に興味は有りませんか？こちらがあなたの助けになります！
+- [Meetups](https://events.vuejs.org/meetups): 地元で Vue.js に熱中している人々を探していませんか？コミュニティの代表になる事に興味は有りませんか？こちらがあなたの助けになります！
 - [GitHub](https://github.com/vuejs): 報告すべきバグや要請したい仕様があれば、GitHub issues が最適です。プルリクエストも歓迎します！
 
 ### エコシステムを調べる
@@ -61,7 +61,7 @@ Vue はすでに世界的に広まっており、コアチームでさえ少な�
 あなたの所属するコミュニティにおける Vue の発展のためにできる事は沢山有ります:
 
 - **地元のミートアップに参加する。** 発表を行ったりワークショップを開催したりする事で、初心者および経験の有る Vue 開発者それぞれの成長を支援してコミュニティに大きな利益をもたらす事ができます。
-- **自身でミートアップを開催する。** もし Vue のミートアップが近隣でまだ開催されていなければ、  [vuemeetups.org の情報](https://www.vuemeetups.org/resources/#introduction) を使う事が成功につながります！
+- **自身でミートアップを開催する。** もし Vue のミートアップが近隣でまだ開催されていなければ、  [events.vuejs.org の情報](https://events.vuejs.org/resources/#getting-started) を使う事が成功につながります！
 - **ミートアップを取りまとめている方々を支援する。** イベントを開催するにあたって支援が少なすぎるという事は無いので、イベントが成功するように地元で幹事役となっている人達を支援して下さい。
 
-地元の Vue コミュニティと交流を深める上で何らかの質問が有れば、 [hello@vuemeetups.org](mailto:hello@vuemeetups.org) もしくは [@VueMeetups](https://www.twitter.com/vuemeetups) にて支援を受けて下さい！
+地元の Vue コミュニティと交流を深める上で何らかの質問が有れば、 [@Vuejs_Events](https://www.twitter.com/vuejs_events) にて支援を受けて下さい！
