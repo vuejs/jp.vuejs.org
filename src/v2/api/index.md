@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-04-01
+updated: 2019-04-27
 ---
 
 ## グローバル設定
@@ -677,14 +677,14 @@ updated: 2019-04-01
       },
       // 文字列メソッド名
       b: 'someMethod',
-      // 深いウオッチャ (watcher)
+      // コールバックは監視しているオブジェクトのプロパティが（そのネストの深さに関係なく）変更されると呼ばれる
       c: {
         handler: function (val, oldVal) { /* ... */ },
         deep: true
       },
       // コールバックは監視の開始後、直ちに呼ばれる
       d: {
-        handler: function (val, oldVal) { /* ... */ },
+        handler: 'someMethod',
         immediate: true
       },
       e: [
