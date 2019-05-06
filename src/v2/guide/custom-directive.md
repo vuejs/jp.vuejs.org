@@ -1,6 +1,6 @@
 ---
 title: カスタムディレクティブ
-updated: 2018-12-08
+updated: 2019-05-06
 type: guide
 order: 302
 ---
@@ -143,6 +143,37 @@ new Vue({
 })
 </script>
 {% endraw %}
+
+`ディレクティブの引数は動的にできます。例えば、`v-mydirective:argument=[dataproperty]` において、`argument` はディレクティブフックの *binding* パラメーターに *arg* プロパティとして割り当てられる文字列値、`dataproperty` は同じ *binding* パラメーターに *value* プロパティとして割り当てられるコンポーネントの data プロパティへの参照となります。ディレクティブフックが呼ばれると、*binding* パラメーターの *value* プロパティは `dataproperty` の値に応じて動的に変わります。
+
+動的引数を使ったカスタムディレクティブの例は次の通りです:
+
+```html
+<div id="app">
+  <p>Scroll down the page</p>
+  <p v-tack:left="[dynamicleft]">I’ll now be offset from the left instead of the top</p>
+</div>
+```
+
+```js
+Vue.directive('tack', {
+  bind(el, binding, vnode) {
+    el.style.position = 'fixed';
+    const s = (binding.arg == 'left' ? 'left' : 'top');
+    el.style[s] = binding.value + 'px';
+  }
+})
+
+// アプリケーションを開始
+new Vue({
+  el: '#app',
+  data() {
+    return {
+      dynamicleft: 500
+    }
+  }
+})
+```
 
 ## 関数による省略記法
 
