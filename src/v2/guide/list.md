@@ -1,6 +1,6 @@
 ---
 title: リストレンダリング
-updated: 2019-04-21
+updated: 2019-05-08
 type: guide
 order: 8
 ---
@@ -118,9 +118,9 @@ new Vue({
   el: '#v-for-object',
   data: {
     object: {
-      firstName: 'John',
-      lastName: 'Doe',
-      age: 30
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
     }
   }
 })
@@ -139,37 +139,37 @@ new Vue({
   el: '#v-for-object',
   data: {
     object: {
-      firstName: 'John',
-      lastName: 'Doe',
-      age: 30
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
     }
   }
 })
 </script>
 {% endraw %}
 
-2 つ目の引数として key も提供できます:
+2 つ目の引数としてプロパティ名（すなわちキー）も提供できます:
 
 ``` html
-<div v-for="(value, key) in object">
-  {{ key }}: {{ value }}
+<div v-for="(value, name) in object">
+  {{ name }}: {{ value }}
 </div>
 ```
 
 {% raw %}
-<div id="v-for-object-value-key" class="demo">
-  <div v-for="(value, key) in object">
-    {{ key }}: {{ value }}
+<div id="v-for-object-value-name" class="demo">
+  <div v-for="(value, name) in object">
+    {{ name }}: {{ value }}
   </div>
 </div>
 <script>
 new Vue({
-  el: '#v-for-object-value-key',
+  el: '#v-for-object-value-name',
   data: {
     object: {
-      firstName: 'John',
-      lastName: 'Doe',
-      age: 30
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
     }
   }
 })
@@ -179,25 +179,25 @@ new Vue({
 index も提供できます:
 
 ``` html
-<div v-for="(value, key, index) in object">
-  {{ index }}. {{ key }}: {{ value }}
+<div v-for="(value, name, index) in object">
+  {{ index }}. {{ name }}: {{ value }}
 </div>
 ```
 
 {% raw %}
-<div id="v-for-object-value-key-index" class="demo">
-  <div v-for="(value, key, index) in object">
-    {{ index }}. {{ key }}: {{ value }}
+<div id="v-for-object-value-name-index" class="demo">
+  <div v-for="(value, name, index) in object">
+    {{ index }}. {{ name }}: {{ value }}
   </div>
 </div>
 <script>
 new Vue({
-  el: '#v-for-object-value-key-index',
+  el: '#v-for-object-value-name-index',
   data: {
     object: {
-      firstName: 'John',
-      lastName: 'Doe',
-      age: 30
+      title: 'How to do lists in Vue',
+      author: 'Jane Doe',
+      publishedAt: '2016-04-10'
     }
   }
 })
@@ -206,21 +206,21 @@ new Vue({
 
 <p class="tip">オブジェクトを反復処理するとき、順序は `Object.keys()` の列挙順のキーに基づいており、全ての JavaScript エンジンの実装で一貫性が保証されて**いません**。</p>
 
-## `key`
+## 状態の維持
 
 Vue が `v-for` で描画された要素のリストを更新する際、標準では "その場でパッチを適用する" (in-place patch) 戦略が用いられます。データのアイテムの順序が変更された場合、アイテムの順序に合わせて DOM 要素を移動する代わりに、 Vue は各要素にその場でパッチを適用して、その特定のインデックスに何を描画するべきかを確実に反映します。これは Vue 1.x にあった機能の `track-by="$index"` に似たものです。
 
 この標準のモードは効率がいいです。しかしこれは、**描画されたリストが子コンポーネントの状態や、一時的な DOM の状態に依存していないときにだけ適しています (例: フォームのインプットの値)**。
 
-Vue が各ノードの識別情報を追跡できるヒントを与えるために、また、先ほど説明したような既存の要素の再利用と並び替えができるように、一意な `key` 属性を全てのアイテムに与える必要があります。この特別な属性は 1.x の `track-by` に相当するものですが、しかしこれは属性のように動作します。従って、これを動的な値に束縛するためには `v-bind` を使う必要があります (以下は省略構文を使ったものです):
+Vue が各ノードの識別情報を追跡できるヒントを与えるために、また、先ほど説明したような既存の要素の再利用と並び替えができるように、一意な `key` 属性を全てのアイテムに与える必要があります:
 
 ``` html
-<div v-for="item in items" :key="item.id">
+<div v-for="item in items" v-bind:key="item.id">
   <!-- content -->
 </div>
 ```
 
-繰り返される DOM の内容が単純な場合や、性能向上のために標準の動作に意図的に頼る場合を除いて、可能なときはいつでも `v-for` に `key` を与えることが推奨されます。
+繰り返される DOM の内容が単純な場合や、性能向上のために標準の動作に意図的に頼る場合を除いて、可能なときはいつでも `v-for` に `key` 属性を与えることが推奨されます。
 
 これは Vue がノードを識別する汎用的な仕組みなので、`key` はガイドの後半でわかるように `v-for` に縛られない他の用途もあります。
 
@@ -314,7 +314,7 @@ vm.b = 2
 // `vm.b` はリアクティブではありません
 ```
 
-Vue はすでに作成されたインスタンスに新しいルートレベルのリアクティブプロパティを動的に追加することはできません。しかし、`Vue.set（object、key、value）` メソッドを使ってネストされたオブジェクトにリアクティブなプロパティを追加することは可能です。例を挙げると：
+Vue はすでに作成されたインスタンスに新しいルートレベルのリアクティブプロパティを動的に追加することはできません。しかし、`Vue.set（object、propertyName、value）` メソッドを使ってネストされたオブジェクトにリアクティブなプロパティを追加することは可能です。例を挙げると：
 
 ``` js
 var vm = new Vue({

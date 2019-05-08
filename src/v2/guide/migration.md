@@ -1,6 +1,6 @@
 ---
 title: Vue 1.x からの移行
-updated: 2018-05-08
+updated: 2019-05-08
 type: guide
 order: 701
 ---
@@ -194,7 +194,7 @@ mounted: function () {
 
 ### オブジェクトにおいての `v-for` の引数の順序 <sup>変更</sup>
 
-`key` を含む場合、引数を `(key, value)` の順序で使用していました。それは今は、 `(value, key)` となり、 lodash などの一般的なオブジェクトのイテレータと一貫性を持つようになりました。
+プロパティ名/キーを含む場合、引数を `(name, value)` の順序で使用していました。それは今は、 `(value, name)` となり、 lodash などの一般的なオブジェクトのイテレータと一貫性を持つようになりました。
 
 {% raw %}
 <div class="upgrade-path">

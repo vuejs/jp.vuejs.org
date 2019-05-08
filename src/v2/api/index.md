@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-04-27
+updated: 2019-05-08
 ---
 
 ## グローバル設定
@@ -247,11 +247,11 @@ updated: 2019-04-27
 
 - **参照:** [非同期更新キュー](../guide/reactivity.html#非同期更新キュー)
 
-### Vue.set( target, key, value )
+### Vue.set( target, propertyName/index, value )
 
 - **引数:**
   - `{Object | Array} target`
-  - `{string | number} key`
+  - `{string | number} propertyName/index`
   - `{any} value`
 
 - **戻り値:** 設定した値
@@ -265,11 +265,11 @@ updated: 2019-04-27
 - **参照:** [リアクティブの探求](../guide/reactivity.html)
 
 
-### Vue.delete( target, key )
+### Vue.delete( target, propertyName/index )
 
 - **引数:**
   - `{Object | Array} target`
-  - `{string | number} key/index`
+  - `{string | number} propertyName/index`
 
   > 2.2.0 以降では、 配列とそのインデックスでも動作します。
 
@@ -1578,11 +1578,11 @@ updated: 2019-04-27
   // その時の `a` の値で`コールバック`がただちに発火します
   ```
 
-### vm.$set( target, key, value )
+### vm.$set( target, propertyName/index, value )
 
 - **引数:**
   - `{Object | Array} target`
-  - `{string | number} key`
+  - `{string | number} propertyName/index`
   - `{any} value`
 
 - **戻り値:** 設定した値
@@ -1593,11 +1593,11 @@ updated: 2019-04-27
 
 - **参照:** [Vue.set](#Vue-set)
 
-### vm.$delete( target, key )
+### vm.$delete( target, propertyName/index )
 
 - **引数:**
   - `{Object | Array} target`
-  - `{string | number} key`
+  - `{string | number} propertyName/index`
 
 - **使用方法:**
 
@@ -2015,7 +2015,7 @@ updated: 2019-04-27
   ``` html
   <div v-for="(item, index) in items"></div>
   <div v-for="(val, key) in object"></div>
-  <div v-for="(val, key, index) in object"></div>
+  <div v-for="(val, name, index) in object"></div>
   ```
 
   `v-for` のデフォルトの振舞いは、それらを移動しないで所定の位置の要素にパッチを適用しようとします。要素の順序を変更するのを強制するためには、`key` という特別な属性によって順序のヒントを提供する必要があります:
