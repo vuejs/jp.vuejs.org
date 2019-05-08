@@ -141,7 +141,7 @@ new Vue({
 
 上記の例では、`v-if` ディレクティブを使用してメモリリークを説明しましたが、シングルページアプリケーションのコンポーネントに [vue-router](https://router.vuejs.org/ja/) を使用してルーティングする場合、より一般的で現実的なシナリオが発生します。
 
-`v-if` ディレクティブのように、`vue-router` は仮想 DOM から要素を削除しユーザーがアプリケーションを回遊するするときにそれらを新しい要素で置き換えます。Vue `beforeDestroy()` [ライフサイクルフック](/v2/guide/instance.html#Lifecycle-Diagram)は `vue-router` ベースで構築されているアプリケーションの同じ種類の課題を解決することに適しています。
+`v-if` ディレクティブのように、`vue-router` は仮想 DOM から要素を削除しユーザーがアプリケーションを回遊するときにそれらを新しい要素で置き換えます。Vue `beforeDestroy()` [ライフサイクルフック](/v2/guide/instance.html#Lifecycle-Diagram)は `vue-router` ベースで構築されているアプリケーションの同じ種類の課題を解決することに適しています。
 
 このように `beforeDestroy()` フックにクリーンアップを移すことができます:
 
