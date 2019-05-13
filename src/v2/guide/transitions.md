@@ -1,6 +1,6 @@
 ---
 title: Enter/Leave とトランジション一覧
-updated: 2018-05-23
+updated: 2019-05-13
 type: guide
 order: 201
 ---
@@ -573,6 +573,8 @@ new Vue({
   <!-- ... -->
 </transition>
 ```
+
+上の例で、`appear` 属性と `v-on:appear` フックのどちらも appear トランジションを引き起こします。
 
 ## 要素間のトランジション
 
