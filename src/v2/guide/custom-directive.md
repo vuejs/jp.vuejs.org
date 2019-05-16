@@ -144,7 +144,7 @@ new Vue({
 </script>
 {% endraw %}
 
-`ディレクティブの引数は動的にできます。例えば、`v-mydirective:argument=[dataproperty]` において、`argument` はディレクティブフックの *binding* パラメーターに *arg* プロパティとして割り当てられる文字列値、`dataproperty` は同じ *binding* パラメーターに *value* プロパティとして割り当てられるコンポーネントの data プロパティへの参照となります。ディレクティブフックが呼ばれると、*binding* パラメーターの *value* プロパティは `dataproperty` の値に応じて動的に変わります。
+ディレクティブの引数は動的にできます。例えば、`v-mydirective:argument=[dataproperty]` において、`argument` はディレクティブフックの *binding* パラメーターに *arg* プロパティとして割り当てられる文字列値、`dataproperty` は同じ *binding* パラメーターに *value* プロパティとして割り当てられるコンポーネントの data プロパティへの参照となります。ディレクティブフックが呼ばれると、*binding* パラメーターの *value* プロパティは `dataproperty` の値に応じて動的に変わります。
 
 動的引数を使ったカスタムディレクティブの例は次の通りです:
 
