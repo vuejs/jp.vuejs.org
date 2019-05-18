@@ -160,7 +160,7 @@ this.$emit('update:title', newTitle)
 <text-document v-bind:title.sync="doc.title"></text-document>
 ```
 
-<p class="tip"><code>v-bind</code> に <code>.sync</code> 修飾子をつける場合は式を指定しても<strong>うまくいかない</strong>ことに注意してください (例: <code>v-bind:title.sync="doc.title + '!'"</code> は無効です)。そうではなく、 <code>v-model</code> と同様にバインドしたいプロパティ名のみを指定してください。</p>
+<p class="tip"><code>v-bind</code> に <code>.sync</code> 修飾子をつける場合は式を指定しても<strong>動作しない</strong>ことに注意してください (例: <code>v-bind:title.sync="doc.title + '!'"</code> は無効です)。そうではなく、 <code>v-model</code> と同様にバインドしたいプロパティ名のみを指定してください。</p>
 
 `.sync` 修飾子を `v-bind` に付けることでオブジェクトを使って複数のプロパティを一度にセットする事ができます：
 
