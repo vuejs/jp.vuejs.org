@@ -1,6 +1,6 @@
 ---
 title: Vue コンポーネントを npm パッケージ化する
-updated: 2018-05-28
+updated: 2019-05-19
 type: cookbook
 order: 12
 ---
@@ -215,4 +215,4 @@ vue serve --open src/my-component.vue
 
 ## 謝辞
 
-このページは 2018 年 3 月の VueConf.us で発表された [Mike Dodge](https://twitter.com/mgdodgeycode) によるライトニング・トークの成果です。彼はこの手順を用いてサンプルの単一ファイルコンポーネントを基本に構築したユーティリティを npm に公開しました。このユーティリティは、 npm を通じて、 [vue-sfc-rollup](https://www.npmjs.com/package/vue-sfc-rollup) からダウンロードできます。さらに [そのリポジトリをクローンして](https://github.com/team-innovation/vue-sfc-rollup) カスタマイズする事もできます。
+このページは 2018 年 3 月の VueConf.us で発表された [Mike Dodge](https://twitter.com/webdevdodge) によるライトニング・トークの成果です。彼はこの手順を用いてサンプルの単一ファイルコンポーネントを基本に構築したユーティリティを npm に公開しました。このユーティリティは、 npm を通じて、 [vue-sfc-rollup](https://www.npmjs.com/package/vue-sfc-rollup) からダウンロードできます。さらに [そのリポジトリをクローンして](https://github.com/team-innovation/vue-sfc-rollup) カスタマイズする事もできます。
