@@ -4674,10 +4674,10 @@ textlint-rule-no-mix-dearu-desumasu@^4.0.0:
     textlint-rule-helper "^2.0.0"
     unist-util-visit "^1.1.0"
 
-textlint-rule-preset-jtf-style@^2.1.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/textlint-rule-preset-jtf-style/-/textlint-rule-preset-jtf-style-2.3.2.tgz#06ef5f0d1dfa44a45666eccfa44751a7de2bec11"
-  integrity sha512-VCgWyHrqIIC/drpBurb2bxDG3lBMYU3qPxCJntmXVmMSZ4+tmD/tKxwYumgRPxE1LrrBbrUrboF/zP+FGJTltQ==
+textlint-rule-preset-jtf-style@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/textlint-rule-preset-jtf-style/-/textlint-rule-preset-jtf-style-2.3.3.tgz#5128d96f4edb566c8940e09ddcf3ce4803d133c4"
+  integrity sha512-wSBz4yqCcbKSAhlW7rhCCCPpCULTq2tT3lhyY3Q43cL+qsNx6U1UjngmQqLWkVBXVw2awQxkdeqORW7r+n4Qdg==
   dependencies:
     analyze-desumasu-dearu "^2.1.2"
     japanese-numerals-to-number "^1.0.2"
