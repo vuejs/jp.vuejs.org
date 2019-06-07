@@ -40,6 +40,7 @@ new Vue({
   // ...
 })
 ```
+When the global filter has the same name as the local filter, the local filter will be preferred.
 
 以下は `capitalize` フィルタの使用例です。
 
