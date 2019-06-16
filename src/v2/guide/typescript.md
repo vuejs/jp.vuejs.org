@@ -1,11 +1,11 @@
 ---
 title: TypeScript のサポート
-updated: 2018-12-22
+updated: 2019-06-12
 type: guide
 order: 403
 ---
 
-> [Vue CLI](https://cli.vuejs.org) は、TypeScript ツールのサポートを組み込みで提供します。次期メジャーバージョンの Vue (3.x) では、クラスベースのコンポーネント API をもつ TypeScript サポートと TSX サポートの大幅な改善も予定しています。
+> [Vue CLI](https://cli.vuejs.org) は、TypeScript ツールのサポートを組み込みで提供します。
 
 ## NPM パッケージ内の公式型宣言
 
