@@ -1,6 +1,6 @@
 ---
 title: カスタムディレクティブ
-updated: 2019-05-06
+updated: 2019-06-03
 type: guide
 order: 302
 ---
@@ -58,7 +58,7 @@ directives: {
 ```
 
 
-### フック関数
+## フック関数
 
 directive definition object はいくつかのフック関数(全て任意)を提供します:
 
@@ -75,7 +75,7 @@ directive definition object はいくつかのフック関数(全て任意)を�
 
 次のセクションで、これらのフックに渡す引数(すなわち `el`, `binging`, `vnode`, `oldVnode`)を見ていきましょう。
 
-### ディレクティブフック引数
+## ディレクティブフック引数
 
 ディレクティブフックには以下の引数が渡せます:
 
@@ -144,36 +144,70 @@ new Vue({
 </script>
 {% endraw %}
 
-ディレクティブの引数は動的にできます。例えば、`v-mydirective:argument=[dataproperty]` において、`argument` はディレクティブフックの *binding* パラメーターに *arg* プロパティとして割り当てられる文字列値、`dataproperty` は同じ *binding* パラメーターに *value* プロパティとして割り当てられるコンポーネントの data プロパティへの参照となります。ディレクティブフックが呼ばれると、*binding* パラメーターの *value* プロパティは `dataproperty` の値に応じて動的に変わります。
+### 動的なディレクティブ引数
 
-動的引数を使ったカスタムディレクティブの例は次の通りです:
+ディレクティブの引数は動的にできます。例えば、`v-mydirective:[argument]="value"` において、`argument` はコンポーネントインスタンスの data プロパティに基づいて更新されます！これにより、アプリケーション内でのカスタムディレクティブの利用が柔軟になります。
+
+要素をページの固定位置にピン留めするカスタムディレクティブを作りたいとしましょう。縦方向のピクセル位置を値で設定するカスタムディレクティブを次のように作ることができます:
 
 ```html
-<div id="app">
+<div id="baseexample">
   <p>Scroll down the page</p>
-  <p v-tack:left="[dynamicleft]">I’ll now be offset from the left instead of the top</p>
+  <p v-pin="200">Stick me 200px from the top of the page</p>
 </div>
 ```
 
 ```js
-Vue.directive('tack', {
-  bind(el, binding, vnode) {
-    el.style.position = 'fixed';
-    const s = (binding.arg == 'left' ? 'left' : 'top');
-    el.style[s] = binding.value + 'px';
+Vue.directive('pin', {
+  bind: function (el, binding, vnode) {
+    el.style.position = 'fixed'
+    el.style.top = binding.value + 'px'
   }
 })
 
-// アプリケーションを開始
 new Vue({
-  el: '#app',
-  data() {
+  el: '#baseexample'
+})
+```
+
+これにより、ページの上端から 200px の位置に要素を固定できます。しかし、上端からではなく左端からの位置で要素をピン留めしたくなったらどうでしょうか？動的引数はコンポーネントのインスタンス毎に更新できるので、こういう場合に役立ちます:
+
+
+```html
+<div id="dynamicexample">
+  <h3>Scroll down inside this section ↓</h3>
+  <p v-pin:[direction]="200">I am pinned onto the page at 200px to the left.</p>
+</div>
+```
+
+```js
+Vue.directive('pin', {
+  bind: function (el, binding, vnode) {
+    el.style.position = 'fixed'
+    var s = (binding.arg == 'left' ? 'left' : 'top')
+    el.style[s] = binding.value + 'px'
+  }
+})
+
+new Vue({
+  el: '#dynamicexample',
+  data: function () {
     return {
-      dynamicleft: 500
+      direction: 'left'
     }
   }
 })
 ```
+
+結果:
+{% raw %}
+<iframe height="200" style="width: 100%;" class="demo" scrolling="no" title="Dynamic Directive Arguments" src="//codepen.io/team/Vue/embed/rgLLzb/?height=300&theme-id=32763&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/team/Vue/pen/rgLLzb/'>Dynamic Directive Arguments</a> by Vue
+  (<a href='https://codepen.io/Vue'>@Vue</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+{% endraw %}
+
+このカスタムディレクティブは、ちょっとした違いのユースケースを柔軟にサポートできるようになりました。
 
 ## 関数による省略記法
 
