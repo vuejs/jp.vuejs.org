@@ -1,7 +1,7 @@
 ---
 title: スタイルガイド
 type: style-guide
-updated: 2019-04-14
+updated: 2019-06-22
 ---
 
 このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
@@ -1437,7 +1437,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ### ディレクティブの短縮記法 <sup data-p="b">強く推奨</sup>
 
-**ディレクティブの短縮記法 (`v-bind:` に対する `:` 、 `v-on:` に対する `@`)は、常に使うか、まったく使わないかのどちらかにするべきです。**
+**ディレクティブの短縮記法 (`v-bind:` に対する `:` 、 `v-on:` に対する `@` 、 `v-slot:` に対する `#`)は、常に使うか、まったく使わないかのどちらかにするべきです。**
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
@@ -1454,6 +1454,16 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
   v-on:input="onInput"
   @focus="onFocus"
 >
+```
+
+``` html
+<template v-slot:header>
+  <h1>Here might be a page title</h1> 
+</template>
+
+<template #footer>
+  <p>Here's some contact info</p>
+</template>
 ```
 {% raw %}</div>{% endraw %}
 
@@ -1486,6 +1496,26 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
   v-on:input="onInput"
   v-on:focus="onFocus"
 >
+```
+
+``` html
+<template v-slot:header>
+  <h1>Here might be a page title</h1> 
+</template>
+
+<template v-slot:footer>
+  <p>Here's some contact info</p>
+</template>
+```
+
+``` html
+<template #header>
+  <h1>Here might be a page title</h1> 
+</template>
+
+<template #footer>
+  <p>Here's some contact info</p>
+</template>
 ```
 {% raw %}</div>{% endraw %}
 
