@@ -1578,6 +1578,34 @@ updated: 2019-05-08
   // その時の `a` の値で`コールバック`がただちに発火します
   ```
 
+  Note that with `immediate` option you won't be able to unwatch the given property on the first callback call. 
+
+  ``` js
+  // This will cause an error
+  var unwatch = vm.$watch(
+    'value',
+    function () {
+      doSomething()
+      unwatch()
+    },
+    { immediate: true }
+  )
+  ```
+  If you still want to call an unwatch function inside the callback, you should check its availability first:
+
+  ``` js
+  var unwatch = vm.$watch(
+    'value',
+    function () {
+      doSomething()
+      if (unwatch) {
+        unwatch()
+      }
+    },
+    { immediate: true }
+  )
+  ```
+
 ### vm.$set( target, propertyName/index, value )
 
 - **引数:**
