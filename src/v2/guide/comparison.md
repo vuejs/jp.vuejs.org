@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2019-03-29
+updated: 2019-07-01
 type: guide
 order: 801
 ---
