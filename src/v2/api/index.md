@@ -1,7 +1,7 @@
 ---
 title: API
 type: api
-updated: 2019-05-08
+updated: 2019-07-08
 ---
 
 ## グローバル設定
@@ -1576,6 +1576,34 @@ updated: 2019-05-08
     immediate: true
   })
   // その時の `a` の値で`コールバック`がただちに発火します
+  ```
+
+  `immediate` オプションを使う場合、最初のコールバック呼び出し時には該当プロパティの監視を解除できないことに注意してください。
+
+  ``` js
+  // エラーになります
+  var unwatch = vm.$watch(
+    'value',
+    function () {
+      doSomething()
+      unwatch()
+    },
+    { immediate: true }
+  )
+  ```
+  コールバックの中でどうしても unwatch 関数を呼び出したい場合は、先に実行可能かをチェックする必要があります:
+
+  ``` js
+  var unwatch = vm.$watch(
+    'value',
+    function () {
+      doSomething()
+      if (unwatch) {
+        unwatch()
+      }
+    },
+    { immediate: true }
+  )
   ```
 
 ### vm.$set( target, propertyName/index, value )
