@@ -1,6 +1,6 @@
 ---
 title: カスタムディレクティブ
-updated: 2019-06-03
+updated: 2019-07-08
 type: guide
 order: 302
 ---
@@ -200,6 +200,7 @@ new Vue({
 ```
 
 結果:
+
 {% raw %}
 <iframe height="200" style="width: 100%;" class="demo" scrolling="no" title="Dynamic Directive Arguments" src="//codepen.io/team/Vue/embed/rgLLzb/?height=300&theme-id=32763&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/team/Vue/pen/rgLLzb/'>Dynamic Directive Arguments</a> by Vue
