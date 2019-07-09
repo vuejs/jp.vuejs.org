@@ -488,7 +488,7 @@ Vue のトランジション機能に、[`appear` トランジションの制御
 {% raw %}
 <div class="upgrade-path">
   <h4>移行ガイド</h4>
-  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>beforeRouteEnter</code> フックを使用している箇所を検出してください。</p>
+  <p>コードに対し <a href="https://github.com/vuejs/vue-migration-helper">移行ヘルパー</a> を実行し <code>activate</code> フックを使用している箇所を検出してください。</p>
 </div>
 {% endraw %}
 
