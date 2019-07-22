@@ -1,6 +1,6 @@
 ---
 title: 動的 & 非同期コンポーネント
-updated: 2018-04-25 00:00:00
+updated: 2019-07-22
 type: guide
 order: 105
 ---
@@ -201,6 +201,8 @@ new Vue({
 `<keep-alive>` の詳細な情報については [API リファレンス](../api/#keep-alive) を参照してください。
 
 ## 非同期コンポーネント
+
+<div class="vueschool"><a href="https://vueschool.io/lessons/dynamically-load-components?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Async Components lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 大規模なアプリケーションでは、アプリケーションを小さなまとまりに分割し、必要なコンポーネントだけサーバからロードしたい場合があるでしょう。Vue では、コンポーネント定義を非同期で解決するファクトリ関数としてコンポーネントを定義することができます。Vue は、コンポーネントをレンダリングする必要がある場合にのみファクトリ関数をトリガし、将来の再レンダリングのために結果をキャッシュします。例えば:
 

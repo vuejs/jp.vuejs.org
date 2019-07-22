@@ -1,11 +1,13 @@
 ---
 title: フォームのバリデーション
 type: cookbook
-updated: 2018-03-20
+updated: 2019-07-22
 order: 3
 ---
 
 ## 基本的な例
+
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-form-validation-diy?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Form Validation Lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 フォームのバリデーションはブラウザにネイティブサポートされますが、異なるブラウザ間での取り扱いには注意が必要です。またバリデーションが完全にサポートされている場合においても、カスタマイズしたバリデーションが必要な場合もあるため、 Vue ベースでのソリューションが適切かもしれません。簡単な例から見ていきましょう。
 
