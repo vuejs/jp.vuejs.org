@@ -1,6 +1,6 @@
 ---
 title: Vue コンポーネントを npm パッケージ化する
-updated: 2019-05-19
+updated: 2019-08-01
 type: cookbook
 order: 12
 ---
