@@ -321,7 +321,7 @@ Vue.component('my-component', {
 }
 ```
 
-`inheritAttrs: false` と `$attrs` を併用すると、要素に送る属性を手動で決定することができます。これは、 [基底コンポーネント](../style-guide/#基底コンポーネントの名前-強く推奨) の利用においてはしばしば望ましいことがあります:
+`inheritAttrs: false` と `$attrs` を併用すると、どの要素に属性を送るかを手動で決定することができます。これは、 [基底コンポーネント](../style-guide/#基底コンポーネントの名前-強く推奨) の利用においてはしばしば望ましいことがあります:
 
 ```js
 Vue.component('base-input', {
