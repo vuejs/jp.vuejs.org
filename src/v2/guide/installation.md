@@ -38,13 +38,13 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 プロトタイピングや学習を目的とする場合は、以下のようにして最新バージョンを使うことができます:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 ```
 
 本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 ```
 
 もしもネイティブの ES Modules を使っているなら、ES Modules 互換のビルドもあります:
