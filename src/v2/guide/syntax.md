@@ -185,7 +185,7 @@ in-DOM テンプレートの中では、v-bind:[someattr] に変換されます�
 <form v-on:submit.prevent="onSubmit"> ... </form>
 ```
 
-他の例については、[`v-on`](events.html#イベント修飾子)や[`v-model`](forms.html#修飾子)を参照してください。これらの機能については後述します。
+後ほど[`v-on`](events.html#イベント修飾子)および[`v-model`](forms.html#修飾子)の説明をする際、修飾子の他の例を見るでしょう。
 
 ## 省略記法
 
