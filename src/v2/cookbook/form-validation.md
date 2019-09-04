@@ -433,4 +433,4 @@ OpenWhisk にて実行される API の URL を表す変数から始まります
 このクックブックでは、手作業でフォームのバリデーションを行うことに焦点をあてていますが、もちろん、これを取り扱うための素晴らしい Vue ライブラリが多く存在します。パッケージ化されたライブラリに切り替えることで、アプリケーションの最終的なサイズに影響をあたえることがありますが、切り替えることは大きなメリットとなりえるでしょう。十分にテストされ、定期的に更新されているコードとして、 Vue のフォームバリデーションライブラリには次のようなものがあります:
 
 * [vuelidate](https://github.com/monterail/vuelidate)
-* [VeeValidate](http://vee-validate.logaretm.com/)
+* [VeeValidate](https://logaretm.github.io/vee-validate/)
