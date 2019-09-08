@@ -1,13 +1,14 @@
 ---
 title: インスタンスプロパティの追加
 type: cookbook
-updated: 2018-05-02
+updated: 2019-09-09
 order: 2
 ---
 
 ## 基本的な例
-多くのコンポーネントで使用したいデータ/ユーティリティがあるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20%26%20closures/ch3.md)。
-この場合は、プロトタイプに追加すれば全ての Vue インスタンスで使用できます：
+
+多くのコンポーネントで使用したいデータ/ユーティリティがあるかもしれませんが、[グローバルスコープを汚染したくはありません](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/scope-closures/ch3.md)。この場合は、プロトタイプに追加すれば全ての Vue インスタンスで使用できます：
+
 ```js
 Vue.prototype.$appName = 'My App'
 ```
