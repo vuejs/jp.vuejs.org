@@ -1,6 +1,6 @@
 ---
 title: テンプレート構文
-updated: 2019-08-22
+updated: 2019-09-02
 type: guide
 order: 4
 ---
@@ -185,7 +185,7 @@ in-DOM テンプレートの中では、v-bind:[someattr] に変換されます�
 <form v-on:submit.prevent="onSubmit"> ... </form>
 ```
 
-これらの機能を調べるとき、この後、[`v-on`](events.html#イベント修飾子) や [`v-model`](forms.html#修飾子)については、修飾子の他の例を見るでしょう。
+後ほど[`v-on`](events.html#イベント修飾子)および[`v-model`](forms.html#修飾子)の説明をする際、修飾子の他の例を見るでしょう。
 
 ## 省略記法
 
