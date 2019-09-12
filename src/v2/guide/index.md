@@ -291,6 +291,8 @@ Vue においては、「コンポーネント」は本質的にはあらかじ�
 Vue.component('todo-item', {
   template: '<li>This is a todo</li>'
 })
+
+var app = new Vue(...)
 ```
 
 これで他のコンポーネントのテンプレートからこのコンポーネントを利用できるようになります:
