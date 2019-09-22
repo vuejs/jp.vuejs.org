@@ -209,7 +209,11 @@
     var links = [
       {
         title: 'テーマ',
-        updatedOn: new Date("Fri Mar 15 2019")
+        updatedOn: new Date("Mon Sep 9 2019")
+      },
+      {
+        title: 'リソース',
+        updatedOn: new Date("Mon Sep 9 2019")
       }
     ]
     var today = new Date().getTime()
