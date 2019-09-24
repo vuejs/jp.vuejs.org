@@ -3,7 +3,8 @@
     <input
       class="search-query"
       v-model="search"
-      placeholder="Search Vue.js"
+      placeholder="Vue.js のサイトを検索"
+      aria-label="検索"
     >
     <div class="search-footer">
       <p>
@@ -11,7 +12,7 @@
           <strong>{{ totalResults }} results</strong> found in {{ queryTime }}ms
         </template>
       </p>
-      <a target="_blank" href="https://www.algolia.com/">
+      <a target="_blank" href="https://www.algolia.com/" aria-label="検索">
           <img src="/images/search-by-algolia.png" height="16">
       </a>
     </div>

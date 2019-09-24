@@ -11,7 +11,7 @@
   <% if (page.type) { %>
     <% if (page.type === 'menu') { %>
       <form id="search-form">
-        <input type="text" id="search-query-menu" class="search-query st-default-search-input">
+        <input type="text" id="search-query-menu" aria-label="Vue.js のサイトを検索" class="search-query st-default-search-input">
       </form>
       <%- partial('partials/toc', { type: 'guide' }) %>
     <% } else { %>
@@ -51,7 +51,7 @@
       <%- partial('partials/ad-text') %>
     <%_ } _%>
     間違いを見つけた、またはドキュメントに貢献したいですか？
-    <a href="https://github.com/vuejs/jp.vuejs.org/blob/lang-ja/src/<%- page.path.replace(/\.html$/, '.md') %>" target="_blank">GitHub 上でこのページを編集する</a> か、<a href="https://github.com/vuejs/jp.vuejs.org" target="_blank">GitHub からこのサイトを Fork してプルリクエストしましょう
+    <a href="https://github.com/vuejs/jp.vuejs.org/blob/lang-ja/src/<%- page.path.replace(/\.html$/, '.md') %>" rel="noopener" target="_blank">GitHub 上でこのページを編集する</a> か、<a href="https://github.com/vuejs/jp.vuejs.org" rel="noopener" target="_blank">GitHub からこのサイトを Fork してプルリクエストしましょう
     </a>！
   </div>
 </div>
