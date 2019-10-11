@@ -122,7 +122,7 @@ Vue.component('example', {
 })
 ```
 
-`$nextTick()` は Promise を返却するため、新しい [ES2016 async/await](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function) 構文を用いて、同じことができます:
+`$nextTick()` は Promise を返却するため、新しい [ES2017 async/await](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function) 構文を用いて、同じことができます:
 
 ``` js
   methods: {
