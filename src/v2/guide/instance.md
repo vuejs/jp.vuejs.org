@@ -123,7 +123,7 @@ vm.$watch('a', function (newValue, oldValue) {
 
 ## インスタンスライフサイクルフック
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/understanding-the-vuejs-lifecycle-hooks?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Lifecycle Hooks Lesson">Vue School で無料の動画レッスンを見る</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/understanding-the-vuejs-lifecycle-hooks?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Lifecycle Hooks Lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 各 Vue インスタンスは、生成時に一連の初期化を行います。例えば、データの監視のセットアップやテンプレートのコンパイル、DOM へのインスタンスのマウント、データが変化したときの DOM の更新などがあります。その初期化の過程で、特定の段階でユーザー自身のコードを追加する、いくつかの **ライフサイクルフック(lifecycle hooks)** と呼ばれる関数を実行します。
 

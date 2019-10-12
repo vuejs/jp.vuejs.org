@@ -7,7 +7,7 @@ order: 302
 
 ## 基本
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/create-vuejs-directive?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Custom Directives lesson">Vue School で無料の動画レッスンを見る</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/create-vuejs-directive?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Custom Directives lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 Vue.js 本体で出荷されたディレクティブの標準セットに加えて (`v-model` と `v-show`)、カスタムディレクティブ (custom directive) を登録することができます。Vue 2.0 では、コードの再利用と抽象化における基本の形はコンポーネントです。しかしながら、通常の要素で低レベル DOM にアクセスしなければならないケースがあるかもしれません。こういった場面では、カスタムディレクティブが役立つでしょう。ひとつの例として、以下のような input 要素へのフォーカスが挙げられます:
 

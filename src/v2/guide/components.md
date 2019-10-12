@@ -5,7 +5,7 @@ type: guide
 order: 11
 ---
 
-<div class="vueschool"><a href="https://vueschool.io/courses/vuejs-components-fundamentals?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Components Fundamentals Course">Vue School で無料の動画レッスンを見る</a></div>
+<div class="vueschool"><a href="https://vueschool.io/courses/vuejs-components-fundamentals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Components Fundamentals Course">Vue School で無料の動画レッスンを見る</a></div>
 
 ## 基本例
 
