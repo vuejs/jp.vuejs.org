@@ -7,7 +7,7 @@ order: 101
 
 > このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/global-vs-local-components?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Component Registration lesson">Vue School で無料の動画レッスンを見る</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/global-vs-local-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Component Registration lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 ## コンポーネント名
 

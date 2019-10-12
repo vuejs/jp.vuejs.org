@@ -202,7 +202,7 @@ new Vue({
 
 ## 非同期コンポーネント
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/dynamically-load-components?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Async Components lesson">Vue School で無料の動画レッスンを見る</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/dynamically-load-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Async Components lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 大規模なアプリケーションでは、アプリケーションを小さなまとまりに分割し、必要なコンポーネントだけサーバからロードしたい場合があるでしょう。Vue では、コンポーネント定義を非同期で解決するファクトリ関数としてコンポーネントを定義することができます。Vue は、コンポーネントをレンダリングする必要がある場合にのみファクトリ関数をトリガし、将来の再レンダリングのために結果をキャッシュします。例えば:
 

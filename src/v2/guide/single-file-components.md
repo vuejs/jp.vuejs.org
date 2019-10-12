@@ -7,7 +7,7 @@ order: 401
 
 ## 前書き
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/introduction-to-single-file-components?friend=vuejs" target="_blank" rel="noopener" title="Free Vue.js Single File Components lesson">Vue School で無料の動画レッスンを見る</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/introduction-to-single-file-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Free Vue.js Single File Components lesson">Vue School で無料の動画レッスンを見る</a></div>
 
 多くの Vue プロジェクトでは、グローバルコンポーネントは、`new Vue({ el: '#container '})` の後に各ページの body においてコンテナ要素をターゲットにすることに続いて、`Vue.component` を使用して定義されています。
 

@@ -77,7 +77,7 @@ $ npm install vue
 
 <p class="tip">CLI は Node.js および関連するビルドツールに関する事前知識を前提としています。Vue またはフロントエンドビルドツールを初めて使用している場合、CLI を使用する前に、ビルドツールなしで[ガイド](./)を参照することを強くお勧めします。</p>
 
-<div class="vue-mastery"><a href="https://www.vuemastery.com/courses/real-world-vue-js/vue-cli" target="_blank" rel="noopener" title="Vue CLI">Vue Masteryで動画の説明を見る</a></div>
+<div class="vue-mastery"><a href="https://www.vuemastery.com/courses/real-world-vue-js/vue-cli" target="_blank" rel="sponsored noopener" title="Vue CLI">Vue Masteryで動画の説明を見る</a></div>
 
 ## さまざまなビルドについて
 
