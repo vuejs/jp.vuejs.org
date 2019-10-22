@@ -30,7 +30,7 @@ order: 803
           <dd>
             <ul>
               <li v-for="repo in profile.reposOfficial">
-                <a :href="githubUrl('vuejs', repo)" target=_blank>{{ repo.name || repo }}</a>
+                <a :href="githubUrl('vuejs', repo)" target=_blank rel="noopener noreferrer">{{ repo.name || repo }}</a>
               </li>
             </ul>
           </dd>
@@ -40,7 +40,7 @@ order: 803
           <dd>
             <ul>
               <li v-for="repo in profile.reposPersonal">
-                <a :href="githubUrl(profile.github, repo)" target=_blank>{{ repo.name || repo }}</a>
+                <a :href="githubUrl(profile.github, repo)" target=_blank rel="noopener noreferrer">{{ repo.name || repo }}</a>
               </li>
             </ul>
           </dd>
