@@ -1,7 +1,7 @@
 ---
 title: Vue.js アプリケーションを Docker 化する
 type: cookbook
-updated: 2019-01-20
+updated: 2019-10-29
 order: 13
 ---
 
@@ -23,8 +23,8 @@ WORKDIR /app
 # `package.json` と `package-lock.json` （あれば）を両方コピーする
 COPY package*.json ./
 
-# プロジェクトの依存ライブラリをインストールする
-RUN npm install
+# 開発環境用の依存を除いて、プロジェクトの依存ライブラリをインストールする
+RUN npm install --production
 
 # カレントワーキングディレクトリ(つまり 'app' フォルダ)にプロジェクトのファイルやフォルダをコピーする
 COPY . .
@@ -67,7 +67,7 @@ docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/doc
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 COPY . .
 RUN npm run build
 
