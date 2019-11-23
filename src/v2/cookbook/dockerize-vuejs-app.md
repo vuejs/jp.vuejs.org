@@ -23,8 +23,8 @@ WORKDIR /app
 # `package.json` と `package-lock.json` （あれば）を両方コピーする
 COPY package*.json ./
 
-# 開発環境用の依存を除いて、プロジェクトの依存ライブラリをインストールする
-RUN npm install --production
+# プロジェクトの依存ライブラリをインストールする
+RUN npm install
 
 # カレントワーキングディレクトリ(つまり 'app' フォルダ)にプロジェクトのファイルやフォルダをコピーする
 COPY . .
@@ -67,7 +67,7 @@ docker run -it -p 8080:8080 --rm --name dockerize-vuejs-app-1 vuejs-cookbook/doc
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --production
+RUN npm install
 COPY . .
 RUN npm run build
 
