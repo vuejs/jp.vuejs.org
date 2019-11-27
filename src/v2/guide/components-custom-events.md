@@ -7,6 +7,8 @@ order: 103
 
 > このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
+<div class="vueschool"><a href="https://vueschool.io/lessons/communication-between-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to work with custom events on Vue School">Learn how to work with custom events in a free Vue School lesson</a></div>
+
 ## イベント名
 
 コンポーネントやプロパティとは違い、イベント名の大文字と小文字は自動的に変換されません。その代わり発火されるイベント名とイベントリスナ名は全く同じにする必要があります。例えばキャメルケース(camelCase)のイベント名でイベントを発火した場合:
