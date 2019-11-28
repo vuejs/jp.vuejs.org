@@ -7,7 +7,7 @@ order: 103
 
 > このページは [コンポーネントの基本](components.html) を読まれていることが前提になっています。コンポーネントを扱った事のない場合はこちらのページを先に読んでください。
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/communication-between-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to work with custom events on Vue School">Learn how to work with custom events in a free Vue School lesson</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/communication-between-components?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to work with custom events on Vue School">カスタムイベント操作を Vue School の無料レッスンで学ぶ</a></div>
 
 ## イベント名
 

@@ -7,7 +7,7 @@ order: 102
 
 > このページは、[コンポーネントの基本](components.html)を読んでいることを前提としています。はじめてコンポーネントについて読む場合は、まずはそちらをお読みください。
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/reusable-components-with-props?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how component props work with Vue School">Learn how component props work with a free lesson on Vue School</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/reusable-components-with-props?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how component props work with Vue School">コンポーネントの props がどのように機能するか Vue School の無料レッスンで学ぶ</a></div>
 
 ## プロパティの形式 (キャメルケース vs ケバブケース)
 
