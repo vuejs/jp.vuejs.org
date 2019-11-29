@@ -5,7 +5,7 @@ type: guide
 order: 7
 ---
 
-<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-conditionals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how conditional rendering works with Vue School">Learn how conditional rendering works with a free lesson on Vue School</a></div>
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-conditionals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how conditional rendering works with Vue School">条件付きレンダリングがどのように機能するか Vue School の無料レッスンで学ぶ</a></div>
 
 ## `v-if`
 
