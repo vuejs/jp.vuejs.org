@@ -31,7 +31,7 @@ mustache タグは、対応するオブジェクトの `msg` プロパティの�
 
 ### 生の HTML
 
-2重中括弧の mustaches は、データを HTML ではなく、プレーンなテキストとして扱います。実際の HTML として出力するためには、`v-html` ディレクティブを使用する必要があります:
+2重中括弧の mustaches は、データを HTML ではなく、プレーンなテキストとして扱います。実際の HTML として出力するためには、[`v-html` ディレクティブ](../api/#v-html)を使用する必要があります:
 
 ``` html
 <p>Using mustaches: {{ rawHtml }}</p>
@@ -61,7 +61,7 @@ new Vue({
 
 ### 属性
 
-Mustache は、HTML 属性の内部で使用することはできません。代わりに、[v-bind ディレクティブ](../api/#v-bind)を使用してください:
+Mustache は、HTML 属性の内部で使用することはできません。代わりに、[`v-bind` ディレクティブ](../api/#v-bind)を使用してください:
 
 ``` html
 <div v-bind:id="dynamicId"></div>
