@@ -604,6 +604,8 @@ new Vue({
 
 完全なコードを試してみるには[この fiddle](https://jsfiddle.net/chrisvfritz/o3nycadu/)、もしくは登録された名前の代わりにコンポーネントのオプションオブジェクトをバインディングしている例となる[このバージョン](https://jsfiddle.net/chrisvfritz/b2qj69o1/)を参照してください。
 
+Keep in mind that this attribute can be used with regular HTML elements, however they will be treated as components, which means all attributes **will be bound as DOM attributes**. For some properties such as `value` to work as you would expect, you will need to bind them using the [`.prop` modifier](../api/#v-bind).
+
 これが動的なコンポーネントについて今のところ知っておくべきことですが、このページを読んで内容が分かり次第、後で [動的 & 非同期コンポーネント](components-dynamic-async.html)の全ガイドを読むことをお勧めします。
 
 ## DOM テンプレートパース時の警告
