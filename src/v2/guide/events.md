@@ -155,7 +155,9 @@ new Vue({
 methods: {
   warn: function (message, event) {
     // ネイティブイベントを参照しています
-    if (event) event.preventDefault()
+    if (event) {
+      event.preventDefault()
+    }
     alert(message)
   }
 }
