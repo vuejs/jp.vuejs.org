@@ -7,6 +7,8 @@ order: 5
 
 ## 算出プロパティ
 
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-computed-properties?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how computed properties work with Vue School">算出プロパティがどのように機能するのか Vue School の無料レッスンで学ぶ</a></div>
+
 テンプレート内に式を書けるのはとても便利ですが、非常に簡単な操作しかできません。テンプレート内に多くのロジックを詰め込むと、コードが肥大化し、メンテナンスが難しくなります。例えば:
 
 ``` html

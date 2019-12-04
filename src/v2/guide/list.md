@@ -5,6 +5,8 @@ type: guide
 order: 8
 ---
 
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-loops?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to render lists on Vue School">リストレンダリングする方法を Vue School の無料レッスンで学ぶ</a></div>
+
 ## `v-for` で配列に要素をマッピングする
 
 配列に基づいて、アイテムのリストを描画するために、`v-for` ディレクティブを使用することができます。`v-for` ディレクティブは `item in items` の形式で特別な構文を要求し、`items` はソースデータの配列で、`item` は配列要素がその上で反復されている**エイリアス**です:
