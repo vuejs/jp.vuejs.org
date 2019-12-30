@@ -15,7 +15,7 @@ order: 6
 <template>
   <div>
     <input v-model="username">
-    <div 
+    <div
       v-if="error"
       class="error"
     >
@@ -151,9 +151,11 @@ import Foo from './Foo.vue'
 describe('Foo', () => {
   it('メッセージを描画し、ユーザー入力に正しく応答します', () => {
     const wrapper = shallowMount(Foo, {
-      data: {
-        message: 'Hello World',
-        username: ''
+      data() {
+        return {
+          message: 'Hello World',
+          username: ''
+        }
       }
     })
 
