@@ -121,7 +121,7 @@ URL を "無害化 (sanitize)" して javascript: の利用による JavaScript 
 
 `sanitizedUrl` は無害化 (sanitize)されていると仮定しましょう。 これは紛れもなく実際の URL で、JavaScript ではありません。`userProvidedStyles` を利用すると、悪意のあるユーザは"クリックジャック"のための CSS を設置できます。例えば、ログインボタンの上の透明ボックスにリンクをスタイリングします。そして、ログインページに似せた `https://user-controlled-website.com/` というサイトが構築されていた場合、ユーザーはログイン情報を盗まれてしまうかもしれません。
 
-`<style>` 要素に対してユーザの入力するコンテンツを許可してしまうと、更に大きな脆弱性が発生し、そのページ全体のスタイルが制御されてしまうということが想像できるでしょう。そのために、以下のようなテンプレート内でのスタイルタグのレンダリングはやめるべきです:
+`<style>` 要素に対してユーザの入力するコンテンツを許可してしまうと、更に大きな脆弱性が発生し、そのページ全体のスタイルが制御されてしまうということが想像できるでしょう。そのために、Vue では以下のようなテンプレート内でのスタイルタグのレンダリングはやめるべきです:
 
 ```html
 <style>{{ userProvidedStyles }}</style>
@@ -162,7 +162,7 @@ Vue テンプレートでのクロスサイトスクリプティング (XSS) を
 [潜在的な危険](#潜在的な危険)の推奨事項に加え、以下のリソースを熟知しておくことをお勧めします。
 
 - [HTML5 Security Cheat Sheet](https://html5sec.org/)
-- [OWASP's Cross Site Scripting (XSS) Prevention Cheat Sheet](https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet)
+- [OWASP's Cross Site Scripting (XSS) Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
 
 DOM へ描画するようなサードパーティ製のコンポーネントを使用する場合は、先に学んだ内容を利用して依存するソースコードの潜在的な危険パターンについてチェックしてください。
 
