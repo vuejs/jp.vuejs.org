@@ -650,6 +650,26 @@ order: 803
         'eslint-plugin-vue'
       ],
     },
+    {
+      name: 'Ben Hong',
+      title: 'Proud Ravenclaw Dragon'
+      city: 'Washington, DC, USA',
+      languages: ['en', 'zh'],
+      work: {
+        role: 'Senior Frontend Engineer',
+        org: 'GitLab (Meltano)',
+      },
+      reposOfficial: [
+        'vuejs.org',
+        'vuepress',
+        'vuejs/events'
+      ],
+      github: 'bencodezen',
+      twitter: 'bencodezen',
+      links: [
+        'https://bencodezen.io/'
+      ]
+    },
   ]))
 
   var emeriti = shuffle([
@@ -1090,24 +1110,6 @@ order: 803
       },
       links: [
         'https://vuejsdevelopers.com'
-      ]
-    },
-    {
-      name: 'Ben Hong',
-      title: '',
-      city: 'Washington, DC, USA',
-      languages: ['en', 'zh'],
-      work: {
-        role: 'Senior Frontend Engineer',
-        org: 'GitLab (Meltano)',
-      },
-      reposOfficial: [
-        'vuejs/events'
-      ],
-      github: 'bencodezen',
-      twitter: 'bencodezen',
-      links: [
-        'https://bencodezen.io/'
       ]
     },
     {
