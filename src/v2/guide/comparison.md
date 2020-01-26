@@ -1,6 +1,6 @@
 ---
 title: 他のフレームワークとの比較
-updated: 2019-10-29
+updated: 2020-01-07
 type: guide
 order: 801
 ---
@@ -65,7 +65,7 @@ Vue は、[描画関数](render-function.html)と、さらに [JSX のサポー�
 
 #### コンポーネントスコープ CSS（Scoped CSS）
 
-あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション (例えば [styled-components](https://github.com/styled-components/styled-components) 、 [glamorous](https://github.com/paypal/glamorous)、 [emotion](https://github.com/emotion-js/emotion)) 経由でしばしば行われます。これは通常の CSS 作成プロセスとは異なる新しいコンポーネント志向のスタイルパラダイムを導入します。加えて、これらにはビルド時に単一のスタイルシートに CSS を抽出するためのサポートがありますが、スタイルが正しく機能するためにはランタイムをバンドルに含める必要があることがいまだ一般的です。スタイルを構成する際に Javascript のダイナミズムにアクセスできる一方で、トレードオフは多くの場合バンドルサイズとランタイムのコストが増加することです。
+あなたがコンポーネントを複数のファイルに分けない限り（例えば、[CSS モジュール](https://github.com/gajus/react-css-modules)を使うなど）、React で CSS のスコープを限定するときには CSS-in-JS ソリューション (例えば [styled-components](https://github.com/styled-components/styled-components) 、 [emotion](https://github.com/emotion-js/emotion)) 経由でしばしば行われます。これは通常の CSS 作成プロセスとは異なる新しいコンポーネント志向のスタイルパラダイムを導入します。加えて、これらにはビルド時に単一のスタイルシートに CSS を抽出するためのサポートがありますが、スタイルが正しく機能するためにはランタイムをバンドルに含める必要があることがいまだ一般的です。スタイルを構成する際に Javascript のダイナミズムにアクセスできる一方で、トレードオフは多くの場合バンドルサイズとランタイムのコストが増加することです。
 
 もしあなたが CSS-in-JS のファンなら、著名な CSS-in-JS ライブラリの多くは Vue をサポートしています (例えば [styled-components-vue](https://github.com/styled-components/vue-styled-components) や [vue-emotion](https://github.com/egoist/vue-emotion))。ここでの React と Vue の主な違いは、 Vue でのスタイリングのデフォルトの方法は [単一ファイルコンポーネント](single-file-components.html) でのより身近な `style` タグによるものだということです。
 
