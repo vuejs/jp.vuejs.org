@@ -476,26 +476,6 @@ order: 803
       ]
     },
     {
-      name: 'Edd Yerburgh',
-      title: 'Testatron Alpha 9000',
-      city: 'London, UK',
-      languages: ['en'],
-      github: 'eddyerburgh',
-      twitter: 'EddYerburgh',
-      work: {
-        role: 'Full Stack Developer'
-      },
-      reposOfficial: [
-        'vue-test-utils'
-      ],
-      reposPersonal: [
-        'avoriaz'
-      ],
-      links: [
-        'https://www.eddyerburgh.me'
-      ]
-    },
-    {
       name: 'Sarah Drasner',
       city: 'Denver, CO, USA',
       languages: ['en'],
@@ -765,6 +745,26 @@ order: 803
         orgUrl: 'http://neolant.ru/'
       }
     },
+    {
+      name: 'Edd Yerburgh',
+      title: 'Testatron Alpha 9000',
+      city: 'London, UK',
+      languages: ['en'],
+      github: 'eddyerburgh',
+      twitter: 'EddYerburgh',
+      work: {
+        role: 'Full Stack Developer'
+      },
+      reposOfficial: [
+        'vue-test-utils'
+      ],
+      reposPersonal: [
+        'avoriaz'
+      ],
+      links: [
+        'https://www.eddyerburgh.me'
+      ]
+    }
   ])
 
   var partners = [
