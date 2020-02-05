@@ -134,7 +134,7 @@ var themeData = [
       {
         name: 'Sapphire',
         price: 79,
-        description: 'Materal Design Admin Template',
+        description: 'Material Design Admin Template',
         url: 'https://www.primefaces.org/layouts/sapphire-vue?af_id=4218',
         image: 'https://www.primefaces.org/vue-templates/sapphire.jpg'
       },
@@ -148,7 +148,7 @@ var themeData = [
       {
         name: 'Serenity',
         price: 79,
-        description: 'Materal Design Admin Template',
+        description: 'Material Design Admin Template',
         url: 'https://www.primefaces.org/layouts/serenity-vue?af_id=4218',
         image: 'https://www.primefaces.org/vue-templates/serenity.jpg'
       },
