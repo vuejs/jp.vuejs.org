@@ -20,13 +20,13 @@ order: 502
 Vue アプリケーションの妥当性を担保しているのが生の `data` オブジェクトだということは見過ごされがちです。Vue インスタンスは単純に `data` オブジェクトへのアクセスをプロキシします。それゆえに、複数のインスタンスによって共有されうる状態がある場合、シンプルに同一の状態を共有することができます:
 
 ``` js
-const sourceOfTruth = {}
+var sourceOfTruth = {}
 
-const vmA = new Vue({
+var vmA = new Vue({
   data: sourceOfTruth
 })
 
-const vmB = new Vue({
+var vmB = new Vue({
   data: sourceOfTruth
 })
 ```
