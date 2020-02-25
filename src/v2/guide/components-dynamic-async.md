@@ -1,6 +1,6 @@
 ---
 title: 動的 & 非同期コンポーネント
-updated: 2019-07-22
+updated: 2020-02-25
 type: guide
 order: 105
 ---
@@ -194,7 +194,7 @@ new Vue({
 </script>
 {% endraw %}
 
-このように _Posts_ タブがレンダリングされていなくても、自身の状態(選択された投稿)を保持するようになります。完全なコードは [この fiddle](https://jsfiddle.net/chrisvfritz/Lp20op9o/) を参照してください。
+このように _Posts_ タブがレンダリングされていなくても、自身の状態(選択された投稿)を保持するようになります。完全なコードは [この例](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-keep-alive-with-dynamic-components) を参照してください。
 
 <p class="tip">`<keep-alive>` にラップされるコンポーネントは、全て `name` を持つ必要があります。 コンポーネントの `name` オプションを使うか、ローカル/グローバル登録を使用してください。</p>
 

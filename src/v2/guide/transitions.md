@@ -1,6 +1,6 @@
 ---
 title: Enter/Leave とトランジション一覧
-updated: 2019-11-04
+updated: 2020-02-25
 type: guide
 order: 201
 ---
@@ -1238,7 +1238,7 @@ new Vue({
 
 <p class="tip">一点、FLIP トランジションは `display: inline` が指定されていると動かないことに注意しましょう。 代わりに `display: inline-block` を使うか、flex コンテキストに要素を置き換えることで動かすことができます。</p>
 
-FLIP アニメーションは、単一の軸だけに限定されるものではありません。多次元のグリッドにあるアイテムも [同じように簡単に](https://jsfiddle.net/chrisvfritz/sLrhk1bc/) トランジションできます:
+FLIP アニメーションは、単一の軸だけに限定されるものではありません。多次元のグリッドにあるアイテムも [同じように簡単に](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-list-move-transitions) トランジションできます:
 
 {% raw %}
 <div id="sudoku-demo" class="demo">

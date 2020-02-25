@@ -1,6 +1,6 @@
 ---
 title: 状態のトランジション
-updated: 2018-03-20
+updated: 2020-02-25
 type: guide
 order: 202
 ---
@@ -367,7 +367,7 @@ function generatePoints (stats) {
 </style>
 {% endraw %}
 
-上記のデモの背後にある完全なコードについては[この Fiddle](https://jsfiddle.net/chrisvfritz/65gLu2b6/) を参照してください。
+上記のデモの背後にある完全なコードについては[この例](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-state-transitions) を参照してください。
 
 ## コンポーネント内のトランジションの整理
 
