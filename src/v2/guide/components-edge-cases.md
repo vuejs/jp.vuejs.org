@@ -1,6 +1,6 @@
 ---
 title: 特別な問題に対処する
-updated: 2019-10-29
+updated: 2020-02-25
 type: guide
 order: 106
 ---
@@ -64,7 +64,7 @@ this.$root.baz()
 </google-map>
 ```
 
-`<google-map>` コンポーネントは全てのサブコンポーネントがアクセスする必要がある `map`プロパティを定義しています。この場合、`<google-map-markers>` は地図上にマーカーを設定するため  `this.$parent.getMap` のような方法で map プロパティにアクセスしたいことでしょう。[ここから](https://jsfiddle.net/chrisvfritz/ttzutdxh/)このパターンをみることができます。
+`<google-map>` コンポーネントは全てのサブコンポーネントがアクセスする必要がある `map`プロパティを定義しています。この場合、`<google-map-markers>` は地図上にマーカーを設定するため  `this.$parent.getMap` のような方法で map プロパティにアクセスしたいことでしょう。[ここから](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-accessing-parent-component-instance)このパターンをみることができます。
 
 しかし、このパターンで作成されたコンポーネントはやはり本質的に壊れやすくなるということを覚えておいてください。例えば、`<google-map-region>` という新しいコンポーネントを追加することをイメージしてください。そして、`<google-map-markers>` が `<google-map-region>` 内に現れるとき、その領域内のマーカーのみ描画すべきです:
 
@@ -156,7 +156,7 @@ provide: function () {
 inject: ['getMap']
 ```
 
-以上の[完例はここから](https://jsfiddle.net/chrisvfritz/tdv8dt3s/)確認できます。`$parent` を使う以上の利点は `<google-map>` インスタンス全体を晒すことなく、どの子孫コンポーネントからでも `getMap` にアクセスできることです。これは子コンポーネントが依存する何かを変更や削除するかもしれないという恐怖を無くし、より安全にコンポーネントを開発できるようにします。これらのコンポーネント間のインターフェースは、ちょうど`プロパティ`を用いるように明確に定義されます。
+以上の[完例はここから](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dependency-injection)確認できます。`$parent` を使う以上の利点は `<google-map>` インスタンス全体を晒すことなく、どの子孫コンポーネントからでも `getMap` にアクセスできることです。これは子コンポーネントが依存する何かを変更や削除するかもしれないという恐怖を無くし、より安全にコンポーネントを開発できるようにします。これらのコンポーネント間のインターフェースは、ちょうど`プロパティ`を用いるように明確に定義されます。
 
 実際、以下を除けば、いわば"広範囲のプロパティ"のようなものとした依存性の注入と考えることができます:
 
@@ -235,7 +235,7 @@ methods: {
 }
 ```
 
-全てのコードが載っている[この fiddle](https://jsfiddle.net/09jvu65m/)を見てください。しかし注意して欲しいのが、もし1つのコンポーネント内で多くのセットアップやクリーンアップをしなければならない場合、ベストな解決策はたいていより細分化したコンポーネントを作ることです。このケースでは、再利用可能な `<input-datepicker>` コンポーネントを作ることをおすすめします。
+全てのコードが載っている[この例](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-programmatic-event-listeners)を見てください。しかし注意して欲しいのが、もし1つのコンポーネント内で多くのセットアップやクリーンアップをしなければならない場合、ベストな解決策はたいていより細分化したコンポーネントを作ることです。このケースでは、再利用可能な `<input-datepicker>` コンポーネントを作ることをおすすめします。
 
 よりプログラム的なリスナーの詳細を学ぶなら、[インスタンスメソッドイベント](https://jp.vuejs.org/v2/api/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88)の API をチェックしてください。
 
