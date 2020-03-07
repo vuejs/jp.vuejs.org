@@ -1,6 +1,6 @@
 ---
 title: Vue 1.x からの移行
-updated: 2019-05-08
+updated: 2020-03-07
 type: guide
 order: 701
 ---
@@ -1138,17 +1138,17 @@ function pluralizeKnife (count) {
 
 例として、two-way 通貨フィルタの移行について説明します:
 
-<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/6744xnjk/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe src="https://codesandbox.io/embed/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-10-two-way-currency-filter?codemirror=1&hidedevtools=1&hidenavigation=1&theme=light" style="width:100%; height:300px; border:0; border-radius: 4px; overflow:hidden;" title="vue-20-template-compilation" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-ほとんどの場合うまく動作しますが、遅延状態の更新によって異常な動作が発生する可能性があります。例えば、`Result` タブをクリックし、それらの入力の 1 つに ` 9.999` を入力してみてください。入力のフォーカスを失うと、その値は `$ 10.00` に更新されます。計算された合計を見ると、`9.999` がデータに格納されていることがわかります。ユーザーに見える現実のバージョンは同期していません！
+ほとんどの場合うまく動作しますが、遅延状態の更新によって異常な動作が発生する可能性があります。例えば、それらの入力の 1 つに ` 9.999` を入力してみてください。入力のフォーカスを失うと、その値は `$ 10.00` に更新されます。計算された合計を見ると、`9.999` がデータに格納されていることがわかります。ユーザーに見える現実のバージョンは同期していません！
 
 Vue 2.0 を使用してより堅牢なソリューションに移行するには、最初に新しい `<currency-input>` コンポーネントでこのフィルタをラップしましょう:
 
-<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/943zfbsh/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe src="https://codesandbox.io/embed/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-10-two-way-currency-filter-v2?codemirror=1&hidedevtools=1&hidenavigation=1&theme=light" style="width:100%; height:300px; border:0; border-radius: 4px; overflow:hidden;" title="vue-20-template-compilation" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 これにより、フォーカスのある入力の内容を選択するなど、フィルタだけでカプセル化できなかった動作を追加できます。次のステップは、フィルタからビジネスロジックを抽出することです。以下では、すべてを外部[`currencyValidator` オブジェクト](https://gist.github.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e) にします:
 
-<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/j4xtb20e/embedded/result,html,js" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe src="https://codesandbox.io/embed/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-10-two-way-currency-filter-v3?codemirror=1&hidedevtools=1&hidenavigation=1&theme=light" style="width:100%; height:300px; border:0; border-radius: 4px; overflow:hidden;" title="vue-20-template-compilation" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 このようにモジュール性が向上すると、Vue 2.0 への移行が容易になるだけでなく、通貨の解析と書式設定も可能になります:
 
@@ -1159,7 +1159,7 @@ Vue 2.0 を使用してより堅牢なソリューションに移行するには
 
 ただし、フィルタと Vue 1.0 の一般的な制限はありますので、Vue 2.0 へのアップグレードを完了しましょう:
 
-<iframe width="100%" height="300" src="https://jsfiddle.net/chrisvfritz/1oqjojjx/embedded/js,html,result" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe src="https://codesandbox.io/embed/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-two-way-currency-filter?codemirror=1&hidedevtools=1&hidenavigation=1&theme=light" style="width:100%; height:300px; border:0; border-radius: 4px; overflow:hidden;" title="vue-20-template-compilation" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 次のことに気付くかもしれません:
 
