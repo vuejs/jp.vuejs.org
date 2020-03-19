@@ -438,6 +438,7 @@ render: function (createElement) {
 
 ``` js
 render: function (createElement) {
+  // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
   return createElement('div', [
     createElement('child', {
       // { name: props => VNode | Array<VNode> } の形式で
