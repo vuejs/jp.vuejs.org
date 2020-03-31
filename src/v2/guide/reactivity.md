@@ -1,6 +1,6 @@
 ---
 title: リアクティブの探求
-updated: 2019-05-08
+updated: 2020-03-31
 type: guide
 order: 601
 ---
