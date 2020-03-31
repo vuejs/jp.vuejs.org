@@ -79,7 +79,7 @@ vm.items[1] = 'x' // is NOT reactive
 vm.items.length = 2 // is NOT reactive
 ```
 
-注意事項 1 を克服するに、次のいずれも `vm.items[indexOfItem] = newValue` と同様に機能しますが、リアクティビティシステムで状態の更新をトリガーします:
+注意事項 1 を克服するに、次のいずれも `vm.items[indexOfItem] = newValue` と同様に機能しますが、リアクティビティシステムで状態の更新をトリガします:
 
 ``` js
 // Vue.set
