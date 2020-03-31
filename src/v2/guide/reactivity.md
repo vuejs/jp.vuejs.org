@@ -62,7 +62,7 @@ this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
 
 ### 配列に関して
 
-Vue は一つの配列における次の変更は検知できません:
+Vue は、配列における次の変更は検知できません:
 
 1. インデックスと一緒にアイテムを直接セットする場合、例えば `vm.items[indexOfItem] = newValue`
 2. 配列の長さを変更する場合、例えば `vm.items.length = newLength`
