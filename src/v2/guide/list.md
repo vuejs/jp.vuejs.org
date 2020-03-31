@@ -260,7 +260,7 @@ example1.items = example1.items.filter(function (item) {
 
 ### 注意事項
 
-JavaScript の制限のため、Vue は、配列やオブジェクトでは変更を**検出することができない**変更のタイプがあります。これらは、[reactivity](reactivity.html#変更検出の注意事項) セクションで議論されています。
+JavaScript の制限のため、Vue は、配列やオブジェクトでは**検出することができない**変更のタイプがあります。これらは、[reactivity](reactivity.html#変更検出の注意事項) セクションで議論されています。
 
 ## フィルタ/ソートされた結果の表示
 
