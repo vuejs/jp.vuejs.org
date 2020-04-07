@@ -1,6 +1,6 @@
 ---
 title: リストレンダリング
-updated: 2019-05-08
+updated: 2020-03-31
 type: guide
 order: 8
 ---
@@ -260,103 +260,7 @@ example1.items = example1.items.filter(function (item) {
 
 ### 注意事項
 
-JavaScript の制限のため、Vue は配列で以下の変更を検出することは**できません**:
-
-1. インデックスでアイテムを直接設定するとき。例: `vm.items[indexOfItem] = newValue`
-2. 配列の長さを変更するとき。例: `vm.items.length = newLength`
-
-例:
-
-``` js
-var vm = new Vue({
-  data: {
-    items: ['a', 'b', 'c']
-  }
-})
-vm.items[1] = 'x' // リアクティブではありません
-vm.items.length = 2 // リアクティブではありません
-```
-
-上記の注意事項 1 に対処するため、以下のどちらも `vm.items[indexOfItem] = newValue` と同じ動作になりますが、リアクティブなシステム内で状態の更新をトリガします。
-
-``` js
-// Vue.set
-Vue.set(vm.items, indexOfItem, newValue)
-```
-``` js
-// Array.prototype.splice
-vm.items.splice(indexOfItem, 1, newValue)
-```
-
-[`vm.$set`](https://jp.vuejs.org/v2/api/#vm-set) インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
-
-``` js
-vm.$set(vm.items, indexOfItem, newValue)
-```
-
-上記の注意事項 2 に対処するためにも `splice` を使います:
-
-``` js
-vm.items.splice(newLength)
-```
-
-## オブジェクトの変更検出の注意
-
-再度になりますが、現代の JavaScript の制約のため、**Vue はプロパティの追加や削除を検出することはできません**。 例:
-
-``` js
-var vm = new Vue({
-  data: {
-    a: 1
-  }
-})
-// `vm.a` はリアクティブです
-
-vm.b = 2
-// `vm.b` はリアクティブではありません
-```
-
-Vue はすでに作成されたインスタンスに新しいルートレベルのリアクティブプロパティを動的に追加することはできません。しかし、`Vue.set（object、propertyName、value）` メソッドを使ってネストされたオブジェクトにリアクティブなプロパティを追加することは可能です。例を挙げると：
-
-``` js
-var vm = new Vue({
-  data: {
-    userProfile: {
-      name: 'Anika'
-    }
-  }
-})
-```
-
-ネストされた `userProfile` オブジェクトに新しい `age` プロパティを追加することができます:
-
-``` js
-Vue.set(vm.userProfile, 'age', 27)
-```
-
-`vm.$set` インスタンスメソッドを使用することもできます。これはグローバル  `Vue.set` のエイリアスです:
-
-``` js
-vm.$set(vm.userProfile, 'age', 27)
-```
-
-例えば `Object.assign()` や `_.extend()` を使って既存のオブジェクトにいくつかの新しいプロパティを割り当てたいときがあります。このような場合は、両方のオブジェクトのプロパティを使用して新しいオブジェクトを作成する必要があります。 なので以下のやり方ではなくて：
-
-``` js
-Object.assign(vm.userProfile, {
-  age: 27,
-  favoriteColor: 'Vue Green'
-})
-```
-
-新しいリアクティブプロパティをこのように追加します。
-
-``` js
-vm.userProfile = Object.assign({}, vm.userProfile, {
-  age: 27,
-  favoriteColor: 'Vue Green'
-})
-```
+JavaScript の制限のため、Vue は、配列やオブジェクトでは**検出することができない**変更のタイプがあります。これらは、[reactivity](reactivity.html#変更検出の注意事項) セクションで議論されています。
 
 ## フィルタ/ソートされた結果の表示
 
