@@ -1,6 +1,6 @@
 ---
 title: プロパティ
-updated: 2019-02-24
+updated: 2020-04-17
 type: guide
 order: 102
 ---
