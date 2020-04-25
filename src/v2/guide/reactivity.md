@@ -1,6 +1,6 @@
 ---
 title: リアクティブの探求
-updated: 2019-05-08
+updated: 2020-03-31
 type: guide
 order: 601
 ---
@@ -21,7 +21,12 @@ order: 601
 
 ## 変更検出の注意事項
 
-モダンな JavaScript の限界(そして `Object.observe` の断念)のため、Vue.js は**プロパティの追加または削除を検出できません**。Vue はインスタンスの初期化中に getter/setter の変換を行うため、全てのプロパティは Vue が変換してリアクティブにできるように `data` オブジェクトに存在しなければなりません。例えば:
+JavaScript の制限のため、Vue は、**検出することができない**変更のタイプがあります。しかし、それらを回避しリアクティビティを維持する方法はあります。
+
+### オブジェクトに関して
+
+Vue はプロパティの追加または削除を検出できません。Vue はインスタンスの初期化中に getter/setter の変換を行うため、全てのプロパティは Vue が変換してリアクティブにできるように `data` オブジェクトに存在しなければなりません。例えば:
+
 
 ``` js
 var vm = new Vue({
@@ -54,7 +59,47 @@ this.$set(this.someObject, 'b', 2)
 this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
 ```
 
-以前に[ リストレンダリング のセクション](list.html#注意事項) で議論した、配列に関連した注意事項もいくつかあります。
+### 配列に関して
+
+Vue は、配列における次の変更は検知できません:
+
+1. インデックスと一緒にアイテムを直接セットする場合、例えば `vm.items[indexOfItem] = newValue`
+2. 配列の長さを変更する場合、例えば `vm.items.length = newLength`
+
+例えば:
+
+``` js
+var vm = new Vue({
+  data: {
+    items: ['a', 'b', 'c']
+  }
+})
+vm.items[1] = 'x' // is NOT reactive
+vm.items.length = 2 // is NOT reactive
+```
+
+注意事項 1 を克服するに、次のいずれも `vm.items[indexOfItem] = newValue` と同様に機能しますが、リアクティビティシステムで状態の更新をトリガします:
+
+``` js
+// Vue.set
+Vue.set(vm.items, indexOfItem, newValue)
+```
+``` js
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue)
+```
+
+また、[`vm.$set`](https://vuejs.org/v2/api/#vm-set) インスタンスメソッドを使うこともできます。これはグローバルな `Vue.set` のエイリアスです:
+
+``` js
+vm.$set(vm.items, indexOfItem, newValue)
+```
+
+注意事項 2 に対応するには、`splice` を使うことができます。
+
+``` js
+vm.items.splice(newLength)
+```
 
 ## リアクティブプロパティの宣言
 

@@ -60,7 +60,7 @@ Activity Bar の Debugging アイコン をクリックして Debug ビューを
       "webRoot": "${workspaceFolder}/src",
       "breakOnLoad": true,
       "sourceMapPathOverrides": {
-        "webpack:///./src/*": "${webRoot}/*"
+        "webpack:///src/*": "${webRoot}/*"
       }
     },
     {

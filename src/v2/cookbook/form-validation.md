@@ -1,7 +1,7 @@
 ---
 title: フォームのバリデーション
 type: cookbook
-updated: 2019-07-22
+updated: 2020-04-19
 order: 3
 ---
 
@@ -207,7 +207,7 @@ const app = new Vue({
       e.preventDefault();
     },
     validEmail: function (email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     }
   }
@@ -334,21 +334,27 @@ const app = new Vue({
 
 ## サーバーサイドでのバリデーション
 
-最後の例では、 Ajax を利用してサーバーにてバリデーションを行うものを作成しました。このフォームでは、新しい product の名前を尋ね、その名前が一意かをチェックします。このバリデーションのために、サーバーレスな [OpenWhisk](http://openwhisk.apache.org/) アクションを書きました。ここでは重要ではありませんが、ロジックはこちらになります:
+最後の例では、 Ajax を利用してサーバーにてバリデーションを行うものを作成しました。このフォームでは、新しい product の名前を尋ね、その名前が一意かをチェックします。このバリデーションのために、サーバーレスな [Netlify](https://netlify.com/) アクションを書きました。ここでは重要ではありませんが、ロジックはこちらになります:
 
 ``` js
-function main(args) {
-    return new Promise((resolve, reject) => {
-        // 悪い製品名: vista, empire, mbp
-        const badNames = ['vista', 'empire', 'mbp'];
+exports.handler = async (event, context) => {
+  
+    const badNames = ['vista', 'empire', 'mbp'];
+    const name = event.queryStringParameters.name;
 
-        if (badNames.includes(args.name)) {
-          reject({error: 'Existing product'});
-        }
+    if (badNames.includes(name)) {
+      return { 
+        statusCode: 400,         
+        body: JSON.stringify({error: 'Invalid name passed.'}) 
+      }
+    }
 
-        resolve({status: 'ok'});
-    });
+    return {
+      statusCode: 204
+    }
+
 }
+
 ```
 
 基本的には "vista", "empire", "mbp" 以外の名前で問題ありません。フォームをみてみましょう。
@@ -390,7 +396,7 @@ function main(args) {
 ここには特別な要素はありません。 JavaScript の例に進みましょう。
 
 ``` js
-const apiUrl = 'https://openwhisk.ng.bluemix.net/api/v1/web/rcamden%40us.ibm.com_My%20Space/safeToDelete/productName.json?name=';
+const apiUrl = 'https://vuecookbook.netlify.com/.netlify/functions/product-name?name=';
 
 const app = new Vue({
   el: '#app',
@@ -408,13 +414,12 @@ const app = new Vue({
         this.errors.push('Product name is required.');
       } else {
         fetch(apiUrl + encodeURIComponent(this.name))
-        .then(res => res.json())
-        .then(res => {
-          if (res.error) {
-            this.errors.push(res.error);
-          } else {
-            // 新しい URL への遷移、または成功時に何かをする
-            alert('ok!');
+        .then(async res => {
+          if (res.status === 204) {
+            alert('OK');
+          } else if (res.status === 400) {
+            let errorResponse = await res.json();
+            this.errors.push(errorResponse.error);
           }
         });
       }

@@ -1,9 +1,11 @@
 ---
 title: イベントハンドリング
-updated: 2019-02-06
+updated: 2020-01-07
 type: guide
 order: 9
 ---
+
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-user-events?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to handle events on Vue School">イベントハンドリングする方法を Vue School の無料レッスンで学ぶ</a></div>
 
 ## イベントの購読
 
@@ -155,7 +157,9 @@ new Vue({
 methods: {
   warn: function (message, event) {
     // ネイティブイベントを参照しています
-    if (event) event.preventDefault()
+    if (event) {
+      event.preventDefault()
+    }
     alert(message)
   }
 }
@@ -287,10 +291,10 @@ Vue.config.keyCodes.f1 = 112
 
 ```html
 <!-- Alt + C -->
-<input @keyup.alt.67="clear">
+<input v-on:keyup.alt.67="clear">
 
 <!-- Ctrl + Click -->
-<div @click.ctrl="doSomething">Do something</div>
+<div v-on:click.ctrl="doSomething">Do something</div>
 ```
 
 <p class="tip">修飾子キーは通常のキーとは異なり、`keyup` イベントで使用する場合、イベント発生時に押されていなければならないことに注意してください。言い換えると、`keyup.ctrl` は `ctrl` を押しながら何かのキーを離したときにのみ、トリガされます。`ctrl` キーだけを離しても、トリガされません。トリガされることを望むなら、`ctrl` ではなく `keyup.17` のように `keyCode` を使用してください。</p>
@@ -303,13 +307,13 @@ Vue.config.keyCodes.f1 = 112
 
 ``` html
 <!-- これは Ctrl に加えて Alt や Shift キーが押されていても発行されます -->
-<button @click.ctrl="onClick">A</button>
+<button v-on:click.ctrl="onClick">A</button>
 
 <!-- これは Ctrl キーが押され、他のキーが押されてないときだけ発行されます -->
-<button @click.ctrl.exact="onCtrlClick">A</button>
+<button v-on:click.ctrl.exact="onCtrlClick">A</button>
 
 <!-- これは システム修飾子が押されてないときだけ発行されます -->
-<button @click.exact="onClick">A</button>
+<button v-on:click.exact="onClick">A</button>
 ```
 
 ### マウスボタンの修飾子

@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2019-06-20
+updated: 2020-03-20
 type: guide
 order: 2
 ---
@@ -21,7 +21,7 @@ Vue (発音は / v j u ː / 、 **view** と同様）はユーザーインター
 
 <p class="tip">公式ガイドは、HTML、CSS そして JavaScript の中レベルのフロントエンドの知識を前提にしています。フロントエンドの開発が初めてであるならば、最初のステップとして、フレームワークに直接入門するのは良いアイデアではないかもしれません。基礎を学んで戻ってきましょう！他のフレームワークでの以前の経験は役に立ちますが、必須ではありません。</p>
 
-Vue.js を試すには、[JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/) が最も簡単です。気軽に他のタブを開いて、基本的な例を試してみましょう。もしくは、単純に <a href="https://gist.githubusercontent.com/chrisvfritz/7f8d7d63000b48493c336e48b3db3e52/raw/ed60c4e5d5c6fec48b0921edaed0cb60be30e87c/index.html" target="_blank" download="index.html" rel="noopener noreferrer"><code>index.html</code> を作成し </a> 、以下のコードで Vue を導入することができます:
+Vue.js を試すには、[Hello World example](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-hello-world) が最も簡単です。気軽に他のタブを開いて、基本的な例を試してみましょう。もしくは、単純に <a href="https://github.com/vuejs/vuejs.org/blob/master/src/v2/examples/vue-20-hello-world/index.html" target="_blank" download="index.html" rel="noopener noreferrer"><code>index.html</code> を作成し </a> 、以下のコードで Vue を導入することができます:
 
 ``` html
 <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
@@ -73,6 +73,8 @@ var app = new Vue({
 {% endraw %}
 
 これで初めての Vue アプリケーションが作成できました！一見するとただテンプレートを描画しているように見えますが、Vue.js は内部で多くの作業を行っています。データと DOM は関連付けられ、そして全てが**リアクティブ**になっています。どのようにしてそれが分かるのでしょうか？ブラウザの JavaScript コンソールを開いて、`app.message` の値を変えてみましょう。描画されたサンプルが、上記に応じて更新されるのが確認できるでしょう。
+
+これでもう HTML を直接操作する必要がないことに注意してください。Vue アプリケーションは、自身を単一の DOM 要素 (上の例では `#app` 要素) にアタッチし、完全に制御します。HTML はエントリポイントにはなりますが、ほかのすべてのことは新しく作られた Vue インスタンスの中で起こります。
 
 文字列の展開に加えて、以下のように要素の属性を束縛（バインディング）することもできます:
 

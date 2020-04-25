@@ -1,6 +1,6 @@
 ---
 title: 状態のトランジション
-updated: 2018-03-20
+updated: 2020-02-25
 type: guide
 order: 202
 ---
@@ -19,7 +19,7 @@ Vue のトランジションシステムは entering、leaving、およびリス
 ウォッチャは、任意の数値プロパティの変化によって他のプロパティをアニメーションさせることができるようにします。それは理論的には複雑に聞こえるかもしれませんが、[GreenSock](https://greensock.com/)を使った例に没頭してみましょう:
 
 ``` html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 
 <div id="animated-number-demo">
   <input v-model.number="number" type="number" step="20">
@@ -41,14 +41,14 @@ new Vue({
   },
   watch: {
     number: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedNumber: newValue });
+      gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
     }
   }
 })
 ```
 
 {% raw %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 <div id="animated-number-demo" class="demo">
   <input v-model.number="number" type="number" step="20">
   <p>{{ animatedNumber }}</p>
@@ -67,7 +67,7 @@ new Vue({
   },
   watch: {
     number: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedNumber: newValue });
+      gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue });
     }
   }
 })
@@ -367,7 +367,7 @@ function generatePoints (stats) {
 </style>
 {% endraw %}
 
-上記のデモの背後にある完全なコードについては[この Fiddle](https://jsfiddle.net/chrisvfritz/65gLu2b6/) を参照してください。
+上記のデモの背後にある完全なコードについては[この例](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-state-transitions) を参照してください。
 
 ## コンポーネント内のトランジションの整理
 

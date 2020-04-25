@@ -438,6 +438,7 @@ render: function (createElement) {
 
 ``` js
 render: function (createElement) {
+  // `<div><child v-slot="props"><span>{{ props.text }}</span></child></div>`
   return createElement('div', [
     createElement('child', {
       // { name: props => VNode | Array<VNode> } の形式で
@@ -639,6 +640,4 @@ Vue.component('my-functional-button', {
 
 もしかすると Vue のテンプレートが実際に render 関数にコンパイルされることを知ることに興味を持つかもしれません。これは普段あなたは知る必要もない実装の詳細ですが、どのように特定のテンプレート機能がコンパイルされるかをもし見たいならこれに興味を持つかもしれません。以下は `Vue.compile` を使ってテンプレート文字列をその場でコンパイルをするちょっとしたデモです。
 
-{% raw %}
-<script async src="https://jsfiddle.net/phanan/5h0wx9np/embed/result,js,html/"></script>
-{% endraw %}
+<iframe src="https://codesandbox.io/embed/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-template-compilation?codemirror=1&hidedevtools=1&hidenavigation=1&theme=light&view=preview" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" title="vue-20-template-compilation" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>

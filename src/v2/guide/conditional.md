@@ -5,6 +5,8 @@ type: guide
 order: 7
 ---
 
+<div class="vueschool"><a href="https://vueschool.io/lessons/vuejs-conditionals?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how conditional rendering works with Vue School">条件付きレンダリングがどのように機能するか Vue School の無料レッスンで学ぶ</a></div>
+
 ## `v-if`
 
 `v-if` ディレクティブは、ブロックを条件に応じて描画したい場合に使用されます。ブロックは、ディレクティブの式が真を返す場合のみ描画されます。

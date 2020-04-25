@@ -1,6 +1,6 @@
 ---
 title: コンポーネントの基本
-updated: 2019-07-22
+updated: 2020-02-25
 type: guide
 order: 11
 ---
@@ -204,7 +204,7 @@ new Vue({
 ></blog-post>
 ```
 
-上記では、`v-bind` を使って動的にプロパティを渡すことができることがわかります。これは、[API から投稿を取得する](https://jsfiddle.net/chrisvfritz/sbLgr0ad)ときのように、前もって描画する正確なコンテンツがわからない場合に特に便利です。
+上記では、`v-bind` を使って動的にプロパティを渡すことができることがわかります。これは、[API から投稿を取得する](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-component-blog-post-example)ときのように、前もって描画する正確なコンテンツがわからない場合に特に便利です。
 
 これがプロパティについて今のところ知っておくべきことですが、このページを読んで内容が分かり次第、後で[プロパティ](components-props.html)の全ガイドを読むことをお勧めします。
 
@@ -602,7 +602,9 @@ new Vue({
 - 登録されたコンポーネントの名前、もしくは
 - コンポーネントのオプションオブジェクト
 
-完全なコードを試してみるには[この fiddle](https://jsfiddle.net/chrisvfritz/o3nycadu/)、もしくは登録された名前の代わりにコンポーネントのオプションオブジェクトをバインディングしている例となる[このバージョン](https://jsfiddle.net/chrisvfritz/b2qj69o1/)を参照してください。
+完全なコードを試してみるには[この例](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components)、もしくは登録された名前の代わりにコンポーネントのオプションオブジェクトをバインディングしている例となる[このバージョン](https://codesandbox.io/s/github/vuejs/vuejs.org/tree/master/src/v2/examples/vue-20-dynamic-components-with-binding)を参照してください。
+
+この属性は通常の HTML 要素にも使えますが、コンポーネントとして取り扱われることに注意してください。つまり、全ての属性が ** DOM の属性としてバインドされる** ということになります。 `value` などの一部のプロパティが、期待通りに動作するためには、[`.prop` 修飾子](../api/#v-bind) を使ってバインドする必要があります。
 
 これが動的なコンポーネントについて今のところ知っておくべきことですが、このページを読んで内容が分かり次第、後で [動的 & 非同期コンポーネント](components-dynamic-async.html)の全ガイドを読むことをお勧めします。
 
