@@ -30,15 +30,18 @@ order: 402
 </script>
 ```
 
-コンポーネントをテストする際には、 Vue と合わせて options のオブジェクトをインポートし、検証を実施します (ここでは、例として Jasmine/Jest スタイルの `expect` アサーションを使用しています):
+コンポーネントをテストする際には、[Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) と合わせてインポートし、検証を実施します (ここでは、例として Jest スタイルの `expect` アサーションを使用しています):
 
 ``` js
-// Vue と テスト対象のコンポーネントをインポートする
-import Vue from 'vue'
-import MyComponent from 'path/to/MyComponent.vue'
+// Vue Test Utils の `shallowMount` とテスト対象のコンポーネントをインポートする
+import { shallowMount } from '@vue/test-utils'
+import MyComponent from './MyComponent.vue'
+
+// Mount the component
+const wrapper = shallowMount(MyComponent)
 
 // テストランナーや検証には、どのようなライブラリを用いても構いませんが
-// ここでは Jasmine 2.0 を用いたテスト記述を行っています。
+// ここでは Jest を用いたテスト記述を行っています。
 describe('MyComponent', () => {
   // コンポーネントの options を直接検証します。
   it('has a created hook', () => {
@@ -55,15 +58,12 @@ describe('MyComponent', () => {
 
   // コンポーネントインスタンスをマウントして検証します。
   it('correctly sets the message when created', () => {
-    const vm = new Vue(MyComponent).$mount()
-    expect(vm.message).toBe('bye!')
+    expect(wrapper.vm.$data.message).toBe('bye!')
   })
 
   // マウントされたコンポーネントインスタンスを描画して検証します。
   it('renders the correct message', () => {
-    const Constructor = Vue.extend(MyComponent)
-    const vm = new Constructor().$mount()
-    expect(vm.$el.textContent).toBe('bye!')
+    expect(wrapper.text()).toBe('bye!')
   })
 })
 ```
