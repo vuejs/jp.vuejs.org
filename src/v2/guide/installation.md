@@ -11,9 +11,9 @@ gz_size: "30.90"
 
 Vue.js は IE8 ではシム (shim) ができない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](https://caniuse.com/#feat=es5) は全てサポートしています。
 
-### Semantic Versioning
+### セマンティックバージョニング
 
-Vue follows [Semantic Versioning](https://semver.org/) in all its official projects for documented features and behavior. For undocumented behavior or exposed internals, changes are described in [release notes](https://github.com/vuejs/vue/releases).
+Vue は、すべての公式プロジェクトにおいてドキュメント化された機能や動作については、[セマンティックバージョニング](https://semver.org/ja/)に準拠しています。ドキュメント化されていない動作や公開されている内容については、[リリースノート](https://github.com/vuejs/vue/releases)に変更点が記載されています。
 
 ### リリースノート
 
