@@ -1948,8 +1948,7 @@ Vue.component('TodoItem', {
 
 `this.$root` や [グローバルイベントバス](../guide/migration.html#dispatch-および-broadcast-置き換え) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。
 
-Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
-Vuex is the [official flux-like implementation](https://vuejs.org/v2/guide/state-management.html#Official-Flux-Like-Implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](https://vuejs.org/v2/guide/installation.html#Vue-Devtools) support).
+Vuex は Vue の[公式 Flux ライクな実装](../guide/state-management.html#公式-Flux-ライクな実装)であり、状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。Vuex は Vue のエコシステムにうまく統合されています（[Vue DevTools](../guide/installation.html#Vue-Devtools) のフルサポートを含みます）。
 
 {% raw %}</details>{% endraw %}
 
