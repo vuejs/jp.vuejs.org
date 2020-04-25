@@ -84,7 +84,7 @@ describe('MyComponent', () => {
 </script>
 ```
 
-[Vue Test Utils](https://vue-test-utils.vuejs.org/) を利用して、異なるプロパティを用いた描画結果の検証が可能です。
+[Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) を利用して、異なるプロパティを用いた描画結果の検証が可能です。
 
 ``` js
 import { shallowMount } from '@vue/test-utils'
