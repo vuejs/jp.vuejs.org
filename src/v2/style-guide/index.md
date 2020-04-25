@@ -1458,7 +1458,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ``` html
 <template v-slot:header>
-  <h1>Here might be a page title</h1> 
+  <h1>Here might be a page title</h1>
 </template>
 
 <template #footer>
@@ -1500,7 +1500,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ``` html
 <template v-slot:header>
-  <h1>Here might be a page title</h1> 
+  <h1>Here might be a page title</h1>
 </template>
 
 <template v-slot:footer>
@@ -1510,7 +1510,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ``` html
 <template #header>
-  <h1>Here might be a page title</h1> 
+  <h1>Here might be a page title</h1>
 </template>
 
 <template #footer>
@@ -1946,7 +1946,10 @@ Vue.component('TodoItem', {
 
 ** グローバル状態管理には、`this.$root` やグローバルイベントバスよりも、[Vuex](https://github.com/vuejs/vuex) が推奨されます **
 
-`this.$root` や [グローバルイベントバス](../guide/migration.html#dispatch-および-broadcast-置き換え) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
+`this.$root` や [グローバルイベントバス](../guide/migration.html#dispatch-および-broadcast-置き換え) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。
+
+Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
+Vuex is the [official flux-like implementation](https://vuejs.org/v2/guide/state-management.html#Official-Flux-Like-Implementation) for Vue, and offers not only a central place to manage state, but also tools for organizing, tracking, and debugging state changes. It integrates well in the Vue ecosystem (including full [Vue DevTools](https://vuejs.org/v2/guide/installation.html#Vue-Devtools) support).
 
 {% raw %}</details>{% endraw %}
 
