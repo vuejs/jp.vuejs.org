@@ -91,7 +91,7 @@ import { shallowMount } from '@vue/test-utils'
 import MyComponent from './MyComponent.vue'
 
 // コンポーネントをマウントし描画結果を返すヘルパー関数
-function getMountedComponent (Component, propsData) {
+function getMountedComponent(Component, propsData) {
   return shallowMount(MyComponent, {
     propsData
   })
@@ -104,6 +104,7 @@ describe('MyComponent', () => {
         msg: 'Hello'
       }).text()
     ).toBe('Hello')
+
     expect(
       getMountedComponent(MyComponent, {
         msg: 'Bye'
@@ -115,14 +116,15 @@ describe('MyComponent', () => {
 
 ## 非同期な更新の検証
 
-Vue は[非同期に DOM の更新を行う](reactivity.html#Async-Update-Queue)ため、state の変更に対する DOM の更新に関する検証は、`Vue.nextTick()` が解決した後に行う必要があります。
+Vue は[非同期に DOM の更新を行う](reactivity.html#非同期更新キュー)ため、state の変更に対する DOM の更新に関する検証は、`Vue.nextTick()` が解決した後に行う必要があります。
 
 ``` js
 // state の更新後、生成された HTML の検証を行う
 it('updates the rendered message when wrapper.message updates', async () => {
   const wrapper = shallowMount(MyComponent)
   wrapper.setData({ message: 'foo' })
-  // 状態が変化して、DOM の更新をアサート前に "tick" を待つ
+
+  // state の更新後、DOM の更新をアサートする前に "tick" を待つ
   await wrapper.vm.$nextTick()
   expect(wrapper.text()).toBe('foo')
 })
