@@ -92,7 +92,7 @@ import MyComponent from './MyComponent.vue'
 
 // コンポーネントをマウントし描画結果を返すヘルパー関数
 function getMountedComponent(Component, propsData) {
-  return shallowMount(MyComponent, {
+  return shallowMount(Component, {
     propsData
   })
 }
