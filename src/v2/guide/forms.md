@@ -365,7 +365,7 @@ vm.selected.number // => 123
 
 ``` html
 <!-- "input" の代わりに "change" 後に同期します -->
-<input v-model.lazy="msg" >
+<input v-model.lazy="msg">
 ```
 
 ### `.number`
