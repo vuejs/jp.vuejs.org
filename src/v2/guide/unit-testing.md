@@ -84,47 +84,49 @@ describe('MyComponent', () => {
 </script>
 ```
 
-`propsData`オプションを利用して、異なるプロパティを用いた描画結果の検証が可能です。
+[Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) を利用して、異なるプロパティを用いた描画結果の検証が可能です。
 
 ``` js
-import Vue from 'vue'
+import { shallowMount } from '@vue/test-utils'
 import MyComponent from './MyComponent.vue'
 
 // コンポーネントをマウントし描画結果を返すヘルパー関数
-function getRenderedText (Component, propsData) {
-  const Constructor = Vue.extend(Component)
-  const vm = new Constructor({ propsData: propsData }).$mount()
-  return vm.$el.textContent
+function getMountedComponent(Component, propsData) {
+  return shallowMount(Component, {
+    propsData
+  })
 }
 
 describe('MyComponent', () => {
   it('renders correctly with different props', () => {
-    expect(getRenderedText(MyComponent, {
-      msg: 'Hello'
-    })).toBe('Hello')
+    expect(
+      getMountedComponent(MyComponent, {
+        msg: 'Hello'
+      }).text()
+    ).toBe('Hello')
 
-    expect(getRenderedText(MyComponent, {
-      msg: 'Bye'
-    })).toBe('Bye')
+    expect(
+      getMountedComponent(MyComponent, {
+        msg: 'Bye'
+      }).text()
+    ).toBe('Bye')
   })
 })
 ```
 
 ## 非同期な更新の検証
 
-Vue は [非同期に DOM の更新を行う](reactivity.html#Async-Update-Queue) ため、 state の変更に対する DOM の更新に関する検証は、 `Vue.nextTick` コールバックを用いて行う必要があります。
+Vue は[非同期に DOM の更新を行う](reactivity.html#非同期更新キュー)ため、state の変更に対する DOM の更新に関する検証は、`Vue.nextTick()` が解決した後に行う必要があります。
 
 ``` js
 // state の更新後、生成された HTML の検証を行う
-it('updates the rendered message when vm.message updates', done => {
-  const vm = new Vue(MyComponent).$mount()
-  vm.message = 'foo'
+it('updates the rendered message when wrapper.message updates', async () => {
+  const wrapper = shallowMount(MyComponent)
+  wrapper.setData({ message: 'foo' })
 
-  // state 変更後、 DOM が更新されるまでの "tick" で待機する
-  Vue.nextTick(() => {
-    expect(vm.$el.textContent).toBe('foo')
-    done()
-  })
+  // state の更新後、DOM の更新をアサートする前に "tick" を待つ
+  await wrapper.vm.$nextTick()
+  expect(wrapper.text()).toBe('foo')
 })
 ```
 

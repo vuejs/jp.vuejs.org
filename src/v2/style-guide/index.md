@@ -1,7 +1,7 @@
 ---
 title: スタイルガイド
 type: style-guide
-updated: 2020-02-25
+updated: 2020-04-26
 ---
 
 このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
@@ -1458,7 +1458,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ``` html
 <template v-slot:header>
-  <h1>Here might be a page title</h1> 
+  <h1>Here might be a page title</h1>
 </template>
 
 <template #footer>
@@ -1500,7 +1500,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ``` html
 <template v-slot:header>
-  <h1>Here might be a page title</h1> 
+  <h1>Here might be a page title</h1>
 </template>
 
 <template v-slot:footer>
@@ -1510,7 +1510,7 @@ HTML では、空白を含まない属性値は引用符でくくらなくても
 
 ``` html
 <template #header>
-  <h1>Here might be a page title</h1> 
+  <h1>Here might be a page title</h1>
 </template>
 
 <template #footer>
@@ -1945,7 +1945,9 @@ Vue.component('TodoItem', {
 
 ** グローバル状態管理には、`this.$root` やグローバルイベントバスよりも、[Vuex](https://github.com/vuejs/vuex) が推奨されます **
 
-`this.$root` や [グローバルイベントバス](../guide/migration.html#dispatch-および-broadcast-置き換え) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。Vuex は状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。
+`this.$root` や [グローバルイベントバス](../guide/migration.html#dispatch-および-broadcast-置き換え) を使用した状態管理は非常にシンプルなケースでは便利かもしれませんが、ほとんどのアプリケーションにとっては適切ではありません。
+
+Vuex は Vue の[公式 Flux ライクな実装](../guide/state-management.html#公式-Flux-ライクな実装)で、状態管理のための中心地だけではなく、整理、追跡、そして状態変更のデバッグのためのツールも提供します。Vuex は Vue のエコシステムにうまく統合されています（[Vue DevTools](../guide/installation.html#Vue-Devtools) のフルサポートを含みます）。
 
 {% raw %}</details>{% endraw %}
 
