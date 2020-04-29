@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2019-06-21
+updated: 2020-04-25
 type: guide
 order: 1
 vue_version: 2.5.16
@@ -10,6 +10,10 @@ gz_size: "30.90"
 ### 互換性の注意
 
 Vue.js は IE8 ではシム (shim) ができない ECMAScript 5 の機能を使用するため、IE8 とそれ以下のバージョンをサポートして**いません**。しかしながら、[ECMAScript 5 準拠のブラウザ](https://caniuse.com/#feat=es5) は全てサポートしています。
+
+### セマンティックバージョニング
+
+Vue は、すべての公式プロジェクトにおいてドキュメント化された機能や動作については、[セマンティックバージョニング](https://semver.org/lang/ja/) に準拠しています。ドキュメント化されていない動作や公開されている内部詳細については、[リリースノート](https://github.com/vuejs/vue/releases) に変更点が記載されています。
 
 ### リリースノート
 
@@ -60,11 +64,11 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 
 Vue は [unpkg](https://unpkg.com/vue@{{vue_version}}/dist/vue.js) または [cdnjs](https://cdnjs.cloudflare.com/ajax/libs/vue/{{vue_version}}/vue.js) 上でも利用可能です(cdnjs は同期に少し時間がかかるため、最新版ではない可能性があります)。
 
-[Vue のさまざまなビルドについて](#さまざまなビルドについて)を読み、公開されたサイトでは**本番バージョン**を使用し、`vue.js` を `vue.min.js` に置き換えてください。これは開発体験の代わりにスピードのために最適化された小さなビルドです。
+[Vue のさまざまなビルドについて](#さまざまなビルドについて) を読み、公開されたサイトでは**本番バージョン**を使用し、`vue.js` を `vue.min.js` に置き換えてください。これは開発体験の代わりにスピードのために最適化された小さなビルドです。
 
 ## NPM
 
-Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](https://webpack.js.org) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html)を作成するための、付随するツールも提供しています。
+Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](https://webpack.js.org) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html) を作成するための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版
@@ -73,7 +77,7 @@ $ npm install vue
 
 ## CLI
 
-大規模なシングルページアプリケーション開発のための足場を素早く組むために、Vue.js では[オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。この CLI にはモダンなフロントエンドワークフローのための、すぐに使えるビルド設定を用意しています。ホットリロード、保存時のリント、製品リリース用ビルドができるようになるまでに、ほんの数分しかかかりません。より詳細は [Vue CLI ドキュメント](https://cli.vuejs.org) を参照してください。
+大規模なシングルページアプリケーション開発のための足場を素早く組むために、Vue.js では [オフィシャル CLI](https://github.com/vuejs/vue-cli) を提供します。この CLI にはモダンなフロントエンドワークフローのための、すぐに使えるビルド設定を用意しています。ホットリロード、保存時のリント、製品リリース用ビルドができるようになるまでに、ほんの数分しかかかりません。より詳細は [Vue CLI ドキュメント](https://cli.vuejs.org) を参照してください。
 
 <p class="tip">CLI は Node.js および関連するビルドツールに関する事前知識を前提としています。Vue またはフロントエンドビルドツールを初めて使用している場合、CLI を使用する前に、ビルドツールなしで[ガイド](./)を参照することを強くお勧めします。</p>
 
