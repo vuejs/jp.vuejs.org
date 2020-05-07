@@ -1,6 +1,6 @@
 ---
 title: 状態管理
-updated: 2018-04-04
+updated: 2020-04-25
 type: guide
 order: 502
 ---
@@ -13,7 +13,7 @@ order: 502
 
 ### React 開発者への情報
 
-もしあなたが React のエコシステムから来たのなら、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどう比較されるか気になっていることでしょう。Redux は実際に view レイヤの知識を持たないので、[シンプルなバインディング](https://yarnpkg.com/en/packages?q=redux%20vue&p=1) を通して簡単に Vue とあわせて利用することができます。Vuex は、 自らが Vue のアプリケーション内にいることを**知っている**、という点で異なります。これにより Vue といっそう良く連携することができ、より直感的な API を提供したり、開発体験を向上させることができます。
+もしあなたが React のエコシステムから来たのなら、最も人気のある Flux 実装の [redux](https://github.com/reactjs/redux) と vuex がどう比較されるか気になっていることでしょう。Redux は実際に view レイヤの知識を持たないので、[シンプルなバインディング](https://classic.yarnpkg.com/en/packages?q=redux%20vue&p=1) を通して簡単に Vue とあわせて利用することができます。Vuex は、 自らが Vue のアプリケーション内にいることを**知っている**、という点で異なります。これにより Vue といっそう良く連携することができ、より直感的な API を提供したり、開発体験を向上させることができます。
 
 ## シンプルな状態管理をゼロから作る
 
