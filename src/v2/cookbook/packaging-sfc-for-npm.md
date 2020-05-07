@@ -1,6 +1,6 @@
 ---
 title: Vue コンポーネントを npm パッケージ化する
-updated: 2019-08-01
+updated: 2020-04-25
 type: cookbook
 order: 12
 ---
@@ -114,8 +114,8 @@ import MyComponent from 'my-component/sfc'; // '/sfc' に注意
   },
   "devDependencies": {
     "rollup": "^1.17.0",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.0.1",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^11.1.0",
     "rollup-plugin-vue": "^5.0.1",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
@@ -172,9 +172,9 @@ export default component;
 package.json の `script` セクションの準備と単一ファイルコンポーネント用のラッパーが用意できれば、残りは Rollup が適切に設定されていることを確認するだけです。幸いにも、この操作はほんの 16 行の rollup.config.js ファイルによって行えます:
 
 ```js
-import commonjs from 'rollup-plugin-commonjs'; // CommonJS モジュールを ES6 に変換
+import commonjs from '@rollup/plugin-commonjs'; // CommonJS モジュールを ES6 に変換
 import vue from 'rollup-plugin-vue'; // .vue 単一ファイルコンポーネントを取得
-import buble from 'rollup-plugin-buble'; // 適切にブラウザをサポートするトランスパイラおよびポリフィル
+import buble from '@rollup/plugin-buble'; // 適切にブラウザをサポートするトランスパイラおよびポリフィル
 export default {
     input: 'src/wrapper.js', // Path relative to package.json
     output: {
