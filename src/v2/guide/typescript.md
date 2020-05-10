@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2019-06-12
+updated: 2020-05-10
 type: guide
 order: 403
 ---
