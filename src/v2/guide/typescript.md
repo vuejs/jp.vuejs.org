@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2019-06-12
+updated: 2020-05-10
 type: guide
 order: 403
 ---
@@ -187,3 +187,33 @@ const Component = Vue.extend({
 ```
 
 型推論やメンバの補完が機能していない場合、特定のメソッドにアノテーションを付けるとこれらの問題に対処できます。`--noImplicitAny` オプションを使用すると、これらのアノテーションが付けられていないメソッドの多くを見つけるのに役立ちます。
+
+## プロパティにアノテーションをつける
+
+```ts
+import Vue, { PropType } from 'vue'
+
+interface ComplexMessage { 
+  title: string,
+  okMessage: string,
+  cancelMessage: string
+}
+const Component = Vue.extend({
+  props: {
+    name: String,
+    success: { type: String },
+    callback: { 
+      type: Function as PropType<() => void>
+    },
+    message: {
+      type: Object as PropType<ComplexMessage>,
+      required: true,
+      validator (message: ComplexMessage) {
+        return !!message.title;
+      }
+    }
+  }
+})
+```
+
+バリデータが型推論できないかメンバの補完が機能していない場合、期待される型引数付きでアノテーションするとこれらの問題に対処できます。
