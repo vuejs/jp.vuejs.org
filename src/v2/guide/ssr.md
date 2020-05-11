@@ -1,6 +1,6 @@
 ---
 title: サーバサイドレンダリング
-updated: 2019-06-22
+updated: 2020-05-11
 type: guide
 order: 503
 ---
