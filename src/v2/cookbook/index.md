@@ -1,7 +1,7 @@
 ---
 title: はじめに
 type: cookbook
-updated: 2019-04-27
+updated: 2020-05-16
 order: 0
 ---
 
