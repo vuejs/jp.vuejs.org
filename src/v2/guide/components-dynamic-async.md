@@ -1,6 +1,6 @@
 ---
 title: 動的 & 非同期コンポーネント
-updated: 2020-02-25
+updated: 2020-05-18
 type: guide
 order: 105
 ---
@@ -227,12 +227,12 @@ Vue.component('async-webpack-example', function (resolve) {
 })
 ```
 
-ファクトリ関数で `Promise` を返すこともできるので、Webpack 2 と ES2015 の構文では以下のように書けます:
+ファクトリ関数で `Promise` を返すこともできるので、Webpack 2 と ES2015 の構文では以下のように動的 import が使えます:
 
 ``` js
 Vue.component(
   'async-webpack-example',
-  // `import` 関数は Promise を返します。
+  // 動的 import は Promise を返します。
   () => import('./my-async-component')
 )
 ```
