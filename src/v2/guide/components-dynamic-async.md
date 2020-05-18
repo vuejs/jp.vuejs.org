@@ -1,6 +1,6 @@
 ---
 title: 動的 & 非同期コンポーネント
-updated: 2020-02-25
+updated: 2020-05-18
 type: guide
 order: 105
 ---
