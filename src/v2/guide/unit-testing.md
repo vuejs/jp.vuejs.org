@@ -33,11 +33,11 @@ order: 402
 コンポーネントをテストする際には、[Vue Test Utils](https://vue-test-utils.vuejs.org/ja/) と合わせてインポートし、検証を実施します (ここでは、例として Jest スタイルの `expect` アサーションを使用しています):
 
 ``` js
-// Vue Test Utils の `shallowMount` とテスト対象のコンポーネントをインポートする
+// Vue Test Utils の `shallowMount` とテスト対象のコンポーネントをインポートします。
 import { shallowMount } from '@vue/test-utils'
 import MyComponent from './MyComponent.vue'
 
-// Mount the component
+// コンポーネントをマウントします。
 const wrapper = shallowMount(MyComponent)
 
 // テストランナーや検証には、どのようなライブラリを用いても構いませんが
