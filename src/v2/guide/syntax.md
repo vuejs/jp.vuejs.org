@@ -142,7 +142,7 @@ Mustache は、HTML 属性の内部で使用することはできません。代
 <a v-bind:[attributeName]="url"> ... </a>
 ```
 
-ここで `attributeName` は JavaScript 式として動的に評価され、その評価結果が引数の最終的な値として使われます。例えば、Vue インスタンスが `"href"` という値の `attributeName` という data プロパティをもつ場合、このバインディングは `v-bind:href` と等しくなります。
+ここで `attributeName` は JavaScript 式として動的に評価され、その評価結果が引数の最終的な値として使われます。例えば、Vue インスタンスが `"href"` という値の `attributename`（`attibuteName`ではない理由は下記　動的引数の式の制約にて説明） という data プロパティをもつ場合、このバインディングは `v-bind:href` と等しくなります。
 
 同様に、動的なイベント名にハンドラをバインドするために動的引数を使うこともできます:
 
