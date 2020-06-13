@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2020-04-25
+updated: 2020-06-14
 type: guide
 order: 1
 vue_version: 2.5.16
