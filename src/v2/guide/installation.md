@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2020-04-25
+updated: 2020-06-14
 type: guide
 order: 1
 vue_version: 2.5.16
@@ -68,7 +68,7 @@ Vue は [unpkg](https://unpkg.com/vue@{{vue_version}}/dist/vue.js) または [cd
 
 ## NPM
 
-Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](https://webpack.js.org) または [Browserify](http://browserify.org/) のようモジュールハンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html) を作成するための、付随するツールも提供しています。
+Vue.js による大規模アプリケーションを構築するときには、NPM を利用したインストールを推奨しています。 [Webpack](https://webpack.js.org) または [Browserify](http://browserify.org/) のようなモジュールバンドラとうまく組み合わせられます。 Vue は[単一ファイルコンポーネント](single-file-components.html) を作成するための、付随するツールも提供しています。
 
 ``` bash
 # 最新の安定版
