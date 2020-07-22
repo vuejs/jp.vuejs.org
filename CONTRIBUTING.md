@@ -73,13 +73,13 @@ Pull Request を送るときに、余裕があれば "resolve #123" といった
 - NG: 例
 - OK: 例:
 
-ただし、文の途中にハイフン`-` や セミコン`;` がある場合は、その記号があると理解しづらい訳になる場合は、例外として削除てもよいです。
+ただし、文の途中にハイフン`-` や セミコロン`;` がある場合は、その記号があると理解しづらい訳になる場合は、例外として削除してもよいです。
 
 - 原文:
 > Avoid using track-by="$index" in two situations: when your repeated block contains form inputs that can cause the list to re-render; or when you are repeating a component with mutable state in addition to the repeated data being assigned to it.
 
 - 訳文:
-> track-by="$index" は2つの状況で使用を回避してください。繰り返されたブロックにリストを再描画するために使用することができる form の input を含んでいるとき、または、繰り返されるデータがそれに割り当てられる他に、可変な状態でをコンポーネントを繰り返しているときです。
+> track-by="$index" は2つの状況で使用を回避してください。繰り返されたブロックにリストを再描画するために使用することができる form の input を含んでいるとき、または、繰り返されるデータがそれに割り当てられる他に、可変な状態でコンポーネントを繰り返しているときです。
 
 ### 単語の統一 (特に技術用語)
 
