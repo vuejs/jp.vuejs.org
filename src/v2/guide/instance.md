@@ -1,6 +1,6 @@
 ---
 title: Vue インスタンス
-updated: 2019-07-22
+updated: 2020-09-07
 type: guide
 order: 3
 ---
@@ -22,14 +22,14 @@ Vue インスタンスを生成するには、**オプションオブジェク�
 Vue アプリケーションは、 `new Vue` で作成された**ルート Vue インスタンス(root Vue instance)**で構成され、必要に応じてネストされたツリーや再利用可能なコンポーネントで形成されます。例えば、Todo アプリのコンポーネントツリーは次のようになります。
 
 ```
-ルートインスタンス
-└─ Todoリスト
-   ├─ Todoアイテム
-   │  ├─ Todo削除ボタン
-   │  └─ Todo編集ボタン
-   └─ Todoリストフッター
-      ├─ Todoクリアボタン
-      └─ Todoリスト統計
+Root Instance
+└─ TodoList
+   ├─ TodoItem
+   │  ├─ TodoButtonDelete
+   │  └─ TodoButtonEdit
+   └─ TodoListFooter
+      ├─ TodosButtonClear
+      └─ TodoListStatistics
 ```
 
 [コンポーネントシステム](components.html) については後ほど詳細を説明します。今は、全ての Vue コンポーネントは Vue インスタンスで、同じオプションオブジェクトを受け入れる(いくつかのルート特有のオプションを除く)と理解しておけば十分です。
