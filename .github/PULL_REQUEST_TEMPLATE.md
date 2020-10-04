@@ -1,3 +1,5 @@
+>注意：このリポジトリは、Vue 2.x 用です。Vue 3.x の日本語翻訳に関連する Issue やプルリクエストは、別のリポジトリで管理されています: https://github.com/vuejs-jp/ja.vuejs.org
+
 ## 概要
 
 resolve # <!-- 対象の Issue 番号を記入する -->
