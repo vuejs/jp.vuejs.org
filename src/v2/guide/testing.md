@@ -1,146 +1,147 @@
 ---
-title: Testing
+title: テスト
+updated: 2020-11-07
 type: guide
 order: 402
 ---
 
-# Testing
+# テスト
 
-## Introduction
+## はじめに
 
-When it comes to building reliable applications, tests can play a critical role in an individual or team's ability to build new features, refactor code, fix bugs, etc. While there are many schools of thought with testing, there are three categories often discussed in the context of web applications:
+信頼性の高いアプリケーションを構築する時、テストは個人やチームが新機能を構築したり、コードをリファクタリングしたり、バグを修正したりする能力において重要な役割を果たすことができます。テストには多くの流派がありますが、Web アプリケーションの文脈でよく議論されるのは3つのカテゴリーです。
 
-- Unit Testing
-- Component Testing
-- End-To-End (E2E) Testing
+- 単体テスト
+- コンポーネントテスト
+- End-To-End (E2E) テスト
 
-This section aims to provide guidance to navigating the testing ecosystem and choosing the right tools for your Vue application or component library.
+このセクションは、テストのエコシステムを案内し、Vue アプリケーションやコンポーネントライブラリに適切なツールを選択するためのガイダンスを提供することを目的としています。
 
-## Unit Testing
+## 単体テスト
 
-### Introduction
+### 導入
 
-Unit tests allow you to test individual units of code in isolation. The purpose of unit testing is to provide developers with confidence in their code. By writing thorough, meaningful tests, you achieve the confidence that as new features are built or your code is refactored your application will remain functional and stable.
+単体テストでは、コードの個々のユニットを分離してテストすることができます。単体テストの目的は、開発者が自分のコードに自信を持てるようになることです。徹底して意味のあるテストを書くことで、新しい機能が構築されたり、コードがリファクタリングされたりしても、アプリケーションが機能的で安定した状態を維持できるという自信を持つことができます。
 
-Unit testing a Vue application does not significantly differ from testing other types of applications.
+Vue アプリケーションの単体テストは、他のアプリケーションのテストと大きな違いはありません。
 
-### Choosing Your Framework
+### フレームワークの選定
 
-Since unit testing advice is often framework-agnostic, here are some basic guidelines to keep in mind when evaluating which unit testing tool is best for your application.
+単体テストのアドバイスはフレームワークに依存しないことが多いので、アプリケーションに最適な単体テストツールを評価する際に心に留めておくべき基本的なガイドラインをいくつか紹介します。
 
-#### First-class error reporting
+#### 最高のエラーレポート
 
-When tests fail, it is critical that your unit testing framework provides useful errors. This is the job of the assertion library. An assertion with high-quality error messages helps minimize the amount of time it takes to debug the problem. In addition to simply telling you what test is failing, assertion libraries provide context for why a test fails, e.g., what is expected vs what was received.
+テストが失敗した場合、単体テストフレームワークが有用なエラーを提供してくれることが重要です。これはアサーションライブラリの仕事です。高品質のエラーメッセージを持つアサーションは、問題のデバッグにかかる時間を最小限に抑えるのに役立ちます。どのテストが失敗しているかを伝えるだけでなく、アサーションライブラリは、テストが失敗した理由、例えば、何が期待されているのか、何を受け取ったのかなどのコンテキストを提供します。
 
-Some unit testing frameworks, like Jest, include assertion libraries. Others, like Mocha, require you to install assertion libraries separately (usually Chai).
+Jest などの一部の単体テストフレームワークには、アサーションライブラリが含まれています。その他、Mocha のようなものではアサーションライブラリを別途インストールする必要があります (通常は Chai)。
 
-#### Active community and team
+#### アクティブなコミュニティとチーム
 
-Since the majority of unit testing frameworks are open-source, having a community that is active can be critical to some teams that will be maintaining their tests for a long period of time and needs to ensure that a project will be actively maintained. In addition, having an active community has the benefit of providing more support whenever you run into issues.
+単体テストフレームワークの大部分はオープンソースなので、アクティブなコミュニティを持つことは、長期間にわたってテストをメンテナンスし、プロジェクトが積極的に維持されることを保証する必要があるチームにとって重要です。さらに、アクティブなコミュニティを持つことには、問題が発生したときにより多くのサポートを受けることができるという利点があります。
 
-### Frameworks
+### フレームワーク
 
-While there are many tools in the ecosystem, here are some common unit testing tools that are being used in the Vue.js ecosystem.
+エコシステムには多くのツールがありますが、Vue.js で使用されている一般的な単体テストツールは次の通りです。
 
 #### Jest
 
-Jest is a JavaScript test framework that is focused on simplicity. One of its unique features is the ability to take snapshots of tests in order to provide an alternative means of verifying units of your application.
+Jest は、シンプルさを重視した JavaScript テストフレームワークです。そのユニークな機能の1つは、アプリケーションのユニットを検証するための代替手段として提供しているテストのスナップショットを取る機能です。
 
-**Resources:**
+**リソース:**
 
 - [Official Jest Website](https://jestjs.io)
 - [Official Vue 2 CLI Plugin - Jest](https://cli.vuejs.org/core-plugins/unit-jest.html)
 
 #### Mocha
 
-Mocha is a JavaScript test framework that is focused on being flexible. Because of this flexibility, it allows you to choose different libraries to fulfill other common features such as spying (e.g., Sinon) and assertions (e.g., Chai). Another unique feature of Mocha is that it can also execute tests in the browser in addition to Node.js.
+Mocha は、柔軟性に重点を置いた JavaScript テストフレームワークです。この柔軟性により、スパイ（Sinon など）やアサーション（Chai など）などの他の一般的な機能を満たすために、さまざまなライブラリを選択できます。 Mocha のもう1つのユニークな機能は、Node.js に加えてブラウザでもテストを実行できることです。
 
-**Resources:**
+**リソース:**
 
 - [Official Mocha Website](https://mochajs.org)
 - [Official Vue CLI Plugin - Mocha](https://cli.vuejs.org/core-plugins/unit-mocha.html)
 
-## Component Testing
+## コンポーネントテスト
 
-### Introduction
+### 導入
 
-To test most Vue components, they must be mounted to the DOM (either virtual or real) in order to fully assert that they are working. This is another framework-agnostic concept. As a result, component testing frameworks were created to give users the ability to do this in a reliable way while also providing Vue-specific conveniences such as integrations for Vuex, Vue Router, and other Vue plugins.
+ほとんどの Vue コンポーネントをテストするには、それらが機能していることを完全に検証するために、それらを DOM（仮想またはリアル）にマウントする必要があります。これは、フレームワークに依存しないコンセプトです。その結果、コンポーネントテストフレームワークが作成され、ユーザーが信頼できる方法でこれを行うことができると同時に、Vuex、Vue Router、およびその他の Vue プラグインの統合など、Vue 固有の便利さが提供されます。
 
-### Choosing Your Framework
+### フレームワークの選択
 
-The following section provides guidelines on things to keep in mind when evaluating which component testing framework is best for your application.
+次のセクションでは、アプリケーションに最適なコンポーネントテストフレームワークを評価する際に留意すべきガイドラインを示します。
 
-#### Optimal compatibility with the Vue ecosystem
+#### Vue エコシステムとの最適な互換性
 
-It should be no surprise that one of the first criteria is that a component testing library should have is being as compatible with the Vue ecosystem as possible. While this may seem comprehensive, some key integration areas to keep in mind include single file components (SFCs), Vuex, Vue Router, and any other Vue specific plugins that your application relies on.
+最初の基準の1つが、コンポーネントテストライブラリが Vue エコシステムと可能な限り互換性を持つべきという点なのは驚くに値しません。これは包括的に思えるかもしれませんが、留意すべきいくつかの重要な関係領域には、単一ファイルコンポーネント（SFC）、Vuex、Vue Router、およびアプリケーションが依存するその他の Vue 固有のプラグインが含まれます。
 
-#### First-class error reporting
+#### 最高のエラーレポート
 
-When tests fail, it is critical that your component testing framework provides useful error logs that help to minimize the amount of time it takes to debug the problem. In addition to simply telling you what test fails, they should also provides context for why a test fails, e.g., what is expected vs what was received.
+テストが失敗した場合、コンポーネントテストのフレームワークが、問題のデバッグにかかる時間を最小限に抑えるのに役立つ有用なエラーログを提供することが重要です。どのテストが失敗したかを単に伝えるだけでなく、なぜテストが失敗したのか、例えば、何が期待されているのか、何を受け取ったのかなどのコンテキストを提供しなければなりません。
 
-### Recommendations
+### 推奨ツール
 
 #### Vue Testing Library (@testing-library/vue)
 
-Vue Testing Library is a set of tools focused on testing components without relying on implementation details. Built with accessibility in mind, its approach also makes refactoring a breeze.
+Vue Testing Library は、実装の詳細に依存せずにコンポーネントをテストすることに焦点を当てたツール群です。アクセシビリティを考慮して構築されているため、そのアプローチはリファクタリングを容易にします。
 
-Its guiding principle is that the more tests resemble the way software is used, the more confidence they can provide.
+その指針となる原則は、テストがソフトウェアの使用方法に類似しているほど、テストの信頼性が高くなるということです。
 
-**Resources:**
+**リソース:**
 
 - [Official Vue Testing Library Website](https://testing-library.com/docs/vue-testing-library/intro)
 
 #### Vue Test Utils
 
-Vue Test Utils is the official low-level component testing library that was written to provide users access to Vue specific APIs. If you are new to testing Vue applications, we would recommend using Vue Testing Library, which is an abstraction over Vue Test Utils.
+Vue Test Utils は、ユーザーが Vue 固有の API へのアクセスを提供するために書かれた公式の低レベルコンポーネントテストライブラリです。Vue アプリケーションのテストを初めて行う場合は、Vue Test Utils を抽象化した Vue Testing Library を使用することをお勧めします。
 
-**Resources**
+**リソース:**
 
 - [Official Vue Test Utils Documentation](https://vue-test-utils.vuejs.org)
 - [Vue Testing Handbook](https://lmiller1990.github.io/vue-testing-handbook/#what-is-this-guide) by Lachlan Miller
-- [Cookbook: Unit Testing Vue Components](https://vuejs.org/v2/cookbook/unit-testing-vue-components.html)
+- [Cookbook: Unit Testing Vue Components](https://jp.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
 
-## End-to-End (E2E) Testing
+## End-to-End (E2E) テスト
 
-### Introduction
+### 導入
 
-While unit tests provide developers with some degree of confidence, unit and component tests are limited in their abilities to provide holistic coverage of an application when deployed to production. As a result, end-to-end (E2E) tests provide coverage on what is arguably the most important aspect of an application: what happens when users actually use your applications.
+単体テストは開発者にある程度の信頼性を提供しますが、単体テストとコンポーネントテストは、本番環境にデプロイされたときに、アプリケーションの全体的なカバレッジを提供する能力には限界があります。結果として、 end-to-end (E2E) テストがアプリケーションの最も重要な側面、すなわちユーザーが実際にアプリケーションを使用したときに何が起こるか、をカバーしています。
 
-In other words, E2E tests validate all of the layers in your application. This not only includes your frontend code, but all associated backend services and infrastructure that are more representative of the environment that your users will be in. By testing how user actions impact your application, E2E tests are often the key to higher confidence in whether an application is functioning properly or not.
+言い換えれば、E2E テストは、アプリケーションのすべてのレイヤーを検証します。これには、フロントエンドのコードだけでなく、関連するすべてのバックエンドサービスやインフラストラクチャが含まれ、ユーザーの環境をより表すものとなります。ユーザーのアクションがアプリケーションにどのような影響を与えるかをテストすることで、E2E テストは、アプリケーションが適切に機能しているかどうかの信頼性を高める鍵となります。
 
-### Choosing Your Framework
+### フレームワークの選定
 
-While end-to-end (E2E) testing on the web has gained a negative reputation for unreliable (flaky) tests and slowing down development processes, modern E2E tools have made strides forward to create more reliable, interactive, and useful tests. When choosing an E2E testing framework, the following sections provide some guidance on things to keep in mind when choosing a testing framework for your application.
+Web 上の end-to-end (E2E) テストは、信頼性の低い (欠陥のある) テストで開発プロセスを遅らせるという否定を受けてきましたが、最新の E2E ツールは、より信頼性の高い、インタラクティブで有用なテストを作成するために躍進しました。以下のセクションでは、E2E テストフレームワークを選択する際にに留意すべきことについてのガイダンスを提供します。
 
-#### Cross-browser testing
+#### クロスブラウザテスト
 
-One of the primary benefits that end-to-end (E2E) testing is known for is its ability to test your application across multiple browsers. While it may seem desirable to have 100% cross-browser coverage, it is important to note that cross browser testing has diminishing returns on a team's resources due the additional time and machine power required to run them consistently. As a result, it is important to be mindful of this trade-off when choosing the amount of cross-browser testing your application needs.
+ end-to-end (E2E)テストの知られている主な利点の1つは、複数のブラウザにまたがってアプリケーションをテストできることです。100%クロスブラウザをカバーすることが望ましいと思われるかもしれませんが、クロスブラウザテストを一貫して実行するために必要な追加の時間とマシンパワーのために、チームのリソースに対するリターンが減少することに注意することが重要です。結果として、アプリケーションが必要とするクロスブラウザテストの量を選択する際には、このトレードオフを念頭に置くことが重要です。
 
 ::: tip
-A recent development in for catching browser-specific issues is using application monitoring and error reporting tools (e.g., Sentry, LogRocket, etc.) for browsers that are not as commonly used (e.g., < IE11, older Safari versions, etc.).
+最近の開発ではブラウザ固有の問題を補足するために、一般的に使用されていないブラウザ（IE11 未満、古いバージョンの Safari など）のためにアプリケーションの監視とエラー報告ツール（Sentry、LogRocket など）が使用されています。
 :::
 
-#### Faster feedback loops
+#### 高速なフィードバックループ
 
-One of the primary problems with end-to-end (E2E) tests and development is that running the entire suite takes a long time. Typically, this is only done in continuous integration and deployment (CI/CD) pipelines. Modern E2E testing frameworks have helped to solve this by adding features like parallelization, which allows for CI/CD pipelines to often run magnitudes faster than before. In addition, when developing locally, the ability to selectively run a single test for the page you are working on while also providing hot reloading of tests can help to boost a developer's workflow and productivity.
+ end-to-end (E2E) テストと開発の主な問題の1つは、テスト全体の実行に長い時間がかかることです。一般的に、これは継続的インテグレーションと継続的デリバリー（CI/CD）のパイプラインでのみ行われます。最新の E2E テストフレームワークは、並列化のような機能を追加することで、CI/CD パイプラインを以前よりも大幅に高速に実行できようにしてこの問題を解決しています。さらに、ローカルで開発する場合、テストのホットリロードを提供しながら作業中のページの単一テストを選択的に実行する機能は、開発者のワークフローと生産性を向上させるのに役立ちます。
 
-#### First class debugging experience
+#### 最高のデバッグ体験
 
-While developers have traditionally relied on scanning logs in a terminal window to help determine what went wrong in a test, modern end-to-end (E2E) test frameworks allow developers to leverage tools that they are already familiar with, e.g. browser developer tools.
+開発者は従来、ターミナルウィンドウでログをスキャンしてテストで何がうまくいかなかったかを判断していましたが、最新の end-to-end (E2E) テストフレームワークでは、ブラウザ開発者ツールなど開発者がすでに使い慣れたツールを活用することができます。
 
-#### Visibility in headless mode
+#### ヘッドレスモードでの視認性
 
-When end-to-end (E2E) tests are run in continuous integration / deployment pipelines, they are often run in headless browsers (i.e., no visible browser is opened for the user to watch). As a result, when errors occur, a critical feature that modern E2E testing frameworks provide 1st class support for is the ability to see snapshots and/or videos of your applications during various testing stages in order to provide insight into why errors are happening. Historically, it was tedious to maintain these integrations.
+ end-to-end (E2E)テストが継続的インテグレーション/継続的デリバリーのパイプラインで実行される場合、多くはヘッドレスブラウザで実行されます（つまり、ユーザーが見るためのブラウザが開かれていない）。そのため、エラーが発生した時に、最新の E2E テスティングフレームワークが第一級のサポートを提供する重要な機能は、エラーが発生した理由を把握するために、さまざまなテスト段階でのアプリケーションのスナップショットやビデオを表示する機能です。歴史的に、これらの統合を維持するのは面倒でした。
 
-### Recommendations
+### 推奨ツール
 
-While there are many tools in the ecosystem, here are some common end-to-end (E2E) testing frameworks that are being used in the Vue.js ecosystem.
+エコシステムには多くのツールがありますが、ここでは Vue.js のエコシステムで使用されている一般的な end-to-end (E2E)テストフレームワークをいくつか紹介します。
 
 #### Cypress.io
 
-Cypress.io is a testing framework that aims to enhance developer productivity by enabling developers to reliably test their applications while providing a first class developer experience.
+Cypress.io は、最高の開発者体験を提供しながら、開発者が信頼性の高い方法でアプリケーションをテストできるようにすることで、開発者の生産性を高めることを目的としたテストフレームワークです。
 
-**Resources**
+**リソース:**
 
 - [Cypress' Official Website](https://www.cypress.io)
 - [Official Vue CLI Cypress Plugin](https://cli.vuejs.org/core-plugins/e2e-cypress.html)
@@ -148,25 +149,25 @@ Cypress.io is a testing framework that aims to enhance developer productivity by
 
 #### Nightwatch.js
 
-Nightwatch.js is an end-to-end testing framework that can be used to test web applications and websites, as well as Node.js unit and integration testing.
+Nightwatch.js は、Node.js の単体テストや統合テストだけでなく、Web アプリケーションや Web サイトのテストにも使える end-to-end のテストフレームワークです。
 
-**Resources:**
+**リソース:**
 
 - [Nightwatch's Official Website](https://nightwatchjs.org)
 - [Official Vue CLI Nightwatch Plugin](https://cli.vuejs.org/core-plugins/e2e-nightwatch.html)
 
 #### Puppeteer
 
-Puppeteer is a Node library that provides a high-level API to control the browser and can pair with other test runners (e.g., Jest) to test your application.
+Puppeteer はブラウザを制御するための高レベルの API を提供する Node ライブラリで、アプリケーションをテストするために他のテストランナー (例: Jest) と連携することができます。
 
-**Resources:**
+**リソース:**
 
 - [Puppeteer's Official Website](https://pptr.dev)
 
 #### TestCafe
 
-TestCafe is a Node.js based end-to-end framework that aims to provide easy setup so that developers can focus on creating tests that are easy to write and reliable.
+TestCafe は Node.js ベースの end-to-end フレームワークで、開発者が書きやすく信頼性の高いテストの作成に集中できるように、簡単なセットアップを提供することを目的としています。
 
-**Resources:**
+**リソース:**
 
 - [TestCafe's Official Website](https://devexpress.github.io/testcafe/)
