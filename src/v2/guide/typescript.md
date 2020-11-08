@@ -1,6 +1,6 @@
 ---
 title: TypeScript のサポート
-updated: 2020-05-10
+updated: 2020-11-07
 type: guide
 order: 403
 ---
@@ -11,7 +11,7 @@ order: 403
 
 静的型システムは、特にアプリケーションが成長するに伴い、多くの潜在的なランタイムエラーを防止するのに役立ちます。そのため、Vue は [TypeScript](https://www.typescriptlang.org/) 向けに[公式型宣言](https://github.com/vuejs/vue/tree/dev/types)を提供しており、Vue コアだけでなく [Vue Router](https://github.com/vuejs/vue-router/tree/dev/types) と [Vuex](https://github.com/vuejs/vuex/tree/dev/types) も同様に提供しています。
 
-これらは [NPM に公開](https://cdn.jsdelivr.net/npm/vue/types/)されており、そして最新の TypeScript は NPM パッケージ内の型宣言を解決する方法を知っています。つまり、NPM でインストールした時、TypeScript を Vue と共に使うための追加のツールを必要としません。
+これらは [NPM に公開](https://cdn.jsdelivr.net/npm/vue@2/types/)されており、そして最新の TypeScript は NPM パッケージ内の型宣言を解決する方法を知っています。つまり、NPM でインストールした時、TypeScript を Vue と共に使うための追加のツールを必要としません。
 
 ## 推奨構成
 
@@ -63,7 +63,7 @@ import Vue from 'vue'
 const Component = Vue.extend({
   // 型推論を有効にする
 })
-  
+
 const Component = {
   // これは型推論を持っていません、
   // なぜなら、これは Vue コンポーネントのオプションであるということを伝えることができないためです。
@@ -71,9 +71,9 @@ const Component = {
 ```
 
 ## クラススタイル Vue コンポーネント
-  
+
 コンポーネントを宣言するときにクラスベース API を使用する場合は、公式にメンテナンスされている [vue-class-component](https://github.com/vuejs/vue-class-component) のデコレータを使用できます:
-  
+
 ``` ts
 import Vue from 'vue'
 import Component from 'vue-class-component'
@@ -193,7 +193,7 @@ const Component = Vue.extend({
 ```ts
 import Vue, { PropType } from 'vue'
 
-interface ComplexMessage { 
+interface ComplexMessage {
   title: string,
   okMessage: string,
   cancelMessage: string
@@ -202,7 +202,7 @@ const Component = Vue.extend({
   props: {
     name: String,
     success: { type: String },
-    callback: { 
+    callback: {
       type: Function as PropType<() => void>
     },
     message: {

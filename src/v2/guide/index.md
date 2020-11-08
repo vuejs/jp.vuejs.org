@@ -1,6 +1,6 @@
 ---
 title: はじめに
-updated: 2020-03-20
+updated: 2020-11-07
 type: guide
 order: 2
 ---
@@ -25,14 +25,14 @@ Vue.js を試すには、[Hello World example](https://codesandbox.io/s/github/v
 
 ``` html
 <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 ```
 
 or:
 
 ``` html
 <!-- 本番バージョン、サイズと速度のために最適化されています -->
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 ```
 
 Vue の他のインストール方法について、[インストール](../guide/installation.html) ページで紹介しています。注意点として、初心者が `vue-cli` で始めることは推奨**しません**（特に、Node.js ベースのツールについてまだ詳しくない場合）。
@@ -322,7 +322,7 @@ Vue.component('todo-item', {
 ``` html
 <div id="app-7">
   <ol>
-    <!-- 
+    <!--
       各 todo-item の内容を表す todo オブジェクトを与えます。
       これにより内容は動的に変化します。
       また後述する "key" を各コンポーネントに提供する必要があります。

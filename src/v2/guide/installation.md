@@ -1,6 +1,6 @@
 ---
 title: インストール
-updated: 2020-06-14
+updated: 2020-11-07
 type: guide
 order: 1
 vue_version: 2.5.16
@@ -42,7 +42,7 @@ Vue を使用する場合は、ブラウザに [Vue Devtools](https://github.com
 プロトタイピングや学習を目的とする場合は、以下のようにして最新バージョンを使うことができます:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 ```
 
 本番環境では、新しいバージョンによる意図しない不具合を避けるため、特定のバージョン番号とビルド番号にリンクすることをお勧めします:
@@ -85,7 +85,7 @@ $ npm install vue
 
 ## さまざまなビルドについて
 
-[NPM パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
+[NPM パッケージの `dist/` ディレクトリ](https://cdn.jsdelivr.net/npm/vue@2/dist/) では Vue.js の多くのさまざまなビルドが見つかります。それらの違いの概要は以下の通りです:
 
 | | UMD | CommonJS | ES Module (バンドラ用) | ES Module (ブラウザ用) |
 | --- | --- | --- | --- | --- |
@@ -102,7 +102,7 @@ $ npm install vue
 
 - **ランタイム**: Vue インスタンスの作成やレンダリング、仮想 DOM の変更などのためのコードです。基本的にコンパイラを除く全てのものです。
 
-- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用されます。[https://cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue) の jsDelivr CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
+- **[UMD](https://github.com/umdjs/umd)**: UMD ビルドは `<script>` タグによってブラウザに直接利用されます。[https://cdn.jsdelivr.net/npm/vue](https://cdn.jsdelivr.net/npm/vue@2) の jsDelivr CDN からの既定のファイルは ランタイム + コンパイラ UMD ビルド (`vue.js`) です。
 
 - **[CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1)**: CommonJS ビルドは [browserify](http://browserify.org/) や [webpack 1](https://webpack.github.io) のような古いバンドラでの利用を意図しています。これらのバンドラ (`pkg.main`) のための既定のファイルはランタイム限定 CommonJS ビルド (`vue.runtime.common.js`) です。
 
