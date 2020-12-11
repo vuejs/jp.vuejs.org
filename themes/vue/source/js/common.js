@@ -329,6 +329,10 @@
     versionSelect && versionSelect.addEventListener('change', function (e) {
       var version = e.target.value
       var section = window.location.pathname.match(/\/v\d\/(\w+?)\//)[1]
+      if (version === 'v3') {
+        window.location.assign('https://v3.ja.vuejs.org/' + section + '/')
+        return
+      }
       if (version === 'SELF') { return }
       window.location.assign('https://' + (version ? version + '-' : '') + 'jp.vuejs.org/' + section + '/')
     })
