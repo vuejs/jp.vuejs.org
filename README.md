@@ -1,7 +1,6 @@
 # vuejs/jp.vuejs.org
 
 [![Circle CI](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja.svg?style=svg&circle-token=833967ff387fa4a8d91a738086d5c166ea0a6f85)](https://circleci.com/gh/vuejs/jp.vuejs.org/tree/lang-ja)
-[![Slack Status](https://vuejs-jp-slackin.herokuapp.com/badge.svg)](https://vuejs-jp-slackin.herokuapp.com/)
 
 このリポジトリは Vue.js バージョン 2.x 向けのドキュメントを管理しているレポジトリです。
 
