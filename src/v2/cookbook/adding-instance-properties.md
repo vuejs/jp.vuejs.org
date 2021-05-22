@@ -1,7 +1,7 @@
 ---
 title: インスタンスプロパティの追加
 type: cookbook
-updated: 2019-11-13
+updated: 2021-05-22
 order: 2
 ---
 
@@ -58,7 +58,7 @@ new Vue({
 })
 ```
 
-この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが作成されるときに `data` によって上書き([並び替え](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/objects-classes/ch5.md))されるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
+この場合、まずは `"My App"` が記録され、それから `"The name of some other app"` が記録されます。なぜなら `this.appName` はインスタンスが作成されるときに `data` によって上書き([並び替え](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/this%20%26%20object%20prototypes/ch5.md))されるからです。これを避けるために、インスタンスプロパティを `$` でスコープする規約を利用します。`$_appName` や `ΩappName` のような独自の規約を使うことにより、プラグインや、将来の機能との衝突を防ぐこともできます。
 
 ## 実例： Vue のリソースを Axios に置き換える
 それでは[使われなくなった Vue Resource を置き換えるとしましょう](https://medium.com/the-vue-point/retiring-vue-resource-871a82880af4)。あなたは `this.$http` を通してリクエストメソッドにアクセスすることを凄く楽しんでいましたが、代わりに Axios で同じことをしたいと思います。
