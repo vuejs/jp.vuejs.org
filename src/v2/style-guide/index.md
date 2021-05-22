@@ -1,7 +1,7 @@
 ---
 title: スタイルガイド
 type: style-guide
-updated: 2020-05-16
+updated: 2021-05-22
 ---
 
 このドキュメントは、 Vue 固有の記法についての公式なスタイルガイドです。もしあなたがプロジェクトにおいて Vue を使用する場合は、エラーや有益でない議論、アンチパターンを避けるための参考となります。しかし、スタイルガイドはすべてのチームやプロジェクトで理想とは限らないと考えていますので、過去の経験や、周囲の技術スタック、個人の価値観に基づいた上で必要に応じて慎重に逸脱することが推奨されます。
@@ -46,7 +46,7 @@ Vue のいくつかの機能は、レアケースまたは従来のコードベ�
 
 **ルートの `App` コンポーネントや、Vue が提供する `<transition>` や `<component>` のようなビルトインコンポーネントを除き、コンポーネント名は常に複数単語とするべきです。**
 
-これは、全ての HTML 要素は 1 単語となっているというこれまでの経緯から、既に存在する、そして将来定義される HTML 要素との[衝突を防止します](http://w3c.github.io/webcomponents/spec/custom/#valid-custom-element-name)。
+これは、全ての HTML 要素は 1 単語となっているというこれまでの経緯から、既に存在する、そして将来定義される HTML 要素との[衝突を防止します](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name)。
 
 {% raw %}<div class="style-example example-bad">{% endraw %}
 #### 悪い例
