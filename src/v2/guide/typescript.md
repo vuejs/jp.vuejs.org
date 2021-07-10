@@ -16,6 +16,7 @@ order: 403
 ## 推奨構成
 
 ``` js
+// tsconfig.json
 {
   "compilerOptions": {
     // これは Vue のブラウザサポートに合わせます
