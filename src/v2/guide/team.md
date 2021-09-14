@@ -471,28 +471,6 @@ order: 803
       ]
     },
     {
-      name: 'Sarah Drasner',
-      city: 'Denver, CO, USA',
-      languages: ['en'],
-      work: {
-        role: 'Head of Developer Experience',
-        org: 'Netlify',
-        orgUrl: 'https://www.netlify.com/'
-      },
-      github: 'sdras',
-      twitter: 'sarah_edo',
-      codepen: 'sdras',
-      reposOfficial: [
-        'vuejs.org'
-      ],
-      reposPersonal: [
-        'intro-to-vue', 'vue-vscode-snippets', 'vue-vscode-extensionpack', 'sample-vue-shop'
-      ],
-      links: [
-        'https://sarah.dev/'
-      ]
-    },
-    {
       name: 'Damian Dulisz',
       title: 'Dark Mage of Plugins, News, and Confs',
       city: 'Wrocław, Poland',
@@ -658,6 +636,28 @@ order: 803
   ]))
 
   var emeriti = shuffle([
+    {
+      name: 'Sarah Drasner',
+      city: 'Denver, CO, USA',
+      languages: ['en'],
+      work: {
+        role: 'Director of Engineering, Core Developer Web',
+        org: 'Google',
+        orgUrl: 'https://www.google.com/'
+      },
+      github: 'sdras',
+      twitter: 'sarah_edo',
+      codepen: 'sdras',
+      reposOfficial: [
+        'vuejs.org'
+      ],
+      reposPersonal: [
+        'intro-to-vue', 'vue-vscode-snippets', 'vue-vscode-extensionpack', 'sample-vue-shop'
+      ],
+      links: [
+        'https://sarah.dev/'
+      ]
+    },
      {
       name: 'Chris Fritz',
       title: 'Good Word Putter-Togetherer',
