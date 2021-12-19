@@ -8,8 +8,17 @@ special_sponsors:
     name: HBuilder
     description: An IDE for Vue
 platinum_sponsors_china:
-  - url: 'http://www.dcloud.io/?hmsr=vuejsorg&hmpl=&hmcu=&hmkw=&hmci='
-    img: dcloud.gif
+  - url: 'https://www.dcloud.io/hbuilderx.html?hmsr=vue-en&hmpl=&hmcu=&hmkw=&hmci='
+    img: hbuilder.png
+    name: HBuilder
+    description: An IDE for Vue
+  - name: authing
+    url: >-
+      https://www.authing.cn/welcome?utm_source=Vuejs&utm_medium=CPT&utm_campaign=EN&utm_term=page-EN
+    img: authing.svg
+  - name: qingfuwu
+    url: https://qingfuwu.cn?utm_campaign=TR_eSJH7nqW&utm_content=&utm_medium=Web&utm_source=CH_53OxwryD&utm_term=
+    img: qingfuwu-v2.svg
 platinum_sponsors:
   - url: >-
       https://vueschool.io/?utm_source=Vuejs.org&utm_medium=Banner&utm_campaign=Sponsored%20Banner&utm_content=V1
@@ -18,9 +27,6 @@ platinum_sponsors:
   - url: 'https://vehikl.com/'
     img: vehikl.png
     name: Vehikl
-  - url: 'https://retool.com/?utm_source=sponsor&utm_campaign=vue'
-    img: retool.png
-    name: Retool
   - url: 'https://passionatepeople.io/'
     img: passionate_people.png
     name: Passionate People
@@ -34,10 +40,9 @@ platinum_sponsors:
   - url: 'https://nuxtjs.org/'
     img: nuxt.png
     name: Nuxt
-  - url: 'https://www.daskeyboard.com/?utm_source=vuejs&utm_medium=sponsorship'
-    img: das_keyboard.png
-    name: Das Keyboard
-    inline_style: 'margin-top: 15px'
+  - url: 'https://www.refurbed.org/?utm_source=vuejs'
+    img: refurbed.png
+    name: Refurbed
 gold_sponsors:
   - url: 'https://www.vuemastery.com/'
     img: vuemastery.png
@@ -151,6 +156,26 @@ gold_sponsors:
   - url: 'https://www.emqx.com'
     img: emq.png
     name: EMQ
+  - url: >-
+      https://www.tatvasoft.com/software-development-technology/vue-js-development-services
+    img: tatvasoft.png
+    name: TatvaSoft
+  - url: 'https://www.aceonlinecasino.co.uk'
+    img: onyx_gaming_limited.svg
+    name: Onyx Gaming Limited
+  - url: 'http://www.lendio.com'
+    img: lendio.png
+    name: Lendio
+  - url: >-
+      https://flowdash.com/?utm_source=vue&utm_medium=sponsor&utm_campaign=open-source
+    img: flowdash.png
+    name: Flowdash
+  - url: 'https://www.fenetre.nl/english/'
+    img: fen_tre_online_solutions.png
+    name: Fenêtre Online Solutions
+  - url: 'https://finclip.com/?from=vue'
+    img: finclip.png
+    name: FinClip
 silver_sponsors:
   - url: 'https://roadster.com'
     img: roadster.png
@@ -176,6 +201,9 @@ silver_sponsors:
   - url: 'https://technology.doximity.com/'
     img: doximity.png
     name: Doximity
+  - url: 'https://www.empiricus.com.br/'
+    img: empiricus.png
+    name: Empiricus
 bronze_sponsors:
   - url: 'https://www.accelebrate.com/'
     img: accelebrate.png
