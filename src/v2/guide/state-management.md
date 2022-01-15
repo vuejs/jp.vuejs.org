@@ -1,13 +1,13 @@
 ---
 title: 状態管理
-updated: 2020-04-25
+updated: 2022-01-15
 type: guide
 order: 502
 ---
 
 ## 公式 Flux ライクな実装
 
-大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は Elm から触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供します。[vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vue-devtools/master/media/demo.gif)を提供します。
+大規模なアプリケーションは、多くの状態が色々なコンポーネントに散らばったり、コンポーネント間の相互作用のために複雑になりがちです。この問題を解消するために、 Vue は Elm から触発された状態管理ライブラリの [vuex](https://github.com/vuejs/vuex) を提供します。[vue-devtools](https://github.com/vuejs/vue-devtools) とも連携し、特別なセットアップなしで[タイムトラベルデバッグ](https://raw.githubusercontent.com/vuejs/vuejs.org/master/src/images/devtools-timetravel.gif)を提供します。
 
 <div class="vue-mastery"><a href="https://www.vuemastery.com/courses/mastering-vuex/intro-to-vuex/" target="_blank" rel="sponsored noopener" title="Vuex Tutorial">Vue Masteryで動画の説明を見る</a></div>
 
