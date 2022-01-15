@@ -27,7 +27,7 @@
   "devDependencies": {
     "husky": "^2.4.0",
     "lint-staged": "^7.3.0",
-    "shelljs": "^0.7.8",
+    "shelljs": "^0.8.5",
     "textlint": "^5.5.0",
     "textlint-checker-for-vuejs-jp-docs": "git+https://github.com/vuejs-jp/textlint-checker-for-vuejs-jp-docs.git",
     "textlint-rule-detect-bad-chars": "^1.0.2",
