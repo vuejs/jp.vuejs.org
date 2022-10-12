@@ -329,7 +329,7 @@
       var version = e.target.value
       var section = window.location.pathname.match(/\/v\d\/(\w+?)\//)[1]
       if (version === 'v3') {
-        window.location.assign('https://v3.ja.vuejs.org/' + section + '/')
+        window.location.assign('https://ja.vuejs.org/' + section + '/')
         return
       }
       if (version === 'SELF') { return }
